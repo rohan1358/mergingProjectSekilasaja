@@ -1,3 +1,7 @@
+# Web Application For sekilasaja.com
+
+Developed by Joy Lodra & Gerry Oei
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

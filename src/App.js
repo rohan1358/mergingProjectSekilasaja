@@ -1,9 +1,23 @@
+import React from "react";
+
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Contact from "./pages/Contact";
+import Home from "./pages/Home/Home";
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
-      <h1>Heading</h1>
-      <h2>Sub-heading</h2>
-      <h4>This is Body</h4>
+      <NavBar />
+      <Router>
+        <Switch>
+          <Route path="/contact" component={Contact} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </Router>
+      <Footer />
     </div>
   );
 }
