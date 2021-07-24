@@ -7,12 +7,10 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import { makeStyles, Container } from "@material-ui/core";
 
 // core components
 import ParallaxStyle from "../styles/ParallaxStyle";
-import Typography from "./Typography";
 
 const useStyles = makeStyles(ParallaxStyle);
 
@@ -40,28 +38,27 @@ export default function Parallax(props) {
     var windowScrollTop = window.pageYOffset / 3;
     // setTransform("translate3d(0," + windowScrollTop + "px,0)");
   };
-  const { filter, className, children, style, image, small } = props;
+  const { filter, className, children, style, image, small, border } = props;
   const classes = useStyles();
   const parallaxClasses = classNames({
     [classes.parallax]: true,
     [classes.filter]: filter,
     [classes.small]: small,
+    [classes.border]: border,
     [className]: className !== undefined,
   });
   return (
     <div>
-      <Container>
-        <div
-          className={parallaxClasses}
-          style={{
-            ...style,
-            backgroundImage: "url(" + image + ")",
-            transform: transform,
-          }}
-        >
-          <Container>{children}</Container>
-        </div>
-      </Container>
+      <div
+        className={parallaxClasses}
+        style={{
+          ...style,
+          backgroundImage: "url(" + image + ")",
+          transform: transform,
+        }}
+      >
+        <Container>{children}</Container>
+      </div>
     </div>
   );
 }
@@ -73,4 +70,5 @@ Parallax.propTypes = {
   style: PropTypes.string,
   image: PropTypes.string,
   small: PropTypes.bool,
+  border: PropTypes.bool,
 };

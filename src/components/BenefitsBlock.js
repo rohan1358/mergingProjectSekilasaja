@@ -8,13 +8,13 @@ import MenuBookIcon from "@material-ui/icons/MenuBook";
 
 // Custom components
 import InfoArea from "./InfoArea";
-import BenefitsStyle from "../styles/BenefitsStyle";
+import MultiUseMobile from "../styles/MultiUseMobile";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
 
 export default function BenefitsBlock() {
-  const classes = BenefitsStyle();
+  const classes = MultiUseMobile();
   const mobileClass = classNames({
     [classes.sectionMobile]: true,
   });
@@ -24,7 +24,7 @@ export default function BenefitsBlock() {
   return (
     <div>
       <div className={desktopClass}>
-        <Grid container direction="row" spacing={3}>
+        <Grid container direction="row">
           <Grid item xs={4}>
             <InfoArea
               title="Text"

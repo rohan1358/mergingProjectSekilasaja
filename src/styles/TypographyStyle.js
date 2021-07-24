@@ -53,6 +53,9 @@ const TypographyStyle = {
   italic: {
     fontStyle: "italic",
   },
+  halfWidth: {
+    width: "40%",
+  },
 };
 
 export default TypographyStyle;

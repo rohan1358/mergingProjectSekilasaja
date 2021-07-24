@@ -1,5 +1,6 @@
 import React from "react";
 
+// Custom components
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Contact from "./pages/Contact";

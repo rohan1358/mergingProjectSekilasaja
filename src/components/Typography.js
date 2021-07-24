@@ -15,7 +15,7 @@ const makeComponentStyles = makeStyles(() => ({
 }));
 
 export default function Typography(props) {
-  const { color, children, size, className, type, ...rest } = props;
+  const { color, children, size, className, type, halfWidth, ...rest } = props;
 
   const classes = makeComponentStyles();
 
@@ -24,6 +24,7 @@ export default function Typography(props) {
     [classes[size]]: size,
     [classes[color]]: color,
     [classes[type]]: type,
+    [classes.halfWidth]: halfWidth,
     [className]: className,
   });
 
@@ -46,4 +47,5 @@ Typography.propTypes = {
   type: PropTypes.oneOf(["italic"]),
   children: PropTypes.node,
   className: PropTypes.string,
+  halfWidth: PropTypes.bool,
 };

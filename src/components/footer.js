@@ -116,9 +116,9 @@ export default function Footer() {
 
           <Grid className={mobileClass} container>
             <Grid item xs={12}>
-              <Typography color="beigeColor" size="heading">
-                SekilasAja
-              </Typography>
+              <a href="/">
+                <img className={iconClass} src={Logo} />
+              </a>
 
               <Typography color="beigeColor">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

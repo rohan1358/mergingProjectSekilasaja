@@ -1,3 +1,4 @@
+import ImagesStyle from "./ImagesStyle";
 import {
   primaryColor,
   warningColor,
@@ -56,6 +57,7 @@ const InfoStyle = {
     width: "61px",
     height: "61px",
   },
+  ...ImagesStyle,
 };
 
 export default InfoStyle;
