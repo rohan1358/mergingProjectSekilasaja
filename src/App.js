@@ -4,7 +4,7 @@ import React from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import Contact from "./pages/Contact";
-import Home from "./pages/Home/Home";
+import Home from "./pages/Home";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 

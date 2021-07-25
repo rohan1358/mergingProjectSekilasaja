@@ -1,13 +1,13 @@
 import React from "react";
-import Book from "../../images/book.png";
+import Book from "../images/book.png";
 
 // Custom components
-import Typography from "../../components/Typography";
-import Parallax from "../../components/Parallax";
-import BenefitsBlock from "../../components/BenefitsBlock";
-import Button from "../../components/Button";
-import MultiUseMobile from "../../styles/MultiUseMobile";
-import BookCard from "../../components/BookCard";
+import Typography from "../components/Typography";
+import Parallax from "../components/Parallax";
+import BenefitsBlock from "../components/BenefitsBlock";
+import Button from "../components/Button";
+import MultiUseMobile from "../styles/MultiUseMobile";
+import BookCard from "../components/BookCard";
 
 // Material-UI components
 import { Container, Grid } from "@material-ui/core";
@@ -28,7 +28,7 @@ export default function Home() {
     <div>
       <Parallax
         className={desktopClass}
-        image={require("../../images/home.png").default}
+        image={require("../images/home.png").default}
       >
         <Grid container>
           <Grid item xs={6}>
