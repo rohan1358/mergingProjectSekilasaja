@@ -19,6 +19,10 @@ const MultiUseMobile = makeStyles((theme) => ({
       display: "none",
     },
   },
+  title: {
+    textAlign: "center",
+    marginTop: "40px",
+  },
 }));
 
 export default MultiUseMobile;

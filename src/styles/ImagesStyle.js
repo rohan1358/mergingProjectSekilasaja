@@ -39,6 +39,9 @@ const ImagesStyle = {
     left: "0",
     padding: "1.25rem",
   },
+  imgBookCover: {
+    maxWidth: "200px",
+  },
 };
 
 export default ImagesStyle;

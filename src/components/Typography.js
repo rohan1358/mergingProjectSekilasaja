@@ -44,7 +44,7 @@ Typography.propTypes = {
     "successColor",
   ]),
   size: PropTypes.oneOf(["heading", "subheading", "small"]),
-  type: PropTypes.oneOf(["italic"]),
+  type: PropTypes.oneOf(["italic", "bold"]),
   children: PropTypes.node,
   className: PropTypes.string,
   halfWidth: PropTypes.bool,

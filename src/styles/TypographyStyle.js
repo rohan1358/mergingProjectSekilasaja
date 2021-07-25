@@ -33,6 +33,7 @@ const TypographyStyle = {
     marginBottom: "18px",
   },
   small: {
+    marginTop: "3px",
     fontSize: "75%",
   },
   beigeColor: {
@@ -52,6 +53,9 @@ const TypographyStyle = {
   },
   italic: {
     fontStyle: "italic",
+  },
+  bold: {
+    fontWeight: "bold",
   },
   halfWidth: {
     width: "40%",
