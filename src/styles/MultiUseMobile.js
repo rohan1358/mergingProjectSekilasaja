@@ -1,6 +1,6 @@
 // Material-UI components
 import { makeStyles } from "@material-ui/core/styles";
-import { secondaryColor } from "./Style";
+import { grayColor, secondaryColor } from "./Style";
 
 const MultiUseMobile = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -64,6 +64,12 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   extraSpace: {
     marginTop: "50px",
+  },
+  title: {
+    textAlign: "center",
+  },
+  dividerColor: {
+    backgroundColor: grayColor,
   },
 }));
 

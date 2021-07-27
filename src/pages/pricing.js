@@ -203,7 +203,9 @@ export default function PricingPage() {
 
       <div className={classes.extraSpace} />
 
-      <BenefitsBlock />
+      <Container>
+        <BenefitsBlock />
+      </Container>
 
       {/* If logged in, remove this button */}
       <div className={classes.center}>

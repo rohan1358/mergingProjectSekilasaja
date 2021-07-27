@@ -9,6 +9,10 @@ import {
 } from "./Style";
 
 const InfoStyle = {
+  bookCover: {
+    maxWidth: "200px",
+    marginTop: "30px",
+  },
   infoArea: {
     margin: "0 auto",
     padding: "0px",

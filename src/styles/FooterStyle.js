@@ -9,9 +9,6 @@ const FooterStyle = makeStyles((theme) => ({
     marginTop: 40,
     backgroundColor: secondaryColor,
   },
-  divider: {
-    background: beigeColor,
-  },
   // small: 600px; md, medium: 960px; lg, large: 1280px
   sectionDesktop: {
     display: "none",
@@ -31,6 +28,15 @@ const FooterStyle = makeStyles((theme) => ({
   icon: {
     marginTop: "18px",
     width: "250px",
+  },
+  socialIcon: {
+    marginRight: theme.spacing(0.5),
+  },
+  iconColor: {
+    color: beigeColor,
+  },
+  topSpacing: {
+    marginTop: "30px",
   },
 }));
 

@@ -7,10 +7,10 @@ import Parallax from "../components/Parallax";
 import BenefitsBlock from "../components/BenefitsBlock";
 import Button from "../components/Button";
 import MultiUseMobile from "../styles/MultiUseMobile";
-import BookCard from "../components/BookCard";
+import CategoryBlock from "../components/CategoryBlock";
 
 // Material-UI components
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Divider } from "@material-ui/core";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -51,6 +51,7 @@ export default function Home() {
           <Grid item xs={12}>
             <img src={Book} />
           </Grid>
+
           <Grid item xs={12}>
             <Container>
               <Typography size="heading">
@@ -61,11 +62,19 @@ export default function Home() {
               </Button>
             </Container>
           </Grid>
+
+          <Grid item xs={12}>
+            <div className={classes.extraSpace} />
+            <Divider className={classes.dividerColor} />
+          </Grid>
         </Grid>
       </div>
 
+      <div className={classes.extraSpace} />
+
       <Container>
         <BenefitsBlock />
+        <CategoryBlock heading={"Temukan Kategori Kesukaan Kamu!"} />
       </Container>
     </div>
   );

@@ -2,7 +2,14 @@ import React from "react";
 import Logo from "../images/yellow-logo.png";
 
 // Material-UI components
-import { Divider, CssBaseline, Grid, Container, Link } from "@material-ui/core";
+import {
+  IconButton,
+  CssBaseline,
+  Grid,
+  Container,
+  Link,
+} from "@material-ui/core";
+import { Instagram, Twitter, Facebook } from "@material-ui/icons";
 
 // Custom components
 import Typography from "./Typography";
@@ -10,6 +17,92 @@ import FooterStyle from "../styles/FooterStyle";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
+
+function SocialIcons() {
+  const classes = FooterStyle();
+  const mobileClass = classNames({
+    [classes.sectionMobile]: true,
+  });
+  const desktopClass = classNames({
+    [classes.sectionDesktop]: true,
+  });
+
+  return (
+    <div>
+      <div className={desktopClass}>
+        <IconButton
+          href="https://www.instagram.com/sekilasajacom"
+          edge="start"
+          size="small"
+          className={classes.socialIcon}
+          color="inherit"
+          aria-label="menu"
+        >
+          <Instagram className={classes.iconColor} />
+        </IconButton>
+
+        <IconButton
+          href="https://twitter.com/sekilasajacom"
+          edge="start"
+          size="small"
+          className={classes.socialIcon}
+          color="inherit"
+          aria-label="menu"
+        >
+          <Twitter className={classes.iconColor} />
+        </IconButton>
+
+        <IconButton
+          href="https://www.instagram.com/sekilasajacom"
+          edge="start"
+          size="small"
+          className={classes.socialIcon}
+          color="inherit"
+          aria-label="menu"
+        >
+          <Facebook className={classes.iconColor} />
+        </IconButton>
+      </div>
+
+      <div className={mobileClass}>
+        <div className={classes.topSpacing}>
+          <IconButton
+            href="https://www.instagram.com/sekilasajacom"
+            edge="start"
+            size="small"
+            className={classes.socialIcon}
+            color="inherit"
+            aria-label="menu"
+          >
+            <Instagram className={classes.iconColor} />
+          </IconButton>
+
+          <IconButton
+            href="https://www.twitter.com/sekilasajacom"
+            edge="start"
+            size="small"
+            className={classes.socialIcon}
+            color="inherit"
+            aria-label="menu"
+          >
+            <Twitter className={classes.iconColor} />
+          </IconButton>
+
+          <IconButton
+            href="https://www.instagram.com/sekilasajacom"
+            edge="start"
+            size="small"
+            className={classes.socialIcon}
+            color="inherit"
+            aria-label="menu"
+          >
+            <Facebook className={classes.iconColor} />
+          </IconButton>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function Copyright() {
   const classes = FooterStyle();
@@ -85,36 +178,41 @@ export default function Footer() {
 
             <Grid item xs={3}>
               <Typography color="beigeColor" size="subheading">
-                Title
+                Bantuan & Panduan
               </Typography>
-              <Link href="/contact">
-                <Typography color="beigeColor">Contact</Typography>
+              <Link underline="none" href="/contact">
+                <Typography color="beigeColor">Hubungi Kami</Typography>
               </Link>
-              <Link>
-                <Typography color="beigeColor">Link</Typography>
+              <Link underline="none" href="/contact">
+                <Typography color="beigeColor">Kebijakan Privasi</Typography>
               </Link>
-              <Link>
-                <Typography color="beigeColor">Link</Typography>
+              <Link underline="none" href="/contact">
+                <Typography color="beigeColor">Syarat & Ketentuan</Typography>
               </Link>
             </Grid>
 
             <Grid item xs={3}>
               <Typography color="beigeColor" size="subheading">
-                Title
+                Link Penting
               </Typography>
-              <Link>
+              <Link href="/pricing" underline="none">
+                <Typography color="beigeColor">Berlanggan Sekarang</Typography>
+              </Link>
+              {/* <Link underline="none">
                 <Typography color="beigeColor">Link</Typography>
               </Link>
-              <Link>
+              <Link underline="none">
                 <Typography color="beigeColor">Link</Typography>
-              </Link>
-              <Link>
-                <Typography color="beigeColor">Link</Typography>
-              </Link>
+              </Link> */}
             </Grid>
           </Grid>
 
-          <Grid className={mobileClass} container>
+          <Grid
+            className={mobileClass}
+            justifyContent="space-between"
+            spacing={3}
+            container
+          >
             <Grid item xs={12}>
               <a href="/">
                 <img className={iconClass} src={Logo} />
@@ -125,37 +223,38 @@ export default function Footer() {
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </Typography>
             </Grid>
+
             <Grid item xs={12}>
               <Typography color="beigeColor" size="subheading">
-                Title
+                Bantuan & Panduan
               </Typography>
-              <Link href="/contact">
-                <Typography color="beigeColor">Contact</Typography>
+              <Link underline="none" href="/contact">
+                <Typography color="beigeColor">Hubungi Kami</Typography>
               </Link>
-              <Link>
-                <Typography color="beigeColor">Link</Typography>
+              <Link underline="none" href="/contact">
+                <Typography color="beigeColor">Kebijakan Privasi</Typography>
               </Link>
-              <Link>
-                <Typography color="beigeColor">Link</Typography>
+              <Link underline="none" href="/contact">
+                <Typography color="beigeColor">Syarat & Ketentuan</Typography>
               </Link>
             </Grid>
+
             <Grid item xs={12}>
               <Typography color="beigeColor" size="subheading">
-                Title
+                Link Penting
               </Typography>
-              <Link>
+              <Link href="/pricing" underline="none">
+                <Typography color="beigeColor">Berlanggan Sekarang</Typography>
+              </Link>
+              {/* <Link underline="none">
                 <Typography color="beigeColor">Link</Typography>
               </Link>
-              <Link>
+              <Link underline="none">
                 <Typography color="beigeColor">Link</Typography>
-              </Link>
-              <Link>
-                <Typography color="beigeColor">Link</Typography>
-              </Link>
+              </Link> */}
             </Grid>
           </Grid>
-
-          {/* <Divider className={dividerClass} /> */}
+          <SocialIcons />
           <Copyright />
         </Container>
       </footer>
