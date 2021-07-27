@@ -10,7 +10,7 @@ import MultiUseMobile from "../styles/MultiUseMobile";
 import CategoryBlock from "../components/CategoryBlock";
 
 // Material-UI components
-import { Container, Grid } from "@material-ui/core";
+import { Container, Grid, Divider } from "@material-ui/core";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -30,43 +30,47 @@ export default function Home() {
         className={desktopClass}
         image={require("../images/home.png").default}
       >
-        <Container>
-          <Grid container>
-            <Grid item xs={6}>
-              <Typography size="heading">
-                Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
-              </Typography>
-              <Button href="/" round color="primary">
-                Daftar Sekarang
-              </Button>
-            </Grid>
-            <Grid item xs={2}></Grid>
-            <Grid item xs={4}>
-              <img src={Book} />
-            </Grid>
+        <Grid container>
+          <Grid item xs={6}>
+            <Typography size="heading">
+              Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
+            </Typography>
+            <Button href="/" round color="primary">
+              Daftar Sekarang
+            </Button>
           </Grid>
-        </Container>
+          <Grid item xs={2}></Grid>
+          <Grid item xs={4}>
+            <img src={Book} />
+          </Grid>
+        </Grid>
       </Parallax>
 
       <div className={mobileClass}>
-        <Container>
-          <Grid container>
-            <Grid item xs={12}>
-              <img src={Book} />
-            </Grid>
-            <Grid item xs={12}>
-              <Container>
-                <Typography size="heading">
-                  Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
-                </Typography>
-                <Button fullWidth href="/" round color="primary">
-                  Daftar Sekarang
-                </Button>
-              </Container>
-            </Grid>
+        <Grid container>
+          <Grid item xs={12}>
+            <img src={Book} />
           </Grid>
-        </Container>
+
+          <Grid item xs={12}>
+            <Container>
+              <Typography size="heading">
+                Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
+              </Typography>
+              <Button fullWidth href="/" round color="primary">
+                Daftar Sekarang
+              </Button>
+            </Container>
+          </Grid>
+
+          <Grid item xs={12}>
+            <div className={classes.extraSpace} />
+            <Divider className={classes.dividerColor} />
+          </Grid>
+        </Grid>
       </div>
+
+      <div className={classes.extraSpace} />
 
       <Container>
         <BenefitsBlock />
