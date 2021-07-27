@@ -12,7 +12,7 @@ import Container from "@material-ui/core/Container";
 
 // Custom components
 import Button from "./Button";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "./SearchBar";
 import NavbarStyle from "../styles/NavbarStyle";
 
 // nodejs library to set properties for components

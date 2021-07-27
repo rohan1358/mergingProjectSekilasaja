@@ -1,7 +1,7 @@
 import React from "react";
 
 // Custom components and pages
-import NavBar from "./components/NavBar";
+import NavBar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
@@ -16,10 +16,10 @@ function App() {
       <NavBar />
       <Router>
         <Switch>
-          <Route path="/contact" component={Contact} />
-          <Route path="/pricing" component={PricingPage} />
-          <Route path="/404page" component={FourOFourPage} />
-          <Route path="/" component={Home} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/pricing" component={PricingPage} />
+          <Route exact path="/" component={Home} />
+          <Route component={FourOFourPage} />
         </Switch>
       </Router>
       <Footer />
