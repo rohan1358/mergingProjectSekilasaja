@@ -66,17 +66,17 @@ export default function NavBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <Button round color="transparent">
+        <Button href="/pricing" round color="transparent">
           Pricing
         </Button>
       </MenuItem>
       <MenuItem>
-        <Button round color="transparent">
+        <Button href="/signup" round color="transparent">
           Sign Up
         </Button>
       </MenuItem>
       <MenuItem>
-        <Button round color="primary">
+        <Button href="/login" round color="primary">
           Login
         </Button>
       </MenuItem>
@@ -96,13 +96,13 @@ export default function NavBar() {
             <div className={growClass} />
 
             <div className={desktopClass}>
-              <Button round color="transparent">
+              <Button href="/pricing" round color="transparent">
                 Pricing
               </Button>
-              <Button round color="transparent">
+              <Button href="/signup" round color="transparent">
                 Sign Up
               </Button>
-              <Button round color="primary">
+              <Button href="/login" round color="primary">
                 Login
               </Button>
             </div>
