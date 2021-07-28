@@ -19,9 +19,13 @@ export default function NewWebLanding() {
         <Paper className={classes.paper} elevation={5}>
           <img className={classes.logo} src={Logo} />
           <Typography size="heading">Sebentar Lagi!</Typography>
-          <Typography className={classes.description} size="subheading">
+          <Typography
+            className={classes.description}
+            type="italic"
+            size="subheading"
+          >
             "Sebentar lagi kami akan merilis website ini dan menawarkan berbagai
-            kilas buku terpopuler di dunia dalam bentu video, audio, dan teks."
+            kilas buku terpopuler di dunia dalam bentuk video, audio, dan teks."
           </Typography>
           <IconButton
             href="https://www.instagram.com/sekilasajacom"

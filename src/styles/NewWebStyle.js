@@ -9,6 +9,7 @@ const NewWebStyle = {
   },
   description: {
     fontWeight: "normal",
+    fontFamily: "Roboto",
   },
   iconStyle: {
     color: secondaryColor,
