@@ -2,13 +2,16 @@ import React from "react";
 import Logo from "../images/dark-logo.png";
 
 // Material-UI components
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+import {
+  AppBar,
+  Toolbar,
+  MenuItem,
+  IconButton,
+  Container,
+  Link,
+  Menu,
+} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import Container from "@material-ui/core/Container";
 
 // Custom components
 import Button from "./Button";
@@ -22,9 +25,6 @@ export default function NavBar() {
   const classes = NavbarStyle();
   const growClass = classNames({
     [classes.grow]: true,
-  });
-  const titleClass = classNames({
-    [classes.title]: true,
   });
   const mobileClass = classNames({
     [classes.sectionMobile]: true,
@@ -66,19 +66,19 @@ export default function NavBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <Button href="/pricing" round color="transparent">
+        <Link href="/pricing" underline="none" className={classes.link}>
           Pricing
-        </Button>
+        </Link>
       </MenuItem>
       <MenuItem>
-        <Button href="/signup" round color="transparent">
+        <Link href="/signup" underline="none" className={classes.link}>
           Sign Up
-        </Button>
+        </Link>
       </MenuItem>
       <MenuItem>
-        <Button href="/login" round color="primary">
+        <Link href="/login" underline="none" className={classes.link}>
           Login
-        </Button>
+        </Link>
       </MenuItem>
     </Menu>
   );

@@ -27,6 +27,14 @@ const NavbarStyle = makeStyles((theme) => ({
   icon: {
     width: "120px",
   },
+  link: {
+    marginLeft: "100px",
+    marginRight: "100px",
+    textTransform: "uppercase",
+    fontWeight: "600",
+    fontSize: "12px",
+    color: secondaryColor,
+  },
 }));
 
 export default NavbarStyle;
