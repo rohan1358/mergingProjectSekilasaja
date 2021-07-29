@@ -1,4 +1,4 @@
-import { primaryColor, secondaryColor } from "./Style";
+import { beigeColor, primaryColor } from "./Style";
 
 const NewWebStyle = {
   paper: {
@@ -12,7 +12,7 @@ const NewWebStyle = {
     fontFamily: "Roboto",
   },
   iconStyle: {
-    color: secondaryColor,
+    color: beigeColor,
     marginRight: "5px",
   },
   logo: {

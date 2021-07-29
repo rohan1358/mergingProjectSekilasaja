@@ -4,6 +4,7 @@ import Logo from "../images/dark-logo.png";
 // Custom components
 import Styles from "../styles/NewWebStyle";
 import Typography from "../components/Typography";
+import Button from "../components/Button";
 
 // Material-UI components
 import { Container, IconButton, Paper, makeStyles } from "@material-ui/core";
@@ -27,16 +28,16 @@ export default function NewWebLanding() {
             "Sebentar lagi kami akan merilis website ini dan menawarkan berbagai
             kilas buku terpopuler di dunia dalam bentuk video, audio, dan teks."
           </Typography>
-          <IconButton
-            href="https://www.instagram.com/sekilasajacom"
-            edge="start"
-            size="small"
-            color="inherit"
-            aria-label="menu"
+          <Button
+            href="https://instagram.com/sekilasajacom"
+            round
+            color="secondary"
           >
             <Instagram className={classes.iconStyle} />
-            <Typography type="italic">SekilasAja!</Typography>
-          </IconButton>
+            <Typography color="beigeColor" type="italic">
+              sekilasajacom
+            </Typography>
+          </Button>
         </Paper>
       </Container>
     </div>
