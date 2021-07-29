@@ -14,17 +14,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 function App() {
   return (
     <div className="App">
-      {/* <NavBar /> */}
+      <NavBar />
       <Router>
         <Switch>
-          {/* <Route exact path="/contact" component={Contact} />
+          <Route exact path="/contact" component={Contact} />
           <Route exact path="/pricing" component={PricingPage} />
           <Route exact path="/" component={Home} />
-          <Route component={FourOFourPage} /> */}
-          <Route component={NewWebLanding} />
+          <Route component={FourOFourPage} />
+          {/* <Route component={NewWebLanding} /> */}
         </Switch>
       </Router>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }
