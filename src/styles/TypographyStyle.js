@@ -33,7 +33,6 @@ const TypographyStyle = {
     marginBottom: "18px",
   },
   small: {
-    marginTop: "3px",
     fontSize: "75%",
   },
   beigeColor: {
