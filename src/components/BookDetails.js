@@ -38,7 +38,7 @@ export default function BookDetails(props) {
             <div className={mobile.extraSpace} />
           </Grid>
 
-          <Grid item xs={8}>
+          <Grid item xs={9}>
             <div className={classes.bookDetailsDesc}>
               <Typography size="subheading" type="bold">
                 {title}
@@ -74,7 +74,7 @@ export default function BookDetails(props) {
 
           <Grid item xs={1} />
 
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <img
               src={cover}
               className={
@@ -95,10 +95,6 @@ export default function BookDetails(props) {
 
       <div className={mobileClass}>
         <Grid container>
-          <Grid item xs={12}>
-            <div className={mobile.extraSpace} />
-          </Grid>
-
           <Grid item xs={12}>
             <img
               src={cover}

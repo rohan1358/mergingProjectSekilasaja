@@ -34,6 +34,7 @@ export default function CategoryBlock(props) {
         <Grid container spacing={7}>
           <Grid item>
             <BookCard
+              link="/book-details"
               cover={BookCover}
               title={"Rich Dad Poor Dad"}
               author={"Robert Kiyosaki"}
@@ -45,6 +46,7 @@ export default function CategoryBlock(props) {
 
           <Grid item>
             <BookCard
+              link="/book-details"
               cover={BookCover}
               title={"Rich Dad Poor Dad"}
               author={"Robert Kiyosaki"}
@@ -56,6 +58,7 @@ export default function CategoryBlock(props) {
 
           <Grid item>
             <BookCard
+              link="/book-details"
               cover={BookCover}
               title={"Rich Dad Poor Dad"}
               author={"Robert Kiyosaki"}
@@ -67,6 +70,7 @@ export default function CategoryBlock(props) {
 
           <Grid item>
             <BookCard
+              link="/book-details"
               cover={BookCover}
               title={"Rich Dad Poor Dad"}
               author={"Robert Kiyosaki"}
@@ -78,6 +82,7 @@ export default function CategoryBlock(props) {
 
           <Grid item>
             <BookCard
+              link="/book-details"
               cover={BookCover}
               title={"Rich Dad Poor Dad"}
               author={"Robert Kiyosaki"}
