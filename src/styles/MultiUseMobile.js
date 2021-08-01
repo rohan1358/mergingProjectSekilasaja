@@ -33,6 +33,7 @@ const MultiUseMobile = makeStyles((theme) => ({
     marginTop: "40px",
     textAlign: "center",
     justifyContent: "center",
+    justifyContent: "center",
     [theme.breakpoints.up("md")]: {
       display: "none",
     },

@@ -68,6 +68,19 @@ const InfoStyle = {
     width: "61px",
     height: "61px",
   },
+  logo: {
+    marginTop: "15px",
+    color: secondaryColor,
+    marginRight: "2px",
+  },
+  kilasDesc: {
+    display: "flex",
+    marginRight: "20px",
+  },
+  kilasDescMobile: {
+    display: "flex",
+    justifyContent: "center",
+  },
   ...ImagesStyle,
 };
 
