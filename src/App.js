@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Custom components and pages
 import NavBar from "./components/Navbar";
@@ -7,9 +8,8 @@ import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import FourOFourPage from "./pages/404page";
 import PricingPage from "./pages/Pricing";
+import BookDetailsPage from "./pages/BookDetailsPage";
 import NewWebLanding from "./pages/NewWebLanding";
-
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
         <Switch>
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/pricing" component={PricingPage} />
+          <Route exact path="/book-details" component={BookDetailsPage} />
           <Route exact path="/" component={Home} />
           <Route component={FourOFourPage} />
           {/* <Route component={NewWebLanding} /> */}

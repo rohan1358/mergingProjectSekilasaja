@@ -74,6 +74,7 @@ export default function Home() {
 
       <Container>
         <BenefitsBlock />
+        <div className={classes.extraSpace} />
         <CategoryBlock heading={"Temukan Kategori Kesukaan Kamu!"} />
       </Container>
     </div>

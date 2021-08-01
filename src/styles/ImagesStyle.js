@@ -40,6 +40,8 @@ const ImagesStyle = {
     padding: "1.25rem",
   },
   imgBookCover: {
+    marginTop: "20px",
+    width: "100%",
     maxWidth: "200px",
   },
 };

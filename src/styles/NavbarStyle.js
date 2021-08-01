@@ -25,7 +25,8 @@ const NavbarStyle = makeStyles((theme) => ({
     color: secondaryColor,
   },
   icon: {
-    width: "120px",
+    width: "100%",
+    maxWidth: "120px",
   },
   link: {
     marginLeft: "100px",

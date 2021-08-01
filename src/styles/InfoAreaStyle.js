@@ -13,6 +13,13 @@ const InfoStyle = {
     maxWidth: "200px",
     marginTop: "30px",
   },
+  bookDetails: {
+    marginTop: "40px",
+  },
+  bookDetailsDesc: {
+    display: "block",
+    marginLeft: "15px",
+  },
   infoArea: {
     margin: "0 auto",
     padding: "0px",
