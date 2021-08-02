@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { secondaryColor } from "./Style";
+import { primaryColor, secondaryColor } from "./Style";
 
 const NavbarStyle = makeStyles((theme) => ({
   grow: {
@@ -35,6 +35,9 @@ const NavbarStyle = makeStyles((theme) => ({
     fontWeight: "600",
     fontSize: "12px",
     color: secondaryColor,
+  },
+  yellowNavBar: {
+    backgroundColor: primaryColor,
   },
 }));
 
