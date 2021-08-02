@@ -8,7 +8,6 @@ import { Timelapse, EmojiObjects, PlayArrow } from "@material-ui/icons";
 import InfoAreaStyle from "../styles/InfoAreaStyle";
 import Typography from "./Typography";
 import MultiUseMobile from "../styles/MultiUseMobile";
-import Button from "./Button";
 
 // nodejs library to set properties for components
 import classNames from "classnames";

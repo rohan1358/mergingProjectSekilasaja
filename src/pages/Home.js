@@ -8,6 +8,8 @@ import BenefitsBlock from "../components/BenefitsBlock";
 import Button from "../components/Button";
 import MultiUseMobile from "../styles/MultiUseMobile";
 import CategoryBlock from "../components/CategoryBlock";
+import NavBar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 // Material-UI components
 import { Container, Grid, Divider } from "@material-ui/core";
@@ -26,6 +28,7 @@ export default function Home() {
 
   return (
     <div>
+      <NavBar />
       <Parallax
         className={desktopClass}
         image={require("../images/home.png").default}
@@ -77,6 +80,7 @@ export default function Home() {
         <div className={classes.extraSpace} />
         <CategoryBlock heading={"Temukan Kategori Kesukaan Kamu!"} />
       </Container>
+      <Footer />
     </div>
   );
 }

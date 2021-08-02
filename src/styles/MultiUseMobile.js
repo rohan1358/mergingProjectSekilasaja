@@ -72,6 +72,10 @@ const MultiUseMobile = makeStyles((theme) => ({
   dividerColor: {
     backgroundColor: grayColor,
   },
+  secWidth: {
+    maxWidth: "800px",
+    width: "100%",
+  },
 }));
 
 export default MultiUseMobile;

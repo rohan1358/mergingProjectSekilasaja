@@ -3,6 +3,8 @@ import React from "react";
 // Custom components
 import Parallax from "../components/Parallax";
 import Typography from "../components/Typography";
+import NavBar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 // Material-UI components
 import { Container } from "@material-ui/core";
@@ -10,6 +12,7 @@ import { Container } from "@material-ui/core";
 export default function Contact() {
   return (
     <div>
+      <NavBar />
       <Container>
         <Parallax
           border
@@ -24,6 +27,7 @@ export default function Contact() {
           </Typography>
         </Parallax>
       </Container>
+      <Footer />
     </div>
   );
 }
