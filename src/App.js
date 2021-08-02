@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// Custom components and pages
+// Custom pages
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import FourOFourPage from "./pages/404page";
