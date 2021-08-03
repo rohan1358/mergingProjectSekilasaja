@@ -44,6 +44,11 @@ const ImagesStyle = {
     width: "100%",
     maxWidth: "170px",
   },
+  videoWidth: {
+    marginTop: "20px",
+    width: "100%",
+    maxWidth: "800px",
+  },
 };
 
 export default ImagesStyle;

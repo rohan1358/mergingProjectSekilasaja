@@ -4,6 +4,8 @@ import BookCover from "../images/rdpd.jpg";
 // Custom components
 import BookDetails from "../components/BookDetails";
 import TextDetails from "../components/TextDetails";
+import NavBar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 // Material-UI components
 import { Container } from "@material-ui/core";
@@ -11,6 +13,7 @@ import { Container } from "@material-ui/core";
 export default function BookDetailsPage() {
   return (
     <div>
+      <NavBar />
       <Container>
         <BookDetails
           cover={BookCover}
@@ -53,6 +56,7 @@ export default function BookDetailsPage() {
           }
         />
       </Container>
+      <Footer />
     </div>
   );
 }
