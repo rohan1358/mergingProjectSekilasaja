@@ -12,6 +12,7 @@ import {
   Menu,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import SearchIcon from "@material-ui/icons/Search";
 
 // Custom components
 import Button from "./Button";
@@ -91,23 +92,32 @@ export default function NavBar() {
             <a href="/">
               <img className={iconClass} src={Logo} />
             </a>
-            <SearchBar />
 
             <div className={growClass} />
 
             <div className={desktopClass}>
+              <IconButton color="inherit">
+                <SearchIcon className={iconColorClass} />
+              </IconButton>
+
               <Button href="/pricing" round color="transparent">
                 Pricing
               </Button>
+
               <Button href="/signup" round color="transparent">
                 Sign Up
               </Button>
+
               <Button href="/login" round color="primary">
                 Login
               </Button>
             </div>
 
             <div className={mobileClass}>
+              <IconButton color="inherit">
+                <SearchIcon className={iconColorClass} />
+              </IconButton>
+
               <IconButton
                 aria-label="show more"
                 aria-controls={mobileMenuId}
