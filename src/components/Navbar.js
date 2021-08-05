@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from 'react';
 import Logo from "../images/dark-logo.png";
 
 // Material-UI components
@@ -14,6 +15,10 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 
+//Import components for login and signup
+import SignUpModalDialog from './SignUp/SignUpModalDialog';
+import LoginModalDialog from './Login/LoginModalDialog';
+
 // Custom components
 import Button from "./Button";
 import SearchBar from "./SearchBar";
@@ -23,66 +28,97 @@ import NavbarStyle from "../styles/NavbarStyle";
 import classNames from "classnames";
 
 export default function NavBar() {
-  const classes = NavbarStyle();
-  const growClass = classNames({
-    [classes.grow]: true,
-  });
-  const mobileClass = classNames({
-    [classes.sectionMobile]: true,
-  });
-  const desktopClass = classNames({
-    [classes.sectionDesktop]: true,
-  });
-  const toolbarClass = classNames({
-    [classes.toolbar]: true,
-  });
-  const iconColorClass = classNames({
-    [classes.iconColor]: true,
-  });
-  const iconClass = classNames({
-    [classes.icon]: true,
-  });
+    const classes = NavbarStyle();
 
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    // FOR SIGNUP MODAL AND LOGIN MODAL
+    // Declare a new state variable for modal open for signup and login
+    const [openSignUp, setSignUpOpen] = useState(false);
+    const [openLogin, setLoginOpen] = useState(false)
 
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    // function to handle modal open for signup
+    const handleSignUpOpen = () => {
+        setSignUpOpen(true);
+    };
 
-  const handleMobileMenuOpen = (event) => {
+    // function to handle modal open for login
+    const handleLoginOpen = () => {
+        setLoginOpen(true);
+    };
+
+    // function to handle modal close for signup
+    const handleSignUpClose = () => {
+        setSignUpOpen(false);
+    };
+
+    // function to handle modal close for login
+    const handleLoginClose = () => {
+        setLoginOpen(false);
+    };
+
+    const growClass = classNames({
+        [classes.grow]: true,
+    });
+    const mobileClass = classNames({
+        [classes.sectionMobile]: true,
+    });
+    const desktopClass = classNames({
+        [classes.sectionDesktop]: true,
+    });
+    const toolbarClass = classNames({
+        [classes.toolbar]: true,
+    });
+    const iconColorClass = classNames({
+        [classes.iconColor]: true,
+    });
+    const iconClass = classNames({
+        [classes.icon]: true,
+    });
+
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
-  };
+    };
 
-  const handleMobileMenuClose = () => {
+    const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
-  };
+    };
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  const renderMobileMenu = (
+    const mobileMenuId = "primary-search-account-menu-mobile";
+    const renderMobileMenu = (
     <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
+        anchorEl={mobileMoreAnchorEl}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        id={mobileMenuId}
+        keepMounted
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
+        open={isMobileMenuOpen}
+        onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <Link href="/pricing" underline="none" className={classes.link}>
-          Pricing
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href="/signup" underline="none" className={classes.link}>
-          Sign Up
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href="/login" underline="none" className={classes.link}>
-          Login
-        </Link>
-      </MenuItem>
+        <MenuItem>
+            <Link href="/pricing" underline="none" className={classes.link}>
+                Pricing
+            </Link>
+        </MenuItem>
+        <MenuItem>
+            <Link underline="none" className={classes.link} onClick={handleSignUpOpen}>
+               Sign Up    
+            </Link>
+           
+        </MenuItem>
+        <MenuItem>
+            <Link underline="none" className={classes.link} onClick={handleLoginOpen}>
+               Login
+            </Link>
+            </MenuItem>
+            <SignUpModalDialog open={openSignUp} handleClose={handleSignUpClose} />
+            <LoginModalDialog open={openLogin} handleClose={handleLoginClose} />
     </Menu>
-  );
+    );
+
+ 
 
   return (
     <div>
@@ -104,13 +140,15 @@ export default function NavBar() {
                 Pricing
               </Button>
 
-              <Button href="/signup" round color="transparent">
-                Sign Up
+              <Button round color="transparent" onClick={handleSignUpOpen}>
+                              Sign Up
               </Button>
-
-              <Button href="/login" round color="primary">
-                Login
+              <SignUpModalDialog open={openSignUp} handleClose={handleSignUpClose} />
+            
+              <Button round color="primary" onClick={handleLoginOpen}>
+                              Login
               </Button>
+              <LoginModalDialog open={openLogin} handleClose={handleLoginClose} />
             </div>
 
             <div className={mobileClass}>
