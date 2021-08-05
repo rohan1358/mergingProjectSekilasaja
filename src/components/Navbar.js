@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../images/dark-logo.png";
+import Book from "../images/rdpd.jpg";
 
 // Material-UI components
 import {
@@ -13,16 +14,20 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 // Custom components
+import Drawer from "./Drawer";
 import Button from "./Button";
 import SearchBar from "./SearchBar";
 import NavbarStyle from "../styles/NavbarStyle";
+import AddedToCardBooks from "./AddedToCartBooks";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
 
 export default function NavBar() {
+  // Other styles
   const classes = NavbarStyle();
   const growClass = classNames({
     [classes.grow]: true,
@@ -111,12 +116,34 @@ export default function NavBar() {
               <Button href="/login" round color="primary">
                 Login
               </Button>
+
+              <div className={classes.divider} />
+
+              <Drawer
+                drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
+                drawerTitle={"Your Cart"}
+                logo={<ShoppingCartIcon className={classes.iconColor} />}
+                button={
+                  <Button round fullWidth color="primary">
+                    Beli Sekarang
+                  </Button>
+                }
+                toPurchaseBookSection={
+                  <AddedToCardBooks
+                    cover={Book}
+                    title={"Rich Dad Poor Dad"}
+                    price={"Rp. 10,000"}
+                  />
+                }
+              />
             </div>
 
             <div className={mobileClass}>
               <IconButton color="inherit">
                 <SearchIcon className={iconColorClass} />
               </IconButton>
+
+              <Drawer />
 
               <IconButton
                 aria-label="show more"
