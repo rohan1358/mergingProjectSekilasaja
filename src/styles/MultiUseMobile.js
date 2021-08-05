@@ -76,6 +76,10 @@ const MultiUseMobile = makeStyles((theme) => ({
     maxWidth: "800px",
     width: "100%",
   },
+  link: {
+    fontWeight: "bold",
+    color: secondaryColor,
+  },
 }));
 
 export default MultiUseMobile;

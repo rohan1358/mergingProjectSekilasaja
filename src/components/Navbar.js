@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from 'react';
+import { useState } from "react";
 import Logo from "../images/dark-logo.png";
 
 // Material-UI components
@@ -16,8 +16,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 
 //Import components for login and signup
-import SignUpModalDialog from './SignUp/SignUpModalDialog';
-import LoginModalDialog from './Login/LoginModalDialog';
+import SignUpModalDialog from "./SignUp/SignUpModalDialog";
+import LoginModalDialog from "./Login/LoginModalDialog";
 
 // Custom components
 import Button from "./Button";
@@ -28,97 +28,102 @@ import NavbarStyle from "../styles/NavbarStyle";
 import classNames from "classnames";
 
 export default function NavBar() {
-    const classes = NavbarStyle();
+  const classes = NavbarStyle();
 
-    // FOR SIGNUP MODAL AND LOGIN MODAL
-    // Declare a new state variable for modal open for signup and login
-    const [openSignUp, setSignUpOpen] = useState(false);
-    const [openLogin, setLoginOpen] = useState(false)
+  // FOR SIGNUP MODAL AND LOGIN MODAL
+  // Declare a new state variable for modal open for signup and login
+  const [openSignUp, setSignUpOpen] = useState(false);
+  const [openLogin, setLoginOpen] = useState(false);
 
-    // function to handle modal open for signup
-    const handleSignUpOpen = () => {
-        setSignUpOpen(true);
-    };
+  // function to handle modal open for signup
+  const handleSignUpOpen = () => {
+    setSignUpOpen(true);
+  };
 
-    // function to handle modal open for login
-    const handleLoginOpen = () => {
-        setLoginOpen(true);
-    };
+  // function to handle modal open for login
+  const handleLoginOpen = () => {
+    setLoginOpen(true);
+  };
 
-    // function to handle modal close for signup
-    const handleSignUpClose = () => {
-        setSignUpOpen(false);
-    };
+  // function to handle modal close for signup
+  const handleSignUpClose = () => {
+    setSignUpOpen(false);
+  };
 
-    // function to handle modal close for login
-    const handleLoginClose = () => {
-        setLoginOpen(false);
-    };
+  // function to handle modal close for login
+  const handleLoginClose = () => {
+    setLoginOpen(false);
+  };
 
-    const growClass = classNames({
-        [classes.grow]: true,
-    });
-    const mobileClass = classNames({
-        [classes.sectionMobile]: true,
-    });
-    const desktopClass = classNames({
-        [classes.sectionDesktop]: true,
-    });
-    const toolbarClass = classNames({
-        [classes.toolbar]: true,
-    });
-    const iconColorClass = classNames({
-        [classes.iconColor]: true,
-    });
-    const iconClass = classNames({
-        [classes.icon]: true,
-    });
+  const growClass = classNames({
+    [classes.grow]: true,
+  });
+  const mobileClass = classNames({
+    [classes.sectionMobile]: true,
+  });
+  const desktopClass = classNames({
+    [classes.sectionDesktop]: true,
+  });
+  const toolbarClass = classNames({
+    [classes.toolbar]: true,
+  });
+  const iconColorClass = classNames({
+    [classes.iconColor]: true,
+  });
+  const iconClass = classNames({
+    [classes.icon]: true,
+  });
 
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const handleMobileMenuOpen = (event) => {
+  const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
-    };
+  };
 
-    const handleMobileMenuClose = () => {
+  const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
-    };
+  };
 
-    const mobileMenuId = "primary-search-account-menu-mobile";
-    const renderMobileMenu = (
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
     <Menu
-        anchorEl={mobileMoreAnchorEl}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
-        id={mobileMenuId}
-        keepMounted
-        transformOrigin={{ vertical: "top", horizontal: "right" }}
-        open={isMobileMenuOpen}
-        onClose={handleMobileMenuClose}
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
     >
-        <MenuItem>
-            <Link href="/pricing" underline="none" className={classes.link}>
-                Pricing
-            </Link>
-        </MenuItem>
-        <MenuItem>
-            <Link underline="none" className={classes.link} onClick={handleSignUpOpen}>
-               Sign Up    
-            </Link>
-           
-        </MenuItem>
-        <MenuItem>
-            <Link underline="none" className={classes.link} onClick={handleLoginOpen}>
-               Login
-            </Link>
-            </MenuItem>
-            <SignUpModalDialog open={openSignUp} handleClose={handleSignUpClose} />
-            <LoginModalDialog open={openLogin} handleClose={handleLoginClose} />
+      <MenuItem>
+        <Link href="/pricing" underline="none" className={classes.link}>
+          Pricing
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          underline="none"
+          className={classes.link}
+          onClick={handleSignUpOpen}
+        >
+          Sign Up
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          underline="none"
+          className={classes.link}
+          onClick={handleLoginOpen}
+        >
+          Login
+        </Link>
+      </MenuItem>
+      <SignUpModalDialog open={openSignUp} handleClose={handleSignUpClose} />
+      <LoginModalDialog open={openLogin} handleClose={handleLoginClose} />
     </Menu>
-    );
-
- 
+  );
 
   return (
     <div>
@@ -141,14 +146,20 @@ export default function NavBar() {
               </Button>
 
               <Button round color="transparent" onClick={handleSignUpOpen}>
-                              Sign Up
+                Sign Up
               </Button>
-              <SignUpModalDialog open={openSignUp} handleClose={handleSignUpClose} />
-            
+              <SignUpModalDialog
+                open={openSignUp}
+                handleClose={handleSignUpClose}
+              />
+
               <Button round color="primary" onClick={handleLoginOpen}>
-                              Login
+                Login
               </Button>
-              <LoginModalDialog open={openLogin} handleClose={handleLoginClose} />
+              <LoginModalDialog
+                open={openLogin}
+                handleClose={handleLoginClose}
+              />
             </div>
 
             <div className={mobileClass}>
