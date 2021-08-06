@@ -62,7 +62,9 @@ const useStyles = makeStyles((theme) => ({
       color: "#fff",
     },
   },
-
+  textTransformNormal: {
+    textTransform: "capitalize",
+  },
   volumeSlider: {
     width: 100,
   },
@@ -275,7 +277,7 @@ const Controls = forwardRef(
                 variant="text"
               >
                 <Typography className={classes.bottomIcons}>
-                  Speed: {playbackRate}
+                  {playbackRate}x
                 </Typography>
               </Button>
 
@@ -300,7 +302,9 @@ const Controls = forwardRef(
                       key={rate}
                       onClick={() => onPlaybackRateChange(rate)}
                     >
-                      <Typography>{rate}</Typography>
+                      <Typography className={classes.textTransformNormal}>
+                        {rate}x
+                      </Typography>
                     </Button>
                   ))}
                 </Grid>
