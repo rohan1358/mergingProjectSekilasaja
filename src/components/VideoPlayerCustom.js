@@ -1,7 +1,11 @@
 import React, { forwardRef, useState } from "react";
 import PropTypes from "prop-types";
 
-import Typography from "@material-ui/core/Typography";
+// Custom components
+import Typography from "../components/Typography";
+import { primaryColor, secondaryColor } from "../styles/Style";
+
+// Material ui components
 import {
   makeStyles,
   withStyles,
@@ -13,7 +17,6 @@ import {
   Popover,
 } from "@material-ui/core";
 
-import BookmarkIcon from "@material-ui/icons/Bookmark";
 import FastRewindIcon from "@material-ui/icons/FastRewind";
 import FastForwardIcon from "@material-ui/icons/FastForward";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
@@ -53,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   bottomIcons: {
+    textTransform: "capitalize",
     color: "#999",
     "&:hover": {
       color: "#fff",
@@ -69,6 +73,7 @@ const PrettoSlider = withStyles({
     height: 8,
   },
   thumb: {
+    color: secondaryColor,
     height: 24,
     width: 24,
     backgroundColor: "#fff",
@@ -126,7 +131,6 @@ const Controls = forwardRef(
       onToggleFullScreen,
       volume,
       onVolumeChange,
-      onBookmark,
     },
     ref
   ) => {
@@ -158,23 +162,7 @@ const Controls = forwardRef(
             justify="space-between"
             style
             style={{ padding: 16 }}
-          >
-            <Grid item>
-              <Typography variant="h5" style={{ color: "#fff" }}>
-                Video Title
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Button
-                onClick={onBookmark}
-                variant="contained"
-                color="primary"
-                startIcon={<BookmarkIcon />}
-              >
-                Bookmark
-              </Button>
-            </Grid>
-          </Grid>
+          />
           <Grid container direction="row" alignItems="center" justify="center">
             <IconButton
               onClick={onRewind}
@@ -215,6 +203,7 @@ const Controls = forwardRef(
           >
             <Grid item xs={12}>
               <PrettoSlider
+                color="secondary"
                 min={0}
                 max={100}
                 ValueLabelComponent={(props) => (
@@ -257,6 +246,7 @@ const Controls = forwardRef(
                 </IconButton>
 
                 <Slider
+                  color="secondary"
                   min={0}
                   max={100}
                   value={muted ? 0 : volume * 100}
@@ -266,19 +256,10 @@ const Controls = forwardRef(
                   onMouseDown={onSeekMouseDown}
                   onChangeCommitted={onVolumeSeekDown}
                 />
-                <Button
-                  variant="text"
-                  onClick={
-                    onChangeDispayFormat
-                    //     () =>
-                    //   setTimeDisplayFormat(
-                    //     timeDisplayFormat == "normal" ? "remaining" : "normal"
-                    //   )
-                  }
-                >
+                <Button variant="text" onClick={onChangeDispayFormat}>
                   <Typography
-                    variant="body1"
-                    style={{ color: "#fff", marginLeft: 16 }}
+                    className={classes.bottomIcons}
+                    style={{ marginLeft: 16 }}
                   >
                     {elapsedTime}/{totalDuration}
                   </Typography>
@@ -293,7 +274,9 @@ const Controls = forwardRef(
                 className={classes.bottomIcons}
                 variant="text"
               >
-                <Typography>{playbackRate}X</Typography>
+                <Typography className={classes.bottomIcons}>
+                  Speed: {playbackRate}
+                </Typography>
               </Button>
 
               <Popover
@@ -315,19 +298,14 @@ const Controls = forwardRef(
                   {[0.5, 1, 1.5, 2].map((rate) => (
                     <Button
                       key={rate}
-                      //   onClick={() => setState({ ...state, playbackRate: rate })}
                       onClick={() => onPlaybackRateChange(rate)}
-                      variant="text"
                     >
-                      <Typography
-                        color={rate === playbackRate ? "secondary" : "inherit"}
-                      >
-                        {rate}X
-                      </Typography>
+                      <Typography>{rate}</Typography>
                     </Button>
                   ))}
                 </Grid>
               </Popover>
+
               <IconButton
                 onClick={onToggleFullScreen}
                 className={classes.bottomIcons}

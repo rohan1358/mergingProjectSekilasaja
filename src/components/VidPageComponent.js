@@ -8,15 +8,7 @@ import MultiUseMobile from "../styles/MultiUseMobile";
 import Controls from "../components/VideoPlayerCustom";
 
 // Material-UI components
-import {
-  Container,
-  Grid,
-  Paper,
-  makeStyles,
-  Tooltip,
-  Slider,
-  withStyles,
-} from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
 
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
@@ -100,45 +92,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PrettoSlider = withStyles({
-  root: {
-    height: 8,
-  },
-  thumb: {
-    height: 24,
-    width: 24,
-    backgroundColor: "#fff",
-    border: "2px solid currentColor",
-    marginTop: -8,
-    marginLeft: -12,
-    "&:focus, &:hover, &$active": {
-      boxShadow: "inherit",
-    },
-  },
-  active: {},
-  valueLabel: {
-    left: "calc(-50% + 4px)",
-  },
-  track: {
-    height: 8,
-    borderRadius: 4,
-  },
-  rail: {
-    height: 8,
-    borderRadius: 4,
-  },
-})(Slider);
-
-function ValueLabelComponent(props) {
-  const { children, open, value } = props;
-
-  return (
-    <Tooltip open={open} enterTouchDelay={0} placement="top" title={value}>
-      {children}
-    </Tooltip>
-  );
-}
-
 const format = (seconds) => {
   if (isNaN(seconds)) {
     return `00:00`;
@@ -160,11 +113,8 @@ export default function VideoComponent(props) {
   const mobile = MultiUseMobile();
 
   const classes = useStyles();
-  const [showControls, setShowControls] = useState(false);
-  // const [count, setCount] = useState(0);
-  const [anchorEl, setAnchorEl] = React.useState(null);
+
   const [timeDisplayFormat, setTimeDisplayFormat] = React.useState("normal");
-  const [bookmarks, setBookmarks] = useState([]);
   const [state, setState] = useState({
     pip: false,
     playing: true,
@@ -186,7 +136,6 @@ export default function VideoComponent(props) {
   const canvasRef = useRef(null);
   const {
     playing,
-    controls,
     light,
 
     muted,
@@ -194,7 +143,6 @@ export default function VideoComponent(props) {
     playbackRate,
     pip,
     played,
-    seeking,
     volume,
   } = state;
 
@@ -280,33 +228,8 @@ export default function VideoComponent(props) {
     setState({ ...state, playbackRate: rate });
   };
 
-  const hanldeMute = () => {
+  const handleMute = () => {
     setState({ ...state, muted: !state.muted });
-  };
-
-  const addBookmark = () => {
-    const canvas = canvasRef.current;
-    canvas.width = 160;
-    canvas.height = 90;
-    const ctx = canvas.getContext("2d");
-
-    ctx.drawImage(
-      playerRef.current.getInternalPlayer(),
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-    const dataUri = canvas.toDataURL();
-    canvas.width = 0;
-    canvas.height = 0;
-    const bookmarksCopy = [...bookmarks];
-    bookmarksCopy.push({
-      time: playerRef.current.getCurrentTime(),
-      display: format(playerRef.current.getCurrentTime()),
-      image: dataUri,
-    });
-    setBookmarks(bookmarksCopy);
   };
 
   const currentTime =
@@ -325,6 +248,7 @@ export default function VideoComponent(props) {
 
   return (
     <Container maxWidth="md">
+      <div className={mobile.extraSpace} />
       <div
         onMouseMove={handleMouseMove}
         onMouseLeave={hanldeMouseLeave}
@@ -367,7 +291,7 @@ export default function VideoComponent(props) {
           played={played}
           elapsedTime={elapsedTime}
           totalDuration={totalDuration}
-          onMute={hanldeMute}
+          onMute={handleMute}
           muted={muted}
           onVolumeChange={handleVolumeChange}
           onVolumeSeekDown={handleVolumeSeekDown}
@@ -376,32 +300,12 @@ export default function VideoComponent(props) {
           onPlaybackRateChange={handlePlaybackRate}
           onToggleFullScreen={toggleFullScreen}
           volume={volume}
-          onBookmark={addBookmark}
         />
       </div>
 
-      <Grid container style={{ marginTop: 20 }} spacing={3}>
-        {bookmarks.map((bookmark, index) => (
-          <Grid key={index} item>
-            <Paper
-              onClick={() => {
-                playerRef.current.seekTo(bookmark.time);
-                controlsRef.current.style.visibility = "visible";
+      <Typography size="subheading">{title}</Typography>
+      <Typography>{description}</Typography>
 
-                setTimeout(() => {
-                  controlsRef.current.style.visibility = "hidden";
-                }, 1000);
-              }}
-              elevation={3}
-            >
-              <img crossOrigin="anonymous" src={bookmark.image} />
-              <Typography variant="body2" align="center">
-                bookmark at {bookmark.display}
-              </Typography>
-            </Paper>
-          </Grid>
-        ))}
-      </Grid>
       <canvas ref={canvasRef} />
     </Container>
   );
