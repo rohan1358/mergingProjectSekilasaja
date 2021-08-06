@@ -21,6 +21,8 @@ export default function BookDetails(props) {
     totalNum,
     kilasTitle,
     kilasBody,
+    video,
+    audio,
     kilas1,
     kilas2,
     kilas3,
@@ -59,9 +61,7 @@ export default function BookDetails(props) {
                 <Typography size="subheading" type="bold">
                   Video
                 </Typography>
-                <Typography type="italic">
-                  TODO: Ntar ada video di sini
-                </Typography>
+                {video}
               </div>
 
               <div>
@@ -71,6 +71,7 @@ export default function BookDetails(props) {
                 <Typography type="italic">
                   TODO: Ntar ada audio di sini
                 </Typography>
+                {audio}
               </div>
 
               <div>
@@ -149,4 +150,6 @@ BookDetails.propTypes = {
   kilasBody: PropTypes.string.isRequired,
   kilas1: PropTypes.string,
   kilas2: PropTypes.string,
+  video: PropTypes.object,
+  audio: PropTypes.object,
 };

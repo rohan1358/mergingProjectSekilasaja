@@ -69,7 +69,7 @@ const InfoStyle = {
     height: "61px",
   },
   logo: {
-    marginTop: "15px",
+    marginTop: "10px",
     color: secondaryColor,
     marginRight: "2px",
   },
