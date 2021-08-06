@@ -259,7 +259,9 @@ export default function VideoComponent(props) {
           ref={playerRef}
           width="100%"
           height="100%"
-          url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          url={
+            "https://drive.google.com/file/d/1akGvZ-GcFYgDuDTLY5IZFwaTlOQ4U6hJ/preview"
+          }
           pip={pip}
           playing={playing}
           controls={false}
