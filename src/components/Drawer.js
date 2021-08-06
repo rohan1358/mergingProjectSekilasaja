@@ -28,8 +28,14 @@ const useStyles = makeStyles({
 });
 
 export default function CustomDrawer(props) {
-  const { logo, button, toPurchaseBookSection, drawerTitle, drawerLogo } =
-    props;
+  const {
+    logo,
+    button,
+    toPurchaseBookSection,
+    drawerTitle,
+    drawerLogo,
+    direction,
+  } = props;
   const classes = NavbarStyle();
   const spaces = MultiUseMobile();
 
@@ -66,6 +72,9 @@ export default function CustomDrawer(props) {
           {drawerLogo}
           <Typography size="subheading">{drawerTitle}</Typography>
         </div>
+        <Divider />
+
+        <div className={spaces.extraSpace} />
 
         <div>{toPurchaseBookSection}</div>
 
@@ -78,7 +87,7 @@ export default function CustomDrawer(props) {
 
   return (
     <div>
-      {["right"].map((anchor) => (
+      {[direction].map((anchor) => (
         <React.Fragment key={anchor}>
           <IconButton onClick={toggleDrawer(anchor, true)} color="inherit">
             {logo}
@@ -103,4 +112,5 @@ CustomDrawer.propTypes = {
   toPurchaseBookSection: PropTypes.object,
   drawerTitle: PropTypes.string,
   drawerLogo: PropTypes.object,
+  direction: PropTypes.string.isRequired,
 };

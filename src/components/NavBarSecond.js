@@ -9,6 +9,7 @@ import DvrIcon from "@material-ui/icons/Dvr";
 // Custom components
 import Button from "./Button";
 import SearchBar from "./SearchBar";
+import Drawer from "./Drawer";
 import NavbarStyle from "../styles/NavbarStyle";
 
 // nodejs library to set properties for components
@@ -30,12 +31,17 @@ export default function NavBarSecond() {
     <div>
       <AppBar className={classes.yellowNavBar}>
         <Toolbar>
-          <IconButton href="/library" color="inherit">
+          <IconButton href="/" color="inherit">
             <HomeIcon className={iconColorClass} />
           </IconButton>
-          <IconButton color="inherit">
-            <DvrIcon className={iconColorClass} />
-          </IconButton>
+
+          <Drawer
+            direction={"left"}
+            drawerLogo={<DvrIcon className={classes.hugeIcon} />}
+            drawerTitle={"Daftar Kilas"}
+            logo={<DvrIcon className={classes.iconColor} />}
+          />
+
           <div className={growClass} />
         </Toolbar>
       </AppBar>
