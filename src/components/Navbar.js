@@ -120,6 +120,7 @@ export default function NavBar() {
               <div className={classes.divider} />
 
               <Drawer
+                direction={"right"}
                 drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
                 drawerTitle={"Your Cart"}
                 logo={<ShoppingCartIcon className={classes.iconColor} />}
