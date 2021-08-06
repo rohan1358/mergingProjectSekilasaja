@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Book from "../images/book.png";
 
 // Custom components
@@ -10,6 +10,7 @@ import MultiUseMobile from "../styles/MultiUseMobile";
 import CategoryBlock from "../components/CategoryBlock";
 import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SignUpModalDialog from "../components/SignUp/SignUpModalDialog";
 
 // Material-UI components
 import { Container, Grid, Divider } from "@material-ui/core";
@@ -26,6 +27,20 @@ export default function Home() {
     [classes.sectionDesktop]: true,
   });
 
+  // FOR SIGNUP MODAL AND LOGIN MODAL
+  // Declare a new state variable for modal open for signup and login
+  const [openSignUp, setSignUpOpen] = useState(false);
+
+  // function to handle modal open for signup
+  const handleSignUpOpen = () => {
+    setSignUpOpen(true);
+  };
+
+  // function to handle modal close for signup
+  const handleSignUpClose = () => {
+    setSignUpOpen(false);
+  };
+
   return (
     <div>
       <NavBar />
@@ -38,9 +53,13 @@ export default function Home() {
             <Typography size="heading">
               Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
             </Typography>
-            <Button href="/" round color="primary">
+            <Button onClick={handleSignUpOpen} round color="primary">
               Daftar Sekarang
             </Button>
+            <SignUpModalDialog
+              open={openSignUp}
+              handleClose={handleSignUpClose}
+            />
           </Grid>
           <Grid item xs={2}></Grid>
           <Grid item xs={4}>
@@ -60,9 +79,18 @@ export default function Home() {
               <Typography size="heading">
                 Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
               </Typography>
-              <Button fullWidth href="/" round color="primary">
+              <Button
+                fullWidth
+                onClick={handleSignUpOpen}
+                round
+                color="primary"
+              >
                 Daftar Sekarang
               </Button>
+              <SignUpModalDialog
+                open={openSignUp}
+                handleClose={handleSignUpClose}
+              />
             </Container>
           </Grid>
 
