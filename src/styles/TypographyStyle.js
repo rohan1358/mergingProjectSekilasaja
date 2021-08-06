@@ -13,8 +13,8 @@ const TypographyStyle = {
     fontWeight: "normal",
     fontSize: "16px",
     color: secondaryColor,
-    marginTop: "15px",
-    marginBottom: "15px",
+    marginTop: "10px",
+    marginBottom: "10px",
   },
   heading: {
     fontFamily: "Montserrat",

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Logo from "../images/dark-logo.png";
+import Book from "../images/rdpd.jpg";
 
 // Material-UI components
 import {
@@ -14,20 +15,24 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 //Import components for login and signup
 import SignUpModalDialog from "./SignUp/SignUpModalDialog";
 import LoginModalDialog from "./Login/LoginModalDialog";
 
 // Custom components
+import Drawer from "./Drawer";
 import Button from "./Button";
 import SearchBar from "./SearchBar";
 import NavbarStyle from "../styles/NavbarStyle";
+import AddedToCardBooks from "./AddedToCartBooks";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
 
 export default function NavBar() {
+  // Other styles
   const classes = NavbarStyle();
 
   // FOR SIGNUP MODAL AND LOGIN MODAL
@@ -156,9 +161,30 @@ export default function NavBar() {
               <Button round color="primary" onClick={handleLoginOpen}>
                 Login
               </Button>
+
               <LoginModalDialog
                 open={openLogin}
                 handleClose={handleLoginClose}
+              />
+              <div className={classes.divider} />
+
+              <Drawer
+                direction={"right"}
+                drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
+                drawerTitle={"Your Cart"}
+                logo={<ShoppingCartIcon className={classes.iconColor} />}
+                button={
+                  <Button round fullWidth color="primary">
+                    Beli Sekarang
+                  </Button>
+                }
+                toPurchaseBookSection={
+                  <AddedToCardBooks
+                    cover={Book}
+                    title={"Rich Dad Poor Dad"}
+                    price={"Rp. 10,000"}
+                  />
+                }
               />
             </div>
 
@@ -166,6 +192,8 @@ export default function NavBar() {
               <IconButton color="inherit">
                 <SearchIcon className={iconColorClass} />
               </IconButton>
+
+              <Drawer />
 
               <IconButton
                 aria-label="show more"
