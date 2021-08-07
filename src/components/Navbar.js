@@ -27,6 +27,7 @@ import Button from "./Button";
 import SearchBar from "./SearchBar";
 import NavbarStyle from "../styles/NavbarStyle";
 import AddedToCardBooks from "./AddedToCartBooks";
+import SearchBarDrawer from "./SearchBarDrawer";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -142,9 +143,11 @@ export default function NavBar() {
             <div className={growClass} />
 
             <div className={desktopClass}>
-              <IconButton color="inherit">
-                <SearchIcon className={iconColorClass} />
-              </IconButton>
+              <SearchBarDrawer
+                direction={"top"}
+                logo={<SearchIcon className={iconColorClass} />}
+                searchBar={<SearchBar />}
+              />
 
               <Button href="/pricing" round color="transparent">
                 Pricing
@@ -189,9 +192,11 @@ export default function NavBar() {
             </div>
 
             <div className={mobileClass}>
-              <IconButton color="inherit">
-                <SearchIcon className={iconColorClass} />
-              </IconButton>
+              <SearchBarDrawer
+                direction={"top"}
+                logo={<SearchIcon className={iconColorClass} />}
+                searchBar={<SearchBar />}
+              />
 
               <Drawer />
 
