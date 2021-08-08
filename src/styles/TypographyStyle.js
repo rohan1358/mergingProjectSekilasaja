@@ -17,7 +17,7 @@ const TypographyStyle = {
     marginBottom: "10px",
   },
   heading: {
-    fontFamily: "Montserrat",
+    fontFamily: "'Montserrat', sans-serif",
     fontWeight: "bold",
     fontSize: "36px",
     color: secondaryColor,
@@ -25,7 +25,7 @@ const TypographyStyle = {
     marginBottom: "20px",
   },
   subheading: {
-    fontFamily: "Montserrat",
+    fontFamily: "'Montserrat', sans-serif",
     fontWeight: "bold",
     fontSize: "24px",
     color: secondaryColor,
