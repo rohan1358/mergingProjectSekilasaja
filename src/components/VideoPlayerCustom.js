@@ -35,18 +35,18 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     bottom: 0,
     height: "100%",
+    width: "100%",
     background: "rgba(0,0,0,0.6)",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
   },
-
   button: {
     margin: theme.spacing(1),
+    width: "100%",
   },
   controlIcons: {
     color: "#777",
-
     fontSize: 50,
     transform: "scale(0.9)",
     "&:hover": {
@@ -54,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
       transform: "scale(1)",
     },
   },
-
   bottomIcons: {
     textTransform: "capitalize",
     color: "#999",
@@ -62,9 +61,11 @@ const useStyles = makeStyles((theme) => ({
       color: "#fff",
     },
   },
-
+  textTransformNormal: {
+    textTransform: "capitalize",
+  },
   volumeSlider: {
-    width: 100,
+    width: 60,
   },
 }));
 
@@ -160,7 +161,6 @@ const Controls = forwardRef(
             direction="row"
             alignItems="center"
             justify="space-between"
-            style
             style={{ padding: 16 }}
           />
           <Grid container direction="row" alignItems="center" justify="center">
@@ -224,11 +224,7 @@ const Controls = forwardRef(
                   onClick={onPlayPause}
                   className={classes.bottomIcons}
                 >
-                  {playing ? (
-                    <PauseIcon fontSize="large" />
-                  ) : (
-                    <PlayArrowIcon fontSize="large" />
-                  )}
+                  {playing ? <PauseIcon /> : <PlayArrowIcon />}
                 </IconButton>
 
                 <IconButton
@@ -237,11 +233,11 @@ const Controls = forwardRef(
                   className={`${classes.bottomIcons} ${classes.volumeButton}`}
                 >
                   {muted ? (
-                    <VolumeMute fontSize="large" />
+                    <VolumeMute />
                   ) : volume > 0.5 ? (
-                    <VolumeUp fontSize="large" />
+                    <VolumeUp />
                   ) : (
-                    <VolumeDown fontSize="large" />
+                    <VolumeDown />
                   )}
                 </IconButton>
 
@@ -256,7 +252,10 @@ const Controls = forwardRef(
                   onMouseDown={onSeekMouseDown}
                   onChangeCommitted={onVolumeSeekDown}
                 />
-                <Button variant="text" onClick={onChangeDispayFormat}>
+                <Button
+                  className={classes.bottomIcons}
+                  onClick={onChangeDispayFormat}
+                >
                   <Typography
                     className={classes.bottomIcons}
                     style={{ marginLeft: 16 }}
@@ -275,7 +274,7 @@ const Controls = forwardRef(
                 variant="text"
               >
                 <Typography className={classes.bottomIcons}>
-                  Speed: {playbackRate}
+                  {playbackRate}x
                 </Typography>
               </Button>
 
@@ -300,7 +299,9 @@ const Controls = forwardRef(
                       key={rate}
                       onClick={() => onPlaybackRateChange(rate)}
                     >
-                      <Typography>{rate}</Typography>
+                      <Typography className={classes.textTransformNormal}>
+                        {rate}x
+                      </Typography>
                     </Button>
                   ))}
                 </Grid>
@@ -310,7 +311,7 @@ const Controls = forwardRef(
                 onClick={onToggleFullScreen}
                 className={classes.bottomIcons}
               >
-                <FullScreen fontSize="large" />
+                <FullScreen />
               </IconButton>
             </Grid>
           </Grid>
