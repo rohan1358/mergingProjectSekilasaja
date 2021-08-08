@@ -44,51 +44,53 @@ export default function BookDetails(props) {
 
   return (
     <div>
-      <div className={desktopClass}>
-        <Paper className={mobile.paddedContent} elevation={5}>
-          <Grid container>
-            <Grid item xs={7}>
-              <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
+      <div className={classes.bookDetailsWidth}>
+        <div className={desktopClass}>
+          <Paper className={mobile.paddedContent} elevation={5}>
+            <Grid container>
+              <Grid item xs={7}>
+                <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
 
-              <Typography size="subheading">{kilasTitle}</Typography>
-              <Typography>{kilasBody}</Typography>
+                <Typography size="subheading">{kilasTitle}</Typography>
+                <Typography>{kilasBody}</Typography>
+              </Grid>
+
+              <Grid item xs={1} />
+
+              <Grid item xs={4}>
+                <div>
+                  <Typography size="subheading" type="bold">
+                    Video
+                  </Typography>
+                  {video}
+                </div>
+
+                <div>
+                  <Typography size="subheading" type="bold">
+                    Audio
+                  </Typography>
+                  <Typography type="italic">
+                    TODO: Ntar ada audio di sini
+                  </Typography>
+                  {audio}
+                </div>
+
+                <div>
+                  <Typography size="subheading" type="bold">
+                    Daftar Kilas
+                  </Typography>
+                  <Typography>1. {kilas1}</Typography>
+                  <Typography>2. {kilas2}</Typography>
+                  <Typography>3. {kilas3}</Typography>
+                  <Typography>4. {kilas4}</Typography>
+                  <Typography>5. {kilas5}</Typography>
+                  <Typography>6. {kilas6}</Typography>
+                  <Typography>7. {kilas7}</Typography>
+                </div>
+              </Grid>
             </Grid>
-
-            <Grid item xs={1} />
-
-            <Grid item xs={4}>
-              <div>
-                <Typography size="subheading" type="bold">
-                  Video
-                </Typography>
-                {video}
-              </div>
-
-              <div>
-                <Typography size="subheading" type="bold">
-                  Audio
-                </Typography>
-                <Typography type="italic">
-                  TODO: Ntar ada audio di sini
-                </Typography>
-                {audio}
-              </div>
-
-              <div>
-                <Typography size="subheading" type="bold">
-                  Daftar Kilas
-                </Typography>
-                <Typography>1. {kilas1}</Typography>
-                <Typography>2. {kilas2}</Typography>
-                <Typography>3. {kilas3}</Typography>
-                <Typography>4. {kilas4}</Typography>
-                <Typography>5. {kilas5}</Typography>
-                <Typography>6. {kilas6}</Typography>
-                <Typography>7. {kilas7}</Typography>
-              </div>
-            </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        </div>
       </div>
 
       <div className={mobileClass}>

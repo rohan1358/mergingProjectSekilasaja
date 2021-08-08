@@ -78,10 +78,17 @@ const InfoStyle = {
     marginRight: "20px",
   },
   kilasDescMobile: {
+    display: "block",
+  },
+  kilasDescMobileCenter: {
     display: "flex",
     justifyContent: "center",
   },
   ...ImagesStyle,
+  bookDetailsWidth: {
+    marginLeft: "40px",
+    marginRight: "40px",
+  },
 };
 
 export default InfoStyle;
