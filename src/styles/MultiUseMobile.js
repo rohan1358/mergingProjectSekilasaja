@@ -85,6 +85,10 @@ const MultiUseMobile = makeStyles((theme) => ({
     padding: 15,
     width: "100%",
   },
+  accountsWidth: {
+    maxWidth: "500px",
+    width: "100%",
+  },
 }));
 
 export default MultiUseMobile;

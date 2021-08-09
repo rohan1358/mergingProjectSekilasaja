@@ -9,7 +9,7 @@ import MultiUseMobile from "../styles/MultiUseMobile";
 import Button from "../components/Button";
 
 // Material-UI components
-import { Container, Paper, Divider } from "@material-ui/core";
+import { Container, Paper, Divider, TextField } from "@material-ui/core";
 
 export default function AccountsPage() {
   const classes = MultiUseMobile();
@@ -20,7 +20,21 @@ export default function AccountsPage() {
       <Container maxWidth={"md"}>
         <div className={classes.extraSpace} />
         <Paper className={classes.paddedContent}>
-          <Typography size="heading">Accounts</Typography>
+          <div className={classes.accountsWidth}>
+            <Typography size="heading">Accounts</Typography>
+            <TextField
+              id="filled-basic"
+              label="Name"
+              variant="filled"
+              fullWidth
+            />
+            <TextField
+              id="filled-basic"
+              label="Name"
+              variant="filled"
+              fullWidth
+            />
+          </div>
           <Typography size="subheading">Profil</Typography>
           <Divider />
           <Typography size="subheading">Layanan Berlangganan</Typography>
