@@ -109,7 +109,7 @@ const format = (seconds) => {
 let count = 0;
 
 export default function VideoComponent(props) {
-  const { title, description } = props;
+  const { title, description, vidLink } = props;
   const mobile = MultiUseMobile();
 
   const classes = useStyles();
@@ -259,7 +259,7 @@ export default function VideoComponent(props) {
           ref={playerRef}
           width="100%"
           height="100%"
-          url="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+          url={vidLink}
           pip={pip}
           playing={playing}
           controls={false}
@@ -338,4 +338,5 @@ export default function VideoComponent(props) {
 VideoComponent.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
+  vidLink: PropTypes.string.isRequired,
 };

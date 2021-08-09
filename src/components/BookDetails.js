@@ -1,7 +1,7 @@
 import React from "react";
 
 // @material-ui/core components
-import { makeStyles, Grid, Divider } from "@material-ui/core";
+import { makeStyles, Grid, Divider, Container } from "@material-ui/core";
 import { Timelapse, EmojiObjects, PlayArrow } from "@material-ui/icons";
 
 // Custom components
@@ -31,65 +31,67 @@ export default function BookDetails(props) {
 
   return (
     <div>
-      <div className={desktopClass}>
-        <Grid container>
-          <Grid item xs={12}>
-            <div className={mobile.extraSpace} />
-          </Grid>
+      <div className={classes.bookDetailsWidth}>
+        <div className={desktopClass}>
+          <Grid container>
+            <Grid item xs={12}>
+              <div className={mobile.extraSpace} />
+            </Grid>
 
-          <Grid item xs={9}>
-            <div className={classes.bookDetailsDesc}>
-              <Typography size="subheading" type="bold">
-                {title}
-              </Typography>
+            <Grid item xs={9}>
+              <div className={classes.bookDetailsDesc}>
+                <Typography size="subheading" type="bold">
+                  {title}
+                </Typography>
 
-              <Typography type="italic">{author}</Typography>
+                <Typography type="italic">{author}</Typography>
 
-              <Divider />
-
-              <div className={classes.kilasDesc}>
-                <div className={classes.kilasDesc}>
-                  <Timelapse className={classes.logo} />
-                  <Typography type="bold">{time} Menit</Typography>
-                </div>
+                <Divider />
 
                 <div className={classes.kilasDesc}>
-                  <EmojiObjects className={classes.logo} />
-                  <Typography type="bold">{num} Kilas</Typography>
+                  <div className={classes.kilasDesc}>
+                    <Timelapse className={classes.logo} />
+                    <Typography type="bold">{time} Menit</Typography>
+                  </div>
+
+                  <div className={classes.kilasDesc}>
+                    <EmojiObjects className={classes.logo} />
+                    <Typography type="bold">{num} Kilas</Typography>
+                  </div>
+
+                  <div className={classes.kilasDesc}>
+                    <PlayArrow className={classes.logo} />
+                    <Typography type="bold">Video, audio, & text</Typography>
+                  </div>
                 </div>
 
-                <div className={classes.kilasDesc}>
-                  <PlayArrow className={classes.logo} />
-                  <Typography type="bold">Video, audio, & text</Typography>
-                </div>
+                <Divider />
+
+                <Typography type="bold">{descriptionTitle}</Typography>
+                <Typography>{description}</Typography>
               </div>
+            </Grid>
 
-              <Divider />
+            <Grid item xs={1} />
 
-              <Typography type="bold">{descriptionTitle}</Typography>
-              <Typography>{description}</Typography>
-            </div>
+            <Grid item xs={2}>
+              <img
+                src={cover}
+                className={
+                  classes.imgRounded +
+                  " " +
+                  classes.imgFluid +
+                  " " +
+                  classes.imgBookCover
+                }
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <div className={mobile.extraSpace} />
+            </Grid>
           </Grid>
-
-          <Grid item xs={1} />
-
-          <Grid item xs={2}>
-            <img
-              src={cover}
-              className={
-                classes.imgRounded +
-                " " +
-                classes.imgFluid +
-                " " +
-                classes.imgBookCover
-              }
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <div className={mobile.extraSpace} />
-          </Grid>
-        </Grid>
+        </div>
       </div>
 
       <div className={mobileClass}>
@@ -118,17 +120,17 @@ export default function BookDetails(props) {
               <Divider />
 
               <div className={classes.kilasDescMobile}>
-                <div className={classes.kilasDesc}>
+                <div className={classes.kilasDescMobileCenter}>
                   <Timelapse className={classes.logo} />
                   <Typography type="bold">{time} Menit</Typography>
                 </div>
 
-                <div className={classes.kilasDesc}>
+                <div className={classes.kilasDescMobileCenter}>
                   <EmojiObjects className={classes.logo} />
                   <Typography type="bold">{num} Kilas</Typography>
                 </div>
 
-                <div className={classes.kilasDesc}>
+                <div className={classes.kilasDescMobileCenter}>
                   <PlayArrow className={classes.logo} />
                   <Typography type="bold">Video, audio, & text</Typography>
                 </div>
@@ -142,10 +144,6 @@ export default function BookDetails(props) {
           </Grid>
 
           <Grid item xs={1} />
-
-          <Grid item xs={12}>
-            <div className={mobile.extraSpace} />
-          </Grid>
         </Grid>
       </div>
     </div>
