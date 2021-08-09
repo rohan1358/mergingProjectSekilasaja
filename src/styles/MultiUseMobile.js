@@ -54,6 +54,9 @@ const MultiUseMobile = makeStyles((theme) => ({
     marginLeft: "-3px",
     top: 0,
   },
+  flex: {
+    display: "flex",
+  },
   block: {
     display: "block",
   },
@@ -85,9 +88,8 @@ const MultiUseMobile = makeStyles((theme) => ({
     padding: 15,
     width: "100%",
   },
-  accountsWidth: {
-    maxWidth: "500px",
-    width: "100%",
+  textFieldRoot: {
+    marginBottom: "10px",
   },
 }));
 
