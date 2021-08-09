@@ -54,11 +54,15 @@ const MultiUseMobile = makeStyles((theme) => ({
     marginLeft: "-3px",
     top: 0,
   },
+  flex: {
+    display: "flex",
+  },
   block: {
     display: "block",
   },
   paddedContent: {
     padding: "40px",
+    paddingTop: "10px",
   },
   normalText: {
     textTransform: "none",
@@ -83,6 +87,9 @@ const MultiUseMobile = makeStyles((theme) => ({
   pricingButton: {
     padding: 15,
     width: "100%",
+  },
+  textFieldRoot: {
+    marginBottom: "10px",
   },
 }));
 

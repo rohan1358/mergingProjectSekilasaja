@@ -3,6 +3,8 @@ import React from "react";
 // Custom components
 import FourOFourStyle from "../styles/404Style";
 import Typography from "../components/Typography";
+import NavBar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 // Material-UI components
 import { makeStyles, Container } from "@material-ui/core";
@@ -14,6 +16,7 @@ export default function FourOFourPage() {
 
   return (
     <div>
+      <NavBar />
       <Container className={classes.position}>
         <Typography className={classes.title} size="heading">
           404
@@ -24,6 +27,7 @@ export default function FourOFourPage() {
           diganti, atau memang pada dasarnya tidak pernah dibuat.
         </Typography>
       </Container>
+      <Footer />
     </div>
   );
 }

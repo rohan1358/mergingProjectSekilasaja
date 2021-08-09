@@ -92,7 +92,7 @@ export default function NavBar() {
 
   return (
     <div>
-      <AppBar color="white">
+      <AppBar position="static" color="white">
         <Container>
           <Toolbar>
             <a href="/">
@@ -165,7 +165,6 @@ export default function NavBar() {
         </Container>
       </AppBar>
       {renderMobileMenu}
-      <div className={toolbarClass} />
     </div>
   );
 }
