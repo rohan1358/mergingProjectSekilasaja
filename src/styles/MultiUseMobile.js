@@ -1,6 +1,6 @@
 // Material-UI components
 import { makeStyles } from "@material-ui/core/styles";
-import { grayColor, secondaryColor } from "./Style";
+import { beigeColor, grayColor, secondaryColor } from "./Style";
 
 const MultiUseMobile = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -74,6 +74,14 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   secWidth: {
     maxWidth: "800px",
+    width: "100%",
+  },
+  beigeText: {
+    textTransform: "none",
+    color: beigeColor,
+  },
+  pricingButton: {
+    padding: 15,
     width: "100%",
   },
 }));
