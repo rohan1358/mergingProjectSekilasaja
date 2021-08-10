@@ -1,6 +1,6 @@
 // Material-UI components
 import { makeStyles } from "@material-ui/core/styles";
-import { beigeColor, grayColor, secondaryColor } from "./Style";
+import { beigeColor, grayColor, primaryColor, secondaryColor } from "./Style";
 
 const MultiUseMobile = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -89,7 +89,11 @@ const MultiUseMobile = makeStyles((theme) => ({
     width: "100%",
   },
   textFieldRoot: {
+    marginTop: "5px",
     marginBottom: "10px",
+  },
+  sectionTitle: {
+    borderBottom: "3px solid",
   },
 }));
 
