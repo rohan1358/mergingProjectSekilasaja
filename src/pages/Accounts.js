@@ -21,12 +21,20 @@ export default function AccountsPage() {
       <Container maxWidth={"sm"}>
         <div className={classes.extraSpace} />
         <Paper className={classes.paddedContent}>
-          <Typography size="heading">Accounts</Typography>
+          <Typography className={classes.sectionTitle} size="heading">
+            Accounts
+          </Typography>
+          <div className={classes.extraSpace} />
           <Typography size="subheading">Layanan Berlangganan</Typography>
           <SubscriptionPlan
             subscriptionType={"Belum Berlanggan"}
             number={"3"}
           />
+
+          <div className={classes.extraSpace} />
+          <Divider />
+          <div className={classes.extraSpace} />
+
           <Typography size="subheading">Profil</Typography>
           <TextField
             className={classes.textFieldRoot}
@@ -56,6 +64,11 @@ export default function AccountsPage() {
             variant="filled"
             fullWidth
           />
+
+          <div className={classes.extraSpace} />
+          <Divider />
+          <div className={classes.extraSpace} />
+
           <Typography size="subheading">Ganti Kata Sandi</Typography>
           <TextField
             className={classes.textFieldRoot}
