@@ -42,7 +42,7 @@ const ImagesStyle = {
   imgBookCover: {
     marginTop: "10px",
     width: "100%",
-    maxWidth: "170px",
+    maxWidth: "230px",
   },
   videoWidth: {
     marginTop: "20px",

@@ -6,6 +6,7 @@ import BookDetails from "../components/BookDetails";
 import TextDetails from "../components/TextDetails";
 import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
+import VideoComponent from "../components/VidPageComponent";
 
 // Material-UI components
 import { Container } from "@material-ui/core";

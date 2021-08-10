@@ -1,6 +1,6 @@
 // Material-UI components
 import { makeStyles } from "@material-ui/core/styles";
-import { grayColor, secondaryColor } from "./Style";
+import { beigeColor, grayColor, secondaryColor } from "./Style";
 
 const MultiUseMobile = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -54,11 +54,15 @@ const MultiUseMobile = makeStyles((theme) => ({
     marginLeft: "-3px",
     top: 0,
   },
+  flex: {
+    display: "flex",
+  },
   block: {
     display: "block",
   },
   paddedContent: {
-    padding: "20px",
+    padding: "40px",
+    paddingTop: "10px",
   },
   normalText: {
     textTransform: "none",
@@ -79,6 +83,17 @@ const MultiUseMobile = makeStyles((theme) => ({
   link: {
     fontWeight: "bold",
     color: secondaryColor,
+  },
+  beigeText: {
+    textTransform: "none",
+    color: beigeColor,
+  },
+  pricingButton: {
+    padding: 15,
+    width: "100%",
+  },
+  textFieldRoot: {
+    marginBottom: "10px",
   },
 }));
 
