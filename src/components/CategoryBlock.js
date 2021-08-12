@@ -9,7 +9,7 @@ import MultiUseMobile from "../styles/MultiUseMobile";
 import { Grid } from "@material-ui/core";
 
 export default function CategoryBlock(props) {
-  const { products, onAdd, title } = props;
+  const { products, title } = props;
   const classes = MultiUseMobile();
 
   return (

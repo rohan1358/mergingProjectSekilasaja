@@ -114,7 +114,6 @@ export default function Home() {
         <CategoryBlock
           title={"Temukan Kategori Kesukaan Kamu!"}
           products={products}
-          onAdd={onAdd}
         />
       </Container>
       <Footer />
