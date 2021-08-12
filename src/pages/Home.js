@@ -75,7 +75,7 @@ export default function Home() {
               Daftar Sekarang
             </Button>
           </Grid>
-          <Grid item xs={2}></Grid>
+          <Grid item xs={2} />
           <Grid item xs={4}>
             <img src={Book} />
           </Grid>
