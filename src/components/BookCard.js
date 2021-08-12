@@ -18,7 +18,8 @@ export default function BookCard(props) {
 
   return (
     <Grid item>
-      <Link onClick={() => onAdd(product)} underline="none" href={link}>
+      {/* <Link onClick={() => onAdd(product)} underline="none" href={link}> */}
+      <Link underline="none" href={link}>
         <div className={classes.bookCover}>
           <div>
             <img

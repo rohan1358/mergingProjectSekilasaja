@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../images/dark-logo.png";
 
 // Material-UI components
@@ -130,7 +130,7 @@ export default function NavBar(props) {
                     onRemove={onRemove}
                   />
                 }
-                countCartItems={cartItems.length}
+                // countCartItems={cartItems.length}
               />
             </div>
 
@@ -157,7 +157,7 @@ export default function NavBar(props) {
                     onRemove={onRemove}
                   />
                 }
-                countCartItems={cartItems.length}
+                // countCartItems={cartItems.length}
               />
 
               <IconButton

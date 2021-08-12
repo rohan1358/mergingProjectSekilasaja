@@ -27,7 +27,11 @@ export default function CategoryBlock(props) {
           spacing={3}
         >
           {products.map((product) => (
-            <BookCard key={product.id} product={product} onAdd={onAdd} />
+            <BookCard
+              key={product.id}
+              product={product}
+              link={"/book-details"}
+            />
           ))}
         </Grid>
       </div>
@@ -40,7 +44,11 @@ export default function CategoryBlock(props) {
           alignItems="center"
         >
           {products.map((product) => (
-            <BookCard key={product.id} product={product} onAdd={onAdd} />
+            <BookCard
+              key={product.id}
+              product={product}
+              link={"/book-details"}
+            />
           ))}
         </Grid>
       </div>
