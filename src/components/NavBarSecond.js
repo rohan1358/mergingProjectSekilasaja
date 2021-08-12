@@ -8,7 +8,6 @@ import DvrIcon from "@material-ui/icons/Dvr";
 
 // Custom components
 import Button from "./Button";
-import SearchBar from "./SearchBar";
 import Drawer from "./Drawer";
 import NavbarStyle from "../styles/NavbarStyle";
 

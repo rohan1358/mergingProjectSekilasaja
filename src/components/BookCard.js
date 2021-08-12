@@ -1,78 +1,46 @@
 import React from "react";
 
 // @material-ui/core components
-import { makeStyles, Link } from "@material-ui/core";
+import { makeStyles, Link, Grid } from "@material-ui/core";
 
 // Custom components
 import InfoAreaStyle from "../styles/InfoAreaStyle";
 import Typography from "./Typography";
-import MultiUseMobile from "../styles/MultiUseMobile";
 
 // nodejs library to set properties for components
-import classNames from "classnames";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function BookCard(props) {
-  const mobile = MultiUseMobile();
   const classes = useStyles();
+  const { link, product, onAdd } = props;
 
-  const mobileClass = classNames({
-    [mobile.sectionMobile]: true,
-  });
-  const desktopClass = classNames({
-    [mobile.sectionDesktop]: true,
-  });
-  const { cover, title, author, description, link } = props;
   return (
-    <div>
-      <Link underline="none" href={link}>
-        <div className={desktopClass}>
-          <div className={classes.bookCover}>
-            <div>
-              <img
-                src={cover}
-                className={
-                  classes.imgRounded +
-                  " " +
-                  classes.imgFluid +
-                  " " +
-                  classes.imgBookCover
-                }
-              />
-              <div className={classes.descriptionWrapper}>
-                <Typography type="bold">{title}</Typography>
-                <Typography type="italic">{author}</Typography>
-                <Typography>{description}</Typography>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className={mobileClass}>
-          <div className={classes.bookCover}>
-            <div>
-              <img
-                src={cover}
-                className={
-                  classes.imgRounded +
-                  " " +
-                  classes.imgFluid +
-                  " " +
-                  classes.imgBookCover
-                }
-              />
-              <div className={classes.descriptionWrapper}>
-                <Typography type="bold">{title}</Typography>
-                <Typography type="italic">{author}</Typography>
-                <Typography>{description}</Typography>
-              </div>
+    <Grid item>
+      <Link onClick={() => onAdd(product)} underline="none" href={link}>
+        <div className={classes.bookCover}>
+          <div>
+            <img
+              src={product.cover}
+              alt={product.title}
+              className={
+                classes.imgRounded +
+                " " +
+                classes.imgFluid +
+                " " +
+                classes.imgBookCover
+              }
+            />
+            <div className={classes.descriptionWrapper}>
+              <Typography type="bold">{product.title}</Typography>
+              <Typography type="italic">{product.author}</Typography>
+              <Typography>{product.description}</Typography>
             </div>
           </div>
         </div>
       </Link>
-    </div>
+    </Grid>
   );
 }
 
