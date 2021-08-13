@@ -1,6 +1,5 @@
 import React from "react";
-import Logo from "../images/dark-logo.png";
-import Book from "../images/rdpd.jpg";
+import Logo from "../../images/dark-logo.png";
 
 // Material-UI components
 import {
@@ -17,17 +16,18 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 // Custom components
-import Drawer from "./Drawer";
-import Button from "./Button";
-import SearchBar from "./SearchBar";
-import NavbarStyle from "../styles/NavbarStyle";
-import AddedToCardBooks from "./AddedToCartBooks";
-import SearchBarDrawer from "./SearchBarDrawer";
+import Drawer from "../Drawer";
+import Button from "../Button";
+import NavbarStyle from "../../styles/NavbarStyle";
+import SearchBarDrawer from "../SearchBarDrawer";
+import Basket from "../AddToCart/Basket";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
 
-export default function NavBar() {
+export default function NavBar(props) {
+  const { cartItems, onAdd, onRemove } = props;
+
   // Other styles
   const classes = NavbarStyle();
   const growClass = classNames({
@@ -38,9 +38,6 @@ export default function NavBar() {
   });
   const desktopClass = classNames({
     [classes.sectionDesktop]: true,
-  });
-  const toolbarClass = classNames({
-    [classes.toolbar]: true,
   });
   const iconColorClass = classNames({
     [classes.iconColor]: true,
@@ -105,7 +102,6 @@ export default function NavBar() {
               <SearchBarDrawer
                 direction={"top"}
                 logo={<SearchIcon className={iconColorClass} />}
-                searchBar={<SearchBar />}
               />
 
               <Button href="/pricing" round color="transparent">
@@ -127,18 +123,14 @@ export default function NavBar() {
                 drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
                 drawerTitle={"Your Cart"}
                 logo={<ShoppingCartIcon className={classes.iconColor} />}
-                button={
-                  <Button round fullWidth color="primary">
-                    Beli Sekarang
-                  </Button>
-                }
-                toPurchaseBookSection={
-                  <AddedToCardBooks
-                    cover={Book}
-                    title={"Rich Dad Poor Dad"}
-                    price={"Rp. 10,000"}
-                  />
-                }
+                // toPurchaseBookSection={
+                //   <Basket
+                //     cartItems={cartItems}
+                //     onAdd={onAdd}
+                //     onRemove={onRemove}
+                //   />
+                // }
+                // countCartItems={cartItems.length}
               />
             </div>
 
@@ -146,10 +138,27 @@ export default function NavBar() {
               <SearchBarDrawer
                 direction={"top"}
                 logo={<SearchIcon className={iconColorClass} />}
-                searchBar={<SearchBar />}
               />
 
-              <Drawer />
+              <Drawer
+                direction={"right"}
+                drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
+                drawerTitle={"Your Cart"}
+                logo={<ShoppingCartIcon className={classes.iconColor} />}
+                button={
+                  <Button round fullWidth color="primary">
+                    Beli Sekarang
+                  </Button>
+                }
+                // toPurchaseBookSection={
+                //   <Basket
+                //     cartItems={cartItems}
+                //     onAdd={onAdd}
+                //     onRemove={onRemove}
+                //   />
+                // }
+                // countCartItems={cartItems.length}
+              />
 
               <IconButton
                 aria-label="show more"

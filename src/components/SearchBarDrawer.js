@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 });
 
 export default function SearchBarDrawer(props) {
-  const { logo, direction, searchBar } = props;
+  const { logo, direction } = props;
   const classes = NavbarStyle();
 
   // Cart Drawer
@@ -90,6 +90,5 @@ export default function SearchBarDrawer(props) {
 
 SearchBarDrawer.propTypes = {
   logo: PropTypes.object.isRequired,
-  searchBar: PropTypes.object.isRequired,
   direction: PropTypes.string.isRequired,
 };
