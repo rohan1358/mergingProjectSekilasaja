@@ -1,25 +1,30 @@
 import React, { useState } from "react";
-import Book from "../images/book.png";
+import Book from "../../images/book.png";
 
 // Custom components
-import Typography from "../components/Typography";
-import Parallax from "../components/Parallax";
-import BenefitsBlock from "../components/BenefitsBlock";
-import Button from "../components/Button";
-import MultiUseMobile from "../styles/MultiUseMobile";
-import CategoryBlock from "../components/CategoryBlock";
-import NavBar from "../components/Navbar";
-import Footer from "../components/Footer";
-import data from "../data/bookData";
+import Typography from "../../components/Typography";
+import Parallax from "../../components/Parallax";
+import BenefitsBlock from "../../components/BenefitsBlock";
+import Button from "../../components/Button";
+import MultiUseMobile from "../../styles/MultiUseMobile";
+import CategoryBlock from "../../components/CategoryBlock";
+import NavBar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import data from "../../data/bookData";
+import InfoAreaStyle from "../../styles/InfoAreaStyle";
 
 // Material-UI components
-import { Container, Grid, Divider } from "@material-ui/core";
+import { Container, Grid, Divider, makeStyles } from "@material-ui/core";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
 
+const useStyles = makeStyles(InfoAreaStyle);
+
 export default function Home() {
   const classes = MultiUseMobile();
+  const books = useStyles();
+
   const mobileClass = classNames({
     [classes.sectionMobile]: true,
   });
@@ -61,10 +66,12 @@ export default function Home() {
 
   return (
     <div>
-      <NavBar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+      {/* <NavBar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> */}
+      <NavBar />
+
       <Parallax
         className={desktopClass}
-        image={require("../images/home.png").default}
+        image={require("../../images/home.png").default}
       >
         <Grid container>
           <Grid item xs={6}>
@@ -77,7 +84,16 @@ export default function Home() {
           </Grid>
           <Grid item xs={2} />
           <Grid item xs={4}>
-            <img src={Book} />
+            <img
+              src={Book}
+              className={
+                books.imgRounded +
+                " " +
+                books.imgFluid +
+                " " +
+                books.imgHomeBook
+              }
+            />
           </Grid>
         </Grid>
       </Parallax>
@@ -85,7 +101,16 @@ export default function Home() {
       <div className={mobileClass}>
         <Grid container>
           <Grid item xs={12}>
-            <img src={Book} />
+            <img
+              src={Book}
+              className={
+                books.imgRounded +
+                " " +
+                books.imgFluid +
+                " " +
+                books.imgHomeBook
+              }
+            />
           </Grid>
 
           <Grid item xs={12}>

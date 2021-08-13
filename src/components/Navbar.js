@@ -123,13 +123,13 @@ export default function NavBar(props) {
                 drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
                 drawerTitle={"Your Cart"}
                 logo={<ShoppingCartIcon className={classes.iconColor} />}
-                toPurchaseBookSection={
-                  <Basket
-                    cartItems={cartItems}
-                    onAdd={onAdd}
-                    onRemove={onRemove}
-                  />
-                }
+                // toPurchaseBookSection={
+                //   <Basket
+                //     cartItems={cartItems}
+                //     onAdd={onAdd}
+                //     onRemove={onRemove}
+                //   />
+                // }
                 // countCartItems={cartItems.length}
               />
             </div>
@@ -150,13 +150,13 @@ export default function NavBar(props) {
                     Beli Sekarang
                   </Button>
                 }
-                toPurchaseBookSection={
-                  <Basket
-                    cartItems={cartItems}
-                    onAdd={onAdd}
-                    onRemove={onRemove}
-                  />
-                }
+                // toPurchaseBookSection={
+                //   <Basket
+                //     cartItems={cartItems}
+                //     onAdd={onAdd}
+                //     onRemove={onRemove}
+                //   />
+                // }
                 // countCartItems={cartItems.length}
               />
 

@@ -1,7 +1,7 @@
 import React from "react";
 
 // @material-ui/core components
-import { makeStyles, Link, Grid } from "@material-ui/core";
+import { makeStyles, Link, Grid, Card } from "@material-ui/core";
 
 // Custom components
 import InfoAreaStyle from "../styles/InfoAreaStyle";
@@ -14,7 +14,8 @@ const useStyles = makeStyles(InfoAreaStyle);
 
 export default function BookCard(props) {
   const classes = useStyles();
-  const { link, product, onAdd } = props;
+  // const { link, product, onAdd } = props;
+  const { link, product } = props;
 
   return (
     <Grid item>
