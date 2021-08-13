@@ -1,8 +1,8 @@
 import React from "react";
 
 // Custom components
-import Button from "./Button";
-import data from "../data/bookData";
+import Button from "../Button";
+import data from "../../data/bookData";
 
 export default function AddToCartButton(props) {
   // Add to Cart Feature

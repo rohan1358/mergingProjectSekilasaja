@@ -4,7 +4,7 @@ import BookCover from "../images/rdpd.jpg";
 // Custom components
 import BookDetails from "../components/BookDetails";
 import TextDetails from "../components/TextDetails";
-import NavBar from "../components/Navbar";
+import NavBar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
 import VideoComponent from "../components/VidPageComponent";
 

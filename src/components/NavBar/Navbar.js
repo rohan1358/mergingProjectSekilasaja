@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../images/dark-logo.png";
+import Logo from "../../images/dark-logo.png";
 
 // Material-UI components
 import {
@@ -16,11 +16,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 // Custom components
-import Drawer from "./Drawer";
-import Button from "./Button";
-import NavbarStyle from "../styles/NavbarStyle";
-import SearchBarDrawer from "./SearchBarDrawer";
-import Basket from "./Basket";
+import Drawer from "../Drawer";
+import Button from "../Button";
+import NavbarStyle from "../../styles/NavbarStyle";
+import SearchBarDrawer from "../SearchBarDrawer";
+import Basket from "../AddToCart/Basket";
 
 // nodejs library to set properties for components
 import classNames from "classnames";

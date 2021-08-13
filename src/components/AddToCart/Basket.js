@@ -1,10 +1,10 @@
 import React from "react";
 
 // Custom components
-import Typography from "./Typography";
-import Button from "./Button";
-import InfoAreaStyle from "../styles/InfoAreaStyle";
-import MultiUseMobile from "../styles/MultiUseMobile";
+import Typography from "../Typography";
+import Button from "../Button";
+import InfoAreaStyle from "../../styles/InfoAreaStyle";
+import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // Material-UI components
 import { makeStyles, Grid } from "@material-ui/core";

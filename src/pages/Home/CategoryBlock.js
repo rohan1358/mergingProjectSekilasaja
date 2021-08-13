@@ -1,9 +1,9 @@
 import React from "react";
 
 // Custom components
-import BookCard from "./BookCard";
-import Typography from "./Typography";
-import MultiUseMobile from "../styles/MultiUseMobile";
+import BookCard from "../../components/BookCard";
+import Typography from "../../components/Typography";
+import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // Other components
 import Carousel from "react-multi-carousel";
@@ -38,7 +38,12 @@ export default function CategoryBlock(props) {
       <div className={classes.title}>
         <Typography size="heading">{title}</Typography>
       </div>
-      <Carousel ssr={true} responsive={responsive}>
+      <Carousel
+        autoPlay={true}
+        autoPlaySpeed={1500}
+        ssr={true}
+        responsive={responsive}
+      >
         {products.map((product) => (
           <BookCard key={product.id} product={product} link={"/book-details"} />
         ))}

@@ -3,7 +3,7 @@ import React from "react";
 // Custom components
 import FourOFourStyle from "../styles/404Style";
 import Typography from "../components/Typography";
-import NavBar from "../components/Navbar";
+import NavBar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
 
 // Material-UI components
