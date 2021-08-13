@@ -13,11 +13,11 @@ const TypographyStyle = {
     fontWeight: "normal",
     fontSize: "16px",
     color: secondaryColor,
-    marginTop: "15px",
-    marginBottom: "15px",
+    marginTop: "10px",
+    marginBottom: "10px",
   },
   heading: {
-    fontFamily: "Montserrat",
+    fontFamily: "'Montserrat', sans-serif",
     fontWeight: "bold",
     fontSize: "36px",
     color: secondaryColor,
@@ -25,7 +25,7 @@ const TypographyStyle = {
     marginBottom: "20px",
   },
   subheading: {
-    fontFamily: "Montserrat",
+    fontFamily: "'Montserrat', sans-serif",
     fontWeight: "bold",
     fontSize: "24px",
     color: secondaryColor,

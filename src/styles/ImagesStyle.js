@@ -40,9 +40,9 @@ const ImagesStyle = {
     padding: "1.25rem",
   },
   imgBookCover: {
-    marginTop: "20px",
+    marginTop: "10px",
     width: "100%",
-    maxWidth: "170px",
+    maxWidth: "230px",
   },
   videoWidth: {
     marginTop: "20px",
