@@ -80,6 +80,10 @@ const MultiUseMobile = makeStyles((theme) => ({
     maxWidth: "800px",
     width: "100%",
   },
+  link: {
+    fontWeight: "bold",
+    color: secondaryColor,
+  },
   beigeText: {
     textTransform: "none",
     color: beigeColor,

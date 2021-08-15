@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Custom components
 import Typography from "../components/Typography";
@@ -7,12 +7,27 @@ import Button from "../components/Button";
 import MultiUseMobile from "../styles/MultiUseMobile";
 import NavBar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SignUpModalDialog from "../components/SignUp/SignUpModalDialog";
 
 // Material-UI components
 import { Container, Grid, Paper } from "@material-ui/core";
 
 export default function PricingPage() {
   const classes = MultiUseMobile();
+
+  // FOR SIGNUP MODAL AND LOGIN MODAL
+  // Declare a new state variable for modal open for signup and login
+  const [openSignUp, setSignUpOpen] = useState(false);
+
+  // function to handle modal open for signup
+  const handleSignUpOpen = () => {
+    setSignUpOpen(true);
+  };
+
+  // function to handle modal close for signup
+  const handleSignUpClose = () => {
+    setSignUpOpen(false);
+  };
 
   return (
     <div>
