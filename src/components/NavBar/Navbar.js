@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../images/dark-logo.png";
 
 // Material-UI components
@@ -15,6 +15,10 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
+//Import components for login and signup
+import SignUpModalDialog from "../SignUp/SignUpModalDialog";
+import LoginModalDialog from "../Login/LoginModalDialog";
+
 // Custom components
 import Drawer from "../Drawer";
 import Button from "../Button";
@@ -30,6 +34,32 @@ export default function NavBar(props) {
 
   // Other styles
   const classes = NavbarStyle();
+
+  // FOR SIGNUP MODAL AND LOGIN MODAL
+  // Declare a new state variable for modal open for signup and login
+  const [openSignUp, setSignUpOpen] = useState(false);
+  const [openLogin, setLoginOpen] = useState(false);
+
+  // function to handle modal open for signup
+  const handleSignUpOpen = () => {
+    setSignUpOpen(true);
+  };
+
+  // function to handle modal open for login
+  const handleLoginOpen = () => {
+    setLoginOpen(true);
+  };
+
+  // function to handle modal close for signup
+  const handleSignUpClose = () => {
+    setSignUpOpen(false);
+  };
+
+  // function to handle modal close for login
+  const handleLoginClose = () => {
+    setLoginOpen(false);
+  };
+
   const growClass = classNames({
     [classes.grow]: true,
   });
@@ -75,15 +105,25 @@ export default function NavBar(props) {
         </Link>
       </MenuItem>
       <MenuItem>
-        <Link href="/signup" underline="none" className={classes.link}>
+        <Link
+          underline="none"
+          className={classes.link}
+          onClick={handleSignUpOpen}
+        >
           Sign Up
         </Link>
       </MenuItem>
       <MenuItem>
-        <Link href="/login" underline="none" className={classes.link}>
+        <Link
+          underline="none"
+          className={classes.link}
+          onClick={handleLoginOpen}
+        >
           Login
         </Link>
       </MenuItem>
+      <SignUpModalDialog open={openSignUp} handleClose={handleSignUpClose} />
+      <LoginModalDialog open={openLogin} handleClose={handleLoginClose} />
     </Menu>
   );
 
@@ -108,14 +148,22 @@ export default function NavBar(props) {
                 Pricing
               </Button>
 
-              <Button href="/signup" round color="transparent">
+              <Button round color="transparent" onClick={handleSignUpOpen}>
                 Sign Up
               </Button>
+              <SignUpModalDialog
+                open={openSignUp}
+                handleClose={handleSignUpClose}
+              />
 
-              <Button href="/login" round color="primary">
+              <Button round color="primary" onClick={handleLoginOpen}>
                 Login
               </Button>
 
+              <LoginModalDialog
+                open={openLogin}
+                handleClose={handleLoginClose}
+              />
               <div className={classes.divider} />
 
               <Drawer
