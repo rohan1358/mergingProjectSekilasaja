@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useContext } from "react";
+import { Redirect, withRouter } from "react-router";
 
 // Material UI components
 import { makeStyles, Link, TextField } from "@material-ui/core";
@@ -7,8 +8,7 @@ import { makeStyles, Link, TextField } from "@material-ui/core";
 import Button from "../Button";
 import Typography from "../Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
-import SignUpModalDialog from "../SignUp/SignUpModalDialog";
-import { secondaryColor } from "../../styles/Style";
+import { AuthContext } from "../Routing/Auth";
 
 //Import firebase for login function
 import fire from "../../fire";
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Form for login, including all other methods relevant to login
-const LoginForm = ({ handleClose }) => {
+const LoginForm = ({ history }) => {
   const classes = useStyles();
   const multi = MultiUseMobile();
 
@@ -40,46 +40,54 @@ const LoginForm = ({ handleClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Method to login with firebase
-  const login = () => {
-    const auth = fire.auth();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((resp) => {
-        console.log("Login successful!");
-        handleClose();
-      })
-      .catch((err) => {
-        console.log("Error: " + err.toString());
-      });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Logging in...");
-
-    //Call function to login with firebase
-    login();
-  };
-
-  // // FOR SIGNUP MODAL
-  // // Declare a new state variable for modal open for SIGNUP
-  // const [openSignUp, setSignUpOpen] = useState(false);
-
-  // // function to handle modal open for signup
-  // const handleSignUpOpen = () => {
-  //   setSignUpOpen(true);
+  // // Method to login with firebase
+  // const login = () => {
+  //   const auth = fire.auth();
+  //   auth
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then((resp) => {
+  //       console.log("Login successful!");
+  //     })
+  //     .catch((err) => {
+  //       console.log("Error: " + err.toString());
+  //     });
   // };
 
-  // // function to handle modal close for signup
-  // const handleSignUpClose = () => {
-  //   setSignUpOpen(false);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Logging in...");
+
+  //   //Call function to login with firebase
+  //   login();
   // };
+
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const { email, password } = event.target.elements;
+      try {
+        await fire
+          .auth()
+          .createUserWithEmailAndPassword(email.value, password.value);
+        history.push("/");
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [history]
+  );
+
+  const { currentUser } = useContext(AuthContext);
+
+  if (currentUser) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       <Typography size="subheading">Login to SekilasAja!</Typography>
       <TextField
+        fullWidth={true}
         label="Email"
         variant="filled"
         type="email"
@@ -88,6 +96,7 @@ const LoginForm = ({ handleClose }) => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
+        fullWidth={true}
         label="Password"
         variant="filled"
         type="password"
@@ -99,19 +108,14 @@ const LoginForm = ({ handleClose }) => {
         Login
       </Button>
 
-      {/* <Typography>
+      <Typography>
         Belum punya akun?{" "}
-        <Link
-          onClick={handleSignUpOpen}
-          className={multi.link}
-          underline="none"
-        >
+        <Link className={multi.link} underline="none" href="/signup">
           Daftar Sekarang!
         </Link>
-        <SignUpModalDialog open={openSignUp} handleClose={handleSignUpClose} />
-      </Typography> */}
+      </Typography>
     </form>
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

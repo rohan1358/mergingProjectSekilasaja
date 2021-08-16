@@ -83,6 +83,9 @@ const MultiUseMobile = makeStyles((theme) => ({
   link: {
     fontWeight: "bold",
     color: secondaryColor,
+    "&:hover,&:focus": {
+      backgroundColor: "#808080",
+    },
   },
   beigeText: {
     textTransform: "none",

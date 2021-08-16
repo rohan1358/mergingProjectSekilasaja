@@ -69,34 +69,33 @@ export default function Home() {
       {/* <NavBar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> */}
       <NavBar />
 
-      <Parallax
-        className={desktopClass}
-        image={require("../../images/home.png").default}
-      >
-        <Grid container>
-          <Grid item xs={6}>
-            <Typography size="heading">
-              Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
-            </Typography>
-            <Button href="/" round color="primary">
-              Daftar Sekarang
-            </Button>
+      <div className={desktopClass}>
+        <Parallax image={require("../../images/home.png").default}>
+          <Grid container>
+            <Grid item xs={6}>
+              <Typography size="heading">
+                Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
+              </Typography>
+              <Button href="/" round color="primary">
+                Daftar Sekarang
+              </Button>
+            </Grid>
+            <Grid item xs={2} />
+            <Grid item xs={4}>
+              <img
+                src={Book}
+                className={
+                  books.imgRounded +
+                  " " +
+                  books.imgFluid +
+                  " " +
+                  books.imgHomeBook
+                }
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={2} />
-          <Grid item xs={4}>
-            <img
-              src={Book}
-              className={
-                books.imgRounded +
-                " " +
-                books.imgFluid +
-                " " +
-                books.imgHomeBook
-              }
-            />
-          </Grid>
-        </Grid>
-      </Parallax>
+        </Parallax>
+      </div>
 
       <div className={mobileClass}>
         <Grid container>

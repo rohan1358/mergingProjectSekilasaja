@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback } from "react";
+import { withRouter } from "react-router";
 
 // Material UI components
 import { makeStyles, TextField, Link } from "@material-ui/core";
@@ -7,7 +8,6 @@ import { makeStyles, TextField, Link } from "@material-ui/core";
 import Button from "../Button";
 import Typography from "../Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
-import LoginModalDialog from "../Login/LoginModalDialog";
 
 //Import firebase for signUp function
 import fire from "../../fire";
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Form for signing up, including all other methods relevant to signing up
-const SignUpForm = ({ handleClose }) => {
+const SignUpForm = ({ history }) => {
   const classes = useStyles();
   const multi = MultiUseMobile();
 
@@ -43,65 +43,81 @@ const SignUpForm = ({ handleClose }) => {
   const [password, setPassword] = useState("");
   const [reenterPassword, setReenterPassword] = useState("");
 
-  // Method to sign up with firebase
-  const signUp = () => {
-    const auth = fire.auth();
-    const firestore = fire.firestore();
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((resp) => {
-        //Store the new user information in the database via firestore
-        return firestore.collection("users").doc(resp.user.uid).set({
-          firstName: firstName,
-          lastName: lastName,
-          phoneNumber: phoneNumber,
-          email: email,
-        });
-      })
-      .then(() => {
-        //Sign up success case
-        console.log("SIGN UP SUCCESS.");
-        handleClose();
-      })
-      .catch((err) => {
-        //Sign up fail case
-        console.log("SIGN UP FAIL: ", err);
-      });
-  };
+  // // Method to sign up with firebase
+  // const signUp = () => {
+  //   const auth = fire.auth();
+  //   const firestore = fire.firestore();
+  //   auth
+  //     .createUserWithEmailAndPassword(email, password)
+  // .then((resp) => {
+  //   //Store the new user information in the database via firestore
+  //   return firestore.collection("users").doc(resp.user.uid).set({
+  //     firstName: firstName,
+  //     lastName: lastName,
+  //     phoneNumber: phoneNumber,
+  //     email: email,
+  //   });
+  // })
+  //     .then(() => {
+  //       //Sign up success case
+  //       console.log("SIGN UP SUCCESS.");
+  //     })
+  //     .catch((err) => {
+  //       //Sign up fail case
+  //       console.log("SIGN UP FAIL: ", err);
+  //     });
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      password,
-      reenterPassword
-    );
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(
+  //     firstName,
+  //     lastName,
+  //     phoneNumber,
+  //     email,
+  //     password,
+  //     reenterPassword
+  //   );
 
-    //Check if password and reenter password are the same or not.
-    if (password != reenterPassword) {
-      console.log("Passwords do not match.");
-    } else {
-      //Call function to do signup in firebase
-      signUp();
-    }
-  };
+  // //Check if password and reenter password are the same or not.
+  // if (password != reenterPassword) {
+  //   console.log("Passwords do not match.");
+  // } else {
+  //   //Call function to do signup in firebase
+  //   signUp();
+  // }
+  // };
 
-  //   // FOR LOGIN MODAL
-  //   // Declare a new state variable for modal open for login
-  //   const [openLogin, setLoginOpen] = useState(false);
-
-  //   // function to handle modal open for login
-  //   const handleLoginOpen = () => {
-  //     setLoginOpen(true);
-  //   };
-
-  //   // function to handle modal close for login
-  //   const handleLoginClose = () => {
-  //     setLoginOpen(false);
-  //   };
+  const handleSubmit = useCallback(
+    async (event) => {
+      event.preventDefault();
+      const { email, password } = event.target.elements;
+      const firestore = fire.firestore();
+      try {
+        //Check if password and reenter password are the same or not.
+        if (password != reenterPassword) {
+          console.log("Passwords do not match.");
+        } else {
+          await fire
+            .auth()
+            .createUserWithEmailAndPassword(email.value, password.value)
+            .then((resp) => {
+              //Store the new user information in the database via firestore
+              return firestore.collection("users").doc(resp.user.uid).set({
+                firstName: firstName,
+                lastName: lastName,
+                phoneNumber: phoneNumber,
+                email: email,
+              });
+            });
+          history.push("/");
+        }
+      } catch (error) {
+        alert(error);
+      }
+    },
+    [history]
+  );
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
@@ -155,15 +171,14 @@ const SignUpForm = ({ handleClose }) => {
         Sign Up
       </Button>
 
-      {/* <Typography>
+      <Typography>
         Sudah punya akun?{" "}
-        <Link onClick={handleLoginOpen} className={multi.link} underline="none">
+        <Link href="/login" className={multi.link} underline="none">
           Masuk sekarang!
         </Link>
-        <LoginModalDialog open={openLogin} handleClose={handleLoginClose} />
-      </Typography> */}
+      </Typography>
     </form>
   );
 };
 
-export default SignUpForm;
+export default withRouter(SignUpForm);
