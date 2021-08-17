@@ -10,15 +10,19 @@ export function getBookInfo(title) {
   var kilasanRef = docRef.collection("kilasan");
   var ringkasanRef = docRef.collection("ringkasan_akhir");
 
+  //Initialize book object
+  var bookInfo = new BookInfo();
+
   //Initial get book data for initial fields
   docRef
     .get()
     .then((doc) => {
       if (doc.exists) {
-        doc = doc.data();
-        console.log(doc.author);
-        console.log("Document data:", doc);
-        return doc;
+        var bookData = doc.data();
+        bookInfo.author = bookData["author"];
+        console.log(bookInfo.author);
+        console.log("Document data:", doc.data());
+        //return bookInfo;
       } else {
         console.log("Error: Book not found!");
       }
@@ -50,4 +54,6 @@ export function getBookInfo(title) {
       var errorMessage = err.message;
       console.log("Error: " + errorCode + "\n\n" + errorMessage);
     });
+  console.log("REACHED!");
+  console.log(bookInfo.author);
 }
