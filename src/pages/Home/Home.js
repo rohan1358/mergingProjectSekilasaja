@@ -25,19 +25,40 @@ import * as firebaseGetBookInfo from "../.././firebase/firebaseGetBookInfo.js";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
+const mobileStyles = makeStyles((theme) => ({
+  // small: 600px; md, medium: 960px; lg, large: 1280px
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+  // small: 600px; md, medium: 960px; lg, large: 1280px
+  sectionMobile: {
+    display: "flex",
+    marginTop: "40px",
+    textAlign: "center",
+    justifyContent: "center",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+}));
+
 export default function Home() {
   //------------------FOR TESTING!!-------------------//
-  firebaseGetBookInfo.getBookInfo("Rich Dad, Poor Dad");
+  firebaseGetBookInfo.getBookInfo("Alibaba");
   //------------------FOR TESTING!!-------------------//
 
+  const mobile = mobileStyles();
   const classes = MultiUseMobile();
   const books = useStyles();
 
   const mobileClass = classNames({
-    [classes.sectionMobile]: true,
+    [mobile.sectionMobile]: true,
   });
   const desktopClass = classNames({
-    [classes.sectionDesktop]: true,
+    [mobile.sectionDesktop]: true,
   });
 
   // Add to Cart Feature

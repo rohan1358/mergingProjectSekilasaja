@@ -1,6 +1,6 @@
 // Material-UI components
 import { makeStyles } from "@material-ui/core/styles";
-import { beigeColor, grayColor, primaryColor, secondaryColor } from "./Style";
+import { beigeColor, grayColor, secondaryColor } from "./Style";
 
 const MultiUseMobile = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -11,13 +11,6 @@ const MultiUseMobile = makeStyles((theme) => ({
     },
   },
   // small: 600px; md, medium: 960px; lg, large: 1280px
-  sectionDesktopBlock: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block",
-    },
-  },
-  // small: 600px; md, medium: 960px; lg, large: 1280px
   sectionMobile: {
     display: "flex",
     marginTop: "40px",
@@ -25,6 +18,13 @@ const MultiUseMobile = makeStyles((theme) => ({
     justifyContent: "center",
     [theme.breakpoints.up("md")]: {
       display: "none",
+    },
+  },
+  // small: 600px; md, medium: 960px; lg, large: 1280px
+  sectionDesktopBlock: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "block",
     },
   },
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -86,10 +86,6 @@ const MultiUseMobile = makeStyles((theme) => ({
     "&:hover,&:focus": {
       backgroundColor: "#808080",
     },
-  },
-  beigeText: {
-    textTransform: "none",
-    color: beigeColor,
   },
   pricingButton: {
     padding: 15,
