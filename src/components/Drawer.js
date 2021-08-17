@@ -13,6 +13,7 @@ import MultiUseMobile from "../styles/MultiUseMobile";
 // Custom components
 import NavbarStyle from "../styles/NavbarStyle";
 import Typography from "./Typography";
+import { dangerColor, beigeColor } from "../styles/Style";
 
 // nodejs library to set properties for component
 import clsx from "clsx";
@@ -25,16 +26,23 @@ const useStyles = makeStyles({
   fullList: {
     width: "auto",
   },
+  badge: {
+    backgroundColor: dangerColor,
+    border: "none",
+    borderRadius: "10px",
+    color: beigeColor,
+    width: "1.5rem",
+  },
 });
 
 export default function CustomDrawer(props) {
   const {
     logo,
-    button,
     toPurchaseBookSection,
     drawerTitle,
     drawerLogo,
     direction,
+    countCartItems,
   } = props;
   const classes = NavbarStyle();
   const spaces = MultiUseMobile();
@@ -77,10 +85,6 @@ export default function CustomDrawer(props) {
         <div className={spaces.extraSpace} />
 
         <div>{toPurchaseBookSection}</div>
-
-        <div className={spaces.extraSpace} />
-
-        {button}
       </Container>
     </div>
   );
@@ -90,7 +94,12 @@ export default function CustomDrawer(props) {
       {[direction].map((anchor) => (
         <React.Fragment key={anchor}>
           <IconButton onClick={toggleDrawer(anchor, true)} color="inherit">
-            {logo}
+            {logo}{" "}
+            {countCartItems ? (
+              <button className={drawer.badge}>{countCartItems}</button>
+            ) : (
+              ""
+            )}
           </IconButton>
 
           <Drawer
@@ -113,4 +122,5 @@ CustomDrawer.propTypes = {
   drawerTitle: PropTypes.string,
   drawerLogo: PropTypes.object,
   direction: PropTypes.string.isRequired,
+  countCartItems: PropTypes.object,
 };

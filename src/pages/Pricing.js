@@ -5,7 +5,7 @@ import Typography from "../components/Typography";
 import BenefitsBlock from "../components/BenefitsBlock";
 import Button from "../components/Button";
 import MultiUseMobile from "../styles/MultiUseMobile";
-import NavBar from "../components/Navbar";
+import NavBar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
 import SignUpModalDialog from "../components/SignUp/SignUpModalDialog";
 
