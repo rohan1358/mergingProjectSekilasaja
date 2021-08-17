@@ -18,6 +18,7 @@ import { Container, Grid, Divider, makeStyles } from "@material-ui/core";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
+import CategoryBarFilter from "../../components/CategoryBarFilter";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -68,7 +69,6 @@ export default function Home() {
     <div>
       {/* <NavBar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> */}
       <NavBar />
-
       <Parallax
         className={desktopClass}
         image={require("../../images/home.png").default}
@@ -97,6 +97,8 @@ export default function Home() {
           </Grid>
         </Grid>
       </Parallax>
+
+
 
       <div className={mobileClass}>
         <Grid container>
@@ -132,6 +134,8 @@ export default function Home() {
       </div>
 
       <div className={classes.extraSpace} />
+
+
 
       <Container>
         <BenefitsBlock />
