@@ -3,6 +3,7 @@ import fire from "../../fire";
 
 // custom components
 import Typography from "../Typography";
+import Loading from "../../pages/Loading";
 
 // Material UI Components
 import { Container } from "@material-ui/core";
@@ -20,15 +21,13 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  // if (pending) {
-  //   return (
-  //     <>
-  //       <Container maxWidth="xs">
-  //         <Typography size="heading">Loading...</Typography>
-  //       </Container>
-  //     </>
-  //   );
-  // }
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <AuthContext.Provider

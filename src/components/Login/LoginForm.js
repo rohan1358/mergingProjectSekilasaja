@@ -40,47 +40,32 @@ const LoginForm = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // // Method to login with firebase
-  // const login = () => {
-  //   const auth = fire.auth();
-  //   auth
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then((resp) => {
-  //       console.log("Login successful!");
-  //     })
-  //     .catch((err) => {
-  //       console.log("Error: " + err.toString());
-  //     });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log("Logging in...");
-
-  //   //Call function to login with firebase
-  //   login();
-  // };
-
-  const handleSubmit = useCallback(
-    async (event) => {
-      event.preventDefault();
-      const { email, password } = event.target.elements;
-      try {
-        await fire
-          .auth()
-          .createUserWithEmailAndPassword(email.value, password.value);
+  // Method to login with firebase
+  const login = () => {
+    const auth = fire.auth();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((resp) => {
+        console.log("Login successful!");
         history.push("/");
-      } catch (error) {
-        alert(error);
-      }
-    },
-    [history]
-  );
+      })
+      .catch((err) => {
+        console.log("Error: " + err.toString());
+      });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Logging in...");
+
+    //Call function to login with firebase
+    login();
+  };
 
   const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
-    return <Redirect to="/" />;
+    return <Redirect to="/accounts" />;
   }
 
   return (

@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import fire from "./fire.js";
 
 // Custom pages
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import LoginPage from "./pages/Login";
+import SignUpPage from "./pages/SignUp";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home/Home";
 import FourOFourPage from "./pages/404page";
@@ -26,9 +26,10 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <PrivateRoute exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUp} />
+          <PrivateRoute exact path="/accounts" component={Accounts} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/pricing" component={Pricing} />
           {/* <Route exact path="/contact" component={Contact} />
