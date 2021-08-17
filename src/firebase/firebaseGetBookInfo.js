@@ -21,12 +21,12 @@ export function getBookInfo(title) {
             bookInfo.author = bookData['author'];
             console.log(bookInfo.author);
             console.log("Document data:", doc.data());
-            return bookInfo;
+            //return bookInfo;
         } else {
             console.log("Error: Book not found!");
         }
 
-        console.log(bookInfo.author);
+        //console.log(bookInfo.author);
         ////Get kilasan of the book
         //kilasanRef.get().then((querySnapshot) => {
         //    querySnapshot.forEach((doc) => {
