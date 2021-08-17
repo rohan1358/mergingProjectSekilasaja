@@ -115,7 +115,10 @@ export default function PricingPage() {
                       >
                         Rp. 10.000 / Kilas
                       </Typography>
-                      <Typography style={{ color: "#FFFEF8" }} type="italic">
+                      <Typography
+                        style={{ color: "#FFFEF8", textTransform: "none" }}
+                        type="italic"
+                      >
                         Loren Ipsum Ngoman Balato Porche
                       </Typography>
                     </div>
