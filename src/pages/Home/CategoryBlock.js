@@ -4,7 +4,7 @@ import React, { useState, useCallback } from "react";
 import BookCard from "../../components/BookCard";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
-import CategoryBarFilter from "../../components/CategoryBarFilter";
+import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
 // Other components
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -31,7 +31,6 @@ const responsive = {
 
 export default function CategoryBlock(props) {
   const { products, title } = props;
-  const [categorisedProducts, setCategorisedProducts] = useState([]);
   const [chosenCategory, setChosenCategory] = useState("");
   // check the user chosen a category or not
   const [isChosenCategory, setIsChosenCategory] = useState(false);

@@ -1,18 +1,18 @@
-import React from "react";
-import { Container } from "@material-ui/core/";
-import data from "../data/bookData";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import data from "../../data/bookData";
 
 // Custom components
-import CategoriesStyle from "../styles/CategoriesStyle";
+import CategoriesStyle from "../../styles/CategoriesStyle";
+import CategoryButton from "./CategoryButton";
 
 //nodejs library to set properties for components
 import classNames from "classnames";
 
-import Button from "./Button";
-import CategoryButton from "./CategoryButton";
-function CategoryBarFilter({chosenCategory, setChosenCategory, setIsChosenCategory }) {
+function CategoryBarFilter({
+  chosenCategory,
+  setChosenCategory,
+  setIsChosenCategory,
+}) {
   const classes = CategoriesStyle();
 
   const mobileClass = classNames({
@@ -51,7 +51,7 @@ function CategoryBarFilter({chosenCategory, setChosenCategory, setIsChosenCatego
         ))}
       </div>
 
-<div className={mobileClass}>
+      <div className={mobileClass}>
         {categories.map((categoryName, index) => (
           <CategoryButton
             key={index}
@@ -62,7 +62,6 @@ function CategoryBarFilter({chosenCategory, setChosenCategory, setIsChosenCatego
           ></CategoryButton>
         ))}
       </div>
-
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { FitnessCenterOutlined } from "@material-ui/icons";
 import RdpdCover from "../images/rdpd.jpg";
-import BusinessIcon from '@material-ui/icons/Business';
+import BusinessIcon from "@material-ui/icons/Business";
 const bookPrice = 15000;
 
 const data = {
@@ -13,7 +13,7 @@ const data = {
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
       price: bookPrice,
       cover: RdpdCover,
-      categories: ["Fiction", "Education"], 
+      categories: ["All", "Fiction", "Education"],
     },
     {
       id: "2",
@@ -23,7 +23,7 @@ const data = {
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
       price: bookPrice,
       cover: RdpdCover,
-      categories: ["Fiction", "Education"],
+      categories: ["All", "Fiction", "Education"],
     },
     {
       id: "3",
@@ -33,7 +33,7 @@ const data = {
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
       price: bookPrice,
       cover: RdpdCover,
-      categories: ["Fiction", "Education"],
+      categories: ["All", "Fiction", "Education"],
     },
     {
       id: "4",
@@ -43,7 +43,7 @@ const data = {
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
       price: bookPrice,
       cover: RdpdCover,
-      categories: ["Fiction", "Education"],
+      categories: ["All", "Fiction", "Education"],
     },
     {
       id: "5",
@@ -53,7 +53,7 @@ const data = {
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
       price: bookPrice,
       cover: RdpdCover,
-      categories: ["History", "Education"],
+      categories: ["All", "History", "Education"],
     },
     {
       id: "6",
@@ -63,7 +63,7 @@ const data = {
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
       price: bookPrice,
       cover: RdpdCover,
-      categories: ["Philosophy", "Technology"],
+      categories: ["All", "Philosophy", "Technology"],
     },
     {
       id: "7",
@@ -73,7 +73,7 @@ const data = {
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
       price: bookPrice,
       cover: RdpdCover,
-      categories: ["Creativity", "Technology"],
+      categories: ["All", "Creativity", "Technology"],
     },
     {
       id: "8",
@@ -83,7 +83,7 @@ const data = {
         "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
       price: bookPrice,
       cover: RdpdCover,
-      categories: ["Health and Nutrition", "History"],
+      categories: ["All", "Health and Nutrition", "History"],
     },
   ],
 };
