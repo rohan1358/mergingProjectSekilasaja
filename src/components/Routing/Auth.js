@@ -20,15 +20,15 @@ export const AuthProvider = ({ children }) => {
     });
   }, []);
 
-  if (pending) {
-    return (
-      <>
-        <Container maxWidth="xs">
-          <Typography size="heading">Loading...</Typography>
-        </Container>
-      </>
-    );
-  }
+  // if (pending) {
+  //   return (
+  //     <>
+  //       <Container maxWidth="xs">
+  //         <Typography size="heading">Loading...</Typography>
+  //       </Container>
+  //     </>
+  //   );
+  // }
 
   return (
     <AuthContext.Provider
