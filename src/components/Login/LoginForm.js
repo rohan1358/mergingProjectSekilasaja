@@ -11,7 +11,7 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import { AuthContext } from "../Routing/Auth";
 
 //Import firebase for login function
-import fire from "../../fire";
+import * as firebaseLogin from "../.././firebase/firebaseLogin.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,33 +40,20 @@ const LoginForm = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // Method to login with firebase
-  const login = () => {
-    const auth = fire.auth();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((resp) => {
-        console.log("Login successful!");
-        history.push("/");
-      })
-      .catch((err) => {
-        console.log("Error: " + err.toString());
-      });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Logging in...");
 
     //Call function to login with firebase
-    login();
+    firebaseLogin.login(email, password);
   };
 
   const { currentUser } = useContext(AuthContext);
 
-  if (currentUser) {
-    return <Redirect to="/accounts" />;
-  }
+   if (currentUser) {
+       console.log('Current user id: ' + currentUser.uid);
+       return <Redirect to="/accounts" />;
+   }
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>

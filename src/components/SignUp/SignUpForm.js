@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from "react";
-import { withRouter } from "react-router";
+import React, { useState, useCallback , useContext} from "react";
+import { Redirect, withRouter } from "react-router";
 
 // Material UI components
 import { makeStyles, TextField, Link } from "@material-ui/core";
@@ -9,8 +9,10 @@ import Button from "../Button";
 import Typography from "../Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
+import { AuthContext } from "../Routing/Auth";
+
 //Import firebase for signUp function
-import fire from "../../fire";
+import * as firebaseSignUp from "../.././firebase/firebaseSignUp.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,32 +45,6 @@ const SignUpForm = ({ history }) => {
   const [password, setPassword] = useState("");
   const [reenterPassword, setReenterPassword] = useState("");
 
-  // Method to sign up with firebase
-  const signUp = () => {
-    const auth = fire.auth();
-    const firestore = fire.firestore();
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((resp) => {
-        //Store the new user information in the database via firestore
-        return firestore.collection("users").doc(resp.user.uid).set({
-          firstName: firstName,
-          lastName: lastName,
-          phoneNumber: phoneNumber,
-          email: email,
-        });
-      })
-      .then(() => {
-        //Sign up success case
-        console.log("SIGN UP SUCCESS.");
-        history.push("/");
-      })
-      .catch((err) => {
-        //Sign up fail case
-        console.log("SIGN UP FAIL: ", err);
-      });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(
@@ -82,12 +58,20 @@ const SignUpForm = ({ history }) => {
 
     //Check if password and reenter password are the same or not.
     if (password != reenterPassword) {
-      console.log("Passwords do not match.");
+        console.log("Passwords do not match.");
+        alert("Passwords do not match!");
     } else {
-      //Call function to do signup in firebase
-      signUp();
+        //Call function to do signup in firebase
+        firebaseSignUp.signUp(email, password, firstName, lastName, phoneNumber);
     }
-  };
+   };
+
+   const { currentUser } = useContext(AuthContext);
+
+   if (currentUser) {
+       console.log('Current user id: ' + currentUser.uid);
+       return <Redirect to="/accounts" />;
+   }
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>

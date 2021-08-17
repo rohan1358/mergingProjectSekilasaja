@@ -9,7 +9,7 @@ import Button from "../../components/Button";
 import SubscriptionPlan from "./SubscriptionPlan";
 
 // firebase components
-import fire from "../../fire";
+import fire from "../.././firebase/fire";
 
 // Material-UI components
 import { Container, Paper, Divider, TextField } from "@material-ui/core";

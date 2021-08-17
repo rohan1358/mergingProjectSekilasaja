@@ -3,8 +3,10 @@
     "",
     "\\src",
     "\\src\\components",
+    "\\src\\components\\Login",
+    "\\src\\components\\SignUp",
     "\\src\\pages"
   ],
-  "SelectedNode": "\\src\\components\\signUpForm.js",
+  "SelectedNode": "\\src\\images",
   "PreviewInSolutionExplorer": false
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import fire from "../../fire";
+import fire from "../.././firebase/fire";
 
 // custom components
 import Typography from "../Typography";
@@ -15,9 +15,9 @@ export const AuthProvider = ({ children }) => {
   const [pending, setPending] = useState(true);
 
   useEffect(() => {
-    fire.auth().onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setPending(false);
+      fire.auth().onAuthStateChanged((user) => {
+          setCurrentUser(user);
+          setPending(false);
     });
   }, []);
 

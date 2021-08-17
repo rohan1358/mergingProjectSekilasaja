@@ -26,7 +26,7 @@ import Basket from "../AddToCart/Basket";
 import classNames from "classnames";
 
 // firebase components
-import fire from "../../fire";
+import fire from "../.././firebase/fire";
 
 export default function NavBar(props) {
   const { cartItems, onAdd, onRemove } = props;
