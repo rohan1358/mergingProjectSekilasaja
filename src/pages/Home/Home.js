@@ -106,7 +106,7 @@ export default function Home() {
             <Typography size="heading">
               Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
             </Typography>
-            <Button href="/" round color="primary">
+            <Button href="/signup" round color="primary">
               Daftar Sekarang
             </Button>
           </Grid>
