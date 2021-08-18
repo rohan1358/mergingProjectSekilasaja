@@ -5,6 +5,8 @@ import Typography from "../components/Typography";
 import MultiUseMobile from "../styles/MultiUseMobile";
 import Button from "../components/Button";
 
+// Testing purposes
+
 // Material-UI components
 import { Container, Paper, Grid, TextField } from "@material-ui/core";
 
