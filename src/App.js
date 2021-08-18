@@ -9,7 +9,7 @@ import Contact from "./pages/Contact";
 import Home from "./pages/Home/Home";
 import FourOFourPage from "./pages/404page";
 import PricingPage from "./pages/Pricing";
-import BookDetailsPage from "./pages/BookDetailsPage";
+import BookDetailsPage from "./pages/BookDetails/BookDetailsPage";
 import VideoWatchingPage from "./pages/VideoWatching";
 import TextReadingPage from "./pages/TextReading";
 import AccountsPage from "./pages/Accounts/Accounts";

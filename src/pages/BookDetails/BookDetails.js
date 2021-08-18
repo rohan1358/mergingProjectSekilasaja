@@ -5,9 +5,9 @@ import { makeStyles, Grid, Divider, Container } from "@material-ui/core";
 import { Timelapse, EmojiObjects, PlayArrow } from "@material-ui/icons";
 
 // Custom components
-import InfoAreaStyle from "../styles/InfoAreaStyle";
-import Typography from "./Typography";
-import MultiUseMobile from "../styles/MultiUseMobile";
+import InfoAreaStyle from "../../styles/InfoAreaStyle";
+import Typography from "../../components/Typography";
+import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
