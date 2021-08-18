@@ -99,6 +99,13 @@ const MultiUseMobile = makeStyles((theme) => ({
   sectionTitle: {
     borderBottom: "3px solid",
   },
+  spaceBetween: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  paragraphSpace: {
+    marginTop: "30px",
+  },
 }));
 
 export default MultiUseMobile;

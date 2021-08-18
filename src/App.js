@@ -13,6 +13,7 @@ import BookDetailsPage from "./pages/BookDetails/BookDetailsPage";
 import VideoWatchingPage from "./pages/VideoWatching";
 import TextReadingPage from "./pages/TextReading";
 import AccountsPage from "./pages/Accounts/Accounts";
+import Payment from "./pages/Payment.js";
 import NewWebLanding from "./pages/NewWebLanding";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          <Route exact path="/payment" component={Payment} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/pricing" component={PricingPage} />
           <Route exact path="/book-details" component={BookDetailsPage} />
