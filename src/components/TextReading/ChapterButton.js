@@ -6,11 +6,7 @@ import TextReadingStyle from "../../styles/TextReadingStyle";
 //nodejs library to set properties for components
 import classNames from "classnames";
 
-function ChapterButton({
-  chosenChapter,
-  setChosenChapter,
-  chapter,
-}) {
+function ChapterButton({ chosenChapter, setChosenChapter, chapter }) {
   const classes = TextReadingStyle();
 
   const [isSelected, setIsSelected] = useState(false);
@@ -22,7 +18,6 @@ function ChapterButton({
       setIsSelected(false);
     }
   }, [chosenChapter]);
-
 
   var btnClass = classNames(classes.chapter, {
     [`${classes.selectedChapter}`]: isSelected,

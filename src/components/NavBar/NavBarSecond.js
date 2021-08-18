@@ -4,7 +4,6 @@ import Logo from "../../images/dark-logo.png";
 // Material-UI components
 import { AppBar, Toolbar, IconButton, Container } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
-import DvrIcon from "@material-ui/icons/Dvr";
 
 // Custom components
 import Button from "../Button";
@@ -14,7 +13,9 @@ import NavbarStyle from "../../styles/NavbarStyle";
 // nodejs library to set properties for components
 import classNames from "classnames";
 
-export default function NavBarSecond() {
+export default function NavBarSecond(props) {
+  const { children } = props;
+
   const classes = NavbarStyle();
   const growClass = classNames({
     [classes.grow]: true,
@@ -34,12 +35,7 @@ export default function NavBarSecond() {
             <HomeIcon className={iconColorClass} />
           </IconButton>
 
-          <Drawer
-            direction={"left"}
-            drawerLogo={<DvrIcon className={classes.hugeIcon} />}
-            drawerTitle={"Daftar Kilas"}
-            logo={<DvrIcon className={classes.iconColor} />}
-          />
+          {children}
 
           <div className={growClass} />
         </Toolbar>

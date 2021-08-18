@@ -1,5 +1,6 @@
 // Material-UI components
 import { makeStyles } from "@material-ui/core/styles";
+import { primaryColor, secondaryColor } from "./Style";
 
 const TextReadingStyle = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -27,52 +28,51 @@ const TextReadingStyle = makeStyles((theme) => ({
     fontSize: "1em",
     textAlign: "center",
     flexDirection: "column",
-    color: "#black",
+    color: secondaryColor,
     justifyContent: "space-between",
-    textAlign: "left"
+    textAlign: "left",
   },
-  book_title:{
+  book_title: {
     textDecoration: "underline",
     fontSize: "1.5em",
     fontWeight: "700",
     marginLeft: "20px",
     marginBottom: "30px",
-    textAlign: "center"
-    
+    textAlign: "center",
   },
-  title: {
-    fontWeight: "700",
-    fontSize: "1.2em",
-    marginBottom: "30px",
-    textAlign: "center"
-  },
+  title: {},
   paragraph: {
-    marginBottom: "30px"
+    fontSize: "18px",
+    marginBottom: "30px",
   },
-  content:{
-    
-  },
+  content: {},
   page: {
     display: "flex",
-    alignItems : "flex-start"
+    alignItems: "flex-start",
   },
   tableOfContent: {
+    marginTop: "20px",
     flex: "0.4",
-    border: "solid 1px black"
+    // border: "solid 1px #41444b",
   },
-  chapter:{
+  chapter: {
+    fontFamily: "Roboto",
+    color: secondaryColor,
     marginBottom: "10px",
     padding: "10px",
     cursor: "pointer",
-     "&:hover": {
-      background: "gray", //41444b
+    "&:hover": {
+      background: secondaryColor,
       color: "white",
     },
   },
-  selectedChapter:{
-    background: "black", //41444b
-    color: "white",
-  }
+  selectedChapter: {
+    background: primaryColor, //41444b
+    fontWeight: "bold",
+  },
+  extraSpace: {
+    marginTop: "40px",
+  },
 }));
 
 export default TextReadingStyle;

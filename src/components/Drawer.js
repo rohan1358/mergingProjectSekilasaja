@@ -36,14 +36,8 @@ const useStyles = makeStyles({
 });
 
 export default function CustomDrawer(props) {
-  const {
-    logo,
-    toPurchaseBookSection,
-    drawerTitle,
-    drawerLogo,
-    direction,
-    countCartItems,
-  } = props;
+  const { logo, children, drawerTitle, drawerLogo, direction, countCartItems } =
+    props;
   const classes = NavbarStyle();
   const spaces = MultiUseMobile();
 
@@ -82,9 +76,7 @@ export default function CustomDrawer(props) {
         </div>
         <Divider />
 
-        <div className={spaces.extraSpace} />
-
-        <div>{toPurchaseBookSection}</div>
+        <div>{children}</div>
       </Container>
     </div>
   );
@@ -118,7 +110,7 @@ export default function CustomDrawer(props) {
 CustomDrawer.propTypes = {
   logo: PropTypes.object.isRequired,
   button: PropTypes.object,
-  toPurchaseBookSection: PropTypes.object,
+  children: PropTypes.object,
   drawerTitle: PropTypes.string,
   drawerLogo: PropTypes.object,
   direction: PropTypes.string.isRequired,
