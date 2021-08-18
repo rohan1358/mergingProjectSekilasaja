@@ -1,12 +1,12 @@
 import React from "react";
-import BookCover from "../images/rdpd.jpg";
+import BookCover from "../../images/rdpd.jpg";
 
 // Custom components
-import BookDetails from "../components/BookDetails";
-import TextDetails from "../components/TextDetails";
-import NavBar from "../components/NavBar/Navbar";
-import Footer from "../components/Footer";
-import VideoComponent from "../components/VidPageComponent";
+import BookDetails from "./BookDetails";
+import TextDetails from "./TextDetails";
+import NavBar from "../../components/NavBar/Navbar";
+import Footer from "../../components/Footer";
+import VideoComponent from "../../components/VidPageComponent";
 
 // Material-UI components
 import { Container } from "@material-ui/core";

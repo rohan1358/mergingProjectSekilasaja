@@ -1,14 +1,12 @@
 import React from "react";
 
 // @material-ui/core components
-import { makeStyles, Grid, Divider, Paper } from "@material-ui/core";
-import { Timelapse, EmojiObjects, PlayArrow } from "@material-ui/icons";
+import { makeStyles, Grid, Paper } from "@material-ui/core";
 
 // Custom components
-import InfoAreaStyle from "../styles/InfoAreaStyle";
-import Typography from "./Typography";
-import MultiUseMobile from "../styles/MultiUseMobile";
-import Button from "./Button";
+import InfoAreaStyle from "../../styles/InfoAreaStyle";
+import Typography from "../../components/Typography";
+import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -63,6 +61,10 @@ export default function BookDetails(props) {
                     Video
                   </Typography>
                   {video}
+
+                  <Typography type="italic">
+                    TODO: There will be video here
+                  </Typography>
                 </div>
 
                 <div>
@@ -70,7 +72,7 @@ export default function BookDetails(props) {
                     Audio
                   </Typography>
                   <Typography type="italic">
-                    TODO: Ntar ada audio di sini
+                    TODO: There will be audio here
                   </Typography>
                   {audio}
                 </div>
@@ -102,7 +104,7 @@ export default function BookDetails(props) {
                   Video
                 </Typography>
                 <Typography type="italic">
-                  TODO: Ntar ada video di sini
+                  TODO: There will be video here
                 </Typography>
               </div>
 
@@ -111,7 +113,7 @@ export default function BookDetails(props) {
                   Audio
                 </Typography>
                 <Typography type="italic">
-                  TODO: Ntar ada audio di sini
+                  TODO: There will be audio here
                 </Typography>
               </div>
 
