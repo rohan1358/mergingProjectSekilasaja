@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Book from "../../images/book.png";
 
 // Custom components
@@ -21,7 +21,9 @@ import classNames from "classnames";
 
 //Import firebase for signUp function
 import fire from "../.././firebase/fire";
-import * as firebaseGetBookInfo from "../.././firebase/firebaseGetBookInfo.js";
+import * as firebaseGetBookInfoByTitle from "../.././firebase/firebaseGetBookInfoByTitle.js";
+import * as firebaseGetBookDashboardImageURL from "../.././firebase/firebaseGetBookDashboardImageURL.js";
+import * as firebaseGetBookCoverImageURL from "../.././firebase/firebaseGetBookCoverImageURL.js";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -47,7 +49,15 @@ const mobileStyles = makeStyles((theme) => ({
 
 export default function Home() {
   //------------------FOR TESTING!!-------------------//
-  firebaseGetBookInfo.getBookInfo("Alibaba");
+    const [a, setA] = useState("");
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await firebaseGetBookInfoByTitle.getBookInfoByTitle("Elon Musk");
+            setA(result);
+        };
+        fetchData();
+    }, []);
+    console.log(a);
   //------------------FOR TESTING!!-------------------//
 
   const mobile = mobileStyles();
@@ -64,7 +74,9 @@ export default function Home() {
   // Add to Cart Feature
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
+    function updateA() {
 
+    }
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
