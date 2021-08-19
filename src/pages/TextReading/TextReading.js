@@ -15,28 +15,45 @@ import { Container } from "@material-ui/core";
 //firebase components
 import db from "../../fire";
 
-export default function VideoWatchingPage() {
+export default function VideoWatchingPage({ match, history }) {
+  console.log(match);
+
   const classes = TextReadingStyle();
   const nav = NavbarStyle();
 
-  const [content, setContent] = useState([]);
+  const [chapterContent, setChapterContent] = useState([]);
+  const [conclusion, setConclusion] = useState([]);
   const [chosenChapter, setChosenChapter] = useState("1");
 
   useEffect(() => {
     db.collection("books")
-      .doc("Alibaba")
+      .doc(match.params.title)
       .collection("kilasan")
       .onSnapshot((snapshot) => {
-        setContent(
+        setChapterContent(
           snapshot.docs.map((doc) => ({
             id: doc.id,
-            content: doc.data(),
+            chapterContent: doc.data(),
           }))
         );
       });
   }, []);
 
-  console.log(content);
+  useEffect(() => {
+    db.collection("books")
+      .doc(match.params.title)
+      .collection("ringkasan_akhir")
+      .onSnapshot((snapshot) => {
+        setConclusion(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            chapterContent: doc.data(),
+          }))
+        );
+      });
+  }, []);
+
+  console.log(chapterContent);
 
   return (
     <div>
@@ -49,7 +66,7 @@ export default function VideoWatchingPage() {
             logo={<DvrIcon className={nav.iconColor} />}
             children={
               <TableOfContent
-                content={content}
+                chapterContent={chapterContent}
                 chosenChapter={chosenChapter}
                 setChosenChapter={setChosenChapter}
               />
@@ -59,24 +76,24 @@ export default function VideoWatchingPage() {
       />
 
       <Container maxWidth={"md"}>
-        {content.length !== 0 && (
+        {chapterContent.length !== 0 && (
           <div className={classes.page}>
             <div className={classes.container}>
               <div className={classes.book_title}>
-                <Typography size="heading">Alibaba</Typography>
+                <Typography size="heading">{match.params.title}</Typography>
               </div>
               <div className={classes.title}>
                 <Typography type="italic" size="bold">
-                  Kilas #{content[chosenChapter - 1].id}
+                  Kilas #{chapterContent[chosenChapter - 1].id}
                 </Typography>
               </div>
               <div className={classes.title}>
                 <Typography size="subheading">
-                  {content[chosenChapter - 1].content.title}
+                  {chapterContent[chosenChapter - 1].chapterContent.title}
                 </Typography>
               </div>
-              <div className={classes.content}>
-                {content[chosenChapter - 1].content.details.map(
+              <div className={classes.chapterContent}>
+                {chapterContent[chosenChapter - 1].chapterContent.details.map(
                   (paragraph, index) => (
                     <Typography className={classes.paragraph}>
                       {paragraph}

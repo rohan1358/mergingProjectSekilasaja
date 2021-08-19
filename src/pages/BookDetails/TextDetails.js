@@ -15,20 +15,8 @@ import PropTypes from "prop-types";
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function BookDetails(props) {
-  const {
-    totalNum,
-    kilasTitle,
-    kilasBody,
-    video,
-    audio,
-    kilas1,
-    kilas2,
-    kilas3,
-    kilas4,
-    kilas5,
-    kilas6,
-    kilas7,
-  } = props;
+  const { totalNum, kilasTitle, kilasBody, video, audio, tableOfContents } =
+    props;
 
   const mobile = MultiUseMobile();
   const classes = useStyles();
@@ -81,13 +69,7 @@ export default function BookDetails(props) {
                   <Typography size="subheading" type="bold">
                     Daftar Kilas
                   </Typography>
-                  <Typography>1. {kilas1}</Typography>
-                  <Typography>2. {kilas2}</Typography>
-                  <Typography>3. {kilas3}</Typography>
-                  <Typography>4. {kilas4}</Typography>
-                  <Typography>5. {kilas5}</Typography>
-                  <Typography>6. {kilas6}</Typography>
-                  <Typography>7. {kilas7}</Typography>
+                  <Typography>{tableOfContents}</Typography>
                 </div>
               </Grid>
             </Grid>
@@ -121,13 +103,7 @@ export default function BookDetails(props) {
                 <Typography size="subheading" type="bold">
                   Daftar Kilas
                 </Typography>
-                <Typography>1. {kilas1}</Typography>
-                <Typography>2. {kilas2}</Typography>
-                <Typography>3. {kilas3}</Typography>
-                <Typography>4. {kilas4}</Typography>
-                <Typography>5. {kilas5}</Typography>
-                <Typography>6. {kilas6}</Typography>
-                <Typography>7. {kilas7}</Typography>
+                <Typography>{tableOfContents}</Typography>
               </div>
             </Grid>
 
@@ -147,13 +123,3 @@ export default function BookDetails(props) {
     </div>
   );
 }
-
-BookDetails.propTypes = {
-  totalNum: PropTypes.object.isRequired,
-  kilasTitle: PropTypes.string.isRequired,
-  kilasBody: PropTypes.string.isRequired,
-  kilas1: PropTypes.string,
-  kilas2: PropTypes.string,
-  video: PropTypes.object,
-  audio: PropTypes.object,
-};

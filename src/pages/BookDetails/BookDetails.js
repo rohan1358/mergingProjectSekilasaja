@@ -90,7 +90,9 @@ export default function BookDetails(props) {
 
             <Grid container spacing={3}>
               <Grid item>
-                <Button>Read or listen now!</Button>
+                <Button href={`/text-page/${title}`}>
+                  Read or listen now!
+                </Button>
               </Grid>
 
               <Grid item>
@@ -152,9 +154,10 @@ export default function BookDetails(props) {
               <Typography type="bold">{descriptionTitle}</Typography>
               <Typography>{description}</Typography>
               <Grid item xs={12}>
-                <Button fullWidth>Read or listen now!</Button>
+                <Button href={`text-page/${title}`} fullWidth>
+                  Read or listen now!
+                </Button>
               </Grid>
-
               <Grid item xs={12}>
                 <Button fullWidth color="secondary">
                   Watch now!
