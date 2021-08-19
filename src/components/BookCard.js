@@ -1,5 +1,7 @@
 import React from "react";
 
+import RdpdCover from "../images/rdpd.jpg";
+
 // @material-ui/core components
 import { makeStyles, Link, Grid, Card } from "@material-ui/core";
 
@@ -12,20 +14,17 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function BookCard(props) {
+export default function BookCard({product}) {
   const classes = useStyles();
-  // const { link, product, onAdd } = props;
-  const { link, product } = props;
-
   return (
     <Grid item>
       {/* <Link onClick={() => onAdd(product)} underline="none" href={link}> */}
-      <Link underline="none" href={link}>
-        <div className={classes.bookCover}>
+      <Link  underline="none" href={`book-details/${product.book_title}`}>
+        <div className={classes.bookCover} >
           <div>
             <img
-              src={product.cover}
-              alt={product.title}
+              src={RdpdCover}
+              alt={product.book_title}
               className={
                 classes.imgRounded +
                 " " +
@@ -35,7 +34,7 @@ export default function BookCard(props) {
               }
             />
             <div className={classes.descriptionWrapper}>
-              <Typography type="bold">{product.title}</Typography>
+              <Typography type="bold">{product.book_title}</Typography>
               <Typography type="italic">{product.author}</Typography>
               <Typography>{product.description}</Typography>
             </div>

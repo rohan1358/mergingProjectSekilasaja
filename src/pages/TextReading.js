@@ -19,20 +19,8 @@ export default function VideoWatchingPage() {
   const classes = TextReadingStyle();
   const nav = NavbarStyle();
 
-  const [book, setBooks] = useState([]);
   const [content, setContent] = useState([]);
   const [chosenChapter, setChosenChapter] = useState("1");
-
-  useEffect(() => {
-    db.collection("books").onSnapshot((snapshot) => {
-      setBooks(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          book: doc.data(),
-        }))
-      );
-    });
-  }, []);
 
   useEffect(() => {
     db.collection("books")
