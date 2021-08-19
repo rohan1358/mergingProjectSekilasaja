@@ -11,7 +11,7 @@ import FourOFourPage from "./pages/404page";
 import PricingPage from "./pages/Pricing";
 import BookDetailsPage from "./pages/BookDetails/BookDetailsPage";
 import VideoWatchingPage from "./pages/VideoWatching";
-import TextReadingPage from "./pages/TextReading";
+import TextReadingPage from "./pages/TextReading/TextReading";
 import AccountsPage from "./pages/Accounts/Accounts";
 import Payment from "./pages/Payment.js";
 import NewWebLanding from "./pages/NewWebLanding";
@@ -24,7 +24,11 @@ function App() {
           <Route exact path="/payment" component={Payment} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/pricing" component={PricingPage} />
-          <Route exact path="/book-details" component={BookDetailsPage} />
+          <Route
+            exact
+            path="/book-details/:title"
+            component={BookDetailsPage}
+          />
           <Route exact path="/video-page" component={VideoWatchingPage} />
           <Route exact path="/text-page" component={TextReadingPage} />
           <Route exact path="/video" component={VideoWatchingPage} />

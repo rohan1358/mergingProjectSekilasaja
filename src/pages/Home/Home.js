@@ -21,7 +21,7 @@ import classNames from "classnames";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function Home() {
+export default function Home({history}) {
   const classes = MultiUseMobile();
   const books = useStyles();
 
@@ -136,6 +136,7 @@ export default function Home() {
         <BenefitsBlock />
         <div className={classes.extraSpace} />
         <CategoryBlock
+          history={history}
           title={"Temukan Kategori Kesukaan Kamu!"}
           products={products}
         />
