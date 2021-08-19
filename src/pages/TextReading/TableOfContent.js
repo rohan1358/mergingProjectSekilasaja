@@ -19,11 +19,6 @@ function TableOfchapterContent({
           chapter={chapter}
         ></ChapterButton>
       ))}
-      <ChapterButton>
-        chosenChapter={chosenChapter}
-        setChosenChapter={setChosenChapter}
-        chapter={chapter}
-      </ChapterButton>
     </div>
   );
 }
