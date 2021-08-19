@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Custom components
 import Typography from "../components/Typography";
 import MultiUseMobile from "../styles/MultiUseMobile";
 import Button from "../components/Button";
+import BookDetailsModal from "./BookDetails/BookDetailsModal";
 
 // Testing purposes
 
@@ -12,6 +13,16 @@ import { Container, Paper, Grid, TextField } from "@material-ui/core";
 
 export default function Payment() {
   const classes = MultiUseMobile();
+  const [openBookDetails, setBookDetailsOpen] = useState(false);
+
+  // function to handle modal open for login
+  const handleBookDetailsOpen = () => {
+    setBookDetailsOpen(true);
+  };
+  // function to handle modal close for login
+  const handleBookDetailsClose = () => {
+    setBookDetailsOpen(false);
+  };
 
   return (
     <Container maxWidth="sm">
@@ -113,9 +124,13 @@ export default function Payment() {
           <div className={classes.extraSpace} />
 
           <Grid item xs={12}>
-            <Button fullWidth round>
+            <Button fullWidth round onClick={handleBookDetailsOpen}>
               Bayar Sekarang
             </Button>
+            <BookDetailsModal
+              open={openBookDetails}
+              handleClose={handleBookDetailsClose}
+            />
           </Grid>
 
           <div className={classes.extraSpace} />

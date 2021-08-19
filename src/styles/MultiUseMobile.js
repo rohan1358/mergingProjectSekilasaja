@@ -62,7 +62,7 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   paddedContent: {
     padding: "40px",
-    paddingTop: "10px",
+    paddingTop: "20px",
   },
   normalText: {
     textTransform: "none",
