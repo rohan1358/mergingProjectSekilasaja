@@ -2,11 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\components",
-    "\\src\\components\\Login",
-    "\\src\\components\\SignUp",
-    "\\src\\pages"
+    "\\src\\firebase",
+    "\\src\\pages\\Home"
   ],
-  "SelectedNode": "\\src\\images",
+  "SelectedNode": "\\src\\firebase\\firebaseSignUp.js",
   "PreviewInSolutionExplorer": false
 }

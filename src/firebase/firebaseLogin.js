@@ -1,6 +1,6 @@
-import fire from "./fire";
+import db from "./fire";
 
-const auth = fire.auth();
+const auth = db.auth();
 
 export function login(email, password) {
     auth

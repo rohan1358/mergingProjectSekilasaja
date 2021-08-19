@@ -13,9 +13,10 @@ import DvrIcon from "@material-ui/icons/Dvr";
 import { Container } from "@material-ui/core";
 
 //firebase components
-import db from "../fire";
+import fire from ".././firebase/fire";
 
 export default function VideoWatchingPage() {
+    const db = fire.firestore();
   const classes = TextReadingStyle();
   const nav = NavbarStyle();
 

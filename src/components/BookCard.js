@@ -16,7 +16,7 @@ export default function BookCard(props) {
   const classes = useStyles();
   // const { link, product, onAdd } = props;
   const { link, product } = props;
-
+    console.log(product);
   return (
     <Grid item>
       {/* <Link onClick={() => onAdd(product)} underline="none" href={link}> */}
@@ -24,7 +24,7 @@ export default function BookCard(props) {
         <div className={classes.bookCover}>
           <div>
             <img
-              src={product.cover}
+              src={product.bookCoverImageLink}
               alt={product.title}
               className={
                 classes.imgRounded +
