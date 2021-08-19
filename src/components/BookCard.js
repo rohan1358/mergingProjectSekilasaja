@@ -16,7 +16,6 @@ export default function BookCard(props) {
   const classes = useStyles();
   // const { link, product, onAdd } = props;
   const { link, product } = props;
-    console.log(product);
   return (
     <Grid item>
       {/* <Link onClick={() => onAdd(product)} underline="none" href={link}> */}

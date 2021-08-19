@@ -44,14 +44,20 @@ export default function CategoryBlock(props) {
     const [books, setBooks] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
-            const results = await firebaseGetBooksByCategory.getBooksByCategory(chosenCategory);
+            var results = await firebaseGetBooksByCategory.getBooksByCategory(chosenCategory);
+            if (results) {
+                console.log("HERE!");
+                await results.forEach((doc) => {
+                    console.log(doc.author);
+                });
+            }
             setBooks(results);
         };
         fetchData();
     }, [chosenCategory]);
 
     console.log(books);
-
+ 
     return (
     <div>
     <div className={classes.title}>

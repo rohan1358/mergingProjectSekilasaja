@@ -7,7 +7,7 @@ export default class BookInfo {
         this.videoLink = videoLink;
         this.category = category;
         this.kilasan = kilasan;
-        this.ringkasanAkhir = ringkasanAkhir
+        this.ringkasanAkhir = ringkasanAkhir;
         this.bookCoverImageLink = bookCoverImageLink;
         this.bookDashboardImageLink = bookDashboardImageLink;
     }
