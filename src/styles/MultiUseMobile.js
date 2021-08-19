@@ -62,7 +62,7 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   paddedContent: {
     padding: "40px",
-    paddingTop: "10px",
+    paddingTop: "20px",
   },
   normalText: {
     textTransform: "none",
@@ -97,6 +97,13 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   sectionTitle: {
     borderBottom: "3px solid",
+  },
+  spaceBetween: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  paragraphSpace: {
+    marginTop: "30px",
   },
 }));
 

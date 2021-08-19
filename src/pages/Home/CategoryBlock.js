@@ -8,9 +8,15 @@ import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFil
 // Other components
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { selectBook, setBook } from "../../feature/bookSlice";
 
 //Import firebase function to get books based on filter
 import * as firebaseGetBooksByCategory from "../.././firebase/firebaseGetBooksByCategory.js";
+
+// Firebase components
+import fire from "../../firebase/fire";
 
 const responsive = {
   superLargeDesktop: {
@@ -33,30 +39,49 @@ const responsive = {
 };
 
 export default function CategoryBlock(props) {
-    const { products, title } = props;
-    const [chosenCategory, setChosenCategory] = useState("All");
-    // check the user chosen a category or not
-    const [isChosenCategory, setIsChosenCategory] = useState(false);
-    const classes = MultiUseMobile();
-    console.log(chosenCategory);
+    const db = fire.firestore();
 
     //Get books from firebase based on category
     const [books, setBooks] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            var results = await firebaseGetBooksByCategory.getBooksByCategory(chosenCategory);
-            if (results) {
-                console.log("HERE!");
-                await results.forEach((doc) => {
-                    console.log(doc.author);
-                });
-            }
-            setBooks(results);
-        };
-        fetchData();
-    }, [chosenCategory]);
+    const [chosenCategory, setChosenCategory] = useState("All");
+    const classes = MultiUseMobile();
+    const dispatch = useDispatch();
+    const { title, history } = props;
 
-    console.log(books);
+
+    // Check if the user has chosen a category or not
+    const [isChosenCategory, setIsChosenCategory] = useState(false);
+
+    const products = useSelector(selectBook);
+
+    //useEffect(() => {
+    //    const fetchData = async () => {
+    //        var results = await firebaseGetBooksByCategory.getBooksByCategory(chosenCategory);
+    //        setBooks(results);
+    //        dispatch(setBook(results));
+    //        setBook(results);
+    //    };
+    //    fetchData();
+        
+    //}, [chosenCategory]);
+
+     
+
+      useEffect(() => {
+        db.collection("books").onSnapshot((snapshot) => {
+          dispatch(
+            setBook(
+              snapshot.docs.map((doc) => ({
+                ...doc.data(),
+              }))
+            )
+          );
+        });
+      }, []);
+
+    console.log(products);
+
+    //console.log(books);
  
     return (
     <div>
@@ -68,52 +93,33 @@ export default function CategoryBlock(props) {
     setChosenCategory={setChosenCategory}
     setIsChosenCategory={setIsChosenCategory}
     ></CategoryBarFilter>
-
-    {isChosenCategory === true ? (
-    <Carousel
-        autoPlay={true}
-        autoPlaySpeed={1500}
-        ssr={true}
-        responsive={responsive}
-    >
-        {/*{products*/}
-        {/*.filter(*/}
-        {/*    (product) => product.categories.includes(chosenCategory) == true*/}
-        {/*)*/}
-        {/*.map((categorisedP_product) => (*/}
-        {/*    //console.log(categorisedPproduct)*/}
-        {/*    <BookCard*/}
-        {/*    key={categorisedP_product.id}*/}
-        {/*    product={categorisedP_product}*/}
-        {/*    link={"/book-details"}*/}
-        {/*    />*/}
-        {/*))}*/}
-        {books
-            .map((book) => (
-                //console.log(categorisedPproduct)
-                <BookCard
-                    key={book.title}
-                    product={book}
-                    link={"/book-details"}
-                />
+      {isChosenCategory === true ? (
+        <Carousel
+          autoPlay={true}
+          autoPlaySpeed={1500}
+          ssr={true}
+          responsive={responsive}
+        >
+          {products
+            .filter(
+              (product) => product.category.includes(chosenCategory) == true
+            )
+            .map((categorisedProduct, index) => (
+              <BookCard key={index} product={categorisedProduct} />
             ))}
-    </Carousel>
-    ) : (
-    <Carousel
-        autoPlay={true}
-        autoPlaySpeed={1500}
-        ssr={true}
-        responsive={responsive}
-    >
-        {products.map((product) => (
-        <BookCard
-            key={product.id}
-            product={product}
-            link={"/book-details"}
-        />
-        ))}
-    </Carousel>
-    )}
+        </Carousel>
+      ) : (
+        <Carousel
+          autoPlay={true}
+          autoPlaySpeed={1500}
+          ssr={true}
+          responsive={responsive}
+        >
+          {products.map((product) => (
+            <BookCard key={product.id} product={product} />
+          ))}
+        </Carousel>
+      )}
 
       {/* {products.map((product) => (
           <BookCard key={product.id} product={product} link={"/book-details"} />

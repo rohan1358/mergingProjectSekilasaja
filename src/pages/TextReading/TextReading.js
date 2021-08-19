@@ -1,39 +1,27 @@
 import React, { useState, useEffect } from "react";
 
 // Custom components
-import NavBarSecond from "../components/NavBar/NavBarSecond";
-import Drawer from "../components/Drawer";
-import TextReadingStyle from "../styles/TextReadingStyle";
-import NavbarStyle from "../styles/NavbarStyle";
-import TableOfContent from "../components/TableOfContent";
-import Typography from "../components/Typography";
+import NavBarSecond from "../../components/NavBar/NavBarSecond";
+import Drawer from "../../components/Drawer";
+import TextReadingStyle from "../../styles/TextReadingStyle";
+import NavbarStyle from "../../styles/NavbarStyle";
+import TableOfContent from "./TableOfContent";
+import Typography from "../../components/Typography";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
 import { Container } from "@material-ui/core";
 
 //firebase components
-import fire from ".././firebase/fire";
+import fire from "../.././firebase/fire";
 
 export default function VideoWatchingPage() {
     const db = fire.firestore();
   const classes = TextReadingStyle();
   const nav = NavbarStyle();
 
-  const [book, setBooks] = useState([]);
   const [content, setContent] = useState([]);
   const [chosenChapter, setChosenChapter] = useState("1");
-
-  useEffect(() => {
-    db.collection("books").onSnapshot((snapshot) => {
-      setBooks(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          book: doc.data(),
-        }))
-      );
-    });
-  }, []);
 
   useEffect(() => {
     db.collection("books")

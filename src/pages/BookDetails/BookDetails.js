@@ -8,6 +8,7 @@ import { Timelapse, EmojiObjects, PlayArrow } from "@material-ui/icons";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import Button from "../../components/Button";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -87,6 +88,16 @@ export default function BookDetails(props) {
               />
             </Grid>
 
+            <Grid container spacing={3}>
+              <Grid item>
+                <Button>Subscribe Now!</Button>
+              </Grid>
+
+              <Grid item>
+                <Button color="secondary">Add to cart</Button>
+              </Grid>
+            </Grid>
+
             <Grid item xs={12}>
               <div className={mobile.extraSpace} />
             </Grid>
@@ -140,6 +151,15 @@ export default function BookDetails(props) {
 
               <Typography type="bold">{descriptionTitle}</Typography>
               <Typography>{description}</Typography>
+              <Grid item xs={12}>
+                <Button fullWidth>Subscribe Now!</Button>
+              </Grid>
+
+              <Grid item xs={12}>
+                <Button fullWidth color="secondary">
+                  Add to cart
+                </Button>
+              </Grid>
             </div>
           </Grid>
 

@@ -1,6 +1,6 @@
 import React from "react";
-import ChapterButton from "../components/TextReading/ChapterButton";
-import TextReadingStyle from "../styles/TextReadingStyle";
+import ChapterButton from "./ChapterButton";
+import TextReadingStyle from "../../styles/TextReadingStyle";
 
 function TableOfContent({ content, chosenChapter, setChosenChapter }) {
   const classes = TextReadingStyle();

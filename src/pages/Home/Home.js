@@ -19,13 +19,6 @@ import { Container, Grid, Divider, makeStyles } from "@material-ui/core";
 // nodejs library to set properties for components
 import classNames from "classnames";
 
-//Import firebase for signUp function
-import fire from "../.././firebase/fire";
-import * as firebaseGetBookInfoByTitle from "../.././firebase/firebaseGetBookInfoByTitle.js";
-import * as firebaseGetBookDashboardImageURL from "../.././firebase/firebaseGetBookDashboardImageURL.js";
-import * as firebaseGetBookCoverImageURL from "../.././firebase/firebaseGetBookCoverImageURL.js";
-import * as firebaseGetBooksByCategory from "../.././firebase/firebaseGetBooksByCategory.js";
-
 const useStyles = makeStyles(InfoAreaStyle);
 
 const mobileStyles = makeStyles((theme) => ({
@@ -48,23 +41,7 @@ const mobileStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Home() {
-  //------------------FOR TESTING!!-------------------//
-    //const [a, setA] = useState("");
-    //const [b, setB] = useState([]);
-    //useEffect(() => {
-    //    const fetchData = async () => {
-    //        const result1 = await firebaseGetBooksByCategory.getBooksByCategory("Biography");
-    //        //const result = await firebaseGetBookInfoByTitle.getBookInfoByTitle("Elon Musk");
-    //        //setA(result);
-    //        setB(result1);
-    //    };
-    //    fetchData();
-    //}, []);
-    ////console.log(a);
-    //console.log(b);
-  //------------------FOR TESTING!!-------------------//
-
+export default function Home({ history }) {
   const mobile = mobileStyles();
   const classes = MultiUseMobile();
   const books = useStyles();
@@ -182,6 +159,7 @@ export default function Home() {
         <BenefitsBlock />
         <div className={classes.extraSpace} />
         <CategoryBlock
+          history={history}
           title={"Temukan Kategori Kesukaan Kamu!"}
           products={products}
         />

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //import firebase configuration
-import fire from "./firebase/fire.js";
+import fire from "./firebase/fire";
 
 // Custom pages
 import LoginPage from "./pages/Login";
@@ -13,8 +13,9 @@ import FourOFourPage from "./pages/404page";
 import PricingPage from "./pages/Pricing";
 import BookDetailsPage from "./pages/BookDetails/BookDetailsPage";
 import VideoWatchingPage from "./pages/VideoWatching";
-import TextReadingPage from "./pages/TextReading";
-import Accounts from "./pages/Accounts/Accounts";
+import TextReadingPage from "./pages/TextReading/TextReading";
+import AccountsPage from "./pages/Accounts/Accounts";
+import Payment from "./pages/Payment.js";
 import NewWebLanding from "./pages/NewWebLanding";
 
 // Routing componentns
@@ -26,15 +27,14 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          <PrivateRoute exact path="/accounts" component={Accounts} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/signup" component={SignUpPage} />
+          <Route exact path="/payment" component={Payment} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/pricing" component={PricingPage} />
-          {/* <Route exact path="/contact" component={Contact} />
-          <Route exact path="/pricing" component={PricingPage} />
-          <Route exact path="/book-details" component={BookDetailsPage} />
+          <Route
+            exact
+            path="/book-details/:title"
+            component={BookDetailsPage}
+          />
           <Route exact path="/video-page" component={VideoWatchingPage} />
           <Route exact path="/text-page" component={TextReadingPage} />
           <Route exact path="/video" component={VideoWatchingPage} />
