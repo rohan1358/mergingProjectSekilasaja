@@ -11,7 +11,7 @@ import Button from "../../components/Button";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // Firebase components
-import db from "../../fire";
+import db from "../../firebase/fire";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectBook, setBook } from "../../feature/bookSlice";

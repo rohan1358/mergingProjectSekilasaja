@@ -44,11 +44,3 @@ export default function BookCard({ product }) {
     </Grid>
   );
 }
-
-BookCard.propTypes = {
-  link: PropTypes.string,
-  cover: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-};

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //import firebase configuration
-import fire from "./fire.js";
+import fire from "./firebase/fire";
 
 // Custom pages
 import Contact from "./pages/Contact";

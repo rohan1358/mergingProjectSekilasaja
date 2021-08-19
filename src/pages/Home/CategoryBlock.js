@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectBook, setBook } from "../../feature/bookSlice";
 
 // Firebase components
-import db from "../../fire";
+import db from "../../firebase/fire";
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -35,27 +35,29 @@ const responsive = {
 };
 
 export default function CategoryBlock(props) {
-  const dispatch = useDispatch();
-  const {title, history } = props;
-  const [chosenCategory, setChosenCategory] = useState("All");
-  // check the user chosen a category or not
-  const [isChosenCategory, setIsChosenCategory] = useState(false);
   const classes = MultiUseMobile();
-  
+  const dispatch = useDispatch();
+  const { title, history } = props;
+  const [chosenCategory, setChosenCategory] = useState("All");
+
+  // Check if the user has chosen a category or not
+  const [isChosenCategory, setIsChosenCategory] = useState(false);
+
   const products = useSelector(selectBook);
 
   useEffect(() => {
-    db.collection("books")
-      .onSnapshot((snapshot) => {
-        dispatch(setBook(
+    db.collection("books").onSnapshot((snapshot) => {
+      dispatch(
+        setBook(
           snapshot.docs.map((doc) => ({
             ...doc.data(),
           }))
-        ))
-      });
+        )
+      );
+    });
   }, []);
 
-  console.log(products)
+  console.log(products);
 
   return (
     <div>
@@ -80,11 +82,7 @@ export default function CategoryBlock(props) {
               (product) => product.category.includes(chosenCategory) == true
             )
             .map((categorisedProduct, index) => (
-              <BookCard
-                key={index}
-                product={categorisedProduct}
-                link={"/book-details"}
-              />
+              <BookCard key={index} product={categorisedProduct} />
             ))}
         </Carousel>
       ) : (
@@ -95,10 +93,7 @@ export default function CategoryBlock(props) {
           responsive={responsive}
         >
           {products.map((product) => (
-            <BookCard
-              key={product.id}
-              product={product}
-            />
+            <BookCard key={product.id} product={product} />
           ))}
         </Carousel>
       )}

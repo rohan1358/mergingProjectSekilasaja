@@ -11,7 +11,7 @@ import SignUpModalDialog from "../SignUp/SignUpModalDialog";
 import { secondaryColor } from "../../styles/Style";
 
 //Import firebase for login function
-import fire from "../../fire";
+import fire from "../../firebase/fire";
 
 const useStyles = makeStyles((theme) => ({
   root: {

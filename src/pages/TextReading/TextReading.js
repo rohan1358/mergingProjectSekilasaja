@@ -13,7 +13,7 @@ import DvrIcon from "@material-ui/icons/Dvr";
 import { Container } from "@material-ui/core";
 
 //firebase components
-import db from "../../fire";
+import db from "../../firebase/fire";
 
 export default function VideoWatchingPage() {
   const classes = TextReadingStyle();

@@ -19,9 +19,12 @@ import { Container, Grid, Divider, makeStyles } from "@material-ui/core";
 // nodejs library to set properties for components
 import classNames from "classnames";
 
+// firebase components
+import firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
+
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function Home({history}) {
+export default function Home({ history }) {
   const classes = MultiUseMobile();
   const books = useStyles();
 

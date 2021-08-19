@@ -10,7 +10,7 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import LoginModalDialog from "../Login/LoginModalDialog";
 
 //Import firebase for signUp function
-import fire from "../../fire";
+import fire from "../../firebase/fire";
 
 const useStyles = makeStyles((theme) => ({
   root: {

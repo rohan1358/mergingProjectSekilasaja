@@ -10,7 +10,7 @@ import InfoStyle from "../../styles/InfoAreaStyle";
 import Button from "../../components/Button";
 
 //Import firebase for login function
-import fire from "../../fire";
+import fire from "../../firebase/fire";
 
 const useStyles = makeStyles(InfoStyle);
 
