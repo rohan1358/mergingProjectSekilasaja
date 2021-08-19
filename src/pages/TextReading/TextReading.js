@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 
 // Custom components
-import NavBarSecond from "../components/NavBar/NavBarSecond";
-import Drawer from "../components/Drawer";
-import TextReadingStyle from "../styles/TextReadingStyle";
-import NavbarStyle from "../styles/NavbarStyle";
-import TableOfContent from "../components/TableOfContent";
-import Typography from "../components/Typography";
+import NavBarSecond from "../../components/NavBar/NavBarSecond";
+import Drawer from "../../components/Drawer";
+import TextReadingStyle from "../../styles/TextReadingStyle";
+import NavbarStyle from "../../styles/NavbarStyle";
+import TableOfContent from "./TableOfContent";
+import Typography from "../../components/Typography";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
 import { Container } from "@material-ui/core";
 
 //firebase components
-import db from "../fire";
+import db from "../../fire";
 
 export default function VideoWatchingPage() {
   const classes = TextReadingStyle();
