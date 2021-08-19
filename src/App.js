@@ -30,7 +30,7 @@ function App() {
             component={BookDetailsPage}
           />
           <Route exact path="/video-page" component={VideoWatchingPage} />
-          <Route exact path="/text-page" component={TextReadingPage} />
+          <Route exact path="/text-page/:title" component={TextReadingPage} />
           <Route exact path="/video" component={VideoWatchingPage} />
           <Route exact path="/accounts" component={AccountsPage} />
           <Route exact path="/" component={Home} />

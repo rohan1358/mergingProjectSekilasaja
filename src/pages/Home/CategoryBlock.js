@@ -14,6 +14,7 @@ import { selectBook, setBook } from "../../feature/bookSlice";
 
 // Firebase components
 import db from "../../firebase/fire";
+
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
