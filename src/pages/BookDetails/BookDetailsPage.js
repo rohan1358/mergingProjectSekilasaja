@@ -69,7 +69,7 @@ const [isLoaded, setIsLoaded] = useState(false);
           descriptionTitle={"Tentang Apa?"}
           description={current_product[0].description }
           time={"15"}
-          num={"9"}
+          num={current_product_kilasan.length}
         />
 
         <TextDetails

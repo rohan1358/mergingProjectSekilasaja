@@ -90,7 +90,7 @@ export default function BookDetails(props) {
 
             <Grid container spacing={3}>
                 <Grid item>
-                  <Button>Subscribe Now!</Button>
+                  <Button>Read Now!</Button>
                 </Grid>
               
                 <Grid item>
