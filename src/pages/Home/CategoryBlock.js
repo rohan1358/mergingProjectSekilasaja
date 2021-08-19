@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 // Custom components
 import BookCard from "../../components/BookCard";
@@ -8,7 +8,12 @@ import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFil
 // Other components
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { selectBook, setBook } from "../../feature/bookSlice";
 
+// Firebase components
+import db from "../../fire";
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -30,12 +35,27 @@ const responsive = {
 };
 
 export default function CategoryBlock(props) {
-  const { products, title } = props;
-  const [chosenCategory, setChosenCategory] = useState("");
+  const dispatch = useDispatch();
+  const {title, history } = props;
+  const [chosenCategory, setChosenCategory] = useState("All");
   // check the user chosen a category or not
   const [isChosenCategory, setIsChosenCategory] = useState(false);
   const classes = MultiUseMobile();
-  console.log(chosenCategory);
+  
+  const products = useSelector(selectBook);
+
+  useEffect(() => {
+    db.collection("books")
+      .onSnapshot((snapshot) => {
+        dispatch(setBook(
+          snapshot.docs.map((doc) => ({
+            ...doc.data(),
+          }))
+        ))
+      });
+  }, []);
+
+  console.log(products)
 
   return (
     <div>
@@ -57,13 +77,12 @@ export default function CategoryBlock(props) {
         >
           {products
             .filter(
-              (product) => product.categories.includes(chosenCategory) == true
+              (product) => product.category.includes(chosenCategory) == true
             )
-            .map((categorisedP_product) => (
-              //console.log(categorisedPproduct)
+            .map((categorisedProduct, index) => (
               <BookCard
-                key={categorisedP_product.id}
-                product={categorisedP_product}
+                key={index}
+                product={categorisedProduct}
                 link={"/book-details"}
               />
             ))}
@@ -79,7 +98,6 @@ export default function CategoryBlock(props) {
             <BookCard
               key={product.id}
               product={product}
-              link={"/book-details"}
             />
           ))}
         </Carousel>
