@@ -11,7 +11,7 @@ import Button from "../../components/Button";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // Firebase components
-import db from "../../firebase/fire";
+import fire from "../../firebase/fire";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectBook, setBook } from "../../feature/bookSlice";
@@ -20,6 +20,7 @@ import { selectBook, setBook } from "../../feature/bookSlice";
 import { Container } from "@material-ui/core";
 
 export default function BookDetailsPage({ match, history }) {
+  const db = fire.firestore();
   const classes = MultiUseMobile();
   const dispatch = useDispatch();
   const products = useSelector(selectBook);
