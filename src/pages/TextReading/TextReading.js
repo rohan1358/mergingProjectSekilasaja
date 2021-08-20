@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useLayoutEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 
 // Custom components
 import NavBarSecond from "../../components/NavBar/NavBarSecond";
@@ -29,14 +29,12 @@ export default function VideoWatchingPage({ match, history }) {
   const [chosenChapter, setChosenChapter] = useState(1);
 
   const handleNext = () => {
-    if(chosenChapter === (chapterContent.length)) {
-      setChosenChapter(1)
+    if (chosenChapter === chapterContent.length) {
+      setChosenChapter(1);
+    } else {
+      setChosenChapter(chosenChapter + 1);
     }
-    else{
-      setChosenChapter(chosenChapter + 1)
-    }
-  }
-
+  };
 
   useEffect(() => {
     db.collection("books")
@@ -125,13 +123,18 @@ export default function VideoWatchingPage({ match, history }) {
         )}
       </Container>
 
-      <AppBar position="fixed" className={classes.audioBar}>
-        <Toolbar>
-          <Button onClick={handleNext}>
-                  Next
-                </Button>
-        </Toolbar>
-      </AppBar>
+      <div className={classes.extraSpace}>
+        <AppBar color="white" position="fixed" className={classes.audioBar}>
+          <Container>
+            <Toolbar>
+              <div className={classes.rootBar} />
+              <Button color="transparent" onClick={handleNext}>
+                <Typography type="bold">Next ►</Typography>
+              </Button>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </div>
     </div>
   );
 }

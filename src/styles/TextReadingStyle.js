@@ -74,16 +74,22 @@ const TextReadingStyle = makeStyles((theme) => ({
     marginTop: "40px",
   },
   audioBar: {
-    top: 'auto',
-    bottom: 0
+    top: "auto",
+    bottom: 0,
   },
   audio: {
-      background: 'none',
-      "&:-webkit-media-controls-play-button": {
-        backgroundColor: secondaryColor,
-        color: "white",
-      },
-  }
+    background: "none",
+    "&:-webkit-media-controls-play-button": {
+      backgroundColor: secondaryColor,
+      color: "white",
+    },
+  },
+  extraSpace: {
+    marginTop: "50px",
+  },
+  rootBar: {
+    flexGrow: 1,
+  },
 }));
 
 export default TextReadingStyle;

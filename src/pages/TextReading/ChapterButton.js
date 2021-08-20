@@ -8,7 +8,7 @@ import classNames from "classnames";
 
 function ChapterButton({ chosenChapter, setChosenChapter, chapter }) {
   const classes = TextReadingStyle();
-  console.log(chapter)
+  console.log(chapter);
   const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,9 @@ function ChapterButton({ chosenChapter, setChosenChapter, chapter }) {
       className={btnClass}
     >
       {/* {"Kilas #" + chapter.id + " : " + chapter.content.title} */}
-      {(chapter.content.title === undefined) ? ("Ringkasan") :("Kilas #" + chapter.content.kilas + " : " + chapter.content.title)}
+      {chapter.content.title === undefined
+        ? "Ringkasan Akhir"
+        : "Kilas #" + chapter.content.kilas + " : " + chapter.content.title}
     </div>
   );
 }
