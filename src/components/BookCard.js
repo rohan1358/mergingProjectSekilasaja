@@ -14,13 +14,13 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function BookCard({product}) {
+export default function BookCard({ product }) {
   const classes = useStyles();
   return (
     <Grid item>
       {/* <Link onClick={() => onAdd(product)} underline="none" href={link}> */}
-      <Link  underline="none" href={`book-details/${product.book_title}`}>
-        <div className={classes.bookCover} >
+      <Link underline="none" href={`book-details/${product.book_title}`}>
+        <div className={classes.bookCover}>
           <div>
             <img
               src={RdpdCover}

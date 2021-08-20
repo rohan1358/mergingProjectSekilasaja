@@ -6,28 +6,28 @@ const CategoriesStyle = makeStyles((theme) => ({
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
-        display: "flex",
-        justifyContent: "space-between",
-        textAlign: "center",
-      },
+      display: "flex",
+      justifyContent: "space-between",
+      textAlign: "center",
+    },
   },
   // small: 600px; md, medium: 960px; lg, large: 1280px
   sectionMobile: {
     display: "block",
     textAlign: "center",
     [theme.breakpoints.up("md")]: {
-        display: "none",
-      },
+      display: "none",
+    },
   },
   text: {
-      margin: "auto 5px",
+    margin: "auto 5px",
   },
   button: {
     display: "flex",
     justifyContent: "center",
     textAlign: "center",
     marginBottom: "5px",
-    border: "solid 1px black",
+    border: "solid 1px #41444B",
     borderRadius: "5px",
     padding: "10px 20px",
     textTransform: "uppercase",
@@ -35,7 +35,7 @@ const CategoriesStyle = makeStyles((theme) => ({
     fontSize: "12px",
     cursor: "pointer",
     "&:hover": {
-      background: "gray", //41444b
+      background: "#41444B", //41444b
       color: "white",
     },
   },
