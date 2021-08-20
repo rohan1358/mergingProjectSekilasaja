@@ -16,6 +16,7 @@ const useStyles = makeStyles(InfoAreaStyle);
 
 export default function BookCard({ product }) {
   const classes = useStyles();
+  // const { link, product, onAdd } = props;
   return (
     <Grid item>
       {/* <Link onClick={() => onAdd(product)} underline="none" href={link}> */}

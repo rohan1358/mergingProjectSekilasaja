@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import fire from "./firebase/fire";
 
 // Custom pages
+import LoginPage from "./pages/Login";
+import SignUpPage from "./pages/SignUp";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home/Home";
 import FourOFourPage from "./pages/404page";
@@ -16,9 +18,13 @@ import AccountsPage from "./pages/Accounts/Accounts";
 import Payment from "./pages/Payment.js";
 import NewWebLanding from "./pages/NewWebLanding";
 
+// Routing componentns
+import PrivateRoute from "./components/Routing/PrivateRoute";
+import { AuthProvider } from "./components/Routing/Auth";
+
 function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <Router>
         <Switch>
           <Route exact path="/payment" component={Payment} />
@@ -34,11 +40,11 @@ function App() {
           <Route exact path="/video" component={VideoWatchingPage} />
           <Route exact path="/accounts" component={AccountsPage} />
           <Route exact path="/" component={Home} />
-          <Route component={FourOFourPage} />
+          <Route component={FourOFourPage} /> */}
           {/* <Route component={NewWebLanding} /> */}
         </Switch>
       </Router>
-    </div>
+    </AuthProvider>
   );
 }
 

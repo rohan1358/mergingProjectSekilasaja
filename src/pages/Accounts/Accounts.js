@@ -8,6 +8,9 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import SubscriptionPlan from "./SubscriptionPlan";
 
+// firebase components
+import fire from "../.././firebase/fire";
+
 // Material-UI components
 import { Container, Paper, Divider, TextField } from "@material-ui/core";
 
@@ -93,7 +96,11 @@ export default function AccountsPage() {
           <div className={classes.extraSpace} />
 
           <div className={classes.center}>
-            <Button round color="secondary">
+            <Button
+              onClick={() => fire.auth().signOut()}
+              round
+              color="secondary"
+            >
               Log out
             </Button>
           </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Book from "../../images/book.png";
 
 // Custom components
@@ -21,21 +21,44 @@ import classNames from "classnames";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
+const mobileStyles = makeStyles((theme) => ({
+  // small: 600px; md, medium: 960px; lg, large: 1280px
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+  // small: 600px; md, medium: 960px; lg, large: 1280px
+  sectionMobile: {
+    display: "flex",
+    marginTop: "40px",
+    textAlign: "center",
+    justifyContent: "center",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+}));
+
 export default function Home({ history }) {
+  const mobile = mobileStyles();
   const classes = MultiUseMobile();
   const books = useStyles();
 
   const mobileClass = classNames({
-    [classes.sectionMobile]: true,
+    [mobile.sectionMobile]: true,
   });
   const desktopClass = classNames({
-    [classes.sectionDesktop]: true,
+    [mobile.sectionDesktop]: true,
   });
 
   // Add to Cart Feature
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
+    function updateA() {
 
+    }
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -77,7 +100,7 @@ export default function Home({ history }) {
             <Typography size="heading">
               Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
             </Typography>
-            <Button href="/" round color="primary">
+            <Button href="/signup" round color="primary">
               Daftar Sekarang
             </Button>
           </Grid>

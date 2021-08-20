@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
 // Custom components
 import BookCard from "../../components/BookCard";
@@ -11,6 +11,9 @@ import "react-multi-carousel/lib/styles.css";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectBook, setBook } from "../../feature/bookSlice";
+
+//Import firebase function to get books based on filter
+import * as firebaseGetBooksByCategory from "../.././firebase/firebaseGetBooksByCategory.js";
 
 // Firebase components
 import fire from "../../firebase/fire";
@@ -71,8 +74,7 @@ export default function CategoryBlock(props) {
         chosenCategory={chosenCategory}
         setChosenCategory={setChosenCategory}
         setIsChosenCategory={setIsChosenCategory}
-      />
-
+      ></CategoryBarFilter>
       {isChosenCategory === true ? (
         <Carousel
           autoPlay={true}
@@ -100,50 +102,6 @@ export default function CategoryBlock(props) {
           ))}
         </Carousel>
       )}
-
-      {/* {products.map((product) => (
-          <BookCard key={product.id} product={product} link={"/book-details"} />
-        ))} */}
     </div>
-    // <div>
-    // <div className={classes.title}>
-    //   <Typography size="heading">{title}</Typography>
-    // </div>
-
-    //   <div className={classes.sectionDesktop}>
-    // <Grid
-    //   container
-    //   direction="row"
-    //   justifyContent="space-around"
-    //   alignItems="center"
-    //   spacing={3}
-    // >
-    // {products.map((product) => (
-    //   <BookCard
-    //     key={product.id}
-    //     product={product}
-    //     link={"/book-details"}
-    //   />
-    // ))}
-    //     </Grid>
-    //   </div>
-
-    //   <div className={classes.sectionMobile}>
-    //     <Grid
-    //       container
-    //       direction="column"
-    //       justifyContent="space-between"
-    //       alignItems="center"
-    //     >
-    //       {products.map((product) => (
-    //         <BookCard
-    //           key={product.id}
-    //           product={product}
-    //           link={"/book-details"}
-    //         />
-    //       ))}
-    //     </Grid>
-    //   </div>
-    // </div>
   );
 }

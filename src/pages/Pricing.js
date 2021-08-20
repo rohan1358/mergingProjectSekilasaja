@@ -7,27 +7,12 @@ import Button from "../components/Button";
 import MultiUseMobile from "../styles/MultiUseMobile";
 import NavBar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
-import SignUpModalDialog from "../components/SignUp/SignUpModalDialog";
 
 // Material-UI components
 import { Container, Grid, Paper } from "@material-ui/core";
 
 export default function PricingPage() {
   const classes = MultiUseMobile();
-
-  // FOR SIGNUP MODAL AND LOGIN MODAL
-  // Declare a new state variable for modal open for signup and login
-  const [openSignUp, setSignUpOpen] = useState(false);
-
-  // function to handle modal open for signup
-  const handleSignUpOpen = () => {
-    setSignUpOpen(true);
-  };
-
-  // function to handle modal close for signup
-  const handleSignUpClose = () => {
-    setSignUpOpen(false);
-  };
 
   return (
     <div>
@@ -125,12 +110,15 @@ export default function PricingPage() {
                   <Button className={classes.pricingButton} color="secondary">
                     <div className={classes.block}>
                       <Typography
-                        className={classes.beigeText}
+                        style={{ color: "#FFFEF8", textTransform: "none" }}
                         size="subheading"
                       >
                         Rp. 10.000 / Kilas
                       </Typography>
-                      <Typography type="italic" className={classes.beigeText}>
+                      <Typography
+                        style={{ color: "#FFFEF8", textTransform: "none" }}
+                        type="italic"
+                      >
                         Loren Ipsum Ngoman Balato Porche
                       </Typography>
                     </div>
@@ -152,7 +140,7 @@ export default function PricingPage() {
 
       {/* If logged in, remove this button */}
       <div className={classes.center}>
-        <Button round color="primary">
+        <Button href="/signup" round color="primary">
           Daftar Sekarang
         </Button>
       </div>

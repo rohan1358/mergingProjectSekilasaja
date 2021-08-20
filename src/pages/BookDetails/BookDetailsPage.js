@@ -23,6 +23,7 @@ import { Container, Divider } from "@material-ui/core";
 const db = fire.firestore();
 
 export default function BookDetailsPage({ match, history }) {
+  const db = fire.firestore();
   const classes = MultiUseMobile();
   const dispatch = useDispatch();
   const products = useSelector(selectBook);
