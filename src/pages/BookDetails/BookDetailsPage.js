@@ -11,13 +11,16 @@ import VideoComponent from "../../components/VidPageComponent";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // Firebase components
-import db from "../../firebase/fire";
+import fire from "../../firebase/fire";
+
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectBook, setBook } from "../../feature/bookSlice";
 
 // Material-UI components
 import { Container, Divider } from "@material-ui/core";
+
+const db = fire.firestore();
 
 export default function BookDetailsPage({ match, history }) {
   const classes = MultiUseMobile();

@@ -6,6 +6,9 @@ import CategoriesStyle from "../../styles/CategoriesStyle";
 //nodejs library to set properties for components
 import classNames from "classnames";
 
+// Material UI components
+import { Grid } from "@material-ui/core";
+
 function CategoryButton({
   chosenCategory,
   categoryName,
@@ -26,18 +29,20 @@ function CategoryButton({
     [`${classes.selectedButton}`]: isSelected,
   });
   return (
-    <div
-      className={btnClass}
-      color="secondary"
-      onClick={(e) => {
-        e.preventDefault();
-        setChosenCategory(categoryName);
-        setIsChosenCategory(true);
-      }}
-    >
-      <BusinessIcon />
-      <div className={classes.text}>{categoryName}</div>
-    </div>
+    <Grid item>
+      <div
+        className={btnClass}
+        color="secondary"
+        onClick={(e) => {
+          e.preventDefault();
+          setChosenCategory(categoryName);
+          setIsChosenCategory(true);
+        }}
+      >
+        <BusinessIcon />
+        <div className={classes.text}>{categoryName}</div>
+      </div>
+    </Grid>
   );
 }
 

@@ -10,6 +10,6 @@ var firebaseConfig = {
 };
 
 const fire = firebase.initializeApp(firebaseConfig);
-const db = fire.firestore();
+// const db = fire.firestore();
 
-export default db;
+export default fire;

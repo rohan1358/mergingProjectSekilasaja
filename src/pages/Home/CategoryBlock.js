@@ -13,7 +13,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectBook, setBook } from "../../feature/bookSlice";
 
 // Firebase components
-import db from "../../firebase/fire";
+import fire from "../../firebase/fire";
+
+const db = fire.firestore();
 
 const responsive = {
   superLargeDesktop: {
@@ -69,7 +71,7 @@ export default function CategoryBlock(props) {
         chosenCategory={chosenCategory}
         setChosenCategory={setChosenCategory}
         setIsChosenCategory={setIsChosenCategory}
-      ></CategoryBarFilter>
+      />
 
       {isChosenCategory === true ? (
         <Carousel
