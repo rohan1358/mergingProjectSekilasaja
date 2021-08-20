@@ -105,6 +105,9 @@ const MultiUseMobile = makeStyles((theme) => ({
   paragraphSpace: {
     marginTop: "30px",
   },
+  iconColor: {
+    color: secondaryColor,
+  },
 }));
 
 export default MultiUseMobile;

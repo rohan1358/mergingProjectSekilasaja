@@ -31,7 +31,11 @@ export default function PricingPage() {
                 <Typography>✔ Lorem ipsum dolor sit amet</Typography>
                 <Typography>✔ Lorem ipsum dolor sit amet</Typography>
                 <div>
-                  <Button className={classes.pricingButton} color="primary">
+                  <Button
+                    href="/payment"
+                    className={classes.pricingButton}
+                    color="primary"
+                  >
                     <div className={classes.block}>
                       <Typography
                         className={classes.normalText}
@@ -46,7 +50,11 @@ export default function PricingPage() {
                   </Button>
                 </div>
                 <div>
-                  <Button className={classes.pricingButton} color="primary">
+                  <Button
+                    href="/payment"
+                    className={classes.pricingButton}
+                    color="primary"
+                  >
                     <div className={classes.block}>
                       <Typography
                         className={classes.normalText}
@@ -61,7 +69,11 @@ export default function PricingPage() {
                   </Button>
                 </div>
                 <div>
-                  <Button className={classes.pricingButton} color="primary">
+                  <Button
+                    href="/payment"
+                    className={classes.pricingButton}
+                    color="primary"
+                  >
                     <div className={classes.block}>
                       <Typography
                         className={classes.normalText}
@@ -76,7 +88,11 @@ export default function PricingPage() {
                   </Button>
                 </div>
                 <div>
-                  <Button className={classes.pricingButton} color="primary">
+                  <Button
+                    href="/payment"
+                    className={classes.pricingButton}
+                    color="primary"
+                  >
                     <div className={classes.block}>
                       <Typography
                         className={classes.normalText}
@@ -107,7 +123,11 @@ export default function PricingPage() {
                 <Typography>✔ Lorem ipsum dolor sit amet</Typography>
 
                 <div>
-                  <Button className={classes.pricingButton} color="secondary">
+                  <Button
+                    href="/library"
+                    className={classes.pricingButton}
+                    color="secondary"
+                  >
                     <div className={classes.block}>
                       <Typography
                         style={{ color: "#FFFEF8", textTransform: "none" }}

@@ -49,6 +49,16 @@ export default function Payment() {
 
             <div className={classes.extraSpace} />
             <div className={classes.spaceBetween}>
+              <TextField
+                style={{ marginRight: "5px" }}
+                id="filled-basic"
+                label="Kode Promo"
+                variant="filled"
+                fullWidth
+              />
+              <Button>Apply</Button>
+            </div>
+            <div className={classes.spaceBetween}>
               <Typography size="subheading">TOTAL</Typography>
               <Typography size="subheading">Rp. 69,000</Typography>
             </div>

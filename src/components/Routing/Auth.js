@@ -15,9 +15,9 @@ export const AuthProvider = ({ children }) => {
   const [pending, setPending] = useState(true);
 
   useEffect(() => {
-      fire.auth().onAuthStateChanged((user) => {
-          setCurrentUser(user);
-          setPending(false);
+    fire.auth().onAuthStateChanged((user) => {
+      setCurrentUser(user);
+      setPending(false);
     });
   }, []);
 
