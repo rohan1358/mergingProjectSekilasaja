@@ -2,15 +2,14 @@ import React from "react";
 import ChapterButton from "./ChapterButton";
 import TextReadingStyle from "../../styles/TextReadingStyle";
 
-function TableOfchapterContent({
+function TableOfContent({
   chapterContent,
   chosenChapter,
   setChosenChapter,
-  conclusion,
 }) {
   const classes = TextReadingStyle();
   return (
-    <div className={classes.tableOfchapterContent}>
+    <div className={classes.tableOfContent}>
       {chapterContent.map((chapter, index) => (
         <ChapterButton
           chosenChapter={chosenChapter}
@@ -19,8 +18,13 @@ function TableOfchapterContent({
           chapter={chapter}
         ></ChapterButton>
       ))}
+      {/* <ChapterButton
+          chosenChapter={chosenChapter}
+          setChosenChapter={setChosenChapter}
+          chapter={conclusion}
+        ></ChapterButton> */}
     </div>
   );
 }
 
-export default TableOfchapterContent;
+export default TableOfContent;

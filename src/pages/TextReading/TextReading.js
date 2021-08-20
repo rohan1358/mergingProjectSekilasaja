@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 
 // Custom components
 import NavBarSecond from "../../components/NavBar/NavBarSecond";
@@ -11,6 +11,10 @@ import Typography from "../../components/Typography";
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
 import { Container } from "@material-ui/core";
+import Button from "../../components/Button";
+// Material-UI components
+import { AppBar, Toolbar, IconButton } from "@material-ui/core";
+import HomeIcon from "@material-ui/icons/Home";
 
 //firebase components
 import fire from "../../firebase/fire";
@@ -22,40 +26,34 @@ export default function VideoWatchingPage({ match, history }) {
 
   const classes = TextReadingStyle();
   const nav = NavbarStyle();
-
+  const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
   const [chapterContent, setChapterContent] = useState([]);
-  const [conclusion, setConclusion] = useState([]);
-  const [chosenChapter, setChosenChapter] = useState("1");
+  const [chosenChapter, setChosenChapter] = useState(1);
+
+  const handleNext = () => {
+    if (chosenChapter === chapterContent.length) {
+      setChosenChapter(1);
+    } else {
+      setChosenChapter(chosenChapter + 1);
+    }
+  };
 
   useEffect(() => {
     db.collection("books")
       .doc(match.params.title)
       .collection("kilasan")
+      .orderBy("kilas")
       .onSnapshot((snapshot) => {
         setChapterContent(
           snapshot.docs.map((doc) => ({
             id: doc.id,
-            chapterContent: doc.data(),
+            content: doc.data(),
           }))
         );
       });
   }, []);
 
-  useEffect(() => {
-    db.collection("books")
-      .doc(match.params.title)
-      .collection("ringkasan_akhir")
-      .onSnapshot((snapshot) => {
-        setConclusion(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            chapterContent: doc.data(),
-          }))
-        );
-      });
-  }, []);
-
-  console.log(chapterContent);
+  console.log(chapterContent.length);
 
   return (
     <div>
@@ -84,29 +82,61 @@ export default function VideoWatchingPage({ match, history }) {
               <div className={classes.book_title}>
                 <Typography size="heading">{match.params.title}</Typography>
               </div>
-              <div className={classes.title}>
-                <Typography type="italic" size="bold">
-                  Kilas #{chapterContent[chosenChapter - 1].id}
-                </Typography>
-              </div>
-              <div className={classes.title}>
-                <Typography size="subheading">
-                  {chapterContent[chosenChapter - 1].chapterContent.title}
-                </Typography>
-              </div>
-              <div className={classes.chapterContent}>
-                {chapterContent[chosenChapter - 1].chapterContent.details.map(
-                  (paragraph, index) => (
-                    <Typography className={classes.paragraph}>
-                      {paragraph}
+              {chosenChapter === chapterContent.length ? (
+                <div>
+                  <div className={classes.title}>
+                    <Typography size="subheading">{"Conclusion"}</Typography>
+                  </div>
+                  <div className={classes.chapterContent}>
+                    {chapterContent[
+                      chapterContent.length - 1
+                    ].content.details.map((paragraph, index) => (
+                      <Typography className={classes.paragraph}>
+                        {paragraph}
+                      </Typography>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <div className={classes.title}>
+                    <Typography type="italic" size="bold">
+                      Kilas #{chapterContent[chosenChapter - 1].id}
                     </Typography>
-                  )
-                )}
-              </div>
+                  </div>
+                  <div className={classes.title}>
+                    <Typography size="subheading">
+                      {chapterContent[chosenChapter - 1].content.title}
+                    </Typography>
+                  </div>
+                  <div className={classes.chapterContent}>
+                    {chapterContent[chosenChapter - 1].content.details.map(
+                      (paragraph, index) => (
+                        <Typography className={classes.paragraph}>
+                          {paragraph}
+                        </Typography>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
       </Container>
+
+      <div className={classes.extraSpace}>
+        <AppBar color="white" position="fixed" className={classes.audioBar}>
+          <Container>
+            <Toolbar>
+              <div className={classes.rootBar} />
+              <Button color="transparent" onClick={handleNext}>
+                <Typography type="bold">Next ►</Typography>
+              </Button>
+            </Toolbar>
+          </Container>
+        </AppBar>
+      </div>
     </div>
   );
 }
