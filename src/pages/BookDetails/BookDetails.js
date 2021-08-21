@@ -96,7 +96,9 @@ export default function BookDetails(props) {
               </Grid>
 
               <Grid item>
-                <Button color="secondary">Watch now!</Button>
+                <Button href={"/video"} color="secondary">
+                  Watch now!
+                </Button>
               </Grid>
             </Grid>
 
@@ -159,7 +161,7 @@ export default function BookDetails(props) {
                 </Button>
               </Grid>
               <Grid item xs={12}>
-                <Button fullWidth color="secondary">
+                <Button href={"/video"} fullWidth color="secondary">
                   Watch now!
                 </Button>
               </Grid>

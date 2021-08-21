@@ -136,7 +136,7 @@ export default function TextReading({ match, history }) {
             </Toolbar> */}
 
             <AudioPlayer
-              vidLink="https://storage.googleapis.com/media-session/elephants-dream/the-wires.mp3"
+              vidLink="https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Cover_Images%2Frdpd.mp3?alt=media&token=4a6b3d53-7cd1-4a1c-8858-be5c83d698ac"
               button={
                 <Button color="transparent" onClick={handleNext}>
                   <Typography type="bold">Next ►</Typography>
