@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -10,12 +10,14 @@ import SubscriptionPlan from "./SubscriptionPlan";
 
 // firebase components
 import fire from "../.././firebase/fire";
+import { AuthContext } from "../../components/Routing/Auth";
 
 // Material-UI components
 import { Container, Paper, Divider, TextField } from "@material-ui/core";
 
 export default function AccountsPage() {
   const classes = MultiUseMobile();
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <div>
@@ -39,6 +41,7 @@ export default function AccountsPage() {
 
           <Typography size="subheading">Profil</Typography>
           <TextField
+            defaultValue={""}
             className={classes.textFieldRoot}
             id="filled-basic"
             label="First Name"
@@ -53,6 +56,8 @@ export default function AccountsPage() {
             fullWidth
           />
           <TextField
+            disabled
+            defaultValue={currentUser.email}
             className={classes.textFieldRoot}
             id="filled-basic"
             label="Email"
@@ -60,6 +65,8 @@ export default function AccountsPage() {
             fullWidth
           />
           <TextField
+            disabled
+            defaultValue={currentUser.phoneNumber}
             className={classes.textFieldRoot}
             id="filled-basic"
             label="Phone Number"

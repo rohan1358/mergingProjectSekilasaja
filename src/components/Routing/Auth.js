@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import fire from "../.././firebase/fire";
 
 // custom components
-import Typography from "../Typography";
 import Loading from "../../pages/Loading";
-
-// Material UI Components
-import { Container } from "@material-ui/core";
 
 export const AuthContext = React.createContext();
 
