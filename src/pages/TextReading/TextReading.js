@@ -10,18 +10,18 @@ import Typography from "../../components/Typography";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
-import { Container } from "@material-ui/core";
+import { Container, AppBar, Toolbar } from "@material-ui/core";
+
+// Custom components
 import Button from "../../components/Button";
-// Material-UI components
-import { AppBar, Toolbar, IconButton } from "@material-ui/core";
-import HomeIcon from "@material-ui/icons/Home";
+import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 
 //firebase components
 import fire from "../../firebase/fire";
 
 const db = fire.firestore();
 
-export default function VideoWatchingPage({ match, history }) {
+export default function TextReading({ match, history }) {
   console.log(match);
 
   const classes = TextReadingStyle();

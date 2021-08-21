@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Book from "../../images/book.png";
+import BookMobile from "../../images/home-mobile.png";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -12,6 +13,7 @@ import NavBar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import data from "../../data/bookData";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
+import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 
 // Material-UI components
 import { Container, Grid, Divider, makeStyles } from "@material-ui/core";
@@ -56,9 +58,7 @@ export default function Home({ history }) {
   // Add to Cart Feature
   const { products } = data;
   const [cartItems, setCartItems] = useState([]);
-    function updateA() {
-
-    }
+  function updateA() {}
   const onAdd = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist) {
@@ -104,8 +104,8 @@ export default function Home({ history }) {
               Daftar Sekarang
             </Button>
           </Grid>
-          <Grid item xs={2} />
-          <Grid item xs={4}>
+          <Grid item xs={1} />
+          <Grid item xs={5}>
             <img
               src={Book}
               className={
@@ -124,7 +124,7 @@ export default function Home({ history }) {
         <Grid container>
           <Grid item xs={12}>
             <img
-              src={Book}
+              src={BookMobile}
               className={
                 books.imgRounded +
                 " " +
@@ -145,15 +145,8 @@ export default function Home({ history }) {
               </Button>
             </Container>
           </Grid>
-
-          <Grid item xs={12}>
-            <div className={classes.extraSpace} />
-            <Divider className={classes.dividerColor} />
-          </Grid>
         </Grid>
       </div>
-
-      <div className={classes.extraSpace} />
 
       <Container>
         <BenefitsBlock />
@@ -163,6 +156,7 @@ export default function Home({ history }) {
           title={"Temukan Kategori Kesukaan Kamu!"}
           products={products}
         />
+        <AudioPlayer vidLink="https://storage.googleapis.com/media-session/elephants-dream/the-wires.mp3" />
       </Container>
       <Footer />
     </div>
