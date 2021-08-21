@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import BookCover from "../../images/rdpd.jpg";
 
 // Custom components
@@ -10,9 +10,9 @@ import Typography from "../../components/Typography";
 import VideoComponent from "../../components/VidPageComponent";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
-// Firebase components
-import fire from "../../firebase/fire";
-
+//Import firebase function to get user based on userid
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
+import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectBook, setBook } from "../../feature/bookSlice";
@@ -20,21 +20,26 @@ import { selectBook, setBook } from "../../feature/bookSlice";
 // Material-UI components
 import { Container, Divider } from "@material-ui/core";
 
-const db = fire.firestore();
+// Auth and fire
+import { AuthContext } from "../../components/Routing/Auth";
+// Firebase components
+import fire from "../../firebase/fire";
+const firestore = fire.firestore();
 
 export default function BookDetailsPage({ match, history }) {
-  const db = fire.firestore();
+  const firestore = fire.firestore();
   const classes = MultiUseMobile();
   const dispatch = useDispatch();
   const products = useSelector(selectBook);
   const [current_product, setCurrent_Product] = useState([]);
   const [current_product_kilasan, setCurrent_Product_Kilasan] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-
-  console.log(match.params.title);
+  const [cartItems, setCartItems] = useState([]);
+  const { currentUser } = useContext(AuthContext);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    db.collection("books").onSnapshot((snapshot) => {
+    firestore.collection("books").onSnapshot((snapshot) => {
       dispatch(
         setBook(
           snapshot.docs.map((doc) => ({
@@ -44,7 +49,8 @@ export default function BookDetailsPage({ match, history }) {
       );
     });
 
-    db.collection("books")
+    firestore
+      .collection("books")
       .doc(match.params.title)
       .collection("kilasan")
       .onSnapshot((snapshot) => {
@@ -54,6 +60,18 @@ export default function BookDetailsPage({ match, history }) {
           }))
         );
       });
+
+    if (currentUser !== null) {
+      const fetchData = async () => {
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
+        setUserData(results);
+      };
+      fetchData();
+    } else {
+      console.log("You are not logged in!");
+    }
   }, []);
 
   useEffect(() => {
@@ -62,24 +80,55 @@ export default function BookDetailsPage({ match, history }) {
     );
   }, [products]);
 
+  useEffect(() => {});
+
+  const onAdd = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
+    }
+  };
+  const onRemove = (product) => {
+    const exist = cartItems.find((x) => x.id === product.id);
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== product.id));
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+    }
+  };
+
   return (
     <div>
-      <NavBar />
+      <NavBar cartItems={cartItems} onRemove={onRemove} />
       {(current_product_kilasan.length !== 0 &&
         current_product.length !== 0) === true && (
         <Container>
           <BookDetails
             cover={BookCover}
+            product={current_product[0]}
+            onAdd={onAdd}
+            currentUser={currentUser}
+            userData={userData}
             title={current_product[0].book_title}
             author={current_product[0].author}
             descriptionTitle={"Tentang Apa?"}
             description={current_product[0].description}
             time={"15"}
-            num={current_product_kilasan.length - 1}
+            num={"9"}
           />
 
           <TextDetails
-            totalNum={current_product_kilasan.length - 1}
+            totalNum={current_product_kilasan.length}
             kilasTitle={current_product_kilasan[0].title}
             kilasBody={current_product_kilasan[0].details.map((paragraph) => (
               <Typography className={classes.paragraph}>{paragraph}</Typography>
@@ -87,9 +136,7 @@ export default function BookDetailsPage({ match, history }) {
             tableOfContents={current_product_kilasan.map((kilas, index) => (
               <div>
                 <Typography className={classes.paragraph}>
-                  {kilas.title === undefined
-                    ? "Ringkasan Akhir"
-                    : "Kilas #" + (index + 1) + " : " + kilas.title}
+                  {"Kilas #" + (index + 1) + " : " + kilas.title}
                 </Typography>
                 <Divider />
               </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // @material-ui/core components
 import { makeStyles, Grid, Divider, Container } from "@material-ui/core";
@@ -14,12 +14,27 @@ import Button from "../../components/Button";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
+import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
+// Firebase components
+import fire from "../../firebase/fire";
+const firestore = fire.firestore();
+
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function BookDetails(props) {
-  const { cover, title, author, description, descriptionTitle, time, num } =
-    props;
-
+  const {
+    cover,
+    onAdd,
+    product,
+    currentUser,
+    userData,
+    title,
+    author,
+    description,
+    descriptionTitle,
+    time,
+    num,
+  } = props;
   const mobile = MultiUseMobile();
   const classes = useStyles();
 
@@ -29,6 +44,29 @@ export default function BookDetails(props) {
   const desktopClass = classNames({
     [mobile.sectionDesktop]: true,
   });
+
+  const handleAddCart = () => {
+    // if (currentUser !== null) {
+    //   var cart_ = [...userData.cart,product.book_title];
+    //   console.log(cart_)
+    //   firestore.collection("users").doc(currentUser.uid).update({
+    //     cart: cart_
+    //   });
+
+    // }
+    // else {
+    //   console.log("not log in")
+    // }
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.AddToCart(
+        currentUser.uid,
+        product
+      );
+      console.log(results);
+    };
+    fetchData();
+    onAdd(product);
+  };
 
   return (
     <div>
@@ -96,8 +134,11 @@ export default function BookDetails(props) {
               </Grid>
 
               <Grid item>
-                <Button href={"/video"} color="secondary">
-                  Watch now!
+                <Button color="secondary">Watch now!</Button>
+              </Grid>
+              <Grid item>
+                <Button onClick={handleAddCart} fullWidth color="secondary">
+                  Add To Cart
                 </Button>
               </Grid>
             </Grid>
@@ -161,8 +202,13 @@ export default function BookDetails(props) {
                 </Button>
               </Grid>
               <Grid item xs={12}>
-                <Button href={"/video"} fullWidth color="secondary">
-                  Watch now!
+                <Button fullWidth color="secondary">
+                  Watch1 now!
+                </Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Button fullWidth color="secondary">
+                  Add To Cart
                 </Button>
               </Grid>
             </div>

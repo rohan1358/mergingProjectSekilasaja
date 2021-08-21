@@ -27,15 +27,14 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
-          {/* Private Route */}
+          <PrivateRoute exact path="/accounts" component={AccountsPage} />
           <PrivateRoute
             exact
             path="/text-page/:title"
             component={TextReadingPage}
           />
           <PrivateRoute exact path="/video" component={VideoWatchingPage} />
-          <PrivateRoute exact path="/accounts" component={AccountsPage} />
-          {/* Public Route */}
+
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/payment" component={Payment} />
@@ -47,7 +46,7 @@ function App() {
             component={BookDetailsPage}
           />
           <Route exact path="/" component={Home} />
-          <Route component={FourOFourPage} /> */}
+          <Route component={FourOFourPage} />
           {/* <Route component={NewWebLanding} /> */}
         </Switch>
       </Router>

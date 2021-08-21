@@ -30,7 +30,7 @@ const CategoriesStyle = makeStyles((theme) => ({
     marginBottom: "5px",
     border: "solid 1px #41444B",
     borderRadius: "5px",
-    padding: "15px 50px",
+    padding: "15px 55px",
     textTransform: "uppercase",
     fontWeight: "600",
     fontSize: "12px",

@@ -11,6 +11,7 @@ import SubscriptionPlan from "./SubscriptionPlan";
 // firebase components
 import fire from "../.././firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 // Material-UI components
 import { Container, Paper, Divider, TextField } from "@material-ui/core";
@@ -18,7 +19,23 @@ import { Container, Paper, Divider, TextField } from "@material-ui/core";
 export default function AccountsPage() {
   const classes = MultiUseMobile();
   const { currentUser } = useContext(AuthContext);
+  const [userData, setUserData] = useState([]);
 
+  useEffect(() => {
+    if (currentUser !== null) {
+      const fetchData = async () => {
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
+        setUserData(results);
+      };
+      fetchData();
+    } else {
+      console.log("You are not logged in!");
+    }
+  }, []);
+
+  console.log(userData.firstName);
   return (
     <div>
       <NavBar />
@@ -41,7 +58,6 @@ export default function AccountsPage() {
 
           <Typography size="subheading">Profil</Typography>
           <TextField
-            defaultValue={""}
             className={classes.textFieldRoot}
             id="filled-basic"
             label="First Name"
@@ -66,7 +82,7 @@ export default function AccountsPage() {
           />
           <TextField
             disabled
-            defaultValue={currentUser.phoneNumber}
+            defaultValue={userData.phoneNumber}
             className={classes.textFieldRoot}
             id="filled-basic"
             label="Phone Number"
