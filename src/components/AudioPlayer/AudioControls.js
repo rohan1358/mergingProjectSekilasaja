@@ -111,11 +111,12 @@ const AudioControls = forwardRef(
       onToggleFullScreen,
       volume,
       onVolumeChange,
+      button,
     },
     ref
   ) => {
-    const classes = useStyles();
     const multi = MultiUseMobile();
+    const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
@@ -166,7 +167,7 @@ const AudioControls = forwardRef(
           /> */}
         </Grid>
 
-        <Grid item xs={5}>
+        <Grid item xs={3}>
           <PrettoSlider
             className={classes.primaryCol}
             min={0}
@@ -197,7 +198,7 @@ const AudioControls = forwardRef(
           </Button>
         </Grid>
 
-        <Grid item xs={1}>
+        <Grid item xs={2}>
           <Button
             onClick={handleClick}
             aria-describedby={id}
@@ -224,7 +225,7 @@ const AudioControls = forwardRef(
             }}
           >
             <Grid container direction="column-reverse">
-              {[0.5, 1, 1.5, 2].map((rate) => (
+              {[0.5, 1, 1.25, 1.5, 1.75, 2].map((rate) => (
                 <Button key={rate} onClick={() => onPlaybackRateChange(rate)}>
                   <Typography className={classes.textTransformNormal}>
                     {rate}x
@@ -233,6 +234,10 @@ const AudioControls = forwardRef(
               ))}
             </Grid>
           </Popover>
+        </Grid>
+
+        <Grid item xs={2}>
+          {button}
         </Grid>
       </Grid>
     );

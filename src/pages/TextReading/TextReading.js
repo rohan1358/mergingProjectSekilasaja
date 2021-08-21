@@ -10,7 +10,7 @@ import Typography from "../../components/Typography";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
-import { Container, AppBar, Toolbar } from "@material-ui/core";
+import { Container, AppBar, Grid } from "@material-ui/core";
 
 // Custom components
 import Button from "../../components/Button";
@@ -128,12 +128,21 @@ export default function TextReading({ match, history }) {
       <div className={classes.extraSpace}>
         <AppBar color="white" position="fixed" className={classes.audioBar}>
           <Container>
-            <Toolbar>
+            {/* <Toolbar>
               <div className={classes.rootBar} />
               <Button color="transparent" onClick={handleNext}>
                 <Typography type="bold">Next ►</Typography>
               </Button>
-            </Toolbar>
+            </Toolbar> */}
+
+            <AudioPlayer
+              vidLink="https://storage.googleapis.com/media-session/elephants-dream/the-wires.mp3"
+              button={
+                <Button color="transparent" onClick={handleNext}>
+                  <Typography type="bold">Next ►</Typography>
+                </Button>
+              }
+            />
           </Container>
         </AppBar>
       </div>

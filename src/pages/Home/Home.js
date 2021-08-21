@@ -13,7 +13,6 @@ import NavBar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import data from "../../data/bookData";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 
 // Material-UI components
 import { Container, Grid, Divider, makeStyles } from "@material-ui/core";
@@ -156,7 +155,6 @@ export default function Home({ history }) {
           title={"Temukan Kategori Kesukaan Kamu!"}
           products={products}
         />
-        <AudioPlayer vidLink="https://storage.googleapis.com/media-session/elephants-dream/the-wires.mp3" />
       </Container>
       <Footer />
     </div>

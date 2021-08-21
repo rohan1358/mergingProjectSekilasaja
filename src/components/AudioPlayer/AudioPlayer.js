@@ -23,7 +23,7 @@ const format = (seconds) => {
   return `${mm}:${ss}`;
 };
 
-export default function AudioPlayer({ vidLink }) {
+export default function AudioPlayer({ vidLink, button }) {
   const mobile = MultiUseMobile();
 
   const [timeDisplayFormat, setTimeDisplayFormat] = React.useState("normal");
@@ -132,7 +132,7 @@ export default function AudioPlayer({ vidLink }) {
         loop={loop}
         playbackRate={playbackRate}
         // volume={volume}
-        muted={muted}
+        // muted={muted}
       />
 
       <AudioControls
@@ -145,13 +145,14 @@ export default function AudioPlayer({ vidLink }) {
         played={played}
         elapsedTime={elapsedTime}
         totalDuration={totalDuration}
-        onMute={handleMute}
-        muted={muted}
-        // onVolumeChange={handleVolumeChange}
-        // onVolumeSeekDown={handleVolumeSeekDown}
+        // onMute={handleMute}
+        // muted={muted}
+        onVolumeChange={handleVolumeChange}
+        onVolumeSeekDown={handleVolumeSeekDown}
         onChangeDispayFormat={handleDisplayFormat}
         playbackRate={playbackRate}
         onPlaybackRateChange={handlePlaybackRate}
+        button={button}
         // volume={volume}
       />
     </div>
