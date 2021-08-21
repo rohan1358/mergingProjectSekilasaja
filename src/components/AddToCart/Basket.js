@@ -31,7 +31,7 @@ export default function Basket(props) {
               <Grid item xs={4}>
                 <img
                   src={item.cover}
-                  alt={item.title}
+                  alt={item.book_title}
                   className={
                     classes.imgRounded +
                     " " +
@@ -45,7 +45,7 @@ export default function Basket(props) {
               <Grid item xs={1} />
 
               <Grid item xs={7}>
-                <Typography type="bold">Kilasan {item.title}</Typography>
+                <Typography type="bold">Kilasan {item.book_title}</Typography>
                 <Typography className="col-2 text-right">
                   Rp. {item.price.toFixed(0)}
                 </Typography>

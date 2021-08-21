@@ -27,6 +27,10 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
+          <PrivateRoute exact path="/accounts" component={AccountsPage} />
+          <PrivateRoute exact path="/text-page/:title" component={TextReadingPage} />
+          <PrivateRoute exact path="/video" component={VideoWatchingPage} />
+
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/payment" component={Payment} />
@@ -37,12 +41,8 @@ function App() {
             path="/book-details/:title"
             component={BookDetailsPage}
           />
-          <Route exact path="/video-page" component={VideoWatchingPage} />
-          <Route exact path="/text-page/:title" component={TextReadingPage} />
-          <Route exact path="/video" component={VideoWatchingPage} />
-          <Route exact path="/accounts" component={AccountsPage} />
           <Route exact path="/" component={Home} />
-          <Route component={FourOFourPage} /> */}
+          <Route component={FourOFourPage} /> 
           {/* <Route component={NewWebLanding} /> */}
         </Switch>
       </Router>

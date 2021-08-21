@@ -10,7 +10,6 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBlock from "./CategoryBlock";
 import NavBar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
-import data from "../../data/bookData";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 
 // Material-UI components
@@ -18,6 +17,11 @@ import { Container, Grid, Divider, makeStyles } from "@material-ui/core";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
+
+// TESTING ONLY
+import data from "../../data/bookData";
+import Basket from "../../components/AddToCart/Basket";
+import CategoryBlockTest from "../../components/AddToCart/CategoryBlockTest"
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -90,7 +94,7 @@ export default function Home({ history }) {
   return (
     <div>
       {/* <NavBar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> */}
-      <NavBar />
+      <NavBar cartItems={[]} />
       <Parallax
         className={desktopClass}
         image={require("../../images/home.png").default}
@@ -163,6 +167,13 @@ export default function Home({ history }) {
           title={"Temukan Kategori Kesukaan Kamu!"}
           products={products}
         />
+
+        <Grid container>
+          <Grid item xs={6}><CategoryBlockTest products={products} onAdd={onAdd} /></Grid>
+          <Grid item xs={1} />
+          <Grid item xs={5}><Typography size="heading">Basket</Typography><Basket cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> </Grid>
+        </Grid>
+        
       </Container>
       <Footer />
     </div>

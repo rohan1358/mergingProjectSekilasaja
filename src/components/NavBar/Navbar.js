@@ -10,11 +10,12 @@ import {
   Container,
   Link,
   Menu,
+  Grid
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-
+import Typography from "../../components/Typography";
 // Custom components
 import Drawer from "../Drawer";
 import Button from "../Button";
@@ -127,14 +128,9 @@ export default function NavBar(props) {
                 drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
                 drawerTitle={"Your Cart"}
                 logo={<ShoppingCartIcon className={classes.iconColor} />}
-                // toPurchaseBookSection={
-                //   <Basket
-                //     cartItems={cartItems}
-                //     onAdd={onAdd}
-                //     onRemove={onRemove}
-                //   />
-                // }
-                // countCartItems={cartItems.length}
+                children = {
+                  <Basket cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+                }
               />
             </div>
 
@@ -154,14 +150,7 @@ export default function NavBar(props) {
                     Beli Sekarang
                   </Button>
                 }
-                // toPurchaseBookSection={
-                //   <Basket
-                //     cartItems={cartItems}
-                //     onAdd={onAdd}
-                //     onRemove={onRemove}
-                //   />
-                // }
-                // countCartItems={cartItems.length}
+                
               />
 
               <IconButton
