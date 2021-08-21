@@ -85,7 +85,9 @@ export default function TextReading({ match, history }) {
               {chosenChapter === chapterContent.length ? (
                 <div>
                   <div className={classes.title}>
-                    <Typography size="subheading">{"Conclusion"}</Typography>
+                    <Typography size="subheading">
+                      {"Ringkasan Akhir"}
+                    </Typography>
                   </div>
                   <div className={classes.chapterContent}>
                     {chapterContent[
@@ -128,13 +130,6 @@ export default function TextReading({ match, history }) {
       <div className={classes.extraSpace}>
         <AppBar color="white" position="fixed" className={classes.audioBar}>
           <Container>
-            {/* <Toolbar>
-              <div className={classes.rootBar} />
-              <Button color="transparent" onClick={handleNext}>
-                <Typography type="bold">Next ►</Typography>
-              </Button>
-            </Toolbar> */}
-
             <AudioPlayer
               vidLink="https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Cover_Images%2Frdpd.mp3?alt=media&token=4a6b3d53-7cd1-4a1c-8858-be5c83d698ac"
               button={
