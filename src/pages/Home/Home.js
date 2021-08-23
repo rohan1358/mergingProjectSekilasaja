@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Book from "../../images/book.png";
 
 // Custom components
@@ -21,7 +21,7 @@ import classNames from "classnames";
 // TESTING ONLY
 import data from "../../data/bookData";
 import Basket from "../../components/AddToCart/Basket";
-import CategoryBlockTest from "../../components/AddToCart/CategoryBlockTest"
+import CategoryBlockTest from "../../components/AddToCart/CategoryBlockTest";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -59,42 +59,11 @@ export default function Home({ history }) {
 
   // Add to Cart Feature
   const { products } = data;
-  const [cartItems, setCartItems] = useState([]);
-    function updateA() {
-
-    }
-  const onAdd = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist) {
-      setCartItems(
-        // cartItems.map((x) =>
-        //   x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-        // )
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty } : x
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
-    }
-  };
-  const onRemove = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== product.id));
-    } else {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-        )
-      );
-    }
-  };
 
   return (
     <div>
       {/* <NavBar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> */}
-      <NavBar cartItems={[]} />
+      <NavBar />
       <Parallax
         className={desktopClass}
         image={require("../../images/home.png").default}
@@ -165,15 +134,7 @@ export default function Home({ history }) {
         <CategoryBlock
           history={history}
           title={"Temukan Kategori Kesukaan Kamu!"}
-          products={products}
         />
-
-        <Grid container>
-          <Grid item xs={6}><CategoryBlockTest products={products} onAdd={onAdd} /></Grid>
-          <Grid item xs={1} />
-          <Grid item xs={5}><Typography size="heading">Basket</Typography><Basket cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> </Grid>
-        </Grid>
-        
       </Container>
       <Footer />
     </div>

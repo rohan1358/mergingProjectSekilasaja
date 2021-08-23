@@ -1,4 +1,4 @@
-import React, { useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // @material-ui/core components
 import { makeStyles, Grid, Divider, Container } from "@material-ui/core";
@@ -21,11 +21,20 @@ const firestore = fire.firestore();
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-
 export default function BookDetails(props) {
-
-  const { cover, onAdd, product,currentUser,userData, title, author, description, descriptionTitle, time, num } =
-    props;
+  const {
+    cover,
+    onAdd,
+    product,
+    currentUser,
+    userData,
+    title,
+    author,
+    description,
+    descriptionTitle,
+    time,
+    num,
+  } = props;
   const mobile = MultiUseMobile();
   const classes = useStyles();
 
@@ -36,7 +45,6 @@ export default function BookDetails(props) {
     [mobile.sectionDesktop]: true,
   });
 
-
   const handleAddCart = () => {
     // if (currentUser !== null) {
     //   var cart_ = [...userData.cart,product.book_title];
@@ -44,18 +52,21 @@ export default function BookDetails(props) {
     //   firestore.collection("users").doc(currentUser.uid).update({
     //     cart: cart_
     //   });
-      
+
     // }
     // else {
     //   console.log("not log in")
     // }
     const fetchData = async () => {
-      const results = await firebaseUpdateCart.AddToCart(currentUser.uid, product);
+      const results = await firebaseUpdateCart.AddToCart(
+        currentUser.uid,
+        product
+      );
       console.log(results);
     };
-    fetchData()
-    onAdd(product)
-  }
+    fetchData();
+    onAdd(product);
+  };
 
   return (
     <div>
@@ -196,7 +207,7 @@ export default function BookDetails(props) {
                 </Button>
               </Grid>
               <Grid item xs={12}>
-                <Button fullWidth color="secondary">
+                <Button onClick={handleAddCart} fullWidth color="secondary">
                   Add To Cart
                 </Button>
               </Grid>

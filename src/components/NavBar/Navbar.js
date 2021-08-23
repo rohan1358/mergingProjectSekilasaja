@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Logo from "../../images/dark-logo.png";
 
 // Material-UI components
@@ -10,12 +10,11 @@ import {
   Container,
   Link,
   Menu,
-  Grid
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Typography from "../../components/Typography";
+
 // Custom components
 import Drawer from "../Drawer";
 import Button from "../Button";
@@ -25,9 +24,6 @@ import Basket from "../AddToCart/Basket";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
-
-// firebase components
-import fire from "../.././firebase/fire";
 
 export default function NavBar(props) {
   const { cartItems, onAdd, onRemove } = props;
@@ -128,8 +124,12 @@ export default function NavBar(props) {
                 drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
                 drawerTitle={"Your Cart"}
                 logo={<ShoppingCartIcon className={classes.iconColor} />}
-                children = {
-                  <Basket cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} />
+                children={
+                  <Basket
+                    cartItems={cartItems}
+                    onAdd={onAdd}
+                    onRemove={onRemove}
+                  />
                 }
               />
             </div>
@@ -150,7 +150,13 @@ export default function NavBar(props) {
                     Beli Sekarang
                   </Button>
                 }
-                
+                children={
+                  <Basket
+                    cartItems={cartItems}
+                    onAdd={onAdd}
+                    onRemove={onRemove}
+                  />
+                }
               />
 
               <IconButton
