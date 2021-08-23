@@ -3,6 +3,7 @@ import React from "react";
 // Custom components
 import Typography from "../../components/Typography";
 import NavBar from "../../components/NavBar/Navbar";
+import NavBarLibrary from "../../components/NavBar/NavbarLibrary";
 import Footer from "../../components/Footer";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
@@ -19,7 +20,8 @@ export default function AccountsPage() {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
+      <NavBarLibrary />
       <Container maxWidth={"sm"}>
         <div className={classes.extraSpace} />
         <Paper className={classes.paddedContent}>
