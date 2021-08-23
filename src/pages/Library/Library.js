@@ -67,7 +67,7 @@ export default function Library({ history }) {
       </Container>
       <Container>
         <div className={classes.extraSpace} />
-        <CategoryBlock history={history} title={"Carilah buku buku disini!"} />
+        <CategoryBlock history={history} />
       </Container>
       <Footer />
     </div>

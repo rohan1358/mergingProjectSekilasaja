@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 
 // @material-ui/core components
 import { makeStyles, Grid, Divider, Container } from "@material-ui/core";
-import { Timelapse, EmojiObjects, PlayArrow } from "@material-ui/icons";
+import {
+  ImportContacts,
+  EmojiObjects,
+  PlayArrow,
+  Videocam,
+} from "@material-ui/icons";
 
 // Custom components
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
@@ -32,7 +37,8 @@ export default function BookDetails(props) {
     author,
     description,
     descriptionTitle,
-    time,
+    readTime,
+    watchTime,
     num,
   } = props;
   const mobile = MultiUseMobile();
@@ -89,8 +95,13 @@ export default function BookDetails(props) {
 
                 <div className={classes.kilasDesc}>
                   <div className={classes.kilasDesc}>
-                    <Timelapse className={classes.logo} />
-                    <Typography type="bold">{time} Menit</Typography>
+                    <ImportContacts className={classes.logo} />
+                    <Typography type="bold">{readTime} Menit</Typography>
+                  </div>
+
+                  <div className={classes.kilasDesc}>
+                    <Videocam className={classes.logo} />
+                    <Typography type="bold">{watchTime} Menit</Typography>
                   </div>
 
                   <div className={classes.kilasDesc}>
@@ -100,7 +111,7 @@ export default function BookDetails(props) {
 
                   <div className={classes.kilasDesc}>
                     <PlayArrow className={classes.logo} />
-                    <Typography type="bold">Video, audio, & text</Typography>
+                    <Typography type="bold">Video, Audio, & Text</Typography>
                   </div>
                 </div>
 
@@ -177,8 +188,13 @@ export default function BookDetails(props) {
 
               <div className={classes.kilasDescMobile}>
                 <div className={classes.kilasDescMobileCenter}>
-                  <Timelapse className={classes.logo} />
-                  <Typography type="bold">{time} Menit</Typography>
+                  <ImportContacts className={classes.logo} />
+                  <Typography type="bold">{readTime} Menit</Typography>
+                </div>
+
+                <div className={classes.kilasDescMobileCenter}>
+                  <Videocam className={classes.logo} />
+                  <Typography type="bold">{watchTime} Menit</Typography>
                 </div>
 
                 <div className={classes.kilasDescMobileCenter}>
@@ -188,7 +204,7 @@ export default function BookDetails(props) {
 
                 <div className={classes.kilasDescMobileCenter}>
                   <PlayArrow className={classes.logo} />
-                  <Typography type="bold">Video, audio, & text</Typography>
+                  <Typography type="bold">Video, Audio, & Text</Typography>
                 </div>
               </div>
 
@@ -227,6 +243,7 @@ BookDetails.propTypes = {
   author: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   descriptionTitle: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
+  readTime: PropTypes.string.isRequired,
+  watchTime: PropTypes.string.isRequired,
   num: PropTypes.string.isRequired,
 };

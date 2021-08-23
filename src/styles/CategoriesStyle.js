@@ -7,7 +7,6 @@ const CategoriesStyle = makeStyles((theme) => ({
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex",
-      justifyContent: "space-between",
       textAlign: "center",
     },
   },

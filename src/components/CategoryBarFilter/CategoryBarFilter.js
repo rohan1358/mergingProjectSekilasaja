@@ -50,7 +50,7 @@ function CategoryBarFilter({
   return (
     <div className="CategoryBarFilter-Panel">
       <div className={desktopClass}>
-        <Grid container justifyContent="space-evenly" spacing={1}>
+        <Grid container justifyContent="center" spacing={1}>
           {categories.map((categoryName, index) => (
             <CategoryButton
               key={index}
@@ -58,7 +58,7 @@ function CategoryBarFilter({
               categoryName={categoryName}
               setChosenCategory={setChosenCategory}
               setIsChosenCategory={setIsChosenCategory}
-            ></CategoryButton>
+            />
           ))}
         </Grid>
       </div>
@@ -71,7 +71,7 @@ function CategoryBarFilter({
             categoryName={categoryName}
             setChosenCategory={setChosenCategory}
             setIsChosenCategory={setIsChosenCategory}
-          ></CategoryButton>
+          />
         ))}
       </div>
     </div>

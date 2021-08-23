@@ -123,8 +123,9 @@ export default function BookDetailsPage({ match, history }) {
             author={current_product[0].author}
             descriptionTitle={"Tentang Apa?"}
             description={current_product[0].description}
-            time={"15"}
-            num={"9"}
+            watchTime={"15"}
+            readTime={"15"}
+            num={current_product_kilasan.length}
           />
 
           <TextDetails
@@ -136,7 +137,9 @@ export default function BookDetailsPage({ match, history }) {
             tableOfContents={current_product_kilasan.map((kilas, index) => (
               <div>
                 <Typography className={classes.paragraph}>
-                  {"Kilas #" + (index + 1) + " : " + kilas.title}
+                  {kilas.title === undefined
+                    ? "Ringkasan Akhir"
+                    : "Kilas #" + (index + 1) + " : " + kilas.title}
                 </Typography>
                 <Divider />
               </div>

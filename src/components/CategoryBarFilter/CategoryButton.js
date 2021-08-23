@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import BusinessIcon from "@material-ui/icons/Business";
+
 // Custom components
 import CategoriesStyle from "../../styles/CategoriesStyle";
-import MultiUseMobile from "../../styles/MultiUseMobile";
 
 //nodejs library to set properties for components
 import classNames from "classnames";
@@ -17,7 +17,6 @@ function CategoryButton({
   setIsChosenCategory,
 }) {
   const classes = CategoriesStyle();
-  const multi = MultiUseMobile();
 
   const [isSelected, setIsSelected] = useState(false);
   useEffect(() => {
@@ -42,7 +41,7 @@ function CategoryButton({
           setIsChosenCategory(true);
         }}
       >
-        {/* <BusinessIcon /> */}
+        <BusinessIcon />
         <div className={classes.text}>{categoryName}</div>
       </div>
     </Grid>
