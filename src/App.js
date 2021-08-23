@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import fire from "./firebase/fire";
 
 // Custom pages
-import LoginPage from "./pages/Login";
-import SignUpPage from "./pages/SignUp";
+import LoginPage from "./pages/Login/Login";
+import SignUpPage from "./pages/SignUp/SignUp";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home/Home";
 import FourOFourPage from "./pages/404page";
