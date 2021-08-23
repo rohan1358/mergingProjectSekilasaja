@@ -16,6 +16,7 @@ import VideoWatchingPage from "./pages/VideoWatching";
 import TextReadingPage from "./pages/TextReading/TextReading";
 import AccountsPage from "./pages/Accounts/Accounts";
 import Payment from "./pages/Payment.js";
+import Library from "./pages/Library/Library";
 import NewWebLanding from "./pages/NewWebLanding";
 
 // Routing componentns
@@ -34,6 +35,7 @@ function App() {
             component={TextReadingPage}
           />
           <PrivateRoute exact path="/video" component={VideoWatchingPage} />
+          <PrivateRoute exact path="/library" component={Library} />
 
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />

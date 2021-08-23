@@ -73,7 +73,7 @@ const LoginForm = ({ history }) => {
 
   if (currentUser) {
     console.log("Current user id: " + currentUser.uid);
-    return <Redirect to="/accounts" />;
+    return <Redirect to="/library" />;
   }
 
   return (
