@@ -91,13 +91,13 @@ export default function AccountsPage() {
             fullWidth
           />
 
-          <Button fullWidth>Ganti Perubahan</Button>
+          <Button fullWidth>Update Profile</Button>
 
           <div className={classes.extraSpace} />
           <Divider />
           <div className={classes.extraSpace} />
 
-          <Typography size="subheading">Ganti Kata Sandi</Typography>
+          <Typography size="subheading">Change Password</Typography>
           <TextField
             className={classes.textFieldRoot}
             id="filled-basic"
@@ -119,6 +119,7 @@ export default function AccountsPage() {
             variant="filled"
             fullWidth
           />
+          <Button fullWidth>Change Password</Button>
           <div className={classes.extraSpace} />
 
           <div className={classes.center}>
