@@ -5,6 +5,9 @@ import Typography from "../Typography";
 import Button from "../Button";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import RdpdCover from "../../images/rdpd.jpg";
+
+import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 
 // Material-UI components
 import { makeStyles, Grid } from "@material-ui/core";
@@ -15,9 +18,21 @@ export default function Basket(props) {
   const classes = useStyles();
   const mobile = MultiUseMobile();
 
-  const { cartItems, onRemove } = props;
-  const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const { cartItems} = props;
+  const itemsPrice = cartItems.reduce((a, c) => a +  c.price, 0);
   const totalPrice = itemsPrice;
+
+  const onRemove_ = (product) => {
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.DeleteToCart(
+        "Dlv3qspcF2QSSRYm7Z4YnQp9bBh2",
+        product
+      );
+      console.log(results);
+    };
+    fetchData();
+  }
+
 
   return (
     <div>
@@ -30,8 +45,8 @@ export default function Basket(props) {
             <Grid container>
               <Grid item xs={4}>
                 <img
-                  src={item.cover}
-                  alt={item.book_title}
+                  src={RdpdCover}
+                  alt={item.title}
                   className={
                     classes.imgRounded +
                     " " +
@@ -45,14 +60,14 @@ export default function Basket(props) {
               <Grid item xs={1} />
 
               <Grid item xs={7}>
-                <Typography type="bold">Kilasan {item.book_title}</Typography>
+                <Typography type="bold">{item.title}</Typography>
                 <Typography className="col-2 text-right">
                   Rp. {item.price.toFixed(0)}
                 </Typography>
 
                 <Button
                   color="secondary"
-                  onClick={() => onRemove(item)}
+                  onClick={() => onRemove_(item)}
                   className="remove"
                 >
                   Hapus

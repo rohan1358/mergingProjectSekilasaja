@@ -26,7 +26,7 @@ import Basket from "../AddToCart/Basket";
 import classNames from "classnames";
 
 export default function NavBar(props) {
-  const { cartItems, onAdd, onRemove } = props;
+  const { cartItems} = props;
 
   // Other styles
   const classes = NavbarStyle();
@@ -127,8 +127,6 @@ export default function NavBar(props) {
                 children={
                   <Basket
                     cartItems={cartItems}
-                    onAdd={onAdd}
-                    onRemove={onRemove}
                   />
                 }
               />
@@ -153,8 +151,6 @@ export default function NavBar(props) {
                 children={
                   <Basket
                     cartItems={cartItems}
-                    onAdd={onAdd}
-                    onRemove={onRemove}
                   />
                 }
               />
