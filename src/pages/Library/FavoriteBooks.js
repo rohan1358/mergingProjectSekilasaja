@@ -37,7 +37,7 @@ const responsive = {
   },
 };
 
-export default function OwnedBooksBlock(props) {
+export default function FavoriteBooksBlock(props) {
   const classes = MultiUseMobile();
   const dispatch = useDispatch();
   const { history, ownedBookTitles } = props;
@@ -69,10 +69,7 @@ export default function OwnedBooksBlock(props) {
   return (
     <div>
       {isOwnedBookTitlesEmpty ? (
-        <Typography type="italic">
-          Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang untuk akses
-          semua buku!
-        </Typography>
+        <Typography type="italic">Simpan buku favorit kamu di sini!</Typography>
       ) : (
         <div className={classes.title}>
           <Carousel

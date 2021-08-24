@@ -5,9 +5,9 @@ import { Redirect, withRouter } from "react-router";
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar/Navbar";
 import OwnedBooksBlock from "./OwnedBooksBlock";
+import FavoriteBooksBlock from "./FavoriteBooks";
 import Parallax from "../../components/Parallax";
 import Typography from "../../components/Typography";
-import CategoryBlock from "../Home/CategoryBlock";
 
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
@@ -61,7 +61,7 @@ export default function Library({ history }) {
       </>
     );
   }
-  
+
   return (
     <div>
       <NavBar />
@@ -75,12 +75,19 @@ export default function Library({ history }) {
             My Library
           </Typography>
         </Parallax>
+
         <div className={classes.extraSpace} />
+
+        <Typography size="subheading">Owned Books / Favorite</Typography>
+        <FavoriteBooksBlock
+          ownedBookTitles={ownedBookTitles}
+          history={history}
+        />
+
+        <div className={classes.extraSpace} />
+
+        <Typography size="subheading">Owned Books / All</Typography>
         <OwnedBooksBlock ownedBookTitles={ownedBookTitles} history={history} />
-      </Container>
-      <Container>
-        <div className={classes.extraSpace} />
-        <CategoryBlock history={history} />
       </Container>
       <Footer />
     </div>
