@@ -150,7 +150,11 @@ export default function BookDetails(props) {
                   </Grid>
 
                   <Grid item>
-                    <Button color="secondary">Watch now!</Button>
+                    <Button href="/video">Watch now!</Button>
+                  </Grid>
+
+                  <Grid item>
+                    <Button color="secondary">Add to favorites!</Button>
                   </Grid>
                 </Grid>
 
@@ -220,9 +224,13 @@ export default function BookDetails(props) {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Button fullWidth color="secondary">
+                    <Button fullWidth href="/video" color="secondary">
                       Watch now!
                     </Button>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Button color="secondary">Add to favorites!</Button>
                   </Grid>
                 </div>
               </Grid>
