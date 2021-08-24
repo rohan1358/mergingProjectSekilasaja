@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import Book from "../../images/book.png";
 
 // Custom components
@@ -18,10 +18,8 @@ import { Container, Grid, Divider, makeStyles } from "@material-ui/core";
 // nodejs library to set properties for components
 import classNames from "classnames";
 
-// TESTING ONLY
-import data from "../../data/bookData";
-import Basket from "../../components/AddToCart/Basket";
-import CategoryBlockTest from "../../components/AddToCart/CategoryBlockTest";
+// Firebase components
+import { AuthContext } from "../../components/Routing/Auth";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -46,6 +44,7 @@ const mobileStyles = makeStyles((theme) => ({
 }));
 
 export default function Home({ history }) {
+  const { currentUser } = useContext(AuthContext);
   const mobile = mobileStyles();
   const classes = MultiUseMobile();
   const books = useStyles();
@@ -57,130 +56,126 @@ export default function Home({ history }) {
     [mobile.sectionDesktop]: true,
   });
 
-  // Add to Cart Feature
-  const { products } = data;
-  const [cartItems, setCartItems] = useState([]);
-  function updateA() {}
-  const onAdd = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist) {
-      setCartItems(
-        // cartItems.map((x) =>
-        //   x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-        // )
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty } : x
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
-    }
-  };
-  const onRemove = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== product.id));
-    } else {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-        )
-      );
-    }
-  };
-
   return (
     <div>
-      {/* <NavBar cartItems={cartItems} onAdd={onAdd} onRemove={onRemove} /> */}
       <NavBar cartItems={[]} />
-      <Parallax
-        className={desktopClass}
-        image={require("../../images/home.png").default}
-      >
-        <Grid container>
-          <Grid item xs={6}>
-            <Typography size="heading">
-              Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
-            </Typography>
-            <Button href="/signup" round color="primary">
-              Daftar Sekarang
-            </Button>
-          </Grid>
-          <Grid item xs={2} />
-          <Grid item xs={4}>
-            <img
-              src={Book}
-              className={
-                books.imgRounded +
-                " " +
-                books.imgFluid +
-                " " +
-                books.imgHomeBook
-              }
-            />
-          </Grid>
-        </Grid>
-      </Parallax>
+      {!!currentUser ? (
+        <div>
+          <Parallax filter image={require("../../images/home2.jpg").default}>
+            <Grid
+              style={{ textAlign: "center" }}
+              container
+              justifyContent="center"
+            >
+              <Grid item>
+                <Typography color="beigeColor" size="heading">
+                  "Ketika kamu berhenti belajar, di titik itu kamu berhenti
+                  bertumbuh."
+                </Typography>
+              </Grid>
+              {/* <Grid item xs={2} />
+              <Grid item xs={4}>
+                <img
+                  src={Book}
+                  className={
+                    books.imgRounded +
+                    " " +
+                    books.imgFluid +
+                    " " +
+                    books.imgHomeBook
+                  }
+                />
+              </Grid> */}
+            </Grid>
+          </Parallax>
 
-      <div className={mobileClass}>
-        <Grid container>
-          <Grid item xs={12}>
-            <img
-              src={Book}
-              className={
-                books.imgRounded +
-                " " +
-                books.imgFluid +
-                " " +
-                books.imgHomeBook
-              }
-            />
-          </Grid>
+          <div className={classes.extraSpace} />
 
-          <Grid item xs={12}>
-            <Container>
-              <Typography size="heading">
-                Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
-              </Typography>
-              <Button fullWidth href="/" round color="primary">
-                Daftar Sekarang
-              </Button>
-            </Container>
-          </Grid>
-
-          <Grid item xs={12}>
+          <Container>
+            <BenefitsBlock />
             <div className={classes.extraSpace} />
-            <Divider className={classes.dividerColor} />
-          </Grid>
-        </Grid>
-      </div>
+            <CategoryBlock
+              history={history}
+              title={"Temukan Kategori Kesukaan Kamu!"}
+            />
+          </Container>
+        </div>
+      ) : (
+        <div>
+          <Parallax
+            className={desktopClass}
+            image={require("../../images/home.png").default}
+          >
+            <Grid container>
+              <Grid item xs={6}>
+                <Typography size="heading">
+                  Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
+                </Typography>
+                <Button href="/signup" round color="primary">
+                  Daftar Sekarang
+                </Button>
+              </Grid>
+              <Grid item xs={2} />
+              <Grid item xs={4}>
+                <img
+                  src={Book}
+                  className={
+                    books.imgRounded +
+                    " " +
+                    books.imgFluid +
+                    " " +
+                    books.imgHomeBook
+                  }
+                />
+              </Grid>
+            </Grid>
+          </Parallax>
 
-      <div className={classes.extraSpace} />
+          <div className={mobileClass}>
+            <Grid container>
+              <Grid item xs={12}>
+                <img
+                  src={Book}
+                  className={
+                    books.imgRounded +
+                    " " +
+                    books.imgFluid +
+                    " " +
+                    books.imgHomeBook
+                  }
+                />
+              </Grid>
 
-      <Container>
-        <BenefitsBlock />
-        <div className={classes.extraSpace} />
-        <CategoryBlock
-          history={history}
-          title={"Temukan Kategori Kesukaan Kamu!"}
-          products={products}
-        />
+              <Grid item xs={12}>
+                <Container>
+                  <Typography size="heading">
+                    Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
+                  </Typography>
+                  <Button fullWidth href="/" round color="primary">
+                    Daftar Sekarang
+                  </Button>
+                </Container>
+              </Grid>
 
-        {/* <Grid container>
-          <Grid item xs={6}>
-            <CategoryBlockTest products={products} onAdd={onAdd} />
-          </Grid>
-          <Grid item xs={1} />
-          <Grid item xs={5}>
-            <Typography size="heading">Basket</Typography>
-            <Basket
-              cartItems={cartItems}
-              onAdd={onAdd}
-              onRemove={onRemove}
-            />{" "}
-          </Grid>
-        </Grid> */}
-      </Container>
+              <Grid item xs={12}>
+                <div className={classes.extraSpace} />
+                <Divider className={classes.dividerColor} />
+              </Grid>
+            </Grid>
+          </div>
+
+          <div className={classes.extraSpace} />
+
+          <Container>
+            <BenefitsBlock />
+            <div className={classes.extraSpace} />
+            <CategoryBlock
+              history={history}
+              title={"Temukan Kategori Kesukaan Kamu!"}
+            />
+          </Container>
+        </div>
+      )}
       <Footer />
     </div>
   );
