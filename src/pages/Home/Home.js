@@ -61,18 +61,18 @@ export default function Home({ history }) {
       <NavBar cartItems={[]} />
       {!!currentUser ? (
         <div>
-          <Parallax filter image={require("../../images/home2.jpg").default}>
+          <Parallax small image={require("../../images/home2.jpg").default}>
             <Grid
               style={{ textAlign: "center" }}
               container
               justifyContent="center"
             >
-              <Grid item>
+              {/* <Grid item>
                 <Typography color="beigeColor" size="heading">
                   "Ketika kamu berhenti belajar, di titik itu kamu berhenti
                   bertumbuh."
                 </Typography>
-              </Grid>
+              </Grid> */}
               {/* <Grid item xs={2} />
               <Grid item xs={4}>
                 <img
