@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 // Custom components
 import NavBarSecond from "../../components/NavBar/NavBarSecond";
@@ -7,6 +7,7 @@ import TextReadingStyle from "../../styles/TextReadingStyle";
 import NavbarStyle from "../../styles/NavbarStyle";
 import TableOfContent from "./TableOfContent";
 import Typography from "../../components/Typography";
+import FourOFourPage from "../404page";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
@@ -18,6 +19,8 @@ import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 
 //firebase components
 import fire from "../../firebase/fire";
+import { AuthContext } from "../../components/Routing/Auth";
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 const db = fire.firestore();
 
@@ -29,6 +32,8 @@ export default function TextReading({ match, history }) {
   const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
   const [chapterContent, setChapterContent] = useState([]);
   const [chosenChapter, setChosenChapter] = useState(1);
+  const [userData, setUserData] = useState([]);
+  const { currentUser } = useContext(AuthContext);
 
   const handleNext = () => {
     if (chosenChapter === chapterContent.length) {
@@ -51,96 +56,113 @@ export default function TextReading({ match, history }) {
           }))
         );
       });
+
+    if (currentUser !== null) {
+      const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
+      const fetchData = async () => {
+        const results = await getUser;
+        setUserData(results);
+      };
+      fetchData();
+    } else {
+      console.log("You are not logged in!");
+    }
   }, []);
 
-  console.log(chapterContent.length);
+  const isSubscribed = userData.is_subscribed;
 
   return (
     <div>
-      <NavBarSecond
-        children={
-          <Drawer
-            direction={"left"}
-            drawerLogo={<DvrIcon className={nav.hugeIcon} />}
-            drawerTitle={"Daftar Kilas"}
-            logo={<DvrIcon className={nav.iconColor} />}
+      {!!isSubscribed ? (
+        <div>
+          <NavBarSecond
             children={
-              <TableOfContent
-                chapterContent={chapterContent}
-                chosenChapter={chosenChapter}
-                setChosenChapter={setChosenChapter}
+              <Drawer
+                direction={"left"}
+                drawerLogo={<DvrIcon className={nav.hugeIcon} />}
+                drawerTitle={"Daftar Kilas"}
+                logo={<DvrIcon className={nav.iconColor} />}
+                children={
+                  <TableOfContent
+                    chapterContent={chapterContent}
+                    chosenChapter={chosenChapter}
+                    setChosenChapter={setChosenChapter}
+                  />
+                }
               />
             }
           />
-        }
-      />
 
-      <Container maxWidth={"md"}>
-        {chapterContent.length !== 0 && (
-          <div className={classes.page}>
-            <div className={classes.container}>
-              <div className={classes.book_title}>
-                <Typography size="heading">{match.params.title}</Typography>
-              </div>
-              {chosenChapter === chapterContent.length ? (
-                <div>
-                  <div className={classes.title}>
-                    <Typography size="subheading">
-                      {"Ringkasan Akhir"}
-                    </Typography>
+          <Container maxWidth={"md"}>
+            {chapterContent.length !== 0 && (
+              <div className={classes.page}>
+                <div className={classes.container}>
+                  <div className={classes.book_title}>
+                    <Typography size="heading">{match.params.title}</Typography>
                   </div>
-                  <div className={classes.chapterContent}>
-                    {chapterContent[
-                      chapterContent.length - 1
-                    ].content.details.map((paragraph, index) => (
-                      <Typography className={classes.paragraph}>
-                        {paragraph}
-                      </Typography>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <div>
-                  <div className={classes.title}>
-                    <Typography type="italic" size="bold">
-                      Kilas #{chapterContent[chosenChapter - 1].id}
-                    </Typography>
-                  </div>
-                  <div className={classes.title}>
-                    <Typography size="subheading">
-                      {chapterContent[chosenChapter - 1].content.title}
-                    </Typography>
-                  </div>
-                  <div className={classes.chapterContent}>
-                    {chapterContent[chosenChapter - 1].content.details.map(
-                      (paragraph, index) => (
-                        <Typography className={classes.paragraph}>
-                          {paragraph}
+                  {chosenChapter === chapterContent.length ? (
+                    <div>
+                      <div className={classes.title}>
+                        <Typography size="subheading">
+                          {"Ringkasan Akhir"}
                         </Typography>
-                      )
-                    )}
-                  </div>
+                      </div>
+                      <div className={classes.chapterContent}>
+                        {chapterContent[
+                          chapterContent.length - 1
+                        ].content.details.map((paragraph, index) => (
+                          <Typography className={classes.paragraph}>
+                            {paragraph}
+                          </Typography>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className={classes.title}>
+                        <Typography type="italic" size="bold">
+                          Kilas #{chapterContent[chosenChapter - 1].id}
+                        </Typography>
+                      </div>
+                      <div className={classes.title}>
+                        <Typography size="subheading">
+                          {chapterContent[chosenChapter - 1].content.title}
+                        </Typography>
+                      </div>
+                      <div className={classes.chapterContent}>
+                        {chapterContent[chosenChapter - 1].content.details.map(
+                          (paragraph, index) => (
+                            <Typography className={classes.paragraph}>
+                              {paragraph}
+                            </Typography>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          </div>
-        )}
-      </Container>
-
-      <div className={classes.extraSpace}>
-        <AppBar color="white" position="fixed" className={classes.audioBar}>
-          <Container>
-            <AudioPlayer
-              vidLink="https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Cover_Images%2Frdpd.mp3?alt=media&token=4a6b3d53-7cd1-4a1c-8858-be5c83d698ac"
-              button={
-                <Button color="transparent" onClick={handleNext}>
-                  <Typography type="bold">Next ►</Typography>
-                </Button>
-              }
-            />
+              </div>
+            )}
           </Container>
-        </AppBar>
-      </div>
+
+          <div className={classes.extraSpace}>
+            <AppBar color="white" position="fixed" className={classes.audioBar}>
+              <Container>
+                <AudioPlayer
+                  vidLink="https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Cover_Images%2Frdpd.mp3?alt=media&token=4a6b3d53-7cd1-4a1c-8858-be5c83d698ac"
+                  button={
+                    <Button color="transparent" onClick={handleNext}>
+                      <Typography type="bold">Next ►</Typography>
+                    </Button>
+                  }
+                />
+              </Container>
+            </AppBar>
+          </div>
+        </div>
+      ) : (
+        <FourOFourPage />
+      )}
     </div>
   );
 }

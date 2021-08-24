@@ -108,6 +108,11 @@ const MultiUseMobile = makeStyles((theme) => ({
   iconColor: {
     color: secondaryColor,
   },
+  blur: {
+    filter: "blur(5px)",
+    userSelect: "none",
+    pointerEvents: "none",
+  },
 }));
 
 export default MultiUseMobile;

@@ -15,8 +15,15 @@ import PropTypes from "prop-types";
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function BookDetails(props) {
-  const { totalNum, kilasTitle, kilasBody, video, audio, tableOfContents } =
-    props;
+  const {
+    totalNum,
+    kilasTitle,
+    kilasBody,
+    video,
+    audio,
+    tableOfContents,
+    isSubscribed,
+  } = props;
 
   const mobile = MultiUseMobile();
   const classes = useStyles();
@@ -30,96 +37,193 @@ export default function BookDetails(props) {
 
   return (
     <div>
-      <div className={classes.bookDetailsWidth}>
-        <div className={desktopClass}>
-          <Paper className={mobile.paddedContent} elevation={5}>
-            <Grid container>
-              <Grid item xs={7}>
-                <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
+      {!!isSubscribed ? (
+        <div>
+          <div className={classes.bookDetailsWidth}>
+            <div className={desktopClass}>
+              <Paper className={mobile.paddedContent} elevation={5}>
+                <Grid container>
+                  <Grid item xs={7}>
+                    <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
 
-                <Typography size="subheading">{kilasTitle}</Typography>
-                <Typography>{kilasBody}</Typography>
+                    <Typography size="subheading">{kilasTitle}</Typography>
+                    <Typography>{kilasBody}</Typography>
+                  </Grid>
+
+                  <Grid item xs={1} />
+
+                  <Grid item xs={4}>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Video
+                      </Typography>
+                      {video}
+
+                      <Typography type="italic">
+                        TODO: There will be video here
+                      </Typography>
+                    </div>
+
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Audio
+                      </Typography>
+                      <Typography type="italic">
+                        TODO: There will be audio here
+                      </Typography>
+                      {audio}
+                    </div>
+
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Daftar Kilas
+                      </Typography>
+                      <Typography>{tableOfContents}</Typography>
+                    </div>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </div>
+          </div>
+
+          <div className={mobileClass}>
+            <Paper className={mobile.paddedContent} elevation={5}>
+              <Grid container>
+                <Grid item xs={12}>
+                  <div>
+                    <Typography size="subheading" type="bold">
+                      Video
+                    </Typography>
+                    <Typography type="italic">
+                      TODO: There will be video here
+                    </Typography>
+                  </div>
+
+                  <div>
+                    <Typography size="subheading" type="bold">
+                      Audio
+                    </Typography>
+                    <Typography type="italic">
+                      TODO: There will be audio here
+                    </Typography>
+                  </div>
+
+                  <div>
+                    <Typography size="subheading" type="bold">
+                      Daftar Kilas
+                    </Typography>
+                    <Typography>{tableOfContents}</Typography>
+                  </div>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <div className={mobile.extraSpace} />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
+
+                  <Typography size="subheading">{kilasTitle}</Typography>
+                  <Typography>{kilasBody}</Typography>
+                </Grid>
               </Grid>
-
-              <Grid item xs={1} />
-
-              <Grid item xs={4}>
-                <div>
-                  <Typography size="subheading" type="bold">
-                    Video
-                  </Typography>
-                  {video}
-
-                  <Typography type="italic">
-                    TODO: There will be video here
-                  </Typography>
-                </div>
-
-                <div>
-                  <Typography size="subheading" type="bold">
-                    Audio
-                  </Typography>
-                  <Typography type="italic">
-                    TODO: There will be audio here
-                  </Typography>
-                  {audio}
-                </div>
-
-                <div>
-                  <Typography size="subheading" type="bold">
-                    Daftar Kilas
-                  </Typography>
-                  <Typography>{tableOfContents}</Typography>
-                </div>
-              </Grid>
-            </Grid>
-          </Paper>
+            </Paper>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div>
+          <div className={classes.bookDetailsWidth}>
+            <div className={desktopClass}>
+              <Paper className={mobile.paddedContent} elevation={5}>
+                <Grid container>
+                  <Grid item xs={7}>
+                    <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
 
-      <div className={mobileClass}>
-        <Paper className={mobile.paddedContent} elevation={5}>
-          <Grid container>
-            <Grid item xs={12}>
-              <div>
-                <Typography size="subheading" type="bold">
-                  Video
-                </Typography>
-                <Typography type="italic">
-                  TODO: There will be video here
-                </Typography>
-              </div>
+                    <Typography size="subheading">{kilasTitle}</Typography>
+                    <Typography>{kilasBody}</Typography>
+                  </Grid>
 
-              <div>
-                <Typography size="subheading" type="bold">
-                  Audio
-                </Typography>
-                <Typography type="italic">
-                  TODO: There will be audio here
-                </Typography>
-              </div>
+                  <Grid item xs={1} />
 
-              <div>
-                <Typography size="subheading" type="bold">
-                  Daftar Kilas
-                </Typography>
-                <Typography>{tableOfContents}</Typography>
-              </div>
-            </Grid>
+                  <Grid item xs={4}>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Video
+                      </Typography>
+                      {video}
 
-            <Grid item xs={12}>
-              <div className={mobile.extraSpace} />
-            </Grid>
+                      <Typography type="italic">
+                        TODO: There will be video here
+                      </Typography>
+                    </div>
 
-            <Grid item xs={12}>
-              <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Audio
+                      </Typography>
+                      <Typography type="italic">
+                        TODO: There will be audio here
+                      </Typography>
+                      {audio}
+                    </div>
 
-              <Typography size="subheading">{kilasTitle}</Typography>
-              <Typography>{kilasBody}</Typography>
-            </Grid>
-          </Grid>
-        </Paper>
-      </div>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Daftar Kilas
+                      </Typography>
+                      <Typography>{tableOfContents}</Typography>
+                    </div>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </div>
+          </div>
+
+          <div className={mobileClass}>
+            <Paper className={mobile.paddedContent} elevation={5}>
+              <Grid container>
+                <Grid item xs={12}>
+                  <div>
+                    <Typography size="subheading" type="bold">
+                      Video
+                    </Typography>
+                    <Typography type="italic">
+                      TODO: There will be video here
+                    </Typography>
+                  </div>
+
+                  <div>
+                    <Typography size="subheading" type="bold">
+                      Audio
+                    </Typography>
+                    <Typography type="italic">
+                      TODO: There will be audio here
+                    </Typography>
+                  </div>
+
+                  <div>
+                    <Typography size="subheading" type="bold">
+                      Daftar Kilas
+                    </Typography>
+                    <Typography>{tableOfContents}</Typography>
+                  </div>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <div className={mobile.extraSpace} />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
+
+                  <Typography size="subheading">{kilasTitle}</Typography>
+                  <Typography>{kilasBody}</Typography>
+                </Grid>
+              </Grid>
+            </Paper>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

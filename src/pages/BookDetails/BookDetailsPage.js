@@ -35,7 +35,7 @@ export default function BookDetailsPage({ match, history }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const { currentUser } = useContext(AuthContext);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState([]);
 
   useEffect(() => {
     firestore.collection("books").onSnapshot((snapshot) => {
@@ -61,10 +61,9 @@ export default function BookDetailsPage({ match, history }) {
       });
 
     if (currentUser !== null) {
+      const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
       const fetchData = async () => {
-        const results = await firebaseGetUserDataById.getUserDataById(
-          currentUser.uid
-        );
+        const results = await getUser;
         setUserData(results);
       };
       fetchData();
@@ -93,6 +92,7 @@ export default function BookDetailsPage({ match, history }) {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
   };
+
   const onRemove = (product) => {
     const exist = cartItems.find((x) => x.id === product.id);
     if (exist.qty === 1) {
@@ -106,45 +106,129 @@ export default function BookDetailsPage({ match, history }) {
     }
   };
 
+  const isSubscribed = userData.is_subscribed;
+
   return (
     <div>
       <NavBar cartItems={cartItems} onRemove={onRemove} />
-      {(current_product_kilasan.length !== 0 &&
-        current_product.length !== 0) === true && (
-        <Container>
-          <BookDetails
-            cover={BookCover}
-            product={current_product[0]}
-            onAdd={onAdd}
-            currentUser={currentUser}
-            userData={userData}
-            title={current_product[0].book_title}
-            author={current_product[0].author}
-            descriptionTitle={"Tentang Apa?"}
-            description={current_product[0].description}
-            watchTime={"15"}
-            readTime={"15"}
-            num={current_product_kilasan.length}
-          />
+      {!!isSubscribed ? (
+        <div>
+          {(current_product_kilasan.length !== 0 &&
+            current_product.length !== 0) === true && (
+            <Container>
+              <BookDetails
+                isSubscribed={isSubscribed}
+                cover={BookCover}
+                product={current_product[0]}
+                onAdd={onAdd}
+                currentUser={currentUser}
+                userData={userData}
+                title={current_product[0].book_title}
+                author={current_product[0].author}
+                descriptionTitle={"Tentang Apa?"}
+                description={current_product[0].description}
+                watchTime={"15"}
+                readTime={"15"}
+                num={current_product_kilasan.length}
+              />
 
-          <TextDetails
-            totalNum={current_product_kilasan.length}
-            kilasTitle={current_product_kilasan[0].title}
-            kilasBody={current_product_kilasan[0].details.map((paragraph) => (
-              <Typography className={classes.paragraph}>{paragraph}</Typography>
-            ))}
-            tableOfContents={current_product_kilasan.map((kilas, index) => (
-              <div>
-                <Typography className={classes.paragraph}>
-                  {kilas.title === undefined
-                    ? "Ringkasan Akhir"
-                    : "Kilas #" + (index + 1) + " : " + kilas.title}
-                </Typography>
-                <Divider />
-              </div>
-            ))}
-          />
-        </Container>
+              <TextDetails
+                totalNum={current_product_kilasan.length}
+                kilasTitle={current_product_kilasan[0].title}
+                kilasBody={current_product_kilasan[0].details.map(
+                  (paragraph) => (
+                    <Typography className={classes.paragraph}>
+                      {paragraph}
+                    </Typography>
+                  )
+                )}
+                tableOfContents={current_product_kilasan.map((kilas, index) => (
+                  <div>
+                    <Typography className={classes.paragraph}>
+                      {kilas.title === undefined
+                        ? "Ringkasan Akhir"
+                        : "Kilas #" + (index + 1) + " : " + kilas.title}
+                    </Typography>
+                    <Divider />
+                  </div>
+                ))}
+              />
+            </Container>
+          )}
+        </div>
+      ) : (
+        <div>
+          {(current_product_kilasan.length !== 0 &&
+            current_product.length !== 0) === true && (
+            <Container>
+              <BookDetails
+                isSubscribed={isSubscribed}
+                cover={BookCover}
+                product={current_product[0]}
+                onAdd={onAdd}
+                currentUser={currentUser}
+                userData={userData}
+                title={current_product[0].book_title}
+                author={current_product[0].author}
+                descriptionTitle={"Tentang Apa?"}
+                description={current_product[0].description}
+                watchTime={"15"}
+                readTime={"15"}
+                num={current_product_kilasan.length}
+              />
+              <TextDetails
+                totalNum={current_product_kilasan.length}
+                kilasTitle={current_product_kilasan[0].title}
+                kilasBody={
+                  <div>
+                    <Typography className={classes.paragraph}>
+                      {current_product_kilasan[0].details[0]}
+                    </Typography>
+
+                    <Typography className={classes.paragraph}>
+                      {current_product_kilasan[0].details[1]}
+                    </Typography>
+
+                    {current_product_kilasan[0].details.map((paragraph) => (
+                      <div className={classes.blur}>
+                        <Typography className={classes.paragraph}>
+                          {paragraph ===
+                            current_product_kilasan[0].details[0] ||
+                          paragraph === current_product_kilasan[0].details[1]
+                            ? ""
+                            : paragraph}
+                        </Typography>
+                      </div>
+                    ))}
+                  </div>
+                }
+                tableOfContents={current_product_kilasan.map((kilas, index) => (
+                  <div>
+                    {index < 3 ? (
+                      <div>
+                        <Typography className={classes.paragraph}>
+                          {kilas.title === undefined
+                            ? "Ringkasan Akhir"
+                            : "Kilas #" + (index + 1) + " : " + kilas.title}
+                        </Typography>
+                        <Divider />
+                      </div>
+                    ) : (
+                      <div className={classes.blur}>
+                        <Typography className={classes.paragraph}>
+                          {kilas.title === undefined
+                            ? "Ringkasan Akhir"
+                            : "Kilas #" + (index + 1) + " : " + kilas.title}
+                        </Typography>
+                        <Divider />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              />
+            </Container>
+          )}
+        </div>
       )}
 
       <Footer />
