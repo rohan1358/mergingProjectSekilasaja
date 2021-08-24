@@ -42,13 +42,15 @@ export default function OwnedBooksBlock(props) {
   const dispatch = useDispatch();
   const { history, ownedBookTitles } = props;
 
+  const [isOwnedBookTitlesEmpty, setIsOwnedBookTitlesEmpty] = useState(false);
   const ownedBooks = useSelector(selectOwnedBooks);
 
   console.log(ownedBookTitles);
 
   useEffect(() => {
     //Get books' data from books database based on owned books of the user
-    db.collection("books")
+    if(ownedBookTitles.length > 0){
+      db.collection("books")
       .where("book_title", "in", ownedBookTitles)
       .onSnapshot((snapshot) => {
         dispatch(
@@ -59,23 +61,31 @@ export default function OwnedBooksBlock(props) {
           )
         );
       });
+    } else {
+      setIsOwnedBookTitlesEmpty(true);
+    }
   }, []);
 
   return (
     <div>
-      <div className={classes.title}>
-        <Typography size="heading">Owned Books</Typography>
-      </div>
-      <Carousel
-        autoPlay={true}
-        autoPlaySpeed={1500}
-        ssr={true}
-        responsive={responsive}
-      >
-        {ownedBooks.map((product) => (
-          <BookCard key={product.id} product={product} />
-        ))}
-      </Carousel>
+      {isOwnedBookTitlesEmpty
+        ? <div className={classes.title}>
+            <Typography size="heading">Carilah kilasan sekarang!</Typography>
+          </div>
+        : <div className={classes.title}>
+            <Typography size="heading">Owned Books</Typography>
+            <Carousel
+              autoPlay={true}
+              autoPlaySpeed={1500}
+              ssr={true}
+              responsive={responsive}
+            >
+              {ownedBooks.map((product) => (
+                <BookCard key={product.id} product={product} />
+              ))}
+            </Carousel>
+          </div>
+      }
     </div>
   );
 }
