@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 // Custom components
 import Typography from "../components/Typography";
@@ -11,8 +11,12 @@ import Footer from "../components/Footer";
 // Material-UI components
 import { Container, Grid, Paper } from "@material-ui/core";
 
+// Firebase components
+import { AuthContext } from "../components/Routing/Auth";
+
 export default function PricingPage() {
   const classes = MultiUseMobile();
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <div>
@@ -159,11 +163,16 @@ export default function PricingPage() {
       </Container>
 
       {/* If logged in, remove this button */}
-      <div className={classes.center}>
-        <Button href="/signup" round color="primary">
-          Daftar Sekarang
-        </Button>
-      </div>
+      {!!currentUser ? (
+        <div className={classes.center}>
+          <Button href="/signup" round color="primary">
+            Daftar Sekarang
+          </Button>
+        </div>
+      ) : (
+        <></>
+      )}
+
       <Footer />
     </div>
   );
