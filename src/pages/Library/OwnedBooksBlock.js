@@ -44,6 +44,8 @@ export default function OwnedBooksBlock(props) {
 
   const ownedBooks = useSelector(selectOwnedBooks);
 
+  console.log(ownedBookTitles);
+
   useEffect(() => {
     //Get books' data from books database based on owned books of the user
     db.collection("books")

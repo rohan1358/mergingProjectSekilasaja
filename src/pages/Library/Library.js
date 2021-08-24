@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Redirect, withRouter } from "react-router";
 
 // Custom components
 import Footer from "../../components/Footer";
@@ -17,6 +18,8 @@ import {
   setOwnedBookTitles,
 } from "../../feature/ownedBookTitlesSlice";
 
+import Loading from "../Loading";
+
 // Firebase components
 import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
@@ -25,6 +28,7 @@ import { AuthContext } from "../../components/Routing/Auth";
 import { Container } from "@material-ui/core";
 
 export default function Library({ history }) {
+  const [pending, setPending] = useState(true);
   const db = fire.firestore();
 
   const dispatch = useDispatch();
@@ -35,9 +39,9 @@ export default function Library({ history }) {
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
-    // if (!currentUser) {
-    //   return <Redirect to="/login" />;
-    // }
+    if (!currentUser) {
+      return <Redirect to="/login" />;
+    }
 
     //Get owned book titles from user data
     db.collection("users")
@@ -46,9 +50,18 @@ export default function Library({ history }) {
         snapshot.forEach((doc) => {
           dispatch(setOwnedBookTitles(doc.data()["owned_books"]));
         });
+        setPending(false);
       });
   }, []);
 
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
+  
   return (
     <div>
       <NavBar />
@@ -63,7 +76,7 @@ export default function Library({ history }) {
           </Typography>
         </Parallax>
         <div className={classes.extraSpace} />
-        {/* <OwnedBooksBlock ownedBookTitles={ownedBookTitles} history={history} /> */}
+        <OwnedBooksBlock ownedBookTitles={ownedBookTitles} history={history} />
       </Container>
       <Container>
         <div className={classes.extraSpace} />
