@@ -24,7 +24,6 @@ import { Container, Divider } from "@material-ui/core";
 import { AuthContext } from "../../components/Routing/Auth";
 // Firebase components
 import fire from "../../firebase/fire";
-const firestore = fire.firestore();
 
 export default function BookDetailsPage({ match, history }) {
   const firestore = fire.firestore();

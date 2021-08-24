@@ -23,10 +23,9 @@ export default function AccountsPage() {
 
   useEffect(() => {
     if (currentUser !== null) {
+      const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
       const fetchData = async () => {
-        const results = await firebaseGetUserDataById.getUserDataById(
-          currentUser.uid
-        );
+        const results = await getUser;
         setUserData(results);
       };
       fetchData();
@@ -35,7 +34,8 @@ export default function AccountsPage() {
     }
   }, []);
 
-  console.log(userData.firstName);
+  const firstName = userData.firstName;
+
   return (
     <div>
       <NavBar />
@@ -58,6 +58,7 @@ export default function AccountsPage() {
 
           <Typography size="subheading">Profil</Typography>
           <TextField
+            defaultValue={firstName}
             className={classes.textFieldRoot}
             id="filled-basic"
             label="First Name"
@@ -65,6 +66,7 @@ export default function AccountsPage() {
             fullWidth
           />
           <TextField
+            defaultValue={userData.lastName}
             className={classes.textFieldRoot}
             id="filled-basic"
             label="Last Name"
@@ -81,7 +83,6 @@ export default function AccountsPage() {
             fullWidth
           />
           <TextField
-            disabled
             defaultValue={userData.phoneNumber}
             className={classes.textFieldRoot}
             id="filled-basic"
@@ -89,6 +90,8 @@ export default function AccountsPage() {
             variant="filled"
             fullWidth
           />
+
+          <Button fullWidth>Ganti Perubahan</Button>
 
           <div className={classes.extraSpace} />
           <Divider />
