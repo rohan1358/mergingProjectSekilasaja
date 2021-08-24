@@ -53,17 +53,6 @@ export default function BookDetails(props) {
   });
 
   const handleAddCart = () => {
-    // if (currentUser !== null) {
-    //   var cart_ = [...userData.cart,product.book_title];
-    //   console.log(cart_)
-    //   firestore.collection("users").doc(currentUser.uid).update({
-    //     cart: cart_
-    //   });
-
-    // }
-    // else {
-    //   console.log("not log in")
-    // }
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,

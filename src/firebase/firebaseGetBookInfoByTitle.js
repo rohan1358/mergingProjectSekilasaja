@@ -36,7 +36,8 @@ export async function getBookInfoByTitle(title) {
             bookInfo.audioLink = bookData["audio_link"];
             bookInfo.category = bookData["category"];
             bookInfo.videoLink = bookData["video_link"];
-
+            bookInfo.price = bookData["price"];
+            bookInfo.description = bookData["description"];
             //Get kilasan
             var kilasan = await kilasanRef.get();
             if (kilasan.docs) {

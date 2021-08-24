@@ -12,7 +12,9 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 
 //Import firebase function to get user based on userid
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
+import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
+
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectBook, setBook } from "../../feature/bookSlice";
@@ -24,177 +26,145 @@ import { Container, Divider } from "@material-ui/core";
 import { AuthContext } from "../../components/Routing/Auth";
 // Firebase components
 import fire from "../../firebase/fire";
+const firestore = fire.firestore();
 
 export default function BookDetailsPage({ match, history }) {
-  const firestore = fire.firestore();
   const classes = MultiUseMobile();
-  const dispatch = useDispatch();
-  const products = useSelector(selectBook);
-  const [current_product, setCurrent_Product] = useState([]);
-  const [current_product_kilasan, setCurrent_Product_Kilasan] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+
+  const [current_product, setCurrent_Product] = useState(null);
+
   const [cartItems, setCartItems] = useState([]);
   const { currentUser } = useContext(AuthContext);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    firestore.collection("books").onSnapshot((snapshot) => {
-      dispatch(
-        setBook(
-          snapshot.docs.map((doc) => ({
-            ...doc.data(),
-          }))
-        )
-      );
-    });
-
-    firestore
-      .collection("books")
-      .doc(match.params.title)
-      .collection("kilasan")
-      .onSnapshot((snapshot) => {
-        setCurrent_Product_Kilasan(
-          snapshot.docs.map((doc) => ({
-            ...doc.data(),
-          }))
-        );
-      });
-
     if (currentUser !== null) {
-      const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
       const fetchData = async () => {
-        const results = await getUser;
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
         setUserData(results);
+
+        const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+          match.params.title
+        );
+        setCurrent_Product(book_);
+
+        //console.log(firebaseUpdateCart.GetCartDataByBooks_Title(results.cart))
+
+        const getCartData = async (book_title) => {
+          const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+            book_title
+          );
+          return products_;
+        };
+
+        var a = [
+          ...results.cart.map((book) => {
+            return getCartData(book);
+          }),
+        ];
+
+        Promise.all(a).then((b) => {
+          console.log(b);
+          setCartItems(b);
+        });
       };
       fetchData();
     } else {
-      console.log("You are not logged in!");
+      console.log("not log in");
     }
   }, []);
 
-  useEffect(() => {
-    setCurrent_Product(
-      products.filter((book) => book.book_title === match.params.title)
-    );
-  }, [products]);
-
-  useEffect(() => {});
-
-  const onAdd = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty } : x
-        )
-      );
-    } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
-    }
-  };
-
-  const onRemove = (product) => {
-    const exist = cartItems.find((x) => x.id === product.id);
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== product.id));
-    } else {
-      setCartItems(
-        cartItems.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
-        )
-      );
-    }
-  };
-
+  console.log(current_product);
   const isSubscribed = userData.is_subscribed;
 
   return (
     <div>
-      <NavBar cartItems={cartItems} onRemove={onRemove} />
+      <NavBar cartItems={cartItems} />
       {!!isSubscribed ? (
         <div>
-          {(current_product_kilasan.length !== 0 &&
+          {(current_product.kilasan[0].length !== 0 &&
             current_product.length !== 0) === true && (
             <Container>
               <BookDetails
                 isSubscribed={isSubscribed}
                 cover={BookCover}
-                product={current_product[0]}
-                onAdd={onAdd}
+                product={current_product}
                 currentUser={currentUser}
                 userData={userData}
-                title={current_product[0].book_title}
-                author={current_product[0].author}
+                title={current_product.title}
+                author={current_product.author}
                 descriptionTitle={"Tentang Apa?"}
-                description={current_product[0].description}
+                description={current_product.description}
                 watchTime={"15"}
                 readTime={"15"}
-                num={current_product_kilasan.length}
+                num={current_product.kilasan[0].length}
               />
 
               <TextDetails
-                totalNum={current_product_kilasan.length}
-                kilasTitle={current_product_kilasan[0].title}
-                kilasBody={current_product_kilasan[0].details.map(
+                totalNum={current_product.kilasan[0].length}
+                kilasTitle={current_product.kilasan[0].title}
+                kilasBody={current_product.kilasan[0].details.map(
                   (paragraph) => (
                     <Typography className={classes.paragraph}>
                       {paragraph}
                     </Typography>
                   )
                 )}
-                tableOfContents={current_product_kilasan.map((kilas, index) => (
-                  <div>
-                    <Typography className={classes.paragraph}>
-                      {kilas.title === undefined
-                        ? "Ringkasan Akhir"
-                        : "Kilas #" + (index + 1) + " : " + kilas.title}
-                    </Typography>
-                    <Divider />
-                  </div>
-                ))}
+                tableOfContents={current_product.kilasan[0].map(
+                  (kilas, index) => (
+                    <div>
+                      <Typography className={classes.paragraph}>
+                        {kilas.title === undefined
+                          ? "Ringkasan Akhir"
+                          : "Kilas #" + (index + 1) + " : " + kilas.title}
+                      </Typography>
+                      <Divider />
+                    </div>
+                  )
+                )}
               />
             </Container>
           )}
         </div>
       ) : (
         <div>
-          {(current_product_kilasan.length !== 0 &&
-            current_product.length !== 0) === true && (
+          {(current_product !== null) === true && (
             <Container>
               <BookDetails
                 isSubscribed={isSubscribed}
                 cover={BookCover}
-                product={current_product[0]}
-                onAdd={onAdd}
+                product={current_product}
                 currentUser={currentUser}
                 userData={userData}
-                title={current_product[0].book_title}
-                author={current_product[0].author}
+                title={current_product.book_title}
+                author={current_product.author}
                 descriptionTitle={"Tentang Apa?"}
-                description={current_product[0].description}
+                description={current_product.description}
                 watchTime={"15"}
                 readTime={"15"}
-                num={current_product_kilasan.length}
+                num={current_product.kilasan[0].length}
               />
               <TextDetails
-                totalNum={current_product_kilasan.length}
-                kilasTitle={current_product_kilasan[0].title}
+                totalNum={current_product.kilasan[0].length}
+                kilasTitle={current_product.kilasan[0].title}
                 kilasBody={
                   <div>
                     <Typography className={classes.paragraph}>
-                      {current_product_kilasan[0].details[0]}
+                      {current_product.kilasan[0].details[0]}
                     </Typography>
 
                     <Typography className={classes.paragraph}>
-                      {current_product_kilasan[0].details[1]}
+                      {current_product.kilasan[0].details[1]}
                     </Typography>
 
-                    {current_product_kilasan[0].details.map((paragraph) => (
+                    {current_product.kilasan[0].details.map((paragraph) => (
                       <div className={classes.blur}>
                         <Typography className={classes.paragraph}>
                           {paragraph ===
-                            current_product_kilasan[0].details[0] ||
-                          paragraph === current_product_kilasan[0].details[1]
+                            current_product.kilasan[0].details[0] ||
+                          paragraph === current_product.kilasan[0].details[1]
                             ? ""
                             : paragraph}
                         </Typography>
@@ -202,33 +172,52 @@ export default function BookDetailsPage({ match, history }) {
                     ))}
                   </div>
                 }
-                tableOfContents={current_product_kilasan.map((kilas, index) => (
-                  <div>
-                    {index < 3 ? (
-                      <div>
-                        <Typography className={classes.paragraph}>
-                          {kilas.title === undefined
-                            ? "Ringkasan Akhir"
-                            : "Kilas #" + (index + 1) + " : " + kilas.title}
-                        </Typography>
-                        <Divider />
-                      </div>
-                    ) : (
-                      <div className={classes.blur}>
-                        <Typography className={classes.paragraph}>
-                          {kilas.title === undefined
-                            ? "Ringkasan Akhir"
-                            : "Kilas #" + (index + 1) + " : " + kilas.title}
-                        </Typography>
-                        <Divider />
-                      </div>
-                    )}
-                  </div>
-                ))}
+                tableOfContents={current_product.kilasan[0].map(
+                  (kilas, index) => (
+                    <div>
+                      {index < 3 ? (
+                        <div>
+                          <Typography className={classes.paragraph}>
+                            {kilas.title === undefined
+                              ? "Ringkasan Akhir"
+                              : "Kilas #" + (index + 1) + " : " + kilas.title}
+                          </Typography>
+                          <Divider />
+                        </div>
+                      ) : (
+                        <div className={classes.blur}>
+                          <Typography className={classes.paragraph}>
+                            {kilas.title === undefined
+                              ? "Ringkasan Akhir"
+                              : "Kilas #" + (index + 1) + " : " + kilas.title}
+                          </Typography>
+                          <Divider />
+                        </div>
+                      )}
+                    </div>
+                  )
+                )}
               />
             </Container>
           )}
         </div>
+      )}
+
+      {(current_product !== null) === true && (
+        <Container>
+          <BookDetails
+            cover={BookCover}
+            product={current_product}
+            currentUser={currentUser}
+            userData={userData}
+            title={current_product.title}
+            author={current_product.author}
+            descriptionTitle={"Tentang Apa?"}
+            description={current_product.description}
+            time={"15"}
+            num={"9"}
+          />
+        </Container>
       )}
 
       <Footer />

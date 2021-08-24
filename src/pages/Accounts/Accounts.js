@@ -57,7 +57,30 @@ export default function AccountsPage() {
           <div className={classes.extraSpace} />
 
           <Typography size="subheading">Profil</Typography>
-          <TextField
+          <label>
+            First Name
+            <input defaultValue={userData.firstName} type="text" name="name" />
+          </label>
+
+          <label>
+            Last Name
+            <input defaultValue={userData.lastName} type="text" name="name" />
+          </label>
+
+          <label>
+            Email
+            <input defaultValue={currentUser.email} type="text" name="name" />
+          </label>
+
+          <label>
+            Phone Number
+            <input
+              defaultValue={userData.phoneNumber}
+              type="text"
+              name="name"
+            />
+          </label>
+          {/* <TextField
             defaultValue={firstName}
             className={classes.textFieldRoot}
             id="filled-basic"
@@ -89,7 +112,7 @@ export default function AccountsPage() {
             label="Phone Number"
             variant="filled"
             fullWidth
-          />
+          /> */}
 
           <Button fullWidth>Update Profile</Button>
 

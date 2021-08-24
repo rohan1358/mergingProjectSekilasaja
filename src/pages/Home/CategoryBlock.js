@@ -43,6 +43,7 @@ const responsive = {
 export default function CategoryBlock(props) {
   const classes = MultiUseMobile();
   const dispatch = useDispatch();
+
   const { title, history } = props;
   const [chosenCategory, setChosenCategory] = useState("All");
 
