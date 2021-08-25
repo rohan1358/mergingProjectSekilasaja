@@ -10,7 +10,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { selectBook, setBook } from "../../feature/bookSlice";
+//import { selectBook, setBook } from "../../feature/bookSlice";
 
 //Import firebase function to get books based on filter
 import * as firebaseGetBooksByCategory from "../.././firebase/firebaseGetBooksByCategory.js";
@@ -42,7 +42,7 @@ const responsive = {
 
 export default function CategoryBlock(props) {
   const classes = MultiUseMobile();
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   const { title, history } = props;
   const [chosenCategory, setChosenCategory] = useState("All");
@@ -50,16 +50,17 @@ export default function CategoryBlock(props) {
   // Check if the user has chosen a category or not
   const [isChosenCategory, setIsChosenCategory] = useState(false);
 
-  const products = useSelector(selectBook);
+  //const products = useSelector(selectBook);
 
+  const [products, SetProducts] = useState([])
   useEffect(() => {
     db.collection("books").onSnapshot((snapshot) => {
-      dispatch(
-        setBook(
+     // dispatch(
+        SetProducts(
           snapshot.docs.map((doc) => ({
             ...doc.data(),
           }))
-        )
+        //)
       );
     });
   }, []);

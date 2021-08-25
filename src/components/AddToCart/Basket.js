@@ -9,6 +9,9 @@ import RdpdCover from "../../images/rdpd.jpg";
 
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { selectCart, setCart } from "../../feature/cartSlice";
 // Material-UI components
 import { makeStyles, Grid } from "@material-ui/core";
 
@@ -17,8 +20,9 @@ const useStyles = makeStyles(InfoAreaStyle);
 export default function Basket(props) {
   const classes = useStyles();
   const mobile = MultiUseMobile();
-
-  const { cartItems} = props;
+  const cartItems = useSelector(selectCart).cart
+  const dispatch = useDispatch();
+  
   const itemsPrice = cartItems.reduce((a, c) => a +  c.price, 0);
   const totalPrice = itemsPrice;
 
@@ -29,6 +33,9 @@ export default function Basket(props) {
         product
       );
       console.log(results);
+      dispatch(setCart([...cartItems.filter(function (ele) {
+        return ele.title != product.title;
+      })]))
     };
     fetchData();
   }

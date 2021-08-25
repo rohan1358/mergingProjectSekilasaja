@@ -9,6 +9,10 @@ import {
   Videocam,
 } from "@material-ui/icons";
 
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { selectCart, setCart } from "../../feature/cartSlice";
+
 // Custom components
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import Typography from "../../components/Typography";
@@ -30,7 +34,6 @@ export default function BookDetails(props) {
   const {
     isSubscribed,
     cover,
-    onAdd,
     product,
     currentUser,
     userData,
@@ -44,7 +47,8 @@ export default function BookDetails(props) {
   } = props;
   const mobile = MultiUseMobile();
   const classes = useStyles();
-
+  const cartItems = useSelector(selectCart).cart
+  const dispatch = useDispatch();
   const mobileClass = classNames({
     [mobile.sectionMobile]: true,
   });
@@ -58,10 +62,10 @@ export default function BookDetails(props) {
         currentUser.uid,
         product
       );
-      console.log(results);
+      dispatch(setCart([...cartItems,product]))
     };
     fetchData();
-    onAdd(product);
+
   };
 
   return (
@@ -143,7 +147,7 @@ export default function BookDetails(props) {
                   </Grid>
 
                   <Grid item>
-                    <Button color="secondary">Add to favorites!</Button>
+                    <Button onClick={handleAddCart} color="secondary">Add to Cart!</Button>
                   </Grid>
                 </Grid>
 
@@ -219,7 +223,7 @@ export default function BookDetails(props) {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Button color="secondary">Add to favorites!</Button>
+                    <Button onClick={handleAddCart} color="secondary">Add to Cart!</Button>
                   </Grid>
                 </div>
               </Grid>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Logo from "../../images/dark-logo.png";
 
 // Material-UI components
@@ -29,9 +29,18 @@ import classNames from "classnames";
 import fire from "../.././firebase/fire";
 import { AuthContext } from "../Routing/Auth";
 
+//Import firebase function to get user based on userid
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
+import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
+import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
+
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { selectCart, setCart } from "../../feature/cartSlice";
+import { selectUser, setUser} from "../../feature/userSlice";
+
 export default function NavBar(props) {
-  const { cartItems, onAdd, onRemove } = props;
-  const { currentUser } = useContext(AuthContext);
+  //const { cartItems, onAdd, onRemove } = props;
 
   // Other styles
   const classes = NavbarStyle();
@@ -63,8 +72,48 @@ export default function NavBar(props) {
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
-
   const mobileMenuId = "primary-search-account-menu-mobile";
+
+  //const [cartItems, setCartItems] = useState([]);
+  const { currentUser } = useContext(AuthContext);
+
+  const cart = useSelector(selectCart).cart
+  const dispatch = useDispatch();
+
+  console.log(cart)
+
+  useEffect(() => {
+    if (currentUser !== null) {
+      const fetchData = async () => {
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
+
+        const getCartData = async (book_title) => {
+          const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+            book_title
+          );
+          return products_;
+        };
+
+        var a = [
+          ...results.cart.map((book) => {
+            return getCartData(book);
+          }),
+        ];
+
+        Promise.all(a).then((b) => {
+          dispatch(setCart(b));
+        });
+        return results
+      };
+      fetchData();
+    } else {
+      console.log("not log in");
+    }
+  }, []);
+
+  
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -154,9 +203,7 @@ export default function NavBar(props) {
                   logo={<ShoppingCartIcon className={classes.iconColor} />}
                   children={
                     <Basket
-                      cartItems={cartItems}
-                      onAdd={onAdd}
-                      onRemove={onRemove}
+                      cartItems={cart}
                     />
                   }
                 />
@@ -230,9 +277,7 @@ export default function NavBar(props) {
                   logo={<ShoppingCartIcon className={classes.iconColor} />}
                   children={
                     <Basket
-                      cartItems={cartItems}
-                      onAdd={onAdd}
-                      onRemove={onRemove}
+                      cartItems={cart}
                     />
                   }
                 />

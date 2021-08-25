@@ -1,18 +1,19 @@
 import { createSlice, creacteAsyncThunk } from "@reduxjs/toolkit";
 
-export const bookSlice = createSlice({
-  name: "book",
+export const userSlice = createSlice({
+  name: "user",
   initialState: {
-    book: [],
+    user: [],
   },
   reducers: {
-    setBook: (state, action) => {
-      state.book = action.payload;
+    setUser: (state, action) => {
+      state.user = action.payload;
+      console.log(action.payload)
     },
   },
 });
 
-export const { setBook } = bookSlice.actions;
-export const selectBook = (state) => state.bookReducer.book;
-const bookReducer = bookSlice.reducer;
-export default bookReducer;
+export const { setUser } = userSlice.actions;
+export const selectUser = (state) => state.user;
+const userReducer = userSlice.reducer;
+export default userReducer;
