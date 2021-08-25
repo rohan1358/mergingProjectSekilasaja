@@ -52,8 +52,8 @@ export async function AddToCart(userid, product) {
 }
 
 export async function DeleteToCart(userid, product) {
-  //References to book information in database 
-  console.log(product)
+  //References to book information in database
+  console.log(product);
   var docRef = firestore.collection("users").doc(userid).get();
   var cartItems = null;
   try {
@@ -71,7 +71,6 @@ export async function DeleteToCart(userid, product) {
       firestore.collection("users").doc(userid).update({
         cart: cartItems,
       });
-     
     } else {
       console.log("Already Deleted");
     }

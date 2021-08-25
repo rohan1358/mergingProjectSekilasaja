@@ -15,8 +15,9 @@ import Button from "../../components/Button";
 import { Container, Divider, Grid } from "@material-ui/core";
 
 //Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectOwnedBooks } from "../../feature/ownedBooksSlice";
+import { selectCart, setCart } from "../../feature/cartSlice";
 
 // Auth and fire
 import { AuthContext } from "../../components/Routing/Auth";
@@ -24,7 +25,7 @@ import fire from "../../firebase/fire";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
-import { current } from "@reduxjs/toolkit";
+
 const firestore = fire.firestore();
 
 export default function BookDetailsPage({ match, history }) {
@@ -32,12 +33,15 @@ export default function BookDetailsPage({ match, history }) {
 
   const [current_product, setCurrent_Product] = useState(null);
 
-  //const [cartItems, setCartItems] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isBookOwned, setIsBookOwned] = useState(false);
   const ownedBooks = useSelector(selectOwnedBooks);
+  const cartItems = useSelector(selectCart).cart;
+  const dispatch = useDispatch();
+  const [isAdded, setIsAdded] = useState(false);
+  const [bookTitle, setBookTitle] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +52,7 @@ export default function BookDetailsPage({ match, history }) {
       ownedBooks.map((x) => {
         if (x.book_title == book_.title) {
           setIsBookOwned(true);
+          setBookTitle(book_.title);
         }
       });
     };
@@ -65,7 +70,35 @@ export default function BookDetailsPage({ match, history }) {
     } else {
       console.log("Not logged in");
     }
+
+    const changeBtn = () => {
+      const exist = cartItems.find((x) => x === bookTitle);
+      if (exist) {
+        setIsAdded(true);
+      } else {
+        setIsAdded(false);
+      }
+    };
+    changeBtn();
   }, []);
+
+  const handleAddCart = () => {
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.AddToCart(
+        currentUser.uid,
+        current_product
+      );
+
+      const exist = cartItems.find((x) => x.title === bookTitle);
+
+      if (exist) {
+        console.log("Already Added");
+      } else {
+        dispatch(setCart([...cartItems, current_product]));
+      }
+    };
+    fetchData();
+  };
 
   return (
     <div>
@@ -78,9 +111,6 @@ export default function BookDetailsPage({ match, history }) {
                 <Container>
                   <BookDetails
                     cover={BookCover}
-                    product={current_product}
-                    currentUser={currentUser}
-                    userData={userData}
                     title={current_product.title}
                     author={current_product.author}
                     descriptionTitle={"Tentang Apa?"}
@@ -174,9 +204,6 @@ export default function BookDetailsPage({ match, history }) {
                 <Container>
                   <BookDetails
                     cover={BookCover}
-                    product={current_product}
-                    currentUser={currentUser}
-                    userData={userData}
                     title={current_product.title}
                     author={current_product.author}
                     descriptionTitle={"Tentang Apa?"}
@@ -194,13 +221,18 @@ export default function BookDetailsPage({ match, history }) {
 
                             <Grid item>
                               {/* <Button onClick={handleAddCart} fullWidth color="secondary"> */}
-                              <Button fullWidth color="secondary">
+                              <Button
+                                onClick={handleAddCart}
+                                fullWidth
+                                color="secondary"
+                              >
                                 Add To Cart
                               </Button>
                             </Grid>
                           </Grid>
                         </div>
-                        <div className={classes.sectionMobile}>
+
+                        <div className={classes.sectionMobileBlock}>
                           <Grid item xs={12}>
                             <Button fullWidth href={"/pricing"}>
                               Subscribe Now!
@@ -208,7 +240,11 @@ export default function BookDetailsPage({ match, history }) {
                           </Grid>
                           <Grid item xs={12}>
                             {/* <Button onClick={handleAddCart} fullWidth color="secondary"> */}
-                            <Button fullWidth color="secondary">
+                            <Button
+                              onClick={handleAddCart}
+                              fullWidth
+                              color="secondary"
+                            >
                               Add To Cart
                             </Button>
                           </Grid>

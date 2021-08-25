@@ -15,15 +15,10 @@ import {
   Videocam,
 } from "@material-ui/icons";
 
-//Redux
-import { useSelector, useDispatch } from "react-redux";
-import { selectCart, setCart } from "../../feature/cartSlice";
-
 // Custom components
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
-import Button from "../../components/Button";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -31,17 +26,12 @@ import PropTypes from "prop-types";
 
 // Firebase components
 import fire from "../../firebase/fire";
-import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 
-const firestore = fire.firestore();
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function BookDetails(props) {
   const {
     cover,
-    product,
-    currentUser,
-    userData,
     title,
     author,
     description,
@@ -53,25 +43,13 @@ export default function BookDetails(props) {
   } = props;
   const mobile = MultiUseMobile();
   const classes = useStyles();
-  const cartItems = useSelector(selectCart).cart;
-  const dispatch = useDispatch();
+
   const mobileClass = classNames({
     [mobile.sectionMobile]: true,
   });
   const desktopClass = classNames({
     [mobile.sectionDesktop]: true,
   });
-
-  const handleAddCart = () => {
-    const fetchData = async () => {
-      const results = await firebaseUpdateCart.AddToCart(
-        currentUser.uid,
-        product
-      );
-      dispatch(setCart([...cartItems, product]));
-    };
-    fetchData();
-  };
 
   return (
     <div>
