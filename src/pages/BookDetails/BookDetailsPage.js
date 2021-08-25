@@ -59,13 +59,15 @@ export default function BookDetailsPage({ match, history }) {
           currentUser.uid
         );
         setUserData(results);
-        setIsSubscribed(results.isSubscribed);
+        setIsSubscribed(results.is_subscribed);
       };
       fetchData();
     } else {
       console.log("Not logged in");
     }
   }, []);
+
+  console.log(isSubscribed);
 
   return (
     <div>

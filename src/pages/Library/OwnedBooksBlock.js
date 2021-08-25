@@ -1,9 +1,10 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useContext } from "react";
 
 // Custom components
 import BookCard from "../../components/BookCard";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import CategoryBlock from "../Home/CategoryBlock";
 
 // Other components
 import Carousel from "react-multi-carousel";
@@ -15,6 +16,8 @@ import { selectOwnedBooks, setOwnedBooks } from "../../feature/ownedBooksSlice";
 
 // Firebase components
 import fire from "../../firebase/fire";
+import { AuthContext } from "../../components/Routing/Auth";
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 const db = fire.firestore();
 
@@ -46,6 +49,10 @@ export default function OwnedBooksBlock(props) {
   const [isOwnedBookTitlesEmpty, setIsOwnedBookTitlesEmpty] = useState(false);
   const ownedBooks = useSelector(selectOwnedBooks);
 
+  const { currentUser } = useContext(AuthContext);
+  const [userData, setUserData] = useState(null);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
   console.log(ownedBookTitles);
 
   useEffect(() => {
@@ -65,27 +72,46 @@ export default function OwnedBooksBlock(props) {
     } else {
       setIsOwnedBookTitlesEmpty(true);
     }
+
+    if (currentUser !== null) {
+      const fetchData = async () => {
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
+        setUserData(results);
+        setIsSubscribed(results.is_subscribed);
+      };
+      fetchData();
+    } else {
+      console.log("Not logged in");
+    }
   }, []);
 
   return (
     <div>
-      {isOwnedBookTitlesEmpty ? (
-        <Typography type="italic">
-          Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang untuk akses
-          semua buku!
-        </Typography>
+      {!!isSubscribed ? (
+        <CategoryBlock />
       ) : (
-        <div className={classes.title}>
-          <Carousel
-            autoPlay={true}
-            autoPlaySpeed={1500}
-            ssr={true}
-            responsive={responsive}
-          >
-            {ownedBooks.map((product) => (
-              <BookCard key={product.id} product={product} />
-            ))}
-          </Carousel>
+        <div>
+          {isOwnedBookTitlesEmpty ? (
+            <Typography type="italic">
+              Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang untuk
+              akses semua buku!
+            </Typography>
+          ) : (
+            <div className={classes.title}>
+              <Carousel
+                autoPlay={true}
+                autoPlaySpeed={1500}
+                ssr={true}
+                responsive={responsive}
+              >
+                {ownedBooks.map((product) => (
+                  <BookCard key={product.id} product={product} />
+                ))}
+              </Carousel>
+            </div>
+          )}
         </div>
       )}
     </div>
