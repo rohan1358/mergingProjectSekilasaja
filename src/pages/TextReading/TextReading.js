@@ -17,6 +17,10 @@ import { Container, AppBar, Grid } from "@material-ui/core";
 import Button from "../../components/Button";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 
+//Redux
+import { useSelector } from "react-redux";
+import { selectOwnedBooks } from "../../feature/ownedBooksSlice";
+
 //firebase components
 import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
@@ -34,6 +38,8 @@ export default function TextReading({ match, history }) {
   const [chosenChapter, setChosenChapter] = useState(1);
   const [userData, setUserData] = useState([]);
   const { currentUser } = useContext(AuthContext);
+  const [isBookOwned, setIsBookOwned] = useState(false);
+  const ownedBooks = useSelector(selectOwnedBooks);
 
   const handleNext = () => {
     if (chosenChapter === chapterContent.length) {
@@ -57,6 +63,12 @@ export default function TextReading({ match, history }) {
         );
       });
 
+    ownedBooks.map((x) => {
+      if (x.book_title == match.params.title) {
+        setIsBookOwned(true);
+      }
+    });
+
     if (currentUser !== null) {
       const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
       const fetchData = async () => {
@@ -73,7 +85,7 @@ export default function TextReading({ match, history }) {
 
   return (
     <div>
-      {!!isSubscribed ? (
+      {!!isSubscribed || !!isBookOwned ? (
         <div>
           <NavBarSecond
             children={

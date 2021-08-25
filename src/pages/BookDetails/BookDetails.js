@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 // @material-ui/core components
-import { makeStyles, Grid, Divider, Container } from "@material-ui/core";
+import {
+  makeStyles,
+  Grid,
+  Divider,
+  Container,
+  ButtonBase,
+} from "@material-ui/core";
 import {
   ImportContacts,
   EmojiObjects,
@@ -32,7 +38,6 @@ const useStyles = makeStyles(InfoAreaStyle);
 
 export default function BookDetails(props) {
   const {
-    isSubscribed,
     cover,
     product,
     currentUser,
@@ -44,10 +49,11 @@ export default function BookDetails(props) {
     readTime,
     watchTime,
     num,
+    buttons,
   } = props;
   const mobile = MultiUseMobile();
   const classes = useStyles();
-  const cartItems = useSelector(selectCart).cart
+  const cartItems = useSelector(selectCart).cart;
   const dispatch = useDispatch();
   const mobileClass = classNames({
     [mobile.sectionMobile]: true,
@@ -62,105 +68,63 @@ export default function BookDetails(props) {
         currentUser.uid,
         product
       );
-      dispatch(setCart([...cartItems,product]))
+      dispatch(setCart([...cartItems, product]));
     };
     fetchData();
-
   };
 
   return (
     <div>
-      {!!isSubscribed ? (
-        <div>
-          <div className={classes.bookDetailsWidth}>
-            <div className={desktopClass}>
-              <Grid container>
-                <Grid item xs={12}>
-                  <div className={mobile.extraSpace} />
-                </Grid>
-
-                <Grid item xs={9}>
-                  <div className={classes.bookDetailsDesc}>
-                    <Typography size="subheading" type="bold">
-                      {title}
-                    </Typography>
-
-                    <Typography type="italic">{author}</Typography>
-
-                    <Divider />
-
-                    <div className={classes.kilasDesc}>
-                      <div className={classes.kilasDesc}>
-                        <ImportContacts className={classes.logo} />
-                        <Typography type="bold">{readTime} Menit</Typography>
-                      </div>
-
-                      <div className={classes.kilasDesc}>
-                        <Videocam className={classes.logo} />
-                        <Typography type="bold">{watchTime} Menit</Typography>
-                      </div>
-
-                      <div className={classes.kilasDesc}>
-                        <EmojiObjects className={classes.logo} />
-                        <Typography type="bold">{num} Kilas</Typography>
-                      </div>
-
-                      <div className={classes.kilasDesc}>
-                        <PlayArrow className={classes.logo} />
-                        <Typography type="bold">
-                          Video, Audio, & Text
-                        </Typography>
-                      </div>
-                    </div>
-
-                    <Divider />
-
-                    <Typography type="bold">{descriptionTitle}</Typography>
-                    <Typography>{description}</Typography>
-                  </div>
-                </Grid>
-
-                <Grid item xs={1} />
-
-                <Grid item xs={2}>
-                  <img
-                    src={cover}
-                    className={
-                      classes.imgRounded +
-                      " " +
-                      classes.imgFluid +
-                      " " +
-                      classes.imgBookCover
-                    }
-                  />
-                </Grid>
-
-                <Grid container spacing={3}>
-                  <Grid item>
-                    <Button href={`/text-page/${title}`}>
-                      Read or listen now!
-                    </Button>
-                  </Grid>
-
-                  <Grid item>
-                    <Button href="/video">Watch now!</Button>
-                  </Grid>
-
-                  <Grid item>
-                    <Button onClick={handleAddCart} color="secondary">Add to Cart!</Button>
-                  </Grid>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <div className={mobile.extraSpace} />
-                </Grid>
-              </Grid>
-            </div>
-          </div>
-
-          <div className={mobileClass}>
+      <div>
+        <div className={classes.bookDetailsWidth}>
+          <div className={desktopClass}>
             <Grid container>
               <Grid item xs={12}>
+                <div className={mobile.extraSpace} />
+              </Grid>
+
+              <Grid item xs={9}>
+                <div className={classes.bookDetailsDesc}>
+                  <Typography size="subheading" type="bold">
+                    {title}
+                  </Typography>
+
+                  <Typography type="italic">{author}</Typography>
+
+                  <Divider />
+
+                  <div className={classes.kilasDesc}>
+                    <div className={classes.kilasDesc}>
+                      <ImportContacts className={classes.logo} />
+                      <Typography type="bold">{readTime} Menit</Typography>
+                    </div>
+
+                    <div className={classes.kilasDesc}>
+                      <Videocam className={classes.logo} />
+                      <Typography type="bold">{watchTime} Menit</Typography>
+                    </div>
+
+                    <div className={classes.kilasDesc}>
+                      <EmojiObjects className={classes.logo} />
+                      <Typography type="bold">{num} Kilas</Typography>
+                    </div>
+
+                    <div className={classes.kilasDesc}>
+                      <PlayArrow className={classes.logo} />
+                      <Typography type="bold">Video, Audio, & Text</Typography>
+                    </div>
+                  </div>
+
+                  <Divider />
+
+                  <Typography type="bold">{descriptionTitle}</Typography>
+                  <Typography>{description}</Typography>
+                </div>
+              </Grid>
+
+              <Grid item xs={1} />
+
+              <Grid item xs={2}>
                 <img
                   src={cover}
                   className={
@@ -173,219 +137,75 @@ export default function BookDetails(props) {
                 />
               </Grid>
 
+              {buttons}
+
               <Grid item xs={12}>
-                <div className={classes.bookDetailsDesc}>
-                  <Typography size="subheading" type="bold">
-                    {title}
-                  </Typography>
-
-                  <Typography type="italic">{author}</Typography>
-
-                  <Divider />
-
-                  <div className={classes.kilasDescMobile}>
-                    <div className={classes.kilasDescMobileCenter}>
-                      <ImportContacts className={classes.logo} />
-                      <Typography type="bold">{readTime} Menit</Typography>
-                    </div>
-
-                    <div className={classes.kilasDescMobileCenter}>
-                      <Videocam className={classes.logo} />
-                      <Typography type="bold">{watchTime} Menit</Typography>
-                    </div>
-
-                    <div className={classes.kilasDescMobileCenter}>
-                      <EmojiObjects className={classes.logo} />
-                      <Typography type="bold">{num} Kilas</Typography>
-                    </div>
-
-                    <div className={classes.kilasDescMobileCenter}>
-                      <PlayArrow className={classes.logo} />
-                      <Typography type="bold">Video, Audio, & Text</Typography>
-                    </div>
-                  </div>
-
-                  <Divider />
-
-                  <Typography type="bold">{descriptionTitle}</Typography>
-                  <Typography>{description}</Typography>
-
-                  <Grid item xs={12}>
-                    <Button href={`text-page/${title}`} fullWidth>
-                      Read or listen now!
-                    </Button>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Button fullWidth href="/video" color="secondary">
-                      Watch now!
-                    </Button>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Button onClick={handleAddCart} color="secondary">Add to Cart!</Button>
-                  </Grid>
-                </div>
+                <div className={mobile.extraSpace} />
               </Grid>
-
-              <Grid item xs={1} />
             </Grid>
           </div>
         </div>
-      ) : (
-        <div>
-          <div className={classes.bookDetailsWidth}>
-            <div className={desktopClass}>
-              <Grid container>
-                <Grid item xs={12}>
-                  <div className={mobile.extraSpace} />
-                </Grid>
 
-                <Grid item xs={9}>
-                  <div className={classes.bookDetailsDesc}>
-                    <Typography size="subheading" type="bold">
-                      {title}
-                    </Typography>
-
-                    <Typography type="italic">{author}</Typography>
-
-                    <Divider />
-
-                    <div className={classes.kilasDesc}>
-                      <div className={classes.kilasDesc}>
-                        <ImportContacts className={classes.logo} />
-                        <Typography type="bold">{readTime} Menit</Typography>
-                      </div>
-
-                      <div className={classes.kilasDesc}>
-                        <Videocam className={classes.logo} />
-                        <Typography type="bold">{watchTime} Menit</Typography>
-                      </div>
-
-                      <div className={classes.kilasDesc}>
-                        <EmojiObjects className={classes.logo} />
-                        <Typography type="bold">{num} Kilas</Typography>
-                      </div>
-
-                      <div className={classes.kilasDesc}>
-                        <PlayArrow className={classes.logo} />
-                        <Typography type="bold">
-                          Video, Audio, & Text
-                        </Typography>
-                      </div>
-                    </div>
-
-                    <Divider />
-
-                    <Typography type="bold">{descriptionTitle}</Typography>
-                    <Typography>{description}</Typography>
-                  </div>
-                </Grid>
-
-                <Grid item xs={1} />
-
-                <Grid item xs={2}>
-                  <img
-                    src={cover}
-                    className={
-                      classes.imgRounded +
-                      " " +
-                      classes.imgFluid +
-                      " " +
-                      classes.imgBookCover
-                    }
-                  />
-                </Grid>
-
-                <Grid container spacing={3}>
-                  <Grid item>
-                    <Button href={"/pricing"}>Subscribe Now!</Button>
-                  </Grid>
-
-                  <Grid item>
-                    <Button onClick={handleAddCart} fullWidth color="secondary">
-                      Add To Cart
-                    </Button>
-                  </Grid>
-                </Grid>
-
-                <Grid item xs={12}>
-                  <div className={mobile.extraSpace} />
-                </Grid>
-              </Grid>
-            </div>
-          </div>
-
-          <div className={mobileClass}>
-            <Grid container>
-              <Grid item xs={12}>
-                <img
-                  src={cover}
-                  className={
-                    classes.imgRounded +
-                    " " +
-                    classes.imgFluid +
-                    " " +
-                    classes.imgBookCover
-                  }
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <div className={classes.bookDetailsDesc}>
-                  <Typography size="subheading" type="bold">
-                    {title}
-                  </Typography>
-
-                  <Typography type="italic">{author}</Typography>
-
-                  <Divider />
-
-                  <div className={classes.kilasDescMobile}>
-                    <div className={classes.kilasDescMobileCenter}>
-                      <ImportContacts className={classes.logo} />
-                      <Typography type="bold">{readTime} Menit</Typography>
-                    </div>
-
-                    <div className={classes.kilasDescMobileCenter}>
-                      <Videocam className={classes.logo} />
-                      <Typography type="bold">{watchTime} Menit</Typography>
-                    </div>
-
-                    <div className={classes.kilasDescMobileCenter}>
-                      <EmojiObjects className={classes.logo} />
-                      <Typography type="bold">{num} Kilas</Typography>
-                    </div>
-
-                    <div className={classes.kilasDescMobileCenter}>
-                      <PlayArrow className={classes.logo} />
-                      <Typography type="bold">Video, Audio, & Text</Typography>
-                    </div>
-                  </div>
-
-                  <Divider />
-
-                  <Typography type="bold">{descriptionTitle}</Typography>
-                  <Typography>{description}</Typography>
-                  <Grid item xs={12}>
-                    <Button fullWidth href={"/pricing"}>
-                      Subscribe Now!
-                    </Button>
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <Button fullWidth color="secondary">
-                      Add To Cart
-                    </Button>
-                  </Grid>
-                </div>
-              </Grid>
-
-              <Grid item xs={1} />
+        <div className={mobileClass}>
+          <Grid container>
+            <Grid item xs={12}>
+              <img
+                src={cover}
+                className={
+                  classes.imgRounded +
+                  " " +
+                  classes.imgFluid +
+                  " " +
+                  classes.imgBookCover
+                }
+              />
             </Grid>
-          </div>
+
+            <Grid item xs={12}>
+              <div className={classes.bookDetailsDesc}>
+                <Typography size="subheading" type="bold">
+                  {title}
+                </Typography>
+
+                <Typography type="italic">{author}</Typography>
+
+                <Divider />
+
+                <div className={classes.kilasDescMobile}>
+                  <div className={classes.kilasDescMobileCenter}>
+                    <ImportContacts className={classes.logo} />
+                    <Typography type="bold">{readTime} Menit</Typography>
+                  </div>
+
+                  <div className={classes.kilasDescMobileCenter}>
+                    <Videocam className={classes.logo} />
+                    <Typography type="bold">{watchTime} Menit</Typography>
+                  </div>
+
+                  <div className={classes.kilasDescMobileCenter}>
+                    <EmojiObjects className={classes.logo} />
+                    <Typography type="bold">{num} Kilas</Typography>
+                  </div>
+
+                  <div className={classes.kilasDescMobileCenter}>
+                    <PlayArrow className={classes.logo} />
+                    <Typography type="bold">Video, Audio, & Text</Typography>
+                  </div>
+                </div>
+
+                <Divider />
+
+                <Typography type="bold">{descriptionTitle}</Typography>
+                <Typography>{description}</Typography>
+
+                {buttons}
+              </div>
+            </Grid>
+
+            <Grid item xs={1} />
+          </Grid>
         </div>
-      )}
+      </div>
     </div>
   );
 }

@@ -8,7 +8,8 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 // Other components
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-//Redux
+
+// Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectOwnedBooks, setOwnedBooks } from "../../feature/ownedBooksSlice";
 

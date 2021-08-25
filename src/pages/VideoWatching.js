@@ -5,16 +5,39 @@ import NavBarSecond from "../components/NavBar/NavBarSecond";
 import VideoComponent from "../components/VidPageComponent";
 import FourOFourPage from "./404page";
 
+//Redux
+import { useSelector } from "react-redux";
+import { selectOwnedBooks } from "../feature/ownedBooksSlice";
+
 //firebase components
 import fire from "../firebase/fire";
 import { AuthContext } from "../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../firebase/firebaseGetUserDataById";
+import * as firebaseGetBookInfoByTitle from "../firebase/firebaseGetBookInfoByTitle";
 
-export default function VideoWatchingPage() {
+const db = fire.firestore();
+
+export default function VideoWatchingPage({ match, history }) {
   const [userData, setUserData] = useState([]);
   const { currentUser } = useContext(AuthContext);
+  const [isBookOwned, setIsBookOwned] = useState(false);
+  const [bookContent, setBookContent] = useState([]);
+  const ownedBooks = useSelector(selectOwnedBooks);
 
   useEffect(() => {
+    const fetchData = async () => {
+      const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        match.params.title
+      );
+      setBookContent(book_);
+      ownedBooks.map((x) => {
+        if (x.book_title == book_.title) {
+          setIsBookOwned(true);
+        }
+      });
+    };
+    fetchData();
+
     if (currentUser !== null) {
       const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
       const fetchData = async () => {
@@ -31,17 +54,15 @@ export default function VideoWatchingPage() {
 
   return (
     <div>
-      {!!isSubscribed ? (
+      {!!isSubscribed || !!isBookOwned ? (
         <div>
           <NavBarSecond />
           <VideoComponent
             vidLink={
               "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
             }
-            title={"The Intelligent Investor"}
-            description={
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada consectetur nibh ut ornare. Ut non tempor justo, lobortis porttitor lorem. Aenean sed metus dolor. Praesent in metus a lacus suscipit interdum id sit amet metus. Aliquam erat volutpat. Vestibulum id auctor leo."
-            }
+            title={bookContent.title}
+            description={bookContent.description}
           />
         </div>
       ) : (

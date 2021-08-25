@@ -9,18 +9,22 @@ import Footer from "../../components/Footer";
 import Typography from "../../components/Typography";
 import VideoComponent from "../../components/VidPageComponent";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import Button from "../../components/Button";
 
-//Import firebase function to get user based on userid
-import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
-import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
-import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 // Material-UI components
-import { Container, Divider } from "@material-ui/core";
+import { Container, Divider, Grid } from "@material-ui/core";
+
+//Redux
+import { useSelector } from "react-redux";
+import { selectOwnedBooks } from "../../feature/ownedBooksSlice";
 
 // Auth and fire
 import { AuthContext } from "../../components/Routing/Auth";
-// Firebase components
 import fire from "../../firebase/fire";
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
+import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
+import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
+import { current } from "@reduxjs/toolkit";
 const firestore = fire.firestore();
 
 export default function BookDetailsPage({ match, history }) {
@@ -31,15 +35,22 @@ export default function BookDetailsPage({ match, history }) {
   //const [cartItems, setCartItems] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
-  const [is_subscribed, setIsSubscribed] = useState(false);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isBookOwned, setIsBookOwned] = useState(false);
+  const ownedBooks = useSelector(selectOwnedBooks);
 
   useEffect(() => {
     const fetchData = async () => {
-    const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-      match.params.title
-    );
-    setCurrent_Product(book_);
-    }
+      const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        match.params.title
+      );
+      setCurrent_Product(book_);
+      ownedBooks.map((x) => {
+        if (x.book_title == book_.title) {
+          setIsBookOwned(true);
+        }
+      });
+    };
     fetchData();
 
     if (currentUser !== null) {
@@ -48,25 +59,24 @@ export default function BookDetailsPage({ match, history }) {
           currentUser.uid
         );
         setUserData(results);
-        setIsSubscribed(results.is_subscribed);        
+        setIsSubscribed(results.isSubscribed);
       };
       fetchData();
     } else {
-      console.log("not log in");
+      console.log("Not logged in");
     }
   }, []);
 
   return (
     <div>
       <NavBar />
-      {!!is_subscribed ? (
+      {!!isSubscribed || !!isBookOwned ? (
         <div>
           {(current_product !== null) === true && (
             <div>
               {(current_product.kilasan[0].length !== 0) === true && (
                 <Container>
                   <BookDetails
-                    isSubscribed={is_subscribed}
                     cover={BookCover}
                     product={current_product}
                     currentUser={currentUser}
@@ -78,6 +88,54 @@ export default function BookDetailsPage({ match, history }) {
                     watchTime={"15"}
                     readTime={"15"}
                     num={current_product.kilasan[0].length}
+                    buttons={
+                      <div>
+                        <div className={classes.sectionDesktop}>
+                          <Grid container spacing={3}>
+                            <Grid item>
+                              <Button
+                                href={`/text-page/${current_product.title}`}
+                              >
+                                Read or listen now!
+                              </Button>
+                            </Grid>
+
+                            <Grid item>
+                              <Button href={`/video/${current_product.title}`}>
+                                Watch now!
+                              </Button>
+                            </Grid>
+
+                            <Grid item>
+                              <Button color="secondary">
+                                Add to Favorites
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </div>
+
+                        <div className={classes.sectionMobileBlock}>
+                          <Grid item xs={12}>
+                            <Button href={current_product.title} fullWidth>
+                              Read or listen now!
+                            </Button>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Button
+                              fullWidth
+                              href={`/video/${current_product.title}`}
+                            >
+                              Watch now!
+                            </Button>
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Button fullWidth color="secondary">
+                              Add to Favorites
+                            </Button>
+                          </Grid>
+                        </div>
+                      </div>
+                    }
                   />
 
                   <TextDetails
@@ -115,18 +173,48 @@ export default function BookDetailsPage({ match, history }) {
               {(current_product.kilasan[0].length !== 0) === true && (
                 <Container>
                   <BookDetails
-                    isSubscribed={is_subscribed}
                     cover={BookCover}
                     product={current_product}
                     currentUser={currentUser}
                     userData={userData}
-                    title={current_product.book_title}
+                    title={current_product.title}
                     author={current_product.author}
                     descriptionTitle={"Tentang Apa?"}
                     description={current_product.description}
                     watchTime={"15"}
                     readTime={"15"}
                     num={current_product.kilasan[0].length}
+                    buttons={
+                      <div>
+                        <div className={classes.sectionDesktop}>
+                          <Grid container spacing={3}>
+                            <Grid item>
+                              <Button href={"/pricing"}>Subscribe Now!</Button>
+                            </Grid>
+
+                            <Grid item>
+                              {/* <Button onClick={handleAddCart} fullWidth color="secondary"> */}
+                              <Button fullWidth color="secondary">
+                                Add To Cart
+                              </Button>
+                            </Grid>
+                          </Grid>
+                        </div>
+                        <div className={classes.sectionMobile}>
+                          <Grid item xs={12}>
+                            <Button fullWidth href={"/pricing"}>
+                              Subscribe Now!
+                            </Button>
+                          </Grid>
+                          <Grid item xs={12}>
+                            {/* <Button onClick={handleAddCart} fullWidth color="secondary"> */}
+                            <Button fullWidth color="secondary">
+                              Add To Cart
+                            </Button>
+                          </Grid>
+                        </div>
+                      </div>
+                    }
                   />
                   <TextDetails
                     totalNum={current_product.kilasan[0].length}
@@ -158,7 +246,7 @@ export default function BookDetailsPage({ match, history }) {
                     tableOfContents={current_product.kilasan.map(
                       (kilas, index) => (
                         <div>
-                          {index < 3 ? (
+                          {index < 2 ? (
                             <div>
                               <Typography className={classes.paragraph}>
                                 {kilas.title === undefined
@@ -192,23 +280,6 @@ export default function BookDetailsPage({ match, history }) {
             </div>
           )}
         </div>
-      )}
-
-      {(current_product !== null) === true && (
-        <Container>
-          <BookDetails
-            cover={BookCover}
-            product={current_product}
-            currentUser={currentUser}
-            userData={userData}
-            title={current_product.title}
-            author={current_product.author}
-            descriptionTitle={"Tentang Apa?"}
-            description={current_product.description}
-            time={"15"}
-            num={"9"}
-          />
-        </Container>
       )}
 
       <Footer />

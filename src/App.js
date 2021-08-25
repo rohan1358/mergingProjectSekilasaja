@@ -34,7 +34,11 @@ function App() {
             path="/text-page/:title"
             component={TextReadingPage}
           />
-          <PrivateRoute exact path="/video" component={VideoWatchingPage} />
+          <PrivateRoute
+            exact
+            path="/video/:title"
+            component={VideoWatchingPage}
+          />
           <PrivateRoute exact path="/library" component={Library} />
 
           <Route exact path="/login" component={LoginPage} />

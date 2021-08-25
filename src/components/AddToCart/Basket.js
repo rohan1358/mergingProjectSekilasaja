@@ -20,10 +20,10 @@ const useStyles = makeStyles(InfoAreaStyle);
 export default function Basket(props) {
   const classes = useStyles();
   const mobile = MultiUseMobile();
-  const cartItems = useSelector(selectCart).cart
+  const cartItems = useSelector(selectCart).cart;
   const dispatch = useDispatch();
-  
-  const itemsPrice = cartItems.reduce((a, c) => a +  c.price, 0);
+
+  const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
   const totalPrice = itemsPrice;
 
   const onRemove_ = (product) => {
@@ -33,13 +33,16 @@ export default function Basket(props) {
         product
       );
       console.log(results);
-      dispatch(setCart([...cartItems.filter(function (ele) {
-        return ele.title != product.title;
-      })]))
+      dispatch(
+        setCart([
+          ...cartItems.filter(function (ele) {
+            return ele.title != product.title;
+          }),
+        ])
+      );
     };
     fetchData();
-  }
-
+  };
 
   return (
     <div>
