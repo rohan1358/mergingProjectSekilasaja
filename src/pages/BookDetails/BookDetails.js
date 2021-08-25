@@ -49,20 +49,41 @@ export default function BookDetails(props) {
   const classes = useStyles();
   const cartItems = useSelector(selectCart).cart
   const dispatch = useDispatch();
+  const [isAdded, setIsAdded] = useState(false)
   const mobileClass = classNames({
     [mobile.sectionMobile]: true,
   });
   const desktopClass = classNames({
     [mobile.sectionDesktop]: true,
   });
-
+  useEffect(() => {
+    const changeBtn = () => {
+      const exist = cartItems.find((x) => x === title);
+      if(exist){
+        setIsAdded(true)
+      }
+      else{
+        setIsAdded(false)
+      }
+    }
+    changeBtn();
+  }, [])
   const handleAddCart = () => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
         product
       );
-      dispatch(setCart([...cartItems,product]))
+
+    const exist = cartItems.find((x) => x.title === product.title);
+
+    if (exist) {
+      console.log("Already Added");
+    } else {
+     dispatch(setCart([...cartItems,product]))
+    }
+
+      
     };
     fetchData();
 
@@ -223,7 +244,11 @@ export default function BookDetails(props) {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Button onClick={handleAddCart} color="secondary">Add to Cart!</Button>
+                    {!isAdded ? (
+                      <Button onClick={handleAddCart} color="secondary">Add to Cart!</Button>
+                    ) : (
+                      <Button color="secondary">Added!</Button>
+                    )}
                   </Grid>
                 </div>
               </Grid>

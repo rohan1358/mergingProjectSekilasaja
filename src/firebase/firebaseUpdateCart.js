@@ -65,7 +65,7 @@ export async function DeleteToCart(userid, product) {
       cartItems = [
         ...cartItems.filter(function (ele) {
           return ele != product.title;
-        }),
+        })
       ];
 
       firestore.collection("users").doc(userid).update({
@@ -82,3 +82,4 @@ export async function DeleteToCart(userid, product) {
     console.log("Error: " + errorCode + "\n\n" + errorMessage);
   }
 }
+

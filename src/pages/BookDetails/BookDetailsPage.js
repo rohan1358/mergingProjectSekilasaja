@@ -194,7 +194,7 @@ export default function BookDetailsPage({ match, history }) {
         </div>
       )}
 
-      {(current_product !== null) === true && (
+      {/* {(current_product !== null) === true && (
         <Container>
           <BookDetails
             cover={BookCover}
@@ -209,7 +209,7 @@ export default function BookDetailsPage({ match, history }) {
             num={"9"}
           />
         </Container>
-      )}
+      )} */}
 
       <Footer />
     </div>
