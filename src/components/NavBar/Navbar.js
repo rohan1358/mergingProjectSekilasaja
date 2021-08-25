@@ -37,7 +37,7 @@ import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
-import { selectUser, setUser} from "../../feature/userSlice";
+import { selectUser, setUser } from "../../feature/userSlice";
 
 export default function NavBar(props) {
   //const { cartItems, onAdd, onRemove } = props;
@@ -77,10 +77,10 @@ export default function NavBar(props) {
   //const [cartItems, setCartItems] = useState([]);
   const { currentUser } = useContext(AuthContext);
 
-  const cart = useSelector(selectCart).cart
+  const cart = useSelector(selectCart).cart;
   const dispatch = useDispatch();
 
-  console.log(cart)
+  console.log(cart);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -105,7 +105,7 @@ export default function NavBar(props) {
         Promise.all(a).then((b) => {
           dispatch(setCart(b));
         });
-        return results
+        return results;
       };
       fetchData();
     } else {
@@ -113,7 +113,6 @@ export default function NavBar(props) {
     }
   }, []);
 
-  
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -201,11 +200,7 @@ export default function NavBar(props) {
                   drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
                   drawerTitle={"Your Cart"}
                   logo={<ShoppingCartIcon className={classes.iconColor} />}
-                  children={
-                    <Basket
-                      cartItems={cart}
-                    />
-                  }
+                  children={<Basket cartItems={cart} />}
                 />
               </div>
 
@@ -275,11 +270,7 @@ export default function NavBar(props) {
                   drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
                   drawerTitle={"Your Cart"}
                   logo={<ShoppingCartIcon className={classes.iconColor} />}
-                  children={
-                    <Basket
-                      cartItems={cart}
-                    />
-                  }
+                  children={<Basket cartItems={cart} />}
                 />
               </div>
 

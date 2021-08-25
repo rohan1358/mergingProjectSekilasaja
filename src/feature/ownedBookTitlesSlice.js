@@ -13,6 +13,7 @@ export const ownedBookTitlesSlice = createSlice({
 });
 
 export const { setOwnedBookTitles } = ownedBookTitlesSlice.actions;
-export const selectOwnedBookTitles = (state) => state.ownedBookTitlesReducer.ownedBookTitles;
+export const selectOwnedBookTitles = (state) =>
+  state.ownedBookTitlesReducer.ownedBookTitles;
 const ownedBookTitlesReducer = ownedBookTitlesSlice.reducer;
 export default ownedBookTitlesReducer;

@@ -52,14 +52,14 @@ export default function CategoryBlock(props) {
 
   //const products = useSelector(selectBook);
 
-  const [products, SetProducts] = useState([])
+  const [products, SetProducts] = useState([]);
   useEffect(() => {
     db.collection("books").onSnapshot((snapshot) => {
-     // dispatch(
-        SetProducts(
-          snapshot.docs.map((doc) => ({
-            ...doc.data(),
-          }))
+      // dispatch(
+      SetProducts(
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+        }))
         //)
       );
     });
