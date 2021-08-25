@@ -3,7 +3,7 @@ import React from "react";
 // Custom components
 import NavBar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
-import LoginForm from "./LoginForm";
+import ForgotPasswordForm from "./ForgotPasswordForm";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Typography from "../../components/Typography";
 
@@ -26,7 +26,7 @@ export default function LoginPage() {
       <div className={multi.extraSpace} />
       <Container maxWidth="xs">
         <Paper className={classes.root}>
-          <LoginForm />
+          <ForgotPasswordForm />
         </Paper>
         <Typography style={{ textAlign: "center" }}>
           Belum punya akun?{" "}

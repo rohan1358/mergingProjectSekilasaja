@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useContext } from "react";
-import { Redirect, withRouter } from "react-router";
+import React, { useState, useRef, useContext } from "react";
+import { withRouter } from "react-router";
 
 // Material UI components
 import { makeStyles, Link, TextField } from "@material-ui/core";
@@ -8,7 +8,6 @@ import { makeStyles, Link, TextField } from "@material-ui/core";
 import Button from "../../components/Button";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
-import { AuthContext } from "../../components/Routing/Auth";
 import { Alert } from "@material-ui/lab";
 
 //Import firebase for login function
@@ -43,45 +42,46 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Form for login, including all other methods relevant to login
-const LoginForm = ({ history }) => {
+const ForgotPasswordForm = ({ history }) => {
   const classes = useStyles();
   const multi = MultiUseMobile();
-
-  // create state variables for each input
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef();
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  function resetPassword(email) {
+    return auth.sendPasswordResetEmail(email);
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    // console.log("Logging in...");
 
-    //Call function to login with firebase
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((resp) => {
-        // console.log("Firebase login suceeded!");
-      })
-      .catch((err) => {
-        var errorCode = err.code;
-        var errorMessage = err.message;
-        return setError("ERROR (" + errorCode + "): " + "\n\n" + errorMessage);
-      });
-  };
+    try {
+      setMessage("");
+      setError("");
+      setLoading(true);
 
-  const { currentUser } = useContext(AuthContext);
+      await resetPassword(emailRef.current.value);
+      setMessage("Cek email kamu untuk mengganti password!");
+    } catch {
+      setError("Gagal reset password!");
+    }
 
-  if (currentUser) {
-    console.log("Current user id: " + currentUser.uid);
-    return <Redirect to="/library" />;
+    setLoading(false);
   }
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
-      <Typography size="subheading">Login to SekilasAja!</Typography>
+      <Typography size="subheading">Lupa Password?</Typography>
       {error && (
         <div className={classes.alertRoot}>
           <Alert severity="error">{error}</Alert>
+        </div>
+      )}
+      {message && (
+        <div className={classes.alertRoot}>
+          <Alert severity="success">{message}</Alert>
         </div>
       )}
       <TextField
@@ -89,30 +89,21 @@ const LoginForm = ({ history }) => {
         label="Email"
         variant="filled"
         type="email"
+        inputRef={emailRef}
         required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
       />
-      <TextField
-        fullWidth={true}
-        label="Password"
-        variant="filled"
-        type="password"
-        required
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Button type="submit" color="primary" fullWidth round>
-        Login
+
+      <Button disabled={loading} type="submit" color="primary" fullWidth round>
+        Reset Password
       </Button>
 
       <Typography>
-        <Link className={multi.link} underline="none" href="/lupa-password">
-          Lupa Password?
+        <Link className={multi.link} underline="none" href="/login">
+          Login
         </Link>
       </Typography>
     </form>
   );
 };
 
-export default withRouter(LoginForm);
+export default withRouter(ForgotPasswordForm);

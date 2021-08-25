@@ -17,6 +17,7 @@ import TextReadingPage from "./pages/TextReading/TextReading";
 import AccountsPage from "./pages/Accounts/Accounts";
 import Payment from "./pages/Payment.js";
 import Library from "./pages/Library/Library";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import NewWebLanding from "./pages/NewWebLanding";
 
 // Routing componentns
@@ -43,6 +44,7 @@ function App() {
 
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
+          <Route exact path="/lupa-password" component={ForgotPassword} />
           <Route exact path="/payment" component={Payment} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/pricing" component={PricingPage} />
