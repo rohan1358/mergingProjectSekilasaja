@@ -8,12 +8,13 @@ import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFil
 // Other components
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-//Redux
-import { useSelector, useDispatch } from "react-redux";
-//import { selectBook, setBook } from "../../feature/bookSlice";
 
-//Import firebase function to get books based on filter
-import * as firebaseGetBooksByCategory from "../.././firebase/firebaseGetBooksByCategory.js";
+// //Redux
+// import { useSelector, useDispatch } from "react-redux";
+// //import { selectBook, setBook } from "../../feature/bookSlice";
+
+// //Import firebase function to get books based on filter
+// import * as firebaseGetBooksByCategory from "../.././firebase/firebaseGetBooksByCategory.js";
 
 // Firebase components
 import fire from "../../firebase/fire";
