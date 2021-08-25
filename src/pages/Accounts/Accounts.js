@@ -1,4 +1,5 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
+import { useHistory } from "react-router-dom";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -14,27 +15,69 @@ import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 // Material-UI components
-import { Container, Paper, Divider, TextField } from "@material-ui/core";
+import { Container, Paper, Divider, TextField, Input } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 
 export default function AccountsPage() {
   const classes = MultiUseMobile();
   const { currentUser } = useContext(AuthContext);
   const [userData, setUserData] = useState([]);
+  const [bookNum, setBookNum] = useState([]);
+  const [endDate, setEndDate] = useState([]);
+
+  // Update Password
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     if (currentUser !== null) {
-      const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
       const fetchData = async () => {
-        const results = await getUser;
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
         setUserData(results);
+        setBookNum(results.owned_books);
+        setEndDate(results.end_date.toDate().toString());
       };
       fetchData();
     } else {
-      console.log("You are not logged in!");
+      console.log("Not logged in");
     }
   }, []);
 
-  const firstName = userData.firstName;
+  function updatePassword(password) {
+    return currentUser.updatePassword(password);
+  }
+
+  function handleChangePassword(e) {
+    e.preventDefault();
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      return setError("Password tidak sama!");
+    }
+
+    const promises = [];
+    setLoading(true);
+    setError("");
+
+    if (passwordRef.current.value) {
+      promises.push(updatePassword(passwordRef.current.value));
+    }
+
+    Promise.all(promises)
+      .then(() => {
+        setSuccess("Berhasil! Password telah terganti dengan yang baru.");
+      })
+      .catch(() => {
+        setError("Gagal! Coba ulang sekali lagi.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
 
   return (
     <div>
@@ -49,7 +92,8 @@ export default function AccountsPage() {
           <Typography size="subheading">Layanan Berlangganan</Typography>
           <SubscriptionPlan
             subscriptionType={"Belum Berlanggan"}
-            number={"3"}
+            number={bookNum.length}
+            endDate={endDate}
           />
 
           <div className={classes.extraSpace} />
@@ -57,7 +101,7 @@ export default function AccountsPage() {
           <div className={classes.extraSpace} />
 
           <Typography size="subheading">Profil</Typography>
-          <label>
+          {/* <label>
             First Name
             <input defaultValue={userData.firstName} type="text" name="name" />
           </label>
@@ -79,9 +123,10 @@ export default function AccountsPage() {
               type="text"
               name="name"
             />
-          </label>
-          {/* <TextField
-            defaultValue={firstName}
+          </label> */}
+
+          <TextField
+            defaultValue={userData.firstName}
             className={classes.textFieldRoot}
             id="filled-basic"
             label="First Name"
@@ -112,7 +157,7 @@ export default function AccountsPage() {
             label="Phone Number"
             variant="filled"
             fullWidth
-          /> */}
+          />
 
           <Button fullWidth>Update Profile</Button>
 
@@ -120,29 +165,40 @@ export default function AccountsPage() {
           <Divider />
           <div className={classes.extraSpace} />
 
-          <Typography size="subheading">Change Password</Typography>
-          <TextField
-            className={classes.textFieldRoot}
-            id="filled-basic"
-            label="Password Lama"
-            variant="filled"
-            fullWidth
-          />
-          <TextField
-            className={classes.textFieldRoot}
-            id="filled-basic"
-            label="Password Baru"
-            variant="filled"
-            fullWidth
-          />
-          <TextField
-            className={classes.textFieldRoot}
-            id="filled-basic"
-            label="Ketik Ulang Password Baru"
-            variant="filled"
-            fullWidth
-          />
-          <Button fullWidth>Change Password</Button>
+          <form onSubmit={handleChangePassword}>
+            <Typography size="subheading">Change Password</Typography>
+            {error && (
+              <div className={classes.alertRoot}>
+                <Alert severity="error">{error}</Alert>
+              </div>
+            )}
+            {success && (
+              <div className={classes.alertRoot}>
+                <Alert severity="success">{success}</Alert>
+              </div>
+            )}
+            <TextField
+              className={classes.textFieldRoot}
+              id="filled-basic"
+              label="Password Baru"
+              variant="filled"
+              inputRef={passwordRef}
+              type="password"
+              fullWidth
+            />
+            <TextField
+              className={classes.textFieldRoot}
+              id="filled-basic"
+              label="Ketik Ulang Password Baru"
+              variant="filled"
+              type="password"
+              inputRef={passwordConfirmRef}
+              fullWidth
+            />
+            <Button disabled={loading} type="submit" fullWidth>
+              Change Password
+            </Button>
+          </form>
           <div className={classes.extraSpace} />
 
           <div className={classes.center}>

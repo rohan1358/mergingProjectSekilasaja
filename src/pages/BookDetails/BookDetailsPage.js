@@ -67,8 +67,6 @@ export default function BookDetailsPage({ match, history }) {
     }
   }, []);
 
-  console.log(isSubscribed);
-
   return (
     <div>
       <NavBar />

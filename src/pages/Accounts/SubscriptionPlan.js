@@ -20,7 +20,7 @@ export default function SubscriptionPlan(props) {
   const [userData, setUserData] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const classes = MultiUseMobile();
-  const { subscriptionType, number, date } = props;
+  const { subscriptionType, number, endDate } = props;
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -55,7 +55,7 @@ export default function SubscriptionPlan(props) {
             </Grid>
             <Grid item xs={4} />
             <Grid item xs={4}>
-              <Typography type="italic">{date}</Typography>
+              <Typography type="italic">{endDate}</Typography>
             </Grid>
           </Grid>
         </div>

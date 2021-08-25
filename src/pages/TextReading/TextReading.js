@@ -33,6 +33,7 @@ export default function TextReading({ match, history }) {
 
   const classes = TextReadingStyle();
   const nav = NavbarStyle();
+
   const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
   const [chapterContent, setChapterContent] = useState([]);
   const [chosenChapter, setChosenChapter] = useState(1);
@@ -110,12 +111,17 @@ export default function TextReading({ match, history }) {
               <div className={classes.page}>
                 <div className={classes.container}>
                   <div className={classes.book_title}>
-                    <Typography size="heading">{match.params.title}</Typography>
+                    <Typography className={classes.uncopyable} size="heading">
+                      {match.params.title}
+                    </Typography>
                   </div>
                   {chosenChapter === chapterContent.length ? (
                     <div>
                       <div className={classes.title}>
-                        <Typography size="subheading">
+                        <Typography
+                          className={classes.uncopyable}
+                          size="subheading"
+                        >
                           {"Ringkasan Akhir"}
                         </Typography>
                       </div>
@@ -132,19 +138,29 @@ export default function TextReading({ match, history }) {
                   ) : (
                     <div>
                       <div className={classes.title}>
-                        <Typography type="italic" size="bold">
+                        <Typography
+                          className={classes.uncopyable}
+                          type="italic"
+                          size="bold"
+                        >
                           Kilas #{chapterContent[chosenChapter - 1].id}
                         </Typography>
                       </div>
                       <div className={classes.title}>
-                        <Typography size="subheading">
+                        <Typography
+                          className={classes.uncopyable}
+                          size="subheading"
+                        >
                           {chapterContent[chosenChapter - 1].content.title}
                         </Typography>
                       </div>
                       <div className={classes.chapterContent}>
                         {chapterContent[chosenChapter - 1].content.details.map(
                           (paragraph, index) => (
-                            <Typography className={classes.paragraph}>
+                            <Typography
+                              className={classes.uncopyable}
+                              className={classes.paragraph}
+                            >
                               {paragraph}
                             </Typography>
                           )

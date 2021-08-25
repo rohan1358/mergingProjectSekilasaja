@@ -44,6 +44,8 @@ const TextReadingStyle = makeStyles((theme) => ({
   paragraph: {
     fontSize: "18px",
     marginBottom: "30px",
+    userSelect: "none",
+    pointerEvents: "none",
   },
   content: {},
   page: {
@@ -89,6 +91,10 @@ const TextReadingStyle = makeStyles((theme) => ({
   },
   rootBar: {
     flexGrow: 1,
+  },
+  uncopyable: {
+    userSelect: "none",
+    pointerEvents: "none",
   },
 }));
 
