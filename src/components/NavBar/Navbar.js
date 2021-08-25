@@ -40,8 +40,6 @@ import { selectCart, setCart } from "../../feature/cartSlice";
 import { selectUser, setUser } from "../../feature/userSlice";
 
 export default function NavBar(props) {
-  //const { cartItems, onAdd, onRemove } = props;
-
   // Other styles
   const classes = NavbarStyle();
 
@@ -62,7 +60,6 @@ export default function NavBar(props) {
   });
 
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleMobileMenuOpen = (event) => {
@@ -82,12 +79,15 @@ export default function NavBar(props) {
 
   console.log(cart);
 
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
   useEffect(() => {
     if (currentUser !== null) {
       const fetchData = async () => {
         const results = await firebaseGetUserDataById.getUserDataById(
           currentUser.uid
         );
+        setIsSubscribed(results.is_subscribed);
 
         const getCartData = async (book_title) => {
           const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
@@ -165,7 +165,7 @@ export default function NavBar(props) {
 
   return (
     <div>
-      {!!currentUser ? (
+      {!!isSubscribed ? (
         <AppBar position="static" color="white">
           <Container>
             <Toolbar>
@@ -192,34 +192,12 @@ export default function NavBar(props) {
                 <Button round color="primary" href="/accounts">
                   Accounts
                 </Button>
-
-                <div className={classes.divider} />
-
-                <Drawer
-                  direction={"right"}
-                  drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
-                  drawerTitle={"Your Cart"}
-                  logo={<ShoppingCartIcon className={classes.iconColor} />}
-                  children={<Basket cartItems={cart} />}
-                />
               </div>
 
               <div className={mobileClass}>
                 <SearchBarDrawer
                   direction={"top"}
                   logo={<SearchIcon className={iconColorClass} />}
-                />
-
-                <Drawer
-                  direction={"right"}
-                  drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
-                  drawerTitle={"Your Cart"}
-                  logo={<ShoppingCartIcon className={classes.iconColor} />}
-                  button={
-                    <Button round fullWidth color="primary">
-                      Beli Sekarang
-                    </Button>
-                  }
                 />
 
                 <IconButton
@@ -236,76 +214,159 @@ export default function NavBar(props) {
           </Container>
         </AppBar>
       ) : (
-        <AppBar position="static" color="white">
-          <Container>
-            <Toolbar>
-              <a href="/">
-                <img className={iconClass} src={Logo} />
-              </a>
+        <div>
+          {!!currentUser ? (
+            <AppBar position="static" color="white">
+              <Container>
+                <Toolbar>
+                  <a href="/">
+                    <img className={iconClass} src={Logo} />
+                  </a>
 
-              <div className={growClass} />
+                  <div className={growClass} />
 
-              <div className={desktopClass}>
-                <SearchBarDrawer
-                  direction={"top"}
-                  logo={<SearchIcon className={iconColorClass} />}
-                />
+                  <div className={desktopClass}>
+                    <SearchBarDrawer
+                      direction={"top"}
+                      logo={<SearchIcon className={iconColorClass} />}
+                    />
 
-                <Button href="/pricing" round color="transparent">
-                  Pricing
-                </Button>
-
-                <Button round color="transparent" href="/signup">
-                  Sign Up
-                </Button>
-
-                <Button round color="primary" href="/login">
-                  Login
-                </Button>
-
-                <div className={classes.divider} />
-
-                <Drawer
-                  direction={"right"}
-                  drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
-                  drawerTitle={"Your Cart"}
-                  logo={<ShoppingCartIcon className={classes.iconColor} />}
-                  children={<Basket cartItems={cart} />}
-                />
-              </div>
-
-              <div className={mobileClass}>
-                <SearchBarDrawer
-                  direction={"top"}
-                  logo={<SearchIcon className={iconColorClass} />}
-                />
-
-                <Drawer
-                  direction={"right"}
-                  drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
-                  drawerTitle={"Your Cart"}
-                  logo={<ShoppingCartIcon className={classes.iconColor} />}
-                  button={
-                    <Button round fullWidth color="primary">
-                      Beli Sekarang
+                    <Button href="/pricing" round color="transparent">
+                      Pricing
                     </Button>
-                  }
-                />
 
-                <IconButton
-                  aria-label="show more"
-                  aria-controls={mobileMenuId}
-                  aria-haspopup="true"
-                  onClick={handleMobileMenuOpen}
-                  color="inherit"
-                >
-                  <MenuIcon className={iconColorClass} />
-                </IconButton>
-              </div>
-            </Toolbar>
-          </Container>
-        </AppBar>
+                    <Button round color="transparent" href="/library">
+                      Library
+                    </Button>
+
+                    <Button round color="primary" href="/accounts">
+                      Accounts
+                    </Button>
+
+                    <div className={classes.divider} />
+
+                    <Drawer
+                      direction={"right"}
+                      drawerLogo={
+                        <ShoppingCartIcon className={classes.hugeIcon} />
+                      }
+                      drawerTitle={"Your Cart"}
+                      logo={<ShoppingCartIcon className={classes.iconColor} />}
+                      children={<Basket cartItems={cart} />}
+                    />
+                  </div>
+
+                  <div className={mobileClass}>
+                    <SearchBarDrawer
+                      direction={"top"}
+                      logo={<SearchIcon className={iconColorClass} />}
+                    />
+
+                    <Drawer
+                      direction={"right"}
+                      drawerLogo={
+                        <ShoppingCartIcon className={classes.hugeIcon} />
+                      }
+                      drawerTitle={"Your Cart"}
+                      logo={<ShoppingCartIcon className={classes.iconColor} />}
+                      button={
+                        <Button round fullWidth color="primary">
+                          Beli Sekarang
+                        </Button>
+                      }
+                    />
+
+                    <IconButton
+                      aria-label="show more"
+                      aria-controls={mobileMenuId}
+                      aria-haspopup="true"
+                      onClick={handleMobileMenuOpen}
+                      color="inherit"
+                    >
+                      <MenuIcon className={iconColorClass} />
+                    </IconButton>
+                  </div>
+                </Toolbar>
+              </Container>
+            </AppBar>
+          ) : (
+            <AppBar position="static" color="white">
+              <Container>
+                <Toolbar>
+                  <a href="/">
+                    <img className={iconClass} src={Logo} />
+                  </a>
+
+                  <div className={growClass} />
+
+                  <div className={desktopClass}>
+                    <SearchBarDrawer
+                      direction={"top"}
+                      logo={<SearchIcon className={iconColorClass} />}
+                    />
+
+                    <Button href="/pricing" round color="transparent">
+                      Pricing
+                    </Button>
+
+                    <Button round color="transparent" href="/signup">
+                      Sign Up
+                    </Button>
+
+                    <Button round color="primary" href="/login">
+                      Login
+                    </Button>
+
+                    <div className={classes.divider} />
+
+                    <Drawer
+                      direction={"right"}
+                      drawerLogo={
+                        <ShoppingCartIcon className={classes.hugeIcon} />
+                      }
+                      drawerTitle={"Your Cart"}
+                      logo={<ShoppingCartIcon className={classes.iconColor} />}
+                      children={<Basket cartItems={cart} />}
+                    />
+                  </div>
+
+                  <div className={mobileClass}>
+                    <SearchBarDrawer
+                      direction={"top"}
+                      logo={<SearchIcon className={iconColorClass} />}
+                    />
+
+                    <Drawer
+                      direction={"right"}
+                      drawerLogo={
+                        <ShoppingCartIcon className={classes.hugeIcon} />
+                      }
+                      drawerTitle={"Your Cart"}
+                      logo={<ShoppingCartIcon className={classes.iconColor} />}
+                      button={
+                        <Button round fullWidth color="primary">
+                          Beli Sekarang
+                        </Button>
+                      }
+                    />
+
+                    <IconButton
+                      aria-label="show more"
+                      aria-controls={mobileMenuId}
+                      aria-haspopup="true"
+                      onClick={handleMobileMenuOpen}
+                      color="inherit"
+                    >
+                      <MenuIcon className={iconColorClass} />
+                    </IconButton>
+                  </div>
+                </Toolbar>
+              </Container>
+            </AppBar>
+          )}
+        </div>
       )}
+
       {renderMobileMenu}
     </div>
   );

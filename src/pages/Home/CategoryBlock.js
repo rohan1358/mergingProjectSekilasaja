@@ -94,8 +94,8 @@ export default function CategoryBlock(props) {
         </Carousel>
       ) : (
         <Carousel
-          autoPlay={true}
-          autoPlaySpeed={1500}
+          // autoPlay={true}
+          // autoPlaySpeed={1500}
           ssr={true}
           responsive={responsive}
         >
