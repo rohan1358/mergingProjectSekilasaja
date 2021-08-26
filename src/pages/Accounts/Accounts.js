@@ -21,7 +21,7 @@ import { Alert } from "@material-ui/lab";
 export default function AccountsPage() {
   const classes = MultiUseMobile();
   const { currentUser } = useContext(AuthContext);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(null);
   const [bookNum, setBookNum] = useState([]);
   const [endDate, setEndDate] = useState([]);
 
@@ -53,6 +53,11 @@ export default function AccountsPage() {
     return currentUser.updatePassword(password);
   }
 
+
+  function handleUpdateUserInformation(e) {
+
+  }
+
   function handleChangePassword(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
@@ -82,7 +87,7 @@ export default function AccountsPage() {
   return (
     <div>
       <NavBar />
-      <Container maxWidth={"sm"}>
+      {(userData !== null) == true && ( <Container maxWidth={"sm"}>
         <div className={classes.extraSpace} />
         <Paper className={classes.paddedContent}>
           <Typography className={classes.sectionTitle} size="heading">
@@ -124,8 +129,9 @@ export default function AccountsPage() {
               name="name"
             />
           </label> */}
-
+<form onSubmit={handleChangePassword}>
           <TextField
+            required
             defaultValue={userData.firstName}
             className={classes.textFieldRoot}
             id="filled-basic"
@@ -160,7 +166,7 @@ export default function AccountsPage() {
           />
 
           <Button fullWidth>Update Profile</Button>
-
+          </form>
           <div className={classes.extraSpace} />
           <Divider />
           <div className={classes.extraSpace} />
@@ -212,7 +218,8 @@ export default function AccountsPage() {
           </div>
         </Paper>
       </Container>
-      <Footer />
+      )}
+     <Footer />
     </div>
   );
 }
