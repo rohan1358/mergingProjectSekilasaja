@@ -70,22 +70,19 @@ export default function BookDetailsPage({ match, history }) {
     } else {
       console.log("Not logged in");
     }
-
-    
   }, []);
   useEffect(() => {
     const changeBtn = () => {
-      const exist = cartItems.find((x) => x.title ===  match.params.title);
+      const exist = cartItems.find((x) => x.title === match.params.title);
       if (exist) {
         setIsAdded(true);
       } else {
         setIsAdded(false);
       }
-
     };
     changeBtn();
-  }, [cartItems])
-  console.log(isAdded)
+  }, [cartItems]);
+  console.log(isAdded);
   const handleAddCart = () => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
@@ -224,20 +221,18 @@ export default function BookDetailsPage({ match, history }) {
                             </Grid>
 
                             <Grid item>
-                            {(isAdded === false) ? (
-                              <Button
-                              onClick={handleAddCart}
-                              color="secondary"
-                            >
-                              Add To Cart
-                            </Button>
-                            ) : (
-                              <Button
-                              color="secondary"
-                            >
-                              Added
-                            </Button>
-                            )}
+                              {isAdded === false ? (
+                                <Button
+                                  onClick={handleAddCart}
+                                  color="secondary"
+                                >
+                                  Add To Cart
+                                </Button>
+                              ) : (
+                                <Typography type="bold">
+                                  ✔ Added to Cart!
+                                </Typography>
+                              )}
                             </Grid>
                           </Grid>
                         </div>
@@ -249,21 +244,18 @@ export default function BookDetailsPage({ match, history }) {
                             </Button>
                           </Grid>
                           <Grid item xs={12}>
-                            {(isAdded === false) ? (
+                            {isAdded === false ? (
                               <Button
-                              onClick={handleAddCart}
-                              fullWidth
-                              color="secondary"
-                            >
-                              Add To Cart
-                            </Button>
+                                onClick={handleAddCart}
+                                fullWidth
+                                color="secondary"
+                              >
+                                Add To Cart
+                              </Button>
                             ) : (
-                              <Button
-                              fullWidth
-                              color="secondary"
-                            >
-                              Added
-                            </Button>
+                              <Typography type="bold">
+                                ✔ Added to Cart!
+                              </Typography>
                             )}
                           </Grid>
                         </div>
@@ -340,4 +332,3 @@ export default function BookDetailsPage({ match, history }) {
     </div>
   );
 }
-

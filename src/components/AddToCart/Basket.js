@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // Custom components
 import Typography from "../Typography";
@@ -7,11 +7,14 @@ import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import RdpdCover from "../../images/rdpd.jpg";
 
+// Firebase components
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
+import { AuthContext } from "../Routing/Auth";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
+
 // Material-UI components
 import { makeStyles, Grid } from "@material-ui/core";
 
@@ -22,6 +25,7 @@ export default function Basket(props) {
   const mobile = MultiUseMobile();
   const cartItems = useSelector(selectCart).cart;
   const dispatch = useDispatch();
+  const { currentUser } = useContext(AuthContext);
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
   const totalPrice = itemsPrice;
@@ -29,7 +33,7 @@ export default function Basket(props) {
   const onRemove_ = (product) => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.DeleteToCart(
-        "Dlv3qspcF2QSSRYm7Z4YnQp9bBh2",
+        currentUser.uid,
         product
       );
       console.log(results);
