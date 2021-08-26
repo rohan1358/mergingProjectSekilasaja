@@ -316,38 +316,12 @@ export default function NavBar(props) {
                     <Button round color="primary" href="/login">
                       Login
                     </Button>
-
-                    <div className={classes.divider} />
-
-                    <Drawer
-                      direction={"right"}
-                      drawerLogo={
-                        <ShoppingCartIcon className={classes.hugeIcon} />
-                      }
-                      drawerTitle={"Your Cart"}
-                      logo={<ShoppingCartIcon className={classes.iconColor} />}
-                      children={<Basket cartItems={cart} />}
-                    />
                   </div>
 
                   <div className={mobileClass}>
                     <SearchBarDrawer
                       direction={"top"}
                       logo={<SearchIcon className={iconColorClass} />}
-                    />
-
-                    <Drawer
-                      direction={"right"}
-                      drawerLogo={
-                        <ShoppingCartIcon className={classes.hugeIcon} />
-                      }
-                      drawerTitle={"Your Cart"}
-                      logo={<ShoppingCartIcon className={classes.iconColor} />}
-                      button={
-                        <Button round fullWidth color="primary">
-                          Beli Sekarang
-                        </Button>
-                      }
                     />
 
                     <IconButton

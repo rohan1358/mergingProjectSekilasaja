@@ -104,95 +104,237 @@ export default function BookDetailsPage({ match, history }) {
   return (
     <div>
       <NavBar />
-      {!!isSubscribed || !!isBookOwned ? (
+      {!!currentUser ? (
         <div>
-          {(current_product !== null) === true && (
+          {!!isSubscribed || !!isBookOwned ? (
             <div>
-              {(current_product.kilasan[0].length !== 0) === true && (
-                <Container>
-                  <BookDetails
-                    cover={BookCover}
-                    title={current_product.title}
-                    author={current_product.author}
-                    descriptionTitle={"Tentang Apa?"}
-                    description={current_product.description}
-                    watchTime={"15"}
-                    readTime={"15"}
-                    num={current_product.kilasan[0].length}
-                    buttons={
-                      <div>
-                        <div className={classes.sectionDesktop}>
-                          <Grid container spacing={3}>
-                            <Grid item>
-                              <Button
-                                href={`/text-page/${current_product.title}`}
-                              >
-                                Read or listen now!
-                              </Button>
-                            </Grid>
+              {(current_product !== null) === true && (
+                <div>
+                  {(current_product.kilasan[0].length !== 0) === true && (
+                    <Container>
+                      <BookDetails
+                        cover={BookCover}
+                        title={current_product.title}
+                        author={current_product.author}
+                        descriptionTitle={"Tentang Apa?"}
+                        description={current_product.description}
+                        watchTime={"15"}
+                        readTime={"15"}
+                        num={current_product.kilasan[0].length}
+                        buttons={
+                          <div>
+                            <div className={classes.sectionDesktop}>
+                              <Grid container spacing={3}>
+                                <Grid item>
+                                  <Button
+                                    href={`/text-page/${current_product.title}`}
+                                  >
+                                    Read or listen now!
+                                  </Button>
+                                </Grid>
 
-                            <Grid item>
-                              <Button href={`/video/${current_product.title}`}>
-                                Watch now!
-                              </Button>
-                            </Grid>
+                                <Grid item>
+                                  <Button
+                                    href={`/video/${current_product.title}`}
+                                  >
+                                    Watch now!
+                                  </Button>
+                                </Grid>
 
-                            <Grid item>
-                              <Button color="secondary">
-                                Add to Favorites
-                              </Button>
-                            </Grid>
-                          </Grid>
-                        </div>
+                                <Grid item>
+                                  <Button color="secondary">
+                                    Add to Favorites
+                                  </Button>
+                                </Grid>
+                              </Grid>
+                            </div>
 
-                        <div className={classes.sectionMobileBlock}>
-                          <Grid item xs={12}>
-                            <Button href={current_product.title} fullWidth>
-                              Read or listen now!
-                            </Button>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Button
-                              fullWidth
-                              href={`/video/${current_product.title}`}
-                            >
-                              Watch now!
-                            </Button>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Button fullWidth color="secondary">
-                              Add to Favorites
-                            </Button>
-                          </Grid>
-                        </div>
-                      </div>
-                    }
-                  />
+                            <div className={classes.sectionMobileBlock}>
+                              <Grid item xs={12}>
+                                <Button href={current_product.title} fullWidth>
+                                  Read or listen now!
+                                </Button>
+                              </Grid>
+                              <Grid item xs={12}>
+                                <Button
+                                  fullWidth
+                                  href={`/video/${current_product.title}`}
+                                >
+                                  Watch now!
+                                </Button>
+                              </Grid>
+                              <Grid item xs={12}>
+                                <Button fullWidth color="secondary">
+                                  Add to Favorites
+                                </Button>
+                              </Grid>
+                            </div>
+                          </div>
+                        }
+                      />
 
-                  <TextDetails
-                    totalNum={current_product.kilasan[0].length}
-                    kilasTitle={current_product.kilasan[0].title}
-                    kilasBody={current_product.kilasan[0].details.map(
-                      (paragraph) => (
-                        <Typography className={classes.paragraph}>
-                          {paragraph}
-                        </Typography>
-                      )
-                    )}
-                    tableOfContents={current_product.kilasan.map(
-                      (kilas, index) => (
-                        <div>
-                          <Typography className={classes.paragraph}>
-                            {kilas.title === undefined
-                              ? "Ringkasan Akhir"
-                              : "Kilas #" + (index + 1) + " : " + kilas.title}
-                          </Typography>
-                          <Divider />
-                        </div>
-                      )
-                    )}
-                  />
-                </Container>
+                      <TextDetails
+                        totalNum={current_product.kilasan[0].length}
+                        kilasTitle={current_product.kilasan[0].title}
+                        kilasBody={current_product.kilasan[0].details.map(
+                          (paragraph) => (
+                            <Typography className={classes.paragraph}>
+                              {paragraph}
+                            </Typography>
+                          )
+                        )}
+                        tableOfContents={current_product.kilasan.map(
+                          (kilas, index) => (
+                            <div>
+                              <Typography className={classes.paragraph}>
+                                {kilas.title === undefined
+                                  ? "Ringkasan Akhir"
+                                  : "Kilas #" +
+                                    (index + 1) +
+                                    " : " +
+                                    kilas.title}
+                              </Typography>
+                              <Divider />
+                            </div>
+                          )
+                        )}
+                      />
+                    </Container>
+                  )}
+                </div>
+              )}
+            </div>
+          ) : (
+            <div>
+              {(current_product !== null) === true && (
+                <div>
+                  {(current_product.kilasan[0].length !== 0) === true && (
+                    <Container>
+                      <BookDetails
+                        cover={BookCover}
+                        title={current_product.title}
+                        author={current_product.author}
+                        descriptionTitle={"Tentang Apa?"}
+                        description={current_product.description}
+                        watchTime={"15"}
+                        readTime={"15"}
+                        num={current_product.kilasan[0].length}
+                        buttons={
+                          <div>
+                            <div className={classes.sectionDesktop}>
+                              <Grid container spacing={3}>
+                                <Grid item>
+                                  <Button href={"/pricing"}>
+                                    Subscribe Now!
+                                  </Button>
+                                </Grid>
+
+                                <Grid item>
+                                  {isAdded === false ? (
+                                    <Button
+                                      onClick={handleAddCart}
+                                      color="secondary"
+                                    >
+                                      Add To Cart
+                                    </Button>
+                                  ) : (
+                                    <Typography type="bold">
+                                      ✔ Added to Cart!
+                                    </Typography>
+                                  )}
+                                </Grid>
+                              </Grid>
+                            </div>
+
+                            <div className={classes.sectionMobileBlock}>
+                              <Grid item xs={12}>
+                                <Button fullWidth href={"/pricing"}>
+                                  Subscribe Now!
+                                </Button>
+                              </Grid>
+                              <Grid item xs={12}>
+                                {isAdded === false ? (
+                                  <Button
+                                    onClick={handleAddCart}
+                                    fullWidth
+                                    color="secondary"
+                                  >
+                                    Add To Cart
+                                  </Button>
+                                ) : (
+                                  <Typography type="bold">
+                                    ✔ Added to Cart!
+                                  </Typography>
+                                )}
+                              </Grid>
+                            </div>
+                          </div>
+                        }
+                      />
+                      <TextDetails
+                        totalNum={current_product.kilasan[0].length}
+                        kilasTitle={current_product.kilasan[0].title}
+                        kilasBody={
+                          <div>
+                            <Typography className={classes.paragraph}>
+                              {current_product.kilasan[0].details[0]}
+                            </Typography>
+
+                            <Typography className={classes.paragraph}>
+                              {current_product.kilasan[0].details[1]}
+                            </Typography>
+
+                            {current_product.kilasan[0].details.map(
+                              (paragraph) => (
+                                <div className={classes.blur}>
+                                  <Typography className={classes.paragraph}>
+                                    {paragraph ===
+                                      current_product.kilasan[0].details[0] ||
+                                    paragraph ===
+                                      current_product.kilasan[0].details[1]
+                                      ? ""
+                                      : paragraph}
+                                  </Typography>
+                                </div>
+                              )
+                            )}
+                          </div>
+                        }
+                        tableOfContents={current_product.kilasan.map(
+                          (kilas, index) => (
+                            <div>
+                              {index < 2 ? (
+                                <div>
+                                  <Typography className={classes.paragraph}>
+                                    {kilas.title === undefined
+                                      ? "Ringkasan Akhir"
+                                      : "Kilas #" +
+                                        (index + 1) +
+                                        " : " +
+                                        kilas.title}
+                                  </Typography>
+                                  <Divider />
+                                </div>
+                              ) : (
+                                <div className={classes.blur}>
+                                  <Typography className={classes.paragraph}>
+                                    {kilas.title === undefined
+                                      ? "Ringkasan Akhir"
+                                      : "Kilas #" +
+                                        (index + 1) +
+                                        " : " +
+                                        kilas.title}
+                                  </Typography>
+                                  <Divider />
+                                </div>
+                              )}
+                            </div>
+                          )
+                        )}
+                      />
+                    </Container>
+                  )}
+                </div>
               )}
             </div>
           )}
@@ -217,46 +359,25 @@ export default function BookDetailsPage({ match, history }) {
                         <div className={classes.sectionDesktop}>
                           <Grid container spacing={3}>
                             <Grid item>
-                              <Button href={"/pricing"}>Subscribe Now!</Button>
+                              <Button href={"/login"}>Masuk Sekarang!</Button>
                             </Grid>
 
                             <Grid item>
-                              {isAdded === false ? (
-                                <Button
-                                  onClick={handleAddCart}
-                                  color="secondary"
-                                >
-                                  Add To Cart
-                                </Button>
-                              ) : (
-                                <Typography type="bold">
-                                  ✔ Added to Cart!
-                                </Typography>
-                              )}
+                              <Button href="/signup">Daftar Sekarang!</Button>
                             </Grid>
                           </Grid>
                         </div>
 
                         <div className={classes.sectionMobileBlock}>
                           <Grid item xs={12}>
-                            <Button fullWidth href={"/pricing"}>
-                              Subscribe Now!
+                            <Button fullWidth href={"/login"}>
+                              Masuk Sekarang!
                             </Button>
                           </Grid>
                           <Grid item xs={12}>
-                            {isAdded === false ? (
-                              <Button
-                                onClick={handleAddCart}
-                                fullWidth
-                                color="secondary"
-                              >
-                                Add To Cart
-                              </Button>
-                            ) : (
-                              <Typography type="bold">
-                                ✔ Added to Cart!
-                              </Typography>
-                            )}
+                            <Button href="/signup" fullWidth>
+                              Daftar Sekarang!
+                            </Button>
                           </Grid>
                         </div>
                       </div>
