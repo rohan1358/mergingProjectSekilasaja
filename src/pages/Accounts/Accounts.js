@@ -31,7 +31,6 @@ export default function AccountsPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -53,12 +52,18 @@ export default function AccountsPage() {
     return currentUser.updatePassword(password);
   }
 
-  function handleUpdateUserInformation(e) {}
+  function handleUpdateUserInformation(e) {
+    e.preventDefault();
+  }
 
   function handleChangePassword(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Password tidak sama!");
+    }
+
+    if (passwordRef.current.value !== "") {
+      return setError("Proses Gagal!");
     }
 
     const promises = [];
@@ -71,10 +76,10 @@ export default function AccountsPage() {
 
     Promise.all(promises)
       .then(() => {
-        setSuccess("Berhasil! Password telah terganti dengan yang baru.");
+        setSuccess("Proses berhasil!");
       })
       .catch(() => {
-        setError("Gagal! Coba ulang sekali lagi.");
+        setError("Proses Gagal!");
       })
       .finally(() => {
         setLoading(false);
@@ -104,7 +109,17 @@ export default function AccountsPage() {
             <div className={classes.extraSpace} />
 
             <Typography size="subheading">Profil</Typography>
-            <form onSubmit={handleChangePassword}>
+            <form onSubmit={handleUpdateUserInformation}>
+              {error && (
+                <div className={classes.alertRoot}>
+                  <Alert severity="error">{error}</Alert>
+                </div>
+              )}
+              {success && (
+                <div className={classes.alertRoot}>
+                  <Alert severity="success">{success}</Alert>
+                </div>
+              )}
               <TextField
                 defaultValue={userData.firstName}
                 className={classes.textFieldRoot}
@@ -139,7 +154,7 @@ export default function AccountsPage() {
                 fullWidth
               />
 
-              <Button type="submit" fullWidth>
+              <Button disabled={loading} type="submit" fullWidth>
                 Update Profile
               </Button>
             </form>
