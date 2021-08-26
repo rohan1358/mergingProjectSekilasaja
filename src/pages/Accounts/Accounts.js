@@ -53,10 +53,7 @@ export default function AccountsPage() {
     return currentUser.updatePassword(password);
   }
 
-
-  function handleUpdateUserInformation(e) {
-
-  }
+  function handleUpdateUserInformation(e) {}
 
   function handleChangePassword(e) {
     e.preventDefault();
@@ -87,139 +84,119 @@ export default function AccountsPage() {
   return (
     <div>
       <NavBar />
-      {(userData !== null) == true && ( <Container maxWidth={"sm"}>
-        <div className={classes.extraSpace} />
-        <Paper className={classes.paddedContent}>
-          <Typography className={classes.sectionTitle} size="heading">
-            Accounts
-          </Typography>
+      {(userData !== null) == true && (
+        <Container maxWidth={"sm"}>
           <div className={classes.extraSpace} />
-          <Typography size="subheading">Layanan Berlangganan</Typography>
-          <SubscriptionPlan
-            subscriptionType={"Belum Berlanggan"}
-            number={bookNum.length}
-            endDate={endDate}
-          />
-
-          <div className={classes.extraSpace} />
-          <Divider />
-          <div className={classes.extraSpace} />
-
-          <Typography size="subheading">Profil</Typography>
-          {/* <label>
-            First Name
-            <input defaultValue={userData.firstName} type="text" name="name" />
-          </label>
-
-          <label>
-            Last Name
-            <input defaultValue={userData.lastName} type="text" name="name" />
-          </label>
-
-          <label>
-            Email
-            <input defaultValue={currentUser.email} type="text" name="name" />
-          </label>
-
-          <label>
-            Phone Number
-            <input
-              defaultValue={userData.phoneNumber}
-              type="text"
-              name="name"
+          <Paper className={classes.paddedContent}>
+            <Typography className={classes.sectionTitle} size="heading">
+              Accounts
+            </Typography>
+            <div className={classes.extraSpace} />
+            <Typography size="subheading">Layanan Berlangganan</Typography>
+            <SubscriptionPlan
+              subscriptionType={"Belum Berlanggan"}
+              number={bookNum.length}
+              endDate={endDate}
             />
-          </label> */}
-<form onSubmit={handleChangePassword}>
-          <TextField
-            required
-            defaultValue={userData.firstName}
-            className={classes.textFieldRoot}
-            id="filled-basic"
-            label="First Name"
-            variant="filled"
-            fullWidth
-          />
-          <TextField
-            defaultValue={userData.lastName}
-            className={classes.textFieldRoot}
-            id="filled-basic"
-            label="Last Name"
-            variant="filled"
-            fullWidth
-          />
-          <TextField
-            disabled
-            defaultValue={currentUser.email}
-            className={classes.textFieldRoot}
-            id="filled-basic"
-            label="Email"
-            variant="filled"
-            fullWidth
-          />
-          <TextField
-            defaultValue={userData.phoneNumber}
-            className={classes.textFieldRoot}
-            id="filled-basic"
-            label="Phone Number"
-            variant="filled"
-            fullWidth
-          />
 
-          <Button fullWidth>Update Profile</Button>
-          </form>
-          <div className={classes.extraSpace} />
-          <Divider />
-          <div className={classes.extraSpace} />
+            <div className={classes.extraSpace} />
+            <Divider />
+            <div className={classes.extraSpace} />
 
-          <form onSubmit={handleChangePassword}>
-            <Typography size="subheading">Change Password</Typography>
-            {error && (
-              <div className={classes.alertRoot}>
-                <Alert severity="error">{error}</Alert>
-              </div>
-            )}
-            {success && (
-              <div className={classes.alertRoot}>
-                <Alert severity="success">{success}</Alert>
-              </div>
-            )}
-            <TextField
-              className={classes.textFieldRoot}
-              id="filled-basic"
-              label="Password Baru"
-              variant="filled"
-              inputRef={passwordRef}
-              type="password"
-              fullWidth
-            />
-            <TextField
-              className={classes.textFieldRoot}
-              id="filled-basic"
-              label="Ketik Ulang Password Baru"
-              variant="filled"
-              type="password"
-              inputRef={passwordConfirmRef}
-              fullWidth
-            />
-            <Button disabled={loading} type="submit" fullWidth>
-              Change Password
-            </Button>
-          </form>
-          <div className={classes.extraSpace} />
+            <Typography size="subheading">Profil</Typography>
+            <form onSubmit={handleChangePassword}>
+              <TextField
+                defaultValue={userData.firstName}
+                className={classes.textFieldRoot}
+                id="filled-basic"
+                label="First Name"
+                variant="filled"
+                fullWidth
+              />
+              <TextField
+                defaultValue={userData.lastName}
+                className={classes.textFieldRoot}
+                id="filled-basic"
+                label="Last Name"
+                variant="filled"
+                fullWidth
+              />
+              <TextField
+                disabled
+                defaultValue={currentUser.email}
+                className={classes.textFieldRoot}
+                id="filled-basic"
+                label="Email"
+                variant="filled"
+                fullWidth
+              />
+              <TextField
+                defaultValue={userData.phoneNumber}
+                className={classes.textFieldRoot}
+                id="filled-basic"
+                label="Phone Number"
+                variant="filled"
+                fullWidth
+              />
 
-          <div className={classes.center}>
-            <Button
-              onClick={() => fire.auth().signOut()}
-              round
-              color="secondary"
-            >
-              Log out
-            </Button>
-          </div>
-        </Paper>
-      </Container>
+              <Button type="submit" fullWidth>
+                Update Profile
+              </Button>
+            </form>
+
+            <div className={classes.extraSpace} />
+            <Divider />
+            <div className={classes.extraSpace} />
+
+            <form onSubmit={handleChangePassword}>
+              <Typography size="subheading">Change Password</Typography>
+              {error && (
+                <div className={classes.alertRoot}>
+                  <Alert severity="error">{error}</Alert>
+                </div>
+              )}
+              {success && (
+                <div className={classes.alertRoot}>
+                  <Alert severity="success">{success}</Alert>
+                </div>
+              )}
+              <TextField
+                className={classes.textFieldRoot}
+                id="filled-basic"
+                label="Password Baru"
+                variant="filled"
+                inputRef={passwordRef}
+                type="password"
+                fullWidth
+              />
+              <TextField
+                className={classes.textFieldRoot}
+                id="filled-basic"
+                label="Ketik Ulang Password Baru"
+                variant="filled"
+                type="password"
+                inputRef={passwordConfirmRef}
+                fullWidth
+              />
+              <Button disabled={loading} type="submit" fullWidth>
+                Change Password
+              </Button>
+            </form>
+            <div className={classes.extraSpace} />
+
+            <div className={classes.center}>
+              <Button
+                onClick={() => fire.auth().signOut()}
+                round
+                color="secondary"
+              >
+                Log out
+              </Button>
+            </div>
+          </Paper>
+        </Container>
       )}
-     <Footer />
+      <Footer />
     </div>
   );
 }
