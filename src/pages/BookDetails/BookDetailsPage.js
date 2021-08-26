@@ -71,17 +71,21 @@ export default function BookDetailsPage({ match, history }) {
       console.log("Not logged in");
     }
 
+    
+  }, []);
+  useEffect(() => {
     const changeBtn = () => {
-      const exist = cartItems.find((x) => x === bookTitle);
+      const exist = cartItems.find((x) => x.title ===  match.params.title);
       if (exist) {
         setIsAdded(true);
       } else {
         setIsAdded(false);
       }
+
     };
     changeBtn();
-  }, []);
-
+  }, [cartItems])
+  console.log(isAdded)
   const handleAddCart = () => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
@@ -220,14 +224,20 @@ export default function BookDetailsPage({ match, history }) {
                             </Grid>
 
                             <Grid item>
-                              {/* <Button onClick={handleAddCart} fullWidth color="secondary"> */}
+                            {(isAdded === false) ? (
                               <Button
-                                onClick={handleAddCart}
-                                fullWidth
-                                color="secondary"
-                              >
-                                Add To Cart
-                              </Button>
+                              onClick={handleAddCart}
+                              color="secondary"
+                            >
+                              Add To Cart
+                            </Button>
+                            ) : (
+                              <Button
+                              color="secondary"
+                            >
+                              Added
+                            </Button>
+                            )}
                             </Grid>
                           </Grid>
                         </div>
@@ -239,14 +249,22 @@ export default function BookDetailsPage({ match, history }) {
                             </Button>
                           </Grid>
                           <Grid item xs={12}>
-                            {/* <Button onClick={handleAddCart} fullWidth color="secondary"> */}
-                            <Button
+                            {(isAdded === false) ? (
+                              <Button
                               onClick={handleAddCart}
                               fullWidth
                               color="secondary"
                             >
                               Add To Cart
                             </Button>
+                            ) : (
+                              <Button
+                              fullWidth
+                              color="secondary"
+                            >
+                              Added
+                            </Button>
+                            )}
                           </Grid>
                         </div>
                       </div>
@@ -322,3 +340,4 @@ export default function BookDetailsPage({ match, history }) {
     </div>
   );
 }
+
