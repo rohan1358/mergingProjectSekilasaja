@@ -77,8 +77,6 @@ export default function NavBar(props) {
   const cart = useSelector(selectCart).cart;
   const dispatch = useDispatch();
 
-  console.log(cart);
-
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   useEffect(() => {

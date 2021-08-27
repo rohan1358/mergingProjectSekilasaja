@@ -1,4 +1,4 @@
-import { createSlice, creacteAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const ownedBookTitlesSlice = createSlice({
   name: "ownedBookTitles",

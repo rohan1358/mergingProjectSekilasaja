@@ -51,6 +51,63 @@ export async function AddToCart(userid, product) {
   }
 }
 
+//Method to get all categories of books in firestore database
+export async function AddToFavorite(userid, product) {
+  //References to book information in database
+  var docRef = firestore.collection("users").doc(userid).get();
+  var favoriteBooks = null;
+  try {
+    favoriteBooks = await docRef.then((doc) => doc.data()["favorite_books"]);
+    console.log(favoriteBooks);
+    const exist = favoriteBooks.find((x) => x === product.title);
+    console.log(exist);
+    if (exist) {
+      console.log("Already Added");
+    } else {
+      favoriteBooks = [...favoriteBooks, product.title];
+      console.log(product);
+      firestore.collection("users").doc(userid).update({
+        favorite_books: favoriteBooks,
+      });
+    }
+    return favoriteBooks;
+  } catch (err) {
+    var errorCode = err.code;
+    var errorMessage = err.message;
+    console.log("Error: " + errorCode + "\n\n" + errorMessage);
+  }
+}
+
+export async function DeleteFromFavorite(userid, product) {
+  //References to book information in database
+  var docRef = firestore.collection("users").doc(userid).get();
+  var favoriteBooks = null;
+  try {
+    favoriteBooks = await docRef.then((doc) => doc.data()["favorite_books"]);
+
+    const exist = favoriteBooks.find((x) => x === product.title);
+
+    if (exist) {
+      favoriteBooks = [
+        ...favoriteBooks.filter(function (ele) {
+          return ele != product.title;
+        }),
+      ];
+
+      firestore.collection("users").doc(userid).update({
+        favorite_books: favoriteBooks,
+      });
+    } else {
+      console.log("Already Deleted");
+    }
+    return favoriteBooks;
+  } catch (err) {
+    var errorCode = err.code;
+    var errorMessage = err.message;
+    console.log("Error: " + errorCode + "\n\n" + errorMessage);
+  }
+}
+
 export async function DeleteToCart(userid, product) {
   //References to book information in database
   console.log(product);

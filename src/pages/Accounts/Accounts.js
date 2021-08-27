@@ -15,20 +15,27 @@ import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 // Material-UI components
-import { Container, Paper, Divider, TextField, Input } from "@material-ui/core";
+import { Container, Paper, Divider, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 
 export default function AccountsPage() {
+  const firestore = fire.firestore();
+
   const classes = MultiUseMobile();
   const { currentUser } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [bookNum, setBookNum] = useState([]);
-  const [endDate, setEndDate] = useState([]);
+  const [endDate, setEndDate] = useState("");
 
-  // Update Password
+  // Update profile
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const phoneNumberRef = useRef();
   const [error, setError] = useState("");
+  const [profileError, setProfileError] = useState("");
+  const [profileSuccess, setProfileSuccess] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -54,6 +61,36 @@ export default function AccountsPage() {
 
   function handleUpdateUserInformation(e) {
     e.preventDefault();
+
+    setProfileError("");
+    setProfileSuccess("");
+
+    try {
+      if (currentUser !== null) {
+        firestore.collection("users").doc(currentUser.uid).update({
+          firstName: firstNameRef.current.value,
+          lastName: lastNameRef.current.value,
+          phoneNumber: phoneNumberRef.current.value,
+        });
+      }
+
+      if (
+        userData.firstName === firstNameRef.current.value &&
+        userData.lastName === lastNameRef.current.value &&
+        userData.phoneNumber === phoneNumberRef.current.value
+      ) {
+        setProfileError("Tidak terjadi perubahan!");
+        setProfileSuccess("");
+      } else {
+        setProfileSuccess("Profil berhasil diganti!");
+        setProfileError("");
+      }
+    } catch (err) {
+      var errorCode = err.code;
+      var errorMessage = err.message;
+      setProfileError("Error (" + errorCode + "): " + errorMessage);
+      setProfileSuccess("");
+    }
   }
 
   function handleChangePassword(e) {
@@ -69,6 +106,7 @@ export default function AccountsPage() {
     const promises = [];
     setLoading(true);
     setError("");
+    setSuccess("");
 
     if (passwordRef.current.value) {
       promises.push(updatePassword(passwordRef.current.value));
@@ -77,6 +115,7 @@ export default function AccountsPage() {
     Promise.all(promises)
       .then(() => {
         setSuccess("Proses berhasil!");
+        setError("");
       })
       .catch(() => {
         setError("Proses Gagal!");
@@ -110,33 +149,38 @@ export default function AccountsPage() {
 
             <Typography size="subheading">Profil</Typography>
             <form onSubmit={handleUpdateUserInformation}>
-              {error && (
+              {profileError && (
                 <div className={classes.alertRoot}>
-                  <Alert severity="error">{error}</Alert>
+                  <Alert severity="error">{profileError}</Alert>
                 </div>
               )}
-              {success && (
+              {profileSuccess && (
                 <div className={classes.alertRoot}>
-                  <Alert severity="success">{success}</Alert>
+                  <Alert severity="success">{profileSuccess}</Alert>
                 </div>
               )}
               <TextField
+                required
                 defaultValue={userData.firstName}
                 className={classes.textFieldRoot}
                 id="filled-basic"
                 label="First Name"
                 variant="filled"
+                inputRef={firstNameRef}
                 fullWidth
               />
               <TextField
+                required
                 defaultValue={userData.lastName}
                 className={classes.textFieldRoot}
                 id="filled-basic"
                 label="Last Name"
                 variant="filled"
+                inputRef={lastNameRef}
                 fullWidth
               />
               <TextField
+                required
                 disabled
                 defaultValue={currentUser.email}
                 className={classes.textFieldRoot}
@@ -146,15 +190,17 @@ export default function AccountsPage() {
                 fullWidth
               />
               <TextField
+                required
                 defaultValue={userData.phoneNumber}
                 className={classes.textFieldRoot}
                 id="filled-basic"
                 label="Phone Number"
                 variant="filled"
+                inputRef={phoneNumberRef}
                 fullWidth
               />
 
-              <Button disabled={loading} type="submit" fullWidth>
+              <Button type="submit" fullWidth>
                 Update Profile
               </Button>
             </form>

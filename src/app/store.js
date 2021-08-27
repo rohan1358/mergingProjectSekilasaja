@@ -5,6 +5,8 @@ import storage from "redux-persist/lib/storage";
 import userReducer from "../feature/userSlice";
 import ownedBookTitlesReducer from "../feature/ownedBookTitlesSlice";
 import ownedBooksReducer from "../feature/ownedBooksSlice";
+import favoriteBookTitlesReducer from "../feature/favoriteBookTitlesSlice";
+import favoriteBooksReducer from "../feature/favoriteBooksSlice";
 
 const persistConfig = {
   key: "root",
@@ -16,6 +18,8 @@ const reducer = combineReducers({
   user: userReducer,
   ownedBookTitlesReducer,
   ownedBooksReducer,
+  favoriteBookTitlesReducer,
+  favoriteBooksReducer,
 });
 
 const persistReducer_ = persistReducer(persistConfig, reducer);

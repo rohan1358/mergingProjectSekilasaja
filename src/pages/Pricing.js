@@ -164,13 +164,13 @@ export default function PricingPage() {
 
       {/* If logged in, remove this button */}
       {!!currentUser ? (
+        <></>
+      ) : (
         <div className={classes.center}>
           <Button href="/signup" round color="primary">
             Daftar Sekarang
           </Button>
         </div>
-      ) : (
-        <></>
       )}
 
       <Footer />

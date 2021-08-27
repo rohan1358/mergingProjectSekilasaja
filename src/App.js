@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-//import firebase configuration
-import fire from "./firebase/fire";
-
 // Custom pages
 import LoginPage from "./pages/Login/Login";
 import SignUpPage from "./pages/SignUp/SignUp";

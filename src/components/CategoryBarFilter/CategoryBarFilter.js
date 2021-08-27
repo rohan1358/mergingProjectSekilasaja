@@ -35,17 +35,6 @@ function CategoryBarFilter({
       setCategories(results);
     };
     fetchData();
-    // const _categories = data.products.map((book) => {
-    //   return book.categories;
-    // });
-    // const _categoriesList = _categories.reduce((book1, book2) => {
-    //   return book1.concat(book2);
-    // });
-    // const uniqueArray = _categoriesList.filter(function (item, pos) {
-    //   return _categoriesList.indexOf(item) == pos;
-    // });
-    // //console.log(uniqueArray)
-    // setCategories(uniqueArray);
   }, []);
   return (
     <div className="CategoryBarFilter-Panel">

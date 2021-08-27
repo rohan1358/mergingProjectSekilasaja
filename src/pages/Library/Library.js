@@ -5,10 +5,8 @@ import { Redirect, withRouter } from "react-router";
 import Footer from "../../components/Footer";
 import NavBar from "../../components/NavBar/Navbar";
 import OwnedBooksBlock from "./OwnedBooksBlock";
-import FavoriteBooksBlock from "./FavoriteBooks";
 import Parallax from "../../components/Parallax";
 import Typography from "../../components/Typography";
-
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
 //Redux
@@ -17,6 +15,10 @@ import {
   selectOwnedBookTitles,
   setOwnedBookTitles,
 } from "../../feature/ownedBookTitlesSlice";
+import {
+  selectFavoriteBookTitles,
+  setFavoriteBookTitles,
+} from "../../feature/favoriteBookTitlesSlice";
 
 import Loading from "../Loading";
 
@@ -28,14 +30,15 @@ import { AuthContext } from "../../components/Routing/Auth";
 import { Container } from "@material-ui/core";
 
 export default function Library({ history }) {
+  const classes = MultiUseMobile();
   const [pending, setPending] = useState(true);
+
   const db = fire.firestore();
+  const { currentUser } = useContext(AuthContext);
 
   const dispatch = useDispatch();
   const ownedBookTitles = useSelector(selectOwnedBookTitles);
-  const { currentUser } = useContext(AuthContext);
-
-  const classes = MultiUseMobile();
+  const favoriteBookTitles = useSelector(selectFavoriteBookTitles);
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
@@ -49,6 +52,7 @@ export default function Library({ history }) {
       .onSnapshot((snapshot) => {
         snapshot.forEach((doc) => {
           dispatch(setOwnedBookTitles(doc.data()["owned_books"]));
+          dispatch(setFavoriteBookTitles(doc.data()["favorite_books"]));
         });
         setPending(false);
       });
@@ -77,17 +81,11 @@ export default function Library({ history }) {
         </Parallax>
 
         <div className={classes.extraSpace} />
-
-        <Typography size="subheading">Owned Books / Favorite</Typography>
-        <FavoriteBooksBlock
+        <OwnedBooksBlock
           ownedBookTitles={ownedBookTitles}
+          favoriteBookTitles={favoriteBookTitles}
           history={history}
         />
-
-        <div className={classes.extraSpace} />
-
-        <Typography size="subheading">Owned Books / All</Typography>
-        <OwnedBooksBlock ownedBookTitles={ownedBookTitles} history={history} />
       </Container>
       <Footer />
     </div>

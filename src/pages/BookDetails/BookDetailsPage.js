@@ -18,6 +18,10 @@ import { Container, Divider, Grid } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { selectOwnedBooks } from "../../feature/ownedBooksSlice";
 import { selectCart, setCart } from "../../feature/cartSlice";
+import {
+  selectFavoriteBooks,
+  setFavoriteBooks,
+} from "../../feature/favoriteBooksSlice";
 
 // Auth and fire
 import { AuthContext } from "../../components/Routing/Auth";
@@ -31,16 +35,19 @@ const firestore = fire.firestore();
 export default function BookDetailsPage({ match, history }) {
   const classes = MultiUseMobile();
 
-  const [current_product, setCurrent_Product] = useState(null);
-
   const { currentUser } = useContext(AuthContext);
+
+  const dispatch = useDispatch();
+  const ownedBooks = useSelector(selectOwnedBooks);
+  const cartItems = useSelector(selectCart).cart;
+  const favoriteBooks = useSelector(selectFavoriteBooks);
+
+  const [current_product, setCurrent_Product] = useState(null);
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isBookOwned, setIsBookOwned] = useState(false);
-  const ownedBooks = useSelector(selectOwnedBooks);
-  const cartItems = useSelector(selectCart).cart;
-  const dispatch = useDispatch();
   const [isAdded, setIsAdded] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const [bookTitle, setBookTitle] = useState([]);
 
   useEffect(() => {
@@ -71,6 +78,7 @@ export default function BookDetailsPage({ match, history }) {
       console.log("Not logged in");
     }
   }, []);
+
   useEffect(() => {
     const changeBtn = () => {
       const exist = cartItems.find((x) => x.title === match.params.title);
@@ -82,7 +90,19 @@ export default function BookDetailsPage({ match, history }) {
     };
     changeBtn();
   }, [cartItems]);
-  console.log(isAdded);
+
+  useEffect(() => {
+    const changeBtn = () => {
+      const exist = favoriteBooks.find((x) => x.title === match.params.title);
+      if (exist) {
+        setIsFavorite(true);
+      } else {
+        setIsFavorite(false);
+      }
+    };
+    changeBtn();
+  }, [favoriteBooks]);
+
   const handleAddCart = () => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
@@ -90,7 +110,7 @@ export default function BookDetailsPage({ match, history }) {
         current_product
       );
 
-      const exist = cartItems.find((x) => x.title === bookTitle);
+      const exist = cartItems.find((x) => x.title === match.params.title);
 
       if (exist) {
         console.log("Already Added");
@@ -101,6 +121,44 @@ export default function BookDetailsPage({ match, history }) {
     fetchData();
   };
 
+  const handleAddFavorite = () => {
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.AddToFavorite(
+        currentUser.uid,
+        current_product
+      );
+
+      const exist = favoriteBooks.find((x) => x.title === match.params.title);
+
+      if (exist) {
+        console.log("Already Added");
+      } else {
+        dispatch(setFavoriteBooks([...favoriteBooks, current_product]));
+      }
+    };
+    fetchData();
+  };
+
+  const handleDeleteFavorite = () => {
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.DeleteFromFavorite(
+        currentUser.uid,
+        current_product
+      );
+      console.log(results);
+      dispatch(
+        setFavoriteBooks([
+          ...cartItems.filter(function (ele) {
+            return ele.title != current_product.title;
+          }),
+        ])
+      );
+    };
+    fetchData();
+  };
+
+  console.log(favoriteBooks);
+
   return (
     <div>
       <NavBar />
@@ -110,7 +168,7 @@ export default function BookDetailsPage({ match, history }) {
             <div>
               {(current_product !== null) === true && (
                 <div>
-                  {(current_product.kilasan[0].length !== 0) === true && (
+                  {(current_product.kilasan.length !== 0) === true && (
                     <Container>
                       <BookDetails
                         cover={BookCover}
@@ -120,7 +178,7 @@ export default function BookDetailsPage({ match, history }) {
                         description={current_product.description}
                         watchTime={"15"}
                         readTime={"15"}
-                        num={current_product.kilasan[0].length}
+                        num={current_product.kilasan.length}
                         buttons={
                           <div>
                             <div className={classes.sectionDesktop}>
@@ -142,16 +200,31 @@ export default function BookDetailsPage({ match, history }) {
                                 </Grid>
 
                                 <Grid item>
-                                  <Button color="secondary">
-                                    Add to Favorites
-                                  </Button>
+                                  {isFavorite === false ? (
+                                    <Button
+                                      onClick={handleAddFavorite}
+                                      color="secondary"
+                                    >
+                                      Add To Favorites
+                                    </Button>
+                                  ) : (
+                                    <Button
+                                      onClick={handleDeleteFavorite}
+                                      color="gray"
+                                    >
+                                      Remove From Favorites!
+                                    </Button>
+                                  )}
                                 </Grid>
                               </Grid>
                             </div>
 
                             <div className={classes.sectionMobileBlock}>
                               <Grid item xs={12}>
-                                <Button href={current_product.title} fullWidth>
+                                <Button
+                                  href={`/text-page/${current_product.title}`}
+                                  fullWidth
+                                >
                                   Read or listen now!
                                 </Button>
                               </Grid>
@@ -164,9 +237,23 @@ export default function BookDetailsPage({ match, history }) {
                                 </Button>
                               </Grid>
                               <Grid item xs={12}>
-                                <Button fullWidth color="secondary">
-                                  Add to Favorites
-                                </Button>
+                                {isFavorite === false ? (
+                                  <Button
+                                    onClick={handleAddFavorite}
+                                    color="secondary"
+                                    fullWidth
+                                  >
+                                    Add To Favorites
+                                  </Button>
+                                ) : (
+                                  <Button
+                                    onClick={handleDeleteFavorite}
+                                    color="gray"
+                                    fullWidth
+                                  >
+                                    Remove From Favorites!
+                                  </Button>
+                                )}
                               </Grid>
                             </div>
                           </div>
@@ -174,7 +261,7 @@ export default function BookDetailsPage({ match, history }) {
                       />
 
                       <TextDetails
-                        totalNum={current_product.kilasan[0].length}
+                        totalNum={current_product.kilasan.length}
                         kilasTitle={current_product.kilasan[0].title}
                         kilasBody={current_product.kilasan[0].details.map(
                           (paragraph) => (
@@ -208,7 +295,7 @@ export default function BookDetailsPage({ match, history }) {
             <div>
               {(current_product !== null) === true && (
                 <div>
-                  {(current_product.kilasan[0].length !== 0) === true && (
+                  {(current_product.kilasan.length !== 0) === true && (
                     <Container>
                       <BookDetails
                         cover={BookCover}
@@ -218,7 +305,7 @@ export default function BookDetailsPage({ match, history }) {
                         description={current_product.description}
                         watchTime={"15"}
                         readTime={"15"}
-                        num={current_product.kilasan[0].length}
+                        num={current_product.kilasan.length}
                         buttons={
                           <div>
                             <div className={classes.sectionDesktop}>
@@ -272,7 +359,7 @@ export default function BookDetailsPage({ match, history }) {
                         }
                       />
                       <TextDetails
-                        totalNum={current_product.kilasan[0].length}
+                        totalNum={current_product.kilasan.length}
                         kilasTitle={current_product.kilasan[0].title}
                         kilasBody={
                           <div>
@@ -343,7 +430,7 @@ export default function BookDetailsPage({ match, history }) {
         <div>
           {(current_product !== null) === true && (
             <div>
-              {(current_product.kilasan[0].length !== 0) === true && (
+              {(current_product.kilasan.length !== 0) === true && (
                 <Container>
                   <BookDetails
                     cover={BookCover}
@@ -353,7 +440,7 @@ export default function BookDetailsPage({ match, history }) {
                     description={current_product.description}
                     watchTime={"15"}
                     readTime={"15"}
-                    num={current_product.kilasan[0].length}
+                    num={current_product.kilasan.length}
                     buttons={
                       <div>
                         <div className={classes.sectionDesktop}>
@@ -384,7 +471,7 @@ export default function BookDetailsPage({ match, history }) {
                     }
                   />
                   <TextDetails
-                    totalNum={current_product.kilasan[0].length}
+                    totalNum={current_product.kilasan.length}
                     kilasTitle={current_product.kilasan[0].title}
                     kilasBody={
                       <div>

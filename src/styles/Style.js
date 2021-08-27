@@ -3,7 +3,7 @@ const secondaryColor = "#41444b";
 const warningColor = "#ff9800";
 const dangerColor = "#f44336";
 const successColor = "#4caf50";
-const grayColor = "#52575D";
+const grayColor = "#D9DDDC";
 const beigeColor = "#FFFEF8";
 
 const containerFluid = {

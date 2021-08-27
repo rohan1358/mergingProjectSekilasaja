@@ -13,7 +13,6 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import { AuthContext } from "../../components/Routing/Auth";
 
 //Import firebase for signUp function
-import * as firebaseSignUp from "../../firebase/firebaseSignUp.js";
 import fire from "../../firebase/fire";
 const auth = fire.auth();
 const firestore = fire.firestore();
@@ -80,16 +79,21 @@ const SignUpForm = ({ history }) => {
         .createUserWithEmailAndPassword(email, password)
         .then((resp) => {
           //Store the new user information in the database via firestore
-          firestore.collection("users").doc(resp.user.uid).set({
-            firstName: firstName,
-            lastName: lastName,
-            phoneNumber: phoneNumber,
-            email: email,
-            owned_books: [],
-            favorite_books: [],
-            is_subscribed: false,
-            cart: [],
-          });
+          firestore
+            .collection("users")
+            .doc(resp.user.uid)
+            .set({
+              firstName: firstName,
+              lastName: lastName,
+              phoneNumber: phoneNumber,
+              email: email,
+              owned_books: [],
+              favorite_books: [],
+              is_subscribed: false,
+              cart: [],
+              start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
+              end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
+            });
           //Sign up success case
           // console.log("Firebase signup suceeded!");
         })

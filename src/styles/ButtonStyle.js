@@ -123,10 +123,10 @@ const ButtonStyle = {
         "0 14px 26px -12px rgba(244, 67, 54, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(244, 67, 54, 0.2)",
     },
   },
-  white: {
+  gray: {
     "&,&:focus,&:hover,&:visited": {
-      backgroundColor: "#FFFFFF",
-      color: grayColor,
+      backgroundColor: grayColor,
+      color: secondaryColor,
     },
   },
   twitter: {
