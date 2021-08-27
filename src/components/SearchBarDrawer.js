@@ -70,36 +70,36 @@ export default function SearchBarDrawer(props) {
     history.push(`/book-details/${value}`);
   }
 
-  const list = (anchor) => (
-    <div
-      className={clsx(drawer.list, {
-        [drawer.fullList]: anchor === "top" || anchor === "bottom",
-      })}
-      role="presentation"
-    >
-      <Container maxWidth={"xs"}>
-        {/* <form className={classes.root} noValidate autoComplete="off">
-          <TextField fullWidth id="standard-basic" label="Search" />
-        </form> */}
+  // const list = (anchor) => (
+  //   <div
+  //     className={clsx(drawer.list, {
+  //       [drawer.fullList]: anchor === "top" || anchor === "bottom",
+  //     })}
+  //     role="presentation"
+  //   >
+  //     <Container maxWidth={"xs"}>
+  //       {/* <form className={classes.root} noValidate autoComplete="off">
+  //         <TextField fullWidth id="standard-basic" label="Search" />
+  //       </form> */}
 
-        <Autocomplete
-          freeSolo
-          id="free-solo-2-demo"
-          disableClearable
-          options={allBooks.map((option) => option.book_title)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Search for books here..."
-              margin="normal"
-              variant="outlined"
-              InputProps={{ ...params.InputProps, type: 'search' }}
-            />
-          )}
-        />
-      </Container>
-    </div>
-  );
+  //       <Autocomplete
+  //         freeSolo
+  //         id="free-solo-2-demo"
+  //         disableClearable
+  //         options={allBooks.map((option) => option.book_title)}
+  //         renderInput={(params) => (
+  //           <TextField
+  //             {...params}
+  //             label="Search for books here..."
+  //             margin="normal"
+  //             variant="outlined"
+  //             InputProps={{ ...params.InputProps, type: 'search' }}
+  //           />
+  //         )}
+  //       />
+  //     </Container>
+  //   </div>
+  // );
 
   return (
     // <div>
