@@ -10,7 +10,8 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 // //Redux
-// import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
 // //import { selectBook, setBook } from "../../feature/bookSlice";
 
 // //Import firebase function to get books based on filter
@@ -43,7 +44,10 @@ const responsive = {
 
 export default function CategoryBlock(props) {
   const classes = MultiUseMobile();
-  //const dispatch = useDispatch();
+
+  //For searching (Using the all books for searching)
+  const dispatch = useDispatch();
+  const allBooks = useSelector(selectAllBooks);
 
   const { title, history } = props;
   const [chosenCategory, setChosenCategory] = useState("All");
@@ -63,7 +67,17 @@ export default function CategoryBlock(props) {
         }))
         //)
       );
+
+      //Add dispatch to store all books info for searching
+      if (allBooks.length < 1) {
+        dispatch(setAllBooks(
+          snapshot.docs.map((doc) => ({
+            ...doc.data(),
+          }))
+        ));
+      }
     });
+
   }, []);
 
   console.log(products);

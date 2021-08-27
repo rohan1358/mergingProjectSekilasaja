@@ -7,6 +7,7 @@ import ownedBookTitlesReducer from "../feature/ownedBookTitlesSlice";
 import ownedBooksReducer from "../feature/ownedBooksSlice";
 import favoriteBookTitlesReducer from "../feature/favoriteBookTitlesSlice";
 import favoriteBooksReducer from "../feature/favoriteBooksSlice";
+import allBooksReducer from "../feature/allBooksSlice";
 
 const persistConfig = {
   key: "root",
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   ownedBooksReducer,
   favoriteBookTitlesReducer,
   favoriteBooksReducer,
+  allBooksReducer,
 });
 
 const persistReducer_ = persistReducer(persistConfig, reducer);

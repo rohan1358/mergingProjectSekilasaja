@@ -68,7 +68,7 @@ export default function Library({ history }) {
 
   return (
     <div>
-      <NavBar />
+      <NavBar history={history}/>
       <Container>
         <Parallax
           small
