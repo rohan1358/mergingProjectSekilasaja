@@ -3,14 +3,11 @@ import React from "react";
 import RdpdCover from "../images/rdpd.jpg";
 
 // @material-ui/core components
-import { makeStyles, Link, Grid, Card } from "@material-ui/core";
+import { makeStyles, Link, Grid } from "@material-ui/core";
 
 // Custom components
 import InfoAreaStyle from "../styles/InfoAreaStyle";
 import Typography from "./Typography";
-
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -19,7 +16,6 @@ export default function BookCard({ product }) {
   // const { link, product, onAdd } = props;
   return (
     <Grid item>
-      {/* <Link onClick={() => onAdd(product)} underline="none" href={link}> */}
       <Link underline="none" href={`book-details/${product.book_title}`}>
         <div className={classes.bookCover}>
           <div>

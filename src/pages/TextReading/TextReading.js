@@ -11,7 +11,7 @@ import FourOFourPage from "../404page";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
-import { Container, AppBar, Grid } from "@material-ui/core";
+import { Container, AppBar, Grid, Paper } from "@material-ui/core";
 
 // Custom components
 import Button from "../../components/Button";
@@ -86,58 +86,54 @@ export default function TextReading({ match, history }) {
 
   return (
     <div>
+      <div style={{ marginTop: "70px" }} />
       {!!isSubscribed || !!isBookOwned ? (
         <div>
-          <NavBarSecond
-            children={
-              <Drawer
-                direction={"left"}
-                drawerLogo={<DvrIcon className={nav.hugeIcon} />}
-                drawerTitle={"Daftar Kilas"}
-                logo={<DvrIcon className={nav.iconColor} />}
-                children={
-                  <TableOfContent
-                    chapterContent={chapterContent}
-                    chosenChapter={chosenChapter}
-                    setChosenChapter={setChosenChapter}
-                  />
-                }
-              />
-            }
-          />
+          <div className={classes.sectionDesktop}>
+            <NavBarSecond
+              children={
+                <Typography size="subheading">{match.params.title}</Typography>
+              }
+            />
+            <Container>
+              {chapterContent.length !== 0 && (
+                <Grid container spacing={5}>
+                  <Grid item xs={4}>
+                    <Paper square elevation={3}>
+                      <TableOfContent
+                        chapterContent={chapterContent}
+                        chosenChapter={chosenChapter}
+                        setChosenChapter={setChosenChapter}
+                        classes={classes.tableOfContent}
+                      />
+                    </Paper>
+                  </Grid>
 
-          <Container maxWidth={"md"}>
-            {chapterContent.length !== 0 && (
-              <div className={classes.page}>
-                <div className={classes.container}>
-                  <div className={classes.book_title}>
-                    <Typography className={classes.uncopyable} size="heading">
-                      {match.params.title}
-                    </Typography>
-                  </div>
-                  {chosenChapter === chapterContent.length ? (
-                    <div>
-                      <div className={classes.title}>
-                        <Typography
-                          className={classes.uncopyable}
-                          size="subheading"
-                        >
-                          {"Ringkasan Akhir"}
-                        </Typography>
-                      </div>
-                      <div className={classes.chapterContent}>
-                        {chapterContent[
-                          chapterContent.length - 1
-                        ].content.details.map((paragraph, index) => (
-                          <Typography className={classes.paragraph}>
-                            {paragraph}
+                  <Grid item xs={8}>
+                    {chosenChapter === chapterContent.length ? (
+                      <div>
+                        <div className={classes.extraSpace} />
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            size="subheading"
+                          >
+                            {"Ringkasan Akhir"}
                           </Typography>
-                        ))}
+                        </div>
+                        <div className={classes.chapterContent}>
+                          {chapterContent[
+                            chapterContent.length - 1
+                          ].content.details.map((paragraph, index) => (
+                            <Typography className={classes.paragraph}>
+                              {paragraph}
+                            </Typography>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className={classes.title}>
+                    ) : (
+                      <div>
+                        {/* <div className={classes.title}>
                         <Typography
                           className={classes.uncopyable}
                           type="italic"
@@ -145,35 +141,124 @@ export default function TextReading({ match, history }) {
                         >
                           Kilas #{chapterContent[chosenChapter - 1].id}
                         </Typography>
-                      </div>
-                      <div className={classes.title}>
-                        <Typography
-                          className={classes.uncopyable}
-                          size="subheading"
-                        >
-                          {chapterContent[chosenChapter - 1].content.title}
-                        </Typography>
-                      </div>
-                      <div className={classes.chapterContent}>
-                        {chapterContent[chosenChapter - 1].content.details.map(
-                          (paragraph, index) => (
+                      </div> */}
+                        <div className={classes.extraSpace} />
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            size="subheading"
+                          >
+                            {chapterContent[chosenChapter - 1].content.title}
+                          </Typography>
+                        </div>
+                        <div className={classes.chapterContent}>
+                          {chapterContent[
+                            chosenChapter - 1
+                          ].content.details.map((paragraph, index) => (
                             <Typography
                               className={classes.uncopyable}
                               className={classes.paragraph}
                             >
                               {paragraph}
                             </Typography>
-                          )
-                        )}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-          </Container>
+                    )}
+                  </Grid>
+                </Grid>
+              )}
+            </Container>
+          </div>
 
-          <div className={classes.extraSpace}>
+          <div className={classes.sectionMobile}>
+            <NavBarSecond
+              children={
+                <Drawer
+                  direction={"left"}
+                  drawerLogo={<DvrIcon className={nav.hugeIcon} />}
+                  drawerTitle={"Daftar Kilas"}
+                  logo={<DvrIcon className={nav.iconColor} />}
+                  children={
+                    <TableOfContent
+                      chapterContent={chapterContent}
+                      chosenChapter={chosenChapter}
+                      setChosenChapter={setChosenChapter}
+                    />
+                  }
+                />
+              }
+            />
+
+            <Container maxWidth={"md"}>
+              {chapterContent.length !== 0 && (
+                <div className={classes.page}>
+                  <div className={classes.container}>
+                    <div className={classes.book_title}>
+                      <Typography className={classes.uncopyable} size="heading">
+                        {match.params.title}
+                      </Typography>
+                    </div>
+                    {chosenChapter === chapterContent.length ? (
+                      <div>
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            size="subheading"
+                          >
+                            {"Ringkasan Akhir"}
+                          </Typography>
+                        </div>
+                        <div className={classes.chapterContent}>
+                          {chapterContent[
+                            chapterContent.length - 1
+                          ].content.details.map((paragraph, index) => (
+                            <Typography className={classes.paragraph}>
+                              {paragraph}
+                            </Typography>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            type="italic"
+                            size="bold"
+                          >
+                            Kilas #{chapterContent[chosenChapter - 1].id}
+                          </Typography>
+                        </div>
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            size="subheading"
+                          >
+                            {chapterContent[chosenChapter - 1].content.title}
+                          </Typography>
+                        </div>
+                        <div className={classes.chapterContent}>
+                          {chapterContent[
+                            chosenChapter - 1
+                          ].content.details.map((paragraph, index) => (
+                            <Typography
+                              className={classes.uncopyable}
+                              className={classes.paragraph}
+                            >
+                              {paragraph}
+                            </Typography>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </Container>
+          </div>
+
+          <div style={{ marginTop: "100px" }}>
             <AppBar color="white" position="fixed" className={classes.audioBar}>
               <Container>
                 <AudioPlayer
