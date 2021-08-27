@@ -133,15 +133,6 @@ export default function TextReading({ match, history }) {
                       </div>
                     ) : (
                       <div>
-                        {/* <div className={classes.title}>
-                        <Typography
-                          className={classes.uncopyable}
-                          type="italic"
-                          size="bold"
-                        >
-                          Kilas #{chapterContent[chosenChapter - 1].id}
-                        </Typography>
-                      </div> */}
                         <div className={classes.extraSpace} />
                         <div className={classes.title}>
                           <Typography

@@ -101,7 +101,7 @@ export default function BookDetailsPage({ match, history }) {
       }
     };
     changeBtn();
-  }, [favoriteBooks]);
+  }, [, favoriteBooks]);
 
   const handleAddCart = () => {
     const fetchData = async () => {

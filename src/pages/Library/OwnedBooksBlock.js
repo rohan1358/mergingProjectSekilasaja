@@ -43,8 +43,18 @@ export default function OwnedBooksBlock(props) {
   const { currentUser } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [allBooks, setAllBooks] = useState([]);
 
   useEffect(() => {
+    // Get books
+    db.collection("books").onSnapshot((snapshot) => {
+      setAllBooks(
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+        }))
+      );
+    });
+
     //Get books' data from books database based on owned books of the user
     if (ownedBookTitles.length > 0) {
       db.collection("books")
@@ -168,6 +178,9 @@ export default function OwnedBooksBlock(props) {
                     </Grid>
                   </div>
                 )}
+
+                <div className={classes.extraSpace} />
+                <Typography size="subheading">Not Owned</Typography>
               </div>
 
               <div className={classes.sectionMobileBlock}>
@@ -219,6 +232,13 @@ export default function OwnedBooksBlock(props) {
                     </Grid>
                   </div>
                 )}
+                <div className={classes.extraSpace} />
+                <Typography size="subheading">Not Owned</Typography>
+                {allBooks
+                  .filter((product) => !ownedBooks.includes(product))
+                  .map((categorisedProduct, index) => (
+                    <BookCard key={index} product={categorisedProduct} />
+                  ))}
               </div>
             </div>
           ) : (
@@ -262,6 +282,9 @@ export default function OwnedBooksBlock(props) {
                     </Grid>
                   </div>
                 )}
+
+                <div className={classes.extraSpace} />
+                <Typography size="subheading">Not Owned</Typography>
               </div>
 
               <div className={classes.sectionMobileBlock}>
@@ -303,6 +326,9 @@ export default function OwnedBooksBlock(props) {
                     </Grid>
                   </div>
                 )}
+
+                <div className={classes.extraSpace} />
+                <Typography size="subheading">Not Owned</Typography>
               </div>
             </div>
           )}

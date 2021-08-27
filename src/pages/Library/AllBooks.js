@@ -62,8 +62,6 @@ export default function CategoryBlock(props) {
     }
   }, []);
 
-  console.log(products);
-
   return (
     <div>
       <CategoryBarFilter
@@ -88,14 +86,25 @@ export default function CategoryBlock(props) {
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Grid container spacing={1}>
-                  {favoriteBooks
-                    .filter(
-                      (product) =>
-                        product.category.includes(chosenCategory) == true
-                    )
-                    .map((categorisedProduct, index) => (
-                      <BookCard key={index} product={categorisedProduct} />
-                    ))}
+                  {favoriteBooks.filter(
+                    (product) =>
+                      product.category.includes(chosenCategory) == true
+                  ).length !== 0 ? (
+                    <div>
+                      {favoriteBooks
+                        .filter(
+                          (product) =>
+                            product.category.includes(chosenCategory) == true
+                        )
+                        .map((categorisedProduct, index) => (
+                          <BookCard key={index} product={categorisedProduct} />
+                        ))}
+                    </div>
+                  ) : (
+                    <Typography type="italic">
+                      Kilas favorit kamu tidak ada di kategori ini!
+                    </Typography>
+                  )}
                 </Grid>
               </div>
             )}
@@ -103,15 +112,37 @@ export default function CategoryBlock(props) {
             <div className={classes.extraSpace} />
 
             <Typography size="subheading">Owned Books</Typography>
-            <Grid container spacing={1}>
-              {products
-                .filter(
-                  (product) => product.category.includes(chosenCategory) == true
-                )
-                .map((categorisedProduct, index) => (
-                  <BookCard key={index} product={categorisedProduct} />
-                ))}
-            </Grid>
+            <div>
+              {products.filter(
+                (product) => product.category.includes(chosenCategory) == true
+              ).length !== 0 ? (
+                <Grid container spacing={1}>
+                  {products.filter(
+                    (product) =>
+                      product.category.includes(chosenCategory) == true
+                  ).length !== 0 ? (
+                    <div>
+                      {products
+                        .filter(
+                          (product) =>
+                            product.category.includes(chosenCategory) == true
+                        )
+                        .map((categorisedProduct, index) => (
+                          <BookCard key={index} product={categorisedProduct} />
+                        ))}
+                    </div>
+                  ) : (
+                    <Typography type="italic">
+                      Kilas favorit kamu tidak ada di kategori ini!
+                    </Typography>
+                  )}
+                </Grid>
+              ) : (
+                <Typography type="italic">
+                  Kilas favorit kamu tidak ada di kategori ini!
+                </Typography>
+              )}
+            </div>
           </div>
 
           <div className={classes.sectionMobileBlock}>
@@ -126,7 +157,36 @@ export default function CategoryBlock(props) {
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Grid container justifyContent="center" spacing={1}>
-                  {favoriteBooks
+                  {favoriteBooks.filter(
+                    (product) =>
+                      product.category.includes(chosenCategory) == true
+                  ).length !== 0 ? (
+                    <div>
+                      {favoriteBooks
+                        .filter(
+                          (product) =>
+                            product.category.includes(chosenCategory) == true
+                        )
+                        .map((categorisedProduct, index) => (
+                          <BookCard key={index} product={categorisedProduct} />
+                        ))}
+                    </div>
+                  ) : (
+                    <Typography type="italic">
+                      Kilas favorit kamu tidak ada di kategori ini!
+                    </Typography>
+                  )}
+                </Grid>
+              </div>
+            )}
+            <div className={classes.extraSpace} />
+            <Typography size="subheading">Owned Books</Typography>
+            <Grid container justifyContent="center" spacing={1}>
+              {products.filter(
+                (product) => product.category.includes(chosenCategory) == true
+              ).length !== 0 ? (
+                <div>
+                  {products
                     .filter(
                       (product) =>
                         product.category.includes(chosenCategory) == true
@@ -134,19 +194,12 @@ export default function CategoryBlock(props) {
                     .map((categorisedProduct, index) => (
                       <BookCard key={index} product={categorisedProduct} />
                     ))}
-                </Grid>
-              </div>
-            )}
-            <div className={classes.extraSpace} />
-            <Typography size="subheading">Owned Books</Typography>
-            <Grid container justifyContent="center" spacing={1}>
-              {products
-                .filter(
-                  (product) => product.category.includes(chosenCategory) == true
-                )
-                .map((categorisedProduct, index) => (
-                  <BookCard key={index} product={categorisedProduct} />
-                ))}
+                </div>
+              ) : (
+                <Typography type="italic">
+                  Kilas favorit kamu tidak ada di kategori ini!
+                </Typography>
+              )}
             </Grid>
           </div>
         </div>

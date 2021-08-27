@@ -79,8 +79,6 @@ export default function NavBar() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isCart, setIsCart] = useState(false);
 
-  console.log(cart);
-
   useEffect(() => {
     if (currentUser !== null) {
       const fetchData = async () => {
