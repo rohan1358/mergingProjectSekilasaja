@@ -71,7 +71,7 @@ export default function SubscriptionPlan(props) {
             </Grid>
 
             <Grid item xs={4}>
-              <Typography type="bold">Jumlah Kilasan</Typography>
+              <Typography type="bold">Jumlah Kilas</Typography>
             </Grid>
             <Grid item xs={4} />
             <Grid item xs={4}>

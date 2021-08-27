@@ -71,6 +71,7 @@ export default function Library({ history }) {
       <NavBar />
       <Container>
         <Parallax
+          small
           border
           filter
           image={require("../../images/library.jpg").default}
