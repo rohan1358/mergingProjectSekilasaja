@@ -10,6 +10,7 @@ import {
   Container,
   Link,
   Menu,
+  Badge,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
@@ -37,9 +38,8 @@ import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
-import { selectUser, setUser } from "../../feature/userSlice";
 
-export default function NavBar(props) {
+export default function NavBar() {
   // Other styles
   const classes = NavbarStyle();
 
@@ -71,13 +71,15 @@ export default function NavBar(props) {
   };
   const mobileMenuId = "primary-search-account-menu-mobile";
 
-  //const [cartItems, setCartItems] = useState([]);
   const { currentUser } = useContext(AuthContext);
 
   const cart = useSelector(selectCart).cart;
   const dispatch = useDispatch();
 
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [isCart, setIsCart] = useState(false);
+
+  console.log(cart);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -108,6 +110,10 @@ export default function NavBar(props) {
       fetchData();
     } else {
       console.log("not log in");
+    }
+
+    if (cart.length > 0) {
+      setIsCart(true);
     }
   }, []);
 
@@ -249,7 +255,11 @@ export default function NavBar(props) {
                         <ShoppingCartIcon className={classes.hugeIcon} />
                       }
                       drawerTitle={"Your Cart"}
-                      logo={<ShoppingCartIcon className={classes.iconColor} />}
+                      logo={
+                        <Badge badgeContent={cart.length} color="error">
+                          <ShoppingCartIcon className={classes.iconColor} />
+                        </Badge>
+                      }
                       children={<Basket cartItems={cart} />}
                     />
                   </div>
@@ -263,16 +273,15 @@ export default function NavBar(props) {
                     <Drawer
                       direction={"right"}
                       drawerLogo={
-                        <ShoppingCartIcon className={classes.hugeIcon} />
+                        <Badge badgeContent={cart.length} color="error">
+                          <ShoppingCartIcon className={classes.iconColor} />
+                        </Badge>
                       }
                       drawerTitle={"Your Cart"}
                       logo={<ShoppingCartIcon className={classes.iconColor} />}
-                      button={
-                        <Button round fullWidth color="primary">
-                          Beli Sekarang
-                        </Button>
-                      }
+                      children={<Basket cartItems={cart} />}
                     />
+                    {isCart && <Button color="danger">{cart.length}</Button>}
 
                     <IconButton
                       aria-label="show more"

@@ -84,6 +84,7 @@ const MultiUseMobile = makeStyles((theme) => ({
     fontWeight: "bold",
     color: secondaryColor,
     "&:hover,&:focus": {
+      cursor: "pointer",
       backgroundColor: "#808080",
     },
   },

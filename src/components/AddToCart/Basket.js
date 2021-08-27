@@ -103,12 +103,8 @@ export default function Basket(props) {
               <Typography type="bold">TOTAL</Typography>
               <Typography type="bold">Rp. {totalPrice.toFixed(2)}</Typography>
             </Grid>
-            <Button
-              fullWidth
-              round
-              onClick={() => alert("Implement Checkout!")}
-            >
-              Checkout
+            <Button fullWidth round href="/payment">
+              Bayar Sekarang!
             </Button>
             <div className={mobile.extraSpace} />
           </>

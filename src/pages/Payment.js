@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 
 // Custom components
 import Typography from "../components/Typography";
@@ -6,12 +6,19 @@ import MultiUseMobile from "../styles/MultiUseMobile";
 import Button from "../components/Button";
 import BookDetailsModal from "./BookDetails/BookDetailsModal";
 
-// Testing purposes
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { selectCart, setCart } from "../feature/cartSlice";
 
 // Material-UI components
-import { Container, Paper, Grid, TextField } from "@material-ui/core";
+import { Container, Paper, Grid, TextField, Link } from "@material-ui/core";
+
+// Firebase components
+import * as firebaseUpdateCart from "../firebase/firebaseUpdateCart";
+import { AuthContext } from "../components/Routing/Auth";
 
 export default function Payment() {
+  const { currentUser } = useContext(AuthContext);
   const classes = MultiUseMobile();
   const [openBookDetails, setBookDetailsOpen] = useState(false);
 
@@ -22,6 +29,29 @@ export default function Payment() {
   // function to handle modal close for login
   const handleBookDetailsClose = () => {
     setBookDetailsOpen(false);
+  };
+
+  // Cart total price
+  const cartItems = useSelector(selectCart).cart;
+  const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
+  const totalPrice = itemsPrice;
+  const dispatch = useDispatch();
+  const onRemove_ = (product) => {
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.DeleteToCart(
+        currentUser.uid,
+        product
+      );
+      console.log(results);
+      dispatch(
+        setCart([
+          ...cartItems.filter(function (ele) {
+            return ele.title != product.title;
+          }),
+        ])
+      );
+    };
+    fetchData();
   };
 
   return (
@@ -42,10 +72,26 @@ export default function Payment() {
         <Grid item xs={12}>
           <Paper className={classes.paddedContent} elevation={5}>
             <Typography size="subheading">1. Your Orders</Typography>
-            <div className={classes.spaceBetween}>
-              <Typography type="italic">6-month subscription</Typography>
-              <Typography type="italic">Rp. 69,000</Typography>
-            </div>
+
+            {cartItems.map((item) => (
+              <div className={classes.spaceBetween}>
+                <div>
+                  <Typography type="italic">{item.title}</Typography>
+                  <Typography type="italic">
+                    Rp. {item.price.toFixed(0)}
+                  </Typography>
+                </div>
+                <Typography>
+                  <Link
+                    className={classes.link}
+                    underline="none"
+                    onClick={() => onRemove_(item)}
+                  >
+                    Hapus
+                  </Link>
+                </Typography>
+              </div>
+            ))}
 
             <div className={classes.extraSpace} />
             <div className={classes.spaceBetween}>
@@ -60,7 +106,9 @@ export default function Payment() {
             </div>
             <div className={classes.spaceBetween}>
               <Typography size="subheading">TOTAL</Typography>
-              <Typography size="subheading">Rp. 69,000</Typography>
+              <Typography size="subheading" type="bold">
+                Rp. {totalPrice.toFixed(0)}
+              </Typography>
             </div>
           </Paper>
         </Grid>
