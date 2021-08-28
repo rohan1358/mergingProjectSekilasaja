@@ -24,7 +24,6 @@ export default function PricingPage() {
       <Container maxWidth={"sm"}>
         <div className={classes.center}>
           <Grid className={classes.desktopClass} spacing={3} container>
-            <Grid item xs={1} />
             <Grid item xs={12}>
               <Typography type="heading">Pricing Plan</Typography>
             </Grid>

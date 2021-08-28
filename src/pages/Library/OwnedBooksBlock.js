@@ -103,6 +103,12 @@ export default function OwnedBooksBlock(props) {
     }
   }, []);
 
+  console.log(allBooks);
+
+  console.log(ownedBooks);
+
+  console.log(allBooks.filter((x) => !ownedBooks.includes(x)));
+
   return (
     <div>
       {!!isSubscribed ? (
@@ -130,21 +136,31 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
-                    <Grid container spacing={1}>
-                      {favoriteBooks
-                        .filter(
-                          (product) =>
-                            product.category.includes(chosenCategory) == true
-                        )
-                        .map((categorisedProduct, index) => (
-                          <div>
-                            <BookCard
-                              key={index}
-                              product={categorisedProduct}
-                            />
-                          </div>
-                        ))}
-                    </Grid>
+                    <div>
+                      {favoriteBooks.filter(
+                        (product) =>
+                          product.category.includes(chosenCategory) == true
+                      ).length !== 0 ? (
+                        <Grid container spacing={1}>
+                          {favoriteBooks
+                            .filter(
+                              (product) =>
+                                product.category.includes(chosenCategory) ==
+                                true
+                            )
+                            .map((categorisedProduct, index) => (
+                              <BookCard
+                                key={index}
+                                product={categorisedProduct}
+                              />
+                            ))}
+                        </Grid>
+                      ) : (
+                        <Typography type="italic">
+                          Kilas favorit kamu tidak ditemukan di kategori ini!
+                        </Typography>
+                      )}
+                    </div>
                   </div>
                 )}
 
@@ -161,26 +177,39 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Owned Books</Typography>
-                    <Grid container spacing={1}>
-                      {ownedBooks
-                        .filter(
-                          (product) =>
-                            product.category.includes(chosenCategory) == true
-                        )
-                        .map((categorisedProduct, index) => (
-                          <div>
-                            <BookCard
-                              key={index}
-                              product={categorisedProduct}
-                            />
-                          </div>
-                        ))}
-                    </Grid>
+                    <div>
+                      {ownedBooks.filter(
+                        (product) =>
+                          product.category.includes(chosenCategory) == true
+                      ).length !== 0 ? (
+                        <Grid container spacing={1}>
+                          {ownedBooks
+                            .filter(
+                              (product) =>
+                                product.category.includes(chosenCategory) ==
+                                true
+                            )
+                            .map((categorisedProduct, index) => (
+                              <BookCard
+                                key={index}
+                                product={categorisedProduct}
+                              />
+                            ))}
+                        </Grid>
+                      ) : (
+                        <Typography type="italic">
+                          Kamu tidak memiliki kilas di dalam kategori ini!
+                        </Typography>
+                      )}
+                    </div>
                   </div>
                 )}
 
                 <div className={classes.extraSpace} />
                 <Typography size="subheading">Not Owned</Typography>
+                <div>
+                  {allBooks.filter((product) => !ownedBooks.includes(product))}
+                </div>
               </div>
 
               <div className={classes.sectionMobileBlock}>
@@ -194,16 +223,31 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
-                    <Grid container justifyContent="center" spacing={1}>
-                      {favoriteBooks
-                        .filter(
-                          (product) =>
-                            product.category.includes(chosenCategory) == true
-                        )
-                        .map((categorisedProduct, index) => (
-                          <BookCard key={index} product={categorisedProduct} />
-                        ))}
-                    </Grid>
+                    <div>
+                      {favoriteBooks.filter(
+                        (product) =>
+                          product.category.includes(chosenCategory) == true
+                      ).length !== 0 ? (
+                        <Grid container justifyContent="center" spacing={1}>
+                          {favoriteBooks
+                            .filter(
+                              (product) =>
+                                product.category.includes(chosenCategory) ==
+                                true
+                            )
+                            .map((categorisedProduct, index) => (
+                              <BookCard
+                                key={index}
+                                product={categorisedProduct}
+                              />
+                            ))}
+                        </Grid>
+                      ) : (
+                        <Typography type="italic">
+                          Kilas favorit kamu tidak ditemukan di kategori ini!
+                        </Typography>
+                      )}
+                    </div>
                   </div>
                 )}
 
@@ -221,24 +265,44 @@ export default function OwnedBooksBlock(props) {
                   <div>
                     <Typography size="subheading">Owned Books</Typography>
                     <Grid container justifyContent="center" spacing={1}>
-                      {ownedBooks
-                        .filter(
-                          (product) =>
-                            product.category.includes(chosenCategory) == true
-                        )
-                        .map((categorisedProduct, index) => (
-                          <BookCard key={index} product={categorisedProduct} />
-                        ))}
+                      {ownedBooks.filter(
+                        (product) =>
+                          product.category.includes(chosenCategory) == true
+                      ).length !== 0 ? (
+                        <div>
+                          {ownedBooks.filter(
+                            (product) =>
+                              product.category.includes(chosenCategory) == true
+                          ).length !== 0 ? (
+                            <Grid container justifyContent="center" spacing={1}>
+                              {ownedBooks
+                                .filter(
+                                  (product) =>
+                                    product.category.includes(chosenCategory) ==
+                                    true
+                                )
+                                .map((categorisedProduct, index) => (
+                                  <BookCard
+                                    key={index}
+                                    product={categorisedProduct}
+                                  />
+                                ))}
+                            </Grid>
+                          ) : (
+                            <Typography type="italic">
+                              Kamu tidak memiliki kilas di dalam kategori ini!
+                            </Typography>
+                          )}
+                        </div>
+                      ) : (
+                        <Typography type="italic">
+                          Tidak ditemukan kilas di kategori ini!
+                        </Typography>
+                      )}
                     </Grid>
                   </div>
                 )}
                 <div className={classes.extraSpace} />
-                <Typography size="subheading">Not Owned</Typography>
-                {allBooks
-                  .filter((product) => !ownedBooks.includes(product))
-                  .map((categorisedProduct, index) => (
-                    <BookCard key={index} product={categorisedProduct} />
-                  ))}
               </div>
             </div>
           ) : (
@@ -284,7 +348,22 @@ export default function OwnedBooksBlock(props) {
                 )}
 
                 <div className={classes.extraSpace} />
+
                 <Typography size="subheading">Not Owned</Typography>
+                {allBooks.filter((product) => !ownedBooks.includes(product))
+                  .length !== 0 ? (
+                  <Grid container spacing={1}>
+                    {allBooks
+                      .filter((product) => !ownedBooks.includes(product))
+                      .map((categorisedProduct, index) => (
+                        <BookCard key={index} product={categorisedProduct} />
+                      ))}
+                  </Grid>
+                ) : (
+                  <Typography type="italic">
+                    Kamu telah memiliki semua kilas!
+                  </Typography>
+                )}
               </div>
 
               <div className={classes.sectionMobileBlock}>
@@ -328,7 +407,22 @@ export default function OwnedBooksBlock(props) {
                 )}
 
                 <div className={classes.extraSpace} />
+
                 <Typography size="subheading">Not Owned</Typography>
+                {allBooks.filter((product) => !ownedBooks.includes(product))
+                  .length !== 0 ? (
+                  <Grid container justifyContent="center" spacing={1}>
+                    {allBooks
+                      .filter((product) => !ownedBooks.includes(product))
+                      .map((categorisedProduct, index) => (
+                        <BookCard key={index} product={categorisedProduct} />
+                      ))}
+                  </Grid>
+                ) : (
+                  <Typography type="italic">
+                    Kamu telah memiliki semua kilas!
+                  </Typography>
+                )}
               </div>
             </div>
           )}
