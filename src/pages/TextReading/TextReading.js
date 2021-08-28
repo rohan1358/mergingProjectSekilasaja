@@ -25,7 +25,7 @@ import { selectOwnedBooks } from "../../feature/ownedBooksSlice";
 import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
-
+import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
 const db = fire.firestore();
 
 export default function TextReading({ match, history }) {
@@ -37,6 +37,7 @@ export default function TextReading({ match, history }) {
   const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
   const [chapterContent, setChapterContent] = useState([]);
   const [chosenChapter, setChosenChapter] = useState(1);
+  const [audioLink, setAudioLink] = useState(null);
   const [userData, setUserData] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const [isBookOwned, setIsBookOwned] = useState(false);
@@ -49,7 +50,6 @@ export default function TextReading({ match, history }) {
       setChosenChapter(chosenChapter + 1);
     }
   };
-
   useEffect(() => {
     db.collection("books")
       .doc(match.params.title)
@@ -72,16 +72,19 @@ export default function TextReading({ match, history }) {
 
     if (currentUser !== null) {
       const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
+      const getlink = firebaseGetBookAudioURL.getBookAudioURL(match.params.title, chosenChapter)
       const fetchData = async () => {
         const results = await getUser;
-        setUserData(results);
+        const link = await getlink;
+        setUserData(results);   
+        setAudioLink(link)
       };
       fetchData();
     } else {
       console.log("You are not logged in!");
     }
-  }, []);
-
+  }, [,chosenChapter]);
+  console.log(audioLink)
   const isSubscribed = userData.is_subscribed;
 
   return (
@@ -253,7 +256,7 @@ export default function TextReading({ match, history }) {
             <AppBar color="white" position="fixed" className={classes.audioBar}>
               <Container>
                 <AudioPlayer
-                  vidLink="https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Cover_Images%2Frdpd.mp3?alt=media&token=4a6b3d53-7cd1-4a1c-8858-be5c83d698ac"
+                  vidLink={audioLink}
                   button={
                     <Button color="transparent" onClick={handleNext}>
                       <Typography type="bold">Next ►</Typography>
