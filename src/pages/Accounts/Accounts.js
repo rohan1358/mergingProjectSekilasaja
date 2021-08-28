@@ -8,6 +8,7 @@ import Footer from "../../components/Footer";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import SubscriptionPlan from "./SubscriptionPlan";
+import Loading from "../Loading";
 
 // firebase components
 import fire from "../.././firebase/fire";
@@ -26,6 +27,7 @@ export default function AccountsPage() {
   const [userData, setUserData] = useState(null);
   const [bookNum, setBookNum] = useState([]);
   const [endDate, setEndDate] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // Update profile
   const passwordRef = useRef();
@@ -37,7 +39,6 @@ export default function AccountsPage() {
   const [profileError, setProfileError] = useState("");
   const [profileSuccess, setProfileSuccess] = useState("");
   const [success, setSuccess] = useState("");
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (currentUser !== null) {
