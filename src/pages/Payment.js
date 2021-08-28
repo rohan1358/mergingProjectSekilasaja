@@ -36,7 +36,8 @@ export default function Payment() {
   // Cart total price
   const cartItems = useSelector(selectCart).cart;
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
-  const totalPrice = itemsPrice;
+  const totalPrice = Intl.NumberFormat().format(itemsPrice);
+
   const dispatch = useDispatch();
   const onRemove_ = (product) => {
     const fetchData = async () => {
@@ -77,7 +78,7 @@ export default function Payment() {
                     <div>
                       <Typography type="italic">{item.title}</Typography>
                       <Typography type="italic">
-                        Rp. {item.price.toFixed(0)}
+                        Rp. {Intl.NumberFormat().format(item.price)}
                       </Typography>
                     </div>
                     <Typography>
@@ -106,7 +107,7 @@ export default function Payment() {
                 <div className={classes.spaceBetween}>
                   <Typography size="subheading">TOTAL</Typography>
                   <Typography size="subheading" type="bold">
-                    Rp. {totalPrice.toFixed(0)}
+                    Rp. {totalPrice}
                   </Typography>
                 </div>
               </Paper>
@@ -214,7 +215,7 @@ export default function Payment() {
                     <div>
                       <Typography type="italic">{item.title}</Typography>
                       <Typography type="italic">
-                        Rp. {item.price.toFixed(0)}
+                        Rp. {Intl.NumberFormat().format(item.price)}
                       </Typography>
                     </div>
                     <Typography>
@@ -243,7 +244,7 @@ export default function Payment() {
                 <div className={classes.spaceBetween}>
                   <Typography size="subheading">TOTAL</Typography>
                   <Typography size="subheading" type="bold">
-                    Rp. {totalPrice.toFixed(0)}
+                    Rp. {totalPrice}
                   </Typography>
                 </div>
               </Paper>

@@ -198,7 +198,7 @@ export default function OwnedBooksBlock(props) {
                         </Grid>
                       ) : (
                         <Typography type="italic">
-                          Kamu tidak memiliki kilas di dalam kategori ini!
+                          Tidak ditemukan kilas di kategori ini!
                         </Typography>
                       )}
                     </div>
@@ -206,10 +206,10 @@ export default function OwnedBooksBlock(props) {
                 )}
 
                 <div className={classes.extraSpace} />
-                <Typography size="subheading">Not Owned</Typography>
+                {/* <Typography size="subheading">Not Owned</Typography>
                 <div>
                   {allBooks.filter((product) => !ownedBooks.includes(product))}
-                </div>
+                </div> */}
               </div>
 
               <div className={classes.sectionMobileBlock}>
@@ -349,7 +349,7 @@ export default function OwnedBooksBlock(props) {
 
                 <div className={classes.extraSpace} />
 
-                <Typography size="subheading">Not Owned</Typography>
+                {/* <Typography size="subheading">Not Owned</Typography>
                 {allBooks.filter((product) => !ownedBooks.includes(product))
                   .length !== 0 ? (
                   <Grid container spacing={1}>
@@ -363,7 +363,7 @@ export default function OwnedBooksBlock(props) {
                   <Typography type="italic">
                     Kamu telah memiliki semua kilas!
                   </Typography>
-                )}
+                )} */}
               </div>
 
               <div className={classes.sectionMobileBlock}>
@@ -408,7 +408,7 @@ export default function OwnedBooksBlock(props) {
 
                 <div className={classes.extraSpace} />
 
-                <Typography size="subheading">Not Owned</Typography>
+                {/* <Typography size="subheading">Not Owned</Typography>
                 {allBooks.filter((product) => !ownedBooks.includes(product))
                   .length !== 0 ? (
                   <Grid container justifyContent="center" spacing={1}>
@@ -422,7 +422,7 @@ export default function OwnedBooksBlock(props) {
                   <Typography type="italic">
                     Kamu telah memiliki semua kilas!
                   </Typography>
-                )}
+                )} */}
               </div>
             </div>
           )}

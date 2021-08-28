@@ -47,7 +47,12 @@ export default function AccountsPage() {
         );
         setUserData(results);
         setBookNum(results.owned_books);
-        setEndDate(results.end_date.toDate().toString());
+
+        // Set Date
+        var month = results.end_date.toDate().getMonth();
+        var year = results.end_date.toDate().getFullYear();
+        var day = results.end_date.toDate().getDate();
+        setEndDate(day + "/" + month + "/" + year);
       };
       fetchData();
     } else {
