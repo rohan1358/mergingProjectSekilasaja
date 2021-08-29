@@ -40,7 +40,7 @@ export default function Basket(props) {
       dispatch(
         setCart([
           ...cartItems.filter(function (ele) {
-            return ele.title != product.title;
+            return ele.book_title != product.book_title;
           }),
         ])
       );
@@ -60,7 +60,7 @@ export default function Basket(props) {
               <Grid item xs={4}>
                 <img
                   src={RdpdCover}
-                  alt={item.title}
+                  alt={item.book_title}
                   className={
                     classes.imgRounded +
                     " " +
@@ -74,7 +74,7 @@ export default function Basket(props) {
               <Grid item xs={1} />
 
               <Grid item xs={7}>
-                <Typography type="bold">{item.title}</Typography>
+                <Typography type="bold">{item.book_title}</Typography>
                 <Typography className="col-2 text-right">
                   Rp. {Intl.NumberFormat().format(item.price)}
                 </Typography>

@@ -22,6 +22,7 @@ import {
 import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
+import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 
 const db = fire.firestore();
 
@@ -37,6 +38,8 @@ export default function OwnedBooksBlock(props) {
     useState(false);
   const favoriteBooks = useSelector(selectFavoriteBooks);
 
+  const [isNotOwnedBooksEmpty, setIsNotOwnedBooksEmpty] = useState(false);
+
   const [chosenCategory, setChosenCategory] = useState("All");
   const [isChosenCategory, setIsChosenCategory] = useState(false);
 
@@ -44,6 +47,7 @@ export default function OwnedBooksBlock(props) {
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [allBooks, setAllBooks] = useState([]);
+  const [booksNotOwned, setBooksNotOwned] = useState([]);
 
   useEffect(() => {
     // Get books
@@ -57,34 +61,50 @@ export default function OwnedBooksBlock(props) {
 
     //Get books' data from books database based on owned books of the user
     if (ownedBookTitles.length > 0) {
-      db.collection("books")
-        .where("book_title", "in", ownedBookTitles)
-        .onSnapshot((snapshot) => {
-          dispatch(
-            setOwnedBooks(
-              snapshot.docs.map((doc) => ({
-                ...doc.data(),
-              }))
-            )
+      const fetchData = () => {
+        const getCartData = async (book_title) => {
+          const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+            book_title
           );
+          return products_;
+        };
+
+        var book_ = [
+          ...ownedBookTitles.map((book) => {
+            return getCartData(book);
+          }),
+        ];
+
+        var a = Promise.all(book_).then(function (book) {
+          dispatch(setOwnedBooks(book));
         });
+      };
+      fetchData();
     } else {
       setIsOwnedBookTitlesEmpty(true);
     }
 
     //Get books' data from books database based on favorite books of the user
     if (favoriteBookTitles.length > 0) {
-      db.collection("books")
-        .where("book_title", "in", favoriteBookTitles)
-        .onSnapshot((snapshot) => {
-          dispatch(
-            setFavoriteBooks(
-              snapshot.docs.map((doc) => ({
-                ...doc.data(),
-              }))
-            )
+      const fetchData = () => {
+        const getCartData = async (book_title) => {
+          const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+            book_title
           );
+          return products_;
+        };
+
+        var book_ = [
+          ...favoriteBookTitles.map((book) => {
+            return getCartData(book);
+          }),
+        ];
+
+        var a = Promise.all(book_).then(function (book) {
+          dispatch(setFavoriteBooks(book));
         });
+      };
+      fetchData();
     } else {
       setIsFavoriteBookTitlesEmpty(true);
     }
@@ -102,12 +122,45 @@ export default function OwnedBooksBlock(props) {
       console.log("Not logged in");
     }
   }, []);
-
-  console.log(allBooks);
-
   console.log(ownedBooks);
+  useEffect(() => {
+    // Filtering not owned books
+    var a = [],
+      diff = [],
+      notOwned = [];
 
-  console.log(allBooks.filter((x) => !ownedBooks.includes(x)));
+    for (var i = 0; i < allBooks.length; i++) {
+      a[allBooks[i].book_title] = true;
+    }
+
+    for (var i = 0; i < ownedBooks.length; i++) {
+      if (a[ownedBooks[i].book_title]) {
+        delete a[ownedBooks[i].book_title];
+      } else {
+        a[ownedBooks[i].book_title] = true;
+      }
+    }
+
+    for (var k in a) {
+      diff.push(k);
+    }
+
+    for (var i = 0; i < allBooks.length; i++) {
+      for (var j = 0; j < diff.length; j++) {
+        if (diff[j] === allBooks[i].book_title) {
+          notOwned = [...notOwned, allBooks[i]];
+        }
+      }
+    }
+
+    setBooksNotOwned(notOwned);
+
+    if (notOwned.length <= 0) {
+      setIsNotOwnedBooksEmpty(true);
+    } else {
+      setIsNotOwnedBooksEmpty(false);
+    }
+  }, [allBooks, ownedBooks]);
 
   return (
     <div>
@@ -125,7 +178,8 @@ export default function OwnedBooksBlock(props) {
 
           {isChosenCategory === true ? (
             <div>
-              <div className={classes.sectionDesktopBlock}>
+              <div className={classes.sectionBlock}>
+                {/* FAVORITE BOOKS DESKTOP */}
                 {isFavoriteBookTitlesEmpty ? (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
@@ -166,6 +220,7 @@ export default function OwnedBooksBlock(props) {
 
                 <div className={classes.extraSpace} />
 
+                {/* OWNED BOOKS DESKTOP */}
                 {isOwnedBookTitlesEmpty ? (
                   <div>
                     <Typography size="subheading">Owned Books</Typography>
@@ -206,13 +261,46 @@ export default function OwnedBooksBlock(props) {
                 )}
 
                 <div className={classes.extraSpace} />
-                {/* <Typography size="subheading">Not Owned</Typography>
-                <div>
-                  {allBooks.filter((product) => !ownedBooks.includes(product))}
-                </div> */}
+
+                {/* NOT OWNED BOOKS DESKTOP */}
+                {isNotOwnedBooksEmpty ? (
+                  <div>
+                    <Typography size="subheading">Not Owned Books</Typography>
+                    <Typography type="italic">
+                      Kamu telah memiliki semua kilas!
+                    </Typography>
+                  </div>
+                ) : (
+                  <div>
+                    <Typography size="subheading">Not Owned Books</Typography>
+                    {booksNotOwned.filter(
+                      (product) =>
+                        product.category.includes(chosenCategory) == true
+                    ).length !== 0 ? (
+                      <Grid container spacing={1}>
+                        {booksNotOwned
+                          .filter(
+                            (product) =>
+                              product.category.includes(chosenCategory) == true
+                          )
+                          .map((categorisedProduct, index) => (
+                            <BookCard
+                              key={index}
+                              product={categorisedProduct}
+                            />
+                          ))}
+                      </Grid>
+                    ) : (
+                      <Typography type="italic">
+                        Kamu memiliki semua kilas di kategori ini!
+                      </Typography>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className={classes.sectionMobileBlock}>
+                {/* FAVORITE BOOKS MOBILE */}
                 {isFavoriteBookTitlesEmpty ? (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
@@ -253,6 +341,7 @@ export default function OwnedBooksBlock(props) {
 
                 <div className={classes.extraSpace} />
 
+                {/* OWNED BOOKS MOBILE */}
                 {isOwnedBookTitlesEmpty ? (
                   <div>
                     <Typography size="subheading">Owned Books</Typography>
@@ -302,7 +391,43 @@ export default function OwnedBooksBlock(props) {
                     </Grid>
                   </div>
                 )}
+
                 <div className={classes.extraSpace} />
+                {/* NOT OWNED BOOKS MOBILE */}
+                {isNotOwnedBooksEmpty ? (
+                  <div>
+                    <Typography size="subheading">Not Owned Books</Typography>
+                    <Typography type="italic">
+                      Kamu telah memiliki semua kilas!
+                    </Typography>
+                  </div>
+                ) : (
+                  <div>
+                    <Typography size="subheading">Not Owned Books</Typography>
+                    {booksNotOwned.filter(
+                      (product) =>
+                        product.category.includes(chosenCategory) == true
+                    ).length !== 0 ? (
+                      <Grid container justifyContent="center" spacing={1}>
+                        {booksNotOwned
+                          .filter(
+                            (product) =>
+                              product.category.includes(chosenCategory) == true
+                          )
+                          .map((categorisedProduct, index) => (
+                            <BookCard
+                              key={index}
+                              product={categorisedProduct}
+                            />
+                          ))}
+                      </Grid>
+                    ) : (
+                      <Typography type="italic">
+                        Kamu memiliki semua kilas di kategori ini!
+                      </Typography>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           ) : (
@@ -349,21 +474,25 @@ export default function OwnedBooksBlock(props) {
 
                 <div className={classes.extraSpace} />
 
-                {/* <Typography size="subheading">Not Owned</Typography>
-                {allBooks.filter((product) => !ownedBooks.includes(product))
-                  .length !== 0 ? (
-                  <Grid container spacing={1}>
-                    {allBooks
-                      .filter((product) => !ownedBooks.includes(product))
-                      .map((categorisedProduct, index) => (
-                        <BookCard key={index} product={categorisedProduct} />
-                      ))}
-                  </Grid>
+                {isNotOwnedBooksEmpty ? (
+                  <div>
+                    <Typography size="subheading">Not Owned Books</Typography>
+                    <Typography type="italic">
+                      Kamu telah memiliki semua kilas!
+                    </Typography>
+                  </div>
                 ) : (
-                  <Typography type="italic">
-                    Kamu telah memiliki semua kilas!
-                  </Typography>
-                )} */}
+                  <div>
+                    <Typography size="subheading">Not Owned Books</Typography>
+                    <Grid container spacing={1}>
+                      {booksNotOwned.map((product) => (
+                        <BookCard key={product.id} product={product} />
+                      ))}
+                    </Grid>
+                  </div>
+                )}
+
+                <div className={classes.extraSpace} />
               </div>
 
               <div className={classes.sectionMobileBlock}>
@@ -408,21 +537,23 @@ export default function OwnedBooksBlock(props) {
 
                 <div className={classes.extraSpace} />
 
-                {/* <Typography size="subheading">Not Owned</Typography>
-                {allBooks.filter((product) => !ownedBooks.includes(product))
-                  .length !== 0 ? (
-                  <Grid container justifyContent="center" spacing={1}>
-                    {allBooks
-                      .filter((product) => !ownedBooks.includes(product))
-                      .map((categorisedProduct, index) => (
-                        <BookCard key={index} product={categorisedProduct} />
-                      ))}
-                  </Grid>
+                {isNotOwnedBooksEmpty ? (
+                  <div>
+                    <Typography size="subheading">Not Owned Books</Typography>
+                    <Typography type="italic">
+                      Kamu telah memiliki semua kilas!
+                    </Typography>
+                  </div>
                 ) : (
-                  <Typography type="italic">
-                    Kamu telah memiliki semua kilas!
-                  </Typography>
-                )} */}
+                  <div>
+                    <Typography size="subheading">Not Owned Books</Typography>
+                    <Grid container justifyContent="center" spacing={1}>
+                      {booksNotOwned.map((product) => (
+                        <BookCard key={product.id} product={product} />
+                      ))}
+                    </Grid>
+                  </div>
+                )}
               </div>
             </div>
           )}

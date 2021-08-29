@@ -42,24 +42,18 @@ export default function NavBarSecond(props) {
             <Grid
               container
               direction="row"
-              justifyContent="center"
+              justifyContent="space-between"
               alignItems="center"
             >
-              <Grid item xs={3}>
+              <Grid item>
                 <IconButton href="/" color="inherit">
                   <HomeIcon className={iconColorClass} />
                 </IconButton>
               </Grid>
 
-              <Grid item xs={3} />
+              <Grid item>{children}</Grid>
 
-              <Grid item xs={3}>
-                {children}
-              </Grid>
-
-              <Grid item xs={3} />
-
-              <Grid item xs={3} />
+              <Grid item />
             </Grid>
           </Container>
         </AppBar>

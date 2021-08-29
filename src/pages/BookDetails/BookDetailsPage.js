@@ -53,13 +53,14 @@ export default function BookDetailsPage({ match, history }) {
   useEffect(() => {
     const fetchData = async () => {
       const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        match.params.title
+        match.params.book_title
       );
       setCurrent_Product(book_);
+
       ownedBooks.map((x) => {
-        if (x.book_title == book_.title) {
+        if (x.book_title == book_.book_title) {
           setIsBookOwned(true);
-          setBookTitle(book_.title);
+          setBookTitle(book_.book_title);
         }
       });
     };
@@ -81,7 +82,10 @@ export default function BookDetailsPage({ match, history }) {
 
   useEffect(() => {
     const changeBtn = () => {
-      const exist = cartItems.find((x) => x.title === match.params.title);
+      console.log(cartItems);
+      const exist = cartItems.find(
+        (x) => x.book_title === match.params.book_title
+      );
       if (exist) {
         setIsAdded(true);
       } else {
@@ -93,7 +97,9 @@ export default function BookDetailsPage({ match, history }) {
 
   useEffect(() => {
     const changeBtn = () => {
-      const exist = favoriteBooks.find((x) => x.title === match.params.title);
+      const exist = favoriteBooks.find(
+        (x) => x.book_title === match.params.book_title
+      );
       if (exist) {
         setIsFavorite(true);
       } else {
@@ -103,6 +109,8 @@ export default function BookDetailsPage({ match, history }) {
     changeBtn();
   }, [, favoriteBooks]);
 
+  console.log(isFavorite);
+
   const handleAddCart = () => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
@@ -110,7 +118,9 @@ export default function BookDetailsPage({ match, history }) {
         current_product
       );
 
-      const exist = cartItems.find((x) => x.title === match.params.title);
+      const exist = cartItems.find(
+        (x) => x.book_title === match.params.book_title
+      );
 
       if (exist) {
         console.log("Already Added");
@@ -128,7 +138,9 @@ export default function BookDetailsPage({ match, history }) {
         current_product
       );
 
-      const exist = favoriteBooks.find((x) => x.title === match.params.title);
+      const exist = favoriteBooks.find(
+        (x) => x.book_title === match.params.book_title
+      );
 
       if (exist) {
         console.log("Already Added");
@@ -149,7 +161,7 @@ export default function BookDetailsPage({ match, history }) {
       dispatch(
         setFavoriteBooks([
           ...cartItems.filter(function (ele) {
-            return ele.title != current_product.title;
+            return ele.book_title != current_product.book_title;
           }),
         ])
       );
@@ -157,7 +169,7 @@ export default function BookDetailsPage({ match, history }) {
     fetchData();
   };
 
-  console.log(favoriteBooks);
+  console.log(current_product);
 
   return (
     <div>
@@ -172,7 +184,7 @@ export default function BookDetailsPage({ match, history }) {
                     <Container>
                       <BookDetails
                         cover={BookCover}
-                        title={current_product.title}
+                        title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
                         description={current_product.description}
@@ -185,7 +197,7 @@ export default function BookDetailsPage({ match, history }) {
                               <Grid container spacing={3}>
                                 <Grid item>
                                   <Button
-                                    href={`/text-page/${current_product.title}`}
+                                    href={`/text-page/${current_product.book_title}`}
                                   >
                                     Read or listen now!
                                   </Button>
@@ -193,7 +205,7 @@ export default function BookDetailsPage({ match, history }) {
 
                                 <Grid item>
                                   <Button
-                                    href={`/video/${current_product.title}`}
+                                    href={`/video/${current_product.book_title}`}
                                   >
                                     Watch now!
                                   </Button>
@@ -222,7 +234,7 @@ export default function BookDetailsPage({ match, history }) {
                             <div className={classes.sectionMobileBlock}>
                               <Grid item xs={12}>
                                 <Button
-                                  href={`/text-page/${current_product.title}`}
+                                  href={`/text-page/${current_product.book_title}`}
                                   fullWidth
                                 >
                                   Read or listen now!
@@ -231,7 +243,7 @@ export default function BookDetailsPage({ match, history }) {
                               <Grid item xs={12}>
                                 <Button
                                   fullWidth
-                                  href={`/video/${current_product.title}`}
+                                  href={`/video/${current_product.book_title}`}
                                 >
                                   Watch now!
                                 </Button>
@@ -299,7 +311,7 @@ export default function BookDetailsPage({ match, history }) {
                     <Container>
                       <BookDetails
                         cover={BookCover}
-                        title={current_product.title}
+                        title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
                         description={current_product.description}
@@ -434,7 +446,7 @@ export default function BookDetailsPage({ match, history }) {
                 <Container>
                   <BookDetails
                     cover={BookCover}
-                    title={current_product.title}
+                    title={current_product.book_title}
                     author={current_product.author}
                     descriptionTitle={"Tentang Apa?"}
                     description={current_product.description}

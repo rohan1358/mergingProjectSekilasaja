@@ -29,12 +29,12 @@ function App() {
           <PrivateRoute exact path="/accounts" component={AccountsPage} />
           <PrivateRoute
             exact
-            path="/text-page/:title"
+            path="/text-page/:book_title"
             component={TextReadingPage}
           />
           <PrivateRoute
             exact
-            path="/video/:title"
+            path="/video/:book_title"
             component={VideoWatchingPage}
           />
           <PrivateRoute exact path="/library" component={Library} />
@@ -47,7 +47,7 @@ function App() {
           <Route exact path="/pricing" component={PricingPage} />
           <Route
             exact
-            path="/book-details/:title"
+            path="/book-details/:book_title"
             component={BookDetailsPage}
           />
           <Route exact path="/" component={Home} />

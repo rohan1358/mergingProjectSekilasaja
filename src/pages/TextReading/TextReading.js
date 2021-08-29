@@ -52,7 +52,7 @@ export default function TextReading({ match, history }) {
   };
   useEffect(() => {
     db.collection("books")
-      .doc(match.params.title)
+      .doc(match.params.book_title)
       .collection("kilasan")
       .orderBy("kilas")
       .onSnapshot((snapshot) => {
@@ -65,26 +65,29 @@ export default function TextReading({ match, history }) {
       });
 
     ownedBooks.map((x) => {
-      if (x.book_title == match.params.title) {
+      if (x.book_title == match.params.book_title) {
         setIsBookOwned(true);
       }
     });
 
     if (currentUser !== null) {
       const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
-      const getlink = firebaseGetBookAudioURL.getBookAudioURL(match.params.title, chosenChapter)
+      const getlink = firebaseGetBookAudioURL.getBookAudioURL(
+        match.params.book_title,
+        chosenChapter
+      );
       const fetchData = async () => {
         const results = await getUser;
         const link = await getlink;
-        setUserData(results);   
-        setAudioLink(link)
+        setUserData(results);
+        setAudioLink(link);
       };
       fetchData();
     } else {
       console.log("You are not logged in!");
     }
-  }, [,chosenChapter]);
-  console.log(audioLink)
+  }, [, chosenChapter]);
+  console.log(audioLink);
   const isSubscribed = userData.is_subscribed;
 
   return (
@@ -95,7 +98,9 @@ export default function TextReading({ match, history }) {
           <div className={classes.sectionDesktop}>
             <NavBarSecond
               children={
-                <Typography size="subheading">{match.params.title}</Typography>
+                <Typography size="subheading">
+                  {match.params.book_title}
+                </Typography>
               }
             />
             <Container>
@@ -190,7 +195,7 @@ export default function TextReading({ match, history }) {
                   <div className={classes.container}>
                     <div className={classes.book_title}>
                       <Typography className={classes.uncopyable} size="heading">
-                        {match.params.title}
+                        {match.params.book_title}
                       </Typography>
                     </div>
                     {chosenChapter === chapterContent.length ? (

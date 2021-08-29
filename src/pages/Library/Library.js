@@ -31,7 +31,6 @@ import { Container } from "@material-ui/core";
 
 export default function Library({ history }) {
   const classes = MultiUseMobile();
-  const [pending, setPending] = useState(true);
 
   const db = fire.firestore();
   const { currentUser } = useContext(AuthContext);
@@ -54,17 +53,8 @@ export default function Library({ history }) {
           dispatch(setOwnedBookTitles(doc.data()["owned_books"]));
           dispatch(setFavoriteBookTitles(doc.data()["favorite_books"]));
         });
-        setPending(false);
       });
   }, []);
-
-  if (pending) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  }
 
   return (
     <div>

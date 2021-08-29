@@ -49,7 +49,7 @@ export default function Payment() {
       dispatch(
         setCart([
           ...cartItems.filter(function (ele) {
-            return ele.title != product.title;
+            return ele.book_title != product.book_title;
           }),
         ])
       );
@@ -76,7 +76,7 @@ export default function Payment() {
                 {cartItems.map((item) => (
                   <div className={classes.spaceBetween}>
                     <div>
-                      <Typography type="italic">{item.title}</Typography>
+                      <Typography type="italic">{item.book_title}</Typography>
                       <Typography type="italic">
                         Rp. {Intl.NumberFormat().format(item.price)}
                       </Typography>
@@ -213,7 +213,7 @@ export default function Payment() {
                 {cartItems.map((item) => (
                   <div className={classes.spaceBetween}>
                     <div>
-                      <Typography type="italic">{item.title}</Typography>
+                      <Typography type="italic">{item.book_title}</Typography>
                       <Typography type="italic">
                         Rp. {Intl.NumberFormat().format(item.price)}
                       </Typography>
