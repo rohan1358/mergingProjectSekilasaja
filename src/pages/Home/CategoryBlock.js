@@ -1,20 +1,14 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // Custom components
 import BookCard from "../../components/BookCard";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
+
 // Other components
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
-// //Redux
-// import { useSelector, useDispatch } from "react-redux";
-// //import { selectBook, setBook } from "../../feature/bookSlice";
-
-// //Import firebase function to get books based on filter
-// import * as firebaseGetBooksByCategory from "../.././firebase/firebaseGetBooksByCategory.js";
 
 // Firebase components
 import fire from "../../firebase/fire";
@@ -43,30 +37,23 @@ const responsive = {
 
 export default function CategoryBlock(props) {
   const classes = MultiUseMobile();
-  //const dispatch = useDispatch();
 
   const { title, history } = props;
   const [chosenCategory, setChosenCategory] = useState("All");
 
   // Check if the user has chosen a category or not
   const [isChosenCategory, setIsChosenCategory] = useState(false);
-
-  //const products = useSelector(selectBook);
-
   const [products, SetProducts] = useState([]);
+
   useEffect(() => {
     db.collection("books").onSnapshot((snapshot) => {
-      // dispatch(
       SetProducts(
         snapshot.docs.map((doc) => ({
           ...doc.data(),
         }))
-        //)
       );
     });
   }, []);
-
-  console.log(products);
 
   return (
     <div>
@@ -90,7 +77,11 @@ export default function CategoryBlock(props) {
               (product) => product.category.includes(chosenCategory) == true
             )
             .map((categorisedProduct, index) => (
-              <BookCard key={index} product={categorisedProduct} />
+              <BookCard
+                coverTitle={categorisedProduct.book_title}
+                key={index}
+                product={categorisedProduct}
+              />
             ))}
         </Carousel>
       ) : (
@@ -101,7 +92,11 @@ export default function CategoryBlock(props) {
           responsive={responsive}
         >
           {products.map((product) => (
-            <BookCard key={product.id} product={product} />
+            <BookCard
+              coverTitle={product.book_title}
+              key={product.id}
+              product={product}
+            />
           ))}
         </Carousel>
       )}

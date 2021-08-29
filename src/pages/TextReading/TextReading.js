@@ -26,15 +26,13 @@ import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
-const db = fire.firestore();
 
 export default function TextReading({ match, history }) {
-  console.log(match);
+  const db = fire.firestore();
 
   const classes = TextReadingStyle();
   const nav = NavbarStyle();
 
-  const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
   const [chapterContent, setChapterContent] = useState([]);
   const [chosenChapter, setChosenChapter] = useState(1);
   const [audioLink, setAudioLink] = useState(null);
@@ -50,6 +48,7 @@ export default function TextReading({ match, history }) {
       setChosenChapter(chosenChapter + 1);
     }
   };
+
   useEffect(() => {
     db.collection("books")
       .doc(match.params.book_title)

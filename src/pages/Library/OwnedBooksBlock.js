@@ -204,6 +204,7 @@ export default function OwnedBooksBlock(props) {
                             )
                             .map((categorisedProduct, index) => (
                               <BookCard
+                                coverTitle={categorisedProduct.book_title}
                                 key={index}
                                 product={categorisedProduct}
                               />
@@ -246,6 +247,7 @@ export default function OwnedBooksBlock(props) {
                             )
                             .map((categorisedProduct, index) => (
                               <BookCard
+                                coverTitle={categorisedProduct.book_title}
                                 key={index}
                                 product={categorisedProduct}
                               />
@@ -285,6 +287,7 @@ export default function OwnedBooksBlock(props) {
                           )
                           .map((categorisedProduct, index) => (
                             <BookCard
+                              coverTitle={categorisedProduct.book_title}
                               key={index}
                               product={categorisedProduct}
                             />
@@ -325,6 +328,7 @@ export default function OwnedBooksBlock(props) {
                             )
                             .map((categorisedProduct, index) => (
                               <BookCard
+                                coverTitle={categorisedProduct.book_title}
                                 key={index}
                                 product={categorisedProduct}
                               />
@@ -372,6 +376,7 @@ export default function OwnedBooksBlock(props) {
                                 )
                                 .map((categorisedProduct, index) => (
                                   <BookCard
+                                    coverTitle={categorisedProduct.book_title}
                                     key={index}
                                     product={categorisedProduct}
                                   />
@@ -416,6 +421,7 @@ export default function OwnedBooksBlock(props) {
                           )
                           .map((categorisedProduct, index) => (
                             <BookCard
+                              coverTitle={categorisedProduct.book_title}
                               key={index}
                               product={categorisedProduct}
                             />
@@ -445,7 +451,11 @@ export default function OwnedBooksBlock(props) {
                     <Typography size="subheading">Favorite Books</Typography>
                     <Grid container spacing={1}>
                       {favoriteBooks.map((product) => (
-                        <BookCard key={product.id} product={product} />
+                        <BookCard
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
                       ))}
                     </Grid>
                   </div>
@@ -466,7 +476,11 @@ export default function OwnedBooksBlock(props) {
                     <Typography size="subheading">Owned Books</Typography>
                     <Grid container spacing={1}>
                       {ownedBooks.map((product) => (
-                        <BookCard key={product.id} product={product} />
+                        <BookCard
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
                       ))}
                     </Grid>
                   </div>
@@ -486,7 +500,11 @@ export default function OwnedBooksBlock(props) {
                     <Typography size="subheading">Not Owned Books</Typography>
                     <Grid container spacing={1}>
                       {booksNotOwned.map((product) => (
-                        <BookCard key={product.id} product={product} />
+                        <BookCard
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
                       ))}
                     </Grid>
                   </div>
@@ -508,7 +526,11 @@ export default function OwnedBooksBlock(props) {
                     <Typography size="subheading">Favorite Books</Typography>
                     <Grid container justifyContent="center" spacing={1}>
                       {favoriteBooks.map((product) => (
-                        <BookCard key={product.id} product={product} />
+                        <BookCard
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
                       ))}
                     </Grid>
                   </div>
@@ -529,7 +551,11 @@ export default function OwnedBooksBlock(props) {
                     <Typography size="subheading">Owned Books</Typography>
                     <Grid container justifyContent="center" spacing={1}>
                       {ownedBooks.map((product) => (
-                        <BookCard key={product.id} product={product} />
+                        <BookCard
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
                       ))}
                     </Grid>
                   </div>
@@ -549,7 +575,11 @@ export default function OwnedBooksBlock(props) {
                     <Typography size="subheading">Not Owned Books</Typography>
                     <Grid container justifyContent="center" spacing={1}>
                       {booksNotOwned.map((product) => (
-                        <BookCard key={product.id} product={product} />
+                        <BookCard
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
                       ))}
                     </Grid>
                   </div>

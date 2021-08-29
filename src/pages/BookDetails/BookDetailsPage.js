@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import BookCover from "../../images/rdpd.jpg";
 
 // Custom components
 import BookDetails from "./BookDetails";
@@ -29,6 +28,7 @@ import fire from "../../firebase/fire";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
+import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 
 const firestore = fire.firestore();
 
@@ -49,6 +49,7 @@ export default function BookDetailsPage({ match, history }) {
   const [isAdded, setIsAdded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [bookTitle, setBookTitle] = useState([]);
+  const [coverLink, setCoverLink] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -77,6 +78,18 @@ export default function BookDetailsPage({ match, history }) {
       fetchData();
     } else {
       console.log("Not logged in");
+    }
+
+    if (match.params.book_title != null) {
+      const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(
+        match.params.book_title
+      );
+
+      const fetchData = async () => {
+        const link = await getLink;
+        setCoverLink(link);
+      };
+      fetchData();
     }
   }, []);
 
@@ -183,7 +196,7 @@ export default function BookDetailsPage({ match, history }) {
                   {(current_product.kilasan.length !== 0) === true && (
                     <Container>
                       <BookDetails
-                        cover={BookCover}
+                        cover={coverLink}
                         title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
@@ -310,7 +323,7 @@ export default function BookDetailsPage({ match, history }) {
                   {(current_product.kilasan.length !== 0) === true && (
                     <Container>
                       <BookDetails
-                        cover={BookCover}
+                        cover={coverLink}
                         title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
@@ -445,7 +458,7 @@ export default function BookDetailsPage({ match, history }) {
               {(current_product.kilasan.length !== 0) === true && (
                 <Container>
                   <BookDetails
-                    cover={BookCover}
+                    cover={coverLink}
                     title={current_product.book_title}
                     author={current_product.author}
                     descriptionTitle={"Tentang Apa?"}

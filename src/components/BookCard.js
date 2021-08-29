@@ -1,6 +1,4 @@
-import React from "react";
-
-import RdpdCover from "../images/rdpd.jpg";
+import React, { useState, useContext, useEffect } from "react";
 
 // @material-ui/core components
 import { makeStyles, Link, Grid } from "@material-ui/core";
@@ -9,18 +7,51 @@ import { makeStyles, Link, Grid } from "@material-ui/core";
 import InfoAreaStyle from "../styles/InfoAreaStyle";
 import Typography from "./Typography";
 
+// Firebase components
+import { AuthContext } from "../components/Routing/Auth";
+import * as firebaseGetBookCoverImageURL from "../firebase/firebaseGetBookCoverImageURL";
+import fire from "../firebase/fire";
+
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function BookCard({ product }) {
+export default function BookCard({ product, coverTitle }) {
   const classes = useStyles();
-  // const { link, product, onAdd } = props;
+
+  const db = fire.firestore();
+  const { currentUser } = useContext(AuthContext);
+  const [coverLink, setCoverLink] = useState("");
+  const [products, SetProducts] = useState([]);
+
+  useEffect(() => {
+    db.collection("books").onSnapshot((snapshot) => {
+      SetProducts(
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+        }))
+      );
+    });
+
+    if (coverTitle != null) {
+      const getLink =
+        firebaseGetBookCoverImageURL.getBookCoverImageURL(coverTitle);
+
+      const fetchData = async () => {
+        const link = await getLink;
+        setCoverLink(link);
+      };
+      fetchData();
+    }
+  }, []);
+
+  console.log(coverLink);
+
   return (
     <Grid item>
       <Link underline="none" href={`book-details/${product.book_title}`}>
         <div className={classes.bookCover}>
           <div>
             <img
-              src={RdpdCover}
+              src={coverLink}
               alt={product.book_title}
               className={
                 classes.imgRounded +

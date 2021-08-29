@@ -18,6 +18,7 @@ import {
 
 // Firebase components
 import fire from "../../firebase/fire";
+import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 
 const db = fire.firestore();
 
@@ -46,17 +47,25 @@ export default function CategoryBlock(props) {
 
     //Get books' data from books database based on favorite books of the user
     if (favoriteBookTitles.length > 0) {
-      db.collection("books")
-        .where("book_title", "in", favoriteBookTitles)
-        .onSnapshot((snapshot) => {
-          dispatch(
-            setFavoriteBooks(
-              snapshot.docs.map((doc) => ({
-                ...doc.data(),
-              }))
-            )
+      const fetchData = () => {
+        const getCartData = async (book_title) => {
+          const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+            book_title
           );
+          return products_;
+        };
+
+        var book_ = [
+          ...favoriteBookTitles.map((book) => {
+            return getCartData(book);
+          }),
+        ];
+
+        var a = Promise.all(book_).then(function (book) {
+          dispatch(setFavoriteBooks(book));
         });
+      };
+      fetchData();
     } else {
       setIsFavoriteBookTitlesEmpty(true);
     }
@@ -68,7 +77,7 @@ export default function CategoryBlock(props) {
         chosenCategory={chosenCategory}
         setChosenCategory={setChosenCategory}
         setIsChosenCategory={setIsChosenCategory}
-      ></CategoryBarFilter>
+      />
 
       <div className={classes.extraSpace} />
 
@@ -97,7 +106,11 @@ export default function CategoryBlock(props) {
                             product.category.includes(chosenCategory) == true
                         )
                         .map((categorisedProduct, index) => (
-                          <BookCard key={index} product={categorisedProduct} />
+                          <BookCard
+                            coverTitle={categorisedProduct.book_title}
+                            key={index}
+                            product={categorisedProduct}
+                          />
                         ))}
                     </Grid>
                   ) : (
@@ -123,7 +136,11 @@ export default function CategoryBlock(props) {
                         product.category.includes(chosenCategory) == true
                     )
                     .map((categorisedProduct, index) => (
-                      <BookCard key={index} product={categorisedProduct} />
+                      <BookCard
+                        coverTitle={categorisedProduct.book_title}
+                        key={index}
+                        product={categorisedProduct}
+                      />
                     ))}
                 </Grid>
               ) : (
@@ -157,7 +174,11 @@ export default function CategoryBlock(props) {
                             product.category.includes(chosenCategory) == true
                         )
                         .map((categorisedProduct, index) => (
-                          <BookCard key={index} product={categorisedProduct} />
+                          <BookCard
+                            coverTitle={categorisedProduct.book_title}
+                            key={index}
+                            product={categorisedProduct}
+                          />
                         ))}
                     </Grid>
                   ) : (
@@ -183,7 +204,11 @@ export default function CategoryBlock(props) {
                         product.category.includes(chosenCategory) == true
                     )
                     .map((categorisedProduct, index) => (
-                      <BookCard key={index} product={categorisedProduct} />
+                      <BookCard
+                        coverTitle={categorisedProduct.book_title}
+                        key={index}
+                        product={categorisedProduct}
+                      />
                     ))}
                 </Grid>
               ) : (
@@ -209,7 +234,11 @@ export default function CategoryBlock(props) {
                 <Typography size="subheading">Favorite Books</Typography>
                 <Grid container spacing={1}>
                   {favoriteBooks.map((product) => (
-                    <BookCard key={product.id} product={product} />
+                    <BookCard
+                      coverTitle={product.book_title}
+                      key={product.id}
+                      product={product}
+                    />
                   ))}
                 </Grid>
               </div>
@@ -220,7 +249,11 @@ export default function CategoryBlock(props) {
             <Typography size="subheading">Owned Books</Typography>
             <Grid container spacing={1}>
               {products.map((product) => (
-                <BookCard key={product.id} product={product} />
+                <BookCard
+                  coverTitle={product.book_title}
+                  key={product.id}
+                  product={product}
+                />
               ))}
             </Grid>
           </div>
@@ -238,7 +271,11 @@ export default function CategoryBlock(props) {
                 <Typography size="subheading">Favorite Books</Typography>
                 <Grid container justifyContent="center" spacing={1}>
                   {favoriteBooks.map((product) => (
-                    <BookCard key={product.id} product={product} />
+                    <BookCard
+                      coverTitle={product.book_title}
+                      key={product.id}
+                      product={product}
+                    />
                   ))}
                 </Grid>
               </div>
@@ -249,7 +286,11 @@ export default function CategoryBlock(props) {
             <Typography size="subheading">Owned Books</Typography>
             <Grid container justifyContent="center" spacing={1}>
               {products.map((product) => (
-                <BookCard key={product.id} product={product} />
+                <BookCard
+                  coverTitle={product.book_title}
+                  key={product.id}
+                  product={product}
+                />
               ))}
             </Grid>
           </div>
