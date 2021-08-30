@@ -183,12 +183,12 @@ export default function Footer() {
               <Link underline="none" href="/contact">
                 <Typography color="beigeColor">Hubungi Kami</Typography>
               </Link>
-              <Link underline="none" href="/contact">
+              {/* <Link underline="none" href="/contact">
                 <Typography color="beigeColor">Kebijakan Privasi</Typography>
               </Link>
               <Link underline="none" href="/contact">
                 <Typography color="beigeColor">Syarat & Ketentuan</Typography>
-              </Link>
+              </Link> */}
             </Grid>
 
             <Grid item xs={3}>

@@ -18,7 +18,7 @@ export async function getBookCategories() {
     results = results.filter(function (item, pos) {
       return results.indexOf(item) == pos;
     });
-    console.log(results);
+    // console.log(results);
     return results;
   } catch (err) {
     var errorCode = err.code;

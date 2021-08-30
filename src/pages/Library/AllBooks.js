@@ -6,9 +6,8 @@ import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
 
-// Other components
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+// Material UI components
+import { Grid } from "@material-ui/core";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -19,28 +18,9 @@ import {
 
 // Firebase components
 import fire from "../../firebase/fire";
+import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 
 const db = fire.firestore();
-
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 5,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 5,
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 768 },
-    items: 3,
-  },
-  mobile: {
-    breakpoint: { max: 768, min: 0 },
-    items: 2,
-  },
-};
 
 export default function CategoryBlock(props) {
   const classes = MultiUseMobile();
@@ -67,23 +47,29 @@ export default function CategoryBlock(props) {
 
     //Get books' data from books database based on favorite books of the user
     if (favoriteBookTitles.length > 0) {
-      db.collection("books")
-        .where("book_title", "in", favoriteBookTitles)
-        .onSnapshot((snapshot) => {
-          dispatch(
-            setFavoriteBooks(
-              snapshot.docs.map((doc) => ({
-                ...doc.data(),
-              }))
-            )
+      const fetchData = () => {
+        const getCartData = async (book_title) => {
+          const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+            book_title
           );
+          return products_;
+        };
+
+        var book_ = [
+          ...favoriteBookTitles.map((book) => {
+            return getCartData(book);
+          }),
+        ];
+
+        var a = Promise.all(book_).then(function (book) {
+          dispatch(setFavoriteBooks(book));
         });
+      };
+      fetchData();
     } else {
       setIsFavoriteBookTitlesEmpty(true);
     }
   }, []);
-
-  console.log(products);
 
   return (
     <div>
@@ -91,70 +77,223 @@ export default function CategoryBlock(props) {
         chosenCategory={chosenCategory}
         setChosenCategory={setChosenCategory}
         setIsChosenCategory={setIsChosenCategory}
-      ></CategoryBarFilter>
+      />
+
+      <div className={classes.extraSpace} />
 
       {isChosenCategory === true ? (
         <div>
-          {isFavoriteBookTitlesEmpty ? (
-            <div>
-              <Typography size="subheading">Favorite Books</Typography>
-              <Typography type="italic">
-                Kamu tidak memiliki kilas favorit sama sekali!
-              </Typography>
-            </div>
-          ) : (
-            <div>
-              <Typography size="subheading">Favorite Books</Typography>
-              <Carousel ssr={true} responsive={responsive}>
-                {favoriteBooks
-                  .filter(
+          <div className={classes.sectionDesktopBlock}>
+            {isFavoriteBookTitlesEmpty ? (
+              <div>
+                <Typography size="subheading">Favorite Books</Typography>
+                <Typography type="italic">
+                  Kamu tidak memiliki kilas favorit sama sekali!
+                </Typography>
+              </div>
+            ) : (
+              <div>
+                <Typography size="subheading">Favorite Books</Typography>
+                <Grid container spacing={1}>
+                  {favoriteBooks.filter(
                     (product) =>
                       product.category.includes(chosenCategory) == true
-                  )
-                  .map((categorisedProduct, index) => (
-                    <BookCard key={index} product={categorisedProduct} />
-                  ))}
-              </Carousel>
-            </div>
-          )}
+                  ).length !== 0 ? (
+                    <Grid container spacing={1}>
+                      {favoriteBooks
+                        .filter(
+                          (product) =>
+                            product.category.includes(chosenCategory) == true
+                        )
+                        .map((categorisedProduct, index) => (
+                          <BookCard
+                            coverTitle={categorisedProduct.book_title}
+                            key={index}
+                            product={categorisedProduct}
+                          />
+                        ))}
+                    </Grid>
+                  ) : (
+                    <Typography type="italic">
+                      Kilas favorit kamu tidak ditemukan di kategori ini!
+                    </Typography>
+                  )}
+                </Grid>
+              </div>
+            )}
 
-          <Typography size="subheading">Owned Books</Typography>
-          <Carousel ssr={true} responsive={responsive}>
-            {products
-              .filter(
+            <div className={classes.extraSpace} />
+
+            <Typography size="subheading">Owned Books</Typography>
+            <div>
+              {products.filter(
                 (product) => product.category.includes(chosenCategory) == true
-              )
-              .map((categorisedProduct, index) => (
-                <BookCard key={index} product={categorisedProduct} />
-              ))}
-          </Carousel>
+              ).length !== 0 ? (
+                <Grid container spacing={1}>
+                  {products
+                    .filter(
+                      (product) =>
+                        product.category.includes(chosenCategory) == true
+                    )
+                    .map((categorisedProduct, index) => (
+                      <BookCard
+                        coverTitle={categorisedProduct.book_title}
+                        key={index}
+                        product={categorisedProduct}
+                      />
+                    ))}
+                </Grid>
+              ) : (
+                <Typography type="italic">
+                  Tidak ditemukan kilas di kategori ini!
+                </Typography>
+              )}
+            </div>
+          </div>
+
+          <div className={classes.sectionMobileBlock}>
+            {isFavoriteBookTitlesEmpty ? (
+              <div>
+                <Typography size="subheading">Favorite Books</Typography>
+                <Typography type="italic">
+                  Kamu tidak memiliki kilas favorit sama sekali!
+                </Typography>
+              </div>
+            ) : (
+              <div>
+                <Typography size="subheading">Favorite Books</Typography>
+                <div>
+                  {favoriteBooks.filter(
+                    (product) =>
+                      product.category.includes(chosenCategory) == true
+                  ).length !== 0 ? (
+                    <Grid container justifyContent="center" spacing={1}>
+                      {favoriteBooks
+                        .filter(
+                          (product) =>
+                            product.category.includes(chosenCategory) == true
+                        )
+                        .map((categorisedProduct, index) => (
+                          <BookCard
+                            coverTitle={categorisedProduct.book_title}
+                            key={index}
+                            product={categorisedProduct}
+                          />
+                        ))}
+                    </Grid>
+                  ) : (
+                    <Typography type="italic">
+                      Kilas favorit kamu tidak ditemukan di kategori ini!
+                    </Typography>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div className={classes.extraSpace} />
+
+            <Typography size="subheading">Owned Books</Typography>
+            <div>
+              {products.filter(
+                (product) => product.category.includes(chosenCategory) == true
+              ).length !== 0 ? (
+                <Grid container justifyContent="center" spacing={1}>
+                  {products
+                    .filter(
+                      (product) =>
+                        product.category.includes(chosenCategory) == true
+                    )
+                    .map((categorisedProduct, index) => (
+                      <BookCard
+                        coverTitle={categorisedProduct.book_title}
+                        key={index}
+                        product={categorisedProduct}
+                      />
+                    ))}
+                </Grid>
+              ) : (
+                <Typography type="italic">
+                  Tidak ditemukan kilas di kategori ini!
+                </Typography>
+              )}
+            </div>
+          </div>
         </div>
       ) : (
         <div>
-          {isFavoriteBookTitlesEmpty ? (
-            <div>
-              <Typography size="subheading">Favorite Books</Typography>
-              <Typography type="italic">
-                Kamu tidak memiliki kilas favorit sama sekali!
-              </Typography>
-            </div>
-          ) : (
-            <div>
-              <Typography size="subheading">Favorite Books</Typography>
-              <Carousel ssr={true} responsive={responsive}>
-                {favoriteBooks.map((product) => (
-                  <BookCard key={product.id} product={product} />
-                ))}
-              </Carousel>
-            </div>
-          )}
+          <div className={classes.sectionDesktopBlock}>
+            {isFavoriteBookTitlesEmpty ? (
+              <div>
+                <Typography size="subheading">Favorite Books</Typography>
+                <Typography type="italic">
+                  Kamu tidak memiliki kilas favorit sama sekali!
+                </Typography>
+              </div>
+            ) : (
+              <div>
+                <Typography size="subheading">Favorite Books</Typography>
+                <Grid container spacing={1}>
+                  {favoriteBooks.map((product) => (
+                    <BookCard
+                      coverTitle={product.book_title}
+                      key={product.id}
+                      product={product}
+                    />
+                  ))}
+                </Grid>
+              </div>
+            )}
 
-          <Typography size="subheading">Owned Books</Typography>
-          <Carousel ssr={true} responsive={responsive}>
-            {products.map((product) => (
-              <BookCard key={product.id} product={product} />
-            ))}
-          </Carousel>
+            <div className={classes.extraSpace} />
+
+            <Typography size="subheading">Owned Books</Typography>
+            <Grid container spacing={1}>
+              {products.map((product) => (
+                <BookCard
+                  coverTitle={product.book_title}
+                  key={product.id}
+                  product={product}
+                />
+              ))}
+            </Grid>
+          </div>
+
+          <div className={classes.sectionMobileBlock}>
+            {isFavoriteBookTitlesEmpty ? (
+              <div>
+                <Typography size="subheading">Favorite Books</Typography>
+                <Typography type="italic">
+                  Kamu tidak memiliki kilas favorit sama sekali!
+                </Typography>
+              </div>
+            ) : (
+              <div>
+                <Typography size="subheading">Favorite Books</Typography>
+                <Grid container justifyContent="center" spacing={1}>
+                  {favoriteBooks.map((product) => (
+                    <BookCard
+                      coverTitle={product.book_title}
+                      key={product.id}
+                      product={product}
+                    />
+                  ))}
+                </Grid>
+              </div>
+            )}
+
+            <div className={classes.extraSpace} />
+
+            <Typography size="subheading">Owned Books</Typography>
+            <Grid container justifyContent="center" spacing={1}>
+              {products.map((product) => (
+                <BookCard
+                  coverTitle={product.book_title}
+                  key={product.id}
+                  product={product}
+                />
+              ))}
+            </Grid>
+          </div>
         </div>
       )}
     </div>

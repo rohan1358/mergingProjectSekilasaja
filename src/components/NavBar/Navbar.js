@@ -33,7 +33,6 @@ import { AuthContext } from "../Routing/Auth";
 //Import firebase function to get user based on userid
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
-import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -172,7 +171,7 @@ export default function NavBar(props) {
   return (
     <div>
       {!!isSubscribed ? (
-        <AppBar position="static" color="white">
+        <AppBar position="fixed" color="white">
           <Container>
             <Toolbar>
               <a href="/">
@@ -224,7 +223,7 @@ export default function NavBar(props) {
       ) : (
         <div>
           {!!currentUser ? (
-            <AppBar position="static" color="white">
+            <AppBar position="fixed" color="white">
               <Container>
                 <Toolbar>
                   <a href="/">
@@ -280,15 +279,16 @@ export default function NavBar(props) {
                     <Drawer
                       direction={"right"}
                       drawerLogo={
+                        <ShoppingCartIcon className={classes.iconColor} />
+                      }
+                      drawerTitle={"Your Cart"}
+                      logo={
                         <Badge badgeContent={cart.length} color="error">
                           <ShoppingCartIcon className={classes.iconColor} />
                         </Badge>
                       }
-                      drawerTitle={"Your Cart"}
-                      logo={<ShoppingCartIcon className={classes.iconColor} />}
                       children={<Basket cartItems={cart} />}
                     />
-                    {isCart && <Button color="danger">{cart.length}</Button>}
 
                     <IconButton
                       aria-label="show more"
@@ -304,7 +304,7 @@ export default function NavBar(props) {
               </Container>
             </AppBar>
           ) : (
-            <AppBar position="static" color="white">
+            <AppBar position="fixed" color="white">
               <Container>
                 <Toolbar>
                   <a href="/">
@@ -357,6 +357,7 @@ export default function NavBar(props) {
         </div>
       )}
 
+      <div className={classes.toolbar} />
       {renderMobileMenu}
     </div>
   );

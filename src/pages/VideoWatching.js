@@ -27,11 +27,11 @@ export default function VideoWatchingPage({ match, history }) {
   useEffect(() => {
     const fetchData = async () => {
       const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        match.params.title
+        match.params.book_title
       );
       setBookContent(book_);
       ownedBooks.map((x) => {
-        if (x.book_title == book_.title) {
+        if (x.book_title == book_.book_title) {
           setIsBookOwned(true);
         }
       });
@@ -61,7 +61,7 @@ export default function VideoWatchingPage({ match, history }) {
             vidLink={
               "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
             }
-            title={bookContent.title}
+            title={bookContent.book_title}
             description={bookContent.description}
           />
         </div>

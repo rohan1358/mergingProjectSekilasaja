@@ -11,7 +11,7 @@ import FourOFourPage from "../404page";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
-import { Container, AppBar, Grid } from "@material-ui/core";
+import { Container, AppBar, Grid, Paper } from "@material-ui/core";
 
 // Custom components
 import Button from "../../components/Button";
@@ -25,18 +25,17 @@ import { selectOwnedBooks } from "../../feature/ownedBooksSlice";
 import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
-
-const db = fire.firestore();
+import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
 
 export default function TextReading({ match, history }) {
-  console.log(match);
+  const db = fire.firestore();
 
   const classes = TextReadingStyle();
   const nav = NavbarStyle();
 
-  const [currentTrackDuration, setCurrentTrackDuration] = useState(0);
   const [chapterContent, setChapterContent] = useState([]);
   const [chosenChapter, setChosenChapter] = useState(1);
+  const [audioLink, setAudioLink] = useState(null);
   const [userData, setUserData] = useState([]);
   const { currentUser } = useContext(AuthContext);
   const [isBookOwned, setIsBookOwned] = useState(false);
@@ -52,7 +51,7 @@ export default function TextReading({ match, history }) {
 
   useEffect(() => {
     db.collection("books")
-      .doc(match.params.title)
+      .doc(match.params.book_title)
       .collection("kilasan")
       .orderBy("kilas")
       .onSnapshot((snapshot) => {
@@ -65,119 +64,203 @@ export default function TextReading({ match, history }) {
       });
 
     ownedBooks.map((x) => {
-      if (x.book_title == match.params.title) {
+      if (x.book_title == match.params.book_title) {
         setIsBookOwned(true);
       }
     });
 
     if (currentUser !== null) {
       const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
+      const getlink = firebaseGetBookAudioURL.getBookAudioURL(
+        match.params.book_title,
+        chosenChapter
+      );
       const fetchData = async () => {
         const results = await getUser;
+        const link = await getlink;
         setUserData(results);
+        setAudioLink(link);
       };
       fetchData();
     } else {
       console.log("You are not logged in!");
     }
-  }, []);
-
+  }, [, chosenChapter]);
+  console.log(audioLink);
   const isSubscribed = userData.is_subscribed;
 
   return (
     <div>
+      <div style={{ marginTop: "70px" }} />
       {!!isSubscribed || !!isBookOwned ? (
         <div>
-          <NavBarSecond
-            children={
-              <Drawer
-                direction={"left"}
-                drawerLogo={<DvrIcon className={nav.hugeIcon} />}
-                drawerTitle={"Daftar Kilas"}
-                logo={<DvrIcon className={nav.iconColor} />}
-                children={
-                  <TableOfContent
-                    chapterContent={chapterContent}
-                    chosenChapter={chosenChapter}
-                    setChosenChapter={setChosenChapter}
-                  />
-                }
-              />
-            }
-          />
+          <div className={classes.sectionDesktop}>
+            <NavBarSecond
+              children={
+                <Typography size="subheading">
+                  {match.params.book_title}
+                </Typography>
+              }
+            />
+            <Container>
+              {chapterContent.length !== 0 && (
+                <Grid container spacing={5}>
+                  <Grid item xs={4}>
+                    <Paper square elevation={3}>
+                      <TableOfContent
+                        chapterContent={chapterContent}
+                        chosenChapter={chosenChapter}
+                        setChosenChapter={setChosenChapter}
+                        classes={classes.tableOfContent}
+                      />
+                    </Paper>
+                  </Grid>
 
-          <Container maxWidth={"md"}>
-            {chapterContent.length !== 0 && (
-              <div className={classes.page}>
-                <div className={classes.container}>
-                  <div className={classes.book_title}>
-                    <Typography className={classes.uncopyable} size="heading">
-                      {match.params.title}
-                    </Typography>
-                  </div>
-                  {chosenChapter === chapterContent.length ? (
-                    <div>
-                      <div className={classes.title}>
-                        <Typography
-                          className={classes.uncopyable}
-                          size="subheading"
-                        >
-                          {"Ringkasan Akhir"}
-                        </Typography>
-                      </div>
-                      <div className={classes.chapterContent}>
-                        {chapterContent[
-                          chapterContent.length - 1
-                        ].content.details.map((paragraph, index) => (
-                          <Typography className={classes.paragraph}>
-                            {paragraph}
+                  <Grid item xs={8}>
+                    {chosenChapter === chapterContent.length ? (
+                      <div>
+                        <div className={classes.extraSpace} />
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            size="subheading"
+                          >
+                            {"Ringkasan Akhir"}
                           </Typography>
-                        ))}
+                        </div>
+                        <div className={classes.chapterContent}>
+                          {chapterContent[
+                            chapterContent.length - 1
+                          ].content.details.map((paragraph, index) => (
+                            <Typography className={classes.paragraph}>
+                              {paragraph}
+                            </Typography>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className={classes.title}>
-                        <Typography
-                          className={classes.uncopyable}
-                          type="italic"
-                          size="bold"
-                        >
-                          Kilas #{chapterContent[chosenChapter - 1].id}
-                        </Typography>
-                      </div>
-                      <div className={classes.title}>
-                        <Typography
-                          className={classes.uncopyable}
-                          size="subheading"
-                        >
-                          {chapterContent[chosenChapter - 1].content.title}
-                        </Typography>
-                      </div>
-                      <div className={classes.chapterContent}>
-                        {chapterContent[chosenChapter - 1].content.details.map(
-                          (paragraph, index) => (
+                    ) : (
+                      <div>
+                        <div className={classes.extraSpace} />
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            size="subheading"
+                          >
+                            {chapterContent[chosenChapter - 1].content.title}
+                          </Typography>
+                        </div>
+                        <div className={classes.chapterContent}>
+                          {chapterContent[
+                            chosenChapter - 1
+                          ].content.details.map((paragraph, index) => (
                             <Typography
                               className={classes.uncopyable}
                               className={classes.paragraph}
                             >
                               {paragraph}
                             </Typography>
-                          )
-                        )}
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
-          </Container>
+                    )}
+                  </Grid>
+                </Grid>
+              )}
+            </Container>
+          </div>
 
-          <div className={classes.extraSpace}>
+          <div className={classes.sectionMobile}>
+            <NavBarSecond
+              children={
+                <Drawer
+                  direction={"left"}
+                  drawerLogo={<DvrIcon className={nav.hugeIcon} />}
+                  drawerTitle={"Daftar Kilas"}
+                  logo={<DvrIcon className={nav.iconColor} />}
+                  children={
+                    <TableOfContent
+                      chapterContent={chapterContent}
+                      chosenChapter={chosenChapter}
+                      setChosenChapter={setChosenChapter}
+                    />
+                  }
+                />
+              }
+            />
+
+            <Container maxWidth={"md"}>
+              {chapterContent.length !== 0 && (
+                <div className={classes.page}>
+                  <div className={classes.container}>
+                    <div className={classes.book_title}>
+                      <Typography className={classes.uncopyable} size="heading">
+                        {match.params.book_title}
+                      </Typography>
+                    </div>
+                    {chosenChapter === chapterContent.length ? (
+                      <div>
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            size="subheading"
+                          >
+                            {"Ringkasan Akhir"}
+                          </Typography>
+                        </div>
+                        <div className={classes.chapterContent}>
+                          {chapterContent[
+                            chapterContent.length - 1
+                          ].content.details.map((paragraph, index) => (
+                            <Typography className={classes.paragraph}>
+                              {paragraph}
+                            </Typography>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            type="italic"
+                            size="bold"
+                          >
+                            Kilas #{chapterContent[chosenChapter - 1].id}
+                          </Typography>
+                        </div>
+                        <div className={classes.title}>
+                          <Typography
+                            className={classes.uncopyable}
+                            size="subheading"
+                          >
+                            {chapterContent[chosenChapter - 1].content.title}
+                          </Typography>
+                        </div>
+                        <div className={classes.chapterContent}>
+                          {chapterContent[
+                            chosenChapter - 1
+                          ].content.details.map((paragraph, index) => (
+                            <Typography
+                              className={classes.uncopyable}
+                              className={classes.paragraph}
+                            >
+                              {paragraph}
+                            </Typography>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </Container>
+          </div>
+
+          <div style={{ marginTop: "100px" }}>
             <AppBar color="white" position="fixed" className={classes.audioBar}>
               <Container>
                 <AudioPlayer
-                  vidLink="https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Cover_Images%2Frdpd.mp3?alt=media&token=4a6b3d53-7cd1-4a1c-8858-be5c83d698ac"
+                  vidLink={audioLink}
                   button={
                     <Button color="transparent" onClick={handleNext}>
                       <Typography type="bold">Next ►</Typography>

@@ -32,12 +32,12 @@ export async function AddToCart(userid, product) {
   try {
     cartItems = await docRef.then((doc) => doc.data()["cart"]);
     console.log(cartItems);
-    const exist = cartItems.find((x) => x === product.title);
+    const exist = cartItems.find((x) => x === product.book_title);
     console.log(exist);
     if (exist) {
       console.log("Already Added");
     } else {
-      cartItems = [...cartItems, product.title];
+      cartItems = [...cartItems, product.book_title];
       console.log(product);
       firestore.collection("users").doc(userid).update({
         cart: cartItems,
@@ -59,12 +59,12 @@ export async function AddToFavorite(userid, product) {
   try {
     favoriteBooks = await docRef.then((doc) => doc.data()["favorite_books"]);
     console.log(favoriteBooks);
-    const exist = favoriteBooks.find((x) => x === product.title);
+    const exist = favoriteBooks.find((x) => x === product.book_title);
     console.log(exist);
     if (exist) {
       console.log("Already Added");
     } else {
-      favoriteBooks = [...favoriteBooks, product.title];
+      favoriteBooks = [...favoriteBooks, product.book_title];
       console.log(product);
       firestore.collection("users").doc(userid).update({
         favorite_books: favoriteBooks,
@@ -85,12 +85,12 @@ export async function DeleteFromFavorite(userid, product) {
   try {
     favoriteBooks = await docRef.then((doc) => doc.data()["favorite_books"]);
 
-    const exist = favoriteBooks.find((x) => x === product.title);
+    const exist = favoriteBooks.find((x) => x === product.book_title);
 
     if (exist) {
       favoriteBooks = [
         ...favoriteBooks.filter(function (ele) {
-          return ele != product.title;
+          return ele != product.book_title;
         }),
       ];
 
@@ -116,12 +116,12 @@ export async function DeleteToCart(userid, product) {
   try {
     cartItems = await docRef.then((doc) => doc.data()["cart"]);
 
-    const exist = cartItems.find((x) => x === product.title);
+    const exist = cartItems.find((x) => x === product.book_title);
 
     if (exist) {
       cartItems = [
         ...cartItems.filter(function (ele) {
-          return ele != product.title;
+          return ele != product.book_title;
         }),
       ];
 

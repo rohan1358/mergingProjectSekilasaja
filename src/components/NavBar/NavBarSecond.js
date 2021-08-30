@@ -2,13 +2,18 @@ import React from "react";
 import Logo from "../../images/dark-logo.png";
 
 // Material-UI components
-import { AppBar, Toolbar, IconButton, Container } from "@material-ui/core";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Container,
+  Grid,
+} from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 
 // Custom components
-import Button from "../Button";
-import Drawer from "../Drawer";
 import NavbarStyle from "../../styles/NavbarStyle";
+import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -17,6 +22,8 @@ export default function NavBarSecond(props) {
   const { children } = props;
 
   const classes = NavbarStyle();
+  const multi = MultiUseMobile();
+
   const growClass = classNames({
     [classes.grow]: true,
   });
@@ -29,18 +36,42 @@ export default function NavBarSecond(props) {
 
   return (
     <div>
-      <AppBar className={classes.yellowNavBar}>
-        <Toolbar>
-          <IconButton href="/" color="inherit">
-            <HomeIcon className={iconColorClass} />
-          </IconButton>
+      <div className={multi.mobileDesktop}>
+        <AppBar className={classes.yellowNavBar}>
+          <Container>
+            <Grid
+              container
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Grid item>
+                <IconButton href="/" color="inherit">
+                  <HomeIcon className={iconColorClass} />
+                </IconButton>
+              </Grid>
 
-          {children}
+              <Grid item>{children}</Grid>
 
-          <div className={growClass} />
-        </Toolbar>
-      </AppBar>
-      <div className={toolbarClass} />
+              <Grid item />
+            </Grid>
+          </Container>
+        </AppBar>
+      </div>
+
+      <div className={multi.sectionMobile}>
+        <AppBar className={classes.yellowNavBar}>
+          <Toolbar>
+            <IconButton href="/" color="inherit">
+              <HomeIcon className={iconColorClass} />
+            </IconButton>
+
+            {children}
+
+            <div className={growClass} />
+          </Toolbar>
+        </AppBar>
+      </div>
     </div>
   );
 }

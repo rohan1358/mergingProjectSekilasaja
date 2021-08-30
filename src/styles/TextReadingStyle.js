@@ -22,7 +22,7 @@ const TextReadingStyle = makeStyles((theme) => ({
   container: {
     display: "flex",
     margin: "auto",
-    padding: "10px",
+    padding: "20px",
     width: "80%",
     flex: "1",
     fontSize: "1em",
@@ -53,7 +53,13 @@ const TextReadingStyle = makeStyles((theme) => ({
     alignItems: "flex-start",
   },
   tableOfContent: {
-    marginTop: "20px",
+    marginTop: "40px",
+    marginBottom: "90px",
+    // border: "solid 1px #41444b",
+  },
+  tableOfContentMobile: {
+    marginTop: "40px",
+    marginBottom: "100px",
     flex: "0.4",
     // border: "solid 1px #41444b",
   },
@@ -68,8 +74,11 @@ const TextReadingStyle = makeStyles((theme) => ({
       color: "white",
     },
   },
+  chapterContent: {
+    marginBottom: "40px",
+  },
   selectedChapter: {
-    background: primaryColor, //41444b
+    background: primaryColor,
     fontWeight: "bold",
   },
   extraSpace: {

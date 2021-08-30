@@ -28,7 +28,7 @@ export default function Basket(props) {
   const { currentUser } = useContext(AuthContext);
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
-  const totalPrice = itemsPrice;
+  const totalPrice = Intl.NumberFormat().format(itemsPrice);
 
   const onRemove_ = (product) => {
     const fetchData = async () => {
@@ -40,7 +40,7 @@ export default function Basket(props) {
       dispatch(
         setCart([
           ...cartItems.filter(function (ele) {
-            return ele.title != product.title;
+            return ele.book_title != product.book_title;
           }),
         ])
       );
@@ -60,7 +60,7 @@ export default function Basket(props) {
               <Grid item xs={4}>
                 <img
                   src={RdpdCover}
-                  alt={item.title}
+                  alt={item.book_title}
                   className={
                     classes.imgRounded +
                     " " +
@@ -74,9 +74,9 @@ export default function Basket(props) {
               <Grid item xs={1} />
 
               <Grid item xs={7}>
-                <Typography type="bold">{item.title}</Typography>
+                <Typography type="bold">{item.book_title}</Typography>
                 <Typography className="col-2 text-right">
-                  Rp. {item.price.toFixed(0)}
+                  Rp. {Intl.NumberFormat().format(item.price)}
                 </Typography>
 
                 <Button
@@ -101,7 +101,7 @@ export default function Basket(props) {
               alignItems="center"
             >
               <Typography type="bold">TOTAL</Typography>
-              <Typography type="bold">Rp. {totalPrice.toFixed(2)}</Typography>
+              <Typography type="bold">Rp. {totalPrice}</Typography>
             </Grid>
             <Button fullWidth round href="/payment">
               Bayar Sekarang!

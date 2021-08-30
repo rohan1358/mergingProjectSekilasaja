@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import BookCover from "../../images/rdpd.jpg";
 
 // Custom components
 import BookDetails from "./BookDetails";
@@ -29,6 +28,7 @@ import fire from "../../firebase/fire";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
+import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 
 const firestore = fire.firestore();
 
@@ -49,20 +49,22 @@ export default function BookDetailsPage({ match, history }) {
   const [isAdded, setIsAdded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [bookTitle, setBookTitle] = useState([]);
+  const [coverLink, setCoverLink] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        match.params.title
+        match.params.book_title
       );
       setCurrent_Product(book_);
+
       ownedBooks.map((x) => {
-        if (x.book_title == book_.title) {
+        if (x.book_title == book_.book_title) {
           setIsBookOwned(true);
-          setBookTitle(book_.title);
+          setBookTitle(book_.book_title);
         } else {
           setIsBookOwned(false);
-          setBookTitle(book_.title);
+          setBookTitle(book_.book_title);
         }
       });
     };
@@ -80,11 +82,27 @@ export default function BookDetailsPage({ match, history }) {
     } else {
       console.log("Not logged in");
     }
+
+    if (match.params.book_title != null) {
+      const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(
+        match.params.book_title
+      );
+
+      const fetchData = async () => {
+        const link = await getLink;
+        setCoverLink(link);
+      };
+      fetchData();
+    }
+    
   }, [history.location]);
 
   useEffect(() => {
     const changeBtn = () => {
-      const exist = cartItems.find((x) => x.title === match.params.title);
+      console.log(cartItems);
+      const exist = cartItems.find(
+        (x) => x.book_title === match.params.book_title
+      );
       if (exist) {
         setIsAdded(true);
       } else {
@@ -96,7 +114,9 @@ export default function BookDetailsPage({ match, history }) {
 
   useEffect(() => {
     const changeBtn = () => {
-      const exist = favoriteBooks.find((x) => x.title === match.params.title);
+      const exist = favoriteBooks.find(
+        (x) => x.book_title === match.params.book_title
+      );
       if (exist) {
         setIsFavorite(true);
       } else {
@@ -104,7 +124,9 @@ export default function BookDetailsPage({ match, history }) {
       }
     };
     changeBtn();
-  }, [favoriteBooks]);
+  }, [, favoriteBooks]);
+
+  console.log(isFavorite);
 
   const handleAddCart = () => {
     const fetchData = async () => {
@@ -113,7 +135,9 @@ export default function BookDetailsPage({ match, history }) {
         current_product
       );
 
-      const exist = cartItems.find((x) => x.title === match.params.title);
+      const exist = cartItems.find(
+        (x) => x.book_title === match.params.book_title
+      );
 
       if (exist) {
         console.log("Already Added");
@@ -131,7 +155,9 @@ export default function BookDetailsPage({ match, history }) {
         current_product
       );
 
-      const exist = favoriteBooks.find((x) => x.title === match.params.title);
+      const exist = favoriteBooks.find(
+        (x) => x.book_title === match.params.book_title
+      );
 
       if (exist) {
         console.log("Already Added");
@@ -152,7 +178,7 @@ export default function BookDetailsPage({ match, history }) {
       dispatch(
         setFavoriteBooks([
           ...cartItems.filter(function (ele) {
-            return ele.title != current_product.title;
+            return ele.book_title != current_product.book_title;
           }),
         ])
       );
@@ -160,7 +186,7 @@ export default function BookDetailsPage({ match, history }) {
     fetchData();
   };
 
-  console.log(favoriteBooks);
+  console.log(current_product);
 
   return (
     <div>
@@ -174,8 +200,8 @@ export default function BookDetailsPage({ match, history }) {
                   {(current_product.kilasan.length !== 0) === true && (
                     <Container>
                       <BookDetails
-                        cover={BookCover}
-                        title={current_product.title}
+                        cover={coverLink}
+                        title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
                         description={current_product.description}
@@ -188,7 +214,7 @@ export default function BookDetailsPage({ match, history }) {
                               <Grid container spacing={3}>
                                 <Grid item>
                                   <Button
-                                    href={`/text-page/${current_product.title}`}
+                                    href={`/text-page/${current_product.book_title}`}
                                   >
                                     Read or listen now!
                                   </Button>
@@ -196,7 +222,7 @@ export default function BookDetailsPage({ match, history }) {
 
                                 <Grid item>
                                   <Button
-                                    href={`/video/${current_product.title}`}
+                                    href={`/video/${current_product.book_title}`}
                                   >
                                     Watch now!
                                   </Button>
@@ -225,7 +251,7 @@ export default function BookDetailsPage({ match, history }) {
                             <div className={classes.sectionMobileBlock}>
                               <Grid item xs={12}>
                                 <Button
-                                  href={`/text-page/${current_product.title}`}
+                                  href={`/text-page/${current_product.book_title}`}
                                   fullWidth
                                 >
                                   Read or listen now!
@@ -234,7 +260,7 @@ export default function BookDetailsPage({ match, history }) {
                               <Grid item xs={12}>
                                 <Button
                                   fullWidth
-                                  href={`/video/${current_product.title}`}
+                                  href={`/video/${current_product.book_title}`}
                                 >
                                   Watch now!
                                 </Button>
@@ -301,8 +327,8 @@ export default function BookDetailsPage({ match, history }) {
                   {(current_product.kilasan.length !== 0) === true && (
                     <Container>
                       <BookDetails
-                        cover={BookCover}
-                        title={current_product.title}
+                        cover={coverLink}
+                        title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
                         description={current_product.description}
@@ -436,8 +462,8 @@ export default function BookDetailsPage({ match, history }) {
               {(current_product.kilasan.length !== 0) === true && (
                 <Container>
                   <BookDetails
-                    cover={BookCover}
-                    title={current_product.title}
+                    cover={coverLink}
+                    title={current_product.book_title}
                     author={current_product.author}
                     descriptionTitle={"Tentang Apa?"}
                     description={current_product.description}

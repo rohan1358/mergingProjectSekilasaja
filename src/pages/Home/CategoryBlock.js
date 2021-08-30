@@ -1,10 +1,11 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // Custom components
 import BookCard from "../../components/BookCard";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
+
 // Other components
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -54,18 +55,14 @@ export default function CategoryBlock(props) {
 
   // Check if the user has chosen a category or not
   const [isChosenCategory, setIsChosenCategory] = useState(false);
-
-  //const products = useSelector(selectBook);
-
   const [products, SetProducts] = useState([]);
+
   useEffect(() => {
     db.collection("books").onSnapshot((snapshot) => {
-      // dispatch(
       SetProducts(
         snapshot.docs.map((doc) => ({
           ...doc.data(),
         }))
-        //)
       );
 
       //Add dispatch to store all books info for searching
@@ -79,8 +76,6 @@ export default function CategoryBlock(props) {
     });
 
   }, []);
-
-  console.log(products);
 
   return (
     <div>
@@ -104,18 +99,26 @@ export default function CategoryBlock(props) {
               (product) => product.category.includes(chosenCategory) == true
             )
             .map((categorisedProduct, index) => (
-              <BookCard key={index} product={categorisedProduct} />
+              <BookCard
+                coverTitle={categorisedProduct.book_title}
+                key={index}
+                product={categorisedProduct}
+              />
             ))}
         </Carousel>
       ) : (
         <Carousel
-          // autoPlay={true}
-          // autoPlaySpeed={1500}
+          autoPlay={true}
+          autoPlaySpeed={1500}
           ssr={true}
           responsive={responsive}
         >
           {products.map((product) => (
-            <BookCard key={product.id} product={product} />
+            <BookCard
+              coverTitle={product.book_title}
+              key={product.id}
+              product={product}
+            />
           ))}
         </Carousel>
       )}

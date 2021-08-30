@@ -5,6 +5,8 @@ import Typography from "../components/Typography";
 import MultiUseMobile from "../styles/MultiUseMobile";
 import Button from "../components/Button";
 import BookDetailsModal from "./BookDetails/BookDetailsModal";
+import Navbar from "../components/NavBar/Navbar";
+import Footer from "../components/Footer";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -34,7 +36,8 @@ export default function Payment() {
   // Cart total price
   const cartItems = useSelector(selectCart).cart;
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
-  const totalPrice = itemsPrice;
+  const totalPrice = Intl.NumberFormat().format(itemsPrice);
+
   const dispatch = useDispatch();
   const onRemove_ = (product) => {
     const fetchData = async () => {
@@ -46,7 +49,7 @@ export default function Payment() {
       dispatch(
         setCart([
           ...cartItems.filter(function (ele) {
-            return ele.title != product.title;
+            return ele.book_title != product.book_title;
           }),
         ])
       );
@@ -55,145 +58,278 @@ export default function Payment() {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="center"
-        spacing={3}
-      >
-        <Grid item xs={12}>
-          <Typography className={classes.center} size="heading">
-            Checkout Page
-          </Typography>
-        </Grid>
+    <div>
+      <Navbar />
+      <Container maxWidth="md">
+        <div className={classes.sectionDesktop}>
+          <Grid container direction="row" justifyContent="center" spacing={3}>
+            <Grid item xs={12}>
+              <Typography className={classes.center} size="heading">
+                Checkout Page
+              </Typography>
+            </Grid>
 
-        <Grid item xs={12}>
-          <Paper className={classes.paddedContent} elevation={5}>
-            <Typography size="subheading">1. Your Orders</Typography>
+            <Grid item xs={6}>
+              <Paper className={classes.paddedContent} elevation={5}>
+                <Typography size="subheading">1. Your Orders</Typography>
 
-            {cartItems.map((item) => (
-              <div className={classes.spaceBetween}>
-                <div>
-                  <Typography type="italic">{item.title}</Typography>
-                  <Typography type="italic">
-                    Rp. {item.price.toFixed(0)}
+                {cartItems.map((item) => (
+                  <div className={classes.spaceBetween}>
+                    <div>
+                      <Typography type="italic">{item.book_title}</Typography>
+                      <Typography type="italic">
+                        Rp. {Intl.NumberFormat().format(item.price)}
+                      </Typography>
+                    </div>
+                    <Typography>
+                      <Link
+                        className={classes.link}
+                        underline="none"
+                        onClick={() => onRemove_(item)}
+                      >
+                        Hapus
+                      </Link>
+                    </Typography>
+                  </div>
+                ))}
+
+                <div className={classes.extraSpace} />
+                <div className={classes.spaceBetween}>
+                  <TextField
+                    style={{ marginRight: "5px" }}
+                    id="filled-basic"
+                    label="Kode Promo"
+                    variant="filled"
+                    fullWidth
+                  />
+                  <Button>Apply</Button>
+                </div>
+                <div className={classes.spaceBetween}>
+                  <Typography size="subheading">TOTAL</Typography>
+                  <Typography size="subheading" type="bold">
+                    Rp. {totalPrice}
                   </Typography>
                 </div>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={6}>
+              <Paper className={classes.paddedContent} elevation={5}>
+                <Typography size="subheading">2. Checkout Form</Typography>
+                <TextField
+                  className={classes.textFieldRoot}
+                  id="filled-basic"
+                  label="First Name"
+                  variant="filled"
+                  fullWidth
+                />
+                <TextField
+                  className={classes.textFieldRoot}
+                  id="filled-basic"
+                  label="Last Name"
+                  variant="filled"
+                  fullWidth
+                />
+                <TextField
+                  className={classes.textFieldRoot}
+                  id="filled-basic"
+                  label="Email"
+                  variant="filled"
+                  fullWidth
+                />
+                <TextField
+                  className={classes.textFieldRoot}
+                  id="filled-basic"
+                  label="Phone Number"
+                  variant="filled"
+                  fullWidth
+                />
+
+                <div className={classes.extraSpace} />
+
+                <Typography size="subheading">3. Payment</Typography>
+                <Typography type="bold">Step 1:</Typography>
                 <Typography>
-                  <Link
-                    className={classes.link}
-                    underline="none"
-                    onClick={() => onRemove_(item)}
-                  >
-                    Hapus
-                  </Link>
+                  • Transfer ke rekening BCA 123456789 a/n Darren Lucky
                 </Typography>
-              </div>
-            ))}
+                <Typography>
+                  • Atau, transfer ke rekening Mandiri 123456789 a/n Darren
+                  Lucky
+                </Typography>
+                <Typography>
+                  • Atau, transfer ke rekening BRI 123456789 a/n Darren Lucky
+                </Typography>
+                <Typography className={classes.paragraphSpace} type="bold">
+                  Step 2:
+                </Typography>
+                <Typography>
+                  Pastikan nominal yang anda transfer sesuai dengan harga yang
+                  tertulis, bila anda transfer dengan nominal yang salah harap
+                  hubungi customer service kami.
+                </Typography>
+                <Typography className={classes.paragraphSpace} type="bold">
+                  Step 3:
+                </Typography>
+                <Typography>
+                  Foto atau screenshot bukti transfer anda, lalu upload foto
+                  melalui tombol "Attach File" di bawah!
+                </Typography>
+                <Button className={classes.paragraphSpace} color="secondary">
+                  Attach File
+                </Button>
 
-            <div className={classes.extraSpace} />
-            <div className={classes.spaceBetween}>
-              <TextField
-                style={{ marginRight: "5px" }}
-                id="filled-basic"
-                label="Kode Promo"
-                variant="filled"
-                fullWidth
-              />
-              <Button>Apply</Button>
-            </div>
-            <div className={classes.spaceBetween}>
-              <Typography size="subheading">TOTAL</Typography>
-              <Typography size="subheading" type="bold">
-                Rp. {totalPrice.toFixed(0)}
-              </Typography>
-            </div>
-          </Paper>
-        </Grid>
+                <div className={classes.extraSpace} />
 
-        <Grid item xs={12}>
-          <Paper className={classes.paddedContent} elevation={5}>
-            <Typography size="subheading">2. Checkout Form</Typography>
-            <TextField
-              className={classes.textFieldRoot}
-              id="filled-basic"
-              label="First Name"
-              variant="filled"
-              fullWidth
-            />
-            <TextField
-              className={classes.textFieldRoot}
-              id="filled-basic"
-              label="Last Name"
-              variant="filled"
-              fullWidth
-            />
-            <TextField
-              className={classes.textFieldRoot}
-              id="filled-basic"
-              label="Email"
-              variant="filled"
-              fullWidth
-            />
-            <TextField
-              className={classes.textFieldRoot}
-              id="filled-basic"
-              label="Phone Number"
-              variant="filled"
-              fullWidth
-            />
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paddedContent} elevation={5}>
-            <Typography size="subheading">3. Payment</Typography>
-            <Typography type="bold">Step 1:</Typography>
-            <Typography>
-              • Transfer ke rekening BCA 123456789 a/n Darren Lucky
-            </Typography>
-            <Typography>
-              • Atau, transfer ke rekening Mandiri 123456789 a/n Darren Lucky
-            </Typography>
-            <Typography>
-              • Atau, transfer ke rekening BRI 123456789 a/n Darren Lucky
-            </Typography>
-            <Typography className={classes.paragraphSpace} type="bold">
-              Step 2:
-            </Typography>
-            <Typography>
-              Pastikan nominal yang anda transfer sesuai dengan harga yang
-              tertulis, bila anda transfer dengan nominal yang salah harap
-              hubungi customer service kami.
-            </Typography>
-            <Typography className={classes.paragraphSpace} type="bold">
-              Step 3:
-            </Typography>
-            <Typography>
-              Foto atau screenshot bukti transfer anda, lalu upload foto melalui
-              tombol "Attach File" di bawah!
-            </Typography>
-            <Button className={classes.paragraphSpace} color="secondary">
-              Attach File
-            </Button>
-          </Paper>
-
-          <div className={classes.extraSpace} />
-
-          <Grid item xs={12}>
-            <Button fullWidth round onClick={handleBookDetailsOpen}>
-              Bayar Sekarang
-            </Button>
-            <BookDetailsModal
-              open={openBookDetails}
-              handleClose={handleBookDetailsClose}
-            />
+                <Button fullWidth round onClick={handleBookDetailsOpen}>
+                  Bayar Sekarang
+                </Button>
+                <BookDetailsModal
+                  open={openBookDetails}
+                  handleClose={handleBookDetailsClose}
+                />
+              </Paper>
+            </Grid>
           </Grid>
+        </div>
 
-          <div className={classes.extraSpace} />
-        </Grid>
-      </Grid>
-    </Container>
+        <div className={classes.sectionMobile}>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-evenly"
+            alignItems="center"
+            spacing={3}
+          >
+            <Grid item xs={12}>
+              <Typography className={classes.center} size="heading">
+                Checkout Page
+              </Typography>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.paddedContent} elevation={5}>
+                <Typography size="subheading">1. Your Orders</Typography>
+
+                {cartItems.map((item) => (
+                  <div className={classes.spaceBetween}>
+                    <div>
+                      <Typography type="italic">{item.book_title}</Typography>
+                      <Typography type="italic">
+                        Rp. {Intl.NumberFormat().format(item.price)}
+                      </Typography>
+                    </div>
+                    <Typography>
+                      <Link
+                        className={classes.link}
+                        underline="none"
+                        onClick={() => onRemove_(item)}
+                      >
+                        Hapus
+                      </Link>
+                    </Typography>
+                  </div>
+                ))}
+
+                <div className={classes.extraSpace} />
+                <div className={classes.spaceBetween}>
+                  <TextField
+                    style={{ marginRight: "5px" }}
+                    id="filled-basic"
+                    label="Kode Promo"
+                    variant="filled"
+                    fullWidth
+                  />
+                  <Button>Apply</Button>
+                </div>
+                <div className={classes.spaceBetween}>
+                  <Typography size="subheading">TOTAL</Typography>
+                  <Typography size="subheading" type="bold">
+                    Rp. {totalPrice}
+                  </Typography>
+                </div>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper className={classes.paddedContent} elevation={5}>
+                <Typography size="subheading">2. Checkout Form</Typography>
+                <TextField
+                  className={classes.textFieldRoot}
+                  id="filled-basic"
+                  label="First Name"
+                  variant="filled"
+                  fullWidth
+                />
+                <TextField
+                  className={classes.textFieldRoot}
+                  id="filled-basic"
+                  label="Last Name"
+                  variant="filled"
+                  fullWidth
+                />
+                <TextField
+                  className={classes.textFieldRoot}
+                  id="filled-basic"
+                  label="Email"
+                  variant="filled"
+                  fullWidth
+                />
+                <TextField
+                  className={classes.textFieldRoot}
+                  id="filled-basic"
+                  label="Phone Number"
+                  variant="filled"
+                  fullWidth
+                />
+
+                <div className={classes.extraSpace} />
+
+                <Typography size="subheading">3. Payment</Typography>
+                <Typography type="bold">Step 1:</Typography>
+                <Typography>
+                  • Transfer ke rekening BCA 123456789 a/n Darren Lucky
+                </Typography>
+                <Typography>
+                  • Atau, transfer ke rekening Mandiri 123456789 a/n Darren
+                  Lucky
+                </Typography>
+                <Typography>
+                  • Atau, transfer ke rekening BRI 123456789 a/n Darren Lucky
+                </Typography>
+                <Typography className={classes.paragraphSpace} type="bold">
+                  Step 2:
+                </Typography>
+                <Typography>
+                  Pastikan nominal yang anda transfer sesuai dengan harga yang
+                  tertulis, bila anda transfer dengan nominal yang salah harap
+                  hubungi customer service kami.
+                </Typography>
+                <Typography className={classes.paragraphSpace} type="bold">
+                  Step 3:
+                </Typography>
+                <Typography>
+                  Foto atau screenshot bukti transfer anda, lalu upload foto
+                  melalui tombol "Attach File" di bawah!
+                </Typography>
+                <Button className={classes.paragraphSpace} color="secondary">
+                  Attach File
+                </Button>
+
+                <div className={classes.extraSpace} />
+
+                <Button fullWidth round onClick={handleBookDetailsOpen}>
+                  Bayar Sekarang
+                </Button>
+              </Paper>
+            </Grid>
+          </Grid>
+        </div>
+        <BookDetailsModal
+          open={openBookDetails}
+          handleClose={handleBookDetailsClose}
+        />
+      </Container>
+      <Footer />
+    </div>
   );
 }

@@ -40,7 +40,6 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   center: {
     textAlign: "center",
-    marginTop: "40px",
     display: "flex",
     justifyContent: "center",
   },
