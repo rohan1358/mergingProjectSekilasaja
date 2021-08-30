@@ -7,12 +7,16 @@ import NavBar from "../../components/NavBar/Navbar";
 import Parallax from "../../components/Parallax";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import BookSearchResultCard from "../../components/BookSearchResultCard";
+import SearchResultsBlock from "./SearchResultsBlock";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
 
 import Loading from "../Loading";
+
+//import { getBookDashboardImageURL } from "../../firebase/firebaseGetBookDashboardImageURL";
 
 // Firebase components
 import fire from "../../firebase/fire";
@@ -35,31 +39,28 @@ export default function SearchResults({ match, history }) {
   const [searchResults, setSearchResults] = React.useState([]);
 
   useEffect(() => {
-    console.log("Search value: " + match.params.searchValue);
-    console.log(allBooks);
+    //Filter the books according to the search input
     const results = allBooks.filter(book =>
-        book.book_title.toLowerCase().includes(match.params.searchValue)
+        book.book_title.toLowerCase().includes(match.params.searchValue.toLowerCase())
     );
     setSearchResults(results);
-    //Check if user is logged in or not, if not logout to home page.
-    if (!currentUser) {
-      return <Redirect to="/login" />;
-    }
-  }, [history.location]);
+    setPending(false);
+  }, [allBooks, history.location]);
 
-  console.log(searchResults);
-//   if (pending) {
-//     return (
-//       <>
-//         <Loading />
-//       </>
-//     );
-//   }
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div>
-      <NavBar history={history}/>
-      <Footer />
+        <NavBar history={history}/>
+        <div className={classes.extraSpace2} />
+        <SearchResultsBlock searchResults={searchResults} history={history}/>
+        <Footer />
     </div>
   );
 }

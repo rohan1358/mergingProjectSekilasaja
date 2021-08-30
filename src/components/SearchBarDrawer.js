@@ -47,17 +47,6 @@ export default function SearchBarDrawer(props) {
     right: false,
   });
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
-
   const allBooks = useSelector(selectAllBooks);
 
   //Handle search input value change
@@ -82,55 +71,7 @@ export default function SearchBarDrawer(props) {
     history.push(`/searchResults/${inputValueRef.current.value}`);
   }
 
-  // const list = (anchor) => (
-  //   <div
-  //     className={clsx(drawer.list, {
-  //       [drawer.fullList]: anchor === "top" || anchor === "bottom",
-  //     })}
-  //     role="presentation"
-  //   >
-  //     <Container maxWidth={"xs"}>
-  //       {/* <form className={classes.root} noValidate autoComplete="off">
-  //         <TextField fullWidth id="standard-basic" label="Search" />
-  //       </form> */}
-
-  //       <Autocomplete
-  //         freeSolo
-  //         id="free-solo-2-demo"
-  //         disableClearable
-  //         options={allBooks.map((option) => option.book_title)}
-  //         renderInput={(params) => (
-  //           <TextField
-  //             {...params}
-  //             label="Search for books here..."
-  //             margin="normal"
-  //             variant="outlined"
-  //             InputProps={{ ...params.InputProps, type: 'search' }}
-  //           />
-  //         )}
-  //       />
-  //     </Container>
-  //   </div>
-  // );
-
   return (
-    // <div>
-    //   {[direction].map((anchor) => (
-    //     <React.Fragment key={anchor}>
-          // <IconButton onClick={toggleDrawer(anchor, true)} color="inherit">
-          //   {logo}
-          // </IconButton>
-
-    //       <Drawer
-    //         anchor={anchor}
-    //         open={state[anchor]}
-    //         onClose={toggleDrawer(anchor, false)}
-    //       >
-    //         {list(anchor)}
-    //       </Drawer>
-    //     </React.Fragment>
-    //   ))}
-    // </div>
       <div
         style={{width: 300}}
       >
