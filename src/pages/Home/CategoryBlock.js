@@ -100,7 +100,7 @@ export default function CategoryBlock(props) {
             )
             .map((categorisedProduct, index) => (
               <BookCard
-                coverTitle={categorisedProduct.book_title}
+                chosenCategory={chosenCategory}
                 key={index}
                 product={categorisedProduct}
               />
@@ -115,7 +115,7 @@ export default function CategoryBlock(props) {
         >
           {products.map((product) => (
             <BookCard
-              coverTitle={product.book_title}
+              chosenCategory={chosenCategory}
               key={product.id}
               product={product}
             />

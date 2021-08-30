@@ -162,13 +162,15 @@ export default function PricingPage() {
                     >
                       <div className={classes.block}>
                         <Typography
-                          style={{ color: "#FFFEF8", textTransform: "none" }}
+                          className={classes.normalText}
+                          style={{ color: "#FFFEF8" }}
                           size="subheading"
                         >
                           Rp. 10.000 / Kilas
                         </Typography>
                         <Typography
-                          style={{ color: "#FFFEF8", textTransform: "none" }}
+                          className={classes.normalText}
+                          style={{ color: "#FFFEF8" }}
                           type="italic"
                         >
                           Loren Ipsum Ngoman Balato Porche
@@ -304,13 +306,15 @@ export default function PricingPage() {
                     >
                       <div className={classes.block}>
                         <Typography
-                          style={{ color: "#FFFEF8", textTransform: "none" }}
+                          className={classes.normalText}
+                          style={{ color: "#FFFEF8" }}
                           size="subheading"
                         >
                           Rp. 10.000 / Kilas
                         </Typography>
                         <Typography
-                          style={{ color: "#FFFEF8", textTransform: "none" }}
+                          className={classes.normalText}
+                          style={{ color: "#FFFEF8" }}
                           type="italic"
                         >
                           Loren Ipsum Ngoman Balato Porche

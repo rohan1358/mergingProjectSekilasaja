@@ -65,6 +65,8 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   normalText: {
     textTransform: "none",
+    marginTop: "5px",
+    marginBottom: "5px",
   },
   extraSpace: {
     marginTop: "50px",
@@ -95,8 +97,17 @@ const MultiUseMobile = makeStyles((theme) => ({
     width: "100%",
   },
   textFieldRoot: {
-    marginTop: "5px",
-    marginBottom: "10px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+    },
+    "& .MuiButtonBase-root": {
+      margin: theme.spacing(2),
+    },
   },
   sectionTitle: {
     borderBottom: "3px solid",
