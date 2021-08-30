@@ -107,6 +107,7 @@ export default function CategoryBlock(props) {
                         )
                         .map((categorisedProduct, index) => (
                           <BookCard
+                            chosenCategory={chosenCategory}
                             coverTitle={categorisedProduct.book_title}
                             key={index}
                             product={categorisedProduct}
@@ -137,6 +138,7 @@ export default function CategoryBlock(props) {
                     )
                     .map((categorisedProduct, index) => (
                       <BookCard
+                        chosenCategory={chosenCategory}
                         coverTitle={categorisedProduct.book_title}
                         key={index}
                         product={categorisedProduct}
@@ -175,6 +177,7 @@ export default function CategoryBlock(props) {
                         )
                         .map((categorisedProduct, index) => (
                           <BookCard
+                            chosenCategory={chosenCategory}
                             coverTitle={categorisedProduct.book_title}
                             key={index}
                             product={categorisedProduct}
@@ -205,6 +208,7 @@ export default function CategoryBlock(props) {
                     )
                     .map((categorisedProduct, index) => (
                       <BookCard
+                        chosenCategory={chosenCategory}
                         coverTitle={categorisedProduct.book_title}
                         key={index}
                         product={categorisedProduct}
@@ -235,6 +239,7 @@ export default function CategoryBlock(props) {
                 <Grid container spacing={1}>
                   {favoriteBooks.map((product) => (
                     <BookCard
+                      chosenCategory={chosenCategory}
                       coverTitle={product.book_title}
                       key={product.id}
                       product={product}
@@ -250,6 +255,7 @@ export default function CategoryBlock(props) {
             <Grid container spacing={1}>
               {products.map((product) => (
                 <BookCard
+                  chosenCategory={chosenCategory}
                   coverTitle={product.book_title}
                   key={product.id}
                   product={product}
@@ -272,6 +278,7 @@ export default function CategoryBlock(props) {
                 <Grid container justifyContent="center" spacing={1}>
                   {favoriteBooks.map((product) => (
                     <BookCard
+                      chosenCategory={chosenCategory}
                       coverTitle={product.book_title}
                       key={product.id}
                       product={product}
@@ -287,6 +294,7 @@ export default function CategoryBlock(props) {
             <Grid container justifyContent="center" spacing={1}>
               {products.map((product) => (
                 <BookCard
+                  chosenCategory={chosenCategory}
                   coverTitle={product.book_title}
                   key={product.id}
                   product={product}

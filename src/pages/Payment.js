@@ -116,34 +116,32 @@ export default function Payment() {
             <Grid item xs={6}>
               <Paper className={classes.paddedContent} elevation={5}>
                 <Typography size="subheading">2. Checkout Form</Typography>
-                <TextField
-                  className={classes.textFieldRoot}
-                  id="filled-basic"
-                  label="First Name"
-                  variant="filled"
-                  fullWidth
-                />
-                <TextField
-                  className={classes.textFieldRoot}
-                  id="filled-basic"
-                  label="Last Name"
-                  variant="filled"
-                  fullWidth
-                />
-                <TextField
-                  className={classes.textFieldRoot}
-                  id="filled-basic"
-                  label="Email"
-                  variant="filled"
-                  fullWidth
-                />
-                <TextField
-                  className={classes.textFieldRoot}
-                  id="filled-basic"
-                  label="Phone Number"
-                  variant="filled"
-                  fullWidth
-                />
+                <form className={classes.textFieldRoot}>
+                  <TextField
+                    id="filled-basic"
+                    label="First Name"
+                    variant="filled"
+                    fullWidth
+                  />
+                  <TextField
+                    id="filled-basic"
+                    label="Last Name"
+                    variant="filled"
+                    fullWidth
+                  />
+                  <TextField
+                    id="filled-basic"
+                    label="Email"
+                    variant="filled"
+                    fullWidth
+                  />
+                  <TextField
+                    id="filled-basic"
+                    label="Phone Number"
+                    variant="filled"
+                    fullWidth
+                  />
+                </form>
 
                 <div className={classes.extraSpace} />
 
@@ -192,7 +190,7 @@ export default function Payment() {
           </Grid>
         </div>
 
-        <div className={classes.sectionMobile}>
+        <div style={{ textAlign: "left" }} className={classes.sectionMobile}>
           <Grid
             container
             direction="row"
@@ -252,35 +250,33 @@ export default function Payment() {
 
             <Grid item xs={12}>
               <Paper className={classes.paddedContent} elevation={5}>
-                <Typography size="subheading">2. Checkout Form</Typography>
-                <TextField
-                  className={classes.textFieldRoot}
-                  id="filled-basic"
-                  label="First Name"
-                  variant="filled"
-                  fullWidth
-                />
-                <TextField
-                  className={classes.textFieldRoot}
-                  id="filled-basic"
-                  label="Last Name"
-                  variant="filled"
-                  fullWidth
-                />
-                <TextField
-                  className={classes.textFieldRoot}
-                  id="filled-basic"
-                  label="Email"
-                  variant="filled"
-                  fullWidth
-                />
-                <TextField
-                  className={classes.textFieldRoot}
-                  id="filled-basic"
-                  label="Phone Number"
-                  variant="filled"
-                  fullWidth
-                />
+                <form className={classes.textFieldRoot}>
+                  <Typography size="subheading">2. Checkout Form</Typography>
+                  <TextField
+                    id="filled-basic"
+                    label="First Name"
+                    variant="filled"
+                    fullWidth
+                  />
+                  <TextField
+                    id="filled-basic"
+                    label="Last Name"
+                    variant="filled"
+                    fullWidth
+                  />
+                  <TextField
+                    id="filled-basic"
+                    label="Email"
+                    variant="filled"
+                    fullWidth
+                  />
+                  <TextField
+                    id="filled-basic"
+                    label="Phone Number"
+                    variant="filled"
+                    fullWidth
+                  />
+                </form>
 
                 <div className={classes.extraSpace} />
 

@@ -10,7 +10,7 @@ import {
 
 const InfoStyle = {
   bookCover: {
-    maxWidth: "240px",
+    maxWidth: "200px",
     marginTop: "30px",
   },
   bookDetails: {

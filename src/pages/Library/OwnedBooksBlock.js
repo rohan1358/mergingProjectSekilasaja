@@ -204,6 +204,7 @@ export default function OwnedBooksBlock(props) {
                             )
                             .map((categorisedProduct, index) => (
                               <BookCard
+                                chosenCategory={chosenCategory}
                                 coverTitle={categorisedProduct.book_title}
                                 key={index}
                                 product={categorisedProduct}
@@ -247,6 +248,7 @@ export default function OwnedBooksBlock(props) {
                             )
                             .map((categorisedProduct, index) => (
                               <BookCard
+                                chosenCategory={chosenCategory}
                                 coverTitle={categorisedProduct.book_title}
                                 key={index}
                                 product={categorisedProduct}
@@ -287,6 +289,7 @@ export default function OwnedBooksBlock(props) {
                           )
                           .map((categorisedProduct, index) => (
                             <BookCard
+                              chosenCategory={chosenCategory}
                               coverTitle={categorisedProduct.book_title}
                               key={index}
                               product={categorisedProduct}
@@ -328,6 +331,7 @@ export default function OwnedBooksBlock(props) {
                             )
                             .map((categorisedProduct, index) => (
                               <BookCard
+                                chosenCategory={chosenCategory}
                                 coverTitle={categorisedProduct.book_title}
                                 key={index}
                                 product={categorisedProduct}
@@ -376,6 +380,7 @@ export default function OwnedBooksBlock(props) {
                                 )
                                 .map((categorisedProduct, index) => (
                                   <BookCard
+                                    chosenCategory={chosenCategory}
                                     coverTitle={categorisedProduct.book_title}
                                     key={index}
                                     product={categorisedProduct}
@@ -421,6 +426,7 @@ export default function OwnedBooksBlock(props) {
                           )
                           .map((categorisedProduct, index) => (
                             <BookCard
+                              chosenCategory={chosenCategory}
                               coverTitle={categorisedProduct.book_title}
                               key={index}
                               product={categorisedProduct}
@@ -452,6 +458,7 @@ export default function OwnedBooksBlock(props) {
                     <Grid container spacing={1}>
                       {favoriteBooks.map((product) => (
                         <BookCard
+                          chosenCategory={chosenCategory}
                           coverTitle={product.book_title}
                           key={product.id}
                           product={product}
@@ -477,6 +484,7 @@ export default function OwnedBooksBlock(props) {
                     <Grid container spacing={1}>
                       {ownedBooks.map((product) => (
                         <BookCard
+                          chosenCategory={chosenCategory}
                           coverTitle={product.book_title}
                           key={product.id}
                           product={product}
@@ -501,6 +509,7 @@ export default function OwnedBooksBlock(props) {
                     <Grid container spacing={1}>
                       {booksNotOwned.map((product) => (
                         <BookCard
+                          chosenCategory={chosenCategory}
                           coverTitle={product.book_title}
                           key={product.id}
                           product={product}
@@ -527,6 +536,7 @@ export default function OwnedBooksBlock(props) {
                     <Grid container justifyContent="center" spacing={1}>
                       {favoriteBooks.map((product) => (
                         <BookCard
+                          chosenCategory={chosenCategory}
                           coverTitle={product.book_title}
                           key={product.id}
                           product={product}
@@ -552,6 +562,7 @@ export default function OwnedBooksBlock(props) {
                     <Grid container justifyContent="center" spacing={1}>
                       {ownedBooks.map((product) => (
                         <BookCard
+                          chosenCategory={chosenCategory}
                           coverTitle={product.book_title}
                           key={product.id}
                           product={product}
@@ -576,6 +587,7 @@ export default function OwnedBooksBlock(props) {
                     <Grid container justifyContent="center" spacing={1}>
                       {booksNotOwned.map((product) => (
                         <BookCard
+                          chosenCategory={chosenCategory}
                           coverTitle={product.book_title}
                           key={product.id}
                           product={product}

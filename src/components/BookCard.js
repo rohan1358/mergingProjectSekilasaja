@@ -11,11 +11,10 @@ import Typography from "./Typography";
 import { AuthContext } from "../components/Routing/Auth";
 import * as firebaseGetBookCoverImageURL from "../firebase/firebaseGetBookCoverImageURL";
 import fire from "../firebase/fire";
-import { Dashboard } from "@material-ui/icons";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function BookCard({ product }) {
+export default function BookCard({ product, chosenCategory }) {
   const classes = useStyles();
 
   const db = fire.firestore();
@@ -43,10 +42,7 @@ export default function BookCard({ product }) {
       if (link !== undefined) setCoverLink(link);
     };
     fetchData();
-  }, [, coverLink]);
-
-  console.log(coverLink);
-  console.log(product.book_title);
+  }, [, chosenCategory]);
 
   return (
     <Grid item>

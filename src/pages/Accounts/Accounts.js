@@ -154,7 +154,10 @@ export default function AccountsPage() {
             <div className={classes.extraSpace} />
 
             <Typography size="subheading">Profil</Typography>
-            <form onSubmit={handleUpdateUserInformation}>
+            <form
+              className={classes.textFieldRoot}
+              onSubmit={handleUpdateUserInformation}
+            >
               {profileError && (
                 <div className={classes.alertRoot}>
                   <Alert severity="error">{profileError}</Alert>
@@ -168,7 +171,6 @@ export default function AccountsPage() {
               <TextField
                 required
                 defaultValue={userData.firstName}
-                className={classes.textFieldRoot}
                 id="filled-basic"
                 label="First Name"
                 variant="filled"
@@ -178,7 +180,6 @@ export default function AccountsPage() {
               <TextField
                 required
                 defaultValue={userData.lastName}
-                className={classes.textFieldRoot}
                 id="filled-basic"
                 label="Last Name"
                 variant="filled"
@@ -189,7 +190,6 @@ export default function AccountsPage() {
                 required
                 disabled
                 defaultValue={currentUser.email}
-                className={classes.textFieldRoot}
                 id="filled-basic"
                 label="Email"
                 variant="filled"
@@ -198,7 +198,6 @@ export default function AccountsPage() {
               <TextField
                 required
                 defaultValue={userData.phoneNumber}
-                className={classes.textFieldRoot}
                 id="filled-basic"
                 label="Phone Number"
                 variant="filled"
@@ -215,8 +214,11 @@ export default function AccountsPage() {
             <Divider />
             <div className={classes.extraSpace} />
 
-            <form onSubmit={handleChangePassword}>
-              <Typography size="subheading">Change Password</Typography>
+            <Typography size="subheading">Ganti Password</Typography>
+            <form
+              className={classes.textFieldRoot}
+              onSubmit={handleChangePassword}
+            >
               {error && (
                 <div className={classes.alertRoot}>
                   <Alert severity="error">{error}</Alert>
@@ -228,7 +230,6 @@ export default function AccountsPage() {
                 </div>
               )}
               <TextField
-                className={classes.textFieldRoot}
                 id="filled-basic"
                 label="Password Baru"
                 variant="filled"
@@ -237,7 +238,6 @@ export default function AccountsPage() {
                 fullWidth
               />
               <TextField
-                className={classes.textFieldRoot}
                 id="filled-basic"
                 label="Ketik Ulang Password Baru"
                 variant="filled"
