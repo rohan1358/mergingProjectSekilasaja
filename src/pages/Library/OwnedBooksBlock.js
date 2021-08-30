@@ -62,7 +62,7 @@ export default function OwnedBooksBlock(props) {
     //Get books' data from books database based on owned books of the user
     if (ownedBookTitles.length > 0) {
       const fetchData = () => {
-        const getCartData = async (book_title) => {
+        const getBookData = async (book_title) => {
           const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
             book_title
           );
@@ -71,7 +71,7 @@ export default function OwnedBooksBlock(props) {
 
         var book_ = [
           ...ownedBookTitles.map((book) => {
-            return getCartData(book);
+            return getBookData(book);
           }),
         ];
 
@@ -87,7 +87,7 @@ export default function OwnedBooksBlock(props) {
     //Get books' data from books database based on favorite books of the user
     if (favoriteBookTitles.length > 0) {
       const fetchData = () => {
-        const getCartData = async (book_title) => {
+        const getBookData = async (book_title) => {
           const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
             book_title
           );
@@ -96,7 +96,7 @@ export default function OwnedBooksBlock(props) {
 
         var book_ = [
           ...favoriteBookTitles.map((book) => {
-            return getCartData(book);
+            return getBookData(book);
           }),
         ];
 

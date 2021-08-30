@@ -95,7 +95,6 @@ export default function BookDetailsPage({ match, history }) {
 
   useEffect(() => {
     const changeBtn = () => {
-      console.log(cartItems);
       const exist = cartItems.find(
         (x) => x.book_title === match.params.book_title
       );

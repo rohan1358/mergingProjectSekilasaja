@@ -38,6 +38,7 @@ const FooterStyle = makeStyles((theme) => ({
   topSpacing: {
     marginTop: "30px",
   },
+  footerStyle: {},
 }));
 
 export default FooterStyle;

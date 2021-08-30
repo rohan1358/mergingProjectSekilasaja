@@ -86,6 +86,7 @@ export default function TextReading({ match, history }) {
       console.log("You are not logged in!");
     }
   }, [, chosenChapter]);
+
   console.log(audioLink);
   const isSubscribed = userData.is_subscribed;
 

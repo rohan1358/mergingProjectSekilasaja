@@ -65,6 +65,8 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   normalText: {
     textTransform: "none",
+    marginTop: "5px",
+    marginBottom: "5px",
   },
   extraSpace: {
     marginTop: "50px",

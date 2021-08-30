@@ -77,11 +77,7 @@ export default function CategoryBlock(props) {
               (product) => product.category.includes(chosenCategory) == true
             )
             .map((categorisedProduct, index) => (
-              <BookCard
-                coverTitle={categorisedProduct.book_title}
-                key={index}
-                product={categorisedProduct}
-              />
+              <BookCard key={index} product={categorisedProduct} />
             ))}
         </Carousel>
       ) : (
@@ -92,11 +88,7 @@ export default function CategoryBlock(props) {
           responsive={responsive}
         >
           {products.map((product) => (
-            <BookCard
-              coverTitle={product.book_title}
-              key={product.id}
-              product={product}
-            />
+            <BookCard key={product.id} product={product} />
           ))}
         </Carousel>
       )}
