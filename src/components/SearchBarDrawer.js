@@ -2,6 +2,8 @@ import React, { useRef, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAllBooks, setAllBooks } from "../feature/allBooksSlice";
 
+import SearchResults from "../pages/SearchResults/SearchResults";
+
 // Material-UI components
 import {
   IconButton,
@@ -65,9 +67,19 @@ export default function SearchBarDrawer(props) {
   }
 
   //Handle event where user selects from autocomplete search (Goes to book details page immediately)
-  const goToBookDetails = (value) => {
-    console.log("Book Selected: " + value);
-    history.push(`/book-details/${value}`);
+  const goToBookDetails = (event, value) => {
+    //Handle event where user presses enter
+    if (event.code == 'Enter') {
+      history.push(`/searchResults/${value}`);
+    } else {
+      console.log("Book Selected: " + value);
+      history.push(`/book-details/${value}`);
+    }
+  }
+
+  //Handle event where user wants to get search results with inputted value by clicking on search icon
+  const handleSubmit = () => {
+    history.push(`/searchResults/${inputValueRef.current.value}`);
   }
 
   // const list = (anchor) => (
@@ -119,33 +131,33 @@ export default function SearchBarDrawer(props) {
     //     </React.Fragment>
     //   ))}
     // </div>
-
-    <div
-      style={{width: 300}}
-    >
-        <Autocomplete
-          freeSolo
-          id="free-solo-2-demo"
-          disableClearable
-          // onChange={(event, value) => console.log("HERE: " + value)} 
-          onChange={(event, value) => goToBookDetails(value)} 
-          options={allBooks.map((option) => option.book_title)}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Search for books here..."
-              margin="normal"
-              variant="outlined"
-              InputProps={{ ...params.InputProps, type: 'search' }}
-              onChange= {handleChange}
-              inputRef={inputValueRef}
-            />
-          )}
-        />
-        <IconButton color="inherit">
-          {logo}
-        </IconButton>
-    </div>
+      <div
+        style={{width: 300}}
+      >
+          <Autocomplete
+            freeSolo
+            id="free-solo-2-demo"
+            disableClearable
+            onChange={(event, value) => goToBookDetails(event, value)} 
+            options={allBooks.map((option) => option.book_title)}
+            renderInput={(params) => (
+              <form className={classes.root} onSubmit={handleSubmit}>
+                <TextField
+                  {...params}
+                  label="Search for books here..."
+                  margin="normal"
+                  variant="outlined"
+                  InputProps={{ ...params.InputProps, type: 'search' }}
+                  onChange= {handleChange}
+                  inputRef={inputValueRef}
+                />
+              </form>
+            )}
+          />
+          <IconButton color="inherit" onClick={handleSubmit}>
+            {logo}
+          </IconButton>
+      </div>
   );
 }
 
