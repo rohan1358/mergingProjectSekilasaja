@@ -1,6 +1,6 @@
 // Material-UI components
 import { makeStyles } from "@material-ui/core/styles";
-import { beigeColor, grayColor, primaryColor, secondaryColor } from "./Style";
+import { beigeColor, grayColor, secondaryColor } from "./Style";
 
 const MultiUseMobile = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -11,13 +11,6 @@ const MultiUseMobile = makeStyles((theme) => ({
     },
   },
   // small: 600px; md, medium: 960px; lg, large: 1280px
-  sectionDesktopBlock: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "block",
-    },
-  },
-  // small: 600px; md, medium: 960px; lg, large: 1280px
   sectionMobile: {
     display: "flex",
     marginTop: "40px",
@@ -25,6 +18,13 @@ const MultiUseMobile = makeStyles((theme) => ({
     justifyContent: "center",
     [theme.breakpoints.up("md")]: {
       display: "none",
+    },
+  },
+  // small: 600px; md, medium: 960px; lg, large: 1280px
+  sectionDesktopBlock: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "block",
     },
   },
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -40,7 +40,6 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   center: {
     textAlign: "center",
-    marginTop: "40px",
     display: "flex",
     justifyContent: "center",
   },
@@ -62,10 +61,12 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   paddedContent: {
     padding: "40px",
-    paddingTop: "10px",
+    paddingTop: "20px",
   },
   normalText: {
     textTransform: "none",
+    marginTop: "5px",
+    marginBottom: "5px",
   },
   extraSpace: {
     marginTop: "50px",
@@ -83,10 +84,10 @@ const MultiUseMobile = makeStyles((theme) => ({
   link: {
     fontWeight: "bold",
     color: secondaryColor,
-  },
-  beigeText: {
-    textTransform: "none",
-    color: beigeColor,
+    "&:hover,&:focus": {
+      cursor: "pointer",
+      backgroundColor: "#808080",
+    },
   },
   pricingButton: {
     padding: 15,
@@ -98,6 +99,21 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   sectionTitle: {
     borderBottom: "3px solid",
+  },
+  spaceBetween: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  paragraphSpace: {
+    marginTop: "30px",
+  },
+  iconColor: {
+    color: secondaryColor,
+  },
+  blur: {
+    filter: "blur(5px)",
+    userSelect: "none",
+    pointerEvents: "none",
   },
 }));
 

@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { AutorenewTwoTone } from "@material-ui/icons";
+import { secondaryColor } from "./Style";
 
 const CategoriesStyle = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -7,7 +7,6 @@ const CategoriesStyle = makeStyles((theme) => ({
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex",
-      justifyContent: "space-between",
       textAlign: "center",
     },
   },
@@ -23,13 +22,14 @@ const CategoriesStyle = makeStyles((theme) => ({
     margin: "auto 5px",
   },
   button: {
+    color: secondaryColor,
     display: "flex",
     justifyContent: "center",
     textAlign: "center",
     marginBottom: "5px",
     border: "solid 1px #41444B",
     borderRadius: "5px",
-    padding: "10px 20px",
+    padding: "15px 55px",
     textTransform: "uppercase",
     fontWeight: "600",
     fontSize: "12px",
@@ -41,7 +41,7 @@ const CategoriesStyle = makeStyles((theme) => ({
   },
   selectedButton: {
     background: "#41444b", //41444b
-    color: "white",
+    color: "#FFFFFF",
   },
   container: {
     display: "block",

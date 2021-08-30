@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useCallback, useContext } from "react";
+import { Redirect, withRouter } from "react-router";
 
 // Material UI components
 import { makeStyles, Link, TextField } from "@material-ui/core";
 
 // Custom components
-import Button from "../Button";
-import Typography from "../Typography";
+import Button from "../../components/Button";
+import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
-import SignUpModalDialog from "../SignUp/SignUpModalDialog";
-import { secondaryColor } from "../../styles/Style";
+import { AuthContext } from "../../components/Routing/Auth";
+import { Alert } from "@material-ui/lab";
 
 //Import firebase for login function
-import fire from "../../fire";
+import * as firebaseLogin from "../../firebase/firebaseLogin.js";
+import fire from "../../firebase/fire";
+
+const auth = fire.auth();
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,57 +33,59 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(2),
     },
   },
+  alertRoot: {
+    width: "100%",
+    marginBottom: theme.spacing(1),
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
 
 //Form for login, including all other methods relevant to login
-const LoginForm = ({ handleClose }) => {
+const LoginForm = ({ history }) => {
   const classes = useStyles();
   const multi = MultiUseMobile();
 
   // create state variables for each input
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // Method to login with firebase
-  const login = () => {
-    const auth = fire.auth();
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((resp) => {
-        console.log("Login successful!");
-        handleClose();
-      })
-      .catch((err) => {
-        console.log("Error: " + err.toString());
-      });
-  };
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Logging in...");
+    // console.log("Logging in...");
 
     //Call function to login with firebase
-    login();
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((resp) => {
+        // console.log("Firebase login suceeded!");
+      })
+      .catch((err) => {
+        var errorCode = err.code;
+        var errorMessage = err.message;
+        return setError("ERROR (" + errorCode + "): " + "\n\n" + errorMessage);
+      });
   };
 
-  // // FOR SIGNUP MODAL
-  // // Declare a new state variable for modal open for SIGNUP
-  // const [openSignUp, setSignUpOpen] = useState(false);
+  const { currentUser } = useContext(AuthContext);
 
-  // // function to handle modal open for signup
-  // const handleSignUpOpen = () => {
-  //   setSignUpOpen(true);
-  // };
-
-  // // function to handle modal close for signup
-  // const handleSignUpClose = () => {
-  //   setSignUpOpen(false);
-  // };
+  if (currentUser) {
+    console.log("Current user id: " + currentUser.uid);
+    return <Redirect to="/library" />;
+  }
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>
       <Typography size="subheading">Login to SekilasAja!</Typography>
+      {error && (
+        <div className={classes.alertRoot}>
+          <Alert severity="error">{error}</Alert>
+        </div>
+      )}
       <TextField
+        fullWidth={true}
         label="Email"
         variant="filled"
         type="email"
@@ -88,6 +94,7 @@ const LoginForm = ({ handleClose }) => {
         onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
+        fullWidth={true}
         label="Password"
         variant="filled"
         type="password"
@@ -99,19 +106,13 @@ const LoginForm = ({ handleClose }) => {
         Login
       </Button>
 
-      {/* <Typography>
-        Belum punya akun?{" "}
-        <Link
-          onClick={handleSignUpOpen}
-          className={multi.link}
-          underline="none"
-        >
-          Daftar Sekarang!
+      <Typography>
+        <Link className={multi.link} underline="none" href="/lupa-password">
+          Lupa Password?
         </Link>
-        <SignUpModalDialog open={openSignUp} handleClose={handleSignUpClose} />
-      </Typography> */}
+      </Typography>
     </form>
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

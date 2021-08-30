@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import VideoPrototype from "../images/video-prototype.png";
 import ReactPlayer from "react-player";
 
 // Custom components
@@ -134,17 +133,8 @@ export default function VideoComponent(props) {
   const playerContainerRef = useRef(null);
   const controlsRef = useRef(null);
   const canvasRef = useRef(null);
-  const {
-    playing,
-    light,
-
-    muted,
-    loop,
-    playbackRate,
-    pip,
-    played,
-    volume,
-  } = state;
+  const { playing, light, muted, loop, playbackRate, pip, played, volume } =
+    state;
 
   const handlePlayPause = () => {
     setState({ ...state, playing: !state.playing });

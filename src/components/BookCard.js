@@ -1,31 +1,61 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 // @material-ui/core components
-import { makeStyles, Link, Grid, Card } from "@material-ui/core";
+import { makeStyles, Link, Grid } from "@material-ui/core";
 
 // Custom components
 import InfoAreaStyle from "../styles/InfoAreaStyle";
 import Typography from "./Typography";
 
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
+// Firebase components
+import { AuthContext } from "../components/Routing/Auth";
+import * as firebaseGetBookCoverImageURL from "../firebase/firebaseGetBookCoverImageURL";
+import fire from "../firebase/fire";
+import { Dashboard } from "@material-ui/icons";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function BookCard(props) {
+export default function BookCard({ product }) {
   const classes = useStyles();
-  // const { link, product, onAdd } = props;
-  const { link, product } = props;
+
+  const db = fire.firestore();
+  const { currentUser } = useContext(AuthContext);
+  const [coverLink, setCoverLink] = useState("");
+  const [products, SetProducts] = useState([]);
+
+  useEffect(() => {
+    db.collection("books").onSnapshot((snapshot) => {
+      SetProducts(
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+        }))
+      );
+    });
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(
+        product.book_title
+      );
+      const link = await getLink;
+
+      if (link !== undefined) setCoverLink(link);
+    };
+    fetchData();
+  }, [, coverLink]);
+
+  console.log(coverLink);
+  console.log(product.book_title);
 
   return (
     <Grid item>
-      {/* <Link onClick={() => onAdd(product)} underline="none" href={link}> */}
-      <Link underline="none" href={link}>
+      <Link underline="none" href={`book-details/${product.book_title}`}>
         <div className={classes.bookCover}>
           <div>
             <img
-              src={product.cover}
-              alt={product.title}
+              src={coverLink}
+              alt={product.book_title}
               className={
                 classes.imgRounded +
                 " " +
@@ -35,7 +65,7 @@ export default function BookCard(props) {
               }
             />
             <div className={classes.descriptionWrapper}>
-              <Typography type="bold">{product.title}</Typography>
+              <Typography type="bold">{product.book_title}</Typography>
               <Typography type="italic">{product.author}</Typography>
               <Typography>{product.description}</Typography>
             </div>
@@ -45,11 +75,3 @@ export default function BookCard(props) {
     </Grid>
   );
 }
-
-BookCard.propTypes = {
-  link: PropTypes.string,
-  cover: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-};
