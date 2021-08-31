@@ -94,7 +94,7 @@ export default function CategoryBlock(props) {
             ) : (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
-                <Grid container spacing={5}>
+                <div>
                   {favoriteBooks.filter(
                     (product) =>
                       product.category.includes(chosenCategory) == true
@@ -119,7 +119,7 @@ export default function CategoryBlock(props) {
                       Kilas favorit kamu tidak ditemukan di kategori ini!
                     </Typography>
                   )}
-                </Grid>
+                </div>
               </div>
             )}
 

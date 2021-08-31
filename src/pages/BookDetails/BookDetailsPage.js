@@ -6,7 +6,7 @@ import TextDetails from "./TextDetails";
 import NavBar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import Typography from "../../components/Typography";
-import VideoComponent from "../../components/VidPageComponent";
+import VideoComponent from "../../components/VideoPlayer/VidPageComponent";
 import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
@@ -103,7 +103,6 @@ export default function BookDetailsPage({ match, history }) {
       };
       fetchData();
     }
-    
   }, [history.location]);
 
   useEffect(() => {

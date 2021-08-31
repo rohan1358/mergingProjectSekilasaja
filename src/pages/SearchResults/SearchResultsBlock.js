@@ -5,11 +5,9 @@ import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // Other components
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import { Container } from "@material-ui/core";
+import { Container, Divider } from "@material-ui/core";
 
-import BookSearchResultCard from "../../components/BookSearchResultCard";
+import BookSearchResultCard from "./BookSearchResultCard";
 
 const responsive = {
   superLargeDesktop: {
@@ -33,58 +31,50 @@ const responsive = {
 
 export default function SearchResultsBlock(props) {
   const classes = MultiUseMobile();
-  const {searchResults, history} = props;
+  const { searchResults, history } = props;
 
   const [isSearchResultsEmpty, setIsSearchResultsEmpty] = useState(true);
 
   useEffect(() => {
-    if(searchResults.length < 1){
-        setIsSearchResultsEmpty(true);
+    if (searchResults.length < 1) {
+      setIsSearchResultsEmpty(true);
     } else {
-        setIsSearchResultsEmpty(false);
+      setIsSearchResultsEmpty(false);
     }
   }, []);
 
   return (
     <div>
-      <div className={classes.title}>
-        <Typography size="heading">Search Results</Typography>
-      </div>
-        {isSearchResultsEmpty ? (
-            <div className={classes.title}>
-                <Typography size="heading">Not Found</Typography>
-            </div>
-        ) : (
-            <div>
-                {searchResults.map((product) => (
-                    <Container className={classes.extraSpace}>
-                        <BookSearchResultCard title={product.book_title} product={product}/>
-                    </Container>
-                ))}
-            </div>
-        )}
-      {/* <BookSearchResultCard title={searchResults[0].book_title} product={searchResults[0]} history={history}/> */}
-      {/* <List>
-          {searchResults.map((product) => {
-            <ListItem>
-                  <BookSearchResultCard title={product.book_title} product={product}/>
-            </ListItem>
-          })}
-      </List> */}
-        {/* <Carousel
-          autoPlay={true}
-          autoPlaySpeed={1500}
-          ssr={true}
-          responsive={responsive}
-        >
-          {products.map((product) => (
-            <BookCard
-              coverTitle={product.book_title}
-              key={product.id}
-              product={product}
-            />
+      {isSearchResultsEmpty ? (
+        <div className={classes.title}>
+          <div style={{ marginTop: "200px" }} />
+          <Typography size="heading">Hasil Pencarian</Typography>
+          <Typography
+            style={{ fontWeight: "normal" }}
+            size="subheading"
+            type="italic"
+          >
+            Kilas tidak ditemukan!
+          </Typography>
+
+          <div style={{ marginBottom: "220px" }} />
+        </div>
+      ) : (
+        <div>
+          <div className={classes.title}>
+            <Typography size="heading">Hasil Pencarian</Typography>
+          </div>
+          {searchResults.map((product) => (
+            <Container maxWidth={"md"} className={classes.extraSpace}>
+              <BookSearchResultCard
+                title={product.book_title}
+                product={product}
+              />
+            </Container>
           ))}
-        </Carousel> */}
+          <div style={{ marginBottom: "120px" }} />
+        </div>
+      )}
     </div>
   );
 }

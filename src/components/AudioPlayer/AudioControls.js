@@ -186,7 +186,7 @@ const AudioControls = forwardRef(
             }}
           >
             <Grid container direction="column-reverse">
-              {[0.5, 1, 1.25, 1.5, 1.75, 2].map((rate) => (
+              {[0.5, 1, 1.25, 1.5, 2].map((rate) => (
                 <Link
                   className={multi.link}
                   underline="none"

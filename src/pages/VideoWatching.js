@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 
 // Custom components
 import NavBarSecond from "../components/NavBar/NavBarSecond";
-import VideoComponent from "../components/VidPageComponent";
+import VideoComponent from "../components/VideoPlayer/VidPageComponent";
 import FourOFourPage from "./404page";
 
 //Redux
@@ -57,6 +57,7 @@ export default function VideoWatchingPage({ match, history }) {
       {!!isSubscribed || !!isBookOwned ? (
         <div>
           <NavBarSecond />
+          <div style={{ marginTop: "100px" }} />
           <VideoComponent
             vidLink={
               "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"

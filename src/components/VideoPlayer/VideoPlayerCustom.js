@@ -2,8 +2,8 @@ import React, { forwardRef } from "react";
 import PropTypes from "prop-types";
 
 // Custom components
-import Typography from "../components/Typography";
-import { primaryColor, secondaryColor } from "../styles/Style";
+import Typography from "../Typography";
+import { primaryColor, secondaryColor } from "../../styles/Style";
 
 // Material ui components
 import {
@@ -27,6 +27,9 @@ import VolumeMute from "@material-ui/icons/VolumeOff";
 import FullScreen from "@material-ui/icons/Fullscreen";
 
 const useStyles = makeStyles((theme) => ({
+  primaryCol: {
+    color: primaryColor,
+  },
   controlsWrapper: {
     visibility: "hidden",
     position: "absolute",
@@ -55,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   bottomIcons: {
+    margin: 0,
     textTransform: "capitalize",
     color: "#999",
     "&:hover": {
@@ -156,13 +160,9 @@ const Controls = forwardRef(
           justify="space-between"
           style={{ flexGrow: 1 }}
         >
-          <Grid
-            container
-            direction="row"
-            alignItems="center"
-            justify="space-between"
-            style={{ padding: 16 }}
-          />
+          <Grid container />
+          <Grid container />
+
           <Grid container direction="row" alignItems="center" justify="center">
             <IconButton
               onClick={onRewind}
@@ -193,17 +193,19 @@ const Controls = forwardRef(
               <FastForwardIcon fontSize="inherit" />
             </IconButton>
           </Grid>
+
           {/* bottom controls */}
           <Grid
             container
             direction="row"
             justify="space-between"
             alignItems="center"
-            style={{ padding: 16 }}
+            style={{ padding: 10 }}
           >
             <Grid item xs={12}>
               <PrettoSlider
-                color="secondary"
+                style={{ margin: 0 }}
+                className={classes.primaryCol}
                 min={0}
                 max={100}
                 ValueLabelComponent={(props) => (
@@ -227,7 +229,7 @@ const Controls = forwardRef(
                   {playing ? <PauseIcon /> : <PlayArrowIcon />}
                 </IconButton>
 
-                <IconButton
+                {/* <IconButton
                   // onClick={() => setState({ ...state, muted: !state.muted })}
                   onClick={onMute}
                   className={`${classes.bottomIcons} ${classes.volumeButton}`}
@@ -242,7 +244,7 @@ const Controls = forwardRef(
                 </IconButton>
 
                 <Slider
-                  color="secondary"
+                  className={classes.primaryCol}
                   min={0}
                   max={100}
                   value={muted ? 0 : volume * 100}
@@ -251,7 +253,7 @@ const Controls = forwardRef(
                   className={classes.volumeSlider}
                   onMouseDown={onSeekMouseDown}
                   onChangeCommitted={onVolumeSeekDown}
-                />
+                /> */}
                 <Button
                   className={classes.bottomIcons}
                   onClick={onChangeDispayFormat}
@@ -294,7 +296,7 @@ const Controls = forwardRef(
                 }}
               >
                 <Grid container direction="column-reverse">
-                  {[0.5, 1, 1.5, 2].map((rate) => (
+                  {[0.5, 1, 1.25, 1.5, 2].map((rate) => (
                     <Button
                       key={rate}
                       onClick={() => onPlaybackRateChange(rate)}

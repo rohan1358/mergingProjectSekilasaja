@@ -20,7 +20,8 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Drawer from "../Drawer";
 import Button from "../Button";
 import NavbarStyle from "../../styles/NavbarStyle";
-import SearchBarDrawer from "../SearchBarDrawer";
+import SearchBar from "../SearchBar/SearchBar";
+import SearchBarDrawer from "../SearchBar/SearchBarDrawer";
 import Basket from "../AddToCart/Basket";
 
 // nodejs library to set properties for components
@@ -181,11 +182,7 @@ export default function NavBar(props) {
               <div className={growClass} />
 
               <div className={desktopClass}>
-                <SearchBarDrawer
-                  direction={"top"}
-                  history = {history}
-                  logo={<SearchIcon className={iconColorClass} />}
-                />
+                <SearchBar history={history} />
 
                 <Button href="/pricing" round color="transparent">
                   Pricing
@@ -203,7 +200,7 @@ export default function NavBar(props) {
               <div className={mobileClass}>
                 <SearchBarDrawer
                   direction={"top"}
-                  history = {history}
+                  history={history}
                   logo={<SearchIcon className={iconColorClass} />}
                 />
 
@@ -233,12 +230,7 @@ export default function NavBar(props) {
                   <div className={growClass} />
 
                   <div className={desktopClass}>
-                    <SearchBarDrawer
-                      direction={"top"}
-                      history = {history}
-                      logo={<SearchIcon className={iconColorClass}
-                     />}
-                    />
+                    <SearchBar history={history} />
 
                     <Button href="/pricing" round color="transparent">
                       Pricing
@@ -272,7 +264,7 @@ export default function NavBar(props) {
                   <div className={mobileClass}>
                     <SearchBarDrawer
                       direction={"top"}
-                      history = {history}
+                      history={history}
                       logo={<SearchIcon className={iconColorClass} />}
                     />
 
@@ -314,11 +306,7 @@ export default function NavBar(props) {
                   <div className={growClass} />
 
                   <div className={desktopClass}>
-                    <SearchBarDrawer
-                      direction={"top"}
-                      history = {history}
-                      logo={<SearchIcon className={iconColorClass} />}
-                    />
+                    <SearchBar history={history} />
 
                     <Button href="/pricing" round color="transparent">
                       Pricing
@@ -336,7 +324,7 @@ export default function NavBar(props) {
                   <div className={mobileClass}>
                     <SearchBarDrawer
                       direction={"top"}
-                      history = {history}
+                      history={history}
                       logo={<SearchIcon className={iconColorClass} />}
                     />
 

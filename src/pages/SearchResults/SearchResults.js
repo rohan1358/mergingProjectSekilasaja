@@ -7,11 +7,11 @@ import NavBar from "../../components/NavBar/Navbar";
 import Parallax from "../../components/Parallax";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
-import BookSearchResultCard from "../../components/BookSearchResultCard";
+import BookSearchResultCard from "./BookSearchResultCard";
 import SearchResultsBlock from "./SearchResultsBlock";
 
 //Redux
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
 
 import Loading from "../Loading";
@@ -31,17 +31,14 @@ export default function SearchResults({ match, history }) {
 
   const allBooks = useSelector(selectAllBooks);
 
-  const db = fire.firestore();
-  const { currentUser } = useContext(AuthContext);
-
-  const dispatch = useDispatch();
-
   const [searchResults, setSearchResults] = React.useState([]);
 
   useEffect(() => {
     //Filter the books according to the search input
-    const results = allBooks.filter(book =>
-        book.book_title.toLowerCase().includes(match.params.searchValue.toLowerCase())
+    const results = allBooks.filter((book) =>
+      book.book_title
+        .toLowerCase()
+        .includes(match.params.searchValue.toLowerCase())
     );
     setSearchResults(results);
     setPending(false);
@@ -57,10 +54,10 @@ export default function SearchResults({ match, history }) {
 
   return (
     <div>
-        <NavBar history={history}/>
-        <div className={classes.extraSpace2} />
-        <SearchResultsBlock searchResults={searchResults} history={history}/>
-        <Footer />
+      <NavBar history={history} />
+      <div className={classes.extraSpace2} />
+      <SearchResultsBlock searchResults={searchResults} history={history} />
+      <Footer />
     </div>
   );
 }

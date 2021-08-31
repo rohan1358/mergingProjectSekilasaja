@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactPlayer from "react-player";
 
 // Custom components
-import Typography from "../components/Typography";
-import MultiUseMobile from "../styles/MultiUseMobile";
-import Controls from "../components/VideoPlayerCustom";
+import Typography from "../Typography";
+import MultiUseMobile from "../../styles/MultiUseMobile";
+import Controls from "./VideoPlayerCustom";
 
 // Material-UI components
 import { Container, makeStyles } from "@material-ui/core";
@@ -14,6 +14,7 @@ import PropTypes from "prop-types";
 
 // Other library
 import screenful from "screenfull";
+import $ from "jquery";
 
 const useStyles = makeStyles((theme) => ({
   playerWrapper: {
@@ -26,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
     //   },
     // },
   },
-
   controlsWrapper: {
     visibility: "hidden",
     position: "absolute",
@@ -57,20 +57,17 @@ const useStyles = makeStyles((theme) => ({
     // height: 60,
     padding: theme.spacing(2),
   },
-
   bottomControls: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     // height:40,
   },
-
   button: {
     margin: theme.spacing(1),
   },
   controlIcons: {
     color: "#777",
-
     fontSize: 50,
     transform: "scale(0.9)",
     "&:hover": {
@@ -78,14 +75,12 @@ const useStyles = makeStyles((theme) => ({
       transform: "scale(1)",
     },
   },
-
   bottomIcons: {
     color: "#999",
     "&:hover": {
       color: "#fff",
     },
   },
-
   volumeSlider: {
     width: 100,
   },
@@ -236,6 +231,20 @@ export default function VideoComponent(props) {
 
   const totalDuration = format(duration);
 
+  // Handle unhover when fullscreen
+  var timer;
+  $("#div1").hover(
+    function () {
+      $("#div2").show();
+    },
+    function () {
+      clearInterval(timer);
+      timer = setTimeout(function () {
+        $("#div2").hide();
+      }, 2000);
+    }
+  );
+
   return (
     <Container maxWidth="md">
       <div className={mobile.extraSpace} />
@@ -256,8 +265,8 @@ export default function VideoComponent(props) {
           light={light}
           loop={loop}
           playbackRate={playbackRate}
-          volume={volume}
-          muted={muted}
+          // volume={volume}
+          // muted={muted}
           onProgress={handleProgress}
           config={{
             file: {
@@ -268,29 +277,57 @@ export default function VideoComponent(props) {
           }}
         />
 
-        <Controls
-          ref={controlsRef}
-          onSeek={handleSeekChange}
-          onSeekMouseDown={handleSeekMouseDown}
-          onSeekMouseUp={handleSeekMouseUp}
-          onDuration={handleDuration}
-          onRewind={handleRewind}
-          onPlayPause={handlePlayPause}
-          onFastForward={handleFastForward}
-          playing={playing}
-          played={played}
-          elapsedTime={elapsedTime}
-          totalDuration={totalDuration}
-          onMute={handleMute}
-          muted={muted}
-          onVolumeChange={handleVolumeChange}
-          onVolumeSeekDown={handleVolumeSeekDown}
-          onChangeDispayFormat={handleDisplayFormat}
-          playbackRate={playbackRate}
-          onPlaybackRateChange={handlePlaybackRate}
-          onToggleFullScreen={toggleFullScreen}
-          volume={volume}
-        />
+        <div id="container">
+          <Controls
+            id="div1"
+            ref={controlsRef}
+            onSeek={handleSeekChange}
+            onSeekMouseDown={handleSeekMouseDown}
+            onSeekMouseUp={handleSeekMouseUp}
+            onDuration={handleDuration}
+            onRewind={handleRewind}
+            onPlayPause={handlePlayPause}
+            onFastForward={handleFastForward}
+            playing={playing}
+            played={played}
+            elapsedTime={elapsedTime}
+            totalDuration={totalDuration}
+            // onMute={handleMute}
+            // muted={muted}
+            onVolumeChange={handleVolumeChange}
+            onVolumeSeekDown={handleVolumeSeekDown}
+            onChangeDispayFormat={handleDisplayFormat}
+            playbackRate={playbackRate}
+            onPlaybackRateChange={handlePlaybackRate}
+            onToggleFullScreen={toggleFullScreen}
+            // volume={volume}
+          />
+
+          <Controls
+            id="div2"
+            ref={controlsRef}
+            onSeek={handleSeekChange}
+            onSeekMouseDown={handleSeekMouseDown}
+            onSeekMouseUp={handleSeekMouseUp}
+            onDuration={handleDuration}
+            onRewind={handleRewind}
+            onPlayPause={handlePlayPause}
+            onFastForward={handleFastForward}
+            playing={playing}
+            played={played}
+            elapsedTime={elapsedTime}
+            totalDuration={totalDuration}
+            // onMute={handleMute}
+            // muted={muted}
+            onVolumeChange={handleVolumeChange}
+            onVolumeSeekDown={handleVolumeSeekDown}
+            onChangeDispayFormat={handleDisplayFormat}
+            playbackRate={playbackRate}
+            onPlaybackRateChange={handlePlaybackRate}
+            onToggleFullScreen={toggleFullScreen}
+            // volume={volume}
+          />
+        </div>
       </div>
 
       <Typography size="subheading">{title}</Typography>
@@ -299,30 +336,6 @@ export default function VideoComponent(props) {
       <canvas ref={canvasRef} />
     </Container>
   );
-  // return (
-  //   <div>
-  //     <Container maxWidth={"md"}>
-  //       <div className={mobile.extraSpace} />
-
-  //       <div>
-  //         {/* TODO: Video */}
-  //         <ReactPlayer
-  //           width="100%"
-  //           height="430px"
-  //           url="https://drive.google.com/file/d/1aUtPV8DfkQOivHpE1ChcSMDt78UkjwOE/view?usp=sharing"
-  //           controls
-  //         />
-  //       </div>
-
-  //       <div>
-  //         <Typography size="subheading">{title}</Typography>
-  //         <Typography>{description}</Typography>
-  //       </div>
-
-  //       <div className={mobile.extraSpace} />
-  //     </Container>
-  //   </div>
-  // );
 }
 
 VideoComponent.propTypes = {
