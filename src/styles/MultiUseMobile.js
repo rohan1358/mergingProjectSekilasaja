@@ -71,6 +71,9 @@ const MultiUseMobile = makeStyles((theme) => ({
   extraSpace: {
     marginTop: "50px",
   },
+  extraSpace2: {
+    marginTop: "100px",
+  },
   title: {
     textAlign: "center",
   },

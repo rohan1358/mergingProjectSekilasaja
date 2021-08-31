@@ -65,6 +65,9 @@ export default function BookDetailsPage({ match, history }) {
         if (x.book_title == book_.book_title) {
           setIsBookOwned(true);
           setBookTitle(book_.book_title);
+        } else {
+          setIsBookOwned(false);
+          setBookTitle(book_.book_title);
         }
       });
     };
@@ -100,7 +103,8 @@ export default function BookDetailsPage({ match, history }) {
       };
       fetchData();
     }
-  }, []);
+    
+  }, [history.location]);
 
   useEffect(() => {
     const changeBtn = () => {
@@ -192,7 +196,7 @@ export default function BookDetailsPage({ match, history }) {
 
   return (
     <div>
-      <NavBar />
+      <NavBar history={history} />
       {!!currentUser ? (
         <div>
           {!!isSubscribed || !!isBookOwned ? (

@@ -38,7 +38,7 @@ import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoB
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
 
-export default function NavBar() {
+export default function NavBar(props) {
   // Other styles
   const classes = NavbarStyle();
 
@@ -77,6 +77,10 @@ export default function NavBar() {
 
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isCart, setIsCart] = useState(false);
+
+  console.log(cart);
+
+  const { history } = props;
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -179,6 +183,7 @@ export default function NavBar() {
               <div className={desktopClass}>
                 <SearchBarDrawer
                   direction={"top"}
+                  history = {history}
                   logo={<SearchIcon className={iconColorClass} />}
                 />
 
@@ -198,6 +203,7 @@ export default function NavBar() {
               <div className={mobileClass}>
                 <SearchBarDrawer
                   direction={"top"}
+                  history = {history}
                   logo={<SearchIcon className={iconColorClass} />}
                 />
 
@@ -229,7 +235,9 @@ export default function NavBar() {
                   <div className={desktopClass}>
                     <SearchBarDrawer
                       direction={"top"}
-                      logo={<SearchIcon className={iconColorClass} />}
+                      history = {history}
+                      logo={<SearchIcon className={iconColorClass}
+                     />}
                     />
 
                     <Button href="/pricing" round color="transparent">
@@ -264,6 +272,7 @@ export default function NavBar() {
                   <div className={mobileClass}>
                     <SearchBarDrawer
                       direction={"top"}
+                      history = {history}
                       logo={<SearchIcon className={iconColorClass} />}
                     />
 
@@ -307,6 +316,7 @@ export default function NavBar() {
                   <div className={desktopClass}>
                     <SearchBarDrawer
                       direction={"top"}
+                      history = {history}
                       logo={<SearchIcon className={iconColorClass} />}
                     />
 
@@ -326,6 +336,7 @@ export default function NavBar() {
                   <div className={mobileClass}>
                     <SearchBarDrawer
                       direction={"top"}
+                      history = {history}
                       logo={<SearchIcon className={iconColorClass} />}
                     />
 
