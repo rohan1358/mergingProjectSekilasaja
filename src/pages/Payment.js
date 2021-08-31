@@ -11,12 +11,15 @@ import Footer from "../components/Footer";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../feature/cartSlice";
+import { selectUser, setUser } from "../feature/userSlice";
 
 // Material-UI components
 import { Container, Paper, Grid, TextField, Link } from "@material-ui/core";
+import { Input } from '@material-ui/core';
 
 // Firebase components
 import * as firebaseUpdateCart from "../firebase/firebaseUpdateCart";
+import * as firebaseUploadPaymentInfo from "../firebase/firebaseUploadPaymentInfo";
 import { AuthContext } from "../components/Routing/Auth";
 
 export default function Payment() {
@@ -24,14 +27,8 @@ export default function Payment() {
   const classes = MultiUseMobile();
   const [openBookDetails, setBookDetailsOpen] = useState(false);
 
-  // function to handle modal open for login
-  const handleBookDetailsOpen = () => {
-    setBookDetailsOpen(true);
-  };
-  // function to handle modal close for login
-  const handleBookDetailsClose = () => {
-    setBookDetailsOpen(false);
-  };
+  // Get user data
+  const userData = useSelector(selectUser);
 
   // Cart total price
   const cartItems = useSelector(selectCart).cart;
@@ -39,6 +36,17 @@ export default function Payment() {
   const totalPrice = Intl.NumberFormat().format(itemsPrice);
 
   const dispatch = useDispatch();
+
+  // function to handle modal open for login
+  const handleBookDetailsOpen = async () => {
+    setBookDetailsOpen(true);
+    await firebaseUploadPaymentInfo.uploadPaymentInfo(userData, cartItems);
+  };
+  // function to handle modal close for login
+  const handleBookDetailsClose = () => {
+    setBookDetailsOpen(false);
+  };
+
   const onRemove_ = (product) => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.DeleteToCart(
@@ -307,10 +315,17 @@ export default function Payment() {
                   Foto atau screenshot bukti transfer anda, lalu upload foto
                   melalui tombol "Attach File" di bawah!
                 </Typography>
-                <Button className={classes.paragraphSpace} color="secondary">
-                  Attach File
-                </Button>
-
+                <label htmlFor="upload-photo">
+                  <input
+                    style={{ display: "none" }}
+                    id="upload-photo"
+                    name="upload-photo"
+                    type="file"
+                  />
+                  <Button variant="contained" component="span" className={classes.paragraphSpace} color="secondary">
+                    Attach File
+                  </Button>{" "}
+                </label>
                 <div className={classes.extraSpace} />
 
                 <Button fullWidth round onClick={handleBookDetailsOpen}>
