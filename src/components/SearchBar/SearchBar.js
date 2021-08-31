@@ -32,7 +32,7 @@ export default function SearchBar(props) {
     if (event.code == "Enter") {
       history.push(`/searchResults/${value}`);
     } else {
-      console.log("Book Selected: " + value);
+      // console.log("Book Selected: " + value);
       history.push(`/book-details/${value}`);
     }
   };

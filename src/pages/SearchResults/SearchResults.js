@@ -16,15 +16,6 @@ import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
 
 import Loading from "../Loading";
 
-//import { getBookDashboardImageURL } from "../../firebase/firebaseGetBookDashboardImageURL";
-
-// Firebase components
-import fire from "../../firebase/fire";
-import { AuthContext } from "../../components/Routing/Auth";
-
-// Material-UI components
-import { Container } from "@material-ui/core";
-
 export default function SearchResults({ match, history }) {
   const classes = MultiUseMobile();
   const [pending, setPending] = useState(true);

@@ -29,7 +29,7 @@ const NavbarStyle = makeStyles((theme) => ({
     maxWidth: "120px",
   },
   link: {
-    marginLeft: "100px",
+    marginLeft: "92px",
     marginRight: "100px",
     textTransform: "uppercase",
     fontWeight: "600",

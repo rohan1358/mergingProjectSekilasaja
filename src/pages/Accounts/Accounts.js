@@ -18,6 +18,7 @@ import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById
 // Material-UI components
 import { Container, Paper, Divider, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 export default function AccountsPage() {
   const firestore = fire.firestore();
@@ -252,11 +253,8 @@ export default function AccountsPage() {
             <div className={classes.extraSpace} />
 
             <div className={classes.center}>
-              <Button
-                onClick={() => fire.auth().signOut()}
-                round
-                color="secondary"
-              >
+              <Button onClick={() => fire.auth().signOut()} color="secondary">
+                <ExitToAppIcon />
                 Log out
               </Button>
             </div>

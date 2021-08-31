@@ -15,6 +15,11 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import PeopleIcon from "@material-ui/icons/People";
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 // Custom components
 import Drawer from "../Drawer";
@@ -23,6 +28,7 @@ import NavbarStyle from "../../styles/NavbarStyle";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchBarDrawer from "../SearchBar/SearchBarDrawer";
 import Basket from "../AddToCart/Basket";
+import Typography from "../Typography";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -87,6 +93,7 @@ export default function NavBar(props) {
         const results = await firebaseGetUserDataById.getUserDataById(
           currentUser.uid
         );
+
         setIsSubscribed(results.is_subscribed);
 
         const getCartData = async (book_title) => {
@@ -131,17 +138,44 @@ export default function NavBar(props) {
         <div>
           <MenuItem>
             <Link href="/pricing" underline="none" className={classes.link}>
-              Pricing
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <MonetizationOnIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Pricing</Typography>
+              </div>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link underline="none" className={classes.link} href="/library">
-              Library
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <LibraryBooksIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Library</Typography>
+              </div>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link underline="none" className={classes.link} href="/accounts">
-              Accounts
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <AccountCircleIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Accounts</Typography>
+              </div>
             </Link>
           </MenuItem>
         </div>
@@ -149,17 +183,44 @@ export default function NavBar(props) {
         <div>
           <MenuItem>
             <Link href="/pricing" underline="none" className={classes.link}>
-              Pricing
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <MonetizationOnIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Pricing</Typography>
+              </div>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link underline="none" className={classes.link} href="/signup">
-              Sign Up
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <PeopleIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Sign Up</Typography>
+              </div>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link underline="none" className={classes.link} href="/login">
-              Login
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <VpnKeyIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Login</Typography>
+              </div>
             </Link>
           </MenuItem>
         </div>
@@ -255,7 +316,7 @@ export default function NavBar(props) {
                           <ShoppingCartIcon className={classes.iconColor} />
                         </Badge>
                       }
-                      children={<Basket cartItems={cart} />}
+                      children={<Basket />}
                     />
                   </div>
 
@@ -277,7 +338,7 @@ export default function NavBar(props) {
                           <ShoppingCartIcon className={classes.iconColor} />
                         </Badge>
                       }
-                      children={<Basket cartItems={cart} />}
+                      children={<Basket />}
                     />
 
                     <IconButton

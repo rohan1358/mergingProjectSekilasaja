@@ -5,7 +5,6 @@ import Typography from "../Typography";
 import Button from "../Button";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import MultiUseMobile from "../../styles/MultiUseMobile";
-import RdpdCover from "../../images/rdpd.jpg";
 
 // Firebase components
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
@@ -20,7 +19,7 @@ import { makeStyles, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function Basket(props) {
+export default function Basket({}) {
   const classes = useStyles();
   const mobile = MultiUseMobile();
   const cartItems = useSelector(selectCart).cart;
@@ -59,7 +58,7 @@ export default function Basket(props) {
             <Grid container>
               <Grid item xs={4}>
                 <img
-                  src={RdpdCover}
+                  src={item.coverLink}
                   alt={item.book_title}
                   className={
                     classes.imgRounded +

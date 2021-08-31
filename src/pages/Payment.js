@@ -4,19 +4,23 @@ import React, { useState, useContext, useRef } from "react";
 import Typography from "../components/Typography";
 import MultiUseMobile from "../styles/MultiUseMobile";
 import Button from "../components/Button";
-import BookDetailsModal from "./BookDetails/BookDetailsModal";
 import Navbar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
+import BookDetailsModal from "./BookDetails/BookDetailsModal";
+
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../feature/cartSlice";
+import { selectUser } from "../feature/userSlice";
 
 // Material-UI components
 import { Container, Paper, Grid, TextField, Link } from "@material-ui/core";
+import PaymentIcon from "@material-ui/icons/Payment";
 
 // Firebase components
 import * as firebaseUpdateCart from "../firebase/firebaseUpdateCart";
 import * as firebaseGetPromoCode from "../firebase/firebaseGetPromoCode";
+import * as firebaseUploadPaymentInfo from "../firebase/firebaseUploadPaymentInfo";
 import { AuthContext } from "../components/Routing/Auth";
 
 export default function Payment() {
@@ -25,16 +29,14 @@ export default function Payment() {
   const classes = MultiUseMobile();
   const [openBookDetails, setBookDetailsOpen] = useState(false);
 
-  // function to handle modal open for login
-  const handleBookDetailsOpen = () => {
-    setBookDetailsOpen(true);
-  };
-  // function to handle modal close for login
-  const handleBookDetailsClose = () => {
-    setBookDetailsOpen(false);
-  };
+  // Get user data
+  const userData = useSelector(selectUser);
+
+  //For upload image
+  const [file, setFile] = useState("");
 
   // Cart total price
+  const dispatch = useDispatch();
   const cartItems = useSelector(selectCart).cart;
   const [discountAmount, setDiscountAmount] = useState(0);
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
@@ -42,7 +44,6 @@ export default function Payment() {
     itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
   );
 
-  const dispatch = useDispatch();
   const onRemove_ = (product) => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.DeleteToCart(
@@ -75,6 +76,32 @@ export default function Payment() {
       console.log("Not logged in");
     }
   };
+
+  const handleChange = (e) => {
+    //let url = URL.createObjectURL(e.target.files[0]);
+    setFile(e.target.files[0]);
+    //console.log();
+    //console.log(url);
+  };
+
+  const handleBookDetailsClose = () => {
+    setBookDetailsOpen(false);
+  };
+
+  // function to handle modal open for login
+  const handlePayment = async () => {
+    // setBookDetailsOpen(true);
+    await firebaseUploadPaymentInfo.uploadPaymentInfo(
+      userData,
+      cartItems,
+      file,
+      totalPrice
+    );
+  };
+
+  // useEffect(() => {
+  //   if (handlePayment === true)
+  // }, [])
 
   return (
     <div>
@@ -140,24 +167,28 @@ export default function Payment() {
                 <Typography size="subheading">2. Checkout Form</Typography>
                 <form className={classes.textFieldRoot}>
                   <TextField
+                    required
                     id="filled-basic"
                     label="First Name"
                     variant="filled"
                     fullWidth
                   />
                   <TextField
+                    required
                     id="filled-basic"
                     label="Last Name"
                     variant="filled"
                     fullWidth
                   />
                   <TextField
+                    required
                     id="filled-basic"
                     label="Email"
                     variant="filled"
                     fullWidth
                   />
                   <TextField
+                    required
                     id="filled-basic"
                     label="Phone Number"
                     variant="filled"
@@ -194,19 +225,31 @@ export default function Payment() {
                   Foto atau screenshot bukti transfer anda, lalu upload foto
                   melalui tombol "Attach File" di bawah!
                 </Typography>
-                <Button className={classes.paragraphSpace} color="secondary">
-                  Attach File
-                </Button>
+                {/* <Button className={classes.paragraphSpace} color="secondary">
+                  Choose File
+                </Button> */}
+
+                <TextField
+                  required
+                  id="outlined-full-width"
+                  label="Image Upload"
+                  name="upload-photo"
+                  type="file"
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                  onChange={handleChange}
+                />
 
                 <div className={classes.extraSpace} />
 
-                <Button fullWidth round onClick={handleBookDetailsOpen}>
+                <Button fullWidth round onClick={handlePayment}>
+                  <PaymentIcon />
                   Bayar Sekarang
                 </Button>
-                <BookDetailsModal
-                  open={openBookDetails}
-                  handleClose={handleBookDetailsClose}
-                />
               </Paper>
             </Grid>
           </Grid>
@@ -329,23 +372,38 @@ export default function Payment() {
                   Foto atau screenshot bukti transfer anda, lalu upload foto
                   melalui tombol "Attach File" di bawah!
                 </Typography>
-                <Button className={classes.paragraphSpace} color="secondary">
-                  Attach File
-                </Button>
+                <form>
+                  <label htmlFor="upload-photo">
+                    <input
+                      style={{ display: "none" }}
+                      id="upload-photo"
+                      name="upload-photo"
+                      type="file"
+                    />
+                    <Button
+                      variant="contained"
+                      component="span"
+                      className={classes.paragraphSpace}
+                      color="secondary"
+                    >
+                      Attach File
+                    </Button>
+                  </label>
+                </form>
 
                 <div className={classes.extraSpace} />
 
-                <Button fullWidth round onClick={handleBookDetailsOpen}>
-                  Bayar Sekarang
+                <Button fullWidth round onClick={handlePayment}>
+                  <PaymentIcon /> Bayar Sekarang
                 </Button>
               </Paper>
             </Grid>
           </Grid>
         </div>
-        <BookDetailsModal
+        {/* <BookDetailsModal
           open={openBookDetails}
           handleClose={handleBookDetailsClose}
-        />
+        /> */}
       </Container>
       <Footer />
     </div>
