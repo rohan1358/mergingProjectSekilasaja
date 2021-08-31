@@ -37,10 +37,19 @@ export default function Payment() {
 
   const dispatch = useDispatch();
 
+  //For upload image
+  const [file, setFile] = useState("");
+  const handleChange = (e) => {
+    //let url = URL.createObjectURL(e.target.files[0]);
+    setFile(e.target.files[0]);
+    //console.log();
+    //console.log(url);
+  };
+
   // function to handle modal open for login
   const handleBookDetailsOpen = async () => {
     setBookDetailsOpen(true);
-    await firebaseUploadPaymentInfo.uploadPaymentInfo(userData, cartItems);
+    await firebaseUploadPaymentInfo.uploadPaymentInfo(userData, cartItems, file);
   };
   // function to handle modal close for login
   const handleBookDetailsClose = () => {
@@ -180,9 +189,23 @@ export default function Payment() {
                   Foto atau screenshot bukti transfer anda, lalu upload foto
                   melalui tombol "Attach File" di bawah!
                 </Typography>
-                <Button className={classes.paragraphSpace} color="secondary">
-                  Attach File
-                </Button>
+                {/* <Button className={classes.paragraphSpace} color="secondary">
+                  Choose File
+                </Button> */}
+
+                <TextField
+                        id="outlined-full-width"
+                        label="Image Upload"
+                        name="upload-photo"
+                        type="file"
+                        fullWidth
+                        margin="normal"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                        onChange={ handleChange}
+                />
 
                 <div className={classes.extraSpace} />
 
