@@ -54,8 +54,8 @@ export async function uploadPaymentInfo(userData, cartItems, image) {
         type: "test",
       });
 
-      //Put reference into payments array of user data
-    //   console.log("ID: " + docRef.id);
+      //Return the download link for image
+      return image_url;
   } catch (err) {
     var errorCode = err.code;
     var errorMessage = err.message;

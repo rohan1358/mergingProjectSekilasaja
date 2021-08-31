@@ -22,6 +22,9 @@ import * as firebaseUpdateCart from "../firebase/firebaseUpdateCart";
 import * as firebaseUploadPaymentInfo from "../firebase/firebaseUploadPaymentInfo";
 import { AuthContext } from "../components/Routing/Auth";
 
+//Email js components
+import * as emailService from "../emailService/emailService";
+
 export default function Payment() {
   const { currentUser } = useContext(AuthContext);
   const classes = MultiUseMobile();
@@ -49,7 +52,10 @@ export default function Payment() {
   // function to handle modal open for login
   const handleBookDetailsOpen = async () => {
     setBookDetailsOpen(true);
-    await firebaseUploadPaymentInfo.uploadPaymentInfo(userData, cartItems, file);
+    //Put payment information into firestore storage and database
+    var image_url = await firebaseUploadPaymentInfo.uploadPaymentInfo(userData, cartItems, file);
+    //Send email notification
+    await emailService.sendPaymentNotification(userData, image_url);
   };
   // function to handle modal close for login
   const handleBookDetailsClose = () => {
