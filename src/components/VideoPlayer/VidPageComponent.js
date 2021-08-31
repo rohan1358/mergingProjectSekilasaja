@@ -231,20 +231,6 @@ export default function VideoComponent(props) {
 
   const totalDuration = format(duration);
 
-  // Handle unhover when fullscreen
-  var timer;
-  $("#div1").hover(
-    function () {
-      $("#div2").show();
-    },
-    function () {
-      clearInterval(timer);
-      timer = setTimeout(function () {
-        $("#div2").hide();
-      }, 2000);
-    }
-  );
-
   return (
     <Container maxWidth="md">
       <div className={mobile.extraSpace} />
@@ -279,7 +265,6 @@ export default function VideoComponent(props) {
 
         <div id="container">
           <Controls
-            id="div1"
             ref={controlsRef}
             onSeek={handleSeekChange}
             onSeekMouseDown={handleSeekMouseDown}
@@ -304,7 +289,6 @@ export default function VideoComponent(props) {
           />
 
           <Controls
-            id="div2"
             ref={controlsRef}
             onSeek={handleSeekChange}
             onSeekMouseDown={handleSeekMouseDown}
