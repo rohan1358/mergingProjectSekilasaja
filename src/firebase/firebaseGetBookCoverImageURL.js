@@ -11,7 +11,6 @@ export async function getBookCoverImageURL(referenceName) {
   try {
     var url = await imgRef.getDownloadURL();
     if (url) {
-      console.log(referenceName);
       return url;
     }
   } catch (err) {

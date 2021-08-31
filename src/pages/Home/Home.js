@@ -58,7 +58,8 @@ export default function Home({ history }) {
 
   return (
     <div>
-      <NavBar cartItems={[]} />
+      <NavBar cartItems={[]} 
+        history={history}/>
       {!!currentUser ? (
         <div>
           <Parallax small image={require("../../images/home2.jpg").default}>

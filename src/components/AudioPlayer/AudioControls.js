@@ -2,7 +2,7 @@ import React, { forwardRef, useState } from "react";
 
 // Custom components
 import Typography from "../Typography";
-import { primaryColor, secondaryColor } from "../../styles/Style";
+import { secondaryColor } from "../../styles/Style";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // nodejs library to set properties for components
@@ -12,18 +12,15 @@ import PropTypes from "prop-types";
 import {
   makeStyles,
   withStyles,
-  Button,
   IconButton,
   Slider,
   Tooltip,
   Grid,
   Popover,
+  Link,
 } from "@material-ui/core";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import PauseIcon from "@material-ui/icons/Pause";
-import VolumeUp from "@material-ui/icons/VolumeUp";
-import VolumeDown from "@material-ui/icons/VolumeDown";
-import VolumeMute from "@material-ui/icons/VolumeOff";
 
 const useStyles = makeStyles((theme) => ({
   primaryCol: {
@@ -95,22 +92,14 @@ const AudioControls = forwardRef(
       onSeekMouseDown,
       onSeekMouseUp,
       onDuration,
-      onRewind,
       onPlayPause,
-      onFastForward,
       playing,
       played,
       elapsedTime,
       totalDuration,
-      onMute,
-      muted,
-      onVolumeSeekDown,
       onChangeDispayFormat,
       playbackRate,
       onPlaybackRateChange,
-      onToggleFullScreen,
-      volume,
-      onVolumeChange,
       button,
     },
     ref
@@ -130,41 +119,11 @@ const AudioControls = forwardRef(
     const id = open ? "simple-popover" : undefined;
 
     return (
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="center"
-      >
-        <Grid item xs={1}>
+      <Grid container direction="row" alignItems="center">
+        <Grid item xs={2}>
           <IconButton onClick={onPlayPause} className={classes.bottomIcons}>
             {playing ? <PauseIcon /> : <PlayArrowIcon />}
           </IconButton>
-          {/* <IconButton
-            // onClick={() => setState({ ...state, muted: !state.muted })}
-            onClick={onMute}
-            className={`${classes.bottomIcons} ${classes.volumeButton}`}
-          >
-            {muted ? (
-              <VolumeMute />
-            ) : volume > 0.5 ? (
-              <VolumeUp />
-            ) : (
-              <VolumeDown />
-            )}
-          </IconButton>
-
-          <Slider
-            className={classes.primaryCol}
-            min={0}
-            max={100}
-            value={muted ? 0 : volume * 100}
-            onChange={onVolumeChange}
-            aria-labelledby="input-slider"
-            className={classes.volumeSlider}
-            onMouseDown={onSeekMouseDown}
-            onChangeCommitted={onVolumeSeekDown}
-          /> */}
         </Grid>
 
         <Grid item xs={3}>
@@ -184,9 +143,10 @@ const AudioControls = forwardRef(
           />
         </Grid>
 
-        <Grid item xs={2}>
-          <Button
-            className={classes.bottomIcons}
+        <Grid item xs={4}>
+          <Link
+            className={multi.link}
+            underline="none"
             onClick={onChangeDispayFormat}
           >
             <Typography
@@ -195,20 +155,21 @@ const AudioControls = forwardRef(
             >
               {elapsedTime}/{totalDuration}
             </Typography>
-          </Button>
+          </Link>
         </Grid>
 
         <Grid item xs={2}>
-          <Button
+          <Link
+            className={multi.link}
+            underline="none"
             onClick={handleClick}
             aria-describedby={id}
-            className={classes.bottomIcons}
             variant="text"
           >
             <Typography className={classes.bottomIcons}>
               {playbackRate}x
             </Typography>
-          </Button>
+          </Link>
 
           <Popover
             open={open}
@@ -225,18 +186,26 @@ const AudioControls = forwardRef(
             }}
           >
             <Grid container direction="column-reverse">
-              {[0.5, 1, 1.25, 1.5, 1.75, 2].map((rate) => (
-                <Button key={rate} onClick={() => onPlaybackRateChange(rate)}>
-                  <Typography className={classes.textTransformNormal}>
+              {[0.5, 1, 1.25, 1.5, 2].map((rate) => (
+                <Link
+                  className={multi.link}
+                  underline="none"
+                  key={rate}
+                  onClick={() => onPlaybackRateChange(rate)}
+                >
+                  <Typography
+                    style={{ padding: "10px" }}
+                    className={classes.textTransformNormal}
+                  >
                     {rate}x
                   </Typography>
-                </Button>
+                </Link>
               ))}
             </Grid>
           </Popover>
         </Grid>
 
-        <Grid item xs={2}>
+        <Grid item xs={1}>
           {button}
         </Grid>
       </Grid>

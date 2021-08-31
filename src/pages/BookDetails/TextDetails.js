@@ -11,6 +11,7 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 // nodejs library to set properties for components
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import { grayColor } from "../../styles/Style";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -55,23 +56,22 @@ export default function BookDetails(props) {
                   <Grid item xs={4}>
                     <div>
                       <Typography size="subheading" type="bold">
-                        Video
+                        Audio
                       </Typography>
-                      {video}
 
-                      <Typography type="italic">
-                        TODO: There will be video here
-                      </Typography>
+                      <Paper
+                        style={{ backgroundColor: grayColor }}
+                        variant="outlined"
+                      >
+                        {audio}
+                      </Paper>
                     </div>
 
                     <div>
                       <Typography size="subheading" type="bold">
-                        Audio
+                        Video
                       </Typography>
-                      <Typography type="italic">
-                        TODO: There will be audio here
-                      </Typography>
-                      {audio}
+                      {video}
                     </div>
 
                     <div>
@@ -92,20 +92,21 @@ export default function BookDetails(props) {
                 <Grid item xs={12}>
                   <div>
                     <Typography size="subheading" type="bold">
-                      Video
+                      Audio
                     </Typography>
-                    <Typography type="italic">
-                      TODO: There will be video here
-                    </Typography>
+                    <Paper
+                      style={{ backgroundColor: grayColor }}
+                      variant="outlined"
+                    >
+                      {audio}
+                    </Paper>
                   </div>
 
                   <div>
                     <Typography size="subheading" type="bold">
-                      Audio
+                      Video
                     </Typography>
-                    <Typography type="italic">
-                      TODO: There will be audio here
-                    </Typography>
+                    {video}
                   </div>
 
                   <div>
@@ -148,23 +149,20 @@ export default function BookDetails(props) {
                   <Grid item xs={4}>
                     <div>
                       <Typography size="subheading" type="bold">
+                        Audio
+                      </Typography>
+                      <Paper
+                        style={{ backgroundColor: grayColor }}
+                        variant="outlined"
+                      >
+                        {audio}
+                      </Paper>
+                    </div>
+                    <div>
+                      <Typography size="subheading" type="bold">
                         Video
                       </Typography>
                       {video}
-
-                      <Typography type="italic">
-                        TODO: There will be video here
-                      </Typography>
-                    </div>
-
-                    <div>
-                      <Typography size="subheading" type="bold">
-                        Audio
-                      </Typography>
-                      <Typography type="italic">
-                        TODO: There will be audio here
-                      </Typography>
-                      {audio}
                     </div>
 
                     <div>
@@ -185,20 +183,20 @@ export default function BookDetails(props) {
                 <Grid item xs={12}>
                   <div>
                     <Typography size="subheading" type="bold">
-                      Video
-                    </Typography>
-                    <Typography type="italic">
-                      TODO: There will be video here
-                    </Typography>
-                  </div>
-
-                  <div>
-                    <Typography size="subheading" type="bold">
                       Audio
                     </Typography>
-                    <Typography type="italic">
-                      TODO: There will be audio here
+                    <Paper
+                      style={{ backgroundColor: grayColor }}
+                      variant="outlined"
+                    >
+                      {audio}
+                    </Paper>
+                  </div>
+                  <div>
+                    <Typography size="subheading" type="bold">
+                      Video
                     </Typography>
+                    {video}
                   </div>
 
                   <div>

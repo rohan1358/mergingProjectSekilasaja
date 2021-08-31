@@ -94,12 +94,12 @@ export default function CategoryBlock(props) {
             ) : (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
-                <Grid container spacing={1}>
+                <div>
                   {favoriteBooks.filter(
                     (product) =>
                       product.category.includes(chosenCategory) == true
                   ).length !== 0 ? (
-                    <Grid container spacing={1}>
+                    <Grid container spacing={5}>
                       {favoriteBooks
                         .filter(
                           (product) =>
@@ -119,7 +119,7 @@ export default function CategoryBlock(props) {
                       Kilas favorit kamu tidak ditemukan di kategori ini!
                     </Typography>
                   )}
-                </Grid>
+                </div>
               </div>
             )}
 
@@ -130,7 +130,7 @@ export default function CategoryBlock(props) {
               {products.filter(
                 (product) => product.category.includes(chosenCategory) == true
               ).length !== 0 ? (
-                <Grid container spacing={1}>
+                <Grid container spacing={5}>
                   {products
                     .filter(
                       (product) =>
@@ -169,7 +169,7 @@ export default function CategoryBlock(props) {
                     (product) =>
                       product.category.includes(chosenCategory) == true
                   ).length !== 0 ? (
-                    <Grid container justifyContent="center" spacing={1}>
+                    <Grid container justifyContent="center" spacing={5}>
                       {favoriteBooks
                         .filter(
                           (product) =>
@@ -200,7 +200,7 @@ export default function CategoryBlock(props) {
               {products.filter(
                 (product) => product.category.includes(chosenCategory) == true
               ).length !== 0 ? (
-                <Grid container justifyContent="center" spacing={1}>
+                <Grid container justifyContent="center" spacing={5}>
                   {products
                     .filter(
                       (product) =>
@@ -236,7 +236,7 @@ export default function CategoryBlock(props) {
             ) : (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
-                <Grid container spacing={1}>
+                <Grid container spacing={5}>
                   {favoriteBooks.map((product) => (
                     <BookCard
                       chosenCategory={chosenCategory}
@@ -252,7 +252,7 @@ export default function CategoryBlock(props) {
             <div className={classes.extraSpace} />
 
             <Typography size="subheading">Owned Books</Typography>
-            <Grid container spacing={1}>
+            <Grid container spacing={5}>
               {products.map((product) => (
                 <BookCard
                   chosenCategory={chosenCategory}
@@ -275,7 +275,7 @@ export default function CategoryBlock(props) {
             ) : (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
-                <Grid container justifyContent="center" spacing={1}>
+                <Grid container justifyContent="center" spacing={5}>
                   {favoriteBooks.map((product) => (
                     <BookCard
                       chosenCategory={chosenCategory}
@@ -291,7 +291,7 @@ export default function CategoryBlock(props) {
             <div className={classes.extraSpace} />
 
             <Typography size="subheading">Owned Books</Typography>
-            <Grid container justifyContent="center" spacing={1}>
+            <Grid container justifyContent="center" spacing={5}>
               {products.map((product) => (
                 <BookCard
                   chosenCategory={chosenCategory}

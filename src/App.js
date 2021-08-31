@@ -15,6 +15,7 @@ import AccountsPage from "./pages/Accounts/Accounts";
 import Payment from "./pages/Payment.js";
 import Library from "./pages/Library/Library";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import SearchResults from "./pages/SearchResults/SearchResults";
 import NewWebLanding from "./pages/NewWebLanding";
 
 // Routing componentns
@@ -38,7 +39,11 @@ function App() {
             component={VideoWatchingPage}
           />
           <PrivateRoute exact path="/library" component={Library} />
-
+          <Route
+            exact
+            path="/searchResults/:searchValue"
+            component={SearchResults}
+          />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/lupa-password" component={ForgotPassword} />

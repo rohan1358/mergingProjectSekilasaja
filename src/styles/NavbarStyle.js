@@ -56,6 +56,11 @@ const NavbarStyle = makeStyles((theme) => ({
     width: 35,
     height: 35,
   },
+  search: {
+    width: "300px",
+    display: "flex",
+    alignItems: "center",
+  },
 }));
 
 export default NavbarStyle;

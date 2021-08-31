@@ -71,6 +71,9 @@ const MultiUseMobile = makeStyles((theme) => ({
   extraSpace: {
     marginTop: "50px",
   },
+  extraSpace2: {
+    marginTop: "100px",
+  },
   title: {
     textAlign: "center",
   },
@@ -121,6 +124,10 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   blur: {
     filter: "blur(5px)",
+    userSelect: "none",
+    pointerEvents: "none",
+  },
+  paragraph: {
     userSelect: "none",
     pointerEvents: "none",
   },

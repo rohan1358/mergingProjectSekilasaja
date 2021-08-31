@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactPlayer from "react-player";
 
 // Custom components
-import Typography from "../components/Typography";
-import MultiUseMobile from "../styles/MultiUseMobile";
-import Controls from "../components/VideoPlayerCustom";
+import Typography from "../Typography";
+import MultiUseMobile from "../../styles/MultiUseMobile";
+import Controls from "./VideoPlayerCustom";
 
 // Material-UI components
 import { Container, makeStyles } from "@material-ui/core";
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     //   },
     // },
   },
-
   controlsWrapper: {
     visibility: "hidden",
     position: "absolute",
@@ -57,20 +56,17 @@ const useStyles = makeStyles((theme) => ({
     // height: 60,
     padding: theme.spacing(2),
   },
-
   bottomControls: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     // height:40,
   },
-
   button: {
     margin: theme.spacing(1),
   },
   controlIcons: {
     color: "#777",
-
     fontSize: 50,
     transform: "scale(0.9)",
     "&:hover": {
@@ -78,14 +74,12 @@ const useStyles = makeStyles((theme) => ({
       transform: "scale(1)",
     },
   },
-
   bottomIcons: {
     color: "#999",
     "&:hover": {
       color: "#fff",
     },
   },
-
   volumeSlider: {
     width: 100,
   },
@@ -256,8 +250,8 @@ export default function VideoComponent(props) {
           light={light}
           loop={loop}
           playbackRate={playbackRate}
-          volume={volume}
-          muted={muted}
+          // volume={volume}
+          // muted={muted}
           onProgress={handleProgress}
           config={{
             file: {
@@ -281,15 +275,15 @@ export default function VideoComponent(props) {
           played={played}
           elapsedTime={elapsedTime}
           totalDuration={totalDuration}
-          onMute={handleMute}
-          muted={muted}
+          // onMute={handleMute}
+          // muted={muted}
           onVolumeChange={handleVolumeChange}
           onVolumeSeekDown={handleVolumeSeekDown}
           onChangeDispayFormat={handleDisplayFormat}
           playbackRate={playbackRate}
           onPlaybackRateChange={handlePlaybackRate}
           onToggleFullScreen={toggleFullScreen}
-          volume={volume}
+          // volume={volume}
         />
       </div>
 
@@ -299,30 +293,6 @@ export default function VideoComponent(props) {
       <canvas ref={canvasRef} />
     </Container>
   );
-  // return (
-  //   <div>
-  //     <Container maxWidth={"md"}>
-  //       <div className={mobile.extraSpace} />
-
-  //       <div>
-  //         {/* TODO: Video */}
-  //         <ReactPlayer
-  //           width="100%"
-  //           height="430px"
-  //           url="https://drive.google.com/file/d/1aUtPV8DfkQOivHpE1ChcSMDt78UkjwOE/view?usp=sharing"
-  //           controls
-  //         />
-  //       </div>
-
-  //       <div>
-  //         <Typography size="subheading">{title}</Typography>
-  //         <Typography>{description}</Typography>
-  //       </div>
-
-  //       <div className={mobile.extraSpace} />
-  //     </Container>
-  //   </div>
-  // );
 }
 
 VideoComponent.propTypes = {

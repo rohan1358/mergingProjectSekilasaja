@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 
 // Custom components
 import Typography from "../components/Typography";
@@ -7,7 +7,6 @@ import Button from "../components/Button";
 import BookDetailsModal from "./BookDetails/BookDetailsModal";
 import Navbar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
-
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../feature/cartSlice";
@@ -17,10 +16,12 @@ import { Container, Paper, Grid, TextField, Link } from "@material-ui/core";
 
 // Firebase components
 import * as firebaseUpdateCart from "../firebase/firebaseUpdateCart";
+import * as firebaseGetPromoCode from "../firebase/firebaseGetPromoCode";
 import { AuthContext } from "../components/Routing/Auth";
 
 export default function Payment() {
   const { currentUser } = useContext(AuthContext);
+  const promoCodeRef = useRef("");
   const classes = MultiUseMobile();
   const [openBookDetails, setBookDetailsOpen] = useState(false);
 
@@ -35,8 +36,11 @@ export default function Payment() {
 
   // Cart total price
   const cartItems = useSelector(selectCart).cart;
+  const [discountAmount, setDiscountAmount] = useState(0);
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
-  const totalPrice = Intl.NumberFormat().format(itemsPrice);
+  const totalPrice = Intl.NumberFormat().format(
+    itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
+  );
 
   const dispatch = useDispatch();
   const onRemove_ = (product) => {
@@ -45,7 +49,6 @@ export default function Payment() {
         currentUser.uid,
         product
       );
-      console.log(results);
       dispatch(
         setCart([
           ...cartItems.filter(function (ele) {
@@ -55,6 +58,22 @@ export default function Payment() {
       );
     };
     fetchData();
+  };
+
+  const handleApplyPromo = () => {
+    if (currentUser !== null) {
+      const fetchData = async () => {
+        const results = await firebaseGetPromoCode.getPromoCode(
+          promoCodeRef.current.value
+        );
+        if (results.length != 0) {
+          setDiscountAmount(-1 * results[0].amount);
+        }
+      };
+      fetchData();
+    } else {
+      console.log("Not logged in");
+    }
   };
 
   return (
@@ -101,8 +120,11 @@ export default function Payment() {
                     label="Kode Promo"
                     variant="filled"
                     fullWidth
+                    inputRef={promoCodeRef}
                   />
-                  <Button>Apply</Button>
+                  <Button onClick={handleApplyPromo} type="submit">
+                    Apply
+                  </Button>
                 </div>
                 <div className={classes.spaceBetween}>
                   <Typography size="subheading">TOTAL</Typography>

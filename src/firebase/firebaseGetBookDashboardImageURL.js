@@ -11,6 +11,7 @@ export async function getBookDashboardImageURL(referenceName) {
   try {
     var url = await imgRef.getDownloadURL();
     if (url) {
+      console.log(url);
       return url;
     }
   } catch (err) {

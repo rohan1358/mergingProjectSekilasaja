@@ -20,7 +20,8 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Drawer from "../Drawer";
 import Button from "../Button";
 import NavbarStyle from "../../styles/NavbarStyle";
-import SearchBarDrawer from "../SearchBarDrawer";
+import SearchBar from "../SearchBar/SearchBar";
+import SearchBarDrawer from "../SearchBar/SearchBarDrawer";
 import Basket from "../AddToCart/Basket";
 
 // nodejs library to set properties for components
@@ -38,7 +39,7 @@ import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoB
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
 
-export default function NavBar() {
+export default function NavBar(props) {
   // Other styles
   const classes = NavbarStyle();
 
@@ -77,6 +78,8 @@ export default function NavBar() {
 
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isCart, setIsCart] = useState(false);
+
+  const { history } = props;
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -177,10 +180,7 @@ export default function NavBar() {
               <div className={growClass} />
 
               <div className={desktopClass}>
-                <SearchBarDrawer
-                  direction={"top"}
-                  logo={<SearchIcon className={iconColorClass} />}
-                />
+                <SearchBar history={history} />
 
                 <Button href="/pricing" round color="transparent">
                   Pricing
@@ -198,6 +198,7 @@ export default function NavBar() {
               <div className={mobileClass}>
                 <SearchBarDrawer
                   direction={"top"}
+                  history={history}
                   logo={<SearchIcon className={iconColorClass} />}
                 />
 
@@ -227,10 +228,7 @@ export default function NavBar() {
                   <div className={growClass} />
 
                   <div className={desktopClass}>
-                    <SearchBarDrawer
-                      direction={"top"}
-                      logo={<SearchIcon className={iconColorClass} />}
-                    />
+                    <SearchBar history={history} />
 
                     <Button href="/pricing" round color="transparent">
                       Pricing
@@ -264,6 +262,7 @@ export default function NavBar() {
                   <div className={mobileClass}>
                     <SearchBarDrawer
                       direction={"top"}
+                      history={history}
                       logo={<SearchIcon className={iconColorClass} />}
                     />
 
@@ -305,10 +304,7 @@ export default function NavBar() {
                   <div className={growClass} />
 
                   <div className={desktopClass}>
-                    <SearchBarDrawer
-                      direction={"top"}
-                      logo={<SearchIcon className={iconColorClass} />}
-                    />
+                    <SearchBar history={history} />
 
                     <Button href="/pricing" round color="transparent">
                       Pricing
@@ -326,6 +322,7 @@ export default function NavBar() {
                   <div className={mobileClass}>
                     <SearchBarDrawer
                       direction={"top"}
+                      history={history}
                       logo={<SearchIcon className={iconColorClass} />}
                     />
 

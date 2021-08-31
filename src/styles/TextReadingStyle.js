@@ -105,6 +105,13 @@ const TextReadingStyle = makeStyles((theme) => ({
     userSelect: "none",
     pointerEvents: "none",
   },
+  link: {
+    fontWeight: "bold",
+    color: secondaryColor,
+    "&:hover,&:focus": {
+      cursor: "pointer",
+    },
+  },
 }));
 
 export default TextReadingStyle;
