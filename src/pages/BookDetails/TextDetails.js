@@ -11,6 +11,7 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 // nodejs library to set properties for components
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import { grayColor } from "../../styles/Style";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -68,10 +69,13 @@ export default function BookDetails(props) {
                       <Typography size="subheading" type="bold">
                         Audio
                       </Typography>
-                      <Typography type="italic">
-                        TODO: There will be audio here
-                      </Typography>
-                      {audio}
+
+                      <Paper
+                        style={{ backgroundColor: grayColor }}
+                        variant="outlined"
+                      >
+                        {audio}
+                      </Paper>
                     </div>
 
                     <div>
@@ -103,9 +107,12 @@ export default function BookDetails(props) {
                     <Typography size="subheading" type="bold">
                       Audio
                     </Typography>
-                    <Typography type="italic">
-                      TODO: There will be audio here
-                    </Typography>
+                    <Paper
+                      style={{ backgroundColor: grayColor }}
+                      variant="outlined"
+                    >
+                      {audio}
+                    </Paper>
                   </div>
 
                   <div>
@@ -161,10 +168,12 @@ export default function BookDetails(props) {
                       <Typography size="subheading" type="bold">
                         Audio
                       </Typography>
-                      <Typography type="italic">
-                        TODO: There will be audio here
-                      </Typography>
-                      {audio}
+                      <Paper
+                        style={{ backgroundColor: grayColor }}
+                        variant="outlined"
+                      >
+                        {audio}
+                      </Paper>
                     </div>
 
                     <div>
@@ -196,9 +205,12 @@ export default function BookDetails(props) {
                     <Typography size="subheading" type="bold">
                       Audio
                     </Typography>
-                    <Typography type="italic">
-                      TODO: There will be audio here
-                    </Typography>
+                    <Paper
+                      style={{ backgroundColor: grayColor }}
+                      variant="outlined"
+                    >
+                      {audio}
+                    </Paper>
                   </div>
 
                   <div>

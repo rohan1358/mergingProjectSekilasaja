@@ -7,6 +7,7 @@ import NavBar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import Typography from "../../components/Typography";
 import VideoComponent from "../../components/VidPageComponent";
+import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 
@@ -29,6 +30,7 @@ import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
+import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
 
 const firestore = fire.firestore();
 
@@ -50,6 +52,7 @@ export default function BookDetailsPage({ match, history }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [bookTitle, setBookTitle] = useState([]);
   const [coverLink, setCoverLink] = useState("");
+  const [audioLink, setAudioLink] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,10 +87,16 @@ export default function BookDetailsPage({ match, history }) {
       const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(
         match.params.book_title
       );
+      const getAudioLink = firebaseGetBookAudioURL.getBookAudioURL(
+        match.params.book_title,
+        1
+      );
 
       const fetchData = async () => {
         const link = await getLink;
+        const audioLink = await getAudioLink;
         setCoverLink(link);
+        setAudioLink(audioLink);
       };
       fetchData();
     }
@@ -180,8 +189,6 @@ export default function BookDetailsPage({ match, history }) {
     };
     fetchData();
   };
-
-  console.log(current_product);
 
   return (
     <div>
@@ -285,6 +292,11 @@ export default function BookDetailsPage({ match, history }) {
                       />
 
                       <TextDetails
+                        audio={
+                          <div style={{ marginTop: "3px" }}>
+                            <AudioPlayer vidLink={audioLink} />
+                          </div>
+                        }
                         totalNum={current_product.kilasan.length}
                         kilasTitle={current_product.kilasan[0].title}
                         kilasBody={current_product.kilasan[0].details.map(
@@ -383,6 +395,11 @@ export default function BookDetailsPage({ match, history }) {
                         }
                       />
                       <TextDetails
+                        audio={
+                          <div style={{ marginTop: "3px" }}>
+                            <AudioPlayer vidLink={audioLink} />
+                          </div>
+                        }
                         totalNum={current_product.kilasan.length}
                         kilasTitle={current_product.kilasan[0].title}
                         kilasBody={
@@ -495,6 +512,11 @@ export default function BookDetailsPage({ match, history }) {
                     }
                   />
                   <TextDetails
+                    audio={
+                      <div style={{ marginTop: "3px" }}>
+                        <AudioPlayer vidLink={audioLink} />
+                      </div>
+                    }
                     totalNum={current_product.kilasan.length}
                     kilasTitle={current_product.kilasan[0].title}
                     kilasBody={

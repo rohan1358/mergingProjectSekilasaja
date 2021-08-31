@@ -11,7 +11,7 @@ import FourOFourPage from "../404page";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
-import { Container, AppBar, Grid, Paper } from "@material-ui/core";
+import { Container, AppBar, Grid, Paper, Link } from "@material-ui/core";
 
 // Custom components
 import Button from "../../components/Button";
@@ -86,7 +86,6 @@ export default function TextReading({ match, history }) {
       console.log("You are not logged in!");
     }
   }, [, chosenChapter]);
-
   console.log(audioLink);
   const isSubscribed = userData.is_subscribed;
 
@@ -260,14 +259,20 @@ export default function TextReading({ match, history }) {
           <div style={{ marginTop: "100px" }}>
             <AppBar color="white" position="fixed" className={classes.audioBar}>
               <Container>
-                <AudioPlayer
-                  vidLink={audioLink}
-                  button={
-                    <Button color="transparent" onClick={handleNext}>
-                      <Typography type="bold">Next ►</Typography>
-                    </Button>
-                  }
-                />
+                <div style={{ padding: "15px" }}>
+                  <AudioPlayer
+                    vidLink={audioLink}
+                    button={
+                      <Link
+                        className={classes.link}
+                        underline="none"
+                        onClick={handleNext}
+                      >
+                        NEXT►
+                      </Link>
+                    }
+                  />
+                </div>
               </Container>
             </AppBar>
           </div>

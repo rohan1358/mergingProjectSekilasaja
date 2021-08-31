@@ -124,6 +124,10 @@ const MultiUseMobile = makeStyles((theme) => ({
     userSelect: "none",
     pointerEvents: "none",
   },
+  paragraph: {
+    userSelect: "none",
+    pointerEvents: "none",
+  },
 }));
 
 export default MultiUseMobile;

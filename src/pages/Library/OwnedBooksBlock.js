@@ -195,7 +195,7 @@ export default function OwnedBooksBlock(props) {
                         (product) =>
                           product.category.includes(chosenCategory) == true
                       ).length !== 0 ? (
-                        <Grid container spacing={1}>
+                        <Grid container spacing={5}>
                           {favoriteBooks
                             .filter(
                               (product) =>
@@ -239,7 +239,7 @@ export default function OwnedBooksBlock(props) {
                         (product) =>
                           product.category.includes(chosenCategory) == true
                       ).length !== 0 ? (
-                        <Grid container spacing={1}>
+                        <Grid container spacing={5}>
                           {ownedBooks
                             .filter(
                               (product) =>
@@ -281,7 +281,7 @@ export default function OwnedBooksBlock(props) {
                       (product) =>
                         product.category.includes(chosenCategory) == true
                     ).length !== 0 ? (
-                      <Grid container spacing={1}>
+                      <Grid container spacing={5}>
                         {booksNotOwned
                           .filter(
                             (product) =>
@@ -322,7 +322,7 @@ export default function OwnedBooksBlock(props) {
                         (product) =>
                           product.category.includes(chosenCategory) == true
                       ).length !== 0 ? (
-                        <Grid container justifyContent="center" spacing={1}>
+                        <Grid container justifyContent="center" spacing={5}>
                           {favoriteBooks
                             .filter(
                               (product) =>
@@ -361,7 +361,7 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Owned Books</Typography>
-                    <Grid container justifyContent="center" spacing={1}>
+                    <Grid container justifyContent="center" spacing={5}>
                       {ownedBooks.filter(
                         (product) =>
                           product.category.includes(chosenCategory) == true
@@ -371,7 +371,7 @@ export default function OwnedBooksBlock(props) {
                             (product) =>
                               product.category.includes(chosenCategory) == true
                           ).length !== 0 ? (
-                            <Grid container justifyContent="center" spacing={1}>
+                            <Grid container justifyContent="center" spacing={5}>
                               {ownedBooks
                                 .filter(
                                   (product) =>
@@ -418,7 +418,7 @@ export default function OwnedBooksBlock(props) {
                       (product) =>
                         product.category.includes(chosenCategory) == true
                     ).length !== 0 ? (
-                      <Grid container justifyContent="center" spacing={1}>
+                      <Grid container justifyContent="center" spacing={5}>
                         {booksNotOwned
                           .filter(
                             (product) =>
@@ -455,7 +455,7 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
-                    <Grid container spacing={1}>
+                    <Grid container spacing={5}>
                       {favoriteBooks.map((product) => (
                         <BookCard
                           chosenCategory={chosenCategory}
@@ -481,7 +481,7 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Owned Books</Typography>
-                    <Grid container spacing={1}>
+                    <Grid container spacing={5}>
                       {ownedBooks.map((product) => (
                         <BookCard
                           chosenCategory={chosenCategory}
@@ -506,7 +506,7 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Not Owned Books</Typography>
-                    <Grid container spacing={1}>
+                    <Grid container spacing={5}>
                       {booksNotOwned.map((product) => (
                         <BookCard
                           chosenCategory={chosenCategory}
@@ -533,7 +533,7 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
-                    <Grid container justifyContent="center" spacing={1}>
+                    <Grid container justifyContent="center" spacing={5}>
                       {favoriteBooks.map((product) => (
                         <BookCard
                           chosenCategory={chosenCategory}
@@ -559,7 +559,7 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Owned Books</Typography>
-                    <Grid container justifyContent="center" spacing={1}>
+                    <Grid container justifyContent="center" spacing={5}>
                       {ownedBooks.map((product) => (
                         <BookCard
                           chosenCategory={chosenCategory}
@@ -584,7 +584,7 @@ export default function OwnedBooksBlock(props) {
                 ) : (
                   <div>
                     <Typography size="subheading">Not Owned Books</Typography>
-                    <Grid container justifyContent="center" spacing={1}>
+                    <Grid container justifyContent="center" spacing={5}>
                       {booksNotOwned.map((product) => (
                         <BookCard
                           chosenCategory={chosenCategory}
