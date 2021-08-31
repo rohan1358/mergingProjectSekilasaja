@@ -79,8 +79,6 @@ export default function NavBar(props) {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isCart, setIsCart] = useState(false);
 
-  console.log(cart);
-
   const { history } = props;
 
   useEffect(() => {

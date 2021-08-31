@@ -84,7 +84,7 @@ export default function SearchBarDrawer(props) {
                     size="small"
                     label={
                       <div className={classes.search}>
-                        <SearchIcon /> Cari The Intelligent Investor...
+                        🔍 Cari The Intelligent Investor...
                       </div>
                     }
                     variant="outlined"

@@ -36,9 +36,11 @@ export default function Payment() {
 
   // Cart total price
   const cartItems = useSelector(selectCart).cart;
-  const [discountAmount, setDiscountAmount] = useState(0)
+  const [discountAmount, setDiscountAmount] = useState(0);
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
-  const totalPrice = Intl.NumberFormat().format(((itemsPrice + discountAmount) > 0) ? ((itemsPrice + discountAmount)) : (0) );
+  const totalPrice = Intl.NumberFormat().format(
+    itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
+  );
 
   const dispatch = useDispatch();
   const onRemove_ = (product) => {
@@ -57,23 +59,23 @@ export default function Payment() {
     };
     fetchData();
   };
-  console.log(discountAmount)
-console.log(totalPrice)
-  const handleApplyPromo = () =>{
+
+  const handleApplyPromo = () => {
     if (currentUser !== null) {
       const fetchData = async () => {
-        const results = await firebaseGetPromoCode.getPromoCode(promoCodeRef.current.value);
-        console.log(results)
-        if(results.length != 0){
-          setDiscountAmount((-1) * results[0].amount)
+        const results = await firebaseGetPromoCode.getPromoCode(
+          promoCodeRef.current.value
+        );
+        if (results.length != 0) {
+          setDiscountAmount(-1 * results[0].amount);
         }
       };
       fetchData();
     } else {
       console.log("Not logged in");
     }
-  }
-  
+  };
+
   return (
     <div>
       <Navbar />
@@ -120,7 +122,9 @@ console.log(totalPrice)
                     fullWidth
                     inputRef={promoCodeRef}
                   />
-                  <Button onClick={handleApplyPromo} type="submit" >Apply</Button>
+                  <Button onClick={handleApplyPromo} type="submit">
+                    Apply
+                  </Button>
                 </div>
                 <div className={classes.spaceBetween}>
                   <Typography size="subheading">TOTAL</Typography>

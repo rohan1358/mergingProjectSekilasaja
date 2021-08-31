@@ -58,11 +58,11 @@ export default function BookDetails(props) {
                       <Typography size="subheading" type="bold">
                         Video
                       </Typography>
-                      {video}
 
                       <Typography type="italic">
                         TODO: There will be video here
                       </Typography>
+                      {video}
                     </div>
 
                     <div>
@@ -101,6 +101,7 @@ export default function BookDetails(props) {
                     <Typography type="italic">
                       TODO: There will be video here
                     </Typography>
+                    {video}
                   </div>
 
                   <div>
@@ -157,11 +158,11 @@ export default function BookDetails(props) {
                       <Typography size="subheading" type="bold">
                         Video
                       </Typography>
-                      {video}
 
                       <Typography type="italic">
                         TODO: There will be video here
                       </Typography>
+                      {video}
                     </div>
 
                     <div>
@@ -199,6 +200,7 @@ export default function BookDetails(props) {
                     <Typography type="italic">
                       TODO: There will be video here
                     </Typography>
+                    {video}
                   </div>
 
                   <div>

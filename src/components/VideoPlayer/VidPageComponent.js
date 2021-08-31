@@ -14,7 +14,6 @@ import PropTypes from "prop-types";
 
 // Other library
 import screenful from "screenfull";
-import $ from "jquery";
 
 const useStyles = makeStyles((theme) => ({
   playerWrapper: {

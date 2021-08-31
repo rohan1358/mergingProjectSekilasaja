@@ -50,7 +50,6 @@ export default function BookDetailsPage({ match, history }) {
   const [isBookOwned, setIsBookOwned] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [bookTitle, setBookTitle] = useState([]);
   const [coverLink, setCoverLink] = useState("");
   const [audioLink, setAudioLink] = useState(null);
 
@@ -60,14 +59,9 @@ export default function BookDetailsPage({ match, history }) {
         match.params.book_title
       );
       setCurrent_Product(book_);
-
       ownedBooks.map((x) => {
         if (x.book_title == book_.book_title) {
           setIsBookOwned(true);
-          setBookTitle(book_.book_title);
-        } else {
-          setIsBookOwned(false);
-          setBookTitle(book_.book_title);
         }
       });
     };
@@ -192,6 +186,10 @@ export default function BookDetailsPage({ match, history }) {
     };
     fetchData();
   };
+
+  console.log(currentUser);
+  console.log(isBookOwned);
+  console.log(ownedBooks);
 
   return (
     <div>
