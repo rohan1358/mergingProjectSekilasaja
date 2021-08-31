@@ -13,6 +13,7 @@ import Button from "../../components/Button";
 
 // Material-UI components
 import { Container, Divider, Grid } from "@material-ui/core";
+import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -293,6 +294,15 @@ export default function BookDetailsPage({ match, history }) {
                       />
 
                       <TextDetails
+                        video={
+                          <Button
+                            href={`/video/${current_product.book_title}`}
+                            color="secondary"
+                            fullWidth
+                          >
+                            <PlayCircleFilledIcon /> Akses Videonya Sekarang!
+                          </Button>
+                        }
                         audio={
                           <div style={{ marginTop: "3px" }}>
                             <AudioPlayer vidLink={audioLink} />
@@ -396,6 +406,11 @@ export default function BookDetailsPage({ match, history }) {
                         }
                       />
                       <TextDetails
+                        video={
+                          <Button href="/pricing" color="secondary" fullWidth>
+                            <PlayCircleFilledIcon /> Akses Videonya Sekarang!
+                          </Button>
+                        }
                         audio={
                           <div style={{ marginTop: "3px" }}>
                             <AudioPlayer vidLink={audioLink} />
@@ -513,6 +528,11 @@ export default function BookDetailsPage({ match, history }) {
                     }
                   />
                   <TextDetails
+                    video={
+                      <Button href="/pricing" color="secondary" fullWidth>
+                        <PlayCircleFilledIcon /> Akses Videonya Sekarang!
+                      </Button>
+                    }
                     audio={
                       <div style={{ marginTop: "3px" }}>
                         <AudioPlayer vidLink={audioLink} />

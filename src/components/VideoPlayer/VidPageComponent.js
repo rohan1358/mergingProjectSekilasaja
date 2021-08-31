@@ -262,55 +262,29 @@ export default function VideoComponent(props) {
           }}
         />
 
-        <div id="container">
-          <Controls
-            ref={controlsRef}
-            onSeek={handleSeekChange}
-            onSeekMouseDown={handleSeekMouseDown}
-            onSeekMouseUp={handleSeekMouseUp}
-            onDuration={handleDuration}
-            onRewind={handleRewind}
-            onPlayPause={handlePlayPause}
-            onFastForward={handleFastForward}
-            playing={playing}
-            played={played}
-            elapsedTime={elapsedTime}
-            totalDuration={totalDuration}
-            // onMute={handleMute}
-            // muted={muted}
-            onVolumeChange={handleVolumeChange}
-            onVolumeSeekDown={handleVolumeSeekDown}
-            onChangeDispayFormat={handleDisplayFormat}
-            playbackRate={playbackRate}
-            onPlaybackRateChange={handlePlaybackRate}
-            onToggleFullScreen={toggleFullScreen}
-            // volume={volume}
-          />
-
-          <Controls
-            ref={controlsRef}
-            onSeek={handleSeekChange}
-            onSeekMouseDown={handleSeekMouseDown}
-            onSeekMouseUp={handleSeekMouseUp}
-            onDuration={handleDuration}
-            onRewind={handleRewind}
-            onPlayPause={handlePlayPause}
-            onFastForward={handleFastForward}
-            playing={playing}
-            played={played}
-            elapsedTime={elapsedTime}
-            totalDuration={totalDuration}
-            // onMute={handleMute}
-            // muted={muted}
-            onVolumeChange={handleVolumeChange}
-            onVolumeSeekDown={handleVolumeSeekDown}
-            onChangeDispayFormat={handleDisplayFormat}
-            playbackRate={playbackRate}
-            onPlaybackRateChange={handlePlaybackRate}
-            onToggleFullScreen={toggleFullScreen}
-            // volume={volume}
-          />
-        </div>
+        <Controls
+          ref={controlsRef}
+          onSeek={handleSeekChange}
+          onSeekMouseDown={handleSeekMouseDown}
+          onSeekMouseUp={handleSeekMouseUp}
+          onDuration={handleDuration}
+          onRewind={handleRewind}
+          onPlayPause={handlePlayPause}
+          onFastForward={handleFastForward}
+          playing={playing}
+          played={played}
+          elapsedTime={elapsedTime}
+          totalDuration={totalDuration}
+          // onMute={handleMute}
+          // muted={muted}
+          onVolumeChange={handleVolumeChange}
+          onVolumeSeekDown={handleVolumeSeekDown}
+          onChangeDispayFormat={handleDisplayFormat}
+          playbackRate={playbackRate}
+          onPlaybackRateChange={handlePlaybackRate}
+          onToggleFullScreen={toggleFullScreen}
+          // volume={volume}
+        />
       </div>
 
       <Typography size="subheading">{title}</Typography>

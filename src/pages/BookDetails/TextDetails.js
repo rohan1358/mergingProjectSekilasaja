@@ -56,17 +56,6 @@ export default function BookDetails(props) {
                   <Grid item xs={4}>
                     <div>
                       <Typography size="subheading" type="bold">
-                        Video
-                      </Typography>
-
-                      <Typography type="italic">
-                        TODO: There will be video here
-                      </Typography>
-                      {video}
-                    </div>
-
-                    <div>
-                      <Typography size="subheading" type="bold">
                         Audio
                       </Typography>
 
@@ -76,6 +65,13 @@ export default function BookDetails(props) {
                       >
                         {audio}
                       </Paper>
+                    </div>
+
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Video
+                      </Typography>
+                      {video}
                     </div>
 
                     <div>
@@ -96,16 +92,6 @@ export default function BookDetails(props) {
                 <Grid item xs={12}>
                   <div>
                     <Typography size="subheading" type="bold">
-                      Video
-                    </Typography>
-                    <Typography type="italic">
-                      TODO: There will be video here
-                    </Typography>
-                    {video}
-                  </div>
-
-                  <div>
-                    <Typography size="subheading" type="bold">
                       Audio
                     </Typography>
                     <Paper
@@ -114,6 +100,13 @@ export default function BookDetails(props) {
                     >
                       {audio}
                     </Paper>
+                  </div>
+
+                  <div>
+                    <Typography size="subheading" type="bold">
+                      Video
+                    </Typography>
+                    {video}
                   </div>
 
                   <div>
@@ -156,17 +149,6 @@ export default function BookDetails(props) {
                   <Grid item xs={4}>
                     <div>
                       <Typography size="subheading" type="bold">
-                        Video
-                      </Typography>
-
-                      <Typography type="italic">
-                        TODO: There will be video here
-                      </Typography>
-                      {video}
-                    </div>
-
-                    <div>
-                      <Typography size="subheading" type="bold">
                         Audio
                       </Typography>
                       <Paper
@@ -175,6 +157,12 @@ export default function BookDetails(props) {
                       >
                         {audio}
                       </Paper>
+                    </div>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Video
+                      </Typography>
+                      {video}
                     </div>
 
                     <div>
@@ -195,16 +183,6 @@ export default function BookDetails(props) {
                 <Grid item xs={12}>
                   <div>
                     <Typography size="subheading" type="bold">
-                      Video
-                    </Typography>
-                    <Typography type="italic">
-                      TODO: There will be video here
-                    </Typography>
-                    {video}
-                  </div>
-
-                  <div>
-                    <Typography size="subheading" type="bold">
                       Audio
                     </Typography>
                     <Paper
@@ -213,6 +191,12 @@ export default function BookDetails(props) {
                     >
                       {audio}
                     </Paper>
+                  </div>
+                  <div>
+                    <Typography size="subheading" type="bold">
+                      Video
+                    </Typography>
+                    {video}
                   </div>
 
                   <div>
