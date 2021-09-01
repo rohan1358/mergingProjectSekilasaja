@@ -60,7 +60,7 @@ export default function VideoWatchingPage({ match, history }) {
           <div style={{ marginTop: "100px" }} />
           <VideoComponent
             vidLink={
-              "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+              "https://drive.google.com/u/0/uc?id=1q9qcktf3TWtwAp_EpJ9-qtoumMVFWe4S&export=download#.mp4"
             }
             title={bookContent.book_title}
             description={bookContent.description}

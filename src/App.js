@@ -12,7 +12,7 @@ import BookDetailsPage from "./pages/BookDetails/BookDetailsPage";
 import VideoWatchingPage from "./pages/VideoWatching";
 import TextReadingPage from "./pages/TextReading/TextReading";
 import AccountsPage from "./pages/Accounts/Accounts";
-import Payment from "./pages/Payment.js";
+import Payment from "./pages/Payment/Payment.js";
 import Library from "./pages/Library/Library";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
@@ -27,6 +27,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Switch>
+          {/* Private Routes (Only logged in users can see) */}
           <PrivateRoute exact path="/accounts" component={AccountsPage} />
           <PrivateRoute
             exact
@@ -39,6 +40,9 @@ function App() {
             component={VideoWatchingPage}
           />
           <PrivateRoute exact path="/library" component={Library} />
+          <PrivateRoute exact path="/payment" component={Payment} />
+
+          {/* Public Routes (Everybody can see) */}
           <Route
             exact
             path="/searchResults/:searchValue"
@@ -47,7 +51,6 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/lupa-password" component={ForgotPassword} />
-          <Route exact path="/payment" component={Payment} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/pricing" component={PricingPage} />
           <Route

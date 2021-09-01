@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 
 // Custom components
 import Typography from "../components/Typography";
@@ -13,10 +13,163 @@ import { Container, Grid, Paper } from "@material-ui/core";
 
 // Firebase components
 import { AuthContext } from "../components/Routing/Auth";
+import * as firebaseUpdateCart from "../firebase/firebaseUpdateCart";
+import * as firebaseGetUserDataById from "../firebase/firebaseGetUserDataById";
+import * as firebaseGetSubscription from "../firebase/firebaseGetSubscription";
+import fire from "../firebase/fire";
 
-export default function PricingPage() {
+// Redux
+import { selectCart, setCart } from "../feature/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
+
+export default function PricingPage({ match }) {
+  const db = fire.firestore();
+
   const classes = MultiUseMobile();
   const { currentUser } = useContext(AuthContext);
+  const cartItems = useSelector(selectCart).cart;
+
+  const [isAdded, setIsAdded] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [subOne, setSubOne] = useState(null);
+  const [subThree, setSubThree] = useState(null);
+  const [subSix, setSubSix] = useState(null);
+  const [subTwelve, setSubTwelve] = useState(null);
+
+  const dispatch = useDispatch();
+
+  // const subscriptionData = [
+  //   { book_title: "Subscription 1 Bulan", price: 39000 },
+  //   { book_title: "Subscription 3 Bulan", price: 110000 },
+  //   { book_title: "Subscription 6 Bulan", price: 200000 },
+  //   { book_title: "Subscription 12 Bulan", price: 390000 },
+  // ];
+
+  useEffect(() => {
+    if (currentUser !== null) {
+      const fetchData = async () => {
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
+        setUserData(results);
+      };
+      fetchData();
+    } else {
+      console.log("Not logged in");
+    }
+
+    const fetchSubData = async () => {
+      const results1 = await firebaseGetSubscription.getSubscription(
+        "Subscription 1 Bulan"
+      );
+      const results3 = await firebaseGetSubscription.getSubscription(
+        "Subscription 3 Bulan"
+      );
+      const results6 = await firebaseGetSubscription.getSubscription(
+        "Subscription 6 Bulan"
+      );
+      const results12 = await firebaseGetSubscription.getSubscription(
+        "Subscription 12 Bulan"
+      );
+      setSubOne(results1);
+      setSubThree(results3);
+      setSubSix(results6);
+      setSubTwelve(results12);
+    };
+    fetchSubData();
+  }, []);
+
+  // useEffect(() => {
+  //   const changeBtn = () => {
+  //     const subsMap = subscriptionData.map((x) => x.book_title);
+  //     const exist = cartItems.find((x) => x.book_title === subsMap);
+
+  //     if (exist) {
+  //       setIsAdded(true);
+  //     } else {
+  //       setIsAdded(false);
+  //     }
+  //   };
+  //   changeBtn();
+  // }, [cartItems]);
+
+  const handleAddCartOne = () => {
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.AddToCart(
+        currentUser.uid,
+        subOne
+      );
+
+      const exist = cartItems.find((x) => x.book_title === subOne.book_title);
+
+      if (exist) {
+        console.log("Already Added");
+      } else {
+        dispatch(setCart([...cartItems, subOne]));
+      }
+    };
+    fetchData();
+  };
+
+  const handleAddCartThree = () => {
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.AddToCart(
+        currentUser.uid,
+        subThree
+      );
+
+      const exist = cartItems.find((x) => x.book_title === subThree.book_title);
+
+      if (exist) {
+        console.log("Already Added");
+      } else {
+        dispatch(setCart([...cartItems, subThree]));
+      }
+    };
+    fetchData();
+  };
+
+  const handleAddCartSix = () => {
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.AddToCart(
+        currentUser.uid,
+        subSix
+      );
+
+      const exist = cartItems.find((x) => x.book_title === subSix.book_title);
+
+      if (exist) {
+        console.log("Already Added");
+      } else {
+        dispatch(setCart([...cartItems, subSix]));
+      }
+    };
+    fetchData();
+  };
+
+  const handleAddCartTwelve = () => {
+    const fetchData = async () => {
+      const results = await firebaseUpdateCart.AddToCart(
+        currentUser.uid,
+        subTwelve
+      );
+
+      const exist = cartItems.find(
+        (x) => x.book_title === subTwelve.book_title
+      );
+
+      if (exist) {
+        console.log("Already Added");
+      } else {
+        dispatch(setCart([...cartItems, subTwelve]));
+      }
+    };
+    fetchData();
+  };
+
+  console.log(cartItems);
+  console.log(subOne);
+  console.log(subThree);
 
   return (
     <div>
@@ -52,7 +205,8 @@ export default function PricingPage() {
                   <Typography>✔ Lorem ipsum dolor sit amet</Typography>
                   <div>
                     <Button
-                      href="/payment"
+                      onClick={handleAddCartOne}
+                      // href="/payment"
                       className={classes.pricingButton}
                       color="primary"
                     >
@@ -74,7 +228,8 @@ export default function PricingPage() {
                   </div>
                   <div>
                     <Button
-                      href="/payment"
+                      onClick={handleAddCartThree}
+                      // href="/payment"
                       className={classes.pricingButton}
                       color="primary"
                     >
@@ -96,7 +251,8 @@ export default function PricingPage() {
                   </div>
                   <div>
                     <Button
-                      href="/payment"
+                      onClick={handleAddCartSix}
+                      // href="/payment"
                       className={classes.pricingButton}
                       color="primary"
                     >
@@ -118,7 +274,8 @@ export default function PricingPage() {
                   </div>
                   <div>
                     <Button
-                      href="/payment"
+                      onClick={handleAddCartTwelve}
+                      // href="/payment"
                       className={classes.pricingButton}
                       color="primary"
                     >

@@ -40,7 +40,6 @@ export default function BookDetailsPage({ match, history }) {
   const classes = MultiUseMobile();
 
   const { currentUser } = useContext(AuthContext);
-
   const dispatch = useDispatch();
   const ownedBooks = useSelector(selectOwnedBooks);
   const cartItems = useSelector(selectCart).cart;

@@ -40,6 +40,7 @@ import { AuthContext } from "../Routing/Auth";
 //Import firebase function to get user based on userid
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
+import * as firebaseGetSubscription from "../../firebase/firebaseGetSubscription";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -100,7 +101,15 @@ export default function NavBar(props) {
           const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
             book_title
           );
-          return products_;
+          const subs_ = await firebaseGetSubscription.getSubscription(
+            book_title
+          );
+
+          if (products_ === undefined) {
+            return subs_;
+          } else {
+            return products_;
+          }
         };
 
         var a = [
@@ -254,6 +263,20 @@ export default function NavBar(props) {
                 <Button round color="primary" href="/accounts">
                   Accounts
                 </Button>
+
+                <div className={classes.divider} />
+
+                <Drawer
+                  direction={"right"}
+                  drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
+                  drawerTitle={"Your Cart"}
+                  logo={
+                    <Badge badgeContent={cart.length} color="error">
+                      <ShoppingCartIcon className={classes.iconColor} />
+                    </Badge>
+                  }
+                  children={<Basket />}
+                />
               </div>
 
               <div className={mobileClass}>
@@ -261,6 +284,18 @@ export default function NavBar(props) {
                   direction={"top"}
                   history={history}
                   logo={<SearchIcon className={iconColorClass} />}
+                />
+
+                <Drawer
+                  direction={"right"}
+                  drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
+                  drawerTitle={"Your Cart"}
+                  logo={
+                    <Badge badgeContent={cart.length} color="error">
+                      <ShoppingCartIcon className={classes.iconColor} />
+                    </Badge>
+                  }
+                  children={<Basket />}
                 />
 
                 <IconButton
