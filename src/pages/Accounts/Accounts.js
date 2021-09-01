@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -8,7 +7,6 @@ import Footer from "../../components/Footer";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import SubscriptionPlan from "./SubscriptionPlan";
-import Loading from "../Loading";
 
 // firebase components
 import fire from "../.././firebase/fire";
@@ -255,7 +253,7 @@ export default function AccountsPage() {
             <div className={classes.center}>
               <Button onClick={() => fire.auth().signOut()} color="secondary">
                 <ExitToAppIcon />
-                Log out
+                Logout
               </Button>
             </div>
           </Paper>

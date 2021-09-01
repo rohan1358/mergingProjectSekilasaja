@@ -110,7 +110,7 @@ const MultiUseMobile = makeStyles((theme) => ({
     },
   },
   sectionTitle: {
-    borderBottom: "3px solid",
+    borderBottom: "1px solid",
   },
   spaceBetween: {
     display: "flex",
@@ -130,6 +130,12 @@ const MultiUseMobile = makeStyles((theme) => ({
   paragraph: {
     userSelect: "none",
     pointerEvents: "none",
+  },
+  alertRoot: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
   },
 }));
 

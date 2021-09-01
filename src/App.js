@@ -12,7 +12,8 @@ import BookDetailsPage from "./pages/BookDetails/BookDetailsPage";
 import VideoWatchingPage from "./pages/VideoWatching";
 import TextReadingPage from "./pages/TextReading/TextReading";
 import AccountsPage from "./pages/Accounts/Accounts";
-import Payment from "./pages/Payment/Payment.js";
+import Payment from "./pages/Payment/Payment";
+import PaymentSuccess from "./pages/Payment/PaymentSuccess";
 import Library from "./pages/Library/Library";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
@@ -43,6 +44,7 @@ function App() {
           <PrivateRoute exact path="/payment" component={Payment} />
 
           {/* Public Routes (Everybody can see) */}
+          <Route exact path="/payment-success" component={PaymentSuccess} />
           <Route
             exact
             path="/searchResults/:searchValue"

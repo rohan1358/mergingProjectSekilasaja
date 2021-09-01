@@ -1,4 +1,5 @@
 import React, { useState, useContext, useRef } from "react";
+import { useHistory } from "react-router";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -6,7 +7,6 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
-import BookDetailsModal from "../BookDetails/BookDetailsModal";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -16,6 +16,7 @@ import { selectUser } from "../../feature/userSlice";
 // Material-UI components
 import { Container, Paper, Grid, TextField, Link } from "@material-ui/core";
 import PaymentIcon from "@material-ui/icons/Payment";
+import { Alert } from "@material-ui/lab";
 
 // Firebase components
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
@@ -28,17 +29,24 @@ import * as emailService from "../../emailService/emailService";
 
 export default function Payment() {
   const { currentUser } = useContext(AuthContext);
-  const promoCodeRef = useRef("");
+  const history = useHistory();
   const classes = MultiUseMobile();
-  const [openBookDetails, setBookDetailsOpen] = useState(false);
 
   // Get user data
   const userData = useSelector(selectUser);
 
   //For upload image
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const emailRef = useRef();
+  const fileRef = useRef();
+  const phoneNumberRef = useRef();
   const [file, setFile] = useState("");
+  const [error, setError] = useState("");
+  const [fileError, setFileError] = useState("");
 
   // Cart total price
+  const promoCodeRef = useRef("");
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCart).cart;
   const [discountAmount, setDiscountAmount] = useState(0);
@@ -81,19 +89,26 @@ export default function Payment() {
   };
 
   const handleChange = (e) => {
-    //let url = URL.createObjectURL(e.target.files[0]);
     setFile(e.target.files[0]);
-    //console.log();
-    //console.log(url);
-  };
-
-  const handleBookDetailsClose = () => {
-    setBookDetailsOpen(false);
   };
 
   // function to handle modal open for login
   const handlePayment = async () => {
-    // setBookDetailsOpen(true);
+    setError("");
+    setFileError("");
+
+    if (firstNameRef.current.value.length === 0) {
+      return setError("Ada bagian yang belum terisi!");
+    }
+
+    if (
+      fileRef.current.value === undefined ||
+      fileRef.current.value === [] ||
+      fileRef.current.value === null
+    ) {
+      return setFileError("Bukti transfer belum diupload!");
+    }
+
     //Put payment information into firestore storage and database
     var image_url = await firebaseUploadPaymentInfo.uploadPaymentInfo(
       userData,
@@ -103,6 +118,7 @@ export default function Payment() {
     );
     //Send email notification
     await emailService.sendPaymentNotification(userData, image_url);
+    history.push("/payment-success");
   };
 
   return (
@@ -167,7 +183,15 @@ export default function Payment() {
             <Grid item xs={6}>
               <Paper className={classes.paddedContent} elevation={5}>
                 <Typography size="subheading">2. Checkout Form</Typography>
-                <form className={classes.textFieldRoot}>
+                <form
+                  onSubmit={handlePayment}
+                  className={classes.textFieldRoot}
+                >
+                  {error && (
+                    <div className={classes.alertRoot}>
+                      <Alert severity="error">{error}</Alert>
+                    </div>
+                  )}
                   <TextField
                     required
                     id="filled-basic"
@@ -201,6 +225,11 @@ export default function Payment() {
                 <div className={classes.extraSpace} />
 
                 <Typography size="subheading">3. Payment</Typography>
+                {fileError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{fileError}</Alert>
+                  </div>
+                )}
                 <Typography type="bold">Step 1:</Typography>
                 <Typography>
                   • Transfer ke rekening BCA 123456789 a/n Darren Lucky
@@ -248,7 +277,7 @@ export default function Payment() {
 
                 <div className={classes.extraSpace} />
 
-                <Button fullWidth round onClick={handlePayment}>
+                <Button fullWidth round onClick={handlePayment} type="submit">
                   <PaymentIcon />
                   Bayar Sekarang
                 </Button>
@@ -317,27 +346,34 @@ export default function Payment() {
 
             <Grid item xs={12}>
               <Paper className={classes.paddedContent} elevation={5}>
-                <form className={classes.textFieldRoot}>
+                <form
+                  onSubmit={handlePayment}
+                  className={classes.textFieldRoot}
+                >
                   <Typography size="subheading">2. Checkout Form</Typography>
                   <TextField
+                    inputRef={firstNameRef}
                     id="filled-basic"
                     label="First Name"
                     variant="filled"
                     fullWidth
                   />
                   <TextField
+                    inputRef={lastNameRef}
                     id="filled-basic"
                     label="Last Name"
                     variant="filled"
                     fullWidth
                   />
                   <TextField
+                    inputRef={emailRef}
                     id="filled-basic"
                     label="Email"
                     variant="filled"
                     fullWidth
                   />
                   <TextField
+                    inputRef={phoneNumberRef}
                     id="filled-basic"
                     label="Phone Number"
                     variant="filled"
@@ -381,6 +417,7 @@ export default function Payment() {
                       id="upload-photo"
                       name="upload-photo"
                       type="file"
+                      ref={fileRef}
                     />
                     <Button
                       variant="contained"
@@ -395,17 +432,13 @@ export default function Payment() {
 
                 <div className={classes.extraSpace} />
 
-                <Button fullWidth round onClick={handlePayment}>
+                <Button fullWidth round onClick={handlePayment} type="submit">
                   <PaymentIcon /> Bayar Sekarang
                 </Button>
               </Paper>
             </Grid>
           </Grid>
         </div>
-        {/* <BookDetailsModal
-          open={openBookDetails}
-          handleClose={handleBookDetailsClose}
-        /> */}
       </Container>
       <Footer />
     </div>
