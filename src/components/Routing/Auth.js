@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
           );
 
           dispatch(setUser(results));
-          
+
           const unsDate = new Date("9/9/99"); // Default year for unsubscribers
           const today = new Date(); // Today's date
 

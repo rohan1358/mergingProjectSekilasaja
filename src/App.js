@@ -17,11 +17,13 @@ import PaymentSuccess from "./pages/Payment/PaymentSuccess";
 import Library from "./pages/Library/Library";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
+import VerifyEmail from "./pages/VerifyEmail";
 import NewWebLanding from "./pages/NewWebLanding";
 
 // Routing componentns
 import PrivateRoute from "./components/Routing/PrivateRoute";
-import { AuthProvider } from "./components/Routing/Auth";
+import NotVerifiedEmailRoute from "./components/Routing/NotVerifiedEmailRoute";
+import { AuthProvider, AuthContext } from "./components/Routing/Auth";
 
 function App() {
   return (
@@ -44,15 +46,16 @@ function App() {
           <PrivateRoute exact path="/payment" component={Payment} />
 
           {/* Public Routes (Everybody can see) */}
+          <Route exact path="/verify-email" component={VerifyEmail} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/signup" component={SignUpPage} />
+          <Route exact path="/lupa-password" component={ForgotPassword} />
           <Route exact path="/payment-success" component={PaymentSuccess} />
           <Route
             exact
             path="/searchResults/:searchValue"
             component={SearchResults}
           />
-          <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/signup" component={SignUpPage} />
-          <Route exact path="/lupa-password" component={ForgotPassword} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/pricing" component={PricingPage} />
           <Route
