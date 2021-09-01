@@ -18,9 +18,9 @@ import { Container, Paper, Divider, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
-export default function AccountsPage() {
+export default function AccountsPage(props) {
   const firestore = fire.firestore();
-
+  const { history } = props;
   const classes = MultiUseMobile();
   const { currentUser } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
@@ -132,7 +132,7 @@ export default function AccountsPage() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar history={history}/>
       {(userData !== null) == true && (
         <Container maxWidth={"sm"}>
           <div className={classes.extraSpace} />

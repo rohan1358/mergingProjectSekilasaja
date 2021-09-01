@@ -88,6 +88,18 @@ export default function NavBar(props) {
 
   const { history } = props;
 
+  //Handle event to navigate to accounts page
+  const goToAccounts = () => {
+      console.log(history);
+      history.push(`/accounts`);
+  };  
+
+  //Handle event to navigate to pricing page
+  const goToPricing = () => {
+    console.log(history);
+    history.push(`/pricing`);
+  };
+
   useEffect(() => {
     if (currentUser !== null) {
       const fetchData = async () => {
@@ -252,7 +264,7 @@ export default function NavBar(props) {
               <div className={desktopClass}>
                 <SearchBar history={history} />
 
-                <Button href="/pricing" round color="transparent">
+                <Button onClick={goToPricing} round color="transparent">
                   Pricing
                 </Button>
 
@@ -260,7 +272,7 @@ export default function NavBar(props) {
                   Library
                 </Button>
 
-                <Button round color="primary" href="/accounts">
+                <Button round color="primary" onClick={goToAccounts}>
                   Accounts
                 </Button>
 
@@ -326,7 +338,7 @@ export default function NavBar(props) {
                   <div className={desktopClass}>
                     <SearchBar history={history} />
 
-                    <Button href="/pricing" round color="transparent">
+                    <Button onClick={goToPricing} round color="transparent">
                       Pricing
                     </Button>
 
@@ -334,7 +346,7 @@ export default function NavBar(props) {
                       Library
                     </Button>
 
-                    <Button round color="primary" href="/accounts">
+                    <Button round color="primary" onClick={goToAccounts}>
                       Accounts
                     </Button>
 
@@ -402,7 +414,7 @@ export default function NavBar(props) {
                   <div className={desktopClass}>
                     <SearchBar history={history} />
 
-                    <Button href="/pricing" round color="transparent">
+                    <Button onClick={goToPricing} round color="transparent">
                       Pricing
                     </Button>
 

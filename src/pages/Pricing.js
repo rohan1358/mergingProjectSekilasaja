@@ -22,7 +22,7 @@ import fire from "../firebase/fire";
 import { selectCart, setCart } from "../feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function PricingPage({ match }) {
+export default function PricingPage({ match, history }) {
   const db = fire.firestore();
 
   const classes = MultiUseMobile();
@@ -173,7 +173,7 @@ export default function PricingPage({ match }) {
 
   return (
     <div>
-      <NavBar />
+      <NavBar history={history}/>
       <Container>
         <BenefitsBlock />
 
