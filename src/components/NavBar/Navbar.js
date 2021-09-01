@@ -90,9 +90,9 @@ export default function NavBar(props) {
 
   //Handle event to navigate to accounts page
   const goToAccounts = () => {
-      console.log(history);
-      history.push(`/accounts`);
-  };  
+    console.log(history);
+    history.push(`/accounts`);
+  };
 
   //Handle event to navigate to pricing page
   const goToPricing = () => {
@@ -158,7 +158,11 @@ export default function NavBar(props) {
       {!!currentUser ? (
         <div>
           <MenuItem>
-            <Link href="/pricing" underline="none" className={classes.link}>
+            <Link
+              onClick={goToPricing}
+              underline="none"
+              className={classes.link}
+            >
               <div
                 style={{
                   display: "flex",
@@ -186,7 +190,11 @@ export default function NavBar(props) {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link underline="none" className={classes.link} href="/accounts">
+            <Link
+              underline="none"
+              className={classes.link}
+              onClick={goToAccounts}
+            >
               <div
                 style={{
                   display: "flex",
@@ -203,7 +211,11 @@ export default function NavBar(props) {
       ) : (
         <div>
           <MenuItem>
-            <Link href="/pricing" underline="none" className={classes.link}>
+            <Link
+              onClick={goToPricing}
+              underline="none"
+              className={classes.link}
+            >
               <div
                 style={{
                   display: "flex",

@@ -13,7 +13,6 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 // firebase components
 import { AuthContext } from "../../components/Routing/Auth";
 import fire from "../../firebase/fire";
-import { sendEmailVerification } from "firebase/auth";
 
 const auth = fire.auth();
 const firestore = fire.firestore();
@@ -90,13 +89,13 @@ const SignUpForm = ({ history }) => {
               lastName: lastName,
               phoneNumber: phoneNumber,
               email: email,
-              owned_books: [],
+              owned_books: ["Steve Jobs", "Atomic Habits"],
               favorite_books: [],
               is_subscribed: false,
               cart: [],
               start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
               end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
-              isEmailVerified: currentUser.emailVerified,
+              // isEmailVerified: currentUser.emailVerified,
             });
           //Sign up success case
           // console.log("Firebase signup suceeded!");
@@ -110,10 +109,17 @@ const SignUpForm = ({ history }) => {
     }
   };
 
-  if (currentUser && currentUser.emailVerified) {
+  if (currentUser) {
     // console.log("Current user id: " + currentUser.uid);
     return <Redirect to="/library" />;
   }
+
+  // if (currentUser && currentUser.emailVerified) {
+  //   // console.log("Current user id: " + currentUser.uid);
+  //   return <Redirect to="/library" />;
+  // } else if (currentUser && !currentUser.emailVerified) {
+  //   return <Redirect to="verify-email" />;
+  // }
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>

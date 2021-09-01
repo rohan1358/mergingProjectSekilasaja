@@ -8,6 +8,7 @@ export async function getSubscription(book_title) {
   //References to book information in database
   var docRef = firestore.collection("subscription");
   var results = null;
+  var coverLink_ = null;
   // const fetchData = async (book_title) => {
   //   const getLink =
   //     firebaseGetBookCoverImageURL.getBookCoverImageURL(book_title);
@@ -16,17 +17,17 @@ export async function getSubscription(book_title) {
   //   if (link !== undefined) return link;
   // };
   // fetchData(title);
+  const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(book_title);
+  getLink.then((link) => {
+    coverLink_ = link;
+  });
 
   try {
     var docs = await docRef.get();
     await docs.forEach((doc) => {
       if (doc.data().book_title === book_title) {
-        results = { ...doc.data(), coverLink: "" };
-        const getLink =
-          firebaseGetBookCoverImageURL.getBookCoverImageURL(book_title);
-        getLink.then((link) => {
-          results.coverLink = link;
-        });
+        results = { ...doc.data(), coverLink: coverLink_ };
+        //data = {...doc.data()};
       }
     });
     return results;

@@ -23,7 +23,7 @@ import NewWebLanding from "./pages/NewWebLanding";
 // Routing componentns
 import PrivateRoute from "./components/Routing/PrivateRoute";
 import NotVerifiedEmailRoute from "./components/Routing/NotVerifiedEmailRoute";
-import { AuthProvider, AuthContext } from "./components/Routing/Auth";
+import { AuthProvider } from "./components/Routing/Auth";
 
 function App() {
   return (

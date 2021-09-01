@@ -27,9 +27,8 @@ import { AuthContext } from "../../components/Routing/Auth";
 //Email js components
 import * as emailService from "../../emailService/emailService";
 
-export default function Payment() {
+export default function Payment({ history }) {
   const { currentUser } = useContext(AuthContext);
-  const history = useHistory();
   const classes = MultiUseMobile();
 
   // Get user data
@@ -54,6 +53,7 @@ export default function Payment() {
   const totalPrice = Intl.NumberFormat().format(
     itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
   );
+  const [promoAdded, setPromoAdded] = useState(false);
 
   const onRemove_ = (product) => {
     const fetchData = async () => {
@@ -86,6 +86,7 @@ export default function Payment() {
     } else {
       console.log("Not logged in");
     }
+    setPromoAdded(true);
   };
 
   const handleChange = (e) => {
@@ -333,7 +334,11 @@ export default function Payment() {
                     variant="filled"
                     fullWidth
                   />
-                  <Button>Apply</Button>
+                  {!!promoAdded ? (
+                    <Button>Apply</Button>
+                  ) : (
+                    <Typography>✔ Applied</Typography>
+                  )}
                 </div>
                 <div className={classes.spaceBetween}>
                   <Typography size="subheading">TOTAL</Typography>

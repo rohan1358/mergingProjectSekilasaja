@@ -93,6 +93,7 @@ export default function PricingPage({ match, history }) {
   //   changeBtn();
   // }, [cartItems]);
 
+  console.log(subOne);
   const handleAddCartOne = () => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
@@ -167,13 +168,9 @@ export default function PricingPage({ match, history }) {
     fetchData();
   };
 
-  console.log(cartItems);
-  console.log(subOne);
-  console.log(subThree);
-
   return (
     <div>
-      <NavBar history={history}/>
+      <NavBar history={history} />
       <Container>
         <BenefitsBlock />
 
