@@ -34,12 +34,12 @@ export default function Payment({ history }) {
   // Get user data
   const userData = useSelector(selectUser);
 
-  //For upload image
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
-  const emailRef = useRef();
-  const fileRef = useRef();
-  const phoneNumberRef = useRef();
+  // create state variables for each input
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
+
   const [file, setFile] = useState("");
   const [error, setError] = useState("");
   const [fileError, setFileError] = useState("");
@@ -84,6 +84,7 @@ export default function Payment({ history }) {
   };
 
   const handleApplyPromo = () => {
+    console.log(promoCodeRef.current.value);
     if (currentUser !== null) {
       const fetchData = async () => {
         const results = await firebaseGetPromoCode.getPromoCode(
@@ -109,16 +110,20 @@ export default function Payment({ history }) {
     setError("");
     setFileError("");
 
-    if (firstNameRef.current.value.length === 0) {
-      return setError("Ada bagian yang belum terisi!");
+    // See if any input values are empty (ALL REQUIRED TO BE FILLED!)
+    if (firstName.length === 0) {
+      return setError("Bagian first name belum terisi!");
+    } else if (lastName.length === 0) {
+      return setError("Bagian last name belum terisi!");
+    } else if (email.length === 0) {
+      return setError("Bagian email belum terisi!");
+    } else if (phoneNumber.length === 0) {
+      return setError("Bagian phone number belum terisi!");
     }
 
-    if (
-      fileRef.current.value === undefined ||
-      fileRef.current.value === [] ||
-      fileRef.current.value === null
-    ) {
-      return setFileError("Bukti transfer belum diupload!");
+    // See if image has been uploaded or not (REQUIRED!)
+    if (!file || file.length === 0) {
+      return setFileError("Tolong upload image bukti pembayaran!");
     }
 
     //Put payment information into firestore storage and database
@@ -224,6 +229,8 @@ export default function Payment({ history }) {
                     id="filled-basic"
                     label="First Name"
                     variant="filled"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     fullWidth
                   />
                   <TextField
@@ -231,6 +238,8 @@ export default function Payment({ history }) {
                     id="filled-basic"
                     label="Last Name"
                     variant="filled"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     fullWidth
                   />
                   <TextField
@@ -238,6 +247,8 @@ export default function Payment({ history }) {
                     id="filled-basic"
                     label="Email"
                     variant="filled"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     fullWidth
                   />
                   <TextField
@@ -245,6 +256,8 @@ export default function Payment({ history }) {
                     id="filled-basic"
                     label="Phone Number"
                     variant="filled"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                     fullWidth
                   />
                 </form>
@@ -283,9 +296,6 @@ export default function Payment({ history }) {
                   Foto atau screenshot bukti transfer anda, lalu upload foto
                   melalui tombol "Attach File" di bawah!
                 </Typography>
-                {/* <Button className={classes.paragraphSpace} color="secondary">
-                  Choose File
-                </Button> */}
 
                 <TextField
                   required
@@ -383,31 +393,35 @@ export default function Payment({ history }) {
                 >
                   <Typography size="subheading">2. Checkout Form</Typography>
                   <TextField
-                    inputRef={firstNameRef}
                     id="filled-basic"
                     label="First Name"
                     variant="filled"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     fullWidth
                   />
                   <TextField
-                    inputRef={lastNameRef}
                     id="filled-basic"
                     label="Last Name"
                     variant="filled"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     fullWidth
                   />
                   <TextField
-                    inputRef={emailRef}
                     id="filled-basic"
                     label="Email"
                     variant="filled"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     fullWidth
                   />
                   <TextField
-                    inputRef={phoneNumberRef}
                     id="filled-basic"
                     label="Phone Number"
                     variant="filled"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
                     fullWidth
                   />
                 </form>
@@ -448,7 +462,7 @@ export default function Payment({ history }) {
                       id="upload-photo"
                       name="upload-photo"
                       type="file"
-                      ref={fileRef}
+                      onChange={handleChange}
                     />
                     <Button
                       variant="contained"
