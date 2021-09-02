@@ -12,7 +12,6 @@ import { AuthContext } from "../../components/Routing/Auth";
 import { Alert } from "@material-ui/lab";
 
 //Import firebase for login function
-import * as firebaseLogin from "../../firebase/firebaseLogin.js";
 import fire from "../../firebase/fire";
 
 const auth = fire.auth();
@@ -54,13 +53,11 @@ const LoginForm = ({ history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("Logging in...");
-
-    //Call function to login with firebase
+    console.log("Logging in...");
     auth
       .signInWithEmailAndPassword(email, password)
       .then((resp) => {
-        // console.log("Firebase login suceeded!");
+        console.log("Firebase login suceeded!");
       })
       .catch((err) => {
         var errorCode = err.code;
@@ -73,7 +70,11 @@ const LoginForm = ({ history }) => {
 
   if (currentUser && currentUser.emailVerified) {
     console.log("Current user id: " + currentUser.uid);
+    console.log("Redirecting to library page...");
     return <Redirect to="/library" />;
+  } else if (currentUser && !currentUser.emailVerified) {
+    console.log("Redirect to email not verified page to ask for email verification...");
+    return <Redirect to="/verify-email"/>;
   }
 
   return (

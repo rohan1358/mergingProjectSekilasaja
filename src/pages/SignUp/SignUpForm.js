@@ -60,23 +60,12 @@ const SignUpForm = ({ history }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log(
-    //   firstName,
-    //   lastName,
-    //   phoneNumber,
-    //   email,
-    //   password,
-    //   reenterPassword
-    // );
 
     //Check if password and reenter password are the same or not.
     if (password != reenterPassword) {
-      // console.log("Passwords do not match!");
-      // alert("Passwords do not match!");
       return setError("Passwords do not match!");
     } else {
       //Call function to do signup in firebase
-      // firebaseSignUp.signUp(email, password, firstName, lastName, phoneNumber);
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((resp) => {
@@ -95,10 +84,9 @@ const SignUpForm = ({ history }) => {
               cart: [],
               start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
               end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
-              // isEmailVerified: currentUser.emailVerified,
             });
           //Sign up success case
-          // console.log("Firebase signup suceeded!");
+          console.log("Firebase signup suceeded!");
         })
         .catch((err) => {
           //Sign up fail case
@@ -109,17 +97,14 @@ const SignUpForm = ({ history }) => {
     }
   };
 
-  if (currentUser) {
-    // console.log("Current user id: " + currentUser.uid);
+  if (currentUser && currentUser.emailVerified) {
+    console.log("Current user id: " + currentUser.uid);
+    console.log("Redirecting to library page...");
     return <Redirect to="/library" />;
+  } else if (currentUser && !currentUser.emailVerified) {
+    console.log("Redirect to email not verified page to ask for email verification...");
+    return <Redirect to="/verify-email"/>;
   }
-
-  // if (currentUser && currentUser.emailVerified) {
-  //   // console.log("Current user id: " + currentUser.uid);
-  //   return <Redirect to="/library" />;
-  // } else if (currentUser && !currentUser.emailVerified) {
-  //   return <Redirect to="verify-email" />;
-  // }
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>

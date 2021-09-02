@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
+import { Redirect, withRouter } from "react-router";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -40,6 +41,15 @@ export default function AccountsPage(props) {
   const [success, setSuccess] = useState("");
 
   useEffect(() => {
+    //Check if user is logged in or not, if not logout to home page.
+    if (!currentUser) {
+      console.log("User is not logged in, redirecting to login page...");
+      return <Redirect to="/login" />;
+    } else if (currentUser && !currentUser.emailVerified) {
+      console.log("Redirect to email not verified page to ask for email verification...");
+      return <Redirect to="/verify-email"/>;
+    } 
+
     if (currentUser !== null) {
       const fetchData = async () => {
         const results = await firebaseGetUserDataById.getUserDataById(

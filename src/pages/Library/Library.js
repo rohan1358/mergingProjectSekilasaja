@@ -42,8 +42,12 @@ export default function Library({ history }) {
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
     if (!currentUser) {
+      console.log("User is not logged in, redirecting to login page...");
       return <Redirect to="/login" />;
-    }
+    } else if (currentUser && !currentUser.emailVerified) {
+      console.log("Redirect to email not verified page to ask for email verification...");
+      return <Redirect to="/verify-email"/>;
+    } 
 
     //Get owned book titles from user data
     db.collection("users")
