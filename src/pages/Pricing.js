@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import MultiUseMobile from "../styles/MultiUseMobile";
 import NavBar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
+import { beigeColor } from "../styles/Style";
 
 // Material-UI components
 import { Container, Grid, Paper } from "@material-ui/core";
@@ -35,15 +36,12 @@ export default function PricingPage({ match, history }) {
   const [subThree, setSubThree] = useState(null);
   const [subSix, setSubSix] = useState(null);
   const [subTwelve, setSubTwelve] = useState(null);
+  const [isSubOneAdded, setIsSubOneAdded] = useState(false);
+  const [isSubThreeAdded, setIsSubThreeAdded] = useState(false);
+  const [isSubSixAdded, setIsSubSixAdded] = useState(false);
+  const [isSubTwelveAdded, setIsSubTwelveAdded] = useState(false);
 
   const dispatch = useDispatch();
-
-  // const subscriptionData = [
-  //   { book_title: "Subscription 1 Bulan", price: 39000 },
-  //   { book_title: "Subscription 3 Bulan", price: 110000 },
-  //   { book_title: "Subscription 6 Bulan", price: 200000 },
-  //   { book_title: "Subscription 12 Bulan", price: 390000 },
-  // ];
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -168,6 +166,52 @@ export default function PricingPage({ match, history }) {
     fetchData();
   };
 
+  useEffect(() => {
+    const changeOneBtn = () => {
+      const exist = cartItems.find((x) => x.book_title === subOne.book_title);
+      if (exist) {
+        setIsSubOneAdded(true);
+      } else {
+        setIsSubOneAdded(false);
+      }
+    };
+    changeOneBtn();
+
+    const changeThreeBtn = () => {
+      const exist = cartItems.find((x) => x.book_title === subThree.book_title);
+      if (exist) {
+        setIsSubThreeAdded(true);
+      } else {
+        setIsSubThreeAdded(false);
+      }
+    };
+    changeThreeBtn();
+
+    const changeSixBtn = () => {
+      const exist = cartItems.find((x) => x.book_title === subSix.book_title);
+      if (exist) {
+        setIsSubSixAdded(true);
+      } else {
+        setIsSubSixAdded(false);
+      }
+    };
+    changeSixBtn();
+
+    const changeTwelveBtn = () => {
+      const exist = cartItems.find(
+        (x) => x.book_title === subTwelve.book_title
+      );
+      if (exist) {
+        setIsSubTwelveAdded(true);
+      } else {
+        setIsSubTwelveAdded(false);
+      }
+    };
+    changeTwelveBtn();
+  }, [cartItems]);
+
+  console.log(isSubOneAdded);
+
   return (
     <div>
       <NavBar history={history} />
@@ -201,96 +245,143 @@ export default function PricingPage({ match, history }) {
                   <Typography>✔ Lorem ipsum dolor sit amet</Typography>
                   <Typography>✔ Lorem ipsum dolor sit amet</Typography>
                   <div>
-                    <Button
-                      onClick={handleAddCartOne}
-                      // href="/payment"
-                      className={classes.pricingButton}
-                      color="primary"
-                    >
-                      <div className={classes.block}>
+                    {isSubOneAdded === false ? (
+                      <Button
+                        onClick={handleAddCartOne}
+                        // href="/payment"
+                        className={classes.pricingButton}
+                        color="primary"
+                      >
+                        <div className={classes.block}>
+                          <Typography
+                            className={classes.normalText}
+                            size="subheading"
+                          >
+                            Rp. 39.000 / Bulan
+                          </Typography>
+                          <Typography
+                            type="italic"
+                            className={classes.normalText}
+                          >
+                            Loren Ipsum Ngoman Balato Porche
+                          </Typography>
+                        </div>
+                      </Button>
+                    ) : (
+                      <Button fullWidth color="secondary">
                         <Typography
                           className={classes.normalText}
                           size="subheading"
+                          style={{ color: beigeColor }}
                         >
-                          Rp. 39.000 / Bulan
+                          ✔ Added to cart!
                         </Typography>
-                        <Typography
-                          type="italic"
-                          className={classes.normalText}
-                        >
-                          Loren Ipsum Ngoman Balato Porche
-                        </Typography>
-                      </div>
-                    </Button>
+                      </Button>
+                    )}
                   </div>
                   <div>
-                    <Button
-                      onClick={handleAddCartThree}
-                      // href="/payment"
-                      className={classes.pricingButton}
-                      color="primary"
-                    >
-                      <div className={classes.block}>
-                        <Typography
-                          className={classes.normalText}
-                          size="subheading"
+                    <div className={classes.block}>
+                      {isSubThreeAdded === false ? (
+                        <Button
+                          onClick={handleAddCartThree}
+                          className={classes.pricingButton}
+                          color="primary"
                         >
-                          Rp. 69.000 / 3 Bulan
-                        </Typography>
-                        <Typography
-                          type="italic"
-                          className={classes.normalText}
-                        >
-                          Setara dengan Rp. 24.166,67 / Bulan
-                        </Typography>
-                      </div>
-                    </Button>
+                          <div className={classes.block}>
+                            <Typography
+                              className={classes.normalText}
+                              size="subheading"
+                            >
+                              Rp. 39.000 / Bulan
+                            </Typography>
+                            <Typography
+                              type="italic"
+                              className={classes.normalText}
+                            >
+                              Loren Ipsum Ngoman Balato Porche
+                            </Typography>
+                          </div>
+                        </Button>
+                      ) : (
+                        <Button fullWidth color="secondary">
+                          <Typography
+                            className={classes.normalText}
+                            size="subheading"
+                            style={{ color: beigeColor }}
+                          >
+                            ✔ Added to cart!
+                          </Typography>
+                        </Button>
+                      )}
+                    </div>
                   </div>
                   <div>
-                    <Button
-                      onClick={handleAddCartSix}
-                      // href="/payment"
-                      className={classes.pricingButton}
-                      color="primary"
-                    >
-                      <div className={classes.block}>
+                    {isSubSixAdded === false ? (
+                      <Button
+                        onClick={handleAddCartSix}
+                        className={classes.pricingButton}
+                        color="primary"
+                      >
+                        <div className={classes.block}>
+                          <Typography
+                            className={classes.normalText}
+                            size="subheading"
+                          >
+                            Rp. 39.000 / 6 Bulan
+                          </Typography>
+                          <Typography
+                            type="italic"
+                            className={classes.normalText}
+                          >
+                            Loren Ipsum Ngoman Balato Porche
+                          </Typography>
+                        </div>
+                      </Button>
+                    ) : (
+                      <Button fullWidth color="secondary">
                         <Typography
                           className={classes.normalText}
                           size="subheading"
+                          style={{ color: beigeColor }}
                         >
-                          Rp. 140.000 / 6 Bulan
+                          ✔ Added to cart!
                         </Typography>
-                        <Typography
-                          type="italic"
-                          className={classes.normalText}
-                        >
-                          Setara dengan Rp. 24.166,67 / Bulan
-                        </Typography>
-                      </div>
-                    </Button>
+                      </Button>
+                    )}
                   </div>
                   <div>
-                    <Button
-                      onClick={handleAddCartTwelve}
-                      // href="/payment"
-                      className={classes.pricingButton}
-                      color="primary"
-                    >
-                      <div className={classes.block}>
+                    {isSubTwelveAdded === false ? (
+                      <Button
+                        onClick={handleAddCartTwelve}
+                        className={classes.pricingButton}
+                        color="primary"
+                      >
+                        <div className={classes.block}>
+                          <Typography
+                            className={classes.normalText}
+                            size="subheading"
+                          >
+                            Rp. 39.000 / 12 Bulan
+                          </Typography>
+                          <Typography
+                            type="italic"
+                            className={classes.normalText}
+                          >
+                            Loren Ipsum Ngoman Balato Porche
+                          </Typography>
+                        </div>
+                      </Button>
+                    ) : (
+                      <Button fullWidth color="secondary">
                         <Typography
                           className={classes.normalText}
                           size="subheading"
+                          style={{ color: beigeColor }}
                         >
-                          Rp. 299.000 / 12 Bulan
+                          ✔ Added to cart!
                         </Typography>
-                        <Typography
-                          type="italic"
-                          className={classes.normalText}
-                        >
-                          Setara dengan Rp. 24.166,67 / Bulan
-                        </Typography>
-                      </div>
-                    </Button>
+                      </Button>
+                    )}
                   </div>
                 </Paper>
               </Grid>

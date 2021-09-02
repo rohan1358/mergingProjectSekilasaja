@@ -43,6 +43,7 @@ function CategoryBarFilter({
           {categories.map((categoryName, index) => (
             <CategoryButton
               key={index}
+              categoryIcon={categoryName}
               chosenCategory={chosenCategory}
               categoryName={categoryName}
               setChosenCategory={setChosenCategory}
@@ -56,6 +57,7 @@ function CategoryBarFilter({
         {categories.map((categoryName, index) => (
           <CategoryButton
             key={index}
+            categoryIcon={categoryName}
             chosenCategory={chosenCategory}
             categoryName={categoryName}
             setChosenCategory={setChosenCategory}

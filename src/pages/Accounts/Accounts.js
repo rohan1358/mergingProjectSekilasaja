@@ -132,7 +132,7 @@ export default function AccountsPage(props) {
 
   return (
     <div>
-      <NavBar history={history}/>
+      <NavBar history={history} />
       {(userData !== null) == true && (
         <Container maxWidth={"sm"}>
           <div className={classes.extraSpace} />
@@ -251,7 +251,11 @@ export default function AccountsPage(props) {
             <div className={classes.extraSpace} />
 
             <div className={classes.center}>
-              <Button onClick={() => fire.auth().signOut()} color="secondary">
+              <Button
+                round
+                onClick={() => fire.auth().signOut()}
+                color="secondary"
+              >
                 <ExitToAppIcon />
                 Logout
               </Button>

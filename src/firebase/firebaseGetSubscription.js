@@ -17,17 +17,16 @@ export async function getSubscription(book_title) {
   //   if (link !== undefined) return link;
   // };
   // fetchData(title);
-  const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(book_title);
-  getLink.then((link) => {
-    coverLink_ = link;
-  });
+  // const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(book_title);
+  // getLink.then((link) => {
+  //   if (link !== undefined || link !== null) coverLink_ = link;
+  // });
 
   try {
     var docs = await docRef.get();
     await docs.forEach((doc) => {
       if (doc.data().book_title === book_title) {
-        results = { ...doc.data(), coverLink: coverLink_ };
-        //data = {...doc.data()};
+        results = { ...doc.data() };
       }
     });
     return results;

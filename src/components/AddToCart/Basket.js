@@ -19,7 +19,7 @@ import { makeStyles, Grid } from "@material-ui/core";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function Basket({ history }) {
+export default function Basket({}) {
   const classes = useStyles();
   const mobile = MultiUseMobile();
   const cartItems = useSelector(selectCart).cart;
@@ -28,12 +28,6 @@ export default function Basket({ history }) {
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
   const totalPrice = Intl.NumberFormat().format(itemsPrice);
-
-  //Handle event to navigate to accounts page
-  const goToPayment = () => {
-    // console.log(history);
-    history.push(`/payment`);
-  };
 
   const onRemove_ = (product) => {
     const fetchData = async () => {
@@ -108,7 +102,7 @@ export default function Basket({ history }) {
               <Typography type="bold">TOTAL</Typography>
               <Typography type="bold">Rp. {totalPrice}</Typography>
             </Grid>
-            <Button fullWidth round onClick={goToPayment}>
+            <Button fullWidth round href="/payment">
               Bayar Sekarang!
             </Button>
             <div className={mobile.extraSpace} />

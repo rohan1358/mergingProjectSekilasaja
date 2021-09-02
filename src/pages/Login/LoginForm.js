@@ -71,7 +71,7 @@ const LoginForm = ({ history }) => {
 
   const { currentUser } = useContext(AuthContext);
 
-  if (currentUser && currentUser.emailVerified) {
+  if (currentUser) {
     console.log("Current user id: " + currentUser.uid);
     return <Redirect to="/library" />;
   }

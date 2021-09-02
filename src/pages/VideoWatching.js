@@ -1,9 +1,15 @@
 import React, { useEffect, useContext, useState } from "react";
+import { Redirect, Route } from "react-router";
+
+// Material UI
+import { Container } from "@material-ui/core";
 
 // Custom components
 import NavBarSecond from "../components/NavBar/NavBarSecond";
 import VideoComponent from "../components/VideoPlayer/VidPageComponent";
 import FourOFourPage from "./404page";
+import ReactPlayer from "react-player";
+import Typography from "../components/Typography";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -58,13 +64,29 @@ export default function VideoWatchingPage({ match, history }) {
         <div>
           <NavBarSecond />
           <div style={{ marginTop: "100px" }} />
-          <VideoComponent
-            vidLink={
-              "https://drive.google.com/u/0/uc?id=1q9qcktf3TWtwAp_EpJ9-qtoumMVFWe4S&export=download#.mp4"
-            }
-            title={bookContent.book_title}
-            description={bookContent.description}
-          />
+          <Container maxWidth="sm">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <ReactPlayer
+                url={bookContent.video_link}
+                controls={true}
+                config={{
+                  file: {
+                    attributes: {
+                      crossorigin: "anonymous",
+                    },
+                  },
+                }}
+              />
+            </div>
+
+            <Typography size="subheading">{bookContent.book_title}</Typography>
+            <Typography>{bookContent.description} </Typography>
+          </Container>
         </div>
       ) : (
         <FourOFourPage />

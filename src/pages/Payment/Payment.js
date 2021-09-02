@@ -80,13 +80,13 @@ export default function Payment({ history }) {
         );
         if (results.length != 0) {
           setDiscountAmount(-1 * results[0].amount);
+          setPromoAdded(true);
         }
       };
       fetchData();
     } else {
       console.log("Not logged in");
     }
-    setPromoAdded(true);
   };
 
   const handleChange = (e) => {
@@ -122,9 +122,11 @@ export default function Payment({ history }) {
     history.push("/payment-success");
   };
 
+  console.log(promoAdded);
+
   return (
     <div>
-      <Navbar />
+      <Navbar history={history} />
       <Container maxWidth="md">
         <div className={classes.sectionDesktop}>
           <Grid container direction="row" justifyContent="center" spacing={3}>
@@ -168,9 +170,11 @@ export default function Payment({ history }) {
                     fullWidth
                     inputRef={promoCodeRef}
                   />
-                  <Button onClick={handleApplyPromo} type="submit">
-                    Apply
-                  </Button>
+                  {!!promoAdded ? (
+                    <Typography type="bold">✔Applied</Typography>
+                  ) : (
+                    <Button onClick={handleApplyPromo}>Apply</Button>
+                  )}
                 </div>
                 <div className={classes.spaceBetween}>
                   <Typography size="subheading">TOTAL</Typography>
@@ -335,9 +339,9 @@ export default function Payment({ history }) {
                     fullWidth
                   />
                   {!!promoAdded ? (
-                    <Button>Apply</Button>
+                    <Typography type="bold">✔Applied</Typography>
                   ) : (
-                    <Typography>✔ Applied</Typography>
+                    <Button onClick={handleApplyPromo}>Apply</Button>
                   )}
                 </div>
                 <div className={classes.spaceBetween}>
