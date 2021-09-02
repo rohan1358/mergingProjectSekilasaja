@@ -158,6 +158,19 @@ export default function Payment({ history }) {
                   </div>
                 ))}
 
+                {!!promoAdded ? (
+                  <div>
+                    <Typography type="italic" color="dangerColor">
+                      Pemotongan dari kode promo
+                    </Typography>
+                    <Typography type="italic" color="dangerColor">
+                      Rp. {Intl.NumberFormat().format(-1 * discountAmount)}
+                    </Typography>
+                  </div>
+                ) : (
+                  <></>
+                )}
+
                 <div className={classes.extraSpace} />
                 <div className={classes.spaceBetween}>
                   <TextField
