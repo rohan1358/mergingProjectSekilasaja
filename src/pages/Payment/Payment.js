@@ -1,5 +1,5 @@
-import React, { useState, useContext, useRef } from "react";
-import { useHistory } from "react-router";
+import React, { useState, useContext, useRef, useEffect } from "react";
+import { Redirect, withRouter } from "react-router";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -54,6 +54,17 @@ export default function Payment({ history }) {
     itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
   );
   const [promoAdded, setPromoAdded] = useState(false);
+
+  useEffect(() => {
+    //Check if user is logged in or not, if not logout to home page.
+    if (!currentUser) {
+      console.log("User is not logged in, redirecting to login page...");
+      return <Redirect to="/login" />;
+    } else if (currentUser && !currentUser.emailVerified) {
+      console.log("Redirect to email not verified page to ask for email verification...");
+      return <Redirect to="/verify-email"/>;
+    } 
+  }, []);
 
   const onRemove_ = (product) => {
     const fetchData = async () => {
