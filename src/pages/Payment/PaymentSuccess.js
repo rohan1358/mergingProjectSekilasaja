@@ -6,8 +6,8 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 
 // Material-UI components
-import { Container, Grid } from "@material-ui/core";
-import HomeIcon from "@material-ui/icons/Home";
+import { Container, Grid, Paper } from "@material-ui/core";
+import BeachAccessIcon from "@material-ui/icons/BeachAccess";
 
 import { AuthContext } from "../../components/Routing/Auth";
 
@@ -28,59 +28,49 @@ export default function PaymentSuccess() {
 
   useEffect(() => {
     const emptyCart = async () => {
-      if(currentUser && cart.cart.length > 0){
-        firestore.collection("users").doc(currentUser.uid).update({
-          cart: [],
-        }).then(function() {
-          dispatch(setCart([]));
-          console.log("Emptied cart...");
-        }).catch((err) => {
-          var errorCode = err.code;
-          var errorMessage = err.message;
-          console.log("Error: " + errorCode + "\n\n" + errorMessage);
-        });
+      if (currentUser && cart.cart.length > 0) {
+        firestore
+          .collection("users")
+          .doc(currentUser.uid)
+          .update({
+            cart: [],
+          })
+          .then(function () {
+            dispatch(setCart([]));
+            console.log("Emptied cart...");
+          })
+          .catch((err) => {
+            var errorCode = err.code;
+            var errorMessage = err.message;
+            console.log("Error: " + errorCode + "\n\n" + errorMessage);
+          });
       }
     };
     emptyCart();
   }, []);
-  
+
   const multi = MultiUseMobile();
   return (
     <div>
-      <Container>
-        <Grid
-          container
-          direction="row-reverse"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <Grid item xs={12}>
-            <div className={multi.extraSpace} />
-          </Grid>
-          <Grid item xs={12}>
-            <div className={multi.extraSpace} />
-          </Grid>
-          <Grid item xs={12}>
-            <div className={multi.extraSpace} />
-          </Grid>
+      <div style={{ marginTop: "130px" }} />
+      <Container maxWidth="xs">
+        <Paper elevation={5} style={{ textAlign: "center", padding: "30px" }}>
+          <BeachAccessIcon className={multi.iconColor} fontSize="large" />
+          <Typography size="subheading">
+            Selamat! Pembayaran kamu berhasil.
+          </Typography>
 
-          <Grid item xs={12}>
-            <div className={multi.center}>
-              <Typography type="italic" size="heading">
-                Pembayaran Berhasil!
-              </Typography>
-            </div>
-          </Grid>
+          <Typography>
+            Mohon menunggu 1x24 jam untuk order kamu diproses dan direview oleh
+            tim kami. Jika ada pertanyaan silahkan email ke hi@sekilasaja.com.
+          </Typography>
 
-          <Grid item xs={12}>
-            <div className={multi.center}>
-              <Button href="/">
-                <HomeIcon />
-                Kembali ke halaman beranda
-              </Button>
-            </div>
-          </Grid>
-        </Grid>
+          <div className={multi.extraSpace} />
+
+          <Button round href="/">
+            Kembali ke halaman beranda ►
+          </Button>
+        </Paper>
       </Container>
     </div>
   );
