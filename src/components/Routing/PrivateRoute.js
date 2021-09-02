@@ -12,6 +12,11 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
       {...rest}
       render={(routeProps) =>
         !!currentUser ? (
+          // currentUser.emailVerified ? (
+          //   <RouteComponent {...routeProps} />
+          // ) : (
+          //   <Redirect to={"/signup"} />
+          // )
           <RouteComponent {...routeProps} />
         ) : (
           <Redirect to={"/login"} />

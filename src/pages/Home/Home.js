@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Book from "../../images/book.png";
+import BookMobile from "../../images/home-mobile.png";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -58,8 +59,7 @@ export default function Home({ history }) {
 
   return (
     <div>
-      <NavBar cartItems={[]} 
-        history={history}/>
+      <NavBar cartItems={[]} history={history} />
       {!!currentUser ? (
         <div>
           <Parallax small image={require("../../images/home2.jpg").default}>
@@ -136,7 +136,7 @@ export default function Home({ history }) {
             <Grid container>
               <Grid item xs={12}>
                 <img
-                  src={Book}
+                  src={BookMobile}
                   className={
                     books.imgRounded +
                     " " +

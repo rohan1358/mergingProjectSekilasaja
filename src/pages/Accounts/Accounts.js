@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { useHistory } from "react-router-dom";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -8,7 +7,6 @@ import Footer from "../../components/Footer";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import SubscriptionPlan from "./SubscriptionPlan";
-import Loading from "../Loading";
 
 // firebase components
 import fire from "../.././firebase/fire";
@@ -18,10 +16,11 @@ import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById
 // Material-UI components
 import { Container, Paper, Divider, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
-export default function AccountsPage() {
+export default function AccountsPage(props) {
   const firestore = fire.firestore();
-
+  const { history } = props;
   const classes = MultiUseMobile();
   const { currentUser } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
@@ -133,7 +132,7 @@ export default function AccountsPage() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar history={history} />
       {(userData !== null) == true && (
         <Container maxWidth={"sm"}>
           <div className={classes.extraSpace} />
@@ -253,11 +252,12 @@ export default function AccountsPage() {
 
             <div className={classes.center}>
               <Button
-                onClick={() => fire.auth().signOut()}
                 round
+                onClick={() => fire.auth().signOut()}
                 color="secondary"
               >
-                Log out
+                <ExitToAppIcon />
+                Logout
               </Button>
             </div>
           </Paper>

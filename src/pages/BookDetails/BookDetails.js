@@ -24,9 +24,6 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import classNames from "classnames";
 import PropTypes from "prop-types";
 
-// Firebase components
-import fire from "../../firebase/fire";
-
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function BookDetails(props) {

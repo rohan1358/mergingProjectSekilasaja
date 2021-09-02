@@ -10,10 +10,10 @@ import Button from "../../components/Button";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
+// firebase components
 import { AuthContext } from "../../components/Routing/Auth";
-
-//Import firebase for signUp function
 import fire from "../../firebase/fire";
+
 const auth = fire.auth();
 const firestore = fire.firestore();
 
@@ -56,17 +56,18 @@ const SignUpForm = ({ history }) => {
   const [password, setPassword] = useState("");
   const [reenterPassword, setReenterPassword] = useState("");
   const [error, setError] = useState("");
+  const { currentUser } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      password,
-      reenterPassword
-    );
+    // console.log(
+    //   firstName,
+    //   lastName,
+    //   phoneNumber,
+    //   email,
+    //   password,
+    //   reenterPassword
+    // );
 
     //Check if password and reenter password are the same or not.
     if (password != reenterPassword) {
@@ -88,12 +89,13 @@ const SignUpForm = ({ history }) => {
               lastName: lastName,
               phoneNumber: phoneNumber,
               email: email,
-              owned_books: [],
+              owned_books: ["Steve Jobs", "Atomic Habits"],
               favorite_books: [],
               is_subscribed: false,
               cart: [],
               start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
               end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
+              // isEmailVerified: currentUser.emailVerified,
             });
           //Sign up success case
           // console.log("Firebase signup suceeded!");
@@ -107,12 +109,17 @@ const SignUpForm = ({ history }) => {
     }
   };
 
-  const { currentUser } = useContext(AuthContext);
-
   if (currentUser) {
-    console.log("Current user id: " + currentUser.uid);
+    // console.log("Current user id: " + currentUser.uid);
     return <Redirect to="/library" />;
   }
+
+  // if (currentUser && currentUser.emailVerified) {
+  //   // console.log("Current user id: " + currentUser.uid);
+  //   return <Redirect to="/library" />;
+  // } else if (currentUser && !currentUser.emailVerified) {
+  //   return <Redirect to="verify-email" />;
+  // }
 
   return (
     <form className={classes.root} onSubmit={handleSubmit}>

@@ -15,6 +15,11 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import PeopleIcon from "@material-ui/icons/People";
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 // Custom components
 import Drawer from "../Drawer";
@@ -23,6 +28,7 @@ import NavbarStyle from "../../styles/NavbarStyle";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchBarDrawer from "../SearchBar/SearchBarDrawer";
 import Basket from "../AddToCart/Basket";
+import Typography from "../Typography";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -34,6 +40,7 @@ import { AuthContext } from "../Routing/Auth";
 //Import firebase function to get user based on userid
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
+import * as firebaseGetSubscription from "../../firebase/firebaseGetSubscription";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -81,19 +88,40 @@ export default function NavBar(props) {
 
   const { history } = props;
 
+  //Handle event to navigate to accounts page
+  const goToAccounts = () => {
+    console.log(history);
+    history.push(`/accounts`);
+  };
+
+  //Handle event to navigate to pricing page
+  const goToPricing = () => {
+    console.log(history);
+    history.push(`/pricing`);
+  };
+
   useEffect(() => {
     if (currentUser !== null) {
       const fetchData = async () => {
         const results = await firebaseGetUserDataById.getUserDataById(
           currentUser.uid
         );
+
         setIsSubscribed(results.is_subscribed);
 
         const getCartData = async (book_title) => {
           const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
             book_title
           );
-          return products_;
+          const subs_ = await firebaseGetSubscription.getSubscription(
+            book_title
+          );
+
+          if (products_ === undefined) {
+            return subs_;
+          } else {
+            return products_;
+          }
         };
 
         var a = [
@@ -130,36 +158,102 @@ export default function NavBar(props) {
       {!!currentUser ? (
         <div>
           <MenuItem>
-            <Link href="/pricing" underline="none" className={classes.link}>
-              Pricing
+            <Link
+              onClick={goToPricing}
+              underline="none"
+              className={classes.link}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <MonetizationOnIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Pricing</Typography>
+              </div>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link underline="none" className={classes.link} href="/library">
-              Library
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <LibraryBooksIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Library</Typography>
+              </div>
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link underline="none" className={classes.link} href="/accounts">
-              Accounts
+            <Link
+              underline="none"
+              className={classes.link}
+              onClick={goToAccounts}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <AccountCircleIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Accounts</Typography>
+              </div>
             </Link>
           </MenuItem>
         </div>
       ) : (
         <div>
           <MenuItem>
-            <Link href="/pricing" underline="none" className={classes.link}>
-              Pricing
+            <Link
+              onClick={goToPricing}
+              underline="none"
+              className={classes.link}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <MonetizationOnIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Pricing</Typography>
+              </div>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link underline="none" className={classes.link} href="/signup">
-              Sign Up
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <PeopleIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Sign Up</Typography>
+              </div>
             </Link>
           </MenuItem>
           <MenuItem>
             <Link underline="none" className={classes.link} href="/login">
-              Login
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <VpnKeyIcon style={{ marginRight: "8px" }} />{" "}
+                <Typography type="bold">Login</Typography>
+              </div>
             </Link>
           </MenuItem>
         </div>
@@ -182,7 +276,7 @@ export default function NavBar(props) {
               <div className={desktopClass}>
                 <SearchBar history={history} />
 
-                <Button href="/pricing" round color="transparent">
+                <Button onClick={goToPricing} round color="transparent">
                   Pricing
                 </Button>
 
@@ -190,9 +284,23 @@ export default function NavBar(props) {
                   Library
                 </Button>
 
-                <Button round color="primary" href="/accounts">
+                <Button round color="primary" onClick={goToAccounts}>
                   Accounts
                 </Button>
+
+                <div className={classes.divider} />
+
+                <Drawer
+                  direction={"right"}
+                  drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
+                  drawerTitle={"Your Cart"}
+                  logo={
+                    <Badge badgeContent={cart.length} color="error">
+                      <ShoppingCartIcon className={classes.iconColor} />
+                    </Badge>
+                  }
+                  children={<Basket />}
+                />
               </div>
 
               <div className={mobileClass}>
@@ -200,6 +308,18 @@ export default function NavBar(props) {
                   direction={"top"}
                   history={history}
                   logo={<SearchIcon className={iconColorClass} />}
+                />
+
+                <Drawer
+                  direction={"right"}
+                  drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
+                  drawerTitle={"Your Cart"}
+                  logo={
+                    <Badge badgeContent={cart.length} color="error">
+                      <ShoppingCartIcon className={classes.iconColor} />
+                    </Badge>
+                  }
+                  children={<Basket />}
                 />
 
                 <IconButton
@@ -230,7 +350,7 @@ export default function NavBar(props) {
                   <div className={desktopClass}>
                     <SearchBar history={history} />
 
-                    <Button href="/pricing" round color="transparent">
+                    <Button onClick={goToPricing} round color="transparent">
                       Pricing
                     </Button>
 
@@ -238,7 +358,7 @@ export default function NavBar(props) {
                       Library
                     </Button>
 
-                    <Button round color="primary" href="/accounts">
+                    <Button round color="primary" onClick={goToAccounts}>
                       Accounts
                     </Button>
 
@@ -255,7 +375,7 @@ export default function NavBar(props) {
                           <ShoppingCartIcon className={classes.iconColor} />
                         </Badge>
                       }
-                      children={<Basket cartItems={cart} />}
+                      children={<Basket />}
                     />
                   </div>
 
@@ -277,7 +397,7 @@ export default function NavBar(props) {
                           <ShoppingCartIcon className={classes.iconColor} />
                         </Badge>
                       }
-                      children={<Basket cartItems={cart} />}
+                      children={<Basket />}
                     />
 
                     <IconButton
@@ -306,7 +426,7 @@ export default function NavBar(props) {
                   <div className={desktopClass}>
                     <SearchBar history={history} />
 
-                    <Button href="/pricing" round color="transparent">
+                    <Button onClick={goToPricing} round color="transparent">
                       Pricing
                     </Button>
 

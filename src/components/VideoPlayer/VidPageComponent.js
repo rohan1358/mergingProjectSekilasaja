@@ -253,13 +253,13 @@ export default function VideoComponent(props) {
           // volume={volume}
           // muted={muted}
           onProgress={handleProgress}
-          config={{
-            file: {
-              attributes: {
-                crossorigin: "anonymous",
-              },
-            },
-          }}
+          // config={{
+          //   file: {
+          //     attributes: {
+          //       crossorigin: "anonymous",
+          //     },
+          //   },
+          // }}
         />
 
         <Controls

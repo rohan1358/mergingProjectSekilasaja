@@ -11,12 +11,12 @@ import { makeStyles, Container } from "@material-ui/core";
 
 const useStyles = makeStyles(FourOFourStyle);
 
-export default function FourOFourPage() {
+export default function FourOFourPage({ history }) {
   const classes = useStyles();
 
   return (
     <div>
-      <NavBar />
+      <NavBar history={history} />
       <Container className={classes.position}>
         <Typography className={classes.title} size="heading">
           404

@@ -14,6 +14,7 @@ import Button from "../../components/Button";
 // Material-UI components
 import { Container, Divider, Grid } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -39,7 +40,6 @@ export default function BookDetailsPage({ match, history }) {
   const classes = MultiUseMobile();
 
   const { currentUser } = useContext(AuthContext);
-
   const dispatch = useDispatch();
   const ownedBooks = useSelector(selectOwnedBooks);
   const cartItems = useSelector(selectCart).cart;
@@ -128,7 +128,7 @@ export default function BookDetailsPage({ match, history }) {
     changeBtn();
   }, [, favoriteBooks]);
 
-  console.log(isFavorite);
+  // console.log(isFavorite);
 
   const handleAddCart = () => {
     const fetchData = async () => {
@@ -179,7 +179,7 @@ export default function BookDetailsPage({ match, history }) {
       console.log(results);
       dispatch(
         setFavoriteBooks([
-          ...cartItems.filter(function (ele) {
+          ...favoriteBooks.filter(function (ele) {
             return ele.book_title != current_product.book_title;
           }),
         ])
@@ -187,10 +187,6 @@ export default function BookDetailsPage({ match, history }) {
     };
     fetchData();
   };
-
-  console.log(currentUser);
-  console.log(isBookOwned);
-  console.log(ownedBooks);
 
   return (
     <div>
@@ -297,7 +293,7 @@ export default function BookDetailsPage({ match, history }) {
                         video={
                           <Button
                             href={`/video/${current_product.book_title}`}
-                            color="secondary"
+                            color="primary"
                             fullWidth
                           >
                             <PlayCircleFilledIcon /> Akses Videonya Sekarang!
@@ -503,11 +499,10 @@ export default function BookDetailsPage({ match, history }) {
                         <div className={classes.sectionDesktop}>
                           <Grid container spacing={3}>
                             <Grid item>
-                              <Button href={"/login"}>Masuk Sekarang!</Button>
-                            </Grid>
-
-                            <Grid item>
-                              <Button href="/signup">Daftar Sekarang!</Button>
+                              <Button href={"/login"}>
+                                {" "}
+                                <VpnKeyIcon /> Masuk Sekarang!
+                              </Button>
                             </Grid>
                           </Grid>
                         </div>
@@ -515,12 +510,8 @@ export default function BookDetailsPage({ match, history }) {
                         <div className={classes.sectionMobileBlock}>
                           <Grid item xs={12}>
                             <Button fullWidth href={"/login"}>
+                              <VpnKeyIcon />
                               Masuk Sekarang!
-                            </Button>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Button href="/signup" fullWidth>
-                              Daftar Sekarang!
                             </Button>
                           </Grid>
                         </div>

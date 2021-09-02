@@ -67,14 +67,15 @@ export default function CategoryBlock(props) {
 
       //Add dispatch to store all books info for searching
       if (allBooks.length < 1) {
-        dispatch(setAllBooks(
-          snapshot.docs.map((doc) => ({
-            ...doc.data(),
-          }))
-        ));
+        dispatch(
+          setAllBooks(
+            snapshot.docs.map((doc) => ({
+              ...doc.data(),
+            }))
+          )
+        );
       }
     });
-
   }, []);
 
   return (

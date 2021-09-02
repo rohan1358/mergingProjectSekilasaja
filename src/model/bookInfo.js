@@ -11,7 +11,7 @@ export default class BookInfo {
     bookCoverImageLink,
     bookDashboardImageLink
   ) {
-    this.title = title;
+    this.book_title = title;
     this.author = author;
     this.audioLink = audioLink;
     this.videoLink = videoLink;

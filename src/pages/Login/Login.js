@@ -16,13 +16,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginPage() {
+export default function LoginPage({ history }) {
   const classes = useStyles();
   const multi = MultiUseMobile();
 
   return (
     <div>
-      <NavBar />
+      <NavBar history={history} />
       <div className={multi.extraSpace} />
       <Container maxWidth="xs">
         <Paper className={classes.root}>

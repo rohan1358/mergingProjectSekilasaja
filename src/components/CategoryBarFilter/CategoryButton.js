@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import BusinessIcon from "@material-ui/icons/Business";
 
 // Custom components
 import CategoriesStyle from "../../styles/CategoriesStyle";
@@ -9,12 +8,22 @@ import classNames from "classnames";
 
 // Material UI components
 import { Grid } from "@material-ui/core";
+import BusinessIcon from "@material-ui/icons/Business";
+import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
+import PresentToAllIcon from "@material-ui/icons/PresentToAll";
+import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
+import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
+import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
+import EuroIcon from "@material-ui/icons/Euro";
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+import ForumIcon from "@material-ui/icons/Forum";
 
 function CategoryButton({
   chosenCategory,
   categoryName,
   setChosenCategory,
   setIsChosenCategory,
+  categoryIcon,
 }) {
   const classes = CategoriesStyle();
 
@@ -30,6 +39,28 @@ function CategoryButton({
   var btnClass = classNames(classes.button, {
     [`${classes.selectedButton}`]: isSelected,
   });
+
+  function categoryIcon() {
+    if (categoryName === "All") return <PresentToAllIcon />;
+
+    if (categoryName === "Business") return <BusinessIcon />;
+
+    if (categoryName === "Personal Development")
+      return <AccessibilityNewIcon />;
+
+    if (categoryName === "Biography") return <SupervisedUserCircleIcon />;
+
+    if (categoryName === "Productivity") return <QueryBuilderIcon />;
+
+    if (categoryName === "Cryptocurrency") return <MonetizationOnIcon />;
+
+    if (categoryName === "Communication") return <ForumIcon />;
+
+    if (categoryName === "Investment") return <AccountBalanceIcon />;
+
+    if (categoryName === "Money") return <EuroIcon />;
+  }
+
   return (
     <Grid item>
       <div
@@ -41,7 +72,7 @@ function CategoryButton({
           setIsChosenCategory(true);
         }}
       >
-        <BusinessIcon />
+        {categoryIcon()}
         <div className={classes.text}>{categoryName}</div>
       </div>
     </Grid>

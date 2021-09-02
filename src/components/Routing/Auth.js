@@ -7,9 +7,16 @@ import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById
 // custom components
 import Loading from "../../pages/Loading";
 
+// //Redux
+import { useSelector, useDispatch } from "react-redux";
+import { selectUser, setUser } from "../../feature/userSlice";
+
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
+  const dispatch = useDispatch();
+  const userData = useSelector(selectUser);
+
   const [currentUser, setCurrentUser] = useState(null);
   const [pending, setPending] = useState(true);
 
@@ -26,6 +33,8 @@ export const AuthProvider = ({ children }) => {
           const results = await firebaseGetUserDataById.getUserDataById(
             user.uid
           );
+
+          dispatch(setUser(results));
 
           const unsDate = new Date("9/9/99"); // Default year for unsubscribers
           const today = new Date(); // Today's date

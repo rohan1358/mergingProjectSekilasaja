@@ -31,11 +31,12 @@ export async function getBookInfoByTitle(title) {
       var bookData = await doc.data();
       bookInfo.book_title = bookData["book_title"];
       bookInfo.author = bookData["author"];
-      bookInfo.audioLink = bookData["audio_link"];
       bookInfo.category = bookData["category"];
-      bookInfo.videoLink = bookData["video_link"];
+      bookInfo.video_link = bookData["video_link"];
       bookInfo.price = bookData["price"];
       bookInfo.description = bookData["description"];
+      const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(title);
+      bookInfo.coverLink = await getLink;
       //Get kilasan
       var kilasan = await kilasanRef.get();
       if (kilasan.docs) {
