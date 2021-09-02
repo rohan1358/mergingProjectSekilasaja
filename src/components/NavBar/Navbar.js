@@ -101,6 +101,15 @@ export default function NavBar(props) {
   };
 
   useEffect(() => {
+    const signout = async() => {
+      fire.auth().signOut();
+    };
+
+    //If user is logged in but not email verified, logout so currentUser becomes null 
+    if (currentUser && !currentUser.emailVerified){
+      signout();
+    }
+
     if (currentUser !== null) {
       const fetchData = async () => {
         const results = await firebaseGetUserDataById.getUserDataById(
@@ -137,7 +146,7 @@ export default function NavBar(props) {
       };
       fetchData();
     } else {
-      console.log("not log in");
+      console.log("Not logged in");
     }
 
     if (cart.length > 0) {

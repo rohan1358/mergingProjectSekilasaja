@@ -41,7 +41,13 @@ export default function Library({ history }) {
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
-    if (!currentUser) {
+    if (currentUser && !currentUser.emailVerified) {
+      console.log(
+        "Redirect to email not verified page to ask for email verification..."
+      );
+      return <Redirect to="/verify-email" />;
+    } else if (!currentUser) {
+      console.log("User is not logged in, redirecting to login page...");
       return <Redirect to="/login" />;
     }
 
@@ -58,7 +64,7 @@ export default function Library({ history }) {
 
   return (
     <div>
-      <NavBar history={history}/>
+      <NavBar history={history} />
       <Container>
         <Parallax
           small
