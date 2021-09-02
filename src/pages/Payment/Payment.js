@@ -122,8 +122,6 @@ export default function Payment({ history }) {
     history.push("/payment-success");
   };
 
-  console.log(promoAdded);
-
   return (
     <div>
       <Navbar history={history} />
@@ -171,7 +169,7 @@ export default function Payment({ history }) {
                     inputRef={promoCodeRef}
                   />
                   {!!promoAdded ? (
-                    <Typography type="bold">✔Applied</Typography>
+                    <Button color="gray">✔ Applied</Button>
                   ) : (
                     <Button onClick={handleApplyPromo}>Apply</Button>
                   )}
@@ -339,7 +337,7 @@ export default function Payment({ history }) {
                     fullWidth
                   />
                   {!!promoAdded ? (
-                    <Typography type="bold">✔Applied</Typography>
+                    <Button color="gray">✔ Applied</Button>
                   ) : (
                     <Button onClick={handleApplyPromo}>Apply</Button>
                   )}

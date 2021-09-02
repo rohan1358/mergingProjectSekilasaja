@@ -99,12 +99,16 @@ export default function PricingPage({ match, history }) {
         subOne
       );
 
-      const exist = cartItems.find((x) => x.book_title === subOne.book_title);
+      const exist = cartItems.find(
+        (x) => x.book_title === "Subscription 1 Bulan"
+      );
 
       if (exist) {
         console.log("Already Added");
+        setIsSubOneAdded(true);
       } else {
         dispatch(setCart([...cartItems, subOne]));
+        setIsSubOneAdded(false);
       }
     };
     fetchData();
@@ -117,7 +121,9 @@ export default function PricingPage({ match, history }) {
         subThree
       );
 
-      const exist = cartItems.find((x) => x.book_title === subThree.book_title);
+      const exist = cartItems.find(
+        (x) => x.book_title === "Subscription 3 Bulan"
+      );
 
       if (exist) {
         console.log("Already Added");
@@ -135,7 +141,9 @@ export default function PricingPage({ match, history }) {
         subSix
       );
 
-      const exist = cartItems.find((x) => x.book_title === subSix.book_title);
+      const exist = cartItems.find(
+        (x) => x.book_title === "Subscription 6 Bulan"
+      );
 
       if (exist) {
         console.log("Already Added");
@@ -154,7 +162,7 @@ export default function PricingPage({ match, history }) {
       );
 
       const exist = cartItems.find(
-        (x) => x.book_title === subTwelve.book_title
+        (x) => x.book_title === "Subscription 12 Bulan"
       );
 
       if (exist) {
@@ -168,7 +176,9 @@ export default function PricingPage({ match, history }) {
 
   useEffect(() => {
     const changeOneBtn = () => {
-      const exist = cartItems.find((x) => x.book_title === subOne.book_title);
+      const exist = cartItems.find(
+        (x) => x.book_title === "Subscription 1 Bulan"
+      );
       if (exist) {
         setIsSubOneAdded(true);
       } else {
@@ -178,7 +188,9 @@ export default function PricingPage({ match, history }) {
     changeOneBtn();
 
     const changeThreeBtn = () => {
-      const exist = cartItems.find((x) => x.book_title === subThree.book_title);
+      const exist = cartItems.find(
+        (x) => x.book_title === "Subscription 3 Bulan"
+      );
       if (exist) {
         setIsSubThreeAdded(true);
       } else {
@@ -188,7 +200,9 @@ export default function PricingPage({ match, history }) {
     changeThreeBtn();
 
     const changeSixBtn = () => {
-      const exist = cartItems.find((x) => x.book_title === subSix.book_title);
+      const exist = cartItems.find(
+        (x) => x.book_title === "Subscription 6 Bulan"
+      );
       if (exist) {
         setIsSubSixAdded(true);
       } else {
@@ -199,7 +213,7 @@ export default function PricingPage({ match, history }) {
 
     const changeTwelveBtn = () => {
       const exist = cartItems.find(
-        (x) => x.book_title === subTwelve.book_title
+        (x) => x.book_title === "Subscription 12 Bulan"
       );
       if (exist) {
         setIsSubTwelveAdded(true);
@@ -211,7 +225,6 @@ export default function PricingPage({ match, history }) {
   }, [cartItems]);
 
   console.log(isSubOneAdded);
-
   return (
     <div>
       <NavBar history={history} />
