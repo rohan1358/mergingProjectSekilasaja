@@ -295,32 +295,6 @@ export default function Payment({ history }) {
                     <Alert severity="error">{fileError}</Alert>
                   </div>
                 )}
-                <Typography type="bold">Step 1:</Typography>
-                <Typography>
-                  • Transfer ke rekening BCA 123456789 a/n Darren Lucky
-                </Typography>
-                <Typography>
-                  • Atau, transfer ke rekening Mandiri 123456789 a/n Darren
-                  Lucky
-                </Typography>
-                <Typography>
-                  • Atau, transfer ke rekening BRI 123456789 a/n Darren Lucky
-                </Typography>
-                <Typography className={classes.paragraphSpace} type="bold">
-                  Step 2:
-                </Typography>
-                <Typography>
-                  Pastikan nominal yang anda transfer sesuai dengan harga yang
-                  tertulis, bila anda transfer dengan nominal yang salah harap
-                  hubungi customer service kami.
-                </Typography>
-                <Typography className={classes.paragraphSpace} type="bold">
-                  Step 3:
-                </Typography>
-                <Typography>
-                  Foto atau screenshot bukti transfer anda, lalu upload foto
-                  melalui tombol "Attach File" di bawah!
-                </Typography>
 
                 <TextField
                   required
@@ -423,11 +397,16 @@ export default function Payment({ history }) {
 
             <Grid item xs={12}>
               <Paper className={classes.paddedContent} elevation={5}>
+                <Typography size="subheading">2. Checkout Form</Typography>
                 <form
                   onSubmit={handlePayment}
                   className={classes.textFieldRoot}
                 >
-                  <Typography size="subheading">2. Checkout Form</Typography>
+                  {error && (
+                    <div className={classes.alertRoot}>
+                      <Alert severity="error">{error}</Alert>
+                    </div>
+                  )}
                   <TextField
                     id="filled-basic"
                     label="First Name"
@@ -465,32 +444,12 @@ export default function Payment({ history }) {
                 <div className={classes.extraSpace} />
 
                 <Typography size="subheading">3. Payment</Typography>
-                <Typography type="bold">Step 1:</Typography>
-                <Typography>
-                  • Transfer ke rekening BCA 123456789 a/n Darren Lucky
-                </Typography>
-                <Typography>
-                  • Atau, transfer ke rekening Mandiri 123456789 a/n Darren
-                  Lucky
-                </Typography>
-                <Typography>
-                  • Atau, transfer ke rekening BRI 123456789 a/n Darren Lucky
-                </Typography>
-                <Typography className={classes.paragraphSpace} type="bold">
-                  Step 2:
-                </Typography>
-                <Typography>
-                  Pastikan nominal yang anda transfer sesuai dengan harga yang
-                  tertulis, bila anda transfer dengan nominal yang salah harap
-                  hubungi customer service kami.
-                </Typography>
-                <Typography className={classes.paragraphSpace} type="bold">
-                  Step 3:
-                </Typography>
-                <Typography>
-                  Foto atau screenshot bukti transfer anda, lalu upload foto
-                  melalui tombol "Attach File" di bawah!
-                </Typography>
+                {fileError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{fileError}</Alert>
+                  </div>
+                )}
+
                 <form>
                   <label htmlFor="upload-photo">
                     <input
