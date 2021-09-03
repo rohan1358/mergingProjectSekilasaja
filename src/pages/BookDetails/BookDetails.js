@@ -84,10 +84,10 @@ export default function BookDetails(props) {
                       <Typography type="bold">{num} Kilas</Typography>
                     </div>
 
-                    <div className={classes.kilasDesc}>
+                    {/* <div className={classes.kilasDesc}>
                       <PlayArrow className={classes.logo} />
                       <Typography type="bold">Video, Audio, & Text</Typography>
-                    </div>
+                    </div> */}
                   </div>
 
                   <Divider />
@@ -162,10 +162,10 @@ export default function BookDetails(props) {
                     <Typography type="bold">{num} Kilas</Typography>
                   </div>
 
-                  <div className={classes.kilasDescMobileCenter}>
+                  {/* <div className={classes.kilasDescMobileCenter}>
                     <PlayArrow className={classes.logo} />
                     <Typography type="bold">Video, Audio, & Text</Typography>
-                  </div>
+                  </div> */}
                 </div>
 
                 <Divider />

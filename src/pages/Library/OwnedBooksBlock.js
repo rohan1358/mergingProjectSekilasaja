@@ -180,7 +180,7 @@ export default function OwnedBooksBlock(props) {
             <div>
               <div className={classes.sectionBlock}>
                 {/* FAVORITE BOOKS DESKTOP */}
-                {isFavoriteBookTitlesEmpty ? (
+                {/* {isFavoriteBookTitlesEmpty ? (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
                     <Typography type="italic">
@@ -220,7 +220,7 @@ export default function OwnedBooksBlock(props) {
                   </div>
                 )}
 
-                <div className={classes.extraSpace} />
+                <div className={classes.extraSpace} /> */}
 
                 {/* OWNED BOOKS DESKTOP */}
                 {isOwnedBookTitlesEmpty ? (
@@ -307,7 +307,7 @@ export default function OwnedBooksBlock(props) {
 
               <div className={classes.sectionMobileBlock}>
                 {/* FAVORITE BOOKS MOBILE */}
-                {isFavoriteBookTitlesEmpty ? (
+                {/* {isFavoriteBookTitlesEmpty ? (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
                     <Typography type="italic">
@@ -347,7 +347,7 @@ export default function OwnedBooksBlock(props) {
                   </div>
                 )}
 
-                <div className={classes.extraSpace} />
+                <div className={classes.extraSpace} /> */}
 
                 {/* OWNED BOOKS MOBILE */}
                 {isOwnedBookTitlesEmpty ? (
@@ -445,7 +445,7 @@ export default function OwnedBooksBlock(props) {
           ) : (
             <div>
               <div className={classes.sectionDesktopBlock}>
-                {isFavoriteBookTitlesEmpty ? (
+                {/* {isFavoriteBookTitlesEmpty ? (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
                     <Typography type="italic">
@@ -468,7 +468,7 @@ export default function OwnedBooksBlock(props) {
                   </div>
                 )}
 
-                <div className={classes.extraSpace} />
+                <div className={classes.extraSpace} /> */}
 
                 {isOwnedBookTitlesEmpty ? (
                   <div>
@@ -523,7 +523,7 @@ export default function OwnedBooksBlock(props) {
               </div>
 
               <div className={classes.sectionMobileBlock}>
-                {isFavoriteBookTitlesEmpty ? (
+                {/* {isFavoriteBookTitlesEmpty ? (
                   <div>
                     <Typography size="subheading">Favorite Books</Typography>
                     <Typography type="italic">
@@ -546,7 +546,7 @@ export default function OwnedBooksBlock(props) {
                   </div>
                 )}
 
-                <div className={classes.extraSpace} />
+                <div className={classes.extraSpace} /> */}
 
                 {isOwnedBookTitlesEmpty ? (
                   <div>

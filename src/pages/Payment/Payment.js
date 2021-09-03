@@ -1,5 +1,5 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
-import { Redirect, withRouter } from "react-router";
+import { Redirect } from "react-router";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -7,6 +7,7 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
+import InfoStyle from "../../styles/InfoAreaStyle";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -14,7 +15,14 @@ import { selectCart, setCart } from "../../feature/cartSlice";
 import { selectUser } from "../../feature/userSlice";
 
 // Material-UI components
-import { Container, Paper, Grid, TextField, Link } from "@material-ui/core";
+import {
+  Container,
+  Paper,
+  Grid,
+  TextField,
+  Link,
+  makeStyles,
+} from "@material-ui/core";
 import PaymentIcon from "@material-ui/icons/Payment";
 import { Alert } from "@material-ui/lab";
 
@@ -27,9 +35,12 @@ import { AuthContext } from "../../components/Routing/Auth";
 //Email js components
 import * as emailService from "../../emailService/emailService";
 
+const useStyles = makeStyles(InfoStyle);
+
 export default function Payment({ history }) {
   const { currentUser } = useContext(AuthContext);
   const classes = MultiUseMobile();
+  const styles = useStyles();
 
   // Get user data
   const userData = useSelector(selectUser);
@@ -158,12 +169,24 @@ export default function Payment({ history }) {
 
                 {cartItems.map((item) => (
                   <div className={classes.spaceBetween}>
-                    <div>
-                      <Typography type="italic">{item.book_title}</Typography>
-                      <Typography type="italic">
-                        Rp. {Intl.NumberFormat().format(item.price)}
-                      </Typography>
-                    </div>
+                    <Grid container spacing={2}>
+                      <Grid item xs={2}>
+                        <img
+                          src={item.coverLink}
+                          alt={item.book_title}
+                          className={
+                            styles.imgFluid + " " + styles.imgBookCover
+                          }
+                        />
+                      </Grid>
+                      <Grid item xs={10}>
+                        <Typography type="italic">{item.book_title}</Typography>
+                        <Typography type="italic">
+                          Rp. {Intl.NumberFormat().format(item.price)}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+
                     <Typography>
                       <Link
                         className={classes.link}
@@ -178,11 +201,11 @@ export default function Payment({ history }) {
 
                 {!!promoAdded ? (
                   <div>
-                    <Typography type="italic" color="dangerColor">
+                    <Typography type="italic" size="bold" color="dangerColor">
                       Pemotongan dari kode promo
                     </Typography>
-                    <Typography type="italic" color="dangerColor">
-                      Rp. {Intl.NumberFormat().format(-1 * discountAmount)}
+                    <Typography type="italic" size="bold" color="dangerColor">
+                      - Rp. {Intl.NumberFormat().format(-1 * discountAmount)}
                     </Typography>
                   </div>
                 ) : (
@@ -345,12 +368,23 @@ export default function Payment({ history }) {
 
                 {cartItems.map((item) => (
                   <div className={classes.spaceBetween}>
-                    <div>
-                      <Typography type="italic">{item.book_title}</Typography>
-                      <Typography type="italic">
-                        Rp. {Intl.NumberFormat().format(item.price)}
-                      </Typography>
-                    </div>
+                    <Grid container spacing={2}>
+                      <Grid item xs={2}>
+                        <img
+                          src={item.coverLink}
+                          alt={item.book_title}
+                          className={
+                            styles.imgFluid + " " + styles.imgBookCover
+                          }
+                        />
+                      </Grid>
+                      <Grid item xs={10}>
+                        <Typography type="italic">{item.book_title}</Typography>
+                        <Typography type="italic">
+                          Rp. {Intl.NumberFormat().format(item.price)}
+                        </Typography>
+                      </Grid>
+                    </Grid>
                     <Typography>
                       <Link
                         className={classes.link}

@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../images/dark-logo.png";
+import { useHistory } from "react-router";
 
 // Material-UI components
 import {
@@ -10,6 +10,8 @@ import {
   Grid,
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
+import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 // Custom components
 import NavbarStyle from "../../styles/NavbarStyle";
@@ -20,6 +22,8 @@ import classNames from "classnames";
 
 export default function NavBarSecond(props) {
   const { children } = props;
+
+  const backHistory = useHistory();
 
   const classes = NavbarStyle();
   const multi = MultiUseMobile();
@@ -46,8 +50,14 @@ export default function NavBarSecond(props) {
               alignItems="center"
             >
               <Grid item>
-                <IconButton href="/" color="inherit">
-                  <HomeIcon className={iconColorClass} />
+                <IconButton
+                  onClick={() => backHistory.goBack()}
+                  color="inherit"
+                >
+                  <ArrowBackIosIcon className={iconColorClass} />
+                </IconButton>
+                <IconButton href="/library" color="inherit">
+                  <AccountBalanceIcon className={iconColorClass} />
                 </IconButton>
               </Grid>
 

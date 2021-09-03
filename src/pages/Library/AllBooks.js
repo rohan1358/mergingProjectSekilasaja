@@ -84,7 +84,7 @@ export default function CategoryBlock(props) {
       {isChosenCategory === true ? (
         <div>
           <div className={classes.sectionDesktopBlock}>
-            {isFavoriteBookTitlesEmpty ? (
+            {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -123,7 +123,7 @@ export default function CategoryBlock(props) {
               </div>
             )}
 
-            <div className={classes.extraSpace} />
+            <div className={classes.extraSpace} /> */}
 
             <Typography size="subheading">Owned Books</Typography>
             <div>
@@ -154,7 +154,7 @@ export default function CategoryBlock(props) {
           </div>
 
           <div className={classes.sectionMobileBlock}>
-            {isFavoriteBookTitlesEmpty ? (
+            {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -193,7 +193,7 @@ export default function CategoryBlock(props) {
               </div>
             )}
 
-            <div className={classes.extraSpace} />
+            <div className={classes.extraSpace} /> */}
 
             <Typography size="subheading">Owned Books</Typography>
             <div>
@@ -226,7 +226,7 @@ export default function CategoryBlock(props) {
       ) : (
         <div>
           <div className={classes.sectionDesktopBlock}>
-            {isFavoriteBookTitlesEmpty ? (
+            {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -249,7 +249,7 @@ export default function CategoryBlock(props) {
               </div>
             )}
 
-            <div className={classes.extraSpace} />
+            <div className={classes.extraSpace} /> */}
 
             <Typography size="subheading">Owned Books</Typography>
             <Grid container spacing={5}>
@@ -265,7 +265,7 @@ export default function CategoryBlock(props) {
           </div>
 
           <div className={classes.sectionMobileBlock}>
-            {isFavoriteBookTitlesEmpty ? (
+            {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -288,7 +288,7 @@ export default function CategoryBlock(props) {
               </div>
             )}
 
-            <div className={classes.extraSpace} />
+            <div className={classes.extraSpace} /> */}
 
             <Typography size="subheading">Owned Books</Typography>
             <Grid container justifyContent="center" spacing={5}>

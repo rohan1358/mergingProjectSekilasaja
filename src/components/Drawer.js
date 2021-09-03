@@ -21,7 +21,7 @@ import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   list: {
-    width: 400,
+    width: 300,
   },
   fullList: {
     width: "auto",

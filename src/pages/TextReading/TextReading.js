@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router";
 
 // Custom components
 import NavBarSecond from "../../components/NavBar/NavBarSecond";

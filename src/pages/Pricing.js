@@ -91,7 +91,6 @@ export default function PricingPage({ match, history }) {
   //   changeBtn();
   // }, [cartItems]);
 
-  console.log(subOne);
   const handleAddCartOne = () => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
@@ -99,16 +98,16 @@ export default function PricingPage({ match, history }) {
         subOne
       );
 
+      history.push("/payment");
+
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 1 Bulan"
       );
 
       if (exist) {
         console.log("Already Added");
-        setIsSubOneAdded(true);
       } else {
         dispatch(setCart([...cartItems, subOne]));
-        setIsSubOneAdded(false);
       }
     };
     fetchData();
@@ -120,6 +119,8 @@ export default function PricingPage({ match, history }) {
         currentUser.uid,
         subThree
       );
+
+      history.push("/payment");
 
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 3 Bulan"
@@ -141,6 +142,8 @@ export default function PricingPage({ match, history }) {
         subSix
       );
 
+      history.push("/payment");
+
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 6 Bulan"
       );
@@ -161,6 +164,8 @@ export default function PricingPage({ match, history }) {
         subTwelve
       );
 
+      history.push("/payment");
+
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 12 Bulan"
       );
@@ -174,75 +179,59 @@ export default function PricingPage({ match, history }) {
     fetchData();
   };
 
-  useEffect(() => {
-    const changeOneBtn = () => {
-      const exist = cartItems.find(
-        (x) => x.book_title === "Subscription 1 Bulan"
-      );
-      if (exist) {
-        setIsSubOneAdded(true);
-      } else {
-        setIsSubOneAdded(false);
-      }
-    };
-    changeOneBtn();
+  // useEffect(() => {
+  //   const changeOneBtn = () => {
+  //     const exist = cartItems.find(
+  //       (x) => x.book_title === "Subscription 1 Bulan"
+  //     );
+  //     if (exist) {
+  //       setIsSubOneAdded(true);
+  //     } else {
+  //       setIsSubOneAdded(false);
+  //     }
+  //   };
+  //   changeOneBtn();
 
-    const changeThreeBtn = () => {
-      const exist = cartItems.find(
-        (x) => x.book_title === "Subscription 3 Bulan"
-      );
-      if (exist) {
-        setIsSubThreeAdded(true);
-      } else {
-        setIsSubThreeAdded(false);
-      }
-    };
-    changeThreeBtn();
+  //   const changeThreeBtn = () => {
+  //     const exist = cartItems.find(
+  //       (x) => x.book_title === "Subscription 3 Bulan"
+  //     );
+  //     if (exist) {
+  //       setIsSubThreeAdded(true);
+  //     } else {
+  //       setIsSubThreeAdded(false);
+  //     }
+  //   };
+  //   changeThreeBtn();
 
-    const changeSixBtn = () => {
-      const exist = cartItems.find(
-        (x) => x.book_title === "Subscription 6 Bulan"
-      );
-      if (exist) {
-        setIsSubSixAdded(true);
-      } else {
-        setIsSubSixAdded(false);
-      }
-    };
-    changeSixBtn();
+  //   const changeSixBtn = () => {
+  //     const exist = cartItems.find(
+  //       (x) => x.book_title === "Subscription 6 Bulan"
+  //     );
+  //     if (exist) {
+  //       setIsSubSixAdded(true);
+  //     } else {
+  //       setIsSubSixAdded(false);
+  //     }
+  //   };
+  //   changeSixBtn();
 
-    const changeTwelveBtn = () => {
-      const exist = cartItems.find(
-        (x) => x.book_title === "Subscription 12 Bulan"
-      );
-      if (exist) {
-        setIsSubTwelveAdded(true);
-      } else {
-        setIsSubTwelveAdded(false);
-      }
-    };
-    changeTwelveBtn();
-  }, [cartItems]);
+  //   const changeTwelveBtn = () => {
+  //     const exist = cartItems.find(
+  //       (x) => x.book_title === "Subscription 12 Bulan"
+  //     );
+  //     if (exist) {
+  //       setIsSubTwelveAdded(true);
+  //     } else {
+  //       setIsSubTwelveAdded(false);
+  //     }
+  //   };
+  //   changeTwelveBtn();
+  // }, [cartItems]);
 
-  console.log(isSubOneAdded);
   return (
     <div>
       <NavBar history={history} />
-      <Container>
-        <BenefitsBlock />
-
-        {/* If logged in, remove this button */}
-        {!!currentUser ? (
-          <></>
-        ) : (
-          <div className={classes.center}>
-            <Button href="/signup" round color="primary">
-              Daftar Sekarang
-            </Button>
-          </div>
-        )}
-        <div className={classes.extraSpace} />
-      </Container>
 
       <Container maxWidth={"sm"}>
         <div className={classes.center}>
@@ -587,6 +576,22 @@ export default function PricingPage({ match, history }) {
           )}
         </div>
 
+        <div className={classes.extraSpace} />
+      </Container>
+
+      <Container>
+        <BenefitsBlock />
+
+        {/* If logged in, remove this button */}
+        {!!currentUser ? (
+          <></>
+        ) : (
+          <div className={classes.center}>
+            <Button href="/signup" round color="primary">
+              Daftar Sekarang
+            </Button>
+          </div>
+        )}
         <div className={classes.extraSpace} />
       </Container>
       <Footer />

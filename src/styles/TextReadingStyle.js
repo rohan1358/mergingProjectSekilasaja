@@ -42,6 +42,7 @@ const TextReadingStyle = makeStyles((theme) => ({
   },
   title: {},
   paragraph: {
+    fontFamily: "Lexend Deca",
     fontSize: "18px",
     marginBottom: "30px",
     userSelect: "none",
@@ -64,7 +65,7 @@ const TextReadingStyle = makeStyles((theme) => ({
     // border: "solid 1px #41444b",
   },
   chapter: {
-    fontFamily: "Roboto",
+    fontFamily: "Lexend Deca",
     color: secondaryColor,
     marginBottom: "10px",
     padding: "10px",

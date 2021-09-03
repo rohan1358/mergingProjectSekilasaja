@@ -69,6 +69,12 @@ export default function VideoWatchingPage({ match, history }) {
 
   const isSubscribed = userData.is_subscribed;
 
+  // console.log(isSubscribed || isBookOwned);
+
+  // if ((isSubscribed || isBookOwned) === false) {
+  //   return <Redirect to="/404page" />;
+  // }
+
   return (
     <div>
       {!!isSubscribed || !!isBookOwned ? (

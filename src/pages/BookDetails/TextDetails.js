@@ -45,7 +45,7 @@ export default function BookDetails(props) {
               <Paper className={mobile.paddedContent} elevation={5}>
                 <Grid container>
                   <Grid item xs={7}>
-                    <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
+                    {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
 
                     <Typography size="subheading">{kilasTitle}</Typography>
                     <Typography>{kilasBody}</Typography>
@@ -122,7 +122,7 @@ export default function BookDetails(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
+                  {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
 
                   <Typography size="subheading">{kilasTitle}</Typography>
                   <Typography>{kilasBody}</Typography>
@@ -138,7 +138,7 @@ export default function BookDetails(props) {
               <Paper className={mobile.paddedContent} elevation={5}>
                 <Grid container>
                   <Grid item xs={7}>
-                    <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
+                    {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
 
                     <Typography size="subheading">{kilasTitle}</Typography>
                     <Typography>{kilasBody}</Typography>
@@ -212,7 +212,7 @@ export default function BookDetails(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <Typography type="bold">Kilas 1 dari {totalNum}</Typography>
+                  {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
 
                   <Typography size="subheading">{kilasTitle}</Typography>
                   <Typography>{kilasBody}</Typography>
