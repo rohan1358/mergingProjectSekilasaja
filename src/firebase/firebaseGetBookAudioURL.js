@@ -17,4 +17,5 @@ export async function getBookAudioURL(referenceName, referenceChapter) {
     var errorCode = err.code;
     var errorMessage = err.message;
     console.log("Error: " + errorCode + "\n\n" + errorMessage);
-}}
+  }
+}
