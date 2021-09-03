@@ -17,11 +17,11 @@ export async function uploadPaymentInfo(
     //Get total cost and items from cart items
     let total_cost = 0;
     let items = [];
-    // cartItems.forEach((item) => {
-    //   let book = { title: item.book_title, price: item.price };
-    //   items.push(book);
-    //   total_cost += item.price;
-    // });
+    cartItems.forEach((item) => {
+      let book = { title: item.book_title, price: item.price };
+      items.push(book);
+      total_cost += item.price;
+    });
 
     //Get today's date for payment date
     const today = new Date(); //Date of payment
