@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router";
 
 // Custom components
 import NavBarSecond from "../../components/NavBar/NavBarSecond";
@@ -13,6 +12,8 @@ import FourOFourPage from "../404page";
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
 import { Container, AppBar, Grid, Paper, Link } from "@material-ui/core";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 // Custom components
 import Button from "../../components/Button";
@@ -45,8 +46,20 @@ export default function TextReading({ match, history }) {
   const handleNext = () => {
     if (chosenChapter === chapterContent.length) {
       setChosenChapter(1);
+      window.scrollTo(0, 0);
     } else {
       setChosenChapter(chosenChapter + 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const handlePrev = () => {
+    if (chosenChapter === 1) {
+      setChosenChapter(chapterContent.length);
+      window.scrollTo(0, 0);
+    } else {
+      setChosenChapter(chosenChapter - 1);
+      window.scrollTo(0, 0);
     }
   };
 
@@ -263,14 +276,28 @@ export default function TextReading({ match, history }) {
                 <div style={{ padding: "15px" }}>
                   <AudioPlayer
                     vidLink={audioLink}
-                    button={
-                      <Link
-                        className={classes.link}
-                        underline="none"
+                    buttonPrev={
+                      <Button
+                        round
+                        style={{ fontSize: "17px" }}
+                        color="gray"
+                        // className={classes.link}
+                        // underline="none"
+                        onClick={handlePrev}
+                      >
+                        <ArrowBackIcon />
+                      </Button>
+                    }
+                    buttonNext={
+                      <Button
+                        style={{ fontSize: "17px" }}
+                        round
+                        // className={classes.link}
+                        // underline="none"
                         onClick={handleNext}
                       >
-                        NEXT►
-                      </Link>
+                        <ArrowForwardIcon />
+                      </Button>
                     }
                   />
                 </div>

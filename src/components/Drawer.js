@@ -76,7 +76,7 @@ export default function CustomDrawer(props) {
         </div>
         <Divider />
 
-        <div>{children}</div>
+        <div onClick={toggleDrawer(anchor, false)}>{children}</div>
       </Container>
     </div>
   );
@@ -86,12 +86,7 @@ export default function CustomDrawer(props) {
       {[direction].map((anchor) => (
         <React.Fragment key={anchor}>
           <IconButton onClick={toggleDrawer(anchor, true)} color="inherit">
-            {logo}{" "}
-            {countCartItems ? (
-              <button className={drawer.badge}>{countCartItems}</button>
-            ) : (
-              ""
-            )}
+            {logo}
           </IconButton>
 
           <Drawer

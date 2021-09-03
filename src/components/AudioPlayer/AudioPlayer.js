@@ -23,7 +23,7 @@ const format = (seconds) => {
   return `${mm}:${ss}`;
 };
 
-export default function AudioPlayer({ vidLink, button }) {
+export default function AudioPlayer({ vidLink, buttonNext, buttonPrev }) {
   const mobile = MultiUseMobile();
 
   const [timeDisplayFormat, setTimeDisplayFormat] = React.useState("normal");
@@ -152,7 +152,8 @@ export default function AudioPlayer({ vidLink, button }) {
         onChangeDispayFormat={handleDisplayFormat}
         playbackRate={playbackRate}
         onPlaybackRateChange={handlePlaybackRate}
-        button={button}
+        buttonNext={buttonNext}
+        buttonPrev={buttonPrev}
         // volume={volume}
       />
     </div>

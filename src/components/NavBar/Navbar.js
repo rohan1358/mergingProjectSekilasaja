@@ -101,12 +101,12 @@ export default function NavBar(props) {
   };
 
   useEffect(() => {
-    const signout = async() => {
+    const signout = async () => {
       fire.auth().signOut();
     };
 
-    //If user is logged in but not email verified, logout so currentUser becomes null 
-    if (currentUser && !currentUser.emailVerified){
+    //If user is logged in but not email verified, logout so currentUser becomes null
+    if (currentUser && !currentUser.emailVerified) {
       signout();
     }
 
