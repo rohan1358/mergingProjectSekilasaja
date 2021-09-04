@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // Custom components
 import BookCard from "../../components/BookCard";
@@ -7,7 +7,17 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
 
 // Material UI components
-import { Grid } from "@material-ui/core";
+import {
+  Grid,
+  Tabs,
+  Tab,
+  makeStyles,
+  useTheme,
+  Box,
+  AppBar,
+} from "@material-ui/core";
+import LibraryAddCheckIcon from "@material-ui/icons/LibraryAddCheck";
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -20,7 +30,50 @@ import {
 import fire from "../../firebase/fire";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 
+// Other
+import SwipeableViews from "react-swipeable-views";
+import PropTypes from "prop-types";
+import { primaryColor, secondaryColor } from "../../styles/Style";
+
 const db = fire.firestore();
+
+// Tabs
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {},
+}));
 
 export default function CategoryBlock(props) {
   const classes = MultiUseMobile();
@@ -71,20 +124,86 @@ export default function CategoryBlock(props) {
     }
   }, []);
 
+  // Tabs
+  const tabs = useStyles();
+  const theme = useTheme();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
+
   return (
     <div>
-      <CategoryBarFilter
-        chosenCategory={chosenCategory}
-        setChosenCategory={setChosenCategory}
-        setIsChosenCategory={setIsChosenCategory}
-      />
+      <div className={tabs.root}>
+        <AppBar position="static" color="default">
+          <Tabs
+            style={{ color: secondaryColor }}
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: primaryColor,
+                height: "3px",
+              },
+            }}
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            aria-label="full width tabs example"
+          >
+            <Tab
+              label={
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "20px",
+                  }}
+                >
+                  <LibraryAddCheckIcon style={{ marginRight: "5px" }} /> Owned
+                  Books
+                </div>
+              }
+              {...a11yProps(0)}
+            />
+            <Tab
+              label={
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "20px",
+                  }}
+                >
+                  <RemoveCircleOutlineIcon style={{ marginRight: "5px" }} /> Not
+                  Owned
+                </div>
+              }
+              {...a11yProps(1)}
+            />
+          </Tabs>
+        </AppBar>
+        <SwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+            <CategoryBarFilter
+              chosenCategory={chosenCategory}
+              setChosenCategory={setChosenCategory}
+              setIsChosenCategory={setIsChosenCategory}
+            />
 
-      <div className={classes.extraSpace} />
+            <div className={classes.extraSpace} />
 
-      {isChosenCategory === true ? (
-        <div>
-          <div className={classes.sectionDesktopBlock}>
-            {/* {isFavoriteBookTitlesEmpty ? (
+            {isChosenCategory === true ? (
+              <div>
+                <div className={classes.sectionDesktopBlock}>
+                  {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -124,37 +243,36 @@ export default function CategoryBlock(props) {
             )}
 
             <div className={classes.extraSpace} /> */}
-
-            <Typography size="subheading">Owned Books</Typography>
-            <div>
-              {products.filter(
-                (product) => product.category.includes(chosenCategory) == true
-              ).length !== 0 ? (
-                <Grid container spacing={5}>
-                  {products
-                    .filter(
+                  <div>
+                    {products.filter(
                       (product) =>
                         product.category.includes(chosenCategory) == true
-                    )
-                    .map((categorisedProduct, index) => (
-                      <BookCard
-                        chosenCategory={chosenCategory}
-                        coverTitle={categorisedProduct.book_title}
-                        key={index}
-                        product={categorisedProduct}
-                      />
-                    ))}
-                </Grid>
-              ) : (
-                <Typography type="italic">
-                  Tidak ditemukan kilas di kategori ini!
-                </Typography>
-              )}
-            </div>
-          </div>
+                    ).length !== 0 ? (
+                      <Grid container spacing={5}>
+                        {products
+                          .filter(
+                            (product) =>
+                              product.category.includes(chosenCategory) == true
+                          )
+                          .map((categorisedProduct, index) => (
+                            <BookCard
+                              chosenCategory={chosenCategory}
+                              coverTitle={categorisedProduct.book_title}
+                              key={index}
+                              product={categorisedProduct}
+                            />
+                          ))}
+                      </Grid>
+                    ) : (
+                      <Typography type="italic">
+                        Tidak ditemukan kilas di kategori ini!
+                      </Typography>
+                    )}
+                  </div>
+                </div>
 
-          <div className={classes.sectionMobileBlock}>
-            {/* {isFavoriteBookTitlesEmpty ? (
+                <div className={classes.sectionMobileBlock}>
+                  {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -194,39 +312,38 @@ export default function CategoryBlock(props) {
             )}
 
             <div className={classes.extraSpace} /> */}
-
-            <Typography size="subheading">Owned Books</Typography>
-            <div>
-              {products.filter(
-                (product) => product.category.includes(chosenCategory) == true
-              ).length !== 0 ? (
-                <Grid container justifyContent="center" spacing={5}>
-                  {products
-                    .filter(
+                  <div>
+                    {products.filter(
                       (product) =>
                         product.category.includes(chosenCategory) == true
-                    )
-                    .map((categorisedProduct, index) => (
-                      <BookCard
-                        chosenCategory={chosenCategory}
-                        coverTitle={categorisedProduct.book_title}
-                        key={index}
-                        product={categorisedProduct}
-                      />
-                    ))}
-                </Grid>
-              ) : (
-                <Typography type="italic">
-                  Tidak ditemukan kilas di kategori ini!
-                </Typography>
-              )}
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <div className={classes.sectionDesktopBlock}>
-            {/* {isFavoriteBookTitlesEmpty ? (
+                    ).length !== 0 ? (
+                      <Grid container justifyContent="center" spacing={5}>
+                        {products
+                          .filter(
+                            (product) =>
+                              product.category.includes(chosenCategory) == true
+                          )
+                          .map((categorisedProduct, index) => (
+                            <BookCard
+                              chosenCategory={chosenCategory}
+                              coverTitle={categorisedProduct.book_title}
+                              key={index}
+                              product={categorisedProduct}
+                            />
+                          ))}
+                      </Grid>
+                    ) : (
+                      <Typography type="italic">
+                        Tidak ditemukan kilas di kategori ini!
+                      </Typography>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className={classes.sectionDesktopBlock}>
+                  {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -250,22 +367,20 @@ export default function CategoryBlock(props) {
             )}
 
             <div className={classes.extraSpace} /> */}
+                  <Grid container spacing={5}>
+                    {products.map((product) => (
+                      <BookCard
+                        chosenCategory={chosenCategory}
+                        coverTitle={product.book_title}
+                        key={product.id}
+                        product={product}
+                      />
+                    ))}
+                  </Grid>
+                </div>
 
-            <Typography size="subheading">Owned Books</Typography>
-            <Grid container spacing={5}>
-              {products.map((product) => (
-                <BookCard
-                  chosenCategory={chosenCategory}
-                  coverTitle={product.book_title}
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-            </Grid>
-          </div>
-
-          <div className={classes.sectionMobileBlock}>
-            {/* {isFavoriteBookTitlesEmpty ? (
+                <div className={classes.sectionMobileBlock}>
+                  {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -289,21 +404,37 @@ export default function CategoryBlock(props) {
             )}
 
             <div className={classes.extraSpace} /> */}
-
-            <Typography size="subheading">Owned Books</Typography>
-            <Grid container justifyContent="center" spacing={5}>
-              {products.map((product) => (
-                <BookCard
-                  chosenCategory={chosenCategory}
-                  coverTitle={product.book_title}
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-            </Grid>
-          </div>
-        </div>
-      )}
+                  <Grid container justifyContent="center" spacing={5}>
+                    {products.map((product) => (
+                      <BookCard
+                        chosenCategory={chosenCategory}
+                        coverTitle={product.book_title}
+                        key={product.id}
+                        product={product}
+                      />
+                    ))}
+                  </Grid>
+                </div>
+              </div>
+            )}
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <div style={{ marginBottom: "50px" }} />
+            <Typography
+              style={{
+                fontSize: "25px",
+                display: "flex",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+              type="italic"
+            >
+              Kamu sudah berlanggan dan telah memiliki semua buku!
+            </Typography>
+            <div style={{ marginBottom: "50px" }} />
+          </TabPanel>
+        </SwipeableViews>
+      </div>
     </div>
   );
 }

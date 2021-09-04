@@ -65,18 +65,16 @@ export default function Library({ history }) {
   return (
     <div>
       <NavBar history={history} />
+      <Parallax
+        small
+        filter
+        image={require("../../images/library.jpg").default}
+      >
+        <Typography color="beigeColor" size="heading">
+          My Library
+        </Typography>
+      </Parallax>
       <Container>
-        <Parallax
-          small
-          border
-          filter
-          image={require("../../images/library.jpg").default}
-        >
-          <Typography color="beigeColor" size="heading">
-            My Library
-          </Typography>
-        </Parallax>
-
         <div className={classes.extraSpace} />
         <OwnedBooksBlock
           ownedBookTitles={ownedBookTitles}

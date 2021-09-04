@@ -21,7 +21,7 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import classNames from "classnames";
 
 export default function NavBarSecond(props) {
-  const { children } = props;
+  const { children, buttons } = props;
 
   const backHistory = useHistory();
 
@@ -79,6 +79,8 @@ export default function NavBarSecond(props) {
             {children}
 
             <div className={growClass} />
+
+            {buttons}
           </Toolbar>
         </AppBar>
       </div>

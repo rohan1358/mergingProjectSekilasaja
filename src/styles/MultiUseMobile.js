@@ -137,6 +137,10 @@ const MultiUseMobile = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  audioControl: {
+    width: "100%",
+    maxWidth: "800px",
+  },
 }));
 
 export default MultiUseMobile;

@@ -212,7 +212,7 @@ export default function NavBar(props) {
                 }}
               >
                 <AccountCircleIcon style={{ marginRight: "8px" }} />{" "}
-                <Typography type="bold">Accounts</Typography>
+                <Typography type="bold">My Account</Typography>
               </div>
             </Link>
           </MenuItem>
@@ -294,7 +294,7 @@ export default function NavBar(props) {
                 </Button>
 
                 <Button round color="primary" onClick={goToAccounts}>
-                  Accounts
+                  My Account
                 </Button>
 
                 <div className={classes.divider} />
@@ -368,7 +368,7 @@ export default function NavBar(props) {
                     </Button>
 
                     <Button round color="primary" onClick={goToAccounts}>
-                      Accounts
+                      My Account
                     </Button>
 
                     <div className={classes.divider} />

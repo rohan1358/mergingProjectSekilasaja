@@ -8,6 +8,7 @@ import NavbarStyle from "../../styles/NavbarStyle";
 import TableOfContent from "./TableOfContent";
 import Typography from "../../components/Typography";
 import FourOFourPage from "../404page";
+import ReactAudioPlayer from "react-audio-player";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
@@ -17,7 +18,6 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 // Custom components
 import Button from "../../components/Button";
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -28,6 +28,7 @@ import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
+import { primaryColor } from "../../styles/Style";
 
 export default function TextReading({ match, history }) {
   const db = fire.firestore();
@@ -200,6 +201,26 @@ export default function TextReading({ match, history }) {
                   }
                 />
               }
+              buttons={
+                <div>
+                  <Button
+                    round
+                    style={{ fontSize: "17px", width: 0 }}
+                    color="gray"
+                    onClick={handlePrev}
+                  >
+                    <ArrowBackIcon />
+                  </Button>
+                  <Button
+                    color="gray"
+                    style={{ fontSize: "17px", width: 0 }}
+                    round
+                    onClick={handleNext}
+                  >
+                    <ArrowForwardIcon />
+                  </Button>
+                </div>
+              }
             />
 
             <Container maxWidth={"md"}>
@@ -273,33 +294,36 @@ export default function TextReading({ match, history }) {
           <div style={{ marginTop: "100px" }}>
             <AppBar color="white" position="fixed" className={classes.audioBar}>
               <Container>
-                <div style={{ padding: "15px" }}>
-                  <AudioPlayer
-                    vidLink={audioLink}
-                    buttonPrev={
-                      <Button
-                        round
-                        style={{ fontSize: "17px" }}
-                        color="gray"
-                        // className={classes.link}
-                        // underline="none"
-                        onClick={handlePrev}
-                      >
-                        <ArrowBackIcon />
-                      </Button>
-                    }
-                    buttonNext={
-                      <Button
-                        style={{ fontSize: "17px" }}
-                        round
-                        // className={classes.link}
-                        // underline="none"
-                        onClick={handleNext}
-                      >
-                        <ArrowForwardIcon />
-                      </Button>
-                    }
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div className={classes.sectionDesktop}>
+                    <Button
+                      round
+                      style={{ fontSize: "17px", width: 0 }}
+                      onClick={handlePrev}
+                    >
+                      <ArrowBackIcon />
+                    </Button>
+                  </div>
+
+                  <ReactAudioPlayer
+                    className={classes.audioControl}
+                    controlsList="nodownload"
+                    src={audioLink}
+                    autoPlay
+                    controls
                   />
+
+                  <div className={classes.sectionDesktop}>
+                    <Button
+                      style={{ fontSize: "17px", width: 0 }}
+                      round
+                      onClick={handleNext}
+                    >
+                      <ArrowForwardIcon />
+                    </Button>
+                  </div>
                 </div>
               </Container>
             </AppBar>

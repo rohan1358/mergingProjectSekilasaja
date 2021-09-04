@@ -113,6 +113,11 @@ const TextReadingStyle = makeStyles((theme) => ({
       cursor: "pointer",
     },
   },
+  audioControl: {
+    width: "100%",
+    maxWidth: "800px",
+    padding: "5px",
+  },
 }));
 
 export default TextReadingStyle;

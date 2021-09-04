@@ -6,13 +6,12 @@ import TextDetails from "./TextDetails";
 import NavBar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import Typography from "../../components/Typography";
-import VideoComponent from "../../components/VideoPlayer/VidPageComponent";
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
+import ReactAudioPlayer from "react-audio-player";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 
 // Material-UI components
-import { Container, Divider, Grid } from "@material-ui/core";
+import { Container, Divider, Grid, Tabs, makeStyles } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
@@ -34,7 +33,13 @@ import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
 
-const firestore = fire.firestore();
+const useStyles = makeStyles((theme) => ({
+  root: {
+    // display: "flex",
+    overflowY: "scroll",
+    height: 250,
+  },
+}));
 
 export default function BookDetailsPage({ match, history }) {
   const classes = MultiUseMobile();
@@ -188,6 +193,9 @@ export default function BookDetailsPage({ match, history }) {
     fetchData();
   };
 
+  // Scrolled bar
+  const tabs = useStyles();
+
   return (
     <div>
       <NavBar history={history} />
@@ -300,9 +308,12 @@ export default function BookDetailsPage({ match, history }) {
                           </Button>
                         }
                         audio={
-                          <div style={{ marginTop: "3px" }}>
-                            <AudioPlayer vidLink={audioLink} />
-                          </div>
+                          <ReactAudioPlayer
+                            className={classes.audioControl}
+                            controlsList="nodownload"
+                            src={audioLink}
+                            controls
+                          />
                         }
                         totalNum={current_product.kilasan.length}
                         kilasTitle={current_product.kilasan[0].title}
@@ -313,21 +324,26 @@ export default function BookDetailsPage({ match, history }) {
                             </Typography>
                           )
                         )}
-                        tableOfContents={current_product.kilasan.map(
-                          (kilas, index) => (
-                            <div>
-                              <Typography className={classes.paragraph}>
+                        tableOfContents={
+                          <div className={tabs.root}>
+                            {current_product.kilasan.map((kilas, index) => (
+                              <Typography style={{ textAlign: "left" }}>
                                 {kilas.title === undefined
                                   ? "Ringkasan Akhir"
                                   : "Kilas #" +
                                     (index + 1) +
                                     " : " +
                                     kilas.title}
+                                <Divider
+                                  style={{
+                                    marginTop: "12px",
+                                    marginBottom: "12px",
+                                  }}
+                                />
                               </Typography>
-                              <Divider />
-                            </div>
-                          )
-                        )}
+                            ))}
+                          </div>
+                        }
                       />
                     </Container>
                   )}
@@ -408,9 +424,12 @@ export default function BookDetailsPage({ match, history }) {
                           </Button>
                         }
                         audio={
-                          <div style={{ marginTop: "3px" }}>
-                            <AudioPlayer vidLink={audioLink} />
-                          </div>
+                          <ReactAudioPlayer
+                            className={classes.audioControl}
+                            controlsList="nodownload"
+                            src={audioLink}
+                            controls
+                          />
                         }
                         totalNum={current_product.kilasan.length}
                         kilasTitle={current_product.kilasan[0].title}
@@ -440,37 +459,39 @@ export default function BookDetailsPage({ match, history }) {
                             )}
                           </div>
                         }
-                        tableOfContents={current_product.kilasan.map(
-                          (kilas, index) => (
-                            <div>
-                              {index < 2 ? (
-                                <div>
-                                  <Typography className={classes.paragraph}>
-                                    {kilas.title === undefined
-                                      ? "Ringkasan Akhir"
-                                      : "Kilas #" +
-                                        (index + 1) +
-                                        " : " +
-                                        kilas.title}
-                                  </Typography>
-                                  <Divider />
-                                </div>
-                              ) : (
-                                <div className={classes.blur}>
-                                  <Typography className={classes.paragraph}>
-                                    {kilas.title === undefined
-                                      ? "Ringkasan Akhir"
-                                      : "Kilas #" +
-                                        (index + 1) +
-                                        " : " +
-                                        kilas.title}
-                                  </Typography>
-                                  <Divider />
-                                </div>
-                              )}
-                            </div>
-                          )
-                        )}
+                        tableOfContents={
+                          <div className={tabs.root}>
+                            {current_product.kilasan.map((kilas, index) => (
+                              <div>
+                                {index < 2 ? (
+                                  <div>
+                                    <Typography className={classes.paragraph}>
+                                      {kilas.title === undefined
+                                        ? "Ringkasan Akhir"
+                                        : "Kilas #" +
+                                          (index + 1) +
+                                          " : " +
+                                          kilas.title}
+                                    </Typography>
+                                    <Divider />
+                                  </div>
+                                ) : (
+                                  <div className={classes.blur}>
+                                    <Typography className={classes.paragraph}>
+                                      {kilas.title === undefined
+                                        ? "Ringkasan Akhir"
+                                        : "Kilas #" +
+                                          (index + 1) +
+                                          " : " +
+                                          kilas.title}
+                                    </Typography>
+                                    <Divider />
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        }
                       />
                     </Container>
                   )}
@@ -525,9 +546,12 @@ export default function BookDetailsPage({ match, history }) {
                       </Button>
                     }
                     audio={
-                      <div style={{ marginTop: "3px" }}>
-                        <AudioPlayer vidLink={audioLink} />
-                      </div>
+                      <ReactAudioPlayer
+                        className={classes.audioControl}
+                        controlsList="nodownload"
+                        src={audioLink}
+                        controls
+                      />
                     }
                     totalNum={current_product.kilasan.length}
                     kilasTitle={current_product.kilasan[0].title}
@@ -555,37 +579,39 @@ export default function BookDetailsPage({ match, history }) {
                         ))}
                       </div>
                     }
-                    tableOfContents={current_product.kilasan.map(
-                      (kilas, index) => (
-                        <div>
-                          {index < 2 ? (
-                            <div>
-                              <Typography className={classes.paragraph}>
-                                {kilas.title === undefined
-                                  ? "Ringkasan Akhir"
-                                  : "Kilas #" +
-                                    (index + 1) +
-                                    " : " +
-                                    kilas.title}
-                              </Typography>
-                              <Divider />
-                            </div>
-                          ) : (
-                            <div className={classes.blur}>
-                              <Typography className={classes.paragraph}>
-                                {kilas.title === undefined
-                                  ? "Ringkasan Akhir"
-                                  : "Kilas #" +
-                                    (index + 1) +
-                                    " : " +
-                                    kilas.title}
-                              </Typography>
-                              <Divider />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    )}
+                    tableOfContents={
+                      <div className={tabs.root}>
+                        {current_product.kilasan.map((kilas, index) => (
+                          <div>
+                            {index < 2 ? (
+                              <div>
+                                <Typography className={classes.paragraph}>
+                                  {kilas.title === undefined
+                                    ? "Ringkasan Akhir"
+                                    : "Kilas #" +
+                                      (index + 1) +
+                                      " : " +
+                                      kilas.title}
+                                </Typography>
+                                <Divider />
+                              </div>
+                            ) : (
+                              <div className={classes.blur}>
+                                <Typography className={classes.paragraph}>
+                                  {kilas.title === undefined
+                                    ? "Ringkasan Akhir"
+                                    : "Kilas #" +
+                                      (index + 1) +
+                                      " : " +
+                                      kilas.title}
+                                </Typography>
+                                <Divider />
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    }
                   />
                 </Container>
               )}

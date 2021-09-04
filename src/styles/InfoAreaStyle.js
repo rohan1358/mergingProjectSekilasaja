@@ -9,6 +9,17 @@ import {
 } from "./Style";
 
 const InfoStyle = {
+  cardHover: {
+    "&:hover": {
+      filter: "brightness(150%)",
+    },
+  },
+  notOwned: {
+    filter: "grayscale(100%)",
+    "&:hover": {
+      filter: "brightness(150%)",
+    },
+  },
   bookCover: {
     maxWidth: "200px",
     marginTop: "30px",

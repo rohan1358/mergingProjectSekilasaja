@@ -1,19 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 // @material-ui/core components
-import {
-  makeStyles,
-  Grid,
-  Divider,
-  Container,
-  ButtonBase,
-} from "@material-ui/core";
-import {
-  ImportContacts,
-  EmojiObjects,
-  PlayArrow,
-  Videocam,
-} from "@material-ui/icons";
+import { makeStyles, Grid, Divider } from "@material-ui/core";
+import { ImportContacts, EmojiObjects, Videocam } from "@material-ui/icons";
 
 // Custom components
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
@@ -53,9 +42,9 @@ export default function BookDetails(props) {
       <div>
         <div className={classes.bookDetailsWidth}>
           <div className={desktopClass}>
-            <Grid container>
+            <Grid container spacing={5}>
               <Grid item xs={12}>
-                <div className={mobile.extraSpace} />
+                <div style={{ marginTop: "5px" }} />
               </Grid>
 
               <Grid item xs={9}>
@@ -94,12 +83,13 @@ export default function BookDetails(props) {
 
                   <Typography type="bold">{descriptionTitle}</Typography>
                   <Typography>{description}</Typography>
+
+                  <div style={{ marginTop: "40px" }} />
+                  {buttons}
                 </div>
               </Grid>
 
-              <Grid item xs={1} />
-
-              <Grid item xs={2}>
+              <Grid item xs={3}>
                 <img
                   src={cover}
                   className={
@@ -107,12 +97,10 @@ export default function BookDetails(props) {
                     " " +
                     classes.imgFluid +
                     " " +
-                    classes.imgBookCover
+                    classes.imgBookDetailsCover
                   }
                 />
               </Grid>
-
-              {buttons}
 
               <Grid item xs={12}>
                 <div className={mobile.extraSpace} />
@@ -131,7 +119,7 @@ export default function BookDetails(props) {
                   " " +
                   classes.imgFluid +
                   " " +
-                  classes.imgBookCover
+                  classes.imgBookDetailsCover
                 }
               />
             </Grid>

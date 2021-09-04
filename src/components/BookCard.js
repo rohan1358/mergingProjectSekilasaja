@@ -8,17 +8,15 @@ import InfoAreaStyle from "../styles/InfoAreaStyle";
 import Typography from "./Typography";
 
 // Firebase components
-import { AuthContext } from "../components/Routing/Auth";
 import * as firebaseGetBookCoverImageURL from "../firebase/firebaseGetBookCoverImageURL";
 import fire from "../firebase/fire";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function BookCard({ product, chosenCategory }) {
+export default function BookCard({ product, chosenCategory, notOwned }) {
   const classes = useStyles();
 
   const db = fire.firestore();
-  const { currentUser } = useContext(AuthContext);
   const [coverLink, setCoverLink] = useState("");
   const [products, SetProducts] = useState([]);
 
@@ -45,7 +43,7 @@ export default function BookCard({ product, chosenCategory }) {
   }, [, chosenCategory]);
 
   return (
-    <Grid item>
+    <Grid className={classes.cardHover + " " + notOwned} item>
       <Link underline="none" href={`book-details/${product.book_title}`}>
         <div className={classes.bookCover}>
           <div>

@@ -44,6 +44,11 @@ const ImagesStyle = {
     width: "100%",
     maxWidth: "200px",
   },
+  imgBookDetailsCover: {
+    marginTop: "10px",
+    width: "100%",
+    maxWidth: "250px",
+  },
   imgHomeBook: {
     width: "100%",
     maxWidth: "500px",

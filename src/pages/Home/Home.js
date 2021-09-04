@@ -105,12 +105,26 @@ export default function Home({ history }) {
         <div>
           <Parallax
             className={desktopClass}
-            image={require("../../images/home.png").default}
+            // image={require("../../images/home.png").default}
           >
             <Grid container>
               <Grid item xs={6}>
-                <Typography size="heading">
+                <Typography
+                  style={{
+                    fontFamily: "Arial Black",
+                    letterSpacing: "-1px",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                  }}
+                  size="heading"
+                >
                   Daftar Sekarang Dan Dapatkan Ketiga Buku Ini Secara Gratis!
+                </Typography>
+                <Typography>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
                 </Typography>
                 <Button href="/signup" round color="primary">
                   Daftar Sekarang
@@ -131,6 +145,12 @@ export default function Home({ history }) {
               </Grid>
             </Grid>
           </Parallax>
+
+          <Parallax
+            large
+            className={desktopClass}
+            image={require("../../images/home3.jpg").default}
+          ></Parallax>
 
           <div className={mobileClass}>
             <Grid container>

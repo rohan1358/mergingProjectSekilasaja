@@ -94,12 +94,12 @@ export default function BookDetails(props) {
                     <Typography size="subheading" type="bold">
                       Audio
                     </Typography>
-                    <Paper
+                    {/* <Paper
                       style={{ backgroundColor: grayColor }}
                       variant="outlined"
-                    >
-                      {audio}
-                    </Paper>
+                    > */}
+                    {audio}
+                    {/* </Paper> */}
                   </div>
 
                   <div>
@@ -151,12 +151,12 @@ export default function BookDetails(props) {
                       <Typography size="subheading" type="bold">
                         Audio
                       </Typography>
-                      <Paper
+                      {/* <Paper
                         style={{ backgroundColor: grayColor }}
                         variant="outlined"
-                      >
-                        {audio}
-                      </Paper>
+                      > */}
+                      {audio}
+                      {/* </Paper> */}
                     </div>
                     <div>
                       <Typography size="subheading" type="bold">
@@ -185,12 +185,12 @@ export default function BookDetails(props) {
                     <Typography size="subheading" type="bold">
                       Audio
                     </Typography>
-                    <Paper
+                    {/* <Paper
                       style={{ backgroundColor: grayColor }}
                       variant="outlined"
-                    >
-                      {audio}
-                    </Paper>
+                    > */}
+                    {audio}
+                    {/* </Paper> */}
                   </div>
                   <div>
                     <Typography size="subheading" type="bold">
