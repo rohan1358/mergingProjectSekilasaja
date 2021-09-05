@@ -142,6 +142,11 @@ const MultiUseMobile = makeStyles((theme) => ({
     width: "100%",
     maxWidth: "800px",
   },
+  fixedLogo: {
+    position: "fixed",
+    bottom: 15,
+    left: 15,
+  },
 }));
 
 export default MultiUseMobile;

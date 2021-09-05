@@ -246,7 +246,7 @@ export default function BookDetailsPage({ match, history }) {
                                   </Button>
                                 </Grid>
 
-                                <Grid item>
+                                {/* <Grid item>
                                   {isFavorite === false ? (
                                     <Button
                                       onClick={handleAddFavorite}
@@ -262,7 +262,7 @@ export default function BookDetailsPage({ match, history }) {
                                       Remove From Favorites!
                                     </Button>
                                   )}
-                                </Grid>
+                                </Grid> */}
                               </Grid>
                             </div>
 
@@ -283,7 +283,7 @@ export default function BookDetailsPage({ match, history }) {
                                   Watch now!
                                 </Button>
                               </Grid>
-                              <Grid item xs={12}>
+                              {/* <Grid item xs={12}>
                                 {isFavorite === false ? (
                                   <Button
                                     onClick={handleAddFavorite}
@@ -301,7 +301,7 @@ export default function BookDetailsPage({ match, history }) {
                                     Remove From Favorites!
                                   </Button>
                                 )}
-                              </Grid>
+                              </Grid> */}
                             </div>
                           </div>
                         }

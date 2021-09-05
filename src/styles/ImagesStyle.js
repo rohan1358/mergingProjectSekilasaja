@@ -3,6 +3,12 @@ const ImagesStyle = {
     width: "220px",
     padding: "10px",
   },
+  imgWhatsappLogo: {
+    width: "60px",
+    "&:hover": {
+      filter: "brightness(150%)",
+    },
+  },
   imgFluid: {
     maxWidth: "100%",
     height: "auto",
@@ -55,7 +61,12 @@ const ImagesStyle = {
   },
   imgHomeBook: {
     width: "100%",
-    maxWidth: "500px",
+    maxWidth: "130px",
+    padding: "5px",
+    transition: "transform .2s",
+    "&:hover": {
+      transform: "scale(1.5)",
+    },
   },
   videoWidth: {
     marginTop: "20px",
