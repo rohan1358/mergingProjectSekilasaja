@@ -313,13 +313,30 @@ export default function Payment({ history }) {
                 <FormControl component="fieldset">
                   <FormLabel component="legend">Gender</FormLabel>
                   <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleRadioChange}>
-                    <FormControlLabel value="female" control={<Radio />} label="Female" />
-                    
-                    <Box value = "female" chosenValue = {value}></Box>
-                    <FormControlLabel value="male" control={<Radio />} label="Male" />
-                    <Box value = "male" chosenValue = {value}></Box>
-                    <FormControlLabel value="other" control={<Radio />} label="Other" />
-                    <Box value = "other" chosenValue = {value}></Box>
+                    <FormControlLabel value="BCA Virtual Account" control={<Radio />} label="BCA Virtual Account" />
+                    <Box value = "BCA Virtual Account" chosenValue = {value}></Box>
+                    <FormControlLabel value="Mandiri Virtual Account" control={<Radio />} label="Mandiri Virtual Account" />
+                    <Box value = "Mandiri Virtual Account" chosenValue = {value}></Box>
+                    <FormControlLabel value="OVO" control={<Radio />} label="OVO" />
+                    <Box value = "OVO" chosenValue = {value}></Box>
+                    <FormControlLabel value="BNI Virtual Account" control={<Radio />} label="BNI Virtual Account" />
+                    <Box value = "BNI Virtual Account" chosenValue = {value}></Box>
+                    <FormControlLabel value="BRI Virtual Account" control={<Radio />} label="BRI Virtual Account" />
+                    <Box value = "BRI Virtual Account" chosenValue = {value}></Box>
+                    <FormControlLabel value="Credit Card (Xendit)" control={<Radio />} label="Credit Card (Xendit)" />
+                    <Box value = "Credit Card (Xendit)" chosenValue = {value}></Box>
+                    <FormControlLabel value="Go Pay/Alfa Group" control={<Radio />} label="Go Pay/Alfa Group" />
+                    <Box value = "Go Pay/Alfa Group" chosenValue = {value}></Box>
+                    <FormControlLabel value="QRIS" control={<Radio />} label="QRIS" />
+                    <Box value = "QRIS" chosenValue = {value}></Box>
+                    <FormControlLabel value="ShopeePay" control={<Radio />} label="ShopeePay" />
+                    <Box value = "ShopeePay" chosenValue = {value}></Box>
+                    <FormControlLabel value="DANA" control={<Radio />} label="DANA" />
+                    <Box value = "DANA" chosenValue = {value}></Box>                    
+                    <FormControlLabel value="Bank Transfer - Permata" control={<Radio />} label="Bank Transfer - Permata" />
+                    <Box value = "Bank Transfer - Permata" chosenValue = {value}></Box>
+                    <FormControlLabel value="LINKAJA" control={<Radio />} label="LINKAJA" />
+                    <Box value = "LINKAJA" chosenValue = {value}></Box>
                     <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
                   </RadioGroup>
                 </FormControl>
