@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router";
 
+
 // Custom components
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
@@ -8,6 +9,15 @@ import Button from "../../components/Button";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import InfoStyle from "../../styles/InfoAreaStyle";
+import Box from "../../components/Box";
+//Material UI
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
+import PaymentStyle from '../../styles/PaymentStyle'
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -43,8 +53,13 @@ const firestore = fire.firestore();
 export default function Payment({ history }) {
   const { currentUser } = useContext(AuthContext);
   const classes = MultiUseMobile();
+  const payment_classes = PaymentStyle();
   const styles = useStyles();
+  const [value, setValue] = useState('female');
 
+  const handleRadioChange = (event) => {
+    setValue(event.target.value);
+  };
   // Get user data
   const userData = useSelector(selectUser);
 
@@ -325,32 +340,36 @@ export default function Payment({ history }) {
                     <Alert severity="error">{fileError}</Alert>
                   </div>
                 )}
-                <Typography type="bold">Step 1:</Typography>
-                <Typography>
-                  • Transfer ke rekening BCA 123456789 a/n Darren Lucky
-                </Typography>
-                <Typography>
-                  • Atau, transfer ke rekening Mandiri 123456789 a/n Darren
-                  Lucky
-                </Typography>
-                <Typography>
-                  • Atau, transfer ke rekening BRI 123456789 a/n Darren Lucky
-                </Typography>
-                <Typography className={classes.paragraphSpace} type="bold">
-                  Step 2:
-                </Typography>
-                <Typography>
-                  Pastikan nominal yang anda transfer sesuai dengan harga yang
-                  tertulis, bila anda transfer dengan nominal yang salah harap
-                  hubungi customer service kami.
-                </Typography>
-                <Typography className={classes.paragraphSpace} type="bold">
-                  Step 3:
-                </Typography>
-                <Typography>
-                  Foto atau screenshot bukti transfer anda, lalu upload foto
-                  melalui tombol "Attach File" di bawah!
-                </Typography>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Gender</FormLabel>
+                  <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleRadioChange}>
+                    <FormControlLabel value="BCA Virtual Account" control={<Radio />} label="BCA Virtual Account" />
+                    <Box value = "BCA Virtual Account" chosenValue = {value}></Box>
+                    <FormControlLabel value="Mandiri Virtual Account" control={<Radio />} label="Mandiri Virtual Account" />
+                    <Box value = "Mandiri Virtual Account" chosenValue = {value}></Box>
+                    <FormControlLabel value="OVO" control={<Radio />} label="OVO" />
+                    <Box value = "OVO" chosenValue = {value}></Box>
+                    <FormControlLabel value="BNI Virtual Account" control={<Radio />} label="BNI Virtual Account" />
+                    <Box value = "BNI Virtual Account" chosenValue = {value}></Box>
+                    <FormControlLabel value="BRI Virtual Account" control={<Radio />} label="BRI Virtual Account" />
+                    <Box value = "BRI Virtual Account" chosenValue = {value}></Box>
+                    <FormControlLabel value="Credit Card (Xendit)" control={<Radio />} label="Credit Card (Xendit)" />
+                    <Box value = "Credit Card (Xendit)" chosenValue = {value}></Box>
+                    <FormControlLabel value="Go Pay/Alfa Group" control={<Radio />} label="Go Pay/Alfa Group" />
+                    <Box value = "Go Pay/Alfa Group" chosenValue = {value}></Box>
+                    <FormControlLabel value="QRIS" control={<Radio />} label="QRIS" />
+                    <Box value = "QRIS" chosenValue = {value}></Box>
+                    <FormControlLabel value="ShopeePay" control={<Radio />} label="ShopeePay" />
+                    <Box value = "ShopeePay" chosenValue = {value}></Box>
+                    <FormControlLabel value="DANA" control={<Radio />} label="DANA" />
+                    <Box value = "DANA" chosenValue = {value}></Box>                    
+                    <FormControlLabel value="Bank Transfer - Permata" control={<Radio />} label="Bank Transfer - Permata" />
+                    <Box value = "Bank Transfer - Permata" chosenValue = {value}></Box>
+                    <FormControlLabel value="LINKAJA" control={<Radio />} label="LINKAJA" />
+                    <Box value = "LINKAJA" chosenValue = {value}></Box>
+                    <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
+                  </RadioGroup>
+                </FormControl>
 
                 <TextField
                   required
@@ -458,11 +477,16 @@ export default function Payment({ history }) {
 
             <Grid item xs={12}>
               <Paper className={classes.paddedContent} elevation={5}>
+                <Typography size="subheading">2. Checkout Form</Typography>
                 <form
                   onSubmit={handlePayment}
                   className={classes.textFieldRoot}
                 >
-                  <Typography size="subheading">2. Checkout Form</Typography>
+                  {error && (
+                    <div className={classes.alertRoot}>
+                      <Alert severity="error">{error}</Alert>
+                    </div>
+                  )}
                   <TextField
                     id="filled-basic"
                     label="First Name"
@@ -500,32 +524,12 @@ export default function Payment({ history }) {
                 <div className={classes.extraSpace} />
 
                 <Typography size="subheading">3. Payment</Typography>
-                <Typography type="bold">Step 1:</Typography>
-                <Typography>
-                  • Transfer ke rekening BCA 123456789 a/n Darren Lucky
-                </Typography>
-                <Typography>
-                  • Atau, transfer ke rekening Mandiri 123456789 a/n Darren
-                  Lucky
-                </Typography>
-                <Typography>
-                  • Atau, transfer ke rekening BRI 123456789 a/n Darren Lucky
-                </Typography>
-                <Typography className={classes.paragraphSpace} type="bold">
-                  Step 2:
-                </Typography>
-                <Typography>
-                  Pastikan nominal yang anda transfer sesuai dengan harga yang
-                  tertulis, bila anda transfer dengan nominal yang salah harap
-                  hubungi customer service kami.
-                </Typography>
-                <Typography className={classes.paragraphSpace} type="bold">
-                  Step 3:
-                </Typography>
-                <Typography>
-                  Foto atau screenshot bukti transfer anda, lalu upload foto
-                  melalui tombol "Attach File" di bawah!
-                </Typography>
+                {fileError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{fileError}</Alert>
+                  </div>
+                )}
+
                 <form>
                   <label htmlFor="upload-photo">
                     <input
