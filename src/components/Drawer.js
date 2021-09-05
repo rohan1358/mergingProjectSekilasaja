@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 });
 
 export default function CustomDrawer(props) {
-  const { logo, children, drawerTitle, drawerLogo, direction, countCartItems } =
+  const { logo, children, drawerTitle, drawerLogo, direction, childrenCart } =
     props;
   const classes = NavbarStyle();
   const spaces = MultiUseMobile();
@@ -77,6 +77,7 @@ export default function CustomDrawer(props) {
         <Divider />
 
         <div onClick={toggleDrawer(anchor, false)}>{children}</div>
+        <div>{childrenCart}</div>
       </Container>
     </div>
   );
@@ -109,5 +110,5 @@ CustomDrawer.propTypes = {
   drawerTitle: PropTypes.string,
   drawerLogo: PropTypes.object,
   direction: PropTypes.string.isRequired,
-  countCartItems: PropTypes.object,
+  childrenCart: PropTypes.object,
 };

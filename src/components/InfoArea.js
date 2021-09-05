@@ -10,6 +10,7 @@ import { makeStyles } from "@material-ui/core";
 // Custom components
 import InfoStyle from "../styles/InfoAreaStyle";
 import Typography from "./Typography";
+import { beigeColor, secondaryColor } from "../styles/Style";
 
 const useStyles = makeStyles(InfoStyle);
 
@@ -28,13 +29,19 @@ export default function InfoArea(props) {
   return (
     <div className={classes.infoArea}>
       <div className={iconWrapper}>
-        <props.icon className={iconClasses} />
+        <props.icon style={{ color: beigeColor }} className={iconClasses} />
       </div>
       <div className={classes.descriptionWrapper}>
-        <Typography size="subheading" className={classes.title}>
+        <Typography
+          color="beigeColor"
+          size="subheading"
+          className={classes.title}
+        >
           {title}
         </Typography>
-        <Typography className={classes.description}>{description}</Typography>
+        <Typography color="beigeColor" className={classes.description}>
+          {description}
+        </Typography>
       </div>
     </div>
   );

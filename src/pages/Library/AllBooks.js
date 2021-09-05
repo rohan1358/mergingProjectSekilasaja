@@ -160,7 +160,7 @@ export default function CategoryBlock(props) {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    fontSize: "20px",
+                    fontSize: "17px",
                   }}
                 >
                   <LibraryAddCheckIcon style={{ marginRight: "5px" }} /> Owned
@@ -175,7 +175,7 @@ export default function CategoryBlock(props) {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    fontSize: "20px",
+                    fontSize: "17px",
                   }}
                 >
                   <RemoveCircleOutlineIcon style={{ marginRight: "5px" }} /> Not

@@ -8,6 +8,9 @@ import Footer from "../../components/Footer";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import SubscriptionPlan from "./SubscriptionPlan";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 
 // firebase components
 import fire from "../.././firebase/fire";
@@ -39,6 +42,8 @@ export default function AccountsPage(props) {
   const [profileError, setProfileError] = useState("");
   const [profileSuccess, setProfileSuccess] = useState("");
   const [success, setSuccess] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
@@ -46,9 +51,11 @@ export default function AccountsPage(props) {
       console.log("User is not logged in, redirecting to login page...");
       return <Redirect to="/login" />;
     } else if (currentUser && !currentUser.emailVerified) {
-      console.log("Redirect to email not verified page to ask for email verification...");
-      return <Redirect to="/verify-email"/>;
-    } 
+      console.log(
+        "Redirect to email not verified page to ask for email verification..."
+      );
+      return <Redirect to="/verify-email" />;
+    }
 
     if (currentUser !== null) {
       const fetchData = async () => {
@@ -110,39 +117,49 @@ export default function AccountsPage(props) {
 
   function handleChangePassword(e) {
     e.preventDefault();
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Password tidak sama!");
-    }
 
-    if (passwordRef.current.value !== "") {
-      return setError("Proses Gagal!");
-    }
-
-    const promises = [];
-    setLoading(true);
     setError("");
     setSuccess("");
 
-    if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value));
+    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+      setSuccess("");
+      return setError("Password tidak sama!");
     }
 
-    Promise.all(promises)
-      .then(() => {
-        setSuccess("Proses berhasil!");
-        setError("");
-      })
-      .catch(() => {
-        setError("Proses Gagal!");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    if (passwordRef.current.value.length === 0) {
+      setSuccess("");
+      return setError("Proses Gagal!");
+    }
+
+    if (passwordRef.current.value) {
+      setError("");
+      setSuccess("Proses berhasil!");
+      updatePassword(passwordRef.current.value);
+    }
+
+    // Promise.all(promises)
+    //   .then(() => {
+    //     setSuccess("Proses berhasil!");
+    //     setError("");
+    //   })
+    //   .catch(() => {
+    //     setError("Proses Gagal!");
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   }
 
   return (
     <div>
-      <NavBar history={history} />
+      <div style={{ marginTop: "100px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
       {(userData !== null) == true && (
         <Container maxWidth={"sm"}>
           <div className={classes.extraSpace} />
@@ -243,6 +260,7 @@ export default function AccountsPage(props) {
                 label="Password Baru"
                 variant="filled"
                 inputRef={passwordRef}
+                // value={newPassword}
                 type="password"
                 fullWidth
               />
@@ -252,6 +270,7 @@ export default function AccountsPage(props) {
                 variant="filled"
                 type="password"
                 inputRef={passwordConfirmRef}
+                // value={newPasswordConfirm}
                 fullWidth
               />
               <Button disabled={loading} type="submit" fullWidth>

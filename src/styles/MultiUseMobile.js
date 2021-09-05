@@ -133,6 +133,7 @@ const MultiUseMobile = makeStyles((theme) => ({
   },
   alertRoot: {
     width: "100%",
+    marginBottom: "8px",
     "& > * + *": {
       marginTop: theme.spacing(2),
     },

@@ -9,6 +9,9 @@ import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import BookSearchResultCard from "./BookSearchResultCard";
 import SearchResultsBlock from "./SearchResultsBlock";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -45,7 +48,14 @@ export default function SearchResults({ match, history }) {
 
   return (
     <div>
-      <NavBar history={history} />
+      <div style={{ marginTop: "100px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
       <div className={classes.extraSpace2} />
       <SearchResultsBlock searchResults={searchResults} history={history} />
       <Footer />

@@ -4,6 +4,9 @@ import React, { useState, useContext, useEffect } from "react";
 import BookDetails from "./BookDetails";
 import TextDetails from "./TextDetails";
 import NavBar from "../../components/NavBar/Navbar";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import Footer from "../../components/Footer";
 import Typography from "../../components/Typography";
 import ReactAudioPlayer from "react-audio-player";
@@ -198,7 +201,14 @@ export default function BookDetailsPage({ match, history }) {
 
   return (
     <div>
-      <NavBar history={history} />
+      <div style={{ marginTop: "100px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
       {!!currentUser ? (
         <div>
           {!!isSubscribed || !!isBookOwned ? (

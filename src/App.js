@@ -56,7 +56,7 @@ function App() {
             path="/searchResults/:searchValue"
             component={SearchResults}
           />
-          <Route exact path="/contact" component={Contact} />
+          {/* <Route exact path="/contact" component={Contact} /> */}
           <Route exact path="/pricing" component={PricingPage} />
           <Route
             exact

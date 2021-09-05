@@ -260,7 +260,7 @@ export default function OwnedBooksBlock(props) {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        fontSize: "20px",
+                        fontSize: "17px",
                       }}
                     >
                       <LibraryAddCheckIcon style={{ marginRight: "5px" }} />{" "}
@@ -275,7 +275,7 @@ export default function OwnedBooksBlock(props) {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        fontSize: "20px",
+                        fontSize: "17px",
                       }}
                     >
                       <RemoveCircleOutlineIcon style={{ marginRight: "5px" }} />{" "}

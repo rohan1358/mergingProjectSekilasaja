@@ -16,9 +16,6 @@ const InfoStyle = {
   },
   notOwned: {
     filter: "grayscale(100%)",
-    "&:hover": {
-      filter: "brightness(150%)",
-    },
   },
   bookCover: {
     maxWidth: "200px",
@@ -68,7 +65,7 @@ const InfoStyle = {
     overflow: "hidden",
   },
   description: {
-    color: secondaryColor,
+    // color: secondaryColor,
     overflow: "hidden",
     marginTop: "0px",
   },

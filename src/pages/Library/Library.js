@@ -8,6 +8,9 @@ import OwnedBooksBlock from "./OwnedBooksBlock";
 import Parallax from "../../components/Parallax";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -64,7 +67,14 @@ export default function Library({ history }) {
 
   return (
     <div>
-      <NavBar history={history} />
+      <div style={{ marginTop: "70px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
       <Parallax
         small
         filter

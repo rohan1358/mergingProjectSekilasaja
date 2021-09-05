@@ -2,15 +2,24 @@ import React, { useContext, useState, useEffect } from "react";
 
 // Custom components
 import Typography from "../components/Typography";
-import BenefitsBlock from "../components/BenefitsBlock";
 import Button from "../components/Button";
 import MultiUseMobile from "../styles/MultiUseMobile";
-import NavBar from "../components/NavBar/Navbar";
+import Header from "../components/NavBar/Header";
+import HeaderLinks from "../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../components/NavBar/HeaderLinksMobile";
 import Footer from "../components/Footer";
-import { beigeColor } from "../styles/Style";
+import { beigeColor, primaryColor, secondaryColor } from "../styles/Style";
 
 // Material-UI components
-import { Container, Grid, Paper } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  CardContent,
+  CardActions,
+  CardHeader,
+  Card,
+  makeStyles,
+} from "@material-ui/core";
 
 // Firebase components
 import { AuthContext } from "../components/Routing/Auth";
@@ -23,23 +32,58 @@ import fire from "../firebase/fire";
 import { selectCart, setCart } from "../feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function PricingPage({ match, history }) {
-  const db = fire.firestore();
+const useStyles = makeStyles((theme) => ({
+  cardHover: {
+    position: "relative",
+    top: 0,
+    transition: "top ease 0.5s",
+    "&:hover": {
+      top: "-10px",
+    },
+  },
+  orLabel: {
+    width: "100%",
+    textAlign: "center",
+    borderBottom: "1px solid #41444b",
+    lineHeight: "0.1em",
+    margin: "10px 0 20px",
+  },
+  middle: {
+    fontSize: "30px",
+    fontWeight: 500,
+    background: "#FAFAFA",
+    padding: "0 10px",
+  },
+  link: {
+    margin: theme.spacing(1, 1.5),
+  },
+  heroContent: {
+    padding: theme.spacing(8, 0, 6),
+  },
+  cardHeader: {
+    backgroundColor: primaryColor,
+  },
+  cardHeaderKilas: {
+    backgroundColor: secondaryColor,
+  },
+  cardPricing: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "baseline",
+    marginBottom: theme.spacing(2),
+  },
+}));
 
-  const classes = MultiUseMobile();
+export default function PricingPage({ match, history }) {
+  const classes = useStyles();
   const { currentUser } = useContext(AuthContext);
   const cartItems = useSelector(selectCart).cart;
 
-  const [isAdded, setIsAdded] = useState(false);
   const [userData, setUserData] = useState(null);
   const [subOne, setSubOne] = useState(null);
   const [subThree, setSubThree] = useState(null);
   const [subSix, setSubSix] = useState(null);
   const [subTwelve, setSubTwelve] = useState(null);
-  const [isSubOneAdded, setIsSubOneAdded] = useState(false);
-  const [isSubThreeAdded, setIsSubThreeAdded] = useState(false);
-  const [isSubSixAdded, setIsSubSixAdded] = useState(false);
-  const [isSubTwelveAdded, setIsSubTwelveAdded] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -76,20 +120,6 @@ export default function PricingPage({ match, history }) {
     };
     fetchSubData();
   }, []);
-
-  // useEffect(() => {
-  //   const changeBtn = () => {
-  //     const subsMap = subscriptionData.map((x) => x.book_title);
-  //     const exist = cartItems.find((x) => x.book_title === subsMap);
-
-  //     if (exist) {
-  //       setIsAdded(true);
-  //     } else {
-  //       setIsAdded(false);
-  //     }
-  //   };
-  //   changeBtn();
-  // }, [cartItems]);
 
   const handleAddCartOne = () => {
     const fetchData = async () => {
@@ -179,421 +209,336 @@ export default function PricingPage({ match, history }) {
     fetchData();
   };
 
-  // useEffect(() => {
-  //   const changeOneBtn = () => {
-  //     const exist = cartItems.find(
-  //       (x) => x.book_title === "Subscription 1 Bulan"
-  //     );
-  //     if (exist) {
-  //       setIsSubOneAdded(true);
-  //     } else {
-  //       setIsSubOneAdded(false);
-  //     }
-  //   };
-  //   changeOneBtn();
-
-  //   const changeThreeBtn = () => {
-  //     const exist = cartItems.find(
-  //       (x) => x.book_title === "Subscription 3 Bulan"
-  //     );
-  //     if (exist) {
-  //       setIsSubThreeAdded(true);
-  //     } else {
-  //       setIsSubThreeAdded(false);
-  //     }
-  //   };
-  //   changeThreeBtn();
-
-  //   const changeSixBtn = () => {
-  //     const exist = cartItems.find(
-  //       (x) => x.book_title === "Subscription 6 Bulan"
-  //     );
-  //     if (exist) {
-  //       setIsSubSixAdded(true);
-  //     } else {
-  //       setIsSubSixAdded(false);
-  //     }
-  //   };
-  //   changeSixBtn();
-
-  //   const changeTwelveBtn = () => {
-  //     const exist = cartItems.find(
-  //       (x) => x.book_title === "Subscription 12 Bulan"
-  //     );
-  //     if (exist) {
-  //       setIsSubTwelveAdded(true);
-  //     } else {
-  //       setIsSubTwelveAdded(false);
-  //     }
-  //   };
-  //   changeTwelveBtn();
-  // }, [cartItems]);
+  const tiers = [
+    {
+      title: "12 Bulan",
+      monthlyPrice: "30.000",
+      price: "285.000",
+      currentPrice: "35.000",
+      disclaimer: "* Pembayaran langsung 12 bulan di depan",
+      buttonText: "Berlanggan Sekarang!",
+      route: handleAddCartTwelve,
+    },
+    {
+      title: "6 Bulan",
+      monthlyPrice: "30.000",
+      price: "145.000",
+      currentPrice: "35.000",
+      disclaimer: "* Pembayaran langsung 6 bulan di depan",
+      buttonText: "Berlanggan Sekarang!",
+      route: handleAddCartSix,
+    },
+    {
+      title: "3  Bulan",
+      monthlyPrice: "30.000",
+      price: "75.000",
+      currentPrice: "35.000",
+      disclaimer: "* Pembayaran langsung 3 bulan di depan",
+      buttonText: "Berlanggan Sekarang!",
+      route: handleAddCartThree,
+    },
+    {
+      title: "1  Bulan",
+      monthlyPrice: "30.000",
+      price: "39.000",
+      currentPrice: "35.000",
+      disclaimer: "* Pembayaran langsung 1 bulan di depan",
+      buttonText: "Berlanggan Sekarang!",
+      route: handleAddCartOne,
+    },
+  ];
 
   return (
     <div>
-      <NavBar history={history} />
+      <div style={{ marginTop: "120px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
 
-      <Container maxWidth={"sm"}>
-        <div className={classes.center}>
-          {!!currentUser ? (
-            <Grid className={classes.desktopClass} spacing={3} container>
-              <Grid item xs={12}>
-                <Typography type="heading">Pricing Plan</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper className={classes.paddedContent} elevation={5}>
-                  <Typography size="subheading">Subscription</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <div>
-                    {isSubOneAdded === false ? (
-                      <Button
-                        onClick={handleAddCartOne}
-                        // href="/payment"
-                        className={classes.pricingButton}
-                        color="primary"
+      {!!currentUser ? (
+        <Container component="main">
+          <Typography style={{ textAlign: "center" }} size="subheading">
+            Subscription
+          </Typography>
+          <Grid container spacing={2} alignItems="flex-end">
+            {tiers.map((tier) => (
+              <Grid
+                style={{
+                  marginBottom: "10px",
+                }}
+                item
+                key={tier.title}
+                xs={12}
+                md={3}
+                className={classes.cardHover}
+                sm={tier.title === "Enterprise" ? 12 : 6}
+              >
+                <Card>
+                  <CardHeader
+                    title={
+                      <Typography size="subheading">{tier.title}</Typography>
+                    }
+                    subheader={tier.subheader}
+                    titleTypographyProps={{ align: "center" }}
+                    subheaderTypographyProps={{ align: "center" }}
+                    // action={tier.title === "12 Bulan" ? <StarIcon /> : null}
+                    className={classes.cardHeader}
+                  />
+                  <CardContent>
+                    <div className={classes.cardPricing}>
+                      <Typography style={{ fontSize: "14px" }} type="italic">
+                        {tier.save}
+                      </Typography>
+                      <Typography
+                        type="subheading"
+                        style={{
+                          fontSize: "20px",
+                        }}
                       >
-                        <div className={classes.block}>
-                          <Typography
-                            className={classes.normalText}
-                            size="subheading"
-                          >
-                            Rp. 39.000 / Bulan
-                          </Typography>
-                          <Typography
-                            type="italic"
-                            className={classes.normalText}
-                          >
-                            Loren Ipsum Ngoman Balato Porche
-                          </Typography>
-                        </div>
-                      </Button>
-                    ) : (
-                      <Button fullWidth color="secondary">
-                        <Typography
-                          className={classes.normalText}
-                          size="subheading"
-                          style={{ color: beigeColor }}
-                        >
-                          ✔ Added to cart!
-                        </Typography>
-                      </Button>
-                    )}
-                  </div>
-                  <div>
-                    <div className={classes.block}>
-                      {isSubThreeAdded === false ? (
-                        <Button
-                          onClick={handleAddCartThree}
-                          className={classes.pricingButton}
-                          color="primary"
-                        >
-                          <div className={classes.block}>
-                            <Typography
-                              className={classes.normalText}
-                              size="subheading"
-                            >
-                              Rp. 39.000 / Bulan
-                            </Typography>
-                            <Typography
-                              type="italic"
-                              className={classes.normalText}
-                            >
-                              Loren Ipsum Ngoman Balato Porche
-                            </Typography>
-                          </div>
-                        </Button>
-                      ) : (
-                        <Button fullWidth color="secondary">
-                          <Typography
-                            className={classes.normalText}
-                            size="subheading"
-                            style={{ color: beigeColor }}
-                          >
-                            ✔ Added to cart!
-                          </Typography>
-                        </Button>
-                      )}
+                        Rp.{tier.monthlyPrice}
+                      </Typography>
+                      <Typography type="italic">/bulan</Typography>
                     </div>
-                  </div>
-                  <div>
-                    {isSubSixAdded === false ? (
-                      <Button
-                        onClick={handleAddCartSix}
-                        className={classes.pricingButton}
-                        color="primary"
+                    <div style={{ textAlign: "center" }}>
+                      <Typography
+                        style={{
+                          textDecoration: "line-through",
+                          textDecorationColor: "red",
+                          marginBottom: "0",
+                        }}
                       >
-                        <div className={classes.block}>
-                          <Typography
-                            className={classes.normalText}
-                            size="subheading"
-                          >
-                            Rp. 39.000 / 6 Bulan
-                          </Typography>
-                          <Typography
-                            type="italic"
-                            className={classes.normalText}
-                          >
-                            Loren Ipsum Ngoman Balato Porche
-                          </Typography>
-                        </div>
-                      </Button>
-                    ) : (
-                      <Button fullWidth color="secondary">
-                        <Typography
-                          className={classes.normalText}
-                          size="subheading"
-                          style={{ color: beigeColor }}
-                        >
-                          ✔ Added to cart!
-                        </Typography>
-                      </Button>
-                    )}
-                  </div>
-                  <div>
-                    {isSubTwelveAdded === false ? (
-                      <Button
-                        onClick={handleAddCartTwelve}
-                        className={classes.pricingButton}
-                        color="primary"
+                        Rp. {tier.price}
+                      </Typography>
+                      <Typography
+                        size="italic"
+                        type="bold"
+                        style={{ marginTop: "0", marginBottom: "25px" }}
                       >
-                        <div className={classes.block}>
-                          <Typography
-                            className={classes.normalText}
-                            size="subheading"
-                          >
-                            Rp. 39.000 / 12 Bulan
-                          </Typography>
-                          <Typography
-                            type="italic"
-                            className={classes.normalText}
-                          >
-                            Loren Ipsum Ngoman Balato Porche
-                          </Typography>
-                        </div>
-                      </Button>
-                    ) : (
-                      <Button fullWidth color="secondary">
-                        <Typography
-                          className={classes.normalText}
-                          size="subheading"
-                          style={{ color: beigeColor }}
-                        >
-                          ✔ Added to cart!
-                        </Typography>
-                      </Button>
-                    )}
-                  </div>
-                </Paper>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Typography type="italic" size="subheading">
-                  OR
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12}>
-                <Paper className={classes.paddedContent} elevation={5}>
-                  <Typography size="subheading">Individual</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-
-                  <div>
+                        Promo Rp. {tier.currentPrice}
+                      </Typography>
+                      <Typography style={{ fontSize: "12px" }} type="italic">
+                        {tier.disclaimer}
+                      </Typography>
+                    </div>
+                  </CardContent>
+                  <CardActions>
                     <Button
-                      href="/library"
-                      className={classes.pricingButton}
-                      color="secondary"
+                      onClick={tier.route}
+                      round
+                      fullWidth
+                      color="primary"
                     >
-                      <div className={classes.block}>
-                        <Typography
-                          className={classes.normalText}
-                          style={{ color: "#FFFEF8" }}
-                          size="subheading"
-                        >
-                          Rp. 10.000 / Kilas
-                        </Typography>
-                        <Typography
-                          className={classes.normalText}
-                          style={{ color: "#FFFEF8" }}
-                          type="italic"
-                        >
-                          Loren Ipsum Ngoman Balato Porche
-                        </Typography>
-                      </div>
+                      {tier.buttonText}
                     </Button>
-                  </div>
-                </Paper>
+                  </CardActions>
+                </Card>
               </Grid>
+            ))}
+          </Grid>
 
-              <Grid item xs={1} />
+          <div style={{ marginTop: "100px" }} />
+
+          <Typography className={classes.orLabel} type="italic">
+            <span className={classes.middle}>OR</span>
+          </Typography>
+
+          <div style={{ marginTop: "100px" }} />
+
+          <Typography style={{ textAlign: "center" }} size="subheading">
+            Individual
+          </Typography>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid
+              style={{
+                marginBottom: "10px",
+              }}
+              item
+              xs={12}
+              md={3}
+              className={classes.cardHover}
+            >
+              <Card>
+                <CardHeader
+                  title={
+                    <Typography color="beigeColor" size="subheading">
+                      Beli Per Kilas
+                    </Typography>
+                  }
+                  titleTypographyProps={{ align: "center" }}
+                  subheaderTypographyProps={{ align: "center" }}
+                  // action={tier.title === "12 Bulan" ? <StarIcon /> : null}
+                  className={classes.cardHeaderKilas}
+                />
+                <CardContent>
+                  <div className={classes.cardPricing}>
+                    <Typography type="subheading" style={{ fontSize: "20px" }}>
+                      Rp. 15.000
+                    </Typography>
+                    <Typography type="italic">/kilas</Typography>
+                  </div>
+                  <div style={{ textAlign: "center" }}>
+                    <Typography style={{ fontSize: "13px" }}>
+                      ✔ Loren ipsum bada cara tana opseum ipun.
+                    </Typography>
+                    <Typography style={{ fontSize: "13px" }}>
+                      ✔ Loren ipsum bada cara tana opseum ipun.
+                    </Typography>
+                    <Typography style={{ fontSize: "13px" }}>
+                      ✔ Loren ipsum bada cara tana opseum ipun.
+                    </Typography>
+                  </div>
+                </CardContent>
+                <CardActions>
+                  <Button href="/library" round fullWidth color="secondary">
+                    Beli Sekarang!
+                  </Button>
+                </CardActions>
+              </Card>
             </Grid>
-          ) : (
-            <Grid className={classes.desktopClass} spacing={3} container>
-              <Grid item xs={12}>
-                <Typography type="heading">Pricing Plan</Typography>
+          </Grid>
+        </Container>
+      ) : (
+        <Container component="main">
+          <Typography style={{ textAlign: "center" }} size="subheading">
+            Subscription
+          </Typography>
+          <Grid container spacing={2} alignItems="flex-end">
+            {tiers.map((tier) => (
+              <Grid
+                style={{
+                  marginBottom: "10px",
+                }}
+                item
+                key={tier.title}
+                xs={12}
+                md={3}
+                className={classes.cardHover}
+                sm={tier.title === "Enterprise" ? 12 : 6}
+              >
+                <Card>
+                  <CardHeader
+                    title={
+                      <Typography size="subheading">{tier.title}</Typography>
+                    }
+                    subheader={tier.subheader}
+                    titleTypographyProps={{ align: "center" }}
+                    subheaderTypographyProps={{ align: "center" }}
+                    // action={tier.title === "12 Bulan" ? <StarIcon /> : null}
+                    className={classes.cardHeader}
+                  />
+                  <CardContent>
+                    <div className={classes.cardPricing}>
+                      <Typography style={{ fontSize: "14px" }} type="italic">
+                        {tier.save}
+                      </Typography>
+                      <Typography
+                        type="subheading"
+                        style={{
+                          fontSize: "20px",
+                        }}
+                      >
+                        Rp.{tier.monthlyPrice}
+                      </Typography>
+                      <Typography type="italic">/bulan</Typography>
+                    </div>
+                    <div style={{ textAlign: "center" }}>
+                      <Typography
+                        style={{
+                          textDecoration: "line-through",
+                          textDecorationColor: "red",
+                          marginBottom: "0",
+                        }}
+                      >
+                        Rp. {tier.price}
+                      </Typography>
+                      <Typography
+                        size="italic"
+                        type="bold"
+                        style={{ marginTop: "0", marginBottom: "25px" }}
+                      >
+                        Promo Rp. {tier.currentPrice}
+                      </Typography>
+                      <Typography style={{ fontSize: "12px" }} type="italic">
+                        {tier.disclaimer}
+                      </Typography>
+                    </div>
+                  </CardContent>
+                  <CardActions>
+                    <Button href="/login" round fullWidth color="primary">
+                      {tier.buttonText}
+                    </Button>
+                  </CardActions>
+                </Card>
               </Grid>
-              <Grid item xs={12}>
-                <Paper className={classes.paddedContent} elevation={5}>
-                  <Typography size="subheading">Subscription</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <div>
-                    <Button
-                      href="/login"
-                      className={classes.pricingButton}
-                      color="primary"
-                    >
-                      <div className={classes.block}>
-                        <Typography
-                          className={classes.normalText}
-                          size="subheading"
-                        >
-                          Rp. 39.000 / Bulan
-                        </Typography>
-                        <Typography
-                          type="italic"
-                          className={classes.normalText}
-                        >
-                          Loren Ipsum Ngoman Balato Porche
-                        </Typography>
-                      </div>
-                    </Button>
-                  </div>
-                  <div>
-                    <Button
-                      href="/login"
-                      className={classes.pricingButton}
-                      color="primary"
-                    >
-                      <div className={classes.block}>
-                        <Typography
-                          className={classes.normalText}
-                          size="subheading"
-                        >
-                          Rp. 69.000 / 3 Bulan
-                        </Typography>
-                        <Typography
-                          type="italic"
-                          className={classes.normalText}
-                        >
-                          Setara dengan Rp. 24.166,67 / Bulan
-                        </Typography>
-                      </div>
-                    </Button>
-                  </div>
-                  <div>
-                    <Button
-                      href="/login"
-                      className={classes.pricingButton}
-                      color="primary"
-                    >
-                      <div className={classes.block}>
-                        <Typography
-                          className={classes.normalText}
-                          size="subheading"
-                        >
-                          Rp. 140.000 / 6 Bulan
-                        </Typography>
-                        <Typography
-                          type="italic"
-                          className={classes.normalText}
-                        >
-                          Setara dengan Rp. 24.166,67 / Bulan
-                        </Typography>
-                      </div>
-                    </Button>
-                  </div>
-                  <div>
-                    <Button
-                      href="/login"
-                      className={classes.pricingButton}
-                      color="primary"
-                    >
-                      <div className={classes.block}>
-                        <Typography
-                          className={classes.normalText}
-                          size="subheading"
-                        >
-                          Rp. 299.000 / 12 Bulan
-                        </Typography>
-                        <Typography
-                          type="italic"
-                          className={classes.normalText}
-                        >
-                          Setara dengan Rp. 24.166,67 / Bulan
-                        </Typography>
-                      </div>
-                    </Button>
-                  </div>
-                </Paper>
-              </Grid>
+            ))}
+          </Grid>
 
-              <Grid item xs={12}>
-                <Typography type="italic" size="subheading">
-                  OR
-                </Typography>
-              </Grid>
+          <div style={{ marginTop: "100px" }} />
 
-              <Grid item xs={12}>
-                <Paper className={classes.paddedContent} elevation={5}>
-                  <Typography size="subheading">Individual</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
-                  <Typography>✔ Lorem ipsum dolor sit amet</Typography>
+          <Typography className={classes.orLabel} type="italic">
+            <span className={classes.middle}>OR</span>
+          </Typography>
 
-                  <div>
-                    <Button
-                      href="/login"
-                      className={classes.pricingButton}
-                      color="secondary"
-                    >
-                      <div className={classes.block}>
-                        <Typography
-                          className={classes.normalText}
-                          style={{ color: "#FFFEF8" }}
-                          size="subheading"
-                        >
-                          Rp. 10.000 / Kilas
-                        </Typography>
-                        <Typography
-                          className={classes.normalText}
-                          style={{ color: "#FFFEF8" }}
-                          type="italic"
-                        >
-                          Loren Ipsum Ngoman Balato Porche
-                        </Typography>
-                      </div>
-                    </Button>
+          <div style={{ marginTop: "100px" }} />
+
+          <Typography style={{ textAlign: "center" }} size="subheading">
+            Individual
+          </Typography>
+          <Grid container justifyContent="center" alignItems="center">
+            <Grid
+              style={{
+                marginBottom: "10px",
+              }}
+              item
+              xs={12}
+              md={3}
+              className={classes.cardHover}
+            >
+              <Card>
+                <CardHeader
+                  title={
+                    <Typography color="beigeColor" size="subheading">
+                      Beli Per Kilas
+                    </Typography>
+                  }
+                  titleTypographyProps={{ align: "center" }}
+                  subheaderTypographyProps={{ align: "center" }}
+                  // action={tier.title === "12 Bulan" ? <StarIcon /> : null}
+                  className={classes.cardHeaderKilas}
+                />
+                <CardContent>
+                  <div className={classes.cardPricing}>
+                    <Typography type="subheading" style={{ fontSize: "20px" }}>
+                      Rp. 15.000
+                    </Typography>
+                    <Typography type="italic">/kilas</Typography>
                   </div>
-                </Paper>
-              </Grid>
-              <Grid item xs={1} />
+                  <div style={{ textAlign: "center" }}>
+                    <Typography style={{ fontSize: "13px" }}>
+                      ✔ Loren ipsum bada cara tana opseum ipun.
+                    </Typography>
+                    <Typography style={{ fontSize: "13px" }}>
+                      ✔ Loren ipsum bada cara tana opseum ipun.
+                    </Typography>
+                    <Typography style={{ fontSize: "13px" }}>
+                      ✔ Loren ipsum bada cara tana opseum ipun.
+                    </Typography>
+                  </div>
+                </CardContent>
+                <CardActions>
+                  <Button href="/login" round fullWidth color="secondary">
+                    Beli Sekarang!
+                  </Button>
+                </CardActions>
+              </Card>
             </Grid>
-          )}
-        </div>
-
-        <div className={classes.extraSpace} />
-      </Container>
-
-      <Container>
-        <BenefitsBlock />
-
-        {/* If logged in, remove this button */}
-        {!!currentUser ? (
-          <></>
-        ) : (
-          <div className={classes.center}>
-            <Button href="/signup" round color="primary">
-              Daftar Sekarang
-            </Button>
-          </div>
-        )}
-        <div className={classes.extraSpace} />
-      </Container>
+          </Grid>
+        </Container>
+      )}
       <Footer />
     </div>
   );

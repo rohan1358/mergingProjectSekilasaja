@@ -27,6 +27,7 @@ import PaymentIcon from "@material-ui/icons/Payment";
 import { Alert } from "@material-ui/lab";
 
 // Firebase components
+import fire from "../../firebase/fire";
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetPromoCode from "../../firebase/firebaseGetPromoCode";
 import * as firebaseUploadPaymentInfo from "../../firebase/firebaseUploadPaymentInfo";
@@ -36,6 +37,8 @@ import { AuthContext } from "../../components/Routing/Auth";
 import * as emailService from "../../emailService/emailService";
 
 const useStyles = makeStyles(InfoStyle);
+
+const firestore = fire.firestore();
 
 export default function Payment({ history }) {
   const { currentUser } = useContext(AuthContext);
@@ -54,9 +57,11 @@ export default function Payment({ history }) {
   const [file, setFile] = useState("");
   const [error, setError] = useState("");
   const [fileError, setFileError] = useState("");
+  const [promoError, setPromoError] = useState("");
 
   // Cart total price
   const promoCodeRef = useRef("");
+  const [promoCode, setPromoCode] = useState("");
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCart).cart;
   const [discountAmount, setDiscountAmount] = useState(0);
@@ -104,8 +109,16 @@ export default function Payment({ history }) {
           promoCodeRef.current.value
         );
         if (results.length != 0) {
-          setDiscountAmount(-1 * results[0].amount);
-          setPromoAdded(true);
+          if (results[0].code != "") {
+            setPromoError("");
+            setDiscountAmount(-1 * results[0].amount);
+            setPromoAdded(true);
+            setPromoCode(results);
+          } else {
+            setPromoError("Kamu tidak mengisi kode promo apapun!");
+          }
+        } else {
+          setPromoError("Tidak ditemukan kode promo!");
         }
       };
       fetchData();
@@ -146,10 +159,22 @@ export default function Payment({ history }) {
       file,
       totalPrice
     );
+
+    firestore.collection("users").doc(currentUser.uid).update({
+      cart: [],
+    });
+
+    firestore.collection("promo").doc(promoCode[0].code).update({
+      code: "",
+      amount: 0,
+    });
+
     //Send email notification
     await emailService.sendPaymentNotification(userData, image_url);
     history.push("/payment-success");
   };
+
+  console.log(promoCode);
 
   return (
     <div>
@@ -213,6 +238,11 @@ export default function Payment({ history }) {
                 )}
 
                 <div className={classes.extraSpace} />
+                {promoError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{promoError}</Alert>
+                  </div>
+                )}
                 <div className={classes.spaceBetween}>
                   <TextField
                     style={{ marginRight: "5px" }}
@@ -398,6 +428,11 @@ export default function Payment({ history }) {
                 ))}
 
                 <div className={classes.extraSpace} />
+                {promoError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{promoError}</Alert>
+                  </div>
+                )}
                 <div className={classes.spaceBetween}>
                   <TextField
                     style={{ marginRight: "5px" }}

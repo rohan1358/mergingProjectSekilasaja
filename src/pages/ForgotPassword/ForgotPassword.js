@@ -2,6 +2,9 @@ import React from "react";
 
 // Custom components
 import NavBar from "../../components/NavBar/Navbar";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import Footer from "../../components/Footer";
 import ForgotPasswordForm from "./ForgotPasswordForm";
 import MultiUseMobile from "../../styles/MultiUseMobile";
@@ -16,13 +19,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoginPage() {
+export default function LoginPage({ history }) {
   const classes = useStyles();
   const multi = MultiUseMobile();
 
   return (
     <div>
-      <NavBar />
+      <div style={{ marginTop: "100px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
       <div className={multi.extraSpace} />
       <Container maxWidth="xs">
         <Paper className={classes.root}>

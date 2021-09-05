@@ -180,13 +180,16 @@ export default function Footer() {
               <Typography color="beigeColor" size="subheading">
                 Bantuan & Panduan
               </Typography>
-              <Link underline="none" href="/contact">
-                <Typography color="beigeColor">Hubungi Kami</Typography>
+              <Link underline="none" href="/">
+                <Typography color="beigeColor">Kirim Feedback</Typography>
+              </Link>
+              <Link underline="none">
+                <Typography color="beigeColor">
+                  Kamu dapat menghubungi kami dengan mengirim email ke
+                  hi@sekilasaja.com
+                </Typography>
               </Link>
               {/* <Link underline="none" href="/contact">
-                <Typography color="beigeColor">Kebijakan Privasi</Typography>
-              </Link>
-              <Link underline="none" href="/contact">
                 <Typography color="beigeColor">Syarat & Ketentuan</Typography>
               </Link> */}
             </Grid>

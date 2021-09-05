@@ -1,4 +1,8 @@
 const ImagesStyle = {
+  imgLogoText: {
+    width: "220px",
+    padding: "10px",
+  },
   imgFluid: {
     maxWidth: "100%",
     height: "auto",
