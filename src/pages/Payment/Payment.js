@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router";
 
+
 // Custom components
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
@@ -8,6 +9,15 @@ import Button from "../../components/Button";
 import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import InfoStyle from "../../styles/InfoAreaStyle";
+import Box from "../../components/Box";
+//Material UI
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+
+import PaymentStyle from '../../styles/PaymentStyle'
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -40,8 +50,13 @@ const useStyles = makeStyles(InfoStyle);
 export default function Payment({ history }) {
   const { currentUser } = useContext(AuthContext);
   const classes = MultiUseMobile();
+  const payment_classes = PaymentStyle();
   const styles = useStyles();
+  const [value, setValue] = useState('female');
 
+  const handleRadioChange = (event) => {
+    setValue(event.target.value);
+  };
   // Get user data
   const userData = useSelector(selectUser);
 
@@ -295,6 +310,19 @@ export default function Payment({ history }) {
                     <Alert severity="error">{fileError}</Alert>
                   </div>
                 )}
+                <FormControl component="fieldset">
+                  <FormLabel component="legend">Gender</FormLabel>
+                  <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleRadioChange}>
+                    <FormControlLabel value="female" control={<Radio />} label="Female" />
+                    
+                    <Box value = "female" chosenValue = {value}></Box>
+                    <FormControlLabel value="male" control={<Radio />} label="Male" />
+                    <Box value = "male" chosenValue = {value}></Box>
+                    <FormControlLabel value="other" control={<Radio />} label="Other" />
+                    <Box value = "other" chosenValue = {value}></Box>
+                    <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
+                  </RadioGroup>
+                </FormControl>
 
                 <TextField
                   required
