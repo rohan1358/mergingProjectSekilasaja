@@ -95,10 +95,11 @@ export default function Home({ history }) {
                       Solusi Buat Kamu Yang{" "}
                       <strong
                         style={{
-                          textDecoration: "underline",
-                          textDecorationColor: primaryColor,
-                          textDecorationThickness: "10px",
-                          textUnderlinePosition: "under",
+                          // textDecoration: "underline",
+                          // textDecorationColor: primaryColor,
+                          // textDecorationThickness: "10px",
+                          // textUnderlinePosition: "under",
+                          backgroundColor: primaryColor,
                         }}
                       >
                         Malas Baca!
