@@ -22,7 +22,13 @@ import Footer from "../../components/Footer";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 
 // Material-UI components
-import { Container, Grid, Divider, makeStyles } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  Divider,
+  makeStyles,
+  Tooltip,
+} from "@material-ui/core";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 
 // nodejs library to set properties for components
@@ -223,11 +229,30 @@ export default function Home({ history }) {
         </div>
       )}
       <Footer />
+
       <a href="/">
-        <img
-          src={Whatsapp}
-          className={books.imgWhatsappLogo + " " + classes.fixedLogo}
-        />
+        <Tooltip
+          title={
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "14px",
+                lineHeight: "20px",
+              }}
+            >
+              <WhatsAppIcon fontSize="large" style={{ marginRight: "10px" }} />
+              Klik tombol ini dan langsung hubungi kami di Whatsapp bila ada
+              pertanyaan!
+            </div>
+          }
+          placement="right"
+        >
+          <img
+            src={Whatsapp}
+            className={books.imgWhatsappLogo + " " + classes.fixedLogo}
+          />
+        </Tooltip>
       </a>
     </div>
   );
