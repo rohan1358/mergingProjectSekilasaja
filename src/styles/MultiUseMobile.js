@@ -13,7 +13,7 @@ const MultiUseMobile = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
   sectionMobile: {
     display: "flex",
-    marginTop: "40px",
+    // marginTop: "40px",
     textAlign: "center",
     justifyContent: "center",
     [theme.breakpoints.up("md")]: {
@@ -128,6 +128,7 @@ const MultiUseMobile = makeStyles((theme) => ({
     pointerEvents: "none",
   },
   paragraph: {
+    fontSize: "18px",
     userSelect: "none",
     pointerEvents: "none",
   },

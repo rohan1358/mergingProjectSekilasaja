@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import BestValue from "../images/best-value.png";
 
 // Custom components
 import Typography from "../components/Typography";
@@ -19,6 +20,7 @@ import {
   CardHeader,
   Card,
   makeStyles,
+  Divider,
 } from "@material-ui/core";
 
 // Firebase components
@@ -26,13 +28,49 @@ import { AuthContext } from "../components/Routing/Auth";
 import * as firebaseUpdateCart from "../firebase/firebaseUpdateCart";
 import * as firebaseGetUserDataById from "../firebase/firebaseGetUserDataById";
 import * as firebaseGetSubscription from "../firebase/firebaseGetSubscription";
-import fire from "../firebase/fire";
 
 // Redux
 import { selectCart, setCart } from "../feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
+  // small: 600px; md, medium: 960px; lg, large: 1280px
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "block",
+    },
+  },
+  // small: 600px; md, medium: 960px; lg, large: 1280px
+  sectionMobile: {
+    display: "block",
+    // marginTop: "40px",
+    justifyContent: "center",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+  ribbon: {
+    backgroundColor: secondaryColor,
+    position: "absolute",
+    color: "white",
+    width: 150,
+    textAlign: "center",
+    textTransform: "uppercase",
+    padding: 5,
+    // transform: "rotate(-40deg)",
+    top: 9,
+    marginLeft: 72,
+    fontWeight: "bold",
+  },
+  span: {},
+  cross: {
+    backgroundColor: "transparent",
+    backgroundImage:
+      "gradient(linear, 19.1% -7.9%, 81% 107.9%, color-stop(0, transparent), color-stop(.48, transparent), color-stop(.5, #000), color-stop(.52, transparent), color-stop(1, transparent))",
+    backgroundImage:
+      "repeating-linear-gradient(168deg, transparent 0%, transparent 48%, red 50%, transparent 52%, transparent 100%)",
+  },
   cardHover: {
     position: "relative",
     top: 0,
@@ -76,6 +114,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PricingPage({ match, history }) {
   const classes = useStyles();
+  const multi = MultiUseMobile();
+
   const { currentUser } = useContext(AuthContext);
   const cartItems = useSelector(selectCart).cart;
 
@@ -212,36 +252,40 @@ export default function PricingPage({ match, history }) {
   const tiers = [
     {
       title: "12 Bulan",
-      monthlyPrice: "30.000",
-      price: "285.000",
-      currentPrice: "35.000",
+      monthlyPrice: "28.250",
+      price: "588.000",
+      hemat: "249.000",
+      currentPrice: "339.000",
       disclaimer: "* Pembayaran langsung 12 bulan di depan",
       buttonText: "Berlanggan Sekarang!",
       route: handleAddCartTwelve,
     },
     {
       title: "6 Bulan",
-      monthlyPrice: "30.000",
-      price: "145.000",
-      currentPrice: "35.000",
+      monthlyPrice: "31.500",
+      price: "294.000",
+      hemat: "105.000",
+      currentPrice: "189.000",
       disclaimer: "* Pembayaran langsung 6 bulan di depan",
       buttonText: "Berlanggan Sekarang!",
       route: handleAddCartSix,
     },
     {
       title: "3  Bulan",
-      monthlyPrice: "30.000",
-      price: "75.000",
-      currentPrice: "35.000",
+      monthlyPrice: "33.000",
+      price: "147.000",
+      hemat: "48.000",
+      currentPrice: "99.000",
       disclaimer: "* Pembayaran langsung 3 bulan di depan",
       buttonText: "Berlanggan Sekarang!",
       route: handleAddCartThree,
     },
     {
       title: "1  Bulan",
-      monthlyPrice: "30.000",
-      price: "39.000",
-      currentPrice: "35.000",
+      monthlyPrice: "39.000",
+      price: "49.000",
+      hemat: "10.000",
+      currentPrice: "39.000",
       disclaimer: "* Pembayaran langsung 1 bulan di depan",
       buttonText: "Berlanggan Sekarang!",
       route: handleAddCartOne,
@@ -261,282 +305,700 @@ export default function PricingPage({ match, history }) {
 
       {!!currentUser ? (
         <Container component="main">
-          <Typography style={{ textAlign: "center" }} size="subheading">
+          <Typography style={{ textAlign: "center" }} size="heading">
             Subscription
           </Typography>
-          <Grid container spacing={2} alignItems="flex-end">
-            {tiers.map((tier) => (
+
+          <div className={classes.sectionDesktop}>
+            <Grid container spacing={2} alignItems="flex-end">
+              {tiers.map((tier) => (
+                <Grid
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                  item
+                  key={tier.title}
+                  xs={12}
+                  md={3}
+                  className={classes.cardHover}
+                  sm={tier.title === "Enterprise" ? 12 : 6}
+                >
+                  {tier.title === "12 Bulan" ? (
+                    <div className={classes.ribbon}>
+                      {/* <img src={BestValue} className={info.imgBestValue} /> */}
+                      BEST VALUE
+                    </div>
+                  ) : null}
+                  <Card>
+                    <CardHeader
+                      title={
+                        <Typography size="subheading">{tier.title}</Typography>
+                      }
+                      subheader={tier.subheader}
+                      titleTypographyProps={{ align: "center" }}
+                      subheaderTypographyProps={{ align: "center" }}
+                      // action={
+                      //   tier.title === "12 Bulan" ? (
+                      //     <div className={classes.ribbon}>
+                      //       {/* <img src={BestValue} className={info.imgBestValue} /> */}
+                      //       BEST VALUE
+                      //     </div>
+                      //   ) : null
+                      // }
+                      className={classes.cardHeader}
+                    />
+                    <CardContent>
+                      <div className={classes.cardPricing}>
+                        <Typography style={{ fontSize: "14px" }} type="italic">
+                          {tier.save}
+                        </Typography>
+                        <Typography
+                          type="subheading"
+                          style={{
+                            fontSize: "20px",
+                          }}
+                        >
+                          Rp. {tier.monthlyPrice}
+                        </Typography>
+                        <Typography type="italic">/bulan</Typography>
+                      </div>
+                      <div style={{ textAlign: "center" }}>
+                        <Typography
+                          type="italic"
+                          style={{
+                            color: "red",
+                            marginBottom: 0,
+                            fontWeight: "bold",
+                            // transform: "rotate(-12deg)",
+                          }}
+                        >
+                          Hemat Rp. {tier.hemat}
+                        </Typography>
+                        <Typography
+                          style={{
+                            // textDecoration: "line-through",
+                            // textDecorationColor: "red",
+                            marginBottom: "0",
+                            fontSize: "20px",
+                          }}
+                          className={classes.cross}
+                        >
+                          Rp. {tier.price}
+                        </Typography>
+                        <Typography
+                          size="italic"
+                          type="bold"
+                          style={{
+                            fontSize: "20px",
+                            marginTop: "0",
+                            marginBottom: "25px",
+                          }}
+                        >
+                          Jadi Rp. {tier.currentPrice}
+                        </Typography>
+                        <Typography style={{ fontSize: "12px" }} type="italic">
+                          {tier.disclaimer}
+                        </Typography>
+                      </div>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        onClick={tier.route}
+                        round
+                        fullWidth
+                        color="primary"
+                      >
+                        {tier.buttonText}
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+
+            <div style={{ marginTop: "100px" }} />
+
+            <Typography className={classes.orLabel} type="italic">
+              <span className={classes.middle}>ATAU</span>
+            </Typography>
+
+            <div style={{ marginTop: "100px" }} />
+
+            <Typography style={{ textAlign: "center" }} size="heading">
+              Individual
+            </Typography>
+            <Grid container justifyContent="center" alignItems="center">
               <Grid
                 style={{
                   marginBottom: "10px",
                 }}
                 item
-                key={tier.title}
                 xs={12}
                 md={3}
                 className={classes.cardHover}
-                sm={tier.title === "Enterprise" ? 12 : 6}
               >
                 <Card>
                   <CardHeader
                     title={
-                      <Typography size="subheading">{tier.title}</Typography>
+                      <Typography color="beigeColor" size="subheading">
+                        Beli Per Kilas
+                      </Typography>
                     }
-                    subheader={tier.subheader}
                     titleTypographyProps={{ align: "center" }}
                     subheaderTypographyProps={{ align: "center" }}
                     // action={tier.title === "12 Bulan" ? <StarIcon /> : null}
-                    className={classes.cardHeader}
+                    className={classes.cardHeaderKilas}
                   />
                   <CardContent>
                     <div className={classes.cardPricing}>
-                      <Typography style={{ fontSize: "14px" }} type="italic">
-                        {tier.save}
-                      </Typography>
                       <Typography
                         type="subheading"
-                        style={{
-                          fontSize: "20px",
-                        }}
+                        style={{ fontSize: "20px" }}
                       >
-                        Rp.{tier.monthlyPrice}
+                        Rp. 15.000
                       </Typography>
-                      <Typography type="italic">/bulan</Typography>
+                      <Typography type="italic">/kilas</Typography>
                     </div>
                     <div style={{ textAlign: "center" }}>
-                      <Typography
-                        style={{
-                          textDecoration: "line-through",
-                          textDecorationColor: "red",
-                          marginBottom: "0",
-                        }}
-                      >
-                        Rp. {tier.price}
+                      <Typography style={{ fontSize: "13px" }}>
+                        ✔ Loren ipsum bada cara tana opseum ipun.
                       </Typography>
-                      <Typography
-                        size="italic"
-                        type="bold"
-                        style={{ marginTop: "0", marginBottom: "25px" }}
-                      >
-                        Promo Rp. {tier.currentPrice}
+                      <Typography style={{ fontSize: "13px" }}>
+                        ✔ Loren ipsum bada cara tana opseum ipun.
                       </Typography>
-                      <Typography style={{ fontSize: "12px" }} type="italic">
-                        {tier.disclaimer}
+                      <Typography style={{ fontSize: "13px" }}>
+                        ✔ Loren ipsum bada cara tana opseum ipun.
                       </Typography>
                     </div>
                   </CardContent>
                   <CardActions>
-                    <Button
-                      onClick={tier.route}
-                      round
-                      fullWidth
-                      color="primary"
-                    >
-                      {tier.buttonText}
+                    <Button href="/library" round fullWidth color="secondary">
+                      Beli Sekarang!
                     </Button>
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
-          </Grid>
-
-          <div style={{ marginTop: "100px" }} />
-
-          <Typography className={classes.orLabel} type="italic">
-            <span className={classes.middle}>OR</span>
-          </Typography>
-
-          <div style={{ marginTop: "100px" }} />
-
-          <Typography style={{ textAlign: "center" }} size="subheading">
-            Individual
-          </Typography>
-          <Grid container justifyContent="center" alignItems="center">
-            <Grid
-              style={{
-                marginBottom: "10px",
-              }}
-              item
-              xs={12}
-              md={3}
-              className={classes.cardHover}
-            >
-              <Card>
-                <CardHeader
-                  title={
-                    <Typography color="beigeColor" size="subheading">
-                      Beli Per Kilas
-                    </Typography>
-                  }
-                  titleTypographyProps={{ align: "center" }}
-                  subheaderTypographyProps={{ align: "center" }}
-                  // action={tier.title === "12 Bulan" ? <StarIcon /> : null}
-                  className={classes.cardHeaderKilas}
-                />
-                <CardContent>
-                  <div className={classes.cardPricing}>
-                    <Typography type="subheading" style={{ fontSize: "20px" }}>
-                      Rp. 15.000
-                    </Typography>
-                    <Typography type="italic">/kilas</Typography>
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    <Typography style={{ fontSize: "13px" }}>
-                      ✔ Loren ipsum bada cara tana opseum ipun.
-                    </Typography>
-                    <Typography style={{ fontSize: "13px" }}>
-                      ✔ Loren ipsum bada cara tana opseum ipun.
-                    </Typography>
-                    <Typography style={{ fontSize: "13px" }}>
-                      ✔ Loren ipsum bada cara tana opseum ipun.
-                    </Typography>
-                  </div>
-                </CardContent>
-                <CardActions>
-                  <Button href="/library" round fullWidth color="secondary">
-                    Beli Sekarang!
-                  </Button>
-                </CardActions>
-              </Card>
             </Grid>
-          </Grid>
+          </div>
+
+          <div className={classes.sectionMobile}>
+            <Grid container spacing={2} alignItems="flex-end">
+              {tiers.map((tier) => (
+                <Grid container justifyContent="center" alignItems="center">
+                  <Grid
+                    style={{
+                      marginBottom: "22px",
+                    }}
+                    item
+                    xs={12}
+                    md={3}
+                    className={classes.cardHover}
+                  >
+                    <Card elevation={5} style={{ padding: "15px" }}>
+                      <Grid
+                        container
+                        alignItems="center"
+                        justifyContent="flex-end"
+                        spacing={3}
+                      >
+                        <Grid item xs={3}>
+                          <Typography
+                            style={{
+                              textAlign: "center",
+                            }}
+                            size="subheading"
+                          >
+                            {tier.title}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={1}>
+                          {/* <Divider orientation="vertical" /> */}
+                          <div
+                            style={{
+                              borderRight: "1px solid #41444b",
+                              height: "170px",
+                            }}
+                          />
+                        </Grid>
+                        <Grid item xs={8}>
+                          <div>
+                            <Typography
+                              type="italic"
+                              style={{
+                                color: "red",
+                                marginBottom: 0,
+                                fontWeight: "bold",
+                                // transform: "rotate(-12deg)",
+                              }}
+                            >
+                              Hemat Rp. {tier.hemat}
+                            </Typography>
+
+                            <Typography
+                              type="subheading"
+                              style={{
+                                marginTop: "0",
+                                fontSize: "25px",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              Rp. {tier.monthlyPrice}
+                              <Typography type="italic">/bulan</Typography>
+                            </Typography>
+                          </div>
+                          <div>
+                            <Typography
+                              style={{ fontSize: "12px" }}
+                              type="italic"
+                            >
+                              {tier.disclaimer}
+                            </Typography>
+                          </div>
+                          <div>
+                            <Button
+                              onClick={tier.route}
+                              round
+                              fullWidth
+                              color="primary"
+                            >
+                              {tier.buttonText}
+                            </Button>
+                          </div>
+                        </Grid>
+                      </Grid>
+                    </Card>
+                  </Grid>
+                </Grid>
+              ))}
+            </Grid>
+
+            <div style={{ marginTop: "100px" }} />
+
+            <Typography className={classes.orLabel} type="italic">
+              <span className={classes.middle}>ATAU</span>
+            </Typography>
+
+            <div style={{ marginTop: "100px" }} />
+
+            <Typography style={{ textAlign: "center" }} size="heading">
+              Individual
+            </Typography>
+
+            <Grid container justifyContent="center" alignItems="center">
+              <Grid
+                style={{
+                  marginBottom: "22px",
+                }}
+                item
+                xs={12}
+                md={3}
+                className={classes.cardHover}
+              >
+                <Card elevation={5} style={{ padding: "15px" }}>
+                  <Grid
+                    container
+                    alignItems="center"
+                    justifyContent="flex-end"
+                    spacing={3}
+                  >
+                    <Grid item xs={3}>
+                      <div
+                        style={{
+                          alignItems: "center",
+                        }}
+                      >
+                        <Typography
+                          type="subheading"
+                          style={{ fontSize: "20px", marginBottom: "0" }}
+                        >
+                          Rp. 15.000
+                        </Typography>
+                        <Typography type="italic">/kilas</Typography>
+                      </div>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <div
+                        style={{
+                          borderRight: "1px solid #41444b",
+                          height: "170px",
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={8}>
+                      {/* <Divider orientation="vertical" /> */}
+                      <div>
+                        <Typography style={{ fontSize: "13px" }}>
+                          ✔ Loren ipsum bada cara tana opseum ipun.
+                        </Typography>
+                        <Typography style={{ fontSize: "13px" }}>
+                          ✔ Loren ipsum bada cara tana opseum ipun.
+                        </Typography>
+                        <Typography style={{ fontSize: "13px" }}>
+                          ✔ Loren ipsum bada cara tana opseum ipun.
+                        </Typography>
+                        <Button
+                          href="/library"
+                          round
+                          fullWidth
+                          color="secondary"
+                        >
+                          Beli Sekarang!
+                        </Button>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </Card>
+              </Grid>
+            </Grid>
+          </div>
         </Container>
       ) : (
         <Container component="main">
-          <Typography style={{ textAlign: "center" }} size="subheading">
+          <Typography style={{ textAlign: "center" }} size="heading">
             Subscription
           </Typography>
-          <Grid container spacing={2} alignItems="flex-end">
-            {tiers.map((tier) => (
+
+          <div className={classes.sectionDesktop}>
+            <Grid container spacing={2} alignItems="flex-end">
+              {tiers.map((tier) => (
+                <Grid
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                  item
+                  key={tier.title}
+                  xs={12}
+                  md={3}
+                  className={classes.cardHover}
+                  sm={tier.title === "Enterprise" ? 12 : 6}
+                >
+                  {tier.title === "12 Bulan" ? (
+                    <div className={classes.ribbon}>
+                      {/* <img src={BestValue} className={info.imgBestValue} /> */}
+                      BEST VALUE
+                    </div>
+                  ) : null}
+                  <Card>
+                    <CardHeader
+                      title={
+                        <Typography size="subheading">{tier.title}</Typography>
+                      }
+                      subheader={tier.subheader}
+                      titleTypographyProps={{ align: "center" }}
+                      subheaderTypographyProps={{ align: "center" }}
+                      // action={
+                      //   tier.title === "12 Bulan" ? (
+                      //     <div className={classes.ribbon}>
+                      //       {/* <img src={BestValue} className={info.imgBestValue} /> */}
+                      //       BEST VALUE
+                      //     </div>
+                      //   ) : null
+                      // }
+                      className={classes.cardHeader}
+                    />
+                    <CardContent>
+                      <div className={classes.cardPricing}>
+                        <Typography style={{ fontSize: "14px" }} type="italic">
+                          {tier.save}
+                        </Typography>
+                        <Typography
+                          type="subheading"
+                          style={{
+                            fontSize: "20px",
+                          }}
+                        >
+                          Rp. {tier.monthlyPrice}
+                        </Typography>
+                        <Typography type="italic">/bulan</Typography>
+                      </div>
+                      <div style={{ textAlign: "center" }}>
+                        <Typography
+                          type="italic"
+                          style={{
+                            color: "red",
+                            marginBottom: 0,
+                            fontWeight: "bold",
+                            // transform: "rotate(-12deg)",
+                          }}
+                        >
+                          Hemat Rp. {tier.hemat}
+                        </Typography>
+                        <Typography
+                          style={{
+                            // textDecoration: "line-through",
+                            // textDecorationColor: "red",
+                            marginBottom: "0",
+                            fontSize: "20px",
+                          }}
+                          className={classes.cross}
+                        >
+                          Rp. {tier.price}
+                        </Typography>
+                        <Typography
+                          size="italic"
+                          type="bold"
+                          style={{
+                            fontSize: "20px",
+                            marginTop: "0",
+                            marginBottom: "25px",
+                          }}
+                        >
+                          Jadi Rp. {tier.currentPrice}
+                        </Typography>
+                        <Typography style={{ fontSize: "12px" }} type="italic">
+                          {tier.disclaimer}
+                        </Typography>
+                      </div>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        // onClick={tier.route}
+                        href="/login"
+                        round
+                        fullWidth
+                        color="primary"
+                      >
+                        {tier.buttonText}
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+
+            <div style={{ marginTop: "100px" }} />
+
+            <Typography className={classes.orLabel} type="italic">
+              <span className={classes.middle}>ATAU</span>
+            </Typography>
+
+            <div style={{ marginTop: "100px" }} />
+
+            <Typography style={{ textAlign: "center" }} size="heading">
+              Individual
+            </Typography>
+            <Grid container justifyContent="center" alignItems="center">
               <Grid
                 style={{
                   marginBottom: "10px",
                 }}
                 item
-                key={tier.title}
                 xs={12}
                 md={3}
                 className={classes.cardHover}
-                sm={tier.title === "Enterprise" ? 12 : 6}
               >
                 <Card>
                   <CardHeader
                     title={
-                      <Typography size="subheading">{tier.title}</Typography>
+                      <Typography color="beigeColor" size="subheading">
+                        Beli Per Kilas
+                      </Typography>
                     }
-                    subheader={tier.subheader}
                     titleTypographyProps={{ align: "center" }}
                     subheaderTypographyProps={{ align: "center" }}
                     // action={tier.title === "12 Bulan" ? <StarIcon /> : null}
-                    className={classes.cardHeader}
+                    className={classes.cardHeaderKilas}
                   />
                   <CardContent>
                     <div className={classes.cardPricing}>
-                      <Typography style={{ fontSize: "14px" }} type="italic">
-                        {tier.save}
-                      </Typography>
                       <Typography
                         type="subheading"
-                        style={{
-                          fontSize: "20px",
-                        }}
+                        style={{ fontSize: "20px" }}
                       >
-                        Rp.{tier.monthlyPrice}
+                        Rp. 15.000
                       </Typography>
-                      <Typography type="italic">/bulan</Typography>
+                      <Typography type="italic">/kilas</Typography>
                     </div>
                     <div style={{ textAlign: "center" }}>
-                      <Typography
-                        style={{
-                          textDecoration: "line-through",
-                          textDecorationColor: "red",
-                          marginBottom: "0",
-                        }}
-                      >
-                        Rp. {tier.price}
+                      <Typography style={{ fontSize: "13px" }}>
+                        ✔ Loren ipsum bada cara tana opseum ipun.
                       </Typography>
-                      <Typography
-                        size="italic"
-                        type="bold"
-                        style={{ marginTop: "0", marginBottom: "25px" }}
-                      >
-                        Promo Rp. {tier.currentPrice}
+                      <Typography style={{ fontSize: "13px" }}>
+                        ✔ Loren ipsum bada cara tana opseum ipun.
                       </Typography>
-                      <Typography style={{ fontSize: "12px" }} type="italic">
-                        {tier.disclaimer}
+                      <Typography style={{ fontSize: "13px" }}>
+                        ✔ Loren ipsum bada cara tana opseum ipun.
                       </Typography>
                     </div>
                   </CardContent>
                   <CardActions>
-                    <Button href="/login" round fullWidth color="primary">
-                      {tier.buttonText}
+                    <Button href="/login" round fullWidth color="secondary">
+                      Beli Sekarang!
                     </Button>
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
-          </Grid>
-
-          <div style={{ marginTop: "100px" }} />
-
-          <Typography className={classes.orLabel} type="italic">
-            <span className={classes.middle}>OR</span>
-          </Typography>
-
-          <div style={{ marginTop: "100px" }} />
-
-          <Typography style={{ textAlign: "center" }} size="subheading">
-            Individual
-          </Typography>
-          <Grid container justifyContent="center" alignItems="center">
-            <Grid
-              style={{
-                marginBottom: "10px",
-              }}
-              item
-              xs={12}
-              md={3}
-              className={classes.cardHover}
-            >
-              <Card>
-                <CardHeader
-                  title={
-                    <Typography color="beigeColor" size="subheading">
-                      Beli Per Kilas
-                    </Typography>
-                  }
-                  titleTypographyProps={{ align: "center" }}
-                  subheaderTypographyProps={{ align: "center" }}
-                  // action={tier.title === "12 Bulan" ? <StarIcon /> : null}
-                  className={classes.cardHeaderKilas}
-                />
-                <CardContent>
-                  <div className={classes.cardPricing}>
-                    <Typography type="subheading" style={{ fontSize: "20px" }}>
-                      Rp. 15.000
-                    </Typography>
-                    <Typography type="italic">/kilas</Typography>
-                  </div>
-                  <div style={{ textAlign: "center" }}>
-                    <Typography style={{ fontSize: "13px" }}>
-                      ✔ Loren ipsum bada cara tana opseum ipun.
-                    </Typography>
-                    <Typography style={{ fontSize: "13px" }}>
-                      ✔ Loren ipsum bada cara tana opseum ipun.
-                    </Typography>
-                    <Typography style={{ fontSize: "13px" }}>
-                      ✔ Loren ipsum bada cara tana opseum ipun.
-                    </Typography>
-                  </div>
-                </CardContent>
-                <CardActions>
-                  <Button href="/login" round fullWidth color="secondary">
-                    Beli Sekarang!
-                  </Button>
-                </CardActions>
-              </Card>
             </Grid>
-          </Grid>
+          </div>
+
+          <div className={classes.sectionMobile}>
+            <Grid container spacing={2} alignItems="flex-end">
+              {tiers.map((tier) => (
+                <Grid container justifyContent="center" alignItems="center">
+                  <Grid
+                    style={{
+                      marginBottom: "22px",
+                    }}
+                    item
+                    xs={12}
+                    md={3}
+                    className={classes.cardHover}
+                  >
+                    <Card elevation={5} style={{ padding: "15px" }}>
+                      <Grid
+                        container
+                        alignItems="center"
+                        justifyContent="flex-end"
+                        spacing={3}
+                      >
+                        <Grid item xs={3}>
+                          <Typography
+                            style={{
+                              textAlign: "center",
+                            }}
+                            size="subheading"
+                          >
+                            {tier.title}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={1}>
+                          {/* <Divider orientation="vertical" /> */}
+                          <div
+                            style={{
+                              borderRight: "1px solid #41444b",
+                              height: "170px",
+                            }}
+                          />
+                        </Grid>
+                        <Grid item xs={8}>
+                          <div>
+                            <Typography
+                              type="italic"
+                              style={{
+                                color: "red",
+                                marginBottom: 0,
+                                fontWeight: "bold",
+                                // transform: "rotate(-12deg)",
+                              }}
+                            >
+                              Hemat Rp. {tier.hemat}
+                            </Typography>
+
+                            <Typography
+                              type="subheading"
+                              style={{
+                                marginTop: "0",
+                                fontSize: "25px",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              Rp. {tier.monthlyPrice}
+                              <Typography type="italic">/bulan</Typography>
+                            </Typography>
+                          </div>
+                          <div>
+                            <Typography
+                              style={{ fontSize: "12px" }}
+                              type="italic"
+                            >
+                              {tier.disclaimer}
+                            </Typography>
+                          </div>
+                          <div>
+                            <Button
+                              // onClick={tier.route}
+                              href={"/login"}
+                              round
+                              fullWidth
+                              color="primary"
+                            >
+                              {tier.buttonText}
+                            </Button>
+                          </div>
+                        </Grid>
+                      </Grid>
+                    </Card>
+                  </Grid>
+                </Grid>
+              ))}
+            </Grid>
+
+            <div style={{ marginTop: "100px" }} />
+
+            <Typography className={classes.orLabel} type="italic">
+              <span className={classes.middle}>ATAU</span>
+            </Typography>
+
+            <div style={{ marginTop: "100px" }} />
+
+            <Typography style={{ textAlign: "center" }} size="heading">
+              Individual
+            </Typography>
+
+            <Grid container justifyContent="center" alignItems="center">
+              <Grid
+                style={{
+                  marginBottom: "22px",
+                }}
+                item
+                xs={12}
+                md={3}
+                className={classes.cardHover}
+              >
+                <Card elevation={5} style={{ padding: "15px" }}>
+                  <Grid
+                    container
+                    alignItems="center"
+                    justifyContent="flex-end"
+                    spacing={3}
+                  >
+                    <Grid item xs={3}>
+                      <div
+                        style={{
+                          alignItems: "center",
+                        }}
+                      >
+                        <Typography
+                          type="subheading"
+                          style={{ fontSize: "20px", marginBottom: "0" }}
+                        >
+                          Rp. 15.000
+                        </Typography>
+                        <Typography type="italic">/kilas</Typography>
+                      </div>
+                    </Grid>
+                    <Grid item xs={1}>
+                      <div
+                        style={{
+                          borderRight: "1px solid #41444b",
+                          height: "170px",
+                        }}
+                      />
+                    </Grid>
+                    <Grid item xs={8}>
+                      {/* <Divider orientation="vertical" /> */}
+                      <div>
+                        <Typography style={{ fontSize: "13px" }}>
+                          ✔ Loren ipsum bada cara tana opseum ipun.
+                        </Typography>
+                        <Typography style={{ fontSize: "13px" }}>
+                          ✔ Loren ipsum bada cara tana opseum ipun.
+                        </Typography>
+                        <Typography style={{ fontSize: "13px" }}>
+                          ✔ Loren ipsum bada cara tana opseum ipun.
+                        </Typography>
+                        <Button href="/login" round fullWidth color="secondary">
+                          Beli Sekarang!
+                        </Button>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </Card>
+              </Grid>
+            </Grid>
+          </div>
         </Container>
       )}
       <Footer />

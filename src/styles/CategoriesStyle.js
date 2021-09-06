@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { secondaryColor } from "./Style";
+import { primaryColor, secondaryColor } from "./Style";
 
 const CategoriesStyle = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -29,19 +29,21 @@ const CategoriesStyle = makeStyles((theme) => ({
     marginBottom: "5px",
     border: "solid 1px #41444B",
     borderRadius: "5px",
-    padding: "15px 53px",
+    padding: "15px 47px",
     textTransform: "uppercase",
     fontWeight: "600",
-    fontSize: "12px",
+    fontSize: "13px",
     cursor: "pointer",
     "&:hover": {
-      background: "#41444B", //41444b
-      color: "white",
+      background: primaryColor, //41444b
+      // color: "white",
+      border: "solid 1px #FFE05D",
     },
   },
   selectedButton: {
-    background: "#41444b", //41444b
-    color: "#FFFFFF",
+    background: primaryColor, //41444b
+    // color: "#FFFFFF",
+    border: "solid 1px #FFE05D",
   },
   container: {
     display: "block",

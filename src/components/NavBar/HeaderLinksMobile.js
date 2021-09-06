@@ -116,17 +116,24 @@ export default function HeaderLinksMobile({ history }) {
         <List className={header.list}>
           <ListItem className={header.listItem}>
             <Button onClick={goToPricing} round color="transparent">
-              <div style={{ color: secondaryColor }}>Pricing</div>
+              <div style={{ color: secondaryColor }}>
+                <MonetizationOnIcon /> Pricing
+              </div>
             </Button>
           </ListItem>
           <ListItem className={header.listItem}>
             <Button href="/library" round color="transparent">
-              <div style={{ color: secondaryColor }}>Library</div>
+              <div style={{ color: secondaryColor }}>
+                <LibraryBooksIcon />
+                Library
+              </div>
             </Button>
           </ListItem>
           <ListItem className={header.listItem}>
             <Button onClick={goToAccounts} round color="transparent">
-              <div style={{ color: secondaryColor }}>My Account</div>
+              <div style={{ color: secondaryColor }}>
+                <AccountCircleIcon /> My Account
+              </div>
             </Button>
           </ListItem>
         </List>

@@ -12,6 +12,7 @@ import Typography from "../../components/Typography";
 import ReactAudioPlayer from "react-audio-player";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
+import TextReadingStyle from "../../styles/TextReadingStyle";
 
 // Material-UI components
 import { Container, Divider, Grid, Tabs, makeStyles } from "@material-ui/core";
@@ -46,6 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BookDetailsPage({ match, history }) {
   const classes = MultiUseMobile();
+  const books = TextReadingStyle();
 
   const { currentUser } = useContext(AuthContext);
   const dispatch = useDispatch();
@@ -329,7 +331,7 @@ export default function BookDetailsPage({ match, history }) {
                         kilasTitle={current_product.kilasan[0].title}
                         kilasBody={current_product.kilasan[0].details.map(
                           (paragraph) => (
-                            <Typography className={classes.paragraph}>
+                            <Typography className={books.paragraphBookDetails}>
                               {paragraph}
                             </Typography>
                           )
@@ -445,18 +447,20 @@ export default function BookDetailsPage({ match, history }) {
                         kilasTitle={current_product.kilasan[0].title}
                         kilasBody={
                           <div>
-                            <Typography className={classes.paragraph}>
+                            <Typography className={books.paragraphBookDetails}>
                               {current_product.kilasan[0].details[0]}
                             </Typography>
 
-                            <Typography className={classes.paragraph}>
+                            <Typography className={books.paragraphBookDetails}>
                               {current_product.kilasan[0].details[1]}
                             </Typography>
 
                             {current_product.kilasan[0].details.map(
                               (paragraph) => (
                                 <div className={classes.blur}>
-                                  <Typography className={classes.paragraph}>
+                                  <Typography
+                                    className={books.paragraphBookDetails}
+                                  >
                                     {paragraph ===
                                       current_product.kilasan[0].details[0] ||
                                     paragraph ===
@@ -475,7 +479,9 @@ export default function BookDetailsPage({ match, history }) {
                               <div>
                                 {index < 2 ? (
                                   <div>
-                                    <Typography className={classes.paragraph}>
+                                    <Typography
+                                      className={books.paragraphBookDetails}
+                                    >
                                       {kilas.title === undefined
                                         ? "Ringkasan Akhir"
                                         : "Kilas #" +
@@ -487,7 +493,9 @@ export default function BookDetailsPage({ match, history }) {
                                   </div>
                                 ) : (
                                   <div className={classes.blur}>
-                                    <Typography className={classes.paragraph}>
+                                    <Typography
+                                      className={books.paragraphBookDetails}
+                                    >
                                       {kilas.title === undefined
                                         ? "Ringkasan Akhir"
                                         : "Kilas #" +
@@ -567,17 +575,17 @@ export default function BookDetailsPage({ match, history }) {
                     kilasTitle={current_product.kilasan[0].title}
                     kilasBody={
                       <div>
-                        <Typography className={classes.paragraph}>
+                        <Typography className={books.paragraphBookDetails}>
                           {current_product.kilasan[0].details[0]}
                         </Typography>
 
-                        <Typography className={classes.paragraph}>
+                        <Typography className={books.paragraphBookDetails}>
                           {current_product.kilasan[0].details[1]}
                         </Typography>
 
                         {current_product.kilasan[0].details.map((paragraph) => (
                           <div className={classes.blur}>
-                            <Typography className={classes.paragraph}>
+                            <Typography className={books.paragraphBookDetails}>
                               {paragraph ===
                                 current_product.kilasan[0].details[0] ||
                               paragraph ===
@@ -595,7 +603,9 @@ export default function BookDetailsPage({ match, history }) {
                           <div>
                             {index < 2 ? (
                               <div>
-                                <Typography className={classes.paragraph}>
+                                <Typography
+                                  className={books.paragraphBookDetails}
+                                >
                                   {kilas.title === undefined
                                     ? "Ringkasan Akhir"
                                     : "Kilas #" +
@@ -607,7 +617,9 @@ export default function BookDetailsPage({ match, history }) {
                               </div>
                             ) : (
                               <div className={classes.blur}>
-                                <Typography className={classes.paragraph}>
+                                <Typography
+                                  className={books.paragraphBookDetails}
+                                >
                                   {kilas.title === undefined
                                     ? "Ringkasan Akhir"
                                     : "Kilas #" +

@@ -15,7 +15,7 @@ const InfoStyle = {
     },
   },
   notOwned: {
-    filter: "grayscale(100%)",
+    filter: "grayscale(0%)",
   },
   bookCover: {
     maxWidth: "200px",

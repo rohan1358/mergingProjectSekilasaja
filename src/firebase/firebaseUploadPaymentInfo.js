@@ -11,7 +11,11 @@ export async function uploadPaymentInfo(
   userData,
   cartItems,
   image,
-  total_cost
+  total_cost,
+  akunTelegram,
+  namaBank,
+  nomorRekening,
+  namaDiRekening
 ) {
   try {
     //Get total cost and items from cart items
@@ -64,7 +68,11 @@ export async function uploadPaymentInfo(
       date: today,
       image_link: image_url,
       info: { items: items, total_cost: total_cost },
-      type: "test",
+      nama_di_rekening: namaDiRekening,
+      nomor_rekening: nomorRekening,
+      nama_bank: namaBank,
+      akun_telegram: akunTelegram,
+      // type: "test",
     });
 
     //Put reference into payments array of user data

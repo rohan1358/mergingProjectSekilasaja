@@ -146,7 +146,7 @@ export default function CategoryBlock(props) {
             TabIndicatorProps={{
               style: {
                 backgroundColor: primaryColor,
-                height: "3px",
+                height: "5px",
               },
             }}
             value={value}
@@ -198,7 +198,7 @@ export default function CategoryBlock(props) {
               setIsChosenCategory={setIsChosenCategory}
             />
 
-            <div className={classes.extraSpace} />
+            {/* <div className={classes.extraSpace} /> */}
 
             {isChosenCategory === true ? (
               <div>
@@ -248,7 +248,7 @@ export default function CategoryBlock(props) {
                       (product) =>
                         product.category.includes(chosenCategory) == true
                     ).length !== 0 ? (
-                      <Grid container spacing={5}>
+                      <Grid container justifyContent={"center"} spacing={5}>
                         {products
                           .filter(
                             (product) =>
@@ -367,7 +367,7 @@ export default function CategoryBlock(props) {
             )}
 
             <div className={classes.extraSpace} /> */}
-                  <Grid container spacing={5}>
+                  <Grid container justifyContent={"center"} spacing={5}>
                     {products.map((product) => (
                       <BookCard
                         chosenCategory={chosenCategory}

@@ -121,7 +121,7 @@ export default function TextReading({ match, history }) {
               {chapterContent.length !== 0 && (
                 <Grid container spacing={5}>
                   <Grid item xs={4}>
-                    <Paper square elevation={3}>
+                    <Paper style={{ maxWidth: "375px" }} square elevation={3}>
                       <TableOfContent
                         chapterContent={chapterContent}
                         chosenChapter={chosenChapter}

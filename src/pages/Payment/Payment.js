@@ -10,6 +10,9 @@ import Footer from "../../components/Footer";
 import InfoStyle from "../../styles/InfoAreaStyle";
 import Box from "../../components/Box";
 import PaymentStyle from "../../styles/PaymentStyle";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -62,16 +65,17 @@ export default function Payment({ history }) {
   const userData = useSelector(selectUser);
 
   // create state variables for each input
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
+  const [namaDiRekening, setNamaDiRekening] = useState("");
+  const [nomorRekening, setNomorRekening] = useState("");
+  const [akunTelegram, setAkunTelegram] = useState("");
+  const [namaBank, setNamaBank] = useState("");
 
   const [file, setFile] = useState("");
   const [error, setError] = useState("");
   const [fileError, setFileError] = useState("");
   const [promoError, setPromoError] = useState("");
   const [cartError, setCartError] = useState("");
+  const [namaBankError, setNamaBankError] = useState("");
 
   // Cart total price
   const promoCodeRef = useRef("");
@@ -150,18 +154,17 @@ export default function Payment({ history }) {
     setError("");
     setFileError("");
     setCartError("");
+    setNamaBankError("");
 
     // See if any input values are empty (ALL REQUIRED TO BE FILLED!)
-    if (firstName.length === 0) {
-      return setError("Bagian first name belum terisi!");
-    } else if (lastName.length === 0) {
-      return setError("Bagian last name belum terisi!");
-    } else if (email.length === 0) {
-      return setError("Bagian email belum terisi!");
-    } else if (phoneNumber.length === 0) {
-      return setError("Bagian phone number belum terisi!");
+    if (namaDiRekening.length === 0) {
+      return setError("Nama di rekening belum terisi!");
+    } else if (nomorRekening.length === 0) {
+      return setError("Nomor rekening belum terisi!");
+    } else if (namaBank.length === 0) {
+      return setNamaBankError("Kamu belum memilih jenis pembayaran!");
     } else if (cartItems.length === 0) {
-      console.log("belum beli apa-apa");
+      // console.log("belum beli apa-apa");
       return setCartError("Kamu belum membeli apa-apa!");
     }
 
@@ -175,7 +178,11 @@ export default function Payment({ history }) {
       userData,
       cartItems,
       file,
-      totalPrice
+      totalPrice,
+      akunTelegram,
+      namaBank,
+      nomorRekening,
+      namaDiRekening
     );
 
     firestore.collection("users").doc(currentUser.uid).update({
@@ -208,7 +215,14 @@ export default function Payment({ history }) {
 
   return (
     <div>
-      <Navbar history={history} />
+      <div style={{ marginTop: "120px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
       <Container maxWidth="md">
         <div className={classes.sectionDesktop}>
           <Grid container direction="row" justifyContent="center" spacing={3}>
@@ -312,37 +326,27 @@ export default function Payment({ history }) {
                   <TextField
                     required
                     id="filled-basic"
-                    label="First Name"
+                    label="Nama Lengkap Di Rekening"
                     variant="filled"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    value={namaDiRekening}
+                    onChange={(e) => setNamaDiRekening(e.target.value)}
                     fullWidth
                   />
                   <TextField
                     required
                     id="filled-basic"
-                    label="Last Name"
+                    label="Nomor Rekening atau Nomor HP QRIS"
                     variant="filled"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    value={nomorRekening}
+                    onChange={(e) => setNomorRekening(e.target.value)}
                     fullWidth
                   />
                   <TextField
-                    required
                     id="filled-basic"
-                    label="Email"
+                    label="Akun Telegram untuk diinvite ke group eksklusif"
                     variant="filled"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    fullWidth
-                  />
-                  <TextField
-                    required
-                    id="filled-basic"
-                    label="Phone Number"
-                    variant="filled"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    value={akunTelegram}
+                    onChange={(e) => setAkunTelegram(e.target.value)}
                     fullWidth
                   />
                 </form>
@@ -355,17 +359,24 @@ export default function Payment({ history }) {
                     <Alert severity="error">{fileError}</Alert>
                   </div>
                 )}
+                {namaBankError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{namaBankError}</Alert>
+                  </div>
+                )}
                 <FormControl component="fieldset">
                   <RadioGroup
                     aria-label="gender"
                     name="gender1"
                     value={value}
                     onChange={handleRadioChange}
+                    required
                   >
                     <FormControlLabel
-                      value="BCA Virtual Account"
+                      value="BCA Transfer"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="BCA Virtual Account"
+                      label="BCA Transfer"
+                      onChange={(e) => setNamaBank(e.target.value)}
                     />
                     <Box
                       text={
@@ -375,40 +386,71 @@ export default function Payment({ history }) {
                             s sdsda
                           </Typography>
                           <ImagePreview open={open} handleClose={handleClose} />
-                          <Button onClick={handleClickOpen} round>
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                          >
                             Contoh
                           </Button>
                         </div>
                       }
-                      value="BCA Virtual Account"
+                      value="BCA Transfer"
                       chosenValue={value}
                     ></Box>
                     <FormControlLabel
-                      value="Mandiri Virtual Account"
+                      value="BRI Transfer"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="Mandiri Virtual Account"
+                      label="BRI Transfer"
+                      onChange={(e) => setNamaBank(e.target.value)}
                     />
                     <Box
-                      value="Mandiri Virtual Account"
+                      text={
+                        <div>
+                          <Typography>
+                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
+                            s sdsda
+                          </Typography>
+                          <ImagePreview open={open} handleClose={handleClose} />
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                          >
+                            Contoh
+                          </Button>
+                        </div>
+                      }
+                      value="BRI Transfer"
                       chosenValue={value}
                     ></Box>
                     <FormControlLabel
-                      value="OVO"
+                      disabled
+                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="OVO"
+                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!) akan tersedia tanggal 20 September 2021"
+                      onChange={(e) => setNamaBank(e.target.value)}
                     />
-                    <Box value="OVO" chosenValue={value}></Box>
-                    <FormControlLabel
-                      value="BNI Virtual Account"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="BNI Virtual Account"
-                    />
-                    <Box value="BNI Virtual Account" chosenValue={value}></Box>
-                    <FormControlLabel
-                      value="BRI Virtual Account"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="BRI Virtual Account"
-                    />
+                    <Box
+                      text={
+                        <div>
+                          <Typography>
+                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
+                            s sdsda
+                          </Typography>
+                          <ImagePreview open={open} handleClose={handleClose} />
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                          >
+                            Contoh
+                          </Button>
+                        </div>
+                      }
+                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
+                      chosenValue={value}
+                    ></Box>
                   </RadioGroup>
                 </FormControl>
 
@@ -534,35 +576,29 @@ export default function Payment({ history }) {
                     </div>
                   )}
                   <TextField
+                    required
                     id="filled-basic"
-                    label="First Name"
+                    label="Nama Lengkap Di Rekening"
                     variant="filled"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    value={namaDiRekening}
+                    onChange={(e) => setNamaDiRekening(e.target.value)}
+                    fullWidth
+                  />
+                  <TextField
+                    required
+                    id="filled-basic"
+                    label="Nomor Rekening atau Nomor HP QRIS"
+                    variant="filled"
+                    value={nomorRekening}
+                    onChange={(e) => setNomorRekening(e.target.value)}
                     fullWidth
                   />
                   <TextField
                     id="filled-basic"
-                    label="Last Name"
+                    label="Akun Telegram untuk diinvite ke group eksklusif"
                     variant="filled"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    fullWidth
-                  />
-                  <TextField
-                    id="filled-basic"
-                    label="Email"
-                    variant="filled"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    fullWidth
-                  />
-                  <TextField
-                    id="filled-basic"
-                    label="Phone Number"
-                    variant="filled"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    value={akunTelegram}
+                    onChange={(e) => setAkunTelegram(e.target.value)}
                     fullWidth
                   />
                 </form>
@@ -575,6 +611,11 @@ export default function Payment({ history }) {
                     <Alert severity="error">{fileError}</Alert>
                   </div>
                 )}
+                {namaBankError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{namaBankError}</Alert>
+                  </div>
+                )}
 
                 <FormControl component="fieldset">
                   <RadioGroup
@@ -584,9 +625,10 @@ export default function Payment({ history }) {
                     onChange={handleRadioChange}
                   >
                     <FormControlLabel
-                      value="BCA Virtual Account"
+                      value="BCA Transfer"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="BCA Virtual Account"
+                      label="BCA Transfer"
+                      onChange={(e) => setNamaBank(e.target.value)}
                     />
                     <Box
                       text={
@@ -595,60 +637,90 @@ export default function Payment({ history }) {
                             asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
                             s sdsda
                           </Typography>
-                          <Button round>Contoh</Button>
+                          <ImagePreview open={open} handleClose={handleClose} />
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                          >
+                            Contoh
+                          </Button>
                         </div>
                       }
-                      value="BCA Virtual Account"
+                      value="BCA Transfer"
                       chosenValue={value}
                     ></Box>
                     <FormControlLabel
-                      value="Mandiri Virtual Account"
+                      value="BRI Transfer"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="Mandiri Virtual Account"
+                      label="BRI Transfer"
+                      onChange={(e) => setNamaBank(e.target.value)}
                     />
                     <Box
-                      value="Mandiri Virtual Account"
+                      text={
+                        <div>
+                          <Typography>
+                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
+                            s sdsda
+                          </Typography>
+                          <ImagePreview open={open} handleClose={handleClose} />
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                          >
+                            Contoh
+                          </Button>
+                        </div>
+                      }
+                      value="BRI Transfer"
                       chosenValue={value}
                     ></Box>
                     <FormControlLabel
-                      value="OVO"
+                      disabled
+                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="OVO"
+                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!) akan tersedia tanggal 20 September 2021"
+                      onChange={(e) => setNamaBank(e.target.value)}
                     />
-                    <Box value="OVO" chosenValue={value}></Box>
-                    <FormControlLabel
-                      value="BNI Virtual Account"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="BNI Virtual Account"
-                    />
-                    <Box value="BNI Virtual Account" chosenValue={value}></Box>
-                    <FormControlLabel
-                      value="BRI Virtual Account"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="BRI Virtual Account"
-                    />
+                    <Box
+                      text={
+                        <div>
+                          <Typography>
+                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
+                            s sdsda
+                          </Typography>
+                          <ImagePreview open={open} handleClose={handleClose} />
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                          >
+                            Contoh
+                          </Button>
+                        </div>
+                      }
+                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
+                      chosenValue={value}
+                      onChange={(e) => setNamaBank(e.target.value)}
+                    ></Box>
                   </RadioGroup>
                 </FormControl>
 
-                <form>
-                  <label htmlFor="upload-photo">
-                    <input
-                      style={{ display: "none" }}
-                      id="upload-photo"
-                      name="upload-photo"
-                      type="file"
-                      onChange={handleChange}
-                    />
-                    <Button
-                      variant="contained"
-                      component="span"
-                      className={classes.paragraphSpace}
-                      color="secondary"
-                    >
-                      Attach File
-                    </Button>
-                  </label>
-                </form>
+                <TextField
+                  required
+                  id="outlined-full-width"
+                  label="Image Upload"
+                  name="upload-photo"
+                  type="file"
+                  fullWidth
+                  margin="normal"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                  onChange={handleChange}
+                />
 
                 <div className={classes.extraSpace} />
 

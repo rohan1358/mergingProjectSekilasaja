@@ -48,6 +48,11 @@ const TextReadingStyle = makeStyles((theme) => ({
     userSelect: "none",
     pointerEvents: "none",
   },
+  paragraphBookDetails: {
+    fontSize: "18px",
+    userSelect: "none",
+    pointerEvents: "none",
+  },
   content: {},
   page: {
     display: "flex",

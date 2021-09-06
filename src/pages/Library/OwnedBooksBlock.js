@@ -247,7 +247,7 @@ export default function OwnedBooksBlock(props) {
                 TabIndicatorProps={{
                   style: {
                     backgroundColor: primaryColor,
-                    height: "3px",
+                    height: "5px",
                   },
                 }}
                 value={value}
@@ -298,7 +298,7 @@ export default function OwnedBooksBlock(props) {
                   setChosenCategory={setChosenCategory}
                   setIsChosenCategory={setIsChosenCategory}
                 />
-                <div className={classes.extraSpace} />
+                {/* <div className={classes.extraSpace} /> */}
 
                 {isChosenCategory === true ? (
                   <div>
@@ -370,7 +370,11 @@ export default function OwnedBooksBlock(props) {
                                 product.category.includes(chosenCategory) ==
                                 true
                             ).length !== 0 ? (
-                              <Grid container spacing={5}>
+                              <Grid
+                                container
+                                justifyContent={"center"}
+                                spacing={5}
+                              >
                                 {ownedBooks
                                   .filter(
                                     (product) =>
@@ -580,7 +584,7 @@ export default function OwnedBooksBlock(props) {
                         </div>
                       ) : (
                         <div>
-                          <Grid container spacing={5}>
+                          <Grid container justifyContent={"center"} spacing={5}>
                             {ownedBooks.map((product) => (
                               <BookCard
                                 chosenCategory={chosenCategory}
@@ -660,7 +664,7 @@ export default function OwnedBooksBlock(props) {
                   setChosenCategory={setChosenCategory}
                   setIsChosenCategory={setIsChosenCategory}
                 />
-                <div className={classes.extraSpace} />
+                {/* <div className={classes.extraSpace} /> */}
 
                 {isChosenCategory === true ? (
                   <div>
@@ -729,7 +733,11 @@ export default function OwnedBooksBlock(props) {
                             (product) =>
                               product.category.includes(chosenCategory) == true
                           ).length !== 0 ? (
-                            <Grid container spacing={5}>
+                            <Grid
+                              container
+                              justifyContent={"center"}
+                              spacing={5}
+                            >
                               {booksNotOwned
                                 .filter(
                                   (product) =>
@@ -906,7 +914,7 @@ export default function OwnedBooksBlock(props) {
                         </div>
                       ) : (
                         <div>
-                          <Grid container spacing={5}>
+                          <Grid container justifyContent={"center"} spacing={5}>
                             {booksNotOwned.map((product) => (
                               <BookCard
                                 notOwned={cards.notOwned}

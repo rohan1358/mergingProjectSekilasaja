@@ -1,7 +1,16 @@
 const ImagesStyle = {
+  imgBestValue: {
+    maxWidth: "100px",
+    width: "100%",
+  },
   imgLogoText: {
     width: "220px",
     padding: "10px",
+  },
+  imgHomePNG: {
+    display: "flex",
+    maxWidth: "400px",
+    width: "100%",
   },
   imgWhatsappLogo: {
     width: "60px",
@@ -61,7 +70,7 @@ const ImagesStyle = {
   },
   imgHomeBook: {
     width: "100%",
-    maxWidth: "130px",
+    maxWidth: "170px",
     padding: "5px",
     transition: "transform .2s",
     "&:hover": {

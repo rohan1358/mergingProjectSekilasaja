@@ -6,6 +6,7 @@ import HomeBlock from "../../images/home3.jpg";
 import Book from "../../images/book.png";
 import BookMobile from "../../images/home-mobile.png";
 import Whatsapp from "../../images/Whatsapp.png";
+import HomeBookPNG from "../../images/home-landing.png";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -52,7 +53,6 @@ const mobileStyles = makeStyles((theme) => ({
   sectionMobile: {
     display: "flex",
     // marginTop: "40px",
-    textAlign: "center",
     justifyContent: "center",
     [theme.breakpoints.up("md")]: {
       display: "none",
@@ -88,14 +88,199 @@ export default function Home({ history }) {
       />
 
       {!!currentUser ? (
-        <div></div>
+        <div>
+          {/* Landing Block */}
+          <Parallax
+            large
+            className={desktopClass}
+            image={require("../../images/home-landing.jpg").default}
+          >
+            <Container>
+              <Grid container>
+                <Grid item xs={12} md={5}>
+                  <div style={{ width: "420px" }}>
+                    <Typography size="heading">
+                      Solusi Buat Kamu Yang{" "}
+                      <strong
+                        style={{
+                          // textDecoration: "underline",
+                          // textDecorationColor: primaryColor,
+                          // textDecorationThickness: "10px",
+                          // textUnderlinePosition: "under",
+                          backgroundColor: primaryColor,
+                        }}
+                      >
+                        Malas Baca!
+                      </strong>
+                    </Typography>
+                    <Typography>
+                      Belajar rangkuman buku{" "}
+                      <strong>
+                        Bisnis, Investasi, dan Pengembangan diri terbaik dunia
+                        hanya dalam 15 menit.
+                      </strong>{" "}
+                      Belajar dimanapun dan kapanpun.
+                    </Typography>
+
+                    <div style={{ marginTop: "20px" }} />
+
+                    <Typography>
+                      Mulai dari <strong>Rp. 1.000/hari</strong>
+                    </Typography>
+
+                    <div style={{ marginTop: "30px" }} />
+                  </div>
+                </Grid>
+              </Grid>
+            </Container>
+          </Parallax>
+
+          <div className={mobileClass}>
+            <Grid container>
+              <Container>
+                <Grid item xs={12}>
+                  <div style={{ marginTop: "100px" }} />
+                  <Typography size="heading">
+                    Solusi Buat Kamu Yang{" "}
+                    <strong
+                      style={{
+                        // textDecoration: "underline",
+                        // textDecorationColor: primaryColor,
+                        // textDecorationThickness: "10px",
+                        // textUnderlinePosition: "under",
+                        backgroundColor: primaryColor,
+                      }}
+                    >
+                      Malas Baca!
+                    </strong>
+                  </Typography>
+                  <Typography>
+                    Belajar rangkuman buku{" "}
+                    <strong>
+                      Bisnis, Investasi, dan Pengembangan diri terbaik dunia
+                      hanya dalam 15 menit.
+                    </strong>{" "}
+                    Belajar dimanapun dan kapanpun.
+                  </Typography>
+
+                  <div style={{ marginTop: "20px" }} />
+
+                  <Typography>
+                    Mulai dari <strong>Rp. 1.000/hari</strong>
+                  </Typography>
+                </Grid>
+              </Container>
+
+              <Grid xs={12}>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <img src={HomeBookPNG} className={books.imgHomePNG} />
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+
+          {/* Second Block */}
+          <BenefitsBlock
+            logo={<img src={Logo} className={books.imgLogoText} />}
+          />
+
+          <div
+            style={{
+              backgroundImage: `url(${HomeBlock})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center center",
+            }}
+          >
+            <Container>
+              <Grid container>
+                <Grid item xs={12} md={5}>
+                  <div style={{ marginTop: "40px" }} />
+
+                  <a href={`/book-details/Steve%20Jobs`}>
+                    <img
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
+                      }
+                      className={
+                        books.imgRounded +
+                        " " +
+                        books.imgFluid +
+                        " " +
+                        books.imgHomeBook
+                      }
+                    />
+                  </a>
+                  <a href={`/book-details/Steve%20Jobs`}>
+                    <img
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
+                      }
+                      className={
+                        books.imgRounded +
+                        " " +
+                        books.imgFluid +
+                        " " +
+                        books.imgHomeBook
+                      }
+                    />
+                  </a>
+                  <a href={`/book-details/Steve%20Jobs`}>
+                    <img
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
+                      }
+                      className={
+                        books.imgRounded +
+                        " " +
+                        books.imgFluid +
+                        " " +
+                        books.imgHomeBook
+                      }
+                    />
+                  </a>
+                  <Typography size="heading">
+                    Dapatkan ketiga buku ini{" "}
+                    <strong
+                      style={{
+                        backgroundColor: primaryColor,
+                      }}
+                    >
+                      secara gratis!
+                    </strong>
+                  </Typography>
+                  <Typography>
+                    Kamu bisa mendapatkan ketiga buku ini secara gratis hanya
+                    dengan mendaftar!
+                  </Typography>
+                  <div style={{ marginTop: "30px" }} />
+                </Grid>
+              </Grid>
+            </Container>
+          </div>
+
+          <div style={{ marginTop: "40px" }} />
+
+          {/* Third Block */}
+          <Container>
+            <CategoryBlock
+              history={history}
+              title={"Temukan Kategori Kesukaan Kamu!"}
+            />
+          </Container>
+        </div>
       ) : (
         <div>
           {/* Landing Block */}
-          <Parallax large image={require("../../images/home3.jpg").default}>
+
+          <Parallax
+            large
+            className={desktopClass}
+            image={require("../../images/home-landing.jpg").default}
+          >
             <Container>
               <Grid container>
-                <Grid item xs={10} md={5}>
+                <Grid item xs={12} md={5}>
                   <div style={{ width: "420px" }}>
                     <Typography size="heading">
                       Solusi Buat Kamu Yang{" "}
@@ -137,6 +322,56 @@ export default function Home({ history }) {
             </Container>
           </Parallax>
 
+          <div className={mobileClass}>
+            <Grid container>
+              <Container>
+                <Grid item xs={12}>
+                  <div style={{ marginTop: "100px" }} />
+                  <Typography size="heading">
+                    Solusi Buat Kamu Yang{" "}
+                    <strong
+                      style={{
+                        // textDecoration: "underline",
+                        // textDecorationColor: primaryColor,
+                        // textDecorationThickness: "10px",
+                        // textUnderlinePosition: "under",
+                        backgroundColor: primaryColor,
+                      }}
+                    >
+                      Malas Baca!
+                    </strong>
+                  </Typography>
+                  <Typography>
+                    Belajar rangkuman buku{" "}
+                    <strong>
+                      Bisnis, Investasi, dan Pengembangan diri terbaik dunia
+                      hanya dalam 15 menit.
+                    </strong>{" "}
+                    Belajar dimanapun dan kapanpun.
+                  </Typography>
+
+                  <div style={{ marginTop: "20px" }} />
+
+                  <Typography>
+                    Mulai dari <strong>Rp. 1.000/hari</strong>
+                  </Typography>
+
+                  <div style={{ marginTop: "30px" }} />
+
+                  <Button round href="/signup">
+                    Bergabung Sekarang!
+                  </Button>
+                </Grid>
+              </Container>
+
+              <Grid xs={12}>
+                <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                  <img src={HomeBookPNG} className={books.imgHomePNG} />
+                </div>
+              </Grid>
+            </Grid>
+          </div>
+
           {/* Second Block */}
           <BenefitsBlock
             logo={<img src={Logo} className={books.imgLogoText} />}
@@ -158,11 +393,11 @@ export default function Home({ history }) {
             <Container>
               <Grid container>
                 <Grid item xs={12} md={5}>
-                  <div className={classes.extraSpace} />
+                  <div style={{ marginTop: "40px" }} />
                   <a href={`/book-details/Steve%20Jobs`}>
                     <img
                       src={
-                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Cover_Images%2FAtomic%20Habits%20Cover.png?alt=media&token=412e534f-6c3b-43e9-a3b7-d3e93ec384e5"
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
                       }
                       className={
                         books.imgRounded +
@@ -176,7 +411,7 @@ export default function Home({ history }) {
                   <a href={`/book-details/Steve%20Jobs`}>
                     <img
                       src={
-                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Cover_Images%2FSteve%20Jobs%20Cover.png?alt=media&token=08496dea-25b8-4c0a-b151-4916aa64affd"
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
                       }
                       className={
                         books.imgRounded +
@@ -190,7 +425,7 @@ export default function Home({ history }) {
                   <a href={`/book-details/Steve%20Jobs`}>
                     <img
                       src={
-                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Cover_Images%2FRich%20Dad's%20Cashflow%20Quadrant%20Cover.png?alt=media&token=6a33064a-e6e7-4e3e-bbf5-b58e897f0a91"
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
                       }
                       className={
                         books.imgRounded +
@@ -202,22 +437,31 @@ export default function Home({ history }) {
                     />
                   </a>
                   <Typography size="heading">
-                    Dapatkan ketiga buku ini secara gratis!
+                    Dapatkan ketiga buku ini{" "}
+                    <strong
+                      style={{
+                        backgroundColor: primaryColor,
+                      }}
+                    >
+                      secara gratis!
+                    </strong>
                   </Typography>
                   <Typography>
                     Kamu bisa mendapatkan ketiga buku ini secara gratis hanya
                     dengan mendaftar!
                   </Typography>
                   <div style={{ marginTop: "30px" }} />
-                  <Button round>Bergabung Sekarang!</Button>
+                  <Button href="/signup" round>
+                    Bergabung Sekarang!
+                  </Button>
 
-                  <div className={classes.extraSpace} />
+                  <div style={{ marginTop: "40px" }} />
                 </Grid>
               </Grid>
             </Container>
           </div>
 
-          <div className={classes.extraSpace} />
+          <div style={{ marginTop: "40px" }} />
 
           {/* Third Block */}
           <Container>
@@ -230,7 +474,7 @@ export default function Home({ history }) {
       )}
       <Footer />
 
-      <a href="/">
+      <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={
             <div
