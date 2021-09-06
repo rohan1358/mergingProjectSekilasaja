@@ -9,13 +9,6 @@ import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import InfoStyle from "../../styles/InfoAreaStyle";
 import Box from "../../components/Box";
-//Material UI
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
-
 import PaymentStyle from "../../styles/PaymentStyle";
 
 //Redux
@@ -31,6 +24,10 @@ import {
   TextField,
   Link,
   makeStyles,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
 } from "@material-ui/core";
 import PaymentIcon from "@material-ui/icons/Payment";
 import { Alert } from "@material-ui/lab";
@@ -45,6 +42,7 @@ import { AuthContext } from "../../components/Routing/Auth";
 //Email js components
 import * as emailService from "../../emailService/emailService";
 import { primaryColor, secondaryColor } from "../../styles/Style";
+import ImagePreview from "./ImagePreview";
 
 const useStyles = makeStyles(InfoStyle);
 
@@ -196,7 +194,17 @@ export default function Payment({ history }) {
     history.push("/payment-success");
   };
 
-  console.log(promoCode);
+  // console.log(promoCode);
+
+  // Image Preview bukti pembayaran
+  const [open, setOpen] = useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -366,7 +374,10 @@ export default function Payment({ history }) {
                             asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
                             s sdsda
                           </Typography>
-                          <Button round>Contoh</Button>
+                          <ImagePreview open={open} handleClose={handleClose} />
+                          <Button onClick={handleClickOpen} round>
+                            Contoh
+                          </Button>
                         </div>
                       }
                       value="BCA Virtual Account"
@@ -641,6 +652,11 @@ export default function Payment({ history }) {
 
                 <div className={classes.extraSpace} />
 
+                {cartError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{cartError}</Alert>
+                  </div>
+                )}
                 <Button fullWidth round onClick={handlePayment} type="submit">
                   <PaymentIcon /> Bayar Sekarang
                 </Button>

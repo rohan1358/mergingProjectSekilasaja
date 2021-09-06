@@ -8,6 +8,10 @@ import Dialog from "@material-ui/core/Dialog";
 import BookDetailsSimple from "./BookDetailsSimple";
 
 const BookDetailsModal = ({ open, handleClose }) => {
+  const handleClose = () => {
+    handleClose();
+  };
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <BookDetailsSimple
