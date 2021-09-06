@@ -63,6 +63,8 @@ export default function BookCard({ product, chosenCategory, notOwned }) {
               <Typography type="italic">{product.author}</Typography>
               <Typography>{product.description}</Typography>
             </div>
+
+            <div style={{ marginBottom: "25px" }} />
           </div>
         </div>
       </Link>

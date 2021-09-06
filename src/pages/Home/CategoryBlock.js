@@ -90,6 +90,9 @@ export default function CategoryBlock(props) {
       ></CategoryBarFilter>
       {isChosenCategory === true ? (
         <Carousel
+          arrows={false}
+          showDots={true}
+          infinite={true}
           autoPlay={true}
           autoPlaySpeed={1500}
           ssr={true}
@@ -109,8 +112,11 @@ export default function CategoryBlock(props) {
         </Carousel>
       ) : (
         <Carousel
+          arrows={false}
+          showDots={true}
+          infinite={true}
           autoPlay={true}
-          autoPlaySpeed={1500}
+          autoPlaySpeed={3000}
           ssr={true}
           responsive={responsive}
         >

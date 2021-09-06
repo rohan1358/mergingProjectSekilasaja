@@ -1,7 +1,6 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router";
 
-
 // Custom components
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
@@ -11,13 +10,13 @@ import Footer from "../../components/Footer";
 import InfoStyle from "../../styles/InfoAreaStyle";
 import Box from "../../components/Box";
 //Material UI
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
+import FormLabel from "@material-ui/core/FormLabel";
 
-import PaymentStyle from '../../styles/PaymentStyle'
+import PaymentStyle from "../../styles/PaymentStyle";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -45,6 +44,7 @@ import { AuthContext } from "../../components/Routing/Auth";
 
 //Email js components
 import * as emailService from "../../emailService/emailService";
+import { primaryColor, secondaryColor } from "../../styles/Style";
 
 const useStyles = makeStyles(InfoStyle);
 
@@ -55,7 +55,7 @@ export default function Payment({ history }) {
   const classes = MultiUseMobile();
   const payment_classes = PaymentStyle();
   const styles = useStyles();
-  const [value, setValue] = useState('female');
+  const [value, setValue] = useState("female");
 
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -73,6 +73,7 @@ export default function Payment({ history }) {
   const [error, setError] = useState("");
   const [fileError, setFileError] = useState("");
   const [promoError, setPromoError] = useState("");
+  const [cartError, setCartError] = useState("");
 
   // Cart total price
   const promoCodeRef = useRef("");
@@ -117,7 +118,7 @@ export default function Payment({ history }) {
   };
 
   const handleApplyPromo = () => {
-    console.log(promoCodeRef.current.value);
+    // console.log(promoCodeRef.current.value);
     if (currentUser !== null) {
       const fetchData = async () => {
         const results = await firebaseGetPromoCode.getPromoCode(
@@ -150,6 +151,7 @@ export default function Payment({ history }) {
   const handlePayment = async () => {
     setError("");
     setFileError("");
+    setCartError("");
 
     // See if any input values are empty (ALL REQUIRED TO BE FILLED!)
     if (firstName.length === 0) {
@@ -160,6 +162,9 @@ export default function Payment({ history }) {
       return setError("Bagian email belum terisi!");
     } else if (phoneNumber.length === 0) {
       return setError("Bagian phone number belum terisi!");
+    } else if (cartItems.length === 0) {
+      console.log("belum beli apa-apa");
+      return setCartError("Kamu belum membeli apa-apa!");
     }
 
     // See if image has been uploaded or not (REQUIRED!)
@@ -179,10 +184,12 @@ export default function Payment({ history }) {
       cart: [],
     });
 
-    firestore.collection("promo").doc(promoCode[0].code).update({
-      code: "",
-      amount: 0,
-    });
+    if (promoCode.length != 0) {
+      firestore.collection("promo").doc(promoCode[0].code).update({
+        code: "",
+        amount: 0,
+      });
+    }
 
     //Send email notification
     await emailService.sendPaymentNotification(userData, image_url);
@@ -341,33 +348,56 @@ export default function Payment({ history }) {
                   </div>
                 )}
                 <FormControl component="fieldset">
-                  <FormLabel component="legend">Gender</FormLabel>
-                  <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleRadioChange}>
-                    <FormControlLabel value="BCA Virtual Account" control={<Radio />} label="BCA Virtual Account" />
-                    <Box value = "BCA Virtual Account" chosenValue = {value}></Box>
-                    <FormControlLabel value="Mandiri Virtual Account" control={<Radio />} label="Mandiri Virtual Account" />
-                    <Box value = "Mandiri Virtual Account" chosenValue = {value}></Box>
-                    <FormControlLabel value="OVO" control={<Radio />} label="OVO" />
-                    <Box value = "OVO" chosenValue = {value}></Box>
-                    <FormControlLabel value="BNI Virtual Account" control={<Radio />} label="BNI Virtual Account" />
-                    <Box value = "BNI Virtual Account" chosenValue = {value}></Box>
-                    <FormControlLabel value="BRI Virtual Account" control={<Radio />} label="BRI Virtual Account" />
-                    <Box value = "BRI Virtual Account" chosenValue = {value}></Box>
-                    <FormControlLabel value="Credit Card (Xendit)" control={<Radio />} label="Credit Card (Xendit)" />
-                    <Box value = "Credit Card (Xendit)" chosenValue = {value}></Box>
-                    <FormControlLabel value="Go Pay/Alfa Group" control={<Radio />} label="Go Pay/Alfa Group" />
-                    <Box value = "Go Pay/Alfa Group" chosenValue = {value}></Box>
-                    <FormControlLabel value="QRIS" control={<Radio />} label="QRIS" />
-                    <Box value = "QRIS" chosenValue = {value}></Box>
-                    <FormControlLabel value="ShopeePay" control={<Radio />} label="ShopeePay" />
-                    <Box value = "ShopeePay" chosenValue = {value}></Box>
-                    <FormControlLabel value="DANA" control={<Radio />} label="DANA" />
-                    <Box value = "DANA" chosenValue = {value}></Box>                    
-                    <FormControlLabel value="Bank Transfer - Permata" control={<Radio />} label="Bank Transfer - Permata" />
-                    <Box value = "Bank Transfer - Permata" chosenValue = {value}></Box>
-                    <FormControlLabel value="LINKAJA" control={<Radio />} label="LINKAJA" />
-                    <Box value = "LINKAJA" chosenValue = {value}></Box>
-                    <FormControlLabel value="disabled" disabled control={<Radio />} label="(Disabled option)" />
+                  <RadioGroup
+                    aria-label="gender"
+                    name="gender1"
+                    value={value}
+                    onChange={handleRadioChange}
+                  >
+                    <FormControlLabel
+                      value="BCA Virtual Account"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="BCA Virtual Account"
+                    />
+                    <Box
+                      text={
+                        <div>
+                          <Typography>
+                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
+                            s sdsda
+                          </Typography>
+                          <Button round>Contoh</Button>
+                        </div>
+                      }
+                      value="BCA Virtual Account"
+                      chosenValue={value}
+                    ></Box>
+                    <FormControlLabel
+                      value="Mandiri Virtual Account"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="Mandiri Virtual Account"
+                    />
+                    <Box
+                      value="Mandiri Virtual Account"
+                      chosenValue={value}
+                    ></Box>
+                    <FormControlLabel
+                      value="OVO"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="OVO"
+                    />
+                    <Box value="OVO" chosenValue={value}></Box>
+                    <FormControlLabel
+                      value="BNI Virtual Account"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="BNI Virtual Account"
+                    />
+                    <Box value="BNI Virtual Account" chosenValue={value}></Box>
+                    <FormControlLabel
+                      value="BRI Virtual Account"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="BRI Virtual Account"
+                    />
                   </RadioGroup>
                 </FormControl>
 
@@ -388,6 +418,11 @@ export default function Payment({ history }) {
 
                 <div className={classes.extraSpace} />
 
+                {cartError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{cartError}</Alert>
+                  </div>
+                )}
                 <Button fullWidth round onClick={handlePayment} type="submit">
                   <PaymentIcon />
                   Bayar Sekarang
@@ -529,6 +564,60 @@ export default function Payment({ history }) {
                     <Alert severity="error">{fileError}</Alert>
                   </div>
                 )}
+
+                <FormControl component="fieldset">
+                  <RadioGroup
+                    aria-label="gender"
+                    name="gender1"
+                    value={value}
+                    onChange={handleRadioChange}
+                  >
+                    <FormControlLabel
+                      value="BCA Virtual Account"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="BCA Virtual Account"
+                    />
+                    <Box
+                      text={
+                        <div>
+                          <Typography>
+                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
+                            s sdsda
+                          </Typography>
+                          <Button round>Contoh</Button>
+                        </div>
+                      }
+                      value="BCA Virtual Account"
+                      chosenValue={value}
+                    ></Box>
+                    <FormControlLabel
+                      value="Mandiri Virtual Account"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="Mandiri Virtual Account"
+                    />
+                    <Box
+                      value="Mandiri Virtual Account"
+                      chosenValue={value}
+                    ></Box>
+                    <FormControlLabel
+                      value="OVO"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="OVO"
+                    />
+                    <Box value="OVO" chosenValue={value}></Box>
+                    <FormControlLabel
+                      value="BNI Virtual Account"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="BNI Virtual Account"
+                    />
+                    <Box value="BNI Virtual Account" chosenValue={value}></Box>
+                    <FormControlLabel
+                      value="BRI Virtual Account"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="BRI Virtual Account"
+                    />
+                  </RadioGroup>
+                </FormControl>
 
                 <form>
                   <label htmlFor="upload-photo">

@@ -11,12 +11,12 @@ import {
 } from "./Style";
 
 const PaymentStyle = makeStyles((theme) => ({
-    box:{
-        border: "1px solid black",
-        padding: "5px",
-        margin : "5px",
-        display: "grid",
-        width : "100%"
-    }
-}))
+  box: {
+    border: "1px solid #41444b",
+    padding: "5px",
+    margin: "5px",
+    display: "grid",
+    width: "100%",
+  },
+}));
 export default PaymentStyle;

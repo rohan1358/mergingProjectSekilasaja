@@ -313,6 +313,7 @@ export default function TextReading({ match, history }) {
                     src={audioLink}
                     autoPlay
                     controls
+                    onEnded={handleNext}
                   />
 
                   <div className={classes.sectionDesktop}>

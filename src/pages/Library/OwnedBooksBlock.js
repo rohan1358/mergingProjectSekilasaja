@@ -7,6 +7,7 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import AllBooks from "./AllBooks";
 import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
 import InfoStyles from "../../styles/InfoAreaStyle";
+import Button from "../../components/Button";
 
 // Material UI components
 import {
@@ -914,6 +915,9 @@ export default function OwnedBooksBlock(props) {
                                 key={product.id}
                                 product={product}
                               />
+                              // <Button fullWidth round color="secondary">
+                              //   Add to cart!
+                              // </Button>
                             ))}
                           </Grid>
                         </div>
