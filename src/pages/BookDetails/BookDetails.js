@@ -163,7 +163,7 @@ export default function BookDetails(props) {
               </Grid>
 
               <Grid item xs={12}>
-                <div className={mobile.extraSpace} />
+                <div style={{ marginTop: "7px" }} />
               </Grid>
             </Grid>
           </div>
@@ -282,6 +282,7 @@ export default function BookDetails(props) {
                 <Typography>{description}</Typography>
 
                 {buttons}
+                <div style={{ marginTop: "20px" }} />
               </div>
             </Grid>
 

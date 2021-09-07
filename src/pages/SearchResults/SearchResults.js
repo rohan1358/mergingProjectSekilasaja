@@ -1,13 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Redirect, withRouter } from "react-router";
+import React, { useState, useEffect } from "react";
 
 // Custom components
 import Footer from "../../components/Footer";
-import NavBar from "../../components/NavBar/Navbar";
-import Parallax from "../../components/Parallax";
-import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
-import BookSearchResultCard from "./BookSearchResultCard";
 import SearchResultsBlock from "./SearchResultsBlock";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
@@ -15,7 +10,7 @@ import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 
 //Redux
 import { useSelector } from "react-redux";
-import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
+import { selectAllBooks } from "../../feature/allBooksSlice";
 
 import Loading from "../Loading";
 

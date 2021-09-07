@@ -429,6 +429,7 @@ export default function BookDetailsPage({ match, history }) {
                           </div>
                         }
                       />
+
                       <TextDetails
                         video={
                           <Button href="/pricing" color="secondary" fullWidth>
@@ -557,6 +558,7 @@ export default function BookDetailsPage({ match, history }) {
                       </div>
                     }
                   />
+
                   <TextDetails
                     video={
                       <Button href="/pricing" color="secondary" fullWidth>

@@ -53,14 +53,27 @@ const useStyles = makeStyles((theme) => ({
   ribbon: {
     backgroundColor: secondaryColor,
     position: "absolute",
-    color: "white",
+    color: beigeColor,
     width: 150,
     textAlign: "center",
     textTransform: "uppercase",
     padding: 5,
     // transform: "rotate(-40deg)",
-    top: 9,
-    marginLeft: 72,
+    top: -1,
+    marginLeft: 60,
+    fontWeight: "bold",
+  },
+  ribbonMobile: {
+    backgroundColor: secondaryColor,
+    position: "absolute",
+    color: beigeColor,
+    width: 100,
+    textAlign: "center",
+    textTransform: "uppercase",
+    padding: 5,
+    // transform: "rotate(-40deg)",
+    top: -10,
+    marginLeft: 0,
     fontWeight: "bold",
   },
   span: {},
@@ -323,35 +336,25 @@ export default function PricingPage({ match, history }) {
                   className={classes.cardHover}
                   sm={tier.title === "Enterprise" ? 12 : 6}
                 >
-                  {tier.title === "12 Bulan" ? (
-                    <div className={classes.ribbon}>
-                      {/* <img src={BestValue} className={info.imgBestValue} /> */}
-                      BEST VALUE
-                    </div>
-                  ) : null}
                   <Card>
                     <CardHeader
                       title={
                         <Typography size="subheading">{tier.title}</Typography>
                       }
-                      subheader={tier.subheader}
+                      subheader={
+                        tier.title === "12 Bulan" ? (
+                          <Typography className={classes.ribbon}>
+                            {/* <img src={BestValue} className={info.imgBestValue} /> */}
+                            BEST VALUE
+                          </Typography>
+                        ) : null
+                      }
                       titleTypographyProps={{ align: "center" }}
                       subheaderTypographyProps={{ align: "center" }}
-                      // action={
-                      //   tier.title === "12 Bulan" ? (
-                      //     <div className={classes.ribbon}>
-                      //       {/* <img src={BestValue} className={info.imgBestValue} /> */}
-                      //       BEST VALUE
-                      //     </div>
-                      //   ) : null
-                      // }
                       className={classes.cardHeader}
-                    />
+                    ></CardHeader>
                     <CardContent>
                       <div className={classes.cardPricing}>
-                        <Typography style={{ fontSize: "14px" }} type="italic">
-                          {tier.save}
-                        </Typography>
                         <Typography
                           type="subheading"
                           style={{
@@ -502,6 +505,12 @@ export default function PricingPage({ match, history }) {
                         spacing={3}
                       >
                         <Grid item xs={3}>
+                          {tier.title === "12 Bulan" ? (
+                            <Typography className={classes.ribbonMobile}>
+                              {/* <img src={BestValue} className={info.imgBestValue} /> */}
+                              <div>BEST</div> VALUE
+                            </Typography>
+                          ) : null}
                           <Typography
                             style={{
                               textAlign: "center",
@@ -512,7 +521,6 @@ export default function PricingPage({ match, history }) {
                           </Typography>
                         </Grid>
                         <Grid item xs={1}>
-                          {/* <Divider orientation="vertical" /> */}
                           <div
                             style={{
                               borderRight: "1px solid #41444b",
@@ -528,7 +536,6 @@ export default function PricingPage({ match, history }) {
                                 color: "red",
                                 marginBottom: 0,
                                 fontWeight: "bold",
-                                // transform: "rotate(-12deg)",
                               }}
                             >
                               Hemat Rp. {tier.hemat}
@@ -687,14 +694,6 @@ export default function PricingPage({ match, history }) {
                       subheader={tier.subheader}
                       titleTypographyProps={{ align: "center" }}
                       subheaderTypographyProps={{ align: "center" }}
-                      // action={
-                      //   tier.title === "12 Bulan" ? (
-                      //     <div className={classes.ribbon}>
-                      //       {/* <img src={BestValue} className={info.imgBestValue} /> */}
-                      //       BEST VALUE
-                      //     </div>
-                      //   ) : null
-                      // }
                       className={classes.cardHeader}
                     />
                     <CardContent>
@@ -752,13 +751,7 @@ export default function PricingPage({ match, history }) {
                       </div>
                     </CardContent>
                     <CardActions>
-                      <Button
-                        // onClick={tier.route}
-                        href="/login"
-                        round
-                        fullWidth
-                        color="primary"
-                      >
+                      <Button href="/login" round fullWidth color="primary">
                         {tier.buttonText}
                       </Button>
                     </CardActions>
@@ -853,6 +846,12 @@ export default function PricingPage({ match, history }) {
                         spacing={3}
                       >
                         <Grid item xs={3}>
+                          {tier.title === "12 Bulan" ? (
+                            <Typography className={classes.ribbonMobile}>
+                              {/* <img src={BestValue} className={info.imgBestValue} /> */}
+                              <div>BEST</div> VALUE
+                            </Typography>
+                          ) : null}
                           <Typography
                             style={{
                               textAlign: "center",

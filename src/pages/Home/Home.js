@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // Pictures
 import Logo from "../../images/yellow-logo.png";
 import HomeBlock from "../../images/home3.jpg";
-import Book from "../../images/book.png";
-import BookMobile from "../../images/home-mobile.png";
 import Whatsapp from "../../images/Whatsapp.png";
 import HomeBookPNG from "../../images/home-landing.png";
 
@@ -15,7 +13,6 @@ import BenefitsBlock from "./BenefitsBlock";
 import Button from "../../components/Button";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBlock from "./CategoryBlock";
-import NavBar from "../../components/NavBar/Navbar";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
@@ -23,13 +20,7 @@ import Footer from "../../components/Footer";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 
 // Material-UI components
-import {
-  Container,
-  Grid,
-  Divider,
-  makeStyles,
-  Tooltip,
-} from "@material-ui/core";
+import { Container, Grid, makeStyles, Tooltip } from "@material-ui/core";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 
 // nodejs library to set properties for components
@@ -38,6 +29,7 @@ import classNames from "classnames";
 // Firebase components
 import { AuthContext } from "../../components/Routing/Auth";
 import { primaryColor } from "../../styles/Style";
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -65,6 +57,8 @@ export default function Home({ history }) {
   const mobile = mobileStyles();
   const classes = MultiUseMobile();
   const books = useStyles();
+  const [userData, setUserData] = useState(null);
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const mobileClass = classNames({
     [mobile.sectionMobile]: true,
@@ -72,6 +66,21 @@ export default function Home({ history }) {
   const desktopClass = classNames({
     [mobile.sectionDesktop]: true,
   });
+
+  useEffect(() => {
+    if (currentUser !== null) {
+      const fetchData = async () => {
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
+        setUserData(results);
+        setIsSubscribed(results.is_subscribed);
+      };
+      fetchData();
+    } else {
+      console.log("Not logged in");
+    }
+  }, []);
 
   return (
     <div>
