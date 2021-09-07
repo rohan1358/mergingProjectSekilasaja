@@ -69,7 +69,7 @@ export default function AccountsPage(props) {
         var month = results.end_date.toDate().getMonth();
         var year = results.end_date.toDate().getFullYear();
         var day = results.end_date.toDate().getDate();
-        setEndDate(day + "/" + month + "/" + year);
+        setEndDate(day + "/" + (month + 1) + "/" + year);
       };
       fetchData();
     } else {

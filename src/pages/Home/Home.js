@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Redirect } from "react-router";
 
 // Pictures
 import Logo from "../../images/yellow-logo.png";
@@ -81,6 +82,10 @@ export default function Home({ history }) {
       console.log("Not logged in");
     }
   }, []);
+
+  if (isSubscribed == true) {
+    return <Redirect to={"/library"} />;
+  }
 
   return (
     <div>
