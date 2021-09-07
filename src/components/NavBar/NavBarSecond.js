@@ -10,6 +10,7 @@ import {
   Grid,
 } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
+import MenuBookIcon from "@material-ui/icons/MenuBook";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
@@ -57,7 +58,7 @@ export default function NavBarSecond(props) {
                   <ArrowBackIosIcon className={iconColorClass} />
                 </IconButton>
                 <IconButton href="/library" color="inherit">
-                  <AccountBalanceIcon className={iconColorClass} />
+                  <MenuBookIcon className={iconColorClass} />
                 </IconButton>
               </Grid>
 
@@ -72,8 +73,11 @@ export default function NavBarSecond(props) {
       <div className={multi.sectionMobile}>
         <AppBar className={classes.yellowNavBar}>
           <Toolbar>
-            <IconButton href="/" color="inherit">
-              <HomeIcon className={iconColorClass} />
+            <IconButton onClick={() => backHistory.goBack()} color="inherit">
+              <ArrowBackIosIcon className={iconColorClass} />
+            </IconButton>
+            <IconButton href="/library" color="inherit">
+              <MenuBookIcon className={iconColorClass} />
             </IconButton>
 
             {children}
