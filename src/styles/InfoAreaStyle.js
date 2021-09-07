@@ -9,10 +9,25 @@ import {
 } from "./Style";
 
 const InfoStyle = {
+  buttonAddedHoverPos: {
+    position: "absolute",
+    top: 270,
+    marginLeft: 115,
+  },
   buttonHoverPos: {
     position: "absolute",
     top: 270,
     marginLeft: 145,
+  },
+  mobileButtonPos: {
+    // position: "absolute",
+    // top: 270,
+    // marginLeft: 145,
+  },
+  addedMobileButtonPos: {
+    // position: "absolute",
+    // top: 270,
+    // marginLeft: 145,
   },
   cardHover: {
     "&:hover": {

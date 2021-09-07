@@ -6,7 +6,7 @@ import classNames from "classnames";
 import PropTypes from "prop-types";
 
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, Badge } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -14,6 +14,8 @@ import Hidden from "@material-ui/core/Hidden";
 import Drawer from "@material-ui/core/Drawer";
 import Menu from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
+import Basket from "../AddToCart/Basket";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 // core components
 import styles from "../../styles/HeaderStyle";
@@ -21,12 +23,19 @@ import NavbarStyle from "../../styles/NavbarStyle";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchBarDrawer from "../SearchBar/SearchBarDrawer";
 import { secondaryColor, beigeColor } from "../../styles/Style";
+import CartDrawer from "../../components/Drawer";
+
+//Redux
+import { useSelector, useDispatch } from "react-redux";
+import { selectCart, setCart } from "../../feature/cartSlice";
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
   const classes = useStyles();
   const nav = NavbarStyle();
+
+  const cart = useSelector(selectCart).cart;
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
   React.useEffect(() => {
@@ -106,6 +115,17 @@ export default function Header(props) {
             direction={"top"}
             history={history}
             logo={<SearchIcon style={{ color: secondaryColor }} />}
+          />
+          <CartDrawer
+            direction={"right"}
+            drawerLogo={<ShoppingCartIcon className={nav.hugeIcon} />}
+            drawerTitle={"Your Cart"}
+            logo={
+              <Badge badgeContent={cart.length} color="error">
+                <ShoppingCartIcon className={nav.iconColor} />
+              </Badge>
+            }
+            childrenCart={<Basket />}
           />
           <IconButton
             style={{ color: secondaryColor }}

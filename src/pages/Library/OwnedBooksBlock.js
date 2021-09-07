@@ -240,43 +240,6 @@ export default function OwnedBooksBlock(props) {
     setValue(index);
   };
 
-  // Add to cart
-  const cartItems = useSelector(selectCart).cart;
-  const [isAdded, setIsAdded] = useState(false);
-  const [show, setShow] = useState(false);
-
-  const handleAddCart = (product) => {
-    const fetchData = async () => {
-      const results = await firebaseUpdateCart.AddToCart(
-        currentUser.uid,
-        product
-      );
-
-      const exist = cartItems.find((x) => x.book_title === product.book_title);
-
-      if (exist) {
-        console.log("Already Added");
-      } else {
-        dispatch(setCart([...cartItems, product]));
-      }
-    };
-    fetchData();
-  };
-
-  // useEffect(() => {
-  //   const changeBtn = () => {
-  //     const exist = cartItems.find(
-  //       (x) => x.book_title === match.params.book_title
-  //     );
-  //     if (exist) {
-  //       setIsAdded(true);
-  //     } else {
-  //       setIsAdded(false);
-  //     }
-  //   };
-  //   changeBtn();
-  // }, [cartItems]);
-
   return (
     <div>
       {!!isSubscribed ? (
@@ -846,6 +809,32 @@ export default function OwnedBooksBlock(props) {
                                 coverTitle={categorisedProduct.book_title}
                                 key={index}
                                 product={categorisedProduct}
+                                addedButton={
+                                  <Button
+                                    color="gray"
+                                    style={{
+                                      borderRadius: "100%",
+                                      paddingRight: "12px",
+                                      paddingLeft: "12px",
+                                    }}
+                                  >
+                                    ✔ Added
+                                  </Button>
+                                }
+                                button={
+                                  <Button
+                                    style={{
+                                      borderRadius: "100%",
+                                      paddingRight: "12px",
+                                      paddingLeft: "12px",
+                                    }}
+                                  >
+                                    <ShoppingCartIcon
+                                      style={{ marginRight: "-0.5px" }}
+                                      fontSize="small"
+                                    />
+                                  </Button>
+                                }
                               />
                             ))}
                         </Grid>
@@ -961,6 +950,19 @@ export default function OwnedBooksBlock(props) {
                                 coverTitle={categorisedProduct.book_title}
                                 key={index}
                                 product={categorisedProduct}
+                                buttonMobile={
+                                  <Button fullWidth round>
+                                    <ShoppingCartIcon
+                                      style={{ marginRight: "-0.5px" }}
+                                      fontSize="small"
+                                    />
+                                  </Button>
+                                }
+                                addedButtonMobile={
+                                  <Button round color="gray" fullWidth>
+                                    ✔ Added
+                                  </Button>
+                                }
                               />
                             ))}
                         </Grid>
@@ -1043,9 +1045,20 @@ export default function OwnedBooksBlock(props) {
                     <Grid container justifyContent={"center"} spacing={5}>
                       {booksNotOwned.map((product) => (
                         <BookCard
+                          addedButton={
+                            <Button
+                              color="gray"
+                              style={{
+                                borderRadius: "100%",
+                                paddingRight: "12px",
+                                paddingLeft: "12px",
+                              }}
+                            >
+                              ✔ Added
+                            </Button>
+                          }
                           button={
                             <Button
-                              onClick={handleAddCart}
                               style={{
                                 borderRadius: "100%",
                                 paddingRight: "12px",
@@ -1123,11 +1136,23 @@ export default function OwnedBooksBlock(props) {
                     <Grid container justifyContent="center" spacing={5}>
                       {booksNotOwned.map((product) => (
                         <BookCard
-                          notOwned={cards.notOwned}
                           chosenCategory={chosenCategory}
                           coverTitle={product.book_title}
                           key={product.id}
                           product={product}
+                          buttonMobile={
+                            <Button fullWidth round>
+                              <ShoppingCartIcon
+                                style={{ marginRight: "-0.5px" }}
+                                fontSize="small"
+                              />
+                            </Button>
+                          }
+                          addedButtonMobile={
+                            <Button round color="gray" fullWidth>
+                              ✔ Added
+                            </Button>
+                          }
                         />
                       ))}
                     </Grid>
