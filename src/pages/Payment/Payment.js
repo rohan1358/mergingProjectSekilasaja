@@ -5,7 +5,6 @@ import { Redirect } from "react-router";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
-import Navbar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import InfoStyle from "../../styles/InfoAreaStyle";
 import Box from "../../components/Box";
@@ -34,6 +33,7 @@ import {
 } from "@material-ui/core";
 import PaymentIcon from "@material-ui/icons/Payment";
 import { Alert } from "@material-ui/lab";
+import ErrorIcon from "@material-ui/icons/Error";
 
 // Firebase components
 import fire from "../../firebase/fire";
@@ -44,7 +44,7 @@ import { AuthContext } from "../../components/Routing/Auth";
 
 //Email js components
 import * as emailService from "../../emailService/emailService";
-import { primaryColor, secondaryColor } from "../../styles/Style";
+import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
 import ImagePreview from "./ImagePreview";
 
 const useStyles = makeStyles(InfoStyle);
@@ -88,6 +88,7 @@ export default function Payment({ history }) {
     itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
   );
   const [promoAdded, setPromoAdded] = useState(false);
+  const [isSubAdded, setIsSubAdded] = useState(false);
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
@@ -101,6 +102,21 @@ export default function Payment({ history }) {
       return <Redirect to="/verify-email" />;
     }
   }, []);
+
+  useEffect(() => {
+    cartItems.map((x) => {
+      if (
+        x.book_title == "Subscription 1 Bulan" ||
+        x.book_title == "Subscription 3 Bulan" ||
+        x.book_title == "Subscription 6 Bulan" ||
+        x.book_title == "Subscription 12 Bulan"
+      ) {
+        setIsSubAdded(true);
+      } else {
+        setIsSubAdded(false);
+      }
+    });
+  }, [cartItems]);
 
   const onRemove_ = (product) => {
     const fetchData = async () => {
@@ -214,7 +230,7 @@ export default function Payment({ history }) {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "120px" }} />
       <Header
         history={history}
@@ -233,6 +249,35 @@ export default function Payment({ history }) {
             </Grid>
 
             <Grid item xs={6}>
+              {isSubAdded ? (
+                <></>
+              ) : (
+                <div>
+                  <Paper className={classes.paddedContent} elevation={5}>
+                    <Typography
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                      type="italic"
+                      size="bold"
+                    >
+                      <ErrorIcon
+                        fontSize="large"
+                        style={{ marginRight: "10px" }}
+                      />
+                      Dengan hanya Rp. 1.000/hari, kamu bisa mempunyai akses
+                      terhadap semua buku!
+                    </Typography>
+                    <Button href="/pricing" round fullWidth>
+                      Berlanggan sekarang!
+                    </Button>
+                  </Paper>
+
+                  <div style={{ marginBottom: "20px" }} />
+                </div>
+              )}
+
               <Paper className={classes.paddedContent} elevation={5}>
                 <Typography size="subheading">1. Your Orders</Typography>
 
@@ -500,6 +545,34 @@ export default function Payment({ history }) {
             </Grid>
 
             <Grid item xs={12}>
+              {isSubAdded ? (
+                <></>
+              ) : (
+                <div>
+                  <Paper className={classes.paddedContent} elevation={5}>
+                    <Typography
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                      type="italic"
+                      size="bold"
+                    >
+                      <ErrorIcon
+                        fontSize="large"
+                        style={{ marginRight: "10px" }}
+                      />
+                      Dengan hanya Rp. 1.000/hari, kamu bisa mempunyai akses
+                      terhadap semua buku!
+                    </Typography>
+                    <Button href="/pricing" round fullWidth>
+                      Berlanggan sekarang!
+                    </Button>
+                  </Paper>
+
+                  <div style={{ marginBottom: "20px" }} />
+                </div>
+              )}
               <Paper className={classes.paddedContent} elevation={5}>
                 <Typography size="subheading">1. Your Orders</Typography>
 

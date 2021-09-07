@@ -11,6 +11,7 @@ import {
   Grid,
   Tabs,
   Tab,
+  Container,
   makeStyles,
   useTheme,
   Box,
@@ -138,9 +139,8 @@ export default function CategoryBlock(props) {
   };
 
   return (
-    <div>
-      <div className={tabs.root}>
-        <AppBar position="static" color="default">
+    <Container>
+      {/* <AppBar position="static" color="default">
           <Tabs
             style={{ color: secondaryColor }}
             TabIndicatorProps={{
@@ -185,25 +185,28 @@ export default function CategoryBlock(props) {
               {...a11yProps(1)}
             />
           </Tabs>
-        </AppBar>
-        <SwipeableViews
+        </AppBar> */}
+      {/* <SwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={value}
           onChangeIndex={handleChangeIndex}
         >
-          <TabPanel value={value} index={0} dir={theme.direction}>
-            <CategoryBarFilter
-              chosenCategory={chosenCategory}
-              setChosenCategory={setChosenCategory}
-              setIsChosenCategory={setIsChosenCategory}
-            />
+          <TabPanel value={value} index={0} dir={theme.direction}> */}
+      <CategoryBarFilter
+        chosenCategory={chosenCategory}
+        setChosenCategory={setChosenCategory}
+        setIsChosenCategory={setIsChosenCategory}
+      />
 
-            {/* <div className={classes.extraSpace} /> */}
+      <div style={{ marginTop: "20px" }} />
 
-            {isChosenCategory === true ? (
-              <div>
-                <div className={classes.sectionDesktopBlock}>
-                  {/* {isFavoriteBookTitlesEmpty ? (
+      {isChosenCategory === true ? (
+        <div>
+          <div className={classes.sectionDesktopBlock}>
+            <Typography style={{ textAlign: "center" }} size="heading">
+              Owned Books
+            </Typography>
+            {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -243,36 +246,39 @@ export default function CategoryBlock(props) {
             )}
 
             <div className={classes.extraSpace} /> */}
-                  <div>
-                    {products.filter(
+            <div>
+              {products.filter(
+                (product) => product.category.includes(chosenCategory) == true
+              ).length !== 0 ? (
+                <Grid container justifyContent={"center"} spacing={5}>
+                  {products
+                    .filter(
                       (product) =>
                         product.category.includes(chosenCategory) == true
-                    ).length !== 0 ? (
-                      <Grid container justifyContent={"center"} spacing={5}>
-                        {products
-                          .filter(
-                            (product) =>
-                              product.category.includes(chosenCategory) == true
-                          )
-                          .map((categorisedProduct, index) => (
-                            <BookCard
-                              chosenCategory={chosenCategory}
-                              coverTitle={categorisedProduct.book_title}
-                              key={index}
-                              product={categorisedProduct}
-                            />
-                          ))}
-                      </Grid>
-                    ) : (
-                      <Typography type="italic">
-                        Tidak ditemukan kilas di kategori ini!
-                      </Typography>
-                    )}
-                  </div>
+                    )
+                    .map((categorisedProduct, index) => (
+                      <BookCard
+                        chosenCategory={chosenCategory}
+                        coverTitle={categorisedProduct.book_title}
+                        key={index}
+                        product={categorisedProduct}
+                      />
+                    ))}
+                </Grid>
+              ) : (
+                <div>
+                  <Typography size="heading">Owned Books</Typography>
+                  <Typography type="italic">
+                    Tidak ditemukan kilas di kategori ini!
+                  </Typography>
                 </div>
+              )}
+            </div>
+          </div>
 
-                <div className={classes.sectionMobileBlock}>
-                  {/* {isFavoriteBookTitlesEmpty ? (
+          <div className={classes.sectionMobileBlock}>
+            <Typography size="heading">Owned Books</Typography>
+            {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -312,38 +318,43 @@ export default function CategoryBlock(props) {
             )}
 
             <div className={classes.extraSpace} /> */}
-                  <div>
-                    {products.filter(
+            <div>
+              {products.filter(
+                (product) => product.category.includes(chosenCategory) == true
+              ).length !== 0 ? (
+                <Grid container justifyContent="center" spacing={5}>
+                  {products
+                    .filter(
                       (product) =>
                         product.category.includes(chosenCategory) == true
-                    ).length !== 0 ? (
-                      <Grid container justifyContent="center" spacing={5}>
-                        {products
-                          .filter(
-                            (product) =>
-                              product.category.includes(chosenCategory) == true
-                          )
-                          .map((categorisedProduct, index) => (
-                            <BookCard
-                              chosenCategory={chosenCategory}
-                              coverTitle={categorisedProduct.book_title}
-                              key={index}
-                              product={categorisedProduct}
-                            />
-                          ))}
-                      </Grid>
-                    ) : (
-                      <Typography type="italic">
-                        Tidak ditemukan kilas di kategori ini!
-                      </Typography>
-                    )}
-                  </div>
+                    )
+                    .map((categorisedProduct, index) => (
+                      <BookCard
+                        chosenCategory={chosenCategory}
+                        coverTitle={categorisedProduct.book_title}
+                        key={index}
+                        product={categorisedProduct}
+                      />
+                    ))}
+                </Grid>
+              ) : (
+                <div>
+                  <Typography size="heading">Owned Books</Typography>
+                  <Typography type="italic">
+                    Tidak ditemukan kilas di kategori ini!
+                  </Typography>
                 </div>
-              </div>
-            ) : (
-              <div>
-                <div className={classes.sectionDesktopBlock}>
-                  {/* {isFavoriteBookTitlesEmpty ? (
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className={classes.sectionDesktopBlock}>
+            <Typography style={{ textAlign: "center" }} size="heading">
+              Owned Books
+            </Typography>
+            {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -367,20 +378,21 @@ export default function CategoryBlock(props) {
             )}
 
             <div className={classes.extraSpace} /> */}
-                  <Grid container justifyContent={"center"} spacing={5}>
-                    {products.map((product) => (
-                      <BookCard
-                        chosenCategory={chosenCategory}
-                        coverTitle={product.book_title}
-                        key={product.id}
-                        product={product}
-                      />
-                    ))}
-                  </Grid>
-                </div>
+            <Grid container justifyContent={"center"} spacing={5}>
+              {products.map((product) => (
+                <BookCard
+                  chosenCategory={chosenCategory}
+                  coverTitle={product.book_title}
+                  key={product.id}
+                  product={product}
+                />
+              ))}
+            </Grid>
+          </div>
 
-                <div className={classes.sectionMobileBlock}>
-                  {/* {isFavoriteBookTitlesEmpty ? (
+          <div className={classes.sectionMobileBlock}>
+            <Typography size="heading">Owned Books</Typography>
+            {/* {isFavoriteBookTitlesEmpty ? (
               <div>
                 <Typography size="subheading">Favorite Books</Typography>
                 <Typography type="italic">
@@ -404,20 +416,21 @@ export default function CategoryBlock(props) {
             )}
 
             <div className={classes.extraSpace} /> */}
-                  <Grid container justifyContent="center" spacing={5}>
-                    {products.map((product) => (
-                      <BookCard
-                        chosenCategory={chosenCategory}
-                        coverTitle={product.book_title}
-                        key={product.id}
-                        product={product}
-                      />
-                    ))}
-                  </Grid>
-                </div>
-              </div>
-            )}
-          </TabPanel>
+            <Grid container justifyContent="center" spacing={5}>
+              {products.map((product) => (
+                <BookCard
+                  chosenCategory={chosenCategory}
+                  coverTitle={product.book_title}
+                  key={product.id}
+                  product={product}
+                />
+              ))}
+            </Grid>
+          </div>
+        </div>
+      )}
+      {/* </TabPanel>
+
           <TabPanel value={value} index={1} dir={theme.direction}>
             <div style={{ marginBottom: "50px" }} />
             <Typography
@@ -433,8 +446,7 @@ export default function CategoryBlock(props) {
             </Typography>
             <div style={{ marginBottom: "50px" }} />
           </TabPanel>
-        </SwipeableViews>
-      </div>
-    </div>
+        </SwipeableViews> */}
+    </Container>
   );
 }

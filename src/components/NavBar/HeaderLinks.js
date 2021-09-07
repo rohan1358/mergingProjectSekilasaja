@@ -109,19 +109,19 @@ export default function HeaderLinks({ history }) {
         <List className={header.list}>
           <ListItem className={header.listItem}>
             <Button onClick={goToPricing} round color="transparent">
-              <div style={{ color: secondaryColor }}>Pricing</div>
+              <div style={{ color: secondaryColor }}>Harga</div>
             </Button>
           </ListItem>
 
           <ListItem className={header.listItem}>
-            <Button href="/library" round color="transparent">
-              <div style={{ color: secondaryColor }}>Library</div>
+            <Button onClick={goToAccounts} round color="transparent">
+              <div style={{ color: secondaryColor }}>Profil</div>
             </Button>
           </ListItem>
 
           <ListItem style={{ display: "flex" }} className={header.listItem}>
-            <Button onClick={goToAccounts} round color="primary">
-              <div style={{ color: secondaryColor }}>My Account</div>
+            <Button href="/library" round color="primary">
+              <div style={{ color: secondaryColor }}>My Library</div>
             </Button>
 
             <div className={classes.divider} />
@@ -150,12 +150,12 @@ export default function HeaderLinks({ history }) {
         <List className={header.list}>
           <ListItem className={header.listItem}>
             <Button onClick={goToPricing} round color="transparent">
-              <div style={{ color: secondaryColor }}>Pricing</div>
+              <div style={{ color: secondaryColor }}>Harga</div>
             </Button>
           </ListItem>
           <ListItem className={header.listItem}>
             <Button href="/signup" round color="transparent">
-              <div style={{ color: secondaryColor }}>Sign Up</div>
+              <div style={{ color: secondaryColor }}>Daftar</div>
             </Button>
           </ListItem>
           <ListItem className={header.listItem}>

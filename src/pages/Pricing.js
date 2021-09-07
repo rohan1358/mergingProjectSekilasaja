@@ -28,10 +28,13 @@ import { AuthContext } from "../components/Routing/Auth";
 import * as firebaseUpdateCart from "../firebase/firebaseUpdateCart";
 import * as firebaseGetUserDataById from "../firebase/firebaseGetUserDataById";
 import * as firebaseGetSubscription from "../firebase/firebaseGetSubscription";
+import fire from "../firebase/fire";
 
 // Redux
 import { selectCart, setCart } from "../feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
+
+const firestore = fire.firestore();
 
 const useStyles = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
@@ -176,6 +179,11 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartOne = () => {
     const fetchData = async () => {
+      if (cartItems.length != 0) {
+        firestore.collection("users").doc(currentUser.uid).update({
+          cart: [],
+        });
+      }
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
         subOne
@@ -198,6 +206,11 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartThree = () => {
     const fetchData = async () => {
+      if (cartItems.length != 0) {
+        firestore.collection("users").doc(currentUser.uid).update({
+          cart: [],
+        });
+      }
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
         subThree
@@ -220,6 +233,11 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartSix = () => {
     const fetchData = async () => {
+      if (cartItems.length != 0) {
+        firestore.collection("users").doc(currentUser.uid).update({
+          cart: [],
+        });
+      }
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
         subSix
@@ -242,6 +260,11 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartTwelve = () => {
     const fetchData = async () => {
+      if (cartItems.length != 0) {
+        firestore.collection("users").doc(currentUser.uid).update({
+          cart: [],
+        });
+      }
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
         subTwelve
@@ -306,7 +329,7 @@ export default function PricingPage({ match, history }) {
   ];
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "120px" }} />
       <Header
         history={history}

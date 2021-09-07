@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import { selectAllBooks } from "../../feature/allBooksSlice";
 
 import Loading from "../Loading";
+import { beigeColor } from "../../styles/Style";
 
 export default function SearchResults({ match, history }) {
   const classes = MultiUseMobile();
@@ -42,7 +43,7 @@ export default function SearchResults({ match, history }) {
   }
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
       <Header
         history={history}

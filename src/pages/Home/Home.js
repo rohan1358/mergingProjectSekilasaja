@@ -19,6 +19,7 @@ import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import Footer from "../../components/Footer";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
+import { beigeColor } from "../../styles/Style";
 
 // Material-UI components
 import { Container, Grid, makeStyles, Tooltip } from "@material-ui/core";
@@ -46,6 +47,7 @@ const mobileStyles = makeStyles((theme) => ({
   sectionMobile: {
     display: "flex",
     // marginTop: "40px",
+    textAlign: "center",
     justifyContent: "center",
     [theme.breakpoints.up("md")]: {
       display: "none",
@@ -88,7 +90,7 @@ export default function Home({ history }) {
   }
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       {/* <NavBar cartItems={[]} history={history} /> */}
       <Header
         history={history}
@@ -97,7 +99,7 @@ export default function Home({ history }) {
         fixed
         color="transparent"
         changeColorOnScroll={{
-          height: 400,
+          height: 20,
         }}
       />
 
@@ -112,7 +114,7 @@ export default function Home({ history }) {
             <Container>
               <Grid container>
                 <Grid item xs={12} md={5}>
-                  <div style={{ width: "420px" }}>
+                  <div style={{ width: "420px", marginTop: "80px" }}>
                     <Typography size="heading">
                       Solusi Buat Kamu Yang{" "}
                       <strong
@@ -138,9 +140,65 @@ export default function Home({ history }) {
 
                     <div style={{ marginTop: "20px" }} />
 
+                    <Button round href="/pricing">
+                      Berlanggan Sekarang!
+                    </Button>
+                    {/* 
                     <Typography>
-                      Mulai dari <strong>Rp. 1.000/hari</strong>
+                      Hanya dengan <strong>Rp. 1.000/hari</strong>, akses semua
+                      buku!
+                    </Typography> */}
+
+                    <div style={{ marginTop: "20px" }} />
+
+                    <Typography
+                      style={{
+                        fontSize: "22px",
+                      }}
+                      size="subheading"
+                    >
+                      Akses kedua bukumu{" "}
+                      <strong
+                        style={{
+                          backgroundColor: primaryColor,
+                        }}
+                      >
+                        sekarang!
+                      </strong>{" "}
                     </Typography>
+
+                    <div style={{ marginTop: "20px" }} />
+
+                    <a href={`/book-details/Atomic%20Habits`}>
+                      <img
+                        src={
+                          "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FAtomic%20Habits.png?alt=media&token=bf6b087c-ce51-4b90-b329-3b91bfe6a1e3"
+                        }
+                        className={
+                          books.imgRounded +
+                          " " +
+                          books.imgFluid +
+                          " " +
+                          books.imgHomeBook
+                        }
+                      />
+                    </a>
+                    <a
+                      href={`/book-details/The%20Little%20Book%20of%20Common%20Sense%20Investing`}
+                    >
+                      <img
+                        src={
+                          "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FThe%20Little%20Book%20of%20Common%20Sense%20Investing.png?alt=media&token=fd281a56-a2e0-4986-a1bd-b20bafe4b069"
+                        }
+                        className={
+                          books.imgRounded +
+                          " " +
+                          books.imgFluid +
+                          " " +
+                          books.imgHomeBook
+                        }
+                      />
+                    </a>
 
                     <div style={{ marginTop: "30px" }} />
                   </div>
@@ -179,9 +237,67 @@ export default function Home({ history }) {
 
                   <div style={{ marginTop: "20px" }} />
 
-                  <Typography>
-                    Mulai dari <strong>Rp. 1.000/hari</strong>
+                  <Button round href="/pricing">
+                    Berlanggan Sekarang!
+                  </Button>
+                  {/* 
+                    <Typography>
+                      Hanya dengan <strong>Rp. 1.000/hari</strong>, akses semua
+                      buku!
+                    </Typography> */}
+
+                  <div style={{ marginTop: "20px" }} />
+
+                  <Typography
+                    style={{
+                      fontSize: "22px",
+                    }}
+                    size="subheading"
+                  >
+                    Akses kedua bukumu{" "}
+                    <strong
+                      style={{
+                        backgroundColor: primaryColor,
+                      }}
+                    >
+                      sekarang!
+                    </strong>{" "}
                   </Typography>
+
+                  <div style={{ marginTop: "20px" }} />
+
+                  <a href={`/book-details/Atomic%20Habits`}>
+                    <img
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FAtomic%20Habits.png?alt=media&token=bf6b087c-ce51-4b90-b329-3b91bfe6a1e3"
+                      }
+                      className={
+                        books.imgRounded +
+                        " " +
+                        books.imgFluid +
+                        " " +
+                        books.imgHomeBook
+                      }
+                    />
+                  </a>
+                  <a
+                    href={`/book-details/The%20Little%20Book%20of%20Common%20Sense%20Investing`}
+                  >
+                    <img
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FThe%20Little%20Book%20of%20Common%20Sense%20Investing.png?alt=media&token=fd281a56-a2e0-4986-a1bd-b20bafe4b069"
+                      }
+                      className={
+                        books.imgRounded +
+                        " " +
+                        books.imgFluid +
+                        " " +
+                        books.imgHomeBook
+                      }
+                    />
+                  </a>
+
+                  <div style={{ marginTop: "30px" }} />
                 </Grid>
               </Container>
 
@@ -196,82 +312,12 @@ export default function Home({ history }) {
           {/* Second Block */}
           <BenefitsBlock
             logo={<img src={Logo} className={books.imgLogoText} />}
+            button={
+              <Button round href="/pricing">
+                Berlanggan Sekarang!
+              </Button>
+            }
           />
-
-          <div
-            style={{
-              backgroundImage: `url(${HomeBlock})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center center",
-            }}
-          >
-            <Container>
-              <Grid container>
-                <Grid item xs={12} md={5}>
-                  <div style={{ marginTop: "40px" }} />
-
-                  <a href={`/book-details/Steve%20Jobs`}>
-                    <img
-                      src={
-                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
-                      }
-                      className={
-                        books.imgRounded +
-                        " " +
-                        books.imgFluid +
-                        " " +
-                        books.imgHomeBook
-                      }
-                    />
-                  </a>
-                  <a href={`/book-details/Steve%20Jobs`}>
-                    <img
-                      src={
-                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
-                      }
-                      className={
-                        books.imgRounded +
-                        " " +
-                        books.imgFluid +
-                        " " +
-                        books.imgHomeBook
-                      }
-                    />
-                  </a>
-                  <a href={`/book-details/Steve%20Jobs`}>
-                    <img
-                      src={
-                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
-                      }
-                      className={
-                        books.imgRounded +
-                        " " +
-                        books.imgFluid +
-                        " " +
-                        books.imgHomeBook
-                      }
-                    />
-                  </a>
-                  <Typography size="heading">
-                    Dapatkan ketiga buku ini{" "}
-                    <strong
-                      style={{
-                        backgroundColor: primaryColor,
-                      }}
-                    >
-                      secara gratis!
-                    </strong>
-                  </Typography>
-                  <Typography>
-                    Kamu bisa mendapatkan ketiga buku ini secara gratis hanya
-                    dengan mendaftar!
-                  </Typography>
-                  <div style={{ marginTop: "30px" }} />
-                </Grid>
-              </Grid>
-            </Container>
-          </div>
 
           <div style={{ marginTop: "40px" }} />
 
@@ -295,15 +341,11 @@ export default function Home({ history }) {
             <Container>
               <Grid container>
                 <Grid item xs={12} md={5}>
-                  <div style={{ width: "420px" }}>
+                  <div style={{ width: "420px", marginTop: "80px" }}>
                     <Typography size="heading">
                       Solusi Buat Kamu Yang{" "}
                       <strong
                         style={{
-                          // textDecoration: "underline",
-                          // textDecorationColor: primaryColor,
-                          // textDecorationThickness: "10px",
-                          // textUnderlinePosition: "under",
                           backgroundColor: primaryColor,
                         }}
                       >
@@ -316,16 +358,60 @@ export default function Home({ history }) {
                         Bisnis, Investasi, dan Pengembangan diri terbaik dunia
                         hanya dalam 15 menit.
                       </strong>{" "}
-                      Belajar dimanapun dan kapanpun.
+                      {/* Belajar dimanapun dan kapanpun. */}
                     </Typography>
 
                     <div style={{ marginTop: "20px" }} />
 
-                    <Typography>
-                      Mulai dari <strong>Rp. 1.000/hari</strong>
+                    <a href={`/book-details/Atomic%20Habits`}>
+                      <img
+                        src={
+                          "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FAtomic%20Habits.png?alt=media&token=bf6b087c-ce51-4b90-b329-3b91bfe6a1e3"
+                        }
+                        className={
+                          books.imgRounded +
+                          " " +
+                          books.imgFluid +
+                          " " +
+                          books.imgHomeBook
+                        }
+                      />
+                    </a>
+                    <a
+                      href={`/book-details/The%20Little%20Book%20of%20Common%20Sense%20Investing`}
+                    >
+                      <img
+                        src={
+                          "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FThe%20Little%20Book%20of%20Common%20Sense%20Investing.png?alt=media&token=fd281a56-a2e0-4986-a1bd-b20bafe4b069"
+                        }
+                        className={
+                          books.imgRounded +
+                          " " +
+                          books.imgFluid +
+                          " " +
+                          books.imgHomeBook
+                        }
+                      />
+                    </a>
+
+                    <Typography
+                      style={{
+                        fontSize: "22px",
+                      }}
+                      size="subheading"
+                    >
+                      Dapatkan kedua buku ini{" "}
+                      <strong
+                        style={{
+                          backgroundColor: primaryColor,
+                        }}
+                      >
+                        GRATIS
+                      </strong>{" "}
+                      hanya dengan mendaftar!
                     </Typography>
 
-                    <div style={{ marginTop: "30px" }} />
+                    <div style={{ marginTop: "20px" }} />
 
                     <Button round href="/signup">
                       Bergabung Sekarang!
@@ -338,17 +424,13 @@ export default function Home({ history }) {
 
           <div className={mobileClass}>
             <Grid container>
-              <Container>
-                <Grid item xs={12}>
+              <Grid item xs={12}>
+                <Container>
                   <div style={{ marginTop: "100px" }} />
                   <Typography size="heading">
                     Solusi Buat Kamu Yang{" "}
                     <strong
                       style={{
-                        // textDecoration: "underline",
-                        // textDecorationColor: primaryColor,
-                        // textDecorationThickness: "10px",
-                        // textUnderlinePosition: "under",
                         backgroundColor: primaryColor,
                       }}
                     >
@@ -361,22 +443,66 @@ export default function Home({ history }) {
                       Bisnis, Investasi, dan Pengembangan diri terbaik dunia
                       hanya dalam 15 menit.
                     </strong>{" "}
-                    Belajar dimanapun dan kapanpun.
+                    {/* Belajar dimanapun dan kapanpun. */}
                   </Typography>
 
                   <div style={{ marginTop: "20px" }} />
 
-                  <Typography>
-                    Mulai dari <strong>Rp. 1.000/hari</strong>
+                  <a href={`/book-details/Atomic%20Habits`}>
+                    <img
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FAtomic%20Habits.png?alt=media&token=bf6b087c-ce51-4b90-b329-3b91bfe6a1e3"
+                      }
+                      className={
+                        books.imgRounded +
+                        " " +
+                        books.imgFluid +
+                        " " +
+                        books.imgHomeBook
+                      }
+                    />
+                  </a>
+                  <a
+                    href={`/book-details/The%20Little%20Book%20of%20Common%20Sense%20Investing`}
+                  >
+                    <img
+                      src={
+                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FThe%20Little%20Book%20of%20Common%20Sense%20Investing.png?alt=media&token=fd281a56-a2e0-4986-a1bd-b20bafe4b069"
+                      }
+                      className={
+                        books.imgRounded +
+                        " " +
+                        books.imgFluid +
+                        " " +
+                        books.imgHomeBook
+                      }
+                    />
+                  </a>
+
+                  <Typography
+                    style={{
+                      fontSize: "22px",
+                    }}
+                    size="subheading"
+                  >
+                    Dapatkan kedua buku ini{" "}
+                    <strong
+                      style={{
+                        backgroundColor: primaryColor,
+                      }}
+                    >
+                      GRATIS
+                    </strong>{" "}
+                    hanya dengan mendaftar!
                   </Typography>
 
-                  <div style={{ marginTop: "30px" }} />
+                  <div style={{ marginTop: "20px" }} />
 
                   <Button round href="/signup">
                     Bergabung Sekarang!
                   </Button>
-                </Grid>
-              </Container>
+                </Container>
+              </Grid>
 
               <Grid xs={12}>
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
@@ -395,85 +521,6 @@ export default function Home({ history }) {
               </Button>
             }
           />
-
-          <div
-            style={{
-              backgroundImage: `url(${HomeBlock})`,
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center center",
-            }}
-          >
-            <Container>
-              <Grid container>
-                <Grid item xs={12} md={5}>
-                  <div style={{ marginTop: "40px" }} />
-                  <a href={`/book-details/Steve%20Jobs`}>
-                    <img
-                      src={
-                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
-                      }
-                      className={
-                        books.imgRounded +
-                        " " +
-                        books.imgFluid +
-                        " " +
-                        books.imgHomeBook
-                      }
-                    />
-                  </a>
-                  <a href={`/book-details/Steve%20Jobs`}>
-                    <img
-                      src={
-                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
-                      }
-                      className={
-                        books.imgRounded +
-                        " " +
-                        books.imgFluid +
-                        " " +
-                        books.imgHomeBook
-                      }
-                    />
-                  </a>
-                  <a href={`/book-details/Steve%20Jobs`}>
-                    <img
-                      src={
-                        "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FRich%20Dad's%20Cashflow%20Quadrant.png?alt=media&token=0a025345-b6fa-464d-a0a1-e7e917985490"
-                      }
-                      className={
-                        books.imgRounded +
-                        " " +
-                        books.imgFluid +
-                        " " +
-                        books.imgHomeBook
-                      }
-                    />
-                  </a>
-                  <Typography size="heading">
-                    Dapatkan ketiga buku ini{" "}
-                    <strong
-                      style={{
-                        backgroundColor: primaryColor,
-                      }}
-                    >
-                      secara gratis!
-                    </strong>
-                  </Typography>
-                  <Typography>
-                    Kamu bisa mendapatkan ketiga buku ini secara gratis hanya
-                    dengan mendaftar!
-                  </Typography>
-                  <div style={{ marginTop: "30px" }} />
-                  <Button href="/signup" round>
-                    Bergabung Sekarang!
-                  </Button>
-
-                  <div style={{ marginTop: "40px" }} />
-                </Grid>
-              </Grid>
-            </Container>
-          </div>
 
           <div style={{ marginTop: "40px" }} />
 

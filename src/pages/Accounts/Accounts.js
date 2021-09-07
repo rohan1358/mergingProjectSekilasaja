@@ -21,6 +21,7 @@ import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById
 import { Container, Paper, Divider, TextField } from "@material-ui/core";
 import { Alert } from "@material-ui/lab";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { beigeColor } from "../../styles/Style";
 
 export default function AccountsPage(props) {
   const firestore = fire.firestore();
@@ -151,7 +152,7 @@ export default function AccountsPage(props) {
   }
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
       <Header
         history={history}

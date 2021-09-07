@@ -88,6 +88,7 @@ export default function CategoryBlock(props) {
         setChosenCategory={setChosenCategory}
         setIsChosenCategory={setIsChosenCategory}
       ></CategoryBarFilter>
+      <div style={{ marginTop: "20px" }} />
       {isChosenCategory === true ? (
         <Carousel
           arrows={false}

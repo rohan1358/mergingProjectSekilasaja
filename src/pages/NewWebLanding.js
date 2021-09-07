@@ -9,13 +9,14 @@ import Button from "../components/Button";
 // Material-UI components
 import { Container, IconButton, Paper, makeStyles } from "@material-ui/core";
 import { Instagram } from "@material-ui/icons";
+import { beigeColor } from "../styles/Style";
 
 const useStyles = makeStyles(Styles);
 
 export default function NewWebLanding() {
   const classes = useStyles();
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <Container>
         <Paper className={classes.paper} elevation={5}>
           <img className={classes.logo} src={Logo} />

@@ -11,6 +11,7 @@ import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 
 // Material-UI components
 import { Container, Paper, makeStyles } from "@material-ui/core";
+import { beigeColor } from "../../styles/Style";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +24,7 @@ export default function SignUpPage({ history }) {
   const multi = MultiUseMobile();
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
       <Header
         history={history}

@@ -1,7 +1,8 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 // @material-ui/core components
 import { makeStyles, Link, Grid } from "@material-ui/core";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 // Custom components
 import InfoAreaStyle from "../styles/InfoAreaStyle";
@@ -13,12 +14,30 @@ import fire from "../firebase/fire";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function BookCard({ product, chosenCategory, notOwned }) {
+const useHoverStyles = makeStyles((theme) => ({
+  root: {
+    "& .appear-item": {
+      display: "none",
+    },
+    "&:hover .appear-item": {
+      display: "block",
+    },
+  },
+}));
+
+export default function BookCard({
+  product,
+  chosenCategory,
+  notOwned,
+  button,
+}) {
   const classes = useStyles();
+  const hover = useHoverStyles();
 
   const db = fire.firestore();
   const [coverLink, setCoverLink] = useState("");
   const [products, SetProducts] = useState([]);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     db.collection("books").onSnapshot((snapshot) => {
@@ -43,8 +62,19 @@ export default function BookCard({ product, chosenCategory, notOwned }) {
   }, [, chosenCategory]);
 
   return (
-    <Grid className={classes.cardHover + " " + notOwned} item>
-      <Link underline="none" href={`book-details/${product.book_title}`}>
+    <Grid
+      className={classes.cardHover + " " + notOwned + " " + hover.root}
+      item
+    >
+      <div className={classes.buttonHoverPos + " " + "appear-item"}>
+        {button}
+      </div>
+      <Link
+        onMouseOver={() => setShow(true)}
+        onMouseOut={() => setShow(false)}
+        underline="none"
+        href={`book-details/${product.book_title}`}
+      >
         <div className={classes.bookCover}>
           <div>
             <img
@@ -64,7 +94,7 @@ export default function BookCard({ product, chosenCategory, notOwned }) {
               <Typography>{product.description}</Typography>
             </div>
 
-            <div style={{ marginBottom: "25px" }} />
+            <div style={{ marginBottom: "0px" }} />
           </div>
         </div>
       </Link>

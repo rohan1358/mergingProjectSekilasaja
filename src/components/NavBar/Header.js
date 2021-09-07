@@ -20,7 +20,7 @@ import styles from "../../styles/HeaderStyle";
 import NavbarStyle from "../../styles/NavbarStyle";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchBarDrawer from "../SearchBar/SearchBarDrawer";
-import { secondaryColor } from "../../styles/Style";
+import { secondaryColor, beigeColor } from "../../styles/Style";
 
 const useStyles = makeStyles(styles);
 
@@ -82,7 +82,7 @@ export default function Header(props) {
     </a>
   );
   return (
-    <AppBar className={appBarClasses}>
+    <AppBar style={{ backgroundColor: beigeColor }} className={appBarClasses}>
       <Toolbar className={classes.container}>
         {/* {leftLinks !== undefined ? brandComponent : null} */}
         <div className={classes.flex}>

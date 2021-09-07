@@ -17,7 +17,7 @@ import Typography from "../../components/Typography";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
-import { beigeColor, secondaryColor } from "../../styles/Style";
+import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
 
 export default function BenefitsBlock({ logo, button }) {
   const classes = MultiUseMobile();
@@ -63,7 +63,19 @@ export default function BenefitsBlock({ logo, button }) {
             <Grid item xs={3}>
               <InfoArea
                 title="Text & Audio"
-                description="Baca atau dengarkan intisari dari buku-buku terlaris dunia dalam 15 menit!"
+                description={
+                  <div>
+                    Baca atau dengarkan intisari dari buku-buku terlaris dunia
+                    dalam{" "}
+                    <strong
+                      style={{
+                        color: primaryColor,
+                      }}
+                    >
+                      15 menit!
+                    </strong>
+                  </div>
+                }
                 icon={MenuBook}
                 iconColor="info"
                 vertical
@@ -72,7 +84,19 @@ export default function BenefitsBlock({ logo, button }) {
             <Grid item xs={3}>
               <InfoArea
                 title="Video Animasi"
-                description="Memudahkan Kamu mengerti isi buku dengan video khusus. Cocok buat Kamu yang visual learner. "
+                description={
+                  <div>
+                    Memudahkan Kamu mengerti isi buku dengan{" "}
+                    <strong
+                      style={{
+                        color: primaryColor,
+                      }}
+                    >
+                      video khusus
+                    </strong>
+                    . Cocok buat Kamu yang visual learner.
+                  </div>
+                }
                 icon={VideoLibrary}
                 iconColor="info"
                 vertical
@@ -81,7 +105,19 @@ export default function BenefitsBlock({ logo, button }) {
             <Grid item xs={3}>
               <InfoArea
                 title="Komunitas Eksklusif"
-                description="Kesuksesan dipengaruhi oleh dengan siapa Kamu bergaul! Bergabung dengan komunitas terbaik untuk mengembangkan diri di grup Telegram."
+                description={
+                  <div>
+                    Kesuksesan dipengaruhi oleh dengan siapa Kamu bergaul!
+                    Bergabung dengan komunitas terbaik untuk{" "}
+                    <strong
+                      style={{
+                        color: primaryColor,
+                      }}
+                    >
+                      mengembangkan diri di grup Telegram.
+                    </strong>
+                  </div>
+                }
                 icon={Group}
                 iconColor="info"
                 vertical
@@ -89,8 +125,20 @@ export default function BenefitsBlock({ logo, button }) {
             </Grid>
             <Grid item xs={3}>
               <InfoArea
-                title="Temukan Buku Barumu"
-                description="Dapatkan rekomendasi buku best-seller yang Kamu harus baca!"
+                title="Temukan Buku Baru"
+                description={
+                  <div>
+                    Dapatkan tambahan{" "}
+                    <strong
+                      style={{
+                        color: primaryColor,
+                      }}
+                    >
+                      15+ Kilas buku
+                    </strong>{" "}
+                    best-seller dunia setiap bulannya!
+                  </div>
+                }
                 icon={WbIncandescent}
                 iconColor="info"
                 vertical
@@ -151,7 +199,19 @@ export default function BenefitsBlock({ logo, button }) {
             <Grid item xs={12}>
               <InfoArea
                 title="Text & Audio"
-                description="Baca atau dengarkan intisari dari buku-buku terlaris dunia dalam 15 menit!"
+                description={
+                  <div>
+                    Baca atau dengarkan intisari dari buku-buku terlaris dunia
+                    dalam{" "}
+                    <strong
+                      style={{
+                        color: primaryColor,
+                      }}
+                    >
+                      15 menit!
+                    </strong>
+                  </div>
+                }
                 icon={MenuBook}
                 iconColor="info"
                 vertical
@@ -160,7 +220,19 @@ export default function BenefitsBlock({ logo, button }) {
             <Grid item xs={12}>
               <InfoArea
                 title="Video Animasi"
-                description="Memudahkan Kamu mengerti isi buku dengan video khusus. Cocok buat Kamu yang visual learner. "
+                description={
+                  <div>
+                    Memudahkan Kamu mengerti isi buku dengan{" "}
+                    <strong
+                      style={{
+                        color: primaryColor,
+                      }}
+                    >
+                      video khusus
+                    </strong>
+                    . Cocok buat Kamu yang visual learner.
+                  </div>
+                }
                 icon={VideoLibrary}
                 iconColor="info"
                 vertical
@@ -169,7 +241,19 @@ export default function BenefitsBlock({ logo, button }) {
             <Grid item xs={12}>
               <InfoArea
                 title="Komunitas Eksklusif"
-                description="Kesuksesan dipengaruhi oleh dengan siapa Kamu bergaul! Bergabung dengan komunitas terbaik untuk mengembangkan diri di grup Telegram."
+                description={
+                  <div>
+                    Kesuksesan dipengaruhi oleh dengan siapa Kamu bergaul!
+                    Bergabung dengan komunitas terbaik untuk{" "}
+                    <strong
+                      style={{
+                        color: primaryColor,
+                      }}
+                    >
+                      mengembangkan diri di grup Telegram.
+                    </strong>
+                  </div>
+                }
                 icon={Group}
                 iconColor="info"
                 vertical
@@ -177,8 +261,20 @@ export default function BenefitsBlock({ logo, button }) {
             </Grid>
             <Grid item xs={12}>
               <InfoArea
-                title="Temukan Buku Barumu"
-                description="Dapatkan rekomendasi buku best-seller yang Kamu harus baca!"
+                title="Temukan Buku Baru"
+                description={
+                  <div>
+                    Dapatkan tambahan{" "}
+                    <strong
+                      style={{
+                        color: primaryColor,
+                      }}
+                    >
+                      15+ Kilas buku
+                    </strong>{" "}
+                    best-seller dunia setiap bulannya!
+                  </div>
+                }
                 icon={WbIncandescent}
                 iconColor="info"
                 vertical

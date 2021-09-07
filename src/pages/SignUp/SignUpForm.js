@@ -78,7 +78,10 @@ const SignUpForm = ({ history }) => {
               lastName: lastName,
               phoneNumber: phoneNumber,
               email: email,
-              owned_books: ["Steve Jobs", "Atomic Habits"],
+              owned_books: [
+                "Atomic Habits",
+                "The Little Book of Common Sense Investing",
+              ],
               favorite_books: [],
               is_subscribed: false,
               cart: [],

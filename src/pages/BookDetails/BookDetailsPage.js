@@ -36,6 +36,7 @@ import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoB
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
+import { beigeColor } from "../../styles/Style";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -202,7 +203,7 @@ export default function BookDetailsPage({ match, history }) {
   const tabs = useStyles();
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
       <Header
         history={history}

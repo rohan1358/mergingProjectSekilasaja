@@ -11,6 +11,7 @@ import HeaderLinksMobile from "../components/NavBar/HeaderLinksMobile";
 
 // Material-UI components
 import { makeStyles, Container } from "@material-ui/core";
+import { beigeColor } from "../styles/Style";
 
 const useStyles = makeStyles(FourOFourStyle);
 
@@ -18,7 +19,7 @@ export default function FourOFourPage({ history }) {
   const classes = useStyles();
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
       <Header
         history={history}

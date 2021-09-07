@@ -10,6 +10,7 @@ import VideoComponent from "../components/VideoPlayer/VidPageComponent";
 import FourOFourPage from "./404page";
 import ReactPlayer from "react-player";
 import Typography from "../components/Typography";
+import { beigeColor } from "../styles/Style";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -76,7 +77,7 @@ export default function VideoWatchingPage({ match, history }) {
   // }
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       {!!isSubscribed || !!isBookOwned ? (
         <div>
           <NavBarSecond />

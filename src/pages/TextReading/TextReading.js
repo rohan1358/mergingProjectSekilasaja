@@ -28,7 +28,7 @@ import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
-import { primaryColor } from "../../styles/Style";
+import { beigeColor, primaryColor } from "../../styles/Style";
 
 export default function TextReading({ match, history }) {
   const db = fire.firestore();
@@ -105,7 +105,7 @@ export default function TextReading({ match, history }) {
   const isSubscribed = userData.is_subscribed;
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "70px" }} />
       {!!isSubscribed || !!isBookOwned ? (
         <div>

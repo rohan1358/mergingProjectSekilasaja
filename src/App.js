@@ -24,6 +24,7 @@ import NewWebLanding from "./pages/NewWebLanding";
 import PrivateRoute from "./components/Routing/PrivateRoute";
 import NotVerifiedEmailRoute from "./components/Routing/NotVerifiedEmailRoute";
 import { AuthProvider } from "./components/Routing/Auth";
+import { beigeColor } from "./styles/Style";
 
 function App() {
   return (

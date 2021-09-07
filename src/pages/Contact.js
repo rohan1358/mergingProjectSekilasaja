@@ -11,10 +11,11 @@ import HeaderLinksMobile from "../components/NavBar/HeaderLinksMobile";
 
 // Material-UI components
 import { Container } from "@material-ui/core";
+import { beigeColor } from "../styles/Style";
 
 export default function Contact({ history }) {
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
       <Header
         history={history}

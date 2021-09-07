@@ -34,7 +34,7 @@ const ParallaxStyle = {
     height: "300px",
   },
   large: {
-    height: "650px",
+    height: "700px",
   },
 };
 

@@ -31,6 +31,7 @@ import { AuthContext } from "../../components/Routing/Auth";
 
 // Material-UI components
 import { Container } from "@material-ui/core";
+import { beigeColor } from "../../styles/Style";
 
 export default function Library({ history }) {
   const classes = MultiUseMobile();
@@ -66,7 +67,7 @@ export default function Library({ history }) {
   }, []);
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "70px" }} />
       <Header
         history={history}
@@ -81,7 +82,7 @@ export default function Library({ history }) {
         image={require("../../images/library.jpg").default}
       >
         <Typography color="beigeColor" size="heading">
-          My Library
+          MY LIBRARY
         </Typography>
       </Parallax>
       <Container>
