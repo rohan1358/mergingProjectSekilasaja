@@ -80,7 +80,9 @@ export default function BookCard({
 
   const handleAddCart = () => {
     console.log("Adding to cart...");
-    product.coverLink = coverLink;
+    if(coverLink != null || !coverLink){
+      product.coverLink = coverLink;
+    }
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
