@@ -115,7 +115,7 @@ export default function BookCard({
     >
       {isAdded ? (
         <div onClick={handleAddCart} className={classes.buttonAddedHoverPos}>
-          <div className={"appear-item"}>{addedButton}</div>
+          <div className={"appearItem"}>{addedButton}</div>
         </div>
       ) : (
         <div onClick={handleAddCart} className={classes.buttonHoverPos}>
