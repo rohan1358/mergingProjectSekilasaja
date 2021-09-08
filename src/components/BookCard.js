@@ -79,6 +79,8 @@ export default function BookCard({
   const [isAdded, setIsAdded] = useState(false);
 
   const handleAddCart = () => {
+    console.log("Adding to cart...");
+    product.coverLink = coverLink;
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,

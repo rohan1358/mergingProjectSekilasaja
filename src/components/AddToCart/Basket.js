@@ -19,6 +19,8 @@ import { makeStyles, Grid, Paper } from "@material-ui/core";
 import ErrorIcon from "@material-ui/icons/Error";
 import { secondaryColor } from "../../styles/Style";
 
+import Loading from "../../pages/Loading";
+
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function Basket({}) {
@@ -53,6 +55,12 @@ export default function Basket({}) {
   useEffect(() => {
     if (cartItems.length == 0) return setIsSubAdded(true);
 
+    // cartItems.forEach((item) => {
+    //   if(item.coverLink != null){
+    //     setPending(false);
+    //   }
+    // });
+
     cartItems.map((x) => {
       if (
         x.book_title == "Subscription 1 Bulan" ||
@@ -66,6 +74,14 @@ export default function Basket({}) {
       }
     });
   }, [cartItems]);
+
+  // if (pending) {
+  //   return (
+  //     <>
+  //       <Loading />
+  //     </>
+  //   );
+  // }
 
   return (
     <div>
