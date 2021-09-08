@@ -288,7 +288,14 @@ export default function BookDetails(props) {
                 <Divider />
 
                 <Typography type="bold">{descriptionTitle}</Typography>
-                <Typography>{description}</Typography>
+                {description.map((paragraph, index) => (
+                    <Typography
+                      className={classes.uncopyable}
+                      className={classes.paragraph}
+                    >
+                      {paragraph}
+                    </Typography>
+                ))}
 
                 {buttons}
                 <div style={{ marginTop: "20px" }} />
