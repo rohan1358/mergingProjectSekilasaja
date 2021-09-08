@@ -42,6 +42,8 @@ import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 
+import Loading from "../Loading";
+
 // Other
 import SwipeableViews from "react-swipeable-views";
 import PropTypes from "prop-types";
@@ -96,6 +98,8 @@ export default function OwnedBooksBlock(props) {
 
   const { history, ownedBookTitles, favoriteBookTitles } = props;
 
+  const [pending, setPending] = useState(true);
+
   const [isOwnedBookTitlesEmpty, setIsOwnedBookTitlesEmpty] = useState(false);
   const ownedBooks = useSelector(selectOwnedBooks);
 
@@ -141,12 +145,15 @@ export default function OwnedBooksBlock(props) {
         ];
 
         var a = Promise.all(book_).then(function (book) {
+          console.log("Finished setting owned books!");
           dispatch(setOwnedBooks(book));
+          setPending(false);
         });
       };
       fetchData();
     } else {
       setIsOwnedBookTitlesEmpty(true);
+      setPending(false);
     }
 
     //Get books' data from books database based on favorite books of the user
@@ -239,6 +246,14 @@ export default function OwnedBooksBlock(props) {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div>
