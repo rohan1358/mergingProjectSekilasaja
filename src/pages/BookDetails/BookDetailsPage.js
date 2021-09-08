@@ -250,11 +250,21 @@ export default function BookDetailsPage({ match, history }) {
                                 </Grid>
 
                                 <Grid item>
-                                  <Button
-                                    href={`/video/${current_product.book_title}`}
-                                  >
-                                    Watch now!
-                                  </Button>
+                                  {
+                                    current_product.video_link ? (
+                                      <Button
+                                        href={`/video/${current_product.book_title}`}
+                                      >
+                                        Watch now!
+                                      </Button>
+                                    ): (
+                                      <Button
+                                        disabled = "true"
+                                      >
+                                        Video coming soon!
+                                      </Button>
+                                    )
+                                  }
                                 </Grid>
 
                                 {/* <Grid item>
@@ -287,12 +297,23 @@ export default function BookDetailsPage({ match, history }) {
                                 </Button>
                               </Grid>
                               <Grid item xs={12}>
-                                <Button
-                                  fullWidth
-                                  href={`/video/${current_product.book_title}`}
-                                >
-                                  Watch now!
-                                </Button>
+                                  {
+                                    current_product.video_link ? (
+                                      <Button
+                                        fullWidth
+                                        href={`/video/${current_product.book_title}`}
+                                      >
+                                        Watch now!
+                                      </Button>
+                                    ): (
+                                      <Button
+                                        fullWidth
+                                        disabled = "true"
+                                      >
+                                        Video coming soon!
+                                      </Button>
+                                    )
+                                  }
                               </Grid>
                               {/* <Grid item xs={12}>
                                 {isFavorite === false ? (
@@ -319,15 +340,23 @@ export default function BookDetailsPage({ match, history }) {
                       />
 
                       <TextDetails
-                        video={
-                          <Button
-                            href={`/video/${current_product.book_title}`}
-                            color="primary"
-                            fullWidth
-                          >
-                            <PlayCircleFilledIcon /> Akses Videonya Sekarang!
-                          </Button>
-                        }
+                        video={ current_product.video_link ? (
+                            <Button
+                              href={`/video/${current_product.book_title}`}
+                              color="primary"
+                              fullWidth
+                            >
+                              <PlayCircleFilledIcon /> Akses Videonya Sekarang!
+                            </Button>
+                          ):(
+                            <Button
+                              disabled = "true"
+                              color="primary"
+                              fullWidth
+                            >
+                              <PlayCircleFilledIcon />Video coming soon!
+                           </Button>
+                          )}
                         audio={
                           <ReactAudioPlayer
                             className={classes.audioControl}
@@ -440,11 +469,20 @@ export default function BookDetailsPage({ match, history }) {
                       />
 
                       <TextDetails
-                        video={
-                          <Button href="/pricing" color="secondary" fullWidth>
-                            <PlayCircleFilledIcon /> Akses Videonya Sekarang!
-                          </Button>
-                        }
+                      video= { 
+                                current_product.video_link ? (
+                                  <Button href="/pricing" color="secondary" fullWidth>
+                                    <PlayCircleFilledIcon /> Akses Videonya Sekarang!
+                                  </Button>
+                                ):(
+                                  <Button
+                                    disabled = "true"
+                                    color="primary"
+                                    fullWidth
+                                  >
+                                    <PlayCircleFilledIcon />Video coming soon!
+                                  </Button>
+                              )}
                         audio={
                           <ReactAudioPlayer
                             className={classes.audioControl}
@@ -569,11 +607,20 @@ export default function BookDetailsPage({ match, history }) {
                   />
 
                   <TextDetails
-                    video={
-                      <Button href="/pricing" color="secondary" fullWidth>
-                        <PlayCircleFilledIcon /> Akses Videonya Sekarang!
-                      </Button>
-                    }
+                    video= { 
+                      current_product.video_link ? (
+                        <Button href="/pricing" color="secondary" fullWidth>
+                          <PlayCircleFilledIcon /> Akses Videonya Sekarang!
+                        </Button>
+                      ):(
+                        <Button
+                          disabled = "true"
+                          color="primary"
+                          fullWidth
+                        >
+                          <PlayCircleFilledIcon />Video coming soon!
+                        </Button>
+                    )}
                     audio={
                       <ReactAudioPlayer
                         className={classes.audioControl}
