@@ -108,6 +108,7 @@ export default function CategoryBlock(props) {
                 chosenCategory={chosenCategory}
                 key={index}
                 product={categorisedProduct}
+                extraSpace={<div style={{ marginTop: "20px" }} />}
               />
             ))}
         </Carousel>
@@ -126,6 +127,7 @@ export default function CategoryBlock(props) {
               chosenCategory={chosenCategory}
               key={product.id}
               product={product}
+              extraSpace={<div style={{ marginTop: "20px" }} />}
             />
           ))}
         </Carousel>

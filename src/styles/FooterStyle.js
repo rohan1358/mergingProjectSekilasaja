@@ -5,6 +5,9 @@ import { secondaryColor, beigeColor } from "./Style";
 import { makeStyles } from "@material-ui/core/styles";
 
 const FooterStyle = makeStyles((theme) => ({
+  linkHover: {
+    "&:hover": { textDecoration: "underline" },
+  },
   footer: {
     marginTop: 40,
     backgroundColor: secondaryColor,

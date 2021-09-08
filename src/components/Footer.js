@@ -192,8 +192,19 @@ export default function Footer() {
                 <Typography color="beigeColor">Kirim Feedback</Typography>
               </Link>
               <Link underline="none">
-                <Typography color="beigeColor">
-                  Hubungi kami di sekilasaja.contact@gmail.com
+                <Typography style={{ maxWidth: "260px" }} color="beigeColor">
+                  Hubungi kami jika ada pertanyaan atau masalah di{" "}
+                  <a
+                    style={{
+                      color: beigeColor,
+                      textDecoration: "none",
+                      fontStyle: "italic",
+                    }}
+                    href="mailto:sekilasaja.contact@gmail.com"
+                    className={classes.linkHover}
+                  >
+                    sekilasaja.contact@gmail.com
+                  </a>
                 </Typography>
               </Link>
               {/* <Link underline="none" href="/contact">
@@ -244,7 +255,18 @@ export default function Footer() {
               </Link>
               <Link underline="none">
                 <Typography color="beigeColor">
-                  Hubungi kami di sekilasaja.contact@gmail.com
+                  Hubungi kami jika ada pertanyaan atau masalah di{" "}
+                  <a
+                    style={{
+                      color: beigeColor,
+                      textDecoration: "none",
+                      fontStyle: "italic",
+                    }}
+                    href="mailto:sekilasaja.contact@gmail.com"
+                    className={classes.linkHover}
+                  >
+                    sekilasaja.contact@gmail.com
+                  </a>
                 </Typography>
               </Link>
               {/* <Link underline="none" href="/contact">

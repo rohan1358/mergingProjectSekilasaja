@@ -39,6 +39,7 @@ export default function BookCard({
   addedButton,
   buttonMobile,
   addedButtonMobile,
+  extraSpace,
 }) {
   const classes = useStyles();
   const hover = useHoverStyles();
@@ -114,7 +115,7 @@ export default function BookCard({
     >
       {isAdded ? (
         <div onClick={handleAddCart} className={classes.buttonAddedHoverPos}>
-          <div className={"appear-item"}>{addedButton}</div>
+          <div className={"appearItem"}>{addedButton}</div>
         </div>
       ) : (
         <div onClick={handleAddCart} className={classes.buttonHoverPos}>
@@ -144,7 +145,7 @@ export default function BookCard({
             <div className={classes.descriptionWrapper}>
               <Typography type="bold">{product.book_title}</Typography>
               <Typography type="italic">{product.author}</Typography>
-              <Typography>{product.description}</Typography>
+              <Typography>{product.short_desc}</Typography>
             </div>
 
             <div style={{ marginBottom: "0px" }} />
@@ -162,6 +163,7 @@ export default function BookCard({
           {buttonMobile}
         </div>
       )}
+      {extraSpace}
     </Grid>
   );
 }
