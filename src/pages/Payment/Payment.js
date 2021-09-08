@@ -1,6 +1,8 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router";
 
+import ReactPixel from "react-facebook-pixel";
+
 // Whatsapp Button
 import Whatsapp from "../../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
