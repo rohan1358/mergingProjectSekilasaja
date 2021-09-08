@@ -5,7 +5,8 @@ var storage = firebase.storage();
 
 //Method to get book cover image from firebase storage
 export async function getBookCoverImageURL(referenceName) {
-  var refName = "Book_Cover_Images/" + referenceName + " Cover.png";
+  // var refName = "Book_Cover_Images/" + referenceName + " Cover.png";
+  var refName = "Book_Cover_Images_JPG/" + referenceName + " Cover.jpg";
   var imgRef = storage.ref().child(refName);
 
   try {
