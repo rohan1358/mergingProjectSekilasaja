@@ -54,9 +54,43 @@ export async function uploadPaymentInfo(
     }
 
     var refName = "Payments/" + referenceName;
+    var exists = true;
     var imgRef = storage.ref().child(refName);
+    var count = 0;
+    //Check if image already exists in storage or not
+    while (exists) {
+      try {
+        var image_url = await imgRef.getDownloadURL();
+        //Check if count exists in the string
+        if(referenceName.includes("_" + count)){
+          referenceName = referenceName.replace("_" + count,"");
+        }
+        count = count + 1;
 
-    console.log(refName);
+        //Remove initial file prefix
+        if (image.type.toString().includes("png")) {
+          referenceName = referenceName.replace(".png","");
+        } else if (image.type.toString().includes("jpeg")) {
+          referenceName = referenceName.replace(".jpg","");
+        }
+
+        //Add new count for new transactions made by same user
+        referenceName = referenceName + "_" + count;
+
+        //Conditional checking to determine data type
+        if (image.type.toString().includes("png")) {
+          referenceName = referenceName + ".png";
+        } else if (image.type.toString().includes("jpeg")) {
+          referenceName = referenceName + ".jpg";
+        }
+
+        console.log(referenceName);
+        refName = "Payments/" + referenceName;
+        imgRef = storage.ref().child(refName);
+      } catch (err) {
+        exists = false;
+      }
+    }
 
     await imgRef.put(image).then((snapshot) => {
       console.log("UPLOADED IMAGE!");

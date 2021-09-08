@@ -245,7 +245,7 @@ export default function Payment({ history }) {
     }
 
     //Send email notification
-    await emailService.sendPaymentNotification(userData, image_url);
+    await emailService.sendPaymentNotification(userData, image_url, namaBank, namaDiRekening, nomorRekening, promoCodeData, cartItems);
 
     if (image_url) {
       setPending(false);
