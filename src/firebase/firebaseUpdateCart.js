@@ -38,7 +38,7 @@ export async function AddToCart(userid, product) {
       console.log("Already Added");
     } else {
       cartItems = [...cartItems, product.book_title];
-      console.log(product);
+      // console.log(product);
       firestore.collection("users").doc(userid).update({
         cart: cartItems,
       });

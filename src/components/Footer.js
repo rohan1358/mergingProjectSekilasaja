@@ -188,7 +188,11 @@ export default function Footer() {
               <Typography color="beigeColor" size="subheading">
                 Bantuan & Panduan
               </Typography>
-              <Link underline="none" href="/">
+              <Link
+                underline="none"
+                href="https://docs.google.com/forms/d/1SVfaa6G8yOglsZCMelTjslwGrbnkKuOQ6u0Xo6F-Tws/edit"
+                target="_blank"
+              >
                 <Typography color="beigeColor">Kirim Feedback</Typography>
               </Link>
               <Link underline="none">
@@ -250,7 +254,10 @@ export default function Footer() {
               <Typography color="beigeColor" size="subheading">
                 Bantuan & Panduan
               </Typography>
-              <Link underline="none" href="/">
+              <Link
+                underline="none"
+                href="https://docs.google.com/forms/d/1SVfaa6G8yOglsZCMelTjslwGrbnkKuOQ6u0Xo6F-Tws/edit"
+              >
                 <Typography color="beigeColor">Kirim Feedback</Typography>
               </Link>
               <Link underline="none">

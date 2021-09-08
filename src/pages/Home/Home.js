@@ -3,7 +3,6 @@ import { Redirect } from "react-router";
 
 // Pictures
 import Logo from "../../images/yellow-logo.png";
-import HomeBlock from "../../images/home3.jpg";
 import Whatsapp from "../../images/Whatsapp.png";
 import HomeBookPNG from "../../images/home-landing.png";
 

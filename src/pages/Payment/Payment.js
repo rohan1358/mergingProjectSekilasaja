@@ -1,6 +1,11 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router";
 
+// Whatsapp Button
+import Whatsapp from "../../images/Whatsapp.png";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import { Tooltip } from "@material-ui/core";
+
 // Custom components
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
@@ -46,7 +51,8 @@ import { AuthContext } from "../../components/Routing/Auth";
 //Email js components
 import * as emailService from "../../emailService/emailService";
 import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
-import ImagePreview from "./ImagePreview";
+import BuktiBCA from "./BuktiBCA";
+import BuktiBRI from "./BuktiBRI";
 
 const useStyles = makeStyles(InfoStyle);
 
@@ -79,6 +85,7 @@ export default function Payment({ history }) {
   const [promoError, setPromoError] = useState("");
   const [cartError, setCartError] = useState("");
   const [namaBankError, setNamaBankError] = useState("");
+  const [promoCodeData, setPromoCodeData] = useState("");
 
   // Cart total price
   const promoCodeRef = useRef("");
@@ -152,11 +159,14 @@ export default function Payment({ history }) {
             setDiscountAmount(-1 * results[0].amount);
             setPromoAdded(true);
             setPromoCode(results);
+            setPromoCodeData(results[0].code);
           } else {
             setPromoError("Kamu tidak mengisi kode promo apapun!");
+            setPromoCodeData("");
           }
         } else {
           setPromoError("Tidak ditemukan kode promo!");
+          setPromoCodeData("");
         }
       };
       fetchData();
@@ -179,6 +189,8 @@ export default function Payment({ history }) {
       setFile(e.target.files[0]);
     }
   };
+
+  console.log(promoCodeData);
 
   // function to handle modal open for login
   const handlePayment = async () => {
@@ -215,7 +227,8 @@ export default function Payment({ history }) {
       akunTelegram,
       namaBank,
       nomorRekening,
-      namaDiRekening
+      namaDiRekening,
+      promoCodeData
     );
 
     firestore.collection("users").doc(currentUser.uid).update({
@@ -451,16 +464,23 @@ export default function Payment({ history }) {
                       text={
                         <div>
                           <Typography>
-                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
-                            s sdsda
+                            Transfer nominal yang akan dibayarkan ke:{" "}
+                            <div>
+                              <strong>No. Rekening: 3720266503</strong>
+                            </div>{" "}
+                            <div style={{ marginBottom: "10px" }}>
+                              <strong>Nama: Darren Lucky Buntoro</strong>
+                            </div>
+                            Lampirkan bukti pembayaran dibawah.
                           </Typography>
-                          <ImagePreview open={open} handleClose={handleClose} />
+                          <BuktiBCA open={open} handleClose={handleClose} />
                           <Button
                             color="secondary"
                             onClick={handleClickOpen}
                             round
+                            fullWidth
                           >
-                            Contoh
+                            Contoh Bukti
                           </Button>
                         </div>
                       }
@@ -477,16 +497,23 @@ export default function Payment({ history }) {
                       text={
                         <div>
                           <Typography>
-                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
-                            s sdsda
+                            Transfer nominal yang akan dibayarkan ke:{" "}
+                            <div>
+                              <strong>No. Rekening: 0541 0100 0710 568</strong>
+                            </div>{" "}
+                            <div style={{ marginBottom: "10px" }}>
+                              <strong>Nama: Darren Lucky Buntoro</strong>
+                            </div>
+                            Lampirkan bukti pembayaran dibawah.
                           </Typography>
-                          <ImagePreview open={open} handleClose={handleClose} />
+                          <BuktiBRI open={open} handleClose={handleClose} />
                           <Button
                             color="secondary"
                             onClick={handleClickOpen}
                             round
+                            fullWidth
                           >
-                            Contoh
+                            Contoh Bukti
                           </Button>
                         </div>
                       }
@@ -507,7 +534,7 @@ export default function Payment({ history }) {
                             asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
                             s sdsda
                           </Typography>
-                          <ImagePreview open={open} handleClose={handleClose} />
+                          {/* <BuktiBCA open={open} handleClose={handleClose} /> */}
                           <Button
                             color="secondary"
                             onClick={handleClickOpen}
@@ -731,16 +758,23 @@ export default function Payment({ history }) {
                       text={
                         <div>
                           <Typography>
-                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
-                            s sdsda
+                            Transfer nominal yang akan dibayarkan ke:{" "}
+                            <div>
+                              <strong>No. Rekening: 3720266503</strong>
+                            </div>{" "}
+                            <div style={{ marginBottom: "10px" }}>
+                              <strong>Nama: Darren Lucky Buntoro</strong>
+                            </div>
+                            Lampirkan bukti pembayaran dibawah.
                           </Typography>
-                          <ImagePreview open={open} handleClose={handleClose} />
+                          <BuktiBCA open={open} handleClose={handleClose} />
                           <Button
                             color="secondary"
                             onClick={handleClickOpen}
                             round
+                            fullWidth
                           >
-                            Contoh
+                            Contoh Bukti
                           </Button>
                         </div>
                       }
@@ -757,16 +791,23 @@ export default function Payment({ history }) {
                       text={
                         <div>
                           <Typography>
-                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
-                            s sdsda
+                            Transfer nominal yang akan dibayarkan ke:{" "}
+                            <div>
+                              <strong>No. Rekening: 0541 0100 0710 568</strong>
+                            </div>{" "}
+                            <div style={{ marginBottom: "10px" }}>
+                              <strong>Nama: Darren Lucky Buntoro</strong>
+                            </div>
+                            Lampirkan bukti pembayaran dibawah.
                           </Typography>
-                          <ImagePreview open={open} handleClose={handleClose} />
+                          <BuktiBRI open={open} handleClose={handleClose} />
                           <Button
                             color="secondary"
                             onClick={handleClickOpen}
                             round
+                            fullWidth
                           >
-                            Contoh
+                            Contoh Bukti
                           </Button>
                         </div>
                       }
@@ -787,7 +828,7 @@ export default function Payment({ history }) {
                             asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
                             s sdsda
                           </Typography>
-                          <ImagePreview open={open} handleClose={handleClose} />
+                          {/* <BuktiBCA open={open} handleClose={handleClose} /> */}
                           <Button
                             color="secondary"
                             onClick={handleClickOpen}
@@ -834,6 +875,40 @@ export default function Payment({ history }) {
           </Grid>
         </div>
       </Container>
+
+      <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
+        <Tooltip
+          title={
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "14px",
+                lineHeight: "20px",
+              }}
+            >
+              <WhatsAppIcon fontSize="large" style={{ marginRight: "10px" }} />
+              Klik tombol ini dan langsung hubungi kami di Whatsapp bila ada
+              pertanyaan!
+            </div>
+          }
+          placement="right"
+        >
+          <img
+            src={Whatsapp}
+            style={{
+              position: "fixed",
+              bottom: 15,
+              left: 15,
+              width: "60px",
+              "&:hover": {
+                filter: "brightness(150%)",
+              },
+            }}
+          />
+        </Tooltip>
+      </a>
+
       <Footer />
     </div>
   );

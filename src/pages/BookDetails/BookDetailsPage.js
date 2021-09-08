@@ -1,5 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 
+// Whatsapp Button
+import Whatsapp from "../../images/Whatsapp.png";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import { Tooltip } from "@material-ui/core";
+
 // Custom components
 import BookDetails from "./BookDetails";
 import TextDetails from "./TextDetails";
@@ -36,6 +41,7 @@ import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoB
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
+import * as firebaseGetBookAudioTrialURL from "../../firebase/firebaseGetBookAudioTrialURL";
 import { beigeColor } from "../../styles/Style";
 
 const useStyles = makeStyles((theme) => ({
@@ -202,6 +208,8 @@ export default function BookDetailsPage({ match, history }) {
   // Scrolled bar
   const tabs = useStyles();
 
+  console.log(current_product);
+
   return (
     <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
@@ -225,9 +233,9 @@ export default function BookDetailsPage({ match, history }) {
                         title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
-                        description={current_product.description}
-                        watchTime={"15"}
-                        readTime={"15"}
+                        description={current_product.descriptions}
+                        watchTime={current_product.watch_time}
+                        readTime={current_product.read_time}
                         num={current_product.kilasan.length}
                         buttons={
                           <div>
@@ -374,9 +382,9 @@ export default function BookDetailsPage({ match, history }) {
                         title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
-                        description={current_product.description}
-                        watchTime={"15"}
-                        readTime={"15"}
+                        description={current_product.descriptions}
+                        watchTime={current_product.watch_time}
+                        readTime={current_product.read_time}
                         num={current_product.kilasan.length}
                         buttons={
                           <div>
@@ -531,7 +539,7 @@ export default function BookDetailsPage({ match, history }) {
                     title={current_product.book_title}
                     author={current_product.author}
                     descriptionTitle={"Tentang Apa?"}
-                    description={current_product.description}
+                    description={current_product.descriptions}
                     watchTime={"15"}
                     readTime={"15"}
                     num={current_product.kilasan.length}
@@ -644,6 +652,39 @@ export default function BookDetailsPage({ match, history }) {
           )}
         </div>
       )}
+
+      <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
+        <Tooltip
+          title={
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "14px",
+                lineHeight: "20px",
+              }}
+            >
+              <WhatsAppIcon fontSize="large" style={{ marginRight: "10px" }} />
+              Klik tombol ini dan langsung hubungi kami di Whatsapp bila ada
+              pertanyaan!
+            </div>
+          }
+          placement="right"
+        >
+          <img
+            src={Whatsapp}
+            style={{
+              position: "fixed",
+              bottom: 15,
+              left: 15,
+              width: "60px",
+              "&:hover": {
+                filter: "brightness(150%)",
+              },
+            }}
+          />
+        </Tooltip>
+      </a>
 
       <Footer />
     </div>

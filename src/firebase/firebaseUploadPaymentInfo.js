@@ -15,7 +15,8 @@ export async function uploadPaymentInfo(
   akunTelegram,
   namaBank,
   nomorRekening,
-  namaDiRekening
+  namaDiRekening,
+  kodePromo
 ) {
   try {
     //Get total cost and items from cart items
@@ -72,6 +73,7 @@ export async function uploadPaymentInfo(
       nomor_rekening: nomorRekening,
       nama_bank: namaBank,
       akun_telegram: akunTelegram,
+      kode_promo: kodePromo,
       // type: "test",
     });
 
