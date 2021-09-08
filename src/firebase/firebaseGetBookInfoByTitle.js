@@ -35,6 +35,20 @@ export async function getBookInfoByTitle(title) {
       bookInfo.video_link = bookData["video_link"];
       bookInfo.price = bookData["price"];
       bookInfo.description = bookData["description"];
+
+      //Make string for description
+      // var final = "";
+      // if(bookData.descriptions){
+      //   bookData.descriptions.forEach((paragraph, index) => {
+      //     if(index == bookData.descriptions.length - 1){
+      //       final = final + paragraph;
+      //     } else {
+      //       final = final + paragraph + '\n\n';
+      //     }
+      //   });
+      // }
+      bookInfo.descriptions = bookData.descriptions;
+
       const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(title);
       bookInfo.coverLink = await getLink;
       //Get kilasan

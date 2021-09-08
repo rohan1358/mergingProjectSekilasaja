@@ -27,6 +27,8 @@ export default function BookDetails(props) {
     num,
     buttons,
   } = props;
+
+  console.log(description);
   const mobile = MultiUseMobile();
   const classes = useStyles();
 
@@ -142,7 +144,14 @@ export default function BookDetails(props) {
                   <Divider />
 
                   <Typography type="bold">{descriptionTitle}</Typography>
-                  <Typography>{description}</Typography>
+                  {description.map((paragraph, index) => (
+                    <Typography
+                      className={classes.uncopyable}
+                      className={classes.paragraph}
+                    >
+                      {paragraph}
+                    </Typography>
+                  ))}
 
                   <div style={{ marginTop: "40px" }} />
                   {buttons}

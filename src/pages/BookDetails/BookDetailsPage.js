@@ -202,6 +202,8 @@ export default function BookDetailsPage({ match, history }) {
   // Scrolled bar
   const tabs = useStyles();
 
+  console.log(current_product);
+
   return (
     <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
@@ -225,7 +227,7 @@ export default function BookDetailsPage({ match, history }) {
                         title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
-                        description={current_product.description}
+                        description={current_product.descriptions}
                         watchTime={"15"}
                         readTime={"15"}
                         num={current_product.kilasan.length}
@@ -374,7 +376,7 @@ export default function BookDetailsPage({ match, history }) {
                         title={current_product.book_title}
                         author={current_product.author}
                         descriptionTitle={"Tentang Apa?"}
-                        description={current_product.description}
+                        description={current_product.descriptions}
                         watchTime={"15"}
                         readTime={"15"}
                         num={current_product.kilasan.length}
@@ -531,7 +533,7 @@ export default function BookDetailsPage({ match, history }) {
                     title={current_product.book_title}
                     author={current_product.author}
                     descriptionTitle={"Tentang Apa?"}
-                    description={current_product.description}
+                    description={current_product.descriptions}
                     watchTime={"15"}
                     readTime={"15"}
                     num={current_product.kilasan.length}
