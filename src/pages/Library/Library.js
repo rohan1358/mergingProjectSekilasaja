@@ -45,6 +45,8 @@ export default function Library({ history }) {
   const { currentUser } = useContext(AuthContext);
 
   const dispatch = useDispatch();
+  const [pending, setPending] = useState(true);
+
   const ownedBookTitles = useSelector(selectOwnedBookTitles);
   const favoriteBookTitles = useSelector(selectFavoriteBookTitles);
 
@@ -67,9 +69,18 @@ export default function Library({ history }) {
         snapshot.forEach((doc) => {
           dispatch(setOwnedBookTitles(doc.data()["owned_books"]));
           dispatch(setFavoriteBookTitles(doc.data()["favorite_books"]));
+          setPending(false);
         });
       });
   }, []);
+
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
