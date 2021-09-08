@@ -32,10 +32,13 @@ import {
   selectFavoriteBooks,
   setFavoriteBooks,
 } from "../../feature/favoriteBooksSlice";
+import {
+  selectOwnedBookTitles,
+  setOwnedBookTitles,
+} from "../../feature/ownedBookTitlesSlice";
 
 // Auth and fire
 import { AuthContext } from "../../components/Routing/Auth";
-import fire from "../../firebase/fire";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
@@ -71,20 +74,11 @@ export default function BookDetailsPage({ match, history }) {
   const [coverLink, setCoverLink] = useState("");
   const [audioLink, setAudioLink] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        match.params.book_title
-      );
-      setCurrent_Product(book_);
-      ownedBooks.map((x) => {
-        if (x.book_title == book_.book_title) {
-          setIsBookOwned(true);
-        }
-      });
-    };
-    fetchData();
+  const [pending, setPending] = useState(true);
 
+  const ownedBookTitles = useSelector(selectOwnedBookTitles);
+
+  useEffect(() => {
     if (currentUser !== null) {
       const fetchData = async () => {
         const results = await firebaseGetUserDataById.getUserDataById(
@@ -92,11 +86,32 @@ export default function BookDetailsPage({ match, history }) {
         );
         setUserData(results);
         setIsSubscribed(results.is_subscribed);
+
+        results.owned_books.map((x) => {
+          if (x == match.params.book_title) {
+            setIsBookOwned(true);
+            setPending(false);
+          }
+        });
       };
       fetchData();
     } else {
       console.log("Not logged in");
     }
+
+    const fetchData = async () => {
+      const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        match.params.book_title
+      );
+      setCurrent_Product(book_);
+      // ownedBooks.map((x) => {
+      //   if (x.book_title == match.params.book_title) {
+      //     setIsBookOwned(true);
+      //     setPending(false);
+      //   }
+      // });
+    };
+    fetchData();
 
     if (match.params.book_title != null) {
       const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(

@@ -261,7 +261,6 @@ export default function OwnedBooksBlock(props) {
     );
   }
 
-  console.log(ownedBooks);
   return (
     <div>
       {!!isSubscribed ? (
