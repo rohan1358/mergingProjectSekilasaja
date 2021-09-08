@@ -193,7 +193,18 @@ export default function Footer() {
               </Link>
               <Link underline="none">
                 <Typography color="beigeColor">
-                  Hubungi kami di sekilasaja.contact@gmail.com
+                  Hubungi kami di{" "}
+                  <a
+                    style={{
+                      color: beigeColor,
+                      textDecoration: "none",
+                      fontStyle: "italic",
+                    }}
+                    href="mailto:sekilasaja.contact@gmail.com"
+                    className={classes.linkHover}
+                  >
+                    sekilasaja.contact@gmail.com
+                  </a>
                 </Typography>
               </Link>
               {/* <Link underline="none" href="/contact">
