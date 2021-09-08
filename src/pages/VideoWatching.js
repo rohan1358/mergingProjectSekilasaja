@@ -30,6 +30,7 @@ export default function VideoWatchingPage({ match, history }) {
   const [isBookOwned, setIsBookOwned] = useState(false);
   const [bookContent, setBookContent] = useState([]);
   const ownedBooks = useSelector(selectOwnedBooks);
+  const [pending, setPending] = useState(false);
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
@@ -66,49 +67,50 @@ export default function VideoWatchingPage({ match, history }) {
     } else {
       console.log("You are not logged in!");
     }
+
+    if (!userData.is_subscribed) {
+      if (!isBookOwned) {
+        <Redirect to="/404page" />;
+      }
+    }
   }, []);
-
-  const isSubscribed = userData.is_subscribed;
-
-  // console.log(isSubscribed || isBookOwned);
-
-  // if ((isSubscribed || isBookOwned) === false) {
-  //   return <Redirect to="/404page" />;
-  // }
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
-      {!!isSubscribed || !!isBookOwned ? (
-        <div>
-          <NavBarSecond />
-          <div style={{ marginTop: "100px" }} />
-          <Container maxWidth="sm">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <ReactPlayer
-                url={bookContent.video_link}
-                controls={true}
-                config={{
-                  file: {
-                    attributes: {
-                      crossorigin: "anonymous",
-                    },
+      {/* {!!isSubscribed || !!isBookOwned ? ( */}
+      <div>
+        <NavBarSecond />
+        <div style={{ marginTop: "70px" }} />
+        <Container maxWidth="sm">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <ReactPlayer
+              url={bookContent.video_link}
+              controls={true}
+              config={{
+                file: {
+                  attributes: {
+                    crossorigin: "anonymous",
                   },
-                }}
-              />
-            </div>
+                },
+              }}
+            />
+          </div>
 
-            <Typography size="subheading">{bookContent.book_title}</Typography>
-            <Typography>{bookContent.description} </Typography>
-          </Container>
-        </div>
-      ) : (
+          <Typography style={{ marginTop: -15 }} size="subheading">
+            {bookContent.book_title}
+          </Typography>
+
+          {/* <Typography>{bookContent.description} </Typography> */}
+        </Container>
+      </div>
+      {/* ) : (
         <FourOFourPage />
-      )}
+      )} */}
     </div>
   );
 }

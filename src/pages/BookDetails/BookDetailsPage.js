@@ -208,8 +208,6 @@ export default function BookDetailsPage({ match, history }) {
   // Scrolled bar
   const tabs = useStyles();
 
-  console.log(current_product);
-
   return (
     <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
@@ -392,7 +390,7 @@ export default function BookDetailsPage({ match, history }) {
                               <Grid container spacing={3}>
                                 <Grid item>
                                   <Button href={"/pricing"}>
-                                    Subscribe Now!
+                                    Berlanggan Sekarang!
                                   </Button>
                                 </Grid>
 
@@ -402,11 +400,11 @@ export default function BookDetailsPage({ match, history }) {
                                       onClick={handleAddCart}
                                       color="secondary"
                                     >
-                                      Add To Cart
+                                      Tambah Ke Keranjang!
                                     </Button>
                                   ) : (
                                     <Typography type="bold">
-                                      ✔ Added to Cart!
+                                      ✔ Added!
                                     </Typography>
                                   )}
                                 </Grid>
@@ -416,7 +414,7 @@ export default function BookDetailsPage({ match, history }) {
                             <div className={classes.sectionMobileBlock}>
                               <Grid item xs={12}>
                                 <Button fullWidth href={"/pricing"}>
-                                  Subscribe Now!
+                                  Berlanggan Sekarang!
                                 </Button>
                               </Grid>
                               <Grid item xs={12}>
@@ -426,12 +424,10 @@ export default function BookDetailsPage({ match, history }) {
                                     fullWidth
                                     color="secondary"
                                   >
-                                    Add To Cart
+                                    Tambah Ke Keranjang
                                   </Button>
                                 ) : (
-                                  <Typography type="bold">
-                                    ✔ Added to Cart!
-                                  </Typography>
+                                  <Typography type="bold">✔ Added!</Typography>
                                 )}
                               </Grid>
                             </div>
@@ -464,6 +460,17 @@ export default function BookDetailsPage({ match, history }) {
                             <Typography className={books.paragraphBookDetails}>
                               {current_product.kilasan[0].details[1]}
                             </Typography>
+
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <Button round href="/pricing">
+                                Berlanggan Sekarang!
+                              </Button>
+                            </div>
 
                             {current_product.kilasan[0].details.map(
                               (paragraph) => (
@@ -593,6 +600,17 @@ export default function BookDetailsPage({ match, history }) {
                         <Typography className={books.paragraphBookDetails}>
                           {current_product.kilasan[0].details[1]}
                         </Typography>
+
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Button round href="/pricing">
+                            Berlanggan Sekarang!
+                          </Button>
+                        </div>
 
                         {current_product.kilasan[0].details.map((paragraph) => (
                           <div className={classes.blur}>

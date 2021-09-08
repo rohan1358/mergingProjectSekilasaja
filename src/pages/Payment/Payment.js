@@ -433,7 +433,7 @@ export default function Payment({ history }) {
                   />
                 </form>
 
-                <div className={classes.extraSpace} />
+                <div style={{ marginTop: "20px" }} />
 
                 <Typography size="subheading">3. Payment</Typography>
                 {fileError && (
@@ -550,10 +550,14 @@ export default function Payment({ history }) {
                   </RadioGroup>
                 </FormControl>
 
+                <Typography style={{ marginTop: "20px" }} size="subheading">
+                  4. Lampirkan Bukti Pembayaran
+                </Typography>
+
                 <TextField
                   required
                   id="outlined-full-width"
-                  label="Image Upload"
+                  label="Lampirkan Bukti Pembayaran"
                   name="upload-photo"
                   type="file"
                   fullWidth
@@ -727,7 +731,7 @@ export default function Payment({ history }) {
                   />
                 </form>
 
-                <div className={classes.extraSpace} />
+                <div style={{ marginTop: "20px" }} />
 
                 <Typography size="subheading">3. Payment</Typography>
                 {fileError && (
@@ -845,10 +849,14 @@ export default function Payment({ history }) {
                   </RadioGroup>
                 </FormControl>
 
+                <Typography style={{ marginTop: "20px" }} size="subheading">
+                  4. Lampirkan Bukti Pembayaran
+                </Typography>
+
                 <TextField
                   required
                   id="outlined-full-width"
-                  label="Image Upload"
+                  label="Lampirkan Bukti Pembayaran"
                   name="upload-photo"
                   type="file"
                   fullWidth

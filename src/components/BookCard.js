@@ -80,7 +80,7 @@ export default function BookCard({
 
   const handleAddCart = () => {
     console.log("Adding to cart...");
-    if(!product.coverLink && (coverLink != null || !coverLink)){
+    if (!product.coverLink && (coverLink != null || !coverLink)) {
       product.coverLink = coverLink;
     }
     const fetchData = async () => {

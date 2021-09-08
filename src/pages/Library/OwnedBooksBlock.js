@@ -152,8 +152,14 @@ export default function OwnedBooksBlock(props) {
       };
       fetchData();
     } else {
-      setIsOwnedBookTitlesEmpty(true);
+      // setIsOwnedBookTitlesEmpty(true);
       setPending(false);
+    }
+
+    if (ownedBooks.length <= 0) {
+      setIsOwnedBookTitlesEmpty(true);
+    } else {
+      setIsOwnedBookTitlesEmpty(false);
     }
 
     //Get books' data from books database based on favorite books of the user
@@ -255,6 +261,7 @@ export default function OwnedBooksBlock(props) {
     );
   }
 
+  console.log(ownedBooks);
   return (
     <div>
       {!!isSubscribed ? (
@@ -368,7 +375,7 @@ export default function OwnedBooksBlock(props) {
                 <div className={classes.extraSpace} /> */}
 
                 {/* OWNED BOOKS DESKTOP */}
-                {isOwnedBookTitlesEmpty ? (
+                {ownedBooks.length === 0 ? (
                   <div>
                     <Typography style={{ textAlign: "center" }} size="heading">
                       Owned Books
@@ -488,7 +495,7 @@ export default function OwnedBooksBlock(props) {
                 <div className={classes.extraSpace} /> */}
 
                 {/* OWNED BOOKS MOBILE */}
-                {isOwnedBookTitlesEmpty ? (
+                {ownedBooks.length === 0 ? (
                   <div>
                     <Typography style={{ textAlign: "center" }} size="heading">
                       Owned Books
@@ -622,7 +629,23 @@ export default function OwnedBooksBlock(props) {
 
                 <div className={classes.extraSpace} /> */}
 
-                {isOwnedBookTitlesEmpty ? (
+                {ownedBooks.length !== 0 ? (
+                  <div>
+                    <Typography style={{ textAlign: "center" }} size="heading">
+                      Owned Books
+                    </Typography>
+                    <Grid container justifyContent={"center"} spacing={5}>
+                      {ownedBooks.map((product) => (
+                        <BookCard
+                          chosenCategory={chosenCategory}
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
+                      ))}
+                    </Grid>
+                  </div>
+                ) : (
                   <div>
                     <Typography style={{ textAlign: "center" }} size="heading">
                       Owned Books
@@ -639,22 +662,6 @@ export default function OwnedBooksBlock(props) {
                       Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang
                       untuk akses semua buku!
                     </Typography>
-                  </div>
-                ) : (
-                  <div>
-                    <Typography style={{ textAlign: "center" }} size="heading">
-                      Owned Books
-                    </Typography>
-                    <Grid container justifyContent={"center"} spacing={5}>
-                      {ownedBooks.map((product) => (
-                        <BookCard
-                          chosenCategory={chosenCategory}
-                          coverTitle={product.book_title}
-                          key={product.id}
-                          product={product}
-                        />
-                      ))}
-                    </Grid>
                   </div>
                 )}
               </div>
@@ -685,7 +692,23 @@ export default function OwnedBooksBlock(props) {
 
                 <div className={classes.extraSpace} /> */}
 
-                {isOwnedBookTitlesEmpty ? (
+                {ownedBooks.length !== 0 ? (
+                  <div>
+                    <Typography style={{ textAlign: "center" }} size="heading">
+                      Owned Books
+                    </Typography>
+                    <Grid container justifyContent="center" spacing={5}>
+                      {ownedBooks.map((product) => (
+                        <BookCard
+                          chosenCategory={chosenCategory}
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
+                      ))}
+                    </Grid>
+                  </div>
+                ) : (
                   <div>
                     <Typography style={{ textAlign: "center" }} size="heading">
                       Owned Books
@@ -703,22 +726,6 @@ export default function OwnedBooksBlock(props) {
                       untuk akses semua buku!
                     </Typography>
                   </div>
-                ) : (
-                  <div>
-                    <Typography style={{ textAlign: "center" }} size="heading">
-                      Owned Books
-                    </Typography>
-                    <Grid container justifyContent="center" spacing={5}>
-                      {ownedBooks.map((product) => (
-                        <BookCard
-                          chosenCategory={chosenCategory}
-                          coverTitle={product.book_title}
-                          key={product.id}
-                          product={product}
-                        />
-                      ))}
-                    </Grid>
-                  </div>
                 )}
               </div>
             </div>
@@ -732,6 +739,8 @@ export default function OwnedBooksBlock(props) {
                   setIsChosenCategory={setIsChosenCategory}
                 /> */}
           {/* <div className={classes.extraSpace} /> */}
+
+          <Divider style={{ marginTop: "20px" }} />
 
           {isChosenCategory === true ? (
             <div>
@@ -778,7 +787,6 @@ export default function OwnedBooksBlock(props) {
                 )}
 
                 <div className={classes.extraSpace} /> */}
-                <Divider style={{ marginTop: "20px" }} />
                 {/* NOT OWNED BOOKS DESKTOP */}
                 {isNotOwnedBooksEmpty ? (
                   <div>
