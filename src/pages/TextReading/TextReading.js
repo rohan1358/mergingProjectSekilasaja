@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router";
 
 // Custom components
 import NavBarSecond from "../../components/NavBar/NavBarSecond";
@@ -9,14 +8,16 @@ import NavbarStyle from "../../styles/NavbarStyle";
 import TableOfContent from "./TableOfContent";
 import Typography from "../../components/Typography";
 import FourOFourPage from "../404page";
+import ReactAudioPlayer from "react-audio-player";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
 import { Container, AppBar, Grid, Paper, Link } from "@material-ui/core";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 // Custom components
 import Button from "../../components/Button";
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -27,6 +28,7 @@ import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
+import { beigeColor, primaryColor } from "../../styles/Style";
 
 export default function TextReading({ match, history }) {
   const db = fire.firestore();
@@ -45,8 +47,20 @@ export default function TextReading({ match, history }) {
   const handleNext = () => {
     if (chosenChapter === chapterContent.length) {
       setChosenChapter(1);
+      window.scrollTo(0, 0);
     } else {
       setChosenChapter(chosenChapter + 1);
+      window.scrollTo(0, 0);
+    }
+  };
+
+  const handlePrev = () => {
+    if (chosenChapter === 1) {
+      setChosenChapter(chapterContent.length);
+      window.scrollTo(0, 0);
+    } else {
+      setChosenChapter(chosenChapter - 1);
+      window.scrollTo(0, 0);
     }
   };
 
@@ -87,11 +101,11 @@ export default function TextReading({ match, history }) {
       console.log("You are not logged in!");
     }
   }, [, chosenChapter]);
-  console.log(audioLink);
+
   const isSubscribed = userData.is_subscribed;
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "70px" }} />
       {!!isSubscribed || !!isBookOwned ? (
         <div>
@@ -107,7 +121,7 @@ export default function TextReading({ match, history }) {
               {chapterContent.length !== 0 && (
                 <Grid container spacing={5}>
                   <Grid item xs={4}>
-                    <Paper square elevation={3}>
+                    <Paper style={{ maxWidth: "375px" }} square elevation={3}>
                       <TableOfContent
                         chapterContent={chapterContent}
                         chosenChapter={chosenChapter}
@@ -187,6 +201,26 @@ export default function TextReading({ match, history }) {
                   }
                 />
               }
+              buttons={
+                <div>
+                  <Button
+                    round
+                    style={{ fontSize: "17px", width: 0 }}
+                    color="gray"
+                    onClick={handlePrev}
+                  >
+                    <ArrowBackIcon />
+                  </Button>
+                  <Button
+                    color="gray"
+                    style={{ fontSize: "17px", width: 0 }}
+                    round
+                    onClick={handleNext}
+                  >
+                    <ArrowForwardIcon />
+                  </Button>
+                </div>
+              }
             />
 
             <Container maxWidth={"md"}>
@@ -260,19 +294,37 @@ export default function TextReading({ match, history }) {
           <div style={{ marginTop: "100px" }}>
             <AppBar color="white" position="fixed" className={classes.audioBar}>
               <Container>
-                <div style={{ padding: "15px" }}>
-                  <AudioPlayer
-                    vidLink={audioLink}
-                    button={
-                      <Link
-                        className={classes.link}
-                        underline="none"
-                        onClick={handleNext}
-                      >
-                        NEXT►
-                      </Link>
-                    }
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                >
+                  <div className={classes.sectionDesktop}>
+                    <Button
+                      round
+                      style={{ fontSize: "17px", width: 0 }}
+                      onClick={handlePrev}
+                    >
+                      <ArrowBackIcon />
+                    </Button>
+                  </div>
+
+                  <ReactAudioPlayer
+                    className={classes.audioControl}
+                    controlsList="nodownload"
+                    src={audioLink}
+                    autoPlay
+                    controls
+                    onEnded={handleNext}
                   />
+
+                  <div className={classes.sectionDesktop}>
+                    <Button
+                      style={{ fontSize: "17px", width: 0 }}
+                      round
+                      onClick={handleNext}
+                    >
+                      <ArrowForwardIcon />
+                    </Button>
+                  </div>
                 </div>
               </Container>
             </AppBar>

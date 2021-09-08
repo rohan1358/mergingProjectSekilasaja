@@ -9,9 +9,37 @@ import {
 } from "./Style";
 
 const InfoStyle = {
+  buttonAddedHoverPos: {
+    position: "absolute",
+    top: 270,
+    marginLeft: 115,
+  },
+  buttonHoverPos: {
+    position: "absolute",
+    top: 270,
+    marginLeft: 145,
+  },
+  mobileButtonPos: {
+    // position: "absolute",
+    // top: 270,
+    // marginLeft: 145,
+  },
+  addedMobileButtonPos: {
+    // position: "absolute",
+    // top: 270,
+    // marginLeft: 145,
+  },
+  cardHover: {
+    "&:hover": {
+      filter: "brightness(100%)",
+    },
+  },
+  notOwned: {
+    filter: "grayscale(100%)",
+  },
   bookCover: {
     maxWidth: "200px",
-    marginTop: "30px",
+    // marginTop: "30px",
   },
   bookDetails: {
     marginTop: "40px",
@@ -57,7 +85,7 @@ const InfoStyle = {
     overflow: "hidden",
   },
   description: {
-    color: secondaryColor,
+    // color: secondaryColor,
     overflow: "hidden",
     marginTop: "0px",
   },

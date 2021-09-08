@@ -88,8 +88,12 @@ export default function CategoryBlock(props) {
         setChosenCategory={setChosenCategory}
         setIsChosenCategory={setIsChosenCategory}
       ></CategoryBarFilter>
+      <div style={{ marginTop: "20px" }} />
       {isChosenCategory === true ? (
         <Carousel
+          arrows={false}
+          showDots={true}
+          infinite={true}
           autoPlay={true}
           autoPlaySpeed={1500}
           ssr={true}
@@ -104,13 +108,17 @@ export default function CategoryBlock(props) {
                 chosenCategory={chosenCategory}
                 key={index}
                 product={categorisedProduct}
+                extraSpace={<div style={{ marginTop: "20px" }} />}
               />
             ))}
         </Carousel>
       ) : (
         <Carousel
+          arrows={false}
+          showDots={true}
+          infinite={true}
           autoPlay={true}
-          autoPlaySpeed={1500}
+          autoPlaySpeed={3000}
           ssr={true}
           responsive={responsive}
         >
@@ -119,6 +127,7 @@ export default function CategoryBlock(props) {
               chosenCategory={chosenCategory}
               key={product.id}
               product={product}
+              extraSpace={<div style={{ marginTop: "20px" }} />}
             />
           ))}
         </Carousel>

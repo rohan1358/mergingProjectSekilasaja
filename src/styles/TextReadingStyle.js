@@ -48,6 +48,11 @@ const TextReadingStyle = makeStyles((theme) => ({
     userSelect: "none",
     pointerEvents: "none",
   },
+  paragraphBookDetails: {
+    fontSize: "18px",
+    userSelect: "none",
+    pointerEvents: "none",
+  },
   content: {},
   page: {
     display: "flex",
@@ -112,6 +117,11 @@ const TextReadingStyle = makeStyles((theme) => ({
     "&:hover,&:focus": {
       cursor: "pointer",
     },
+  },
+  audioControl: {
+    width: "100%",
+    maxWidth: "800px",
+    padding: "5px",
   },
 }));
 

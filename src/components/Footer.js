@@ -17,6 +17,7 @@ import FooterStyle from "../styles/FooterStyle";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
+import { beigeColor } from "../styles/Style";
 
 function SocialIcons() {
   const classes = FooterStyle();
@@ -35,13 +36,16 @@ function SocialIcons() {
           edge="start"
           size="small"
           className={classes.socialIcon}
-          color="inherit"
+          color={beigeColor}
           aria-label="menu"
         >
-          <Instagram className={classes.iconColor} />
+          <Instagram className={classes.iconColor} />{" "}
+          <Typography style={{ marginLeft: "5px" }} color="beigeColor" small>
+            sekilasajacom
+          </Typography>
         </IconButton>
 
-        <IconButton
+        {/* <IconButton
           href="https://twitter.com/sekilasajacom"
           edge="start"
           size="small"
@@ -61,7 +65,7 @@ function SocialIcons() {
           aria-label="menu"
         >
           <Facebook className={classes.iconColor} />
-        </IconButton>
+        </IconButton> */}
       </div>
 
       <div className={mobileClass}>
@@ -75,8 +79,11 @@ function SocialIcons() {
             aria-label="menu"
           >
             <Instagram className={classes.iconColor} />
+            <Typography style={{ marginLeft: "5px" }} color="beigeColor" small>
+              sekilasajacom
+            </Typography>
           </IconButton>
-
+          {/* 
           <IconButton
             href="https://www.twitter.com/sekilasajacom"
             edge="start"
@@ -97,7 +104,7 @@ function SocialIcons() {
             aria-label="menu"
           >
             <Facebook className={classes.iconColor} />
-          </IconButton>
+          </IconButton> */}
         </div>
       </div>
     </div>
@@ -118,7 +125,7 @@ function Copyright() {
       <div className={desktopClass}>
         <Typography color="beigeColor" size="small">
           {"Copyright © "}
-          {"SekilasAja "}
+          {"SekilasAja! "}
           {new Date().getFullYear()}
           {"."}
         </Typography>
@@ -127,7 +134,7 @@ function Copyright() {
       <div className={mobileClass}>
         <Typography color="beigeColor" size="small">
           {"Copyright © "}
-          {"SekilasAja "}
+          {"SekilasAja! "}
           {new Date().getFullYear()}
           {"."}
         </Typography>
@@ -169,24 +176,27 @@ export default function Footer() {
               <a href="/">
                 <img className={iconClass} src={Logo} />
               </a>
+              <SocialIcons />
 
-              <Typography color="beigeColor">
+              {/* <Typography color="beigeColor">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </Typography>
+              </Typography> */}
             </Grid>
 
             <Grid item xs={3}>
               <Typography color="beigeColor" size="subheading">
                 Bantuan & Panduan
               </Typography>
-              <Link underline="none" href="/contact">
-                <Typography color="beigeColor">Hubungi Kami</Typography>
+              <Link underline="none" href="/">
+                <Typography color="beigeColor">Kirim Feedback</Typography>
+              </Link>
+              <Link underline="none">
+                <Typography color="beigeColor">
+                  Hubungi kami di sekilasaja.contact@gmail.com
+                </Typography>
               </Link>
               {/* <Link underline="none" href="/contact">
-                <Typography color="beigeColor">Kebijakan Privasi</Typography>
-              </Link>
-              <Link underline="none" href="/contact">
                 <Typography color="beigeColor">Syarat & Ketentuan</Typography>
               </Link> */}
             </Grid>
@@ -217,18 +227,27 @@ export default function Footer() {
               <a href="/">
                 <img className={iconClass} src={Logo} />
               </a>
+              <SocialIcons />
 
-              <Typography color="beigeColor">
+              {/* <Typography color="beigeColor">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </Typography>
+              </Typography> */}
             </Grid>
 
             <Grid item xs={12}>
               <Typography color="beigeColor" size="subheading">
                 Bantuan & Panduan
               </Typography>
-              <Link underline="none" href="/contact">
+              <Link underline="none" href="/">
+                <Typography color="beigeColor">Kirim Feedback</Typography>
+              </Link>
+              <Link underline="none">
+                <Typography color="beigeColor">
+                  Hubungi kami di sekilasaja.contact@gmail.com
+                </Typography>
+              </Link>
+              {/* <Link underline="none" href="/contact">
                 <Typography color="beigeColor">Hubungi Kami</Typography>
               </Link>
               <Link underline="none" href="/contact">
@@ -236,7 +255,7 @@ export default function Footer() {
               </Link>
               <Link underline="none" href="/contact">
                 <Typography color="beigeColor">Syarat & Ketentuan</Typography>
-              </Link>
+              </Link> */}
             </Grid>
 
             <Grid item xs={12}>
@@ -252,9 +271,9 @@ export default function Footer() {
               <Link underline="none">
                 <Typography color="beigeColor">Link</Typography>
               </Link> */}
+              <div style={{ marginBottom: "30px" }} />
             </Grid>
           </Grid>
-          <SocialIcons />
           <Copyright />
         </Container>
       </footer>

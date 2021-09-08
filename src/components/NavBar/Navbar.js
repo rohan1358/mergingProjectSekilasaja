@@ -101,12 +101,12 @@ export default function NavBar(props) {
   };
 
   useEffect(() => {
-    const signout = async() => {
+    const signout = async () => {
       fire.auth().signOut();
     };
 
-    //If user is logged in but not email verified, logout so currentUser becomes null 
-    if (currentUser && !currentUser.emailVerified){
+    //If user is logged in but not email verified, logout so currentUser becomes null
+    if (currentUser && !currentUser.emailVerified) {
       signout();
     }
 
@@ -212,7 +212,7 @@ export default function NavBar(props) {
                 }}
               >
                 <AccountCircleIcon style={{ marginRight: "8px" }} />{" "}
-                <Typography type="bold">Accounts</Typography>
+                <Typography type="bold">My Account</Typography>
               </div>
             </Link>
           </MenuItem>
@@ -272,7 +272,7 @@ export default function NavBar(props) {
 
   return (
     <div>
-      {!!isSubscribed ? (
+      {!!currentUser ? (
         <AppBar position="fixed" color="white">
           <Container>
             <Toolbar>
@@ -294,7 +294,7 @@ export default function NavBar(props) {
                 </Button>
 
                 <Button round color="primary" onClick={goToAccounts}>
-                  Accounts
+                  My Account
                 </Button>
 
                 <div className={classes.divider} />
@@ -308,7 +308,7 @@ export default function NavBar(props) {
                       <ShoppingCartIcon className={classes.iconColor} />
                     </Badge>
                   }
-                  children={<Basket />}
+                  childrenCart={<Basket />}
                 />
               </div>
 
@@ -321,14 +321,16 @@ export default function NavBar(props) {
 
                 <Drawer
                   direction={"right"}
-                  drawerLogo={<ShoppingCartIcon className={classes.hugeIcon} />}
+                  drawerLogo={
+                    <ShoppingCartIcon className={classes.iconColor} />
+                  }
                   drawerTitle={"Your Cart"}
                   logo={
                     <Badge badgeContent={cart.length} color="error">
                       <ShoppingCartIcon className={classes.iconColor} />
                     </Badge>
                   }
-                  children={<Basket />}
+                  childrenCart={<Basket />}
                 />
 
                 <IconButton
@@ -345,131 +347,51 @@ export default function NavBar(props) {
           </Container>
         </AppBar>
       ) : (
-        <div>
-          {!!currentUser ? (
-            <AppBar position="fixed" color="white">
-              <Container>
-                <Toolbar>
-                  <a href="/">
-                    <img className={iconClass} src={Logo} />
-                  </a>
+        <AppBar position="fixed" color="white">
+          <Container>
+            <Toolbar>
+              <a href="/">
+                <img className={iconClass} src={Logo} />
+              </a>
 
-                  <div className={growClass} />
+              <div className={growClass} />
 
-                  <div className={desktopClass}>
-                    <SearchBar history={history} />
+              <div className={desktopClass}>
+                <SearchBar history={history} />
 
-                    <Button onClick={goToPricing} round color="transparent">
-                      Pricing
-                    </Button>
+                <Button onClick={goToPricing} round color="transparent">
+                  Pricing
+                </Button>
 
-                    <Button round color="transparent" href="/library">
-                      Library
-                    </Button>
+                <Button round color="transparent" href="/signup">
+                  Sign Up
+                </Button>
 
-                    <Button round color="primary" onClick={goToAccounts}>
-                      Accounts
-                    </Button>
+                <Button round color="primary" href="/login">
+                  Login
+                </Button>
+              </div>
 
-                    <div className={classes.divider} />
+              <div className={mobileClass}>
+                <SearchBarDrawer
+                  direction={"top"}
+                  history={history}
+                  logo={<SearchIcon className={iconColorClass} />}
+                />
 
-                    <Drawer
-                      direction={"right"}
-                      drawerLogo={
-                        <ShoppingCartIcon className={classes.hugeIcon} />
-                      }
-                      drawerTitle={"Your Cart"}
-                      logo={
-                        <Badge badgeContent={cart.length} color="error">
-                          <ShoppingCartIcon className={classes.iconColor} />
-                        </Badge>
-                      }
-                      children={<Basket />}
-                    />
-                  </div>
-
-                  <div className={mobileClass}>
-                    <SearchBarDrawer
-                      direction={"top"}
-                      history={history}
-                      logo={<SearchIcon className={iconColorClass} />}
-                    />
-
-                    <Drawer
-                      direction={"right"}
-                      drawerLogo={
-                        <ShoppingCartIcon className={classes.iconColor} />
-                      }
-                      drawerTitle={"Your Cart"}
-                      logo={
-                        <Badge badgeContent={cart.length} color="error">
-                          <ShoppingCartIcon className={classes.iconColor} />
-                        </Badge>
-                      }
-                      children={<Basket />}
-                    />
-
-                    <IconButton
-                      aria-label="show more"
-                      aria-controls={mobileMenuId}
-                      aria-haspopup="true"
-                      onClick={handleMobileMenuOpen}
-                      color="inherit"
-                    >
-                      <MenuIcon className={iconColorClass} />
-                    </IconButton>
-                  </div>
-                </Toolbar>
-              </Container>
-            </AppBar>
-          ) : (
-            <AppBar position="fixed" color="white">
-              <Container>
-                <Toolbar>
-                  <a href="/">
-                    <img className={iconClass} src={Logo} />
-                  </a>
-
-                  <div className={growClass} />
-
-                  <div className={desktopClass}>
-                    <SearchBar history={history} />
-
-                    <Button onClick={goToPricing} round color="transparent">
-                      Pricing
-                    </Button>
-
-                    <Button round color="transparent" href="/signup">
-                      Sign Up
-                    </Button>
-
-                    <Button round color="primary" href="/login">
-                      Login
-                    </Button>
-                  </div>
-
-                  <div className={mobileClass}>
-                    <SearchBarDrawer
-                      direction={"top"}
-                      history={history}
-                      logo={<SearchIcon className={iconColorClass} />}
-                    />
-
-                    <IconButton
-                      aria-label="show more"
-                      aria-controls={mobileMenuId}
-                      aria-haspopup="true"
-                      onClick={handleMobileMenuOpen}
-                      color="inherit"
-                    >
-                      <MenuIcon className={iconColorClass} />
-                    </IconButton>
-                  </div>
-                </Toolbar>
-              </Container>
-            </AppBar>
-          )}
-        </div>
+                <IconButton
+                  aria-label="show more"
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={handleMobileMenuOpen}
+                  color="inherit"
+                >
+                  <MenuIcon className={iconColorClass} />
+                </IconButton>
+              </div>
+            </Toolbar>
+          </Container>
+        </AppBar>
       )}
 
       <div className={classes.toolbar} />

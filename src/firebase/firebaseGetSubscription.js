@@ -8,7 +8,7 @@ export async function getSubscription(book_title) {
   //References to book information in database
   var docRef = firestore.collection("subscription");
   var results = null;
-  var coverLink_ = null;
+  // var coverLink_ = null;
   // const fetchData = async (book_title) => {
   //   const getLink =
   //     firebaseGetBookCoverImageURL.getBookCoverImageURL(book_title);

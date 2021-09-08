@@ -8,6 +8,9 @@ import OwnedBooksBlock from "./OwnedBooksBlock";
 import Parallax from "../../components/Parallax";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -28,6 +31,7 @@ import { AuthContext } from "../../components/Routing/Auth";
 
 // Material-UI components
 import { Container } from "@material-ui/core";
+import { beigeColor } from "../../styles/Style";
 
 export default function Library({ history }) {
   const classes = MultiUseMobile();
@@ -63,20 +67,25 @@ export default function Library({ history }) {
   }, []);
 
   return (
-    <div>
-      <NavBar history={history} />
+    <div style={{ backgroundColor: beigeColor }}>
+      <div style={{ marginTop: "70px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
+      <Parallax
+        small
+        filter
+        image={require("../../images/library.jpg").default}
+      >
+        <Typography color="beigeColor" size="heading">
+          MY LIBRARY
+        </Typography>
+      </Parallax>
       <Container>
-        <Parallax
-          small
-          border
-          filter
-          image={require("../../images/library.jpg").default}
-        >
-          <Typography color="beigeColor" size="heading">
-            My Library
-          </Typography>
-        </Parallax>
-
         <div className={classes.extraSpace} />
         <OwnedBooksBlock
           ownedBookTitles={ownedBookTitles}

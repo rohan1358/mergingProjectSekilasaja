@@ -62,7 +62,12 @@ export default function SearchBar(props) {
                 size="small"
                 label={
                   <div className={classes.search}>
-                    🔍 Cari The Intelligent Investor...
+                    <SearchIcon
+                      style={{ marginLeft: "-5px", marginTop: "-4px" }}
+                    />
+                    <div style={{ marginLeft: "3px", marginTop: "-4px" }}>
+                      Cari The Intelligent Investor...
+                    </div>
                   </div>
                 }
                 variant="outlined"

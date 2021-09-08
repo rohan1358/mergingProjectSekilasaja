@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 // Custom components
 import TextReadingStyle from "../../styles/TextReadingStyle";
+import { toggleDrawer } from "../../components/Drawer";
 
 //nodejs library to set properties for components
 import classNames from "classnames";
@@ -28,6 +29,7 @@ function ChapterButton({ chosenChapter, setChosenChapter, chapter }) {
       onClick={(e) => {
         e.preventDefault();
         setChosenChapter(chapter.content.kilas);
+        window.scrollTo(0, 0);
       }}
       className={btnClass}
     >

@@ -13,6 +13,7 @@ import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 //For email verification
 import { AuthContext } from "../components/Routing/Auth";
+import { beigeColor } from "../styles/Style";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,7 +76,7 @@ export default function VerifyEmail() {
   }
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "130px" }} />
       <Container maxWidth="xs">
         <Paper

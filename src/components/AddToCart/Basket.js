@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // Custom components
 import Typography from "../Typography";
@@ -15,7 +15,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
 
 // Material-UI components
-import { makeStyles, Grid } from "@material-ui/core";
+import { makeStyles, Grid, Paper } from "@material-ui/core";
+import ErrorIcon from "@material-ui/icons/Error";
+import { secondaryColor } from "../../styles/Style";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -25,6 +27,7 @@ export default function Basket({}) {
   const cartItems = useSelector(selectCart).cart;
   const dispatch = useDispatch();
   const { currentUser } = useContext(AuthContext);
+  const [isSubAdded, setIsSubAdded] = useState(false);
 
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
   const totalPrice = Intl.NumberFormat().format(itemsPrice);
@@ -47,15 +50,65 @@ export default function Basket({}) {
     fetchData();
   };
 
+  useEffect(() => {
+    if (cartItems.length == 0) return setIsSubAdded(true);
+
+    cartItems.map((x) => {
+      if (
+        x.book_title == "Subscription 1 Bulan" ||
+        x.book_title == "Subscription 3 Bulan" ||
+        x.book_title == "Subscription 6 Bulan" ||
+        x.book_title == "Subscription 12 Bulan"
+      ) {
+        setIsSubAdded(true);
+      } else {
+        setIsSubAdded(false);
+      }
+    });
+  }, [cartItems]);
+
   return (
     <div>
       <div>
+        {isSubAdded ? (
+          <></>
+        ) : (
+          <div>
+            <Paper
+              style={{ textAlign: "center", padding: "5px" }}
+              elevation={5}
+            >
+              <ErrorIcon
+                fontSize="large"
+                style={{ marginRight: "10px", color: secondaryColor }}
+              />
+              <Typography
+                style={{
+                  textAlign: "center",
+                }}
+                type="italic"
+                size="bold"
+              >
+                Dengan hanya Rp. 1.000/hari, kamu bisa mempunyai akses terhadap
+                semua buku!
+              </Typography>
+              <Button href="/pricing" round fullWidth>
+                Berlanggan sekarang!
+              </Button>
+            </Paper>
+
+            <div style={{ marginBottom: "20px" }} />
+          </div>
+        )}
+
         {cartItems.length === 0 && (
           <Typography type="italic">Your Cart is empty</Typography>
         )}
+
         {cartItems.map((item) => (
           <div key={item.id} className="row">
             <Grid container>
+              <Grid item xs={12}></Grid>
               <Grid item xs={4}>
                 <img
                   src={item.coverLink}

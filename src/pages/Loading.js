@@ -6,11 +6,12 @@ import MultiUseMobile from "../styles/MultiUseMobile";
 
 // Material-UI components
 import { Container, Grid } from "@material-ui/core";
+import { beigeColor } from "../styles/Style";
 
 export default function Loading() {
   const multi = MultiUseMobile();
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       <Container>
         <Grid
           container

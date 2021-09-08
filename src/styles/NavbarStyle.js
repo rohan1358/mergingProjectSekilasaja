@@ -41,8 +41,8 @@ const NavbarStyle = makeStyles((theme) => ({
   },
   divider: {
     color: "#CFCFCF",
-    borderRight: "1px solid",
-    padding: "10px",
+    borderRight: "2px solid",
+    padding: "15px",
     marginRight: "3px",
   },
   drawerTitle: {

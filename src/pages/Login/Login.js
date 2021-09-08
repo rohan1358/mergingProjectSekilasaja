@@ -6,9 +6,13 @@ import Footer from "../../components/Footer";
 import LoginForm from "./LoginForm";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Typography from "../../components/Typography";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 
 // Material-UI components
 import { Container, Paper, makeStyles, Link } from "@material-ui/core";
+import { beigeColor } from "../../styles/Style";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,8 +25,15 @@ export default function LoginPage({ history }) {
   const multi = MultiUseMobile();
 
   return (
-    <div>
-      <NavBar history={history} />
+    <div style={{ backgroundColor: beigeColor }}>
+      <div style={{ marginTop: "100px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
       <div className={multi.extraSpace} />
       <Container maxWidth="xs">
         <Paper className={classes.root}>

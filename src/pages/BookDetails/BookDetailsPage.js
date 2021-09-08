@@ -4,15 +4,18 @@ import React, { useState, useContext, useEffect } from "react";
 import BookDetails from "./BookDetails";
 import TextDetails from "./TextDetails";
 import NavBar from "../../components/NavBar/Navbar";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import Footer from "../../components/Footer";
 import Typography from "../../components/Typography";
-import VideoComponent from "../../components/VideoPlayer/VidPageComponent";
-import AudioPlayer from "../../components/AudioPlayer/AudioPlayer";
+import ReactAudioPlayer from "react-audio-player";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
+import TextReadingStyle from "../../styles/TextReadingStyle";
 
 // Material-UI components
-import { Container, Divider, Grid } from "@material-ui/core";
+import { Container, Divider, Grid, Tabs, makeStyles } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
@@ -33,11 +36,19 @@ import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoB
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
+import { beigeColor } from "../../styles/Style";
 
-const firestore = fire.firestore();
+const useStyles = makeStyles((theme) => ({
+  root: {
+    // display: "flex",
+    overflowY: "scroll",
+    height: 250,
+  },
+}));
 
 export default function BookDetailsPage({ match, history }) {
   const classes = MultiUseMobile();
+  const books = TextReadingStyle();
 
   const { currentUser } = useContext(AuthContext);
   const dispatch = useDispatch();
@@ -188,9 +199,19 @@ export default function BookDetailsPage({ match, history }) {
     fetchData();
   };
 
+  // Scrolled bar
+  const tabs = useStyles();
+
   return (
-    <div>
-      <NavBar history={history} />
+    <div style={{ backgroundColor: beigeColor }}>
+      <div style={{ marginTop: "100px" }} />
+      <Header
+        history={history}
+        rightLinks={<HeaderLinks history={history} />}
+        rightLinksMobile={<HeaderLinksMobile history={history} />}
+        fixed
+        color="white"
+      />
       {!!currentUser ? (
         <div>
           {!!isSubscribed || !!isBookOwned ? (
@@ -228,7 +249,7 @@ export default function BookDetailsPage({ match, history }) {
                                   </Button>
                                 </Grid>
 
-                                <Grid item>
+                                {/* <Grid item>
                                   {isFavorite === false ? (
                                     <Button
                                       onClick={handleAddFavorite}
@@ -244,7 +265,7 @@ export default function BookDetailsPage({ match, history }) {
                                       Remove From Favorites!
                                     </Button>
                                   )}
-                                </Grid>
+                                </Grid> */}
                               </Grid>
                             </div>
 
@@ -265,7 +286,7 @@ export default function BookDetailsPage({ match, history }) {
                                   Watch now!
                                 </Button>
                               </Grid>
-                              <Grid item xs={12}>
+                              {/* <Grid item xs={12}>
                                 {isFavorite === false ? (
                                   <Button
                                     onClick={handleAddFavorite}
@@ -283,7 +304,7 @@ export default function BookDetailsPage({ match, history }) {
                                     Remove From Favorites!
                                   </Button>
                                 )}
-                              </Grid>
+                              </Grid> */}
                             </div>
                           </div>
                         }
@@ -300,34 +321,42 @@ export default function BookDetailsPage({ match, history }) {
                           </Button>
                         }
                         audio={
-                          <div style={{ marginTop: "3px" }}>
-                            <AudioPlayer vidLink={audioLink} />
-                          </div>
+                          <ReactAudioPlayer
+                            className={classes.audioControl}
+                            controlsList="nodownload"
+                            src={audioLink}
+                            controls
+                          />
                         }
                         totalNum={current_product.kilasan.length}
                         kilasTitle={current_product.kilasan[0].title}
                         kilasBody={current_product.kilasan[0].details.map(
                           (paragraph) => (
-                            <Typography className={classes.paragraph}>
+                            <Typography className={books.paragraphBookDetails}>
                               {paragraph}
                             </Typography>
                           )
                         )}
-                        tableOfContents={current_product.kilasan.map(
-                          (kilas, index) => (
-                            <div>
-                              <Typography className={classes.paragraph}>
+                        tableOfContents={
+                          <div className={tabs.root}>
+                            {current_product.kilasan.map((kilas, index) => (
+                              <Typography style={{ textAlign: "left" }}>
                                 {kilas.title === undefined
                                   ? "Ringkasan Akhir"
                                   : "Kilas #" +
                                     (index + 1) +
                                     " : " +
                                     kilas.title}
+                                <Divider
+                                  style={{
+                                    marginTop: "12px",
+                                    marginBottom: "12px",
+                                  }}
+                                />
                               </Typography>
-                              <Divider />
-                            </div>
-                          )
-                        )}
+                            ))}
+                          </div>
+                        }
                       />
                     </Container>
                   )}
@@ -401,6 +430,7 @@ export default function BookDetailsPage({ match, history }) {
                           </div>
                         }
                       />
+
                       <TextDetails
                         video={
                           <Button href="/pricing" color="secondary" fullWidth>
@@ -408,26 +438,31 @@ export default function BookDetailsPage({ match, history }) {
                           </Button>
                         }
                         audio={
-                          <div style={{ marginTop: "3px" }}>
-                            <AudioPlayer vidLink={audioLink} />
-                          </div>
+                          <ReactAudioPlayer
+                            className={classes.audioControl}
+                            controlsList="nodownload"
+                            src={audioLink}
+                            controls
+                          />
                         }
                         totalNum={current_product.kilasan.length}
                         kilasTitle={current_product.kilasan[0].title}
                         kilasBody={
                           <div>
-                            <Typography className={classes.paragraph}>
+                            <Typography className={books.paragraphBookDetails}>
                               {current_product.kilasan[0].details[0]}
                             </Typography>
 
-                            <Typography className={classes.paragraph}>
+                            <Typography className={books.paragraphBookDetails}>
                               {current_product.kilasan[0].details[1]}
                             </Typography>
 
                             {current_product.kilasan[0].details.map(
                               (paragraph) => (
                                 <div className={classes.blur}>
-                                  <Typography className={classes.paragraph}>
+                                  <Typography
+                                    className={books.paragraphBookDetails}
+                                  >
                                     {paragraph ===
                                       current_product.kilasan[0].details[0] ||
                                     paragraph ===
@@ -440,37 +475,43 @@ export default function BookDetailsPage({ match, history }) {
                             )}
                           </div>
                         }
-                        tableOfContents={current_product.kilasan.map(
-                          (kilas, index) => (
-                            <div>
-                              {index < 2 ? (
-                                <div>
-                                  <Typography className={classes.paragraph}>
-                                    {kilas.title === undefined
-                                      ? "Ringkasan Akhir"
-                                      : "Kilas #" +
-                                        (index + 1) +
-                                        " : " +
-                                        kilas.title}
-                                  </Typography>
-                                  <Divider />
-                                </div>
-                              ) : (
-                                <div className={classes.blur}>
-                                  <Typography className={classes.paragraph}>
-                                    {kilas.title === undefined
-                                      ? "Ringkasan Akhir"
-                                      : "Kilas #" +
-                                        (index + 1) +
-                                        " : " +
-                                        kilas.title}
-                                  </Typography>
-                                  <Divider />
-                                </div>
-                              )}
-                            </div>
-                          )
-                        )}
+                        tableOfContents={
+                          <div className={tabs.root}>
+                            {current_product.kilasan.map((kilas, index) => (
+                              <div>
+                                {index < 2 ? (
+                                  <div>
+                                    <Typography
+                                      className={books.paragraphBookDetails}
+                                    >
+                                      {kilas.title === undefined
+                                        ? "Ringkasan Akhir"
+                                        : "Kilas #" +
+                                          (index + 1) +
+                                          " : " +
+                                          kilas.title}
+                                    </Typography>
+                                    <Divider />
+                                  </div>
+                                ) : (
+                                  <div className={classes.blur}>
+                                    <Typography
+                                      className={books.paragraphBookDetails}
+                                    >
+                                      {kilas.title === undefined
+                                        ? "Ringkasan Akhir"
+                                        : "Kilas #" +
+                                          (index + 1) +
+                                          " : " +
+                                          kilas.title}
+                                    </Typography>
+                                    <Divider />
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        }
                       />
                     </Container>
                   )}
@@ -518,6 +559,7 @@ export default function BookDetailsPage({ match, history }) {
                       </div>
                     }
                   />
+
                   <TextDetails
                     video={
                       <Button href="/pricing" color="secondary" fullWidth>
@@ -525,25 +567,28 @@ export default function BookDetailsPage({ match, history }) {
                       </Button>
                     }
                     audio={
-                      <div style={{ marginTop: "3px" }}>
-                        <AudioPlayer vidLink={audioLink} />
-                      </div>
+                      <ReactAudioPlayer
+                        className={classes.audioControl}
+                        controlsList="nodownload"
+                        src={audioLink}
+                        controls
+                      />
                     }
                     totalNum={current_product.kilasan.length}
                     kilasTitle={current_product.kilasan[0].title}
                     kilasBody={
                       <div>
-                        <Typography className={classes.paragraph}>
+                        <Typography className={books.paragraphBookDetails}>
                           {current_product.kilasan[0].details[0]}
                         </Typography>
 
-                        <Typography className={classes.paragraph}>
+                        <Typography className={books.paragraphBookDetails}>
                           {current_product.kilasan[0].details[1]}
                         </Typography>
 
                         {current_product.kilasan[0].details.map((paragraph) => (
                           <div className={classes.blur}>
-                            <Typography className={classes.paragraph}>
+                            <Typography className={books.paragraphBookDetails}>
                               {paragraph ===
                                 current_product.kilasan[0].details[0] ||
                               paragraph ===
@@ -555,37 +600,43 @@ export default function BookDetailsPage({ match, history }) {
                         ))}
                       </div>
                     }
-                    tableOfContents={current_product.kilasan.map(
-                      (kilas, index) => (
-                        <div>
-                          {index < 2 ? (
-                            <div>
-                              <Typography className={classes.paragraph}>
-                                {kilas.title === undefined
-                                  ? "Ringkasan Akhir"
-                                  : "Kilas #" +
-                                    (index + 1) +
-                                    " : " +
-                                    kilas.title}
-                              </Typography>
-                              <Divider />
-                            </div>
-                          ) : (
-                            <div className={classes.blur}>
-                              <Typography className={classes.paragraph}>
-                                {kilas.title === undefined
-                                  ? "Ringkasan Akhir"
-                                  : "Kilas #" +
-                                    (index + 1) +
-                                    " : " +
-                                    kilas.title}
-                              </Typography>
-                              <Divider />
-                            </div>
-                          )}
-                        </div>
-                      )
-                    )}
+                    tableOfContents={
+                      <div className={tabs.root}>
+                        {current_product.kilasan.map((kilas, index) => (
+                          <div>
+                            {index < 2 ? (
+                              <div>
+                                <Typography
+                                  className={books.paragraphBookDetails}
+                                >
+                                  {kilas.title === undefined
+                                    ? "Ringkasan Akhir"
+                                    : "Kilas #" +
+                                      (index + 1) +
+                                      " : " +
+                                      kilas.title}
+                                </Typography>
+                                <Divider />
+                              </div>
+                            ) : (
+                              <div className={classes.blur}>
+                                <Typography
+                                  className={books.paragraphBookDetails}
+                                >
+                                  {kilas.title === undefined
+                                    ? "Ringkasan Akhir"
+                                    : "Kilas #" +
+                                      (index + 1) +
+                                      " : " +
+                                      kilas.title}
+                                </Typography>
+                                <Divider />
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    }
                   />
                 </Container>
               )}

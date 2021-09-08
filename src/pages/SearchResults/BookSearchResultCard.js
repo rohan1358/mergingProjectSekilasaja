@@ -61,7 +61,7 @@ export default function BookSearchResultCard({ product, title, history }) {
           direction="row"
           justifyContent="center"
           alignItems="center"
-          spacing={3}
+          spacing={4}
         >
           <Grid item xs={4}>
             <img

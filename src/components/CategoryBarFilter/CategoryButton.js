@@ -15,7 +15,6 @@ import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import EuroIcon from "@material-ui/icons/Euro";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import ForumIcon from "@material-ui/icons/Forum";
 
 function CategoryButton({
@@ -43,7 +42,7 @@ function CategoryButton({
   function categoryIcon() {
     if (categoryName === "All") return <PresentToAllIcon />;
 
-    if (categoryName === "Business") return <BusinessIcon />;
+    if (categoryName === "Business & Entrepreneurship") return <BusinessIcon />;
 
     if (categoryName === "Personal Development")
       return <AccessibilityNewIcon />;
@@ -56,9 +55,7 @@ function CategoryButton({
 
     if (categoryName === "Communication") return <ForumIcon />;
 
-    if (categoryName === "Investment") return <AccountBalanceIcon />;
-
-    if (categoryName === "Money") return <EuroIcon />;
+    if (categoryName === "Money & Investment") return <EuroIcon />;
   }
 
   return (

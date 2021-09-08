@@ -100,7 +100,8 @@ const AudioControls = forwardRef(
       onChangeDispayFormat,
       playbackRate,
       onPlaybackRateChange,
-      button,
+      buttonNext,
+      buttonPrev,
     },
     ref
   ) => {
@@ -119,94 +120,109 @@ const AudioControls = forwardRef(
     const id = open ? "simple-popover" : undefined;
 
     return (
-      <Grid container direction="row" alignItems="center">
-        <Grid item xs={2}>
-          <IconButton onClick={onPlayPause} className={classes.bottomIcons}>
-            {playing ? <PauseIcon /> : <PlayArrowIcon />}
-          </IconButton>
-        </Grid>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+      >
+        <Grid
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+          item
+          xs={12}
+        >
+          <div style={{ padding: "5px" }}>{buttonPrev}</div>
 
-        <Grid item xs={3}>
-          <PrettoSlider
-            className={classes.primaryCol}
-            min={0}
-            max={100}
-            ValueLabelComponent={(props) => (
-              <ValueLabelComponent {...props} value={elapsedTime} />
-            )}
-            aria-label="custom thumb label"
-            value={played * 100}
-            onChange={onSeek}
-            onMouseDown={onSeekMouseDown}
-            onChangeCommitted={onSeekMouseUp}
-            onDuration={onDuration}
-          />
-        </Grid>
+          <div style={{ padding: "5px" }}>
+            <IconButton onClick={onPlayPause} className={classes.bottomIcons}>
+              {playing ? <PauseIcon /> : <PlayArrowIcon />}
+            </IconButton>
+          </div>
 
-        <Grid item xs={4}>
-          <Link
-            className={multi.link}
-            underline="none"
-            onClick={onChangeDispayFormat}
-          >
-            <Typography
-              className={classes.bottomIcons}
-              style={{ marginLeft: 16 }}
+          <div style={{ width: "100%", maxWidth: "700px", padding: "3px" }}>
+            <PrettoSlider
+              className={classes.primaryCol}
+              min={0}
+              max={100}
+              ValueLabelComponent={(props) => (
+                <ValueLabelComponent {...props} value={elapsedTime} />
+              )}
+              aria-label="custom thumb label"
+              value={played * 100}
+              onChange={onSeek}
+              onMouseDown={onSeekMouseDown}
+              onChangeCommitted={onSeekMouseUp}
+              onDuration={onDuration}
+            />
+          </div>
+
+          <div style={{ padding: "5px" }}>
+            <Link
+              className={multi.link}
+              underline="none"
+              onClick={onChangeDispayFormat}
             >
-              {elapsedTime}/{totalDuration}
-            </Typography>
-          </Link>
-        </Grid>
+              <Typography
+                className={classes.bottomIcons}
+                style={{ marginLeft: 16 }}
+              >
+                {elapsedTime}/{totalDuration}
+              </Typography>
+            </Link>
+          </div>
 
-        <Grid item xs={2}>
-          <Link
-            className={multi.link}
-            underline="none"
-            onClick={handleClick}
-            aria-describedby={id}
-            variant="text"
-          >
-            <Typography className={classes.bottomIcons}>
-              {playbackRate}x
-            </Typography>
-          </Link>
+          <div style={{ padding: "5px" }}>
+            <Link
+              className={multi.link}
+              underline="none"
+              onClick={handleClick}
+              aria-describedby={id}
+              variant="text"
+            >
+              <Typography className={classes.bottomIcons}>
+                {playbackRate}x
+              </Typography>
+            </Link>
 
-          <Popover
-            open={open}
-            id={id}
-            onClose={handleClose}
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-          >
-            <Grid container direction="column-reverse">
-              {[0.5, 1, 1.25, 1.5, 2].map((rate) => (
-                <Link
-                  className={multi.link}
-                  underline="none"
-                  key={rate}
-                  onClick={() => onPlaybackRateChange(rate)}
-                >
-                  <Typography
-                    style={{ padding: "10px" }}
-                    className={classes.textTransformNormal}
+            <Popover
+              open={open}
+              id={id}
+              onClose={handleClose}
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              transformOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+            >
+              <Grid container direction="column-reverse">
+                {[0.5, 1, 1.25, 1.5, 2].map((rate) => (
+                  <Link
+                    className={multi.link}
+                    underline="none"
+                    key={rate}
+                    onClick={() => onPlaybackRateChange(rate)}
                   >
-                    {rate}x
-                  </Typography>
-                </Link>
-              ))}
-            </Grid>
-          </Popover>
-        </Grid>
+                    <Typography
+                      style={{ padding: "10px" }}
+                      className={classes.textTransformNormal}
+                    >
+                      {rate}x
+                    </Typography>
+                  </Link>
+                ))}
+              </Grid>
+            </Popover>
+          </div>
 
-        <Grid item xs={1}>
-          {button}
+          <div style={{ padding: "5px" }}>{buttonNext}</div>
         </Grid>
       </Grid>
     );

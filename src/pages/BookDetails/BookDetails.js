@@ -1,19 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 // @material-ui/core components
-import {
-  makeStyles,
-  Grid,
-  Divider,
-  Container,
-  ButtonBase,
-} from "@material-ui/core";
-import {
-  ImportContacts,
-  EmojiObjects,
-  PlayArrow,
-  Videocam,
-} from "@material-ui/icons";
+import { makeStyles, Grid, Divider, Tooltip } from "@material-ui/core";
+import { ImportContacts, EmojiObjects, Videocam } from "@material-ui/icons";
 
 // Custom components
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
@@ -53,9 +42,9 @@ export default function BookDetails(props) {
       <div>
         <div className={classes.bookDetailsWidth}>
           <div className={desktopClass}>
-            <Grid container>
+            <Grid container spacing={5}>
               <Grid item xs={12}>
-                <div className={mobile.extraSpace} />
+                <div style={{ marginTop: "5px" }} />
               </Grid>
 
               <Grid item xs={9}>
@@ -70,17 +59,77 @@ export default function BookDetails(props) {
 
                   <div className={classes.kilasDesc}>
                     <div className={classes.kilasDesc}>
-                      <ImportContacts className={classes.logo} />
+                      <Tooltip
+                        title={
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              fontSize: "14px",
+                              lineHeight: "20px",
+                            }}
+                          >
+                            <ImportContacts
+                              fontSize="large"
+                              style={{ marginRight: "10px" }}
+                            />
+                            Perkiraan waktu yang dibutuhkan untuk membaca kilas
+                          </div>
+                        }
+                        placement="top"
+                      >
+                        <ImportContacts className={classes.logo} />
+                      </Tooltip>
                       <Typography type="bold">{readTime} Menit</Typography>
                     </div>
 
                     <div className={classes.kilasDesc}>
-                      <Videocam className={classes.logo} />
+                      <Tooltip
+                        title={
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              fontSize: "14px",
+                              lineHeight: "20px",
+                            }}
+                          >
+                            <Videocam
+                              fontSize="large"
+                              style={{ marginRight: "10px" }}
+                            />
+                            Waktu yang dibutuhkan untuk menonton video kilas
+                          </div>
+                        }
+                        placement="top"
+                      >
+                        <Videocam className={classes.logo} />
+                      </Tooltip>
                       <Typography type="bold">{watchTime} Menit</Typography>
                     </div>
 
                     <div className={classes.kilasDesc}>
-                      <EmojiObjects className={classes.logo} />
+                      <Tooltip
+                        title={
+                          <div
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              fontSize: "14px",
+                              lineHeight: "20px",
+                            }}
+                          >
+                            <EmojiObjects
+                              fontSize="large"
+                              style={{ marginRight: "10px" }}
+                            />
+                            Total kilas (bab) yang ada di setiap rangkuman
+                          </div>
+                        }
+                        placement="top"
+                      >
+                        <EmojiObjects className={classes.logo} />
+                      </Tooltip>
                       <Typography type="bold">{num} Kilas</Typography>
                     </div>
 
@@ -94,12 +143,13 @@ export default function BookDetails(props) {
 
                   <Typography type="bold">{descriptionTitle}</Typography>
                   <Typography>{description}</Typography>
+
+                  <div style={{ marginTop: "40px" }} />
+                  {buttons}
                 </div>
               </Grid>
 
-              <Grid item xs={1} />
-
-              <Grid item xs={2}>
+              <Grid item xs={3}>
                 <img
                   src={cover}
                   className={
@@ -107,15 +157,13 @@ export default function BookDetails(props) {
                     " " +
                     classes.imgFluid +
                     " " +
-                    classes.imgBookCover
+                    classes.imgBookDetailsCover
                   }
                 />
               </Grid>
 
-              {buttons}
-
               <Grid item xs={12}>
-                <div className={mobile.extraSpace} />
+                <div style={{ marginTop: "7px" }} />
               </Grid>
             </Grid>
           </div>
@@ -131,7 +179,7 @@ export default function BookDetails(props) {
                   " " +
                   classes.imgFluid +
                   " " +
-                  classes.imgBookCover
+                  classes.imgBookDetailsCover
                 }
               />
             </Grid>
@@ -148,17 +196,77 @@ export default function BookDetails(props) {
 
                 <div className={classes.kilasDescMobile}>
                   <div className={classes.kilasDescMobileCenter}>
-                    <ImportContacts className={classes.logo} />
+                    <Tooltip
+                      title={
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            fontSize: "14px",
+                            lineHeight: "20px",
+                          }}
+                        >
+                          <ImportContacts
+                            fontSize="large"
+                            style={{ marginRight: "10px" }}
+                          />
+                          Perkiraan waktu yang dibutuhkan untuk membaca kilas
+                        </div>
+                      }
+                      placement="top"
+                    >
+                      <ImportContacts className={classes.logo} />
+                    </Tooltip>
                     <Typography type="bold">{readTime} Menit</Typography>
                   </div>
 
                   <div className={classes.kilasDescMobileCenter}>
-                    <Videocam className={classes.logo} />
+                    <Tooltip
+                      title={
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            fontSize: "14px",
+                            lineHeight: "20px",
+                          }}
+                        >
+                          <Videocam
+                            fontSize="large"
+                            style={{ marginRight: "10px" }}
+                          />
+                          Waktu yang dibutuhkan untuk menonton video kilas
+                        </div>
+                      }
+                      placement="top"
+                    >
+                      <Videocam className={classes.logo} />
+                    </Tooltip>
                     <Typography type="bold">{watchTime} Menit</Typography>
                   </div>
 
                   <div className={classes.kilasDescMobileCenter}>
-                    <EmojiObjects className={classes.logo} />
+                    <Tooltip
+                      title={
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            fontSize: "14px",
+                            lineHeight: "20px",
+                          }}
+                        >
+                          <EmojiObjects
+                            fontSize="large"
+                            style={{ marginRight: "10px" }}
+                          />
+                          Total kilas (bab) yang ada di setiap rangkuman
+                        </div>
+                      }
+                      placement="top"
+                    >
+                      <EmojiObjects className={classes.logo} />
+                    </Tooltip>
                     <Typography type="bold">{num} Kilas</Typography>
                   </div>
 
@@ -174,6 +282,7 @@ export default function BookDetails(props) {
                 <Typography>{description}</Typography>
 
                 {buttons}
+                <div style={{ marginTop: "20px" }} />
               </div>
             </Grid>
 

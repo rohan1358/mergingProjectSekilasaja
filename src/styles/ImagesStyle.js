@@ -1,4 +1,23 @@
 const ImagesStyle = {
+  imgBestValue: {
+    maxWidth: "100px",
+    width: "100%",
+  },
+  imgLogoText: {
+    width: "220px",
+    padding: "10px",
+  },
+  imgHomePNG: {
+    display: "flex",
+    maxWidth: "400px",
+    width: "100%",
+  },
+  imgWhatsappLogo: {
+    width: "60px",
+    "&:hover": {
+      filter: "brightness(150%)",
+    },
+  },
   imgFluid: {
     maxWidth: "100%",
     height: "auto",
@@ -44,9 +63,19 @@ const ImagesStyle = {
     width: "100%",
     maxWidth: "200px",
   },
+  imgBookDetailsCover: {
+    marginTop: "10px",
+    width: "100%",
+    maxWidth: "250px",
+  },
   imgHomeBook: {
     width: "100%",
-    maxWidth: "500px",
+    maxWidth: "170px",
+    padding: "5px",
+    transition: "transform .2s",
+    "&:hover": {
+      transform: "scale(1.5)",
+    },
   },
   videoWidth: {
     marginTop: "20px",
