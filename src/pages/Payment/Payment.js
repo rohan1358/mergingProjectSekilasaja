@@ -12,6 +12,7 @@ import PaymentStyle from "../../styles/PaymentStyle";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
+import Loading from "../Loading";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -58,6 +59,8 @@ export default function Payment({ history }) {
   const styles = useStyles();
   const [value, setValue] = useState("female");
 
+  const [pending, setPending] = useState(false);
+
   const handleRadioChange = (event) => {
     setValue(event.target.value);
   };
@@ -89,6 +92,7 @@ export default function Payment({ history }) {
   );
   const [promoAdded, setPromoAdded] = useState(false);
   const [isSubAdded, setIsSubAdded] = useState(false);
+  const [isEmailSent, setIsEmailSent] = useState(false);
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
@@ -162,7 +166,16 @@ export default function Payment({ history }) {
   };
 
   const handleChange = (e) => {
-    setFile(e.target.files[0]);
+    //Check if file size exceeds 2mb or not
+    setFileError("");
+    var fsize = e.target.files[0].size;
+    var convertedFileSize = Math.round((fsize/1024));
+    if (convertedFileSize >= 2048) {
+      e.target.value = '';
+      return setFileError("File yang diupload melebihi 2mb, tolong upload ulang!");
+    } else {
+      setFile(e.target.files[0]);
+    }
   };
 
   // function to handle modal open for login
@@ -171,6 +184,7 @@ export default function Payment({ history }) {
     setFileError("");
     setCartError("");
     setNamaBankError("");
+    setIsEmailSent(false);
 
     // See if any input values are empty (ALL REQUIRED TO BE FILLED!)
     if (namaDiRekening.length === 0) {
@@ -189,6 +203,7 @@ export default function Payment({ history }) {
       return setFileError("Tolong upload image bukti pembayaran!");
     }
 
+    setPending(true);
     //Put payment information into firestore storage and database
     var image_url = await firebaseUploadPaymentInfo.uploadPaymentInfo(
       userData,
@@ -214,10 +229,12 @@ export default function Payment({ history }) {
 
     //Send email notification
     await emailService.sendPaymentNotification(userData, image_url);
-    history.push("/payment-success");
-  };
 
-  // console.log(promoCode);
+    if(image_url){
+      setPending(false);
+      setIsEmailSent(true);
+    }
+  };
 
   // Image Preview bukti pembayaran
   const [open, setOpen] = useState(false);
@@ -228,6 +245,11 @@ export default function Payment({ history }) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  //Go to payment success page if succeeded in uploading to firebase and send email notification
+  if (isEmailSent && !pending) {
+    history.push("/payment-success");
+  }
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
