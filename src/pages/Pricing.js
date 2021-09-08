@@ -481,24 +481,19 @@ export default function PricingPage({ match, history }) {
                         type="subheading"
                         style={{ fontSize: "20px" }}
                       >
-                        Rp. 15.000
+                        Rp. 25.000
                       </Typography>
-                      <Typography type="italic">/kilas</Typography>
-                    </div>
-                    <div style={{ textAlign: "center" }}>
-                      <Typography style={{ fontSize: "13px" }}>
-                        ✔ Loren ipsum bada cara tana opseum ipun.
-                      </Typography>
-                      <Typography style={{ fontSize: "13px" }}>
-                        ✔ Loren ipsum bada cara tana opseum ipun.
-                      </Typography>
-                      <Typography style={{ fontSize: "13px" }}>
-                        ✔ Loren ipsum bada cara tana opseum ipun.
-                      </Typography>
+                      <Typography type="italic">/Kilas</Typography>
                     </div>
                   </CardContent>
                   <CardActions>
-                    <Button href="/library" round fullWidth color="secondary">
+                    <Button
+                      style={{ marginTop: "-30px" }}
+                      href="/library"
+                      round
+                      fullWidth
+                      color="secondary"
+                    >
                       Beli Sekarang!
                     </Button>
                   </CardActions>
@@ -632,47 +627,25 @@ export default function PricingPage({ match, history }) {
                     justifyContent="flex-end"
                     spacing={3}
                   >
-                    <Grid item xs={3}>
+                    <Grid item xs={12}>
                       <div
                         style={{
                           alignItems: "center",
+                          display: "flex",
+                          justifyContent: "center",
                         }}
                       >
                         <Typography
                           type="subheading"
-                          style={{ fontSize: "20px", marginBottom: "0" }}
+                          style={{ fontSize: "20px" }}
                         >
-                          Rp. 15.000
+                          Rp. 25.000
                         </Typography>
-                        <Typography type="italic">/kilas</Typography>
+                        <Typography type="italic">/Kilas</Typography>
                       </div>
-                    </Grid>
-                    <Grid item xs={1}>
-                      <div
-                        style={{
-                          borderRight: "1px solid #41444b",
-                          height: "170px",
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={8}>
-                      {/* <Divider orientation="vertical" /> */}
+
                       <div>
-                        <Typography style={{ fontSize: "13px" }}>
-                          ✔ Loren ipsum bada cara tana opseum ipun.
-                        </Typography>
-                        <Typography style={{ fontSize: "13px" }}>
-                          ✔ Loren ipsum bada cara tana opseum ipun.
-                        </Typography>
-                        <Typography style={{ fontSize: "13px" }}>
-                          ✔ Loren ipsum bada cara tana opseum ipun.
-                        </Typography>
-                        <Button
-                          href="/library"
-                          round
-                          fullWidth
-                          color="secondary"
-                        >
+                        <Button href="/login" round fullWidth color="secondary">
                           Beli Sekarang!
                         </Button>
                       </div>
@@ -822,24 +795,19 @@ export default function PricingPage({ match, history }) {
                         type="subheading"
                         style={{ fontSize: "20px" }}
                       >
-                        Rp. 15.000
+                        Rp. 25.000
                       </Typography>
-                      <Typography type="italic">/kilas</Typography>
-                    </div>
-                    <div style={{ textAlign: "center" }}>
-                      <Typography style={{ fontSize: "13px" }}>
-                        ✔ Loren ipsum bada cara tana opseum ipun.
-                      </Typography>
-                      <Typography style={{ fontSize: "13px" }}>
-                        ✔ Loren ipsum bada cara tana opseum ipun.
-                      </Typography>
-                      <Typography style={{ fontSize: "13px" }}>
-                        ✔ Loren ipsum bada cara tana opseum ipun.
-                      </Typography>
+                      <Typography type="italic">/Kilas</Typography>
                     </div>
                   </CardContent>
                   <CardActions>
-                    <Button href="/login" round fullWidth color="secondary">
+                    <Button
+                      style={{ marginTop: "-30px" }}
+                      href="/login"
+                      round
+                      fullWidth
+                      color="secondary"
+                    >
                       Beli Sekarang!
                     </Button>
                   </CardActions>
@@ -976,46 +944,31 @@ export default function PricingPage({ match, history }) {
                     justifyContent="flex-end"
                     spacing={3}
                   >
-                    <Grid item xs={3}>
+                    <Grid item xs={12}>
                       <div
                         style={{
                           alignItems: "center",
+                          display: "flex",
+                          justifyContent: "center",
                         }}
                       >
                         <Typography
                           type="subheading"
-                          style={{ fontSize: "20px", marginBottom: "0" }}
+                          style={{ fontSize: "20px" }}
                         >
-                          Rp. 15.000
+                          Rp. 25.000
                         </Typography>
-                        <Typography type="italic">/kilas</Typography>
+                        <Typography type="italic">/Kilas</Typography>
                       </div>
                     </Grid>
-                    <Grid item xs={1}>
+                    {/* <Grid item xs={1}>
                       <div
                         style={{
                           borderRight: "1px solid #41444b",
                           height: "170px",
                         }}
                       />
-                    </Grid>
-                    <Grid item xs={8}>
-                      {/* <Divider orientation="vertical" /> */}
-                      <div>
-                        <Typography style={{ fontSize: "13px" }}>
-                          ✔ Loren ipsum bada cara tana opseum ipun.
-                        </Typography>
-                        <Typography style={{ fontSize: "13px" }}>
-                          ✔ Loren ipsum bada cara tana opseum ipun.
-                        </Typography>
-                        <Typography style={{ fontSize: "13px" }}>
-                          ✔ Loren ipsum bada cara tana opseum ipun.
-                        </Typography>
-                        <Button href="/login" round fullWidth color="secondary">
-                          Beli Sekarang!
-                        </Button>
-                      </div>
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                 </Card>
               </Grid>

@@ -89,7 +89,7 @@ export default function Basket({}) {
                 type="italic"
                 size="bold"
               >
-                Dengan hanya Rp. 1.000/hari, kamu bisa mempunyai akses terhadap
+                Dengan hanya Rp. 1.000/hari, Kamu bisa memiliki akses untuk
                 semua buku!
               </Typography>
               <Button href="/pricing" round fullWidth>

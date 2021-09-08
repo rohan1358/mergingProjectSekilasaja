@@ -169,10 +169,12 @@ export default function Payment({ history }) {
     //Check if file size exceeds 2mb or not
     setFileError("");
     var fsize = e.target.files[0].size;
-    var convertedFileSize = Math.round((fsize/1024));
+    var convertedFileSize = Math.round(fsize / 1024);
     if (convertedFileSize >= 2048) {
-      e.target.value = '';
-      return setFileError("File yang diupload melebihi 2mb, tolong upload ulang!");
+      e.target.value = "";
+      return setFileError(
+        "File yang diupload melebihi 2mb, tolong upload ulang!"
+      );
     } else {
       setFile(e.target.files[0]);
     }
@@ -230,7 +232,7 @@ export default function Payment({ history }) {
     //Send email notification
     await emailService.sendPaymentNotification(userData, image_url);
 
-    if(image_url){
+    if (image_url) {
       setPending(false);
       setIsEmailSent(true);
     }
@@ -288,8 +290,8 @@ export default function Payment({ history }) {
                         fontSize="large"
                         style={{ marginRight: "10px" }}
                       />
-                      Dengan hanya Rp. 1.000/hari, kamu bisa mempunyai akses
-                      terhadap semua buku!
+                      Dengan hanya Rp. 1.000/hari, Kamu bisa memiliki akses
+                      untuk semua buku!
                     </Typography>
                     <Button href="/pricing" round fullWidth>
                       Berlanggan sekarang!
@@ -584,8 +586,8 @@ export default function Payment({ history }) {
                         fontSize="large"
                         style={{ marginRight: "10px" }}
                       />
-                      Dengan hanya Rp. 1.000/hari, kamu bisa mempunyai akses
-                      terhadap semua buku!
+                      Dengan hanya Rp. 1.000/hari, Kamu bisa memiliki akses
+                      untuk semua buku!
                     </Typography>
                     <Button href="/pricing" round fullWidth>
                       Berlanggan sekarang!
