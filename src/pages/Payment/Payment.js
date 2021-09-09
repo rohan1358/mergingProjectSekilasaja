@@ -230,7 +230,8 @@ export default function Payment({ history }) {
       namaBank,
       nomorRekening,
       namaDiRekening,
-      promoCodeData
+      promoCodeData,
+      discountAmount
     );
 
     firestore.collection("users").doc(currentUser.uid).update({
