@@ -13,9 +13,9 @@ const tagManagerArgs = {
 
 TagManager.initialize(tagManagerArgs);
 
-document.addEventListener("contextmenu", function (e) {
-  e.preventDefault();
-});
+// document.addEventListener("contextmenu", function (e) {
+//   e.preventDefault();
+// });
 
 ReactDOM.render(
   <React.StrictMode>
