@@ -62,7 +62,8 @@ export default function PaymentSuccess() {
 
           <Typography>
             Mohon menunggu 1x24 jam untuk order kamu diproses dan direview oleh
-            tim kami. Jika ada pertanyaan silahkan email ke hi@sekilasaja.com.
+            tim kami. Jika belum aktif setelah 1x24 jam, silahkan hubungi
+            customer service kami!
           </Typography>
 
           <div className={multi.extraSpace} />
