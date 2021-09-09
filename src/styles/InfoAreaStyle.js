@@ -11,12 +11,14 @@ import {
 const InfoStyle = {
   buttonAddedHoverPos: {
     position: "absolute",
-    top: 270,
+    // top: 270,
+    marginTop: 250,
     marginLeft: 115,
   },
   buttonHoverPos: {
     position: "absolute",
-    top: 270,
+    // top: 270,
+    marginTop: 250,
     marginLeft: 145,
   },
   mobileButtonPos: {

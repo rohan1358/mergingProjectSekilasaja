@@ -244,16 +244,16 @@ export default function Payment({ history }) {
       });
     }
 
-    //Send email notification
-    await emailService.sendPaymentNotification(
-      userData,
-      image_url,
-      namaBank,
-      namaDiRekening,
-      nomorRekening,
-      promoCodeData,
-      cartItems
-    );
+    // //Send email notification
+    // await emailService.sendPaymentNotification(
+    //   userData,
+    //   image_url,
+    //   namaBank,
+    //   namaDiRekening,
+    //   nomorRekening,
+    //   promoCodeData,
+    //   cartItems
+    // );
 
     if (image_url) {
       setPending(false);
@@ -446,11 +446,7 @@ export default function Payment({ history }) {
                 <div style={{ marginTop: "20px" }} />
 
                 <Typography size="subheading">3. Payment</Typography>
-                {fileError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{fileError}</Alert>
-                  </div>
-                )}
+
                 {namaBankError && (
                   <div className={classes.alertRoot}>
                     <Alert severity="error">{namaBankError}</Alert>
@@ -563,6 +559,12 @@ export default function Payment({ history }) {
                 <Typography style={{ marginTop: "20px" }} size="subheading">
                   4. Lampirkan Bukti Pembayaran
                 </Typography>
+
+                {fileError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{fileError}</Alert>
+                  </div>
+                )}
 
                 <TextField
                   required
@@ -744,11 +746,7 @@ export default function Payment({ history }) {
                 <div style={{ marginTop: "20px" }} />
 
                 <Typography size="subheading">3. Payment</Typography>
-                {fileError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{fileError}</Alert>
-                  </div>
-                )}
+
                 {namaBankError && (
                   <div className={classes.alertRoot}>
                     <Alert severity="error">{namaBankError}</Alert>
@@ -862,6 +860,11 @@ export default function Payment({ history }) {
                 <Typography style={{ marginTop: "20px" }} size="subheading">
                   4. Lampirkan Bukti Pembayaran
                 </Typography>
+                {fileError && (
+                  <div className={classes.alertRoot}>
+                    <Alert severity="error">{fileError}</Alert>
+                  </div>
+                )}
 
                 <TextField
                   required
