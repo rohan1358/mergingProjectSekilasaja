@@ -163,7 +163,7 @@ export default function Payment({ history }) {
             setPromoCode(results);
             setPromoCodeData(results[0].code);
           } else {
-            setPromoError("Kamu tidak mengisi kode promo apapun!");
+            setPromoError("Tidak ditemukan kode promo!");
             setPromoCodeData("");
           }
         } else {
@@ -673,6 +673,18 @@ export default function Payment({ history }) {
                     </Typography>
                   </div>
                 ))}
+                {!!promoAdded ? (
+                  <div>
+                    <Typography type="italic" size="bold" color="dangerColor">
+                      Pemotongan dari kode promo
+                    </Typography>
+                    <Typography type="italic" size="bold" color="dangerColor">
+                      - Rp. {Intl.NumberFormat().format(-1 * discountAmount)}
+                    </Typography>
+                  </div>
+                ) : (
+                  <></>
+                )}
 
                 <div className={classes.extraSpace} />
                 {promoError && (
@@ -680,6 +692,7 @@ export default function Payment({ history }) {
                     <Alert severity="error">{promoError}</Alert>
                   </div>
                 )}
+
                 <div className={classes.spaceBetween}>
                   <TextField
                     style={{ marginRight: "5px" }}
@@ -687,6 +700,7 @@ export default function Payment({ history }) {
                     label="Kode Promo"
                     variant="filled"
                     fullWidth
+                    inputRef={promoCodeRef}
                   />
                   {!!promoAdded ? (
                     <Button color="gray">✔ Applied</Button>
