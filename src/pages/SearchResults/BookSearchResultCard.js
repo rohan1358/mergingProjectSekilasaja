@@ -80,7 +80,7 @@ export default function BookSearchResultCard({ product, title, history }) {
             <Typography size="subheading">{title}</Typography>
             <Typography type="italic">{product.author}</Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {product.description}
+              {product.short_desc}
             </Typography>
           </Grid>
         </Grid>
