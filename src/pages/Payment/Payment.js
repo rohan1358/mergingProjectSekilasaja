@@ -149,14 +149,22 @@ export default function Payment({ history }) {
   };
 
   const handleApplyPromo = () => {
-    // console.log(promoCodeRef.current.value);
+    //console.log(promoCodeRef.current.value);
     if (currentUser !== null) {
       const fetchData = async () => {
+        var promoCodeUsed = '';
+        if (promoCode.length > 0) {
+          promoCodeUsed = promoCode;
+        } else {
+          promoCodeUsed = promoCodeRef.current.value;
+        }
+        console.log(promoCodeUsed);
         const results = await firebaseGetPromoCode.getPromoCode(
-          promoCodeRef.current.value
+          promoCodeUsed
         );
         if (results.length != 0) {
           if (results[0].code != "") {
+            console.log("HERE!");
             setPromoError("");
             setDiscountAmount(-1 * results[0].amount);
             setPromoAdded(true);
@@ -387,6 +395,7 @@ export default function Payment({ history }) {
                     label="Kode Promo"
                     variant="filled"
                     fullWidth
+                    onChange={(e) => setPromoCode(e.target.value)}
                     inputRef={promoCodeRef}
                   />
                   {!!promoAdded ? (
