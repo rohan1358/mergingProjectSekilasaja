@@ -18,6 +18,7 @@ import Library from "./pages/Library/Library";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
 import VerifyEmail from "./pages/VerifyEmail";
+import HomeTwo from "./pages/Home/HomeTwo";
 import NewWebLanding from "./pages/NewWebLanding";
 
 // Routing componentns
@@ -65,6 +66,7 @@ function App() {
             component={BookDetailsPage}
           />
           <Route exact path="/" component={Home} />
+          <Route exact path="/home" component={HomeTwo} />
           <Route component={FourOFourPage} />
           {/* <Route component={NewWebLanding} /> */}
         </Switch>
