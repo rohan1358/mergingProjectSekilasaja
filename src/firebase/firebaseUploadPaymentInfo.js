@@ -16,7 +16,8 @@ export async function uploadPaymentInfo(
   namaBank,
   nomorRekening,
   namaDiRekening,
-  kodePromo
+  kodePromo,
+  discountAmount
 ) {
   try {
     //Get total cost and items from cart items
@@ -27,6 +28,9 @@ export async function uploadPaymentInfo(
       items.push(book);
       total_cost += item.price;
     });
+
+    //Decrease total cost by promo amount (add because discount amount is negative value)
+    total_cost = total_cost + discountAmount;
 
     //Get today's date for payment date
     const today = new Date(); //Date of payment
@@ -108,7 +112,7 @@ export async function uploadPaymentInfo(
       nama_bank: namaBank,
       akun_telegram: akunTelegram,
       kode_promo: kodePromo,
-      // type: "test",
+      promo_discount_amount: discountAmount,
     });
 
     //Put reference into payments array of user data
