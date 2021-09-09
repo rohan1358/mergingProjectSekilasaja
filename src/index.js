@@ -5,10 +5,17 @@ import { Provider } from "react-redux";
 import store, { persistor } from "./app/store";
 import reportWebVitals from "./reportWebVitals";
 import { PersistGate } from "redux-persist/integration/react";
+import TagManager from "react-gtm-module";
 
-// document.addEventListener("contextmenu", function (e) {
-//   e.preventDefault();
-// });
+const tagManagerArgs = {
+  gtmId: "GTM-5CD4PVH",
+};
+
+TagManager.initialize(tagManagerArgs);
+
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+});
 
 ReactDOM.render(
   <React.StrictMode>
