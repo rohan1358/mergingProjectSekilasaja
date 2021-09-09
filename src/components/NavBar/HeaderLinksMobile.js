@@ -117,7 +117,7 @@ export default function HeaderLinksMobile({ history }) {
           <ListItem className={header.listItem}>
             <Button onClick={goToPricing} round color="transparent">
               <div style={{ color: secondaryColor }}>
-                <MonetizationOnIcon /> Pricing
+                <MonetizationOnIcon /> Harga
               </div>
             </Button>
           </ListItem>

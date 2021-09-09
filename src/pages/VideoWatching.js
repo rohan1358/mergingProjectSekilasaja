@@ -44,6 +44,17 @@ export default function VideoWatchingPage({ match, history }) {
       return <Redirect to="/verify-email" />;
     }
 
+    if (currentUser !== null) {
+      const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
+      const fetchData = async () => {
+        const results = await getUser;
+        setUserData(results);
+      };
+      fetchData();
+    } else {
+      console.log("You are not logged in!");
+    }
+
     const fetchData = async () => {
       const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
         match.params.book_title
@@ -56,17 +67,6 @@ export default function VideoWatchingPage({ match, history }) {
       });
     };
     fetchData();
-
-    if (currentUser !== null) {
-      const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
-      const fetchData = async () => {
-        const results = await getUser;
-        setUserData(results);
-      };
-      fetchData();
-    } else {
-      console.log("You are not logged in!");
-    }
 
     if (!userData.is_subscribed) {
       if (!isBookOwned) {

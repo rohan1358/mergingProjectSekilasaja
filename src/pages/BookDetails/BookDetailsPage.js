@@ -502,6 +502,10 @@ export default function BookDetailsPage({ match, history }) {
                               {current_product.kilasan[0].details[1]}
                             </Typography>
 
+                            <Typography className={books.paragraphBookDetails}>
+                              {current_product.kilasan[0].details[2]}
+                            </Typography>
+
                             <div
                               style={{
                                 display: "flex",
@@ -522,7 +526,9 @@ export default function BookDetailsPage({ match, history }) {
                                     {paragraph ===
                                       current_product.kilasan[0].details[0] ||
                                     paragraph ===
-                                      current_product.kilasan[0].details[1]
+                                      current_product.kilasan[0].details[1] ||
+                                    paragraph ===
+                                      current_product.kilasan[0].details[2]
                                       ? ""
                                       : paragraph}
                                   </Typography>
@@ -649,6 +655,10 @@ export default function BookDetailsPage({ match, history }) {
                           {current_product.kilasan[0].details[1]}
                         </Typography>
 
+                        <Typography className={books.paragraphBookDetails}>
+                          {current_product.kilasan[0].details[2]}
+                        </Typography>
+
                         <div
                           style={{
                             display: "flex",
@@ -666,7 +676,9 @@ export default function BookDetailsPage({ match, history }) {
                               {paragraph ===
                                 current_product.kilasan[0].details[0] ||
                               paragraph ===
-                                current_product.kilasan[0].details[1]
+                                current_product.kilasan[0].details[1] ||
+                              paragraph ===
+                                current_product.kilasan[0].details[2]
                                 ? ""
                                 : paragraph}
                             </Typography>

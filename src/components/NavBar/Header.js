@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Logo from "../../images/dark-logo.png";
 
 // nodejs library that concatenates classes
@@ -25,13 +25,17 @@ import SearchBarDrawer from "../SearchBar/SearchBarDrawer";
 import { secondaryColor, beigeColor } from "../../styles/Style";
 import CartDrawer from "../../components/Drawer";
 
-//Redux
+// Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
+
+// User
+import { AuthContext } from "../Routing/Auth";
 
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
+  const { currentUser } = useContext(AuthContext);
   const classes = useStyles();
   const nav = NavbarStyle();
 
@@ -116,17 +120,21 @@ export default function Header(props) {
             history={history}
             logo={<SearchIcon style={{ color: secondaryColor }} />}
           />
-          <CartDrawer
-            direction={"right"}
-            drawerLogo={<ShoppingCartIcon className={nav.hugeIcon} />}
-            drawerTitle={"Your Cart"}
-            logo={
-              <Badge badgeContent={cart.length} color="error">
-                <ShoppingCartIcon className={nav.iconColor} />
-              </Badge>
-            }
-            childrenCart={<Basket />}
-          />
+          {!!currentUser ? (
+            <CartDrawer
+              direction={"right"}
+              drawerLogo={<ShoppingCartIcon className={nav.hugeIcon} />}
+              drawerTitle={"Your Cart"}
+              logo={
+                <Badge badgeContent={cart.length} color="error">
+                  <ShoppingCartIcon className={nav.iconColor} />
+                </Badge>
+              }
+              childrenCart={<Basket />}
+            />
+          ) : (
+            <></>
+          )}
           <IconButton
             style={{ color: secondaryColor }}
             aria-label="open drawer"

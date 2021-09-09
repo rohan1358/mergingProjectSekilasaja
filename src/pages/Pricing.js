@@ -674,7 +674,12 @@ export default function PricingPage({ match, history }) {
                       </div>
 
                       <div>
-                        <Button href="/login" round fullWidth color="secondary">
+                        <Button
+                          href="/library"
+                          round
+                          fullWidth
+                          color="secondary"
+                        >
                           Beli Sekarang!
                         </Button>
                       </div>
@@ -988,6 +993,11 @@ export default function PricingPage({ match, history }) {
                           Rp. 25.000
                         </Typography>
                         <Typography type="italic">/Kilas</Typography>
+                      </div>
+                      <div>
+                        <Button href="/login" round fullWidth color="secondary">
+                          Beli Sekarang!
+                        </Button>
                       </div>
                     </Grid>
                     {/* <Grid item xs={1}>

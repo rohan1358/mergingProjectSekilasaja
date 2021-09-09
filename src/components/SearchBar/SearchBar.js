@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -11,14 +11,17 @@ import SearchIcon from "@material-ui/icons/Search";
 
 // Custom components
 import NavbarStyle from "../../styles/NavbarStyle";
+import Loading from "../../pages/Loading";
 
 // nodejs library to set properties for component
 import PropTypes from "prop-types";
+import { Redirect } from "react-router";
 
 export default function SearchBar(props) {
   const classes = NavbarStyle();
   const { history } = props;
   const allBooks = useSelector(selectAllBooks);
+  const [pending, setPending] = useState(false);
 
   //Handle search input value change
   const inputValueRef = useRef("");
@@ -30,10 +33,17 @@ export default function SearchBar(props) {
   const goToBookDetails = (event, value) => {
     //Handle event where user presses enter
     if (event.code == "Enter") {
+      // setPending(true);
       history.push(`/searchResults/${value}`);
+      // <Redirect to={`/searchResults/${value}`} />;
+      // setPending(false);
     } else {
+      // setPending(true);
       // console.log("Book Selected: " + value);
-      history.push(`/book-details/${value}`);
+      // history.push(`/book-details/${value}`);
+      history.push(`/searchResults/${value}`);
+      // <Redirect to={`/book-details/${value}`} />;
+      // setPending(false);
     }
   };
 
@@ -41,7 +51,16 @@ export default function SearchBar(props) {
   const handleSubmit = () => {
     if (inputValueRef.current.value !== "")
       history.push(`/searchResults/${inputValueRef.current.value}`);
+    // <Redirect to={`/searchResults/${inputValueRef.current.value}`} />;
   };
+
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div className={classes.search}>
