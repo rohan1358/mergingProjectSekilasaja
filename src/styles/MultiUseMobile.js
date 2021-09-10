@@ -131,6 +131,7 @@ const MultiUseMobile = makeStyles((theme) => ({
     fontSize: "18px",
     userSelect: "none",
     pointerEvents: "none",
+    textAlign: "left",
   },
   alertRoot: {
     width: "100%",

@@ -115,7 +115,7 @@ export default function HeaderLinksMobile({ history }) {
       {!!currentUser ? (
         <List className={header.list}>
           <ListItem className={header.listItem}>
-            <Button onClick={goToPricing} round color="transparent">
+            <Button fullWidth onClick={goToPricing} round color="transparent">
               <div style={{ color: secondaryColor }}>
                 <MonetizationOnIcon /> Harga
               </div>
@@ -123,14 +123,14 @@ export default function HeaderLinksMobile({ history }) {
           </ListItem>
 
           <ListItem className={header.listItem}>
-            <Button onClick={goToAccounts} round color="transparent">
+            <Button fullWidth onClick={goToAccounts} round color="transparent">
               <div style={{ color: secondaryColor }}>
                 <AccountCircleIcon /> Profil
               </div>
             </Button>
           </ListItem>
           <ListItem className={header.listItem}>
-            <Button href="/library" round color="transparent">
+            <Button fullWidth href="/library" round color="transparent">
               <div style={{ color: secondaryColor }}>
                 <LibraryBooksIcon />
                 My Library

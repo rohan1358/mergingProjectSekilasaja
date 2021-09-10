@@ -8,7 +8,6 @@ import { Tooltip } from "@material-ui/core";
 // Custom components
 import BookDetails from "./BookDetails";
 import TextDetails from "./TextDetails";
-import NavBar from "../../components/NavBar/Navbar";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
@@ -296,7 +295,10 @@ export default function BookDetailsPage({ match, history }) {
                               </Grid>
                             </div>
 
-                            <div className={classes.sectionMobileBlock}>
+                            <div
+                              style={{ textAlign: "left" }}
+                              className={classes.sectionMobileBlock}
+                            >
                               <Grid item xs={12}>
                                 <Button
                                   href={`/text-page/${current_product.book_title}`}
@@ -369,10 +371,20 @@ export default function BookDetailsPage({ match, history }) {
                           />
                         }
                         totalNum={current_product.kilasan.length}
-                        kilasTitle={current_product.kilasan[0].title}
+                        kilasTitle={
+                          <Typography
+                            style={{ textAlign: "left" }}
+                            size="subheading"
+                          >
+                            {current_product.kilasan[0].title}
+                          </Typography>
+                        }
                         kilasBody={current_product.kilasan[0].details.map(
                           (paragraph) => (
-                            <Typography className={books.paragraphBookDetails}>
+                            <Typography
+                              style={{ textAlign: "left" }}
+                              className={books.paragraphBookDetails}
+                            >
                               {paragraph}
                             </Typography>
                           )
