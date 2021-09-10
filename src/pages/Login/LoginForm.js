@@ -43,13 +43,17 @@ const useStyles = makeStyles((theme) => ({
 
 //Form for login, including all other methods relevant to login
 const LoginForm = ({ history }) => {
+  // Styles
   const classes = useStyles();
   const multi = MultiUseMobile();
 
-  // create state variables for each input
+  // useState hooks
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  // Auth
+  const { currentUser } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,8 +69,6 @@ const LoginForm = ({ history }) => {
         return setError("ERROR (" + errorCode + "): " + "\n\n" + errorMessage);
       });
   };
-
-  const { currentUser } = useContext(AuthContext);
 
   if (currentUser && currentUser.emailVerified) {
     console.log("Current user id: " + currentUser.uid);

@@ -1,4 +1,6 @@
 import React from "react";
+
+// Custom components
 import ChapterButton from "./ChapterButton";
 
 function TableOfContent({
@@ -17,11 +19,6 @@ function TableOfContent({
           chapter={chapter}
         ></ChapterButton>
       ))}
-      {/* <ChapterButton
-          chosenChapter={chosenChapter}
-          setChosenChapter={setChosenChapter}
-          chapter={conclusion}
-        ></ChapterButton> */}
     </div>
   );
 }

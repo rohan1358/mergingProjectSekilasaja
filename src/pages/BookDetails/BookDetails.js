@@ -11,23 +11,21 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
-import PropTypes from "prop-types";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function BookDetails(props) {
-  const {
-    cover,
-    title,
-    author,
-    description,
-    descriptionTitle,
-    readTime,
-    watchTime,
-    num,
-    buttons,
-  } = props;
-
+export default function BookDetails({
+  cover,
+  title,
+  author,
+  description,
+  descriptionTitle,
+  readTime,
+  watchTime,
+  num,
+  buttons,
+}) {
+  // Styles
   const mobile = MultiUseMobile();
   const classes = useStyles();
 
@@ -133,11 +131,6 @@ export default function BookDetails(props) {
                       </Tooltip>
                       <Typography type="bold">{num} Kilas</Typography>
                     </div>
-
-                    {/* <div className={classes.kilasDesc}>
-                      <PlayArrow className={classes.logo} />
-                      <Typography type="bold">Video, Audio, & Text</Typography>
-                    </div> */}
                   </div>
 
                   <Divider />
@@ -277,11 +270,6 @@ export default function BookDetails(props) {
                     </Tooltip>
                     <Typography type="bold">{num} Kilas</Typography>
                   </div>
-
-                  {/* <div className={classes.kilasDescMobileCenter}>
-                    <PlayArrow className={classes.logo} />
-                    <Typography type="bold">Video, Audio, & Text</Typography>
-                  </div> */}
                 </div>
 
                 <Divider />
@@ -308,14 +296,3 @@ export default function BookDetails(props) {
     </div>
   );
 }
-
-BookDetails.propTypes = {
-  cover: PropTypes.object.isRequired,
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  descriptionTitle: PropTypes.string.isRequired,
-  readTime: PropTypes.string.isRequired,
-  watchTime: PropTypes.string.isRequired,
-  num: PropTypes.string.isRequired,
-};

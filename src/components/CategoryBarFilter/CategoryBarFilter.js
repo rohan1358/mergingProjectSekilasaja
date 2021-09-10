@@ -18,8 +18,8 @@ function CategoryBarFilter({
   setChosenCategory,
   setIsChosenCategory,
 }) {
+  // Styles
   const classes = CategoriesStyle();
-
   const mobileClass = classNames({
     [classes.sectionMobile]: true,
   });
@@ -27,6 +27,7 @@ function CategoryBarFilter({
     [classes.sectionDesktop]: true,
   });
 
+  // useState hooks
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -36,6 +37,7 @@ function CategoryBarFilter({
     };
     fetchData();
   }, []);
+
   return (
     <div className="CategoryBarFilter-Panel">
       <div className={desktopClass}>

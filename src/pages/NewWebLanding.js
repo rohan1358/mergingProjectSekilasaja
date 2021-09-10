@@ -14,7 +14,9 @@ import { beigeColor } from "../styles/Style";
 const useStyles = makeStyles(Styles);
 
 export default function NewWebLanding() {
+  // Styles
   const classes = useStyles();
+
   return (
     <div style={{ backgroundColor: beigeColor }}>
       <Container>

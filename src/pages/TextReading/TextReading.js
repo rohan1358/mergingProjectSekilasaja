@@ -19,6 +19,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 // Custom components
 import Button from "../../components/Button";
+import { beigeColor, primaryColor } from "../../styles/Style";
 
 //Redux
 import { useSelector } from "react-redux";
@@ -29,20 +30,24 @@ import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
-import { beigeColor, primaryColor } from "../../styles/Style";
 
 export default function TextReading({ match, history }) {
+  // Auth
   const db = fire.firestore();
+  const { currentUser } = useContext(AuthContext);
 
+  // Styles
   const classes = TextReadingStyle();
   const nav = NavbarStyle();
 
+  // useState hooks
   const [chapterContent, setChapterContent] = useState([]);
   const [chosenChapter, setChosenChapter] = useState(1);
   const [audioLink, setAudioLink] = useState(null);
   const [userData, setUserData] = useState([]);
-  const { currentUser } = useContext(AuthContext);
   const [isBookOwned, setIsBookOwned] = useState(false);
+
+  // Redux
   const ownedBooks = useSelector(selectOwnedBooks);
 
   const handleNext = () => {
@@ -112,7 +117,6 @@ export default function TextReading({ match, history }) {
   return (
     <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "70px" }} />
-      {/* {!!isSubscribed || !!isBookOwned ? ( */}
       <div>
         <div className={classes.sectionDesktop}>
           <NavBarSecond
@@ -333,9 +337,6 @@ export default function TextReading({ match, history }) {
           </AppBar>
         </div>
       </div>
-      {/* ) : (
-        <FourOFourPage />
-      )} */}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Redirect, withRouter } from "react-router";
+import { Redirect } from "react-router";
 
 // Whatsapp Button
 import Whatsapp from "../../images/Whatsapp.png";
@@ -8,14 +8,14 @@ import { Tooltip } from "@material-ui/core";
 
 // Custom components
 import Footer from "../../components/Footer";
-import NavBar from "../../components/NavBar/Navbar";
-import OwnedBooksBlock from "./OwnedBooksBlock";
+import UnsubscribedLibrary from "./UnsubscribedLibrary";
 import Parallax from "../../components/Parallax";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
+import SubscribedLibrary from "./SubscribedLibrary";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -23,34 +23,49 @@ import {
   selectOwnedBookTitles,
   setOwnedBookTitles,
 } from "../../feature/ownedBookTitlesSlice";
-import {
-  selectFavoriteBookTitles,
-  setFavoriteBookTitles,
-} from "../../feature/favoriteBookTitlesSlice";
 
 import Loading from "../Loading";
 
 // Firebase components
 import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 // Material-UI components
 import { Container } from "@material-ui/core";
 import { beigeColor } from "../../styles/Style";
 
 export default function Library({ history }) {
+  // Styles
   const classes = MultiUseMobile();
 
+  // Auth
   const db = fire.firestore();
   const { currentUser } = useContext(AuthContext);
 
+  // Redux
   const dispatch = useDispatch();
-  const [pending, setPending] = useState(true);
-
   const ownedBookTitles = useSelector(selectOwnedBookTitles);
-  const favoriteBookTitles = useSelector(selectFavoriteBookTitles);
+
+  // useState Hooks
+  const [pending, setPending] = useState(true);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
+    if (currentUser !== null) {
+      const fetchData = async () => {
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
+        setUserData(results);
+        setIsSubscribed(results.is_subscribed);
+      };
+      fetchData();
+    } else {
+      console.log("Not logged in");
+    }
+
     //Check if user is logged in or not, if not logout to home page.
     if (currentUser && !currentUser.emailVerified) {
       console.log(
@@ -68,7 +83,6 @@ export default function Library({ history }) {
       .onSnapshot((snapshot) => {
         snapshot.forEach((doc) => {
           dispatch(setOwnedBookTitles(doc.data()["owned_books"]));
-          dispatch(setFavoriteBookTitles(doc.data()["favorite_books"]));
           setPending(false);
         });
       });
@@ -103,13 +117,19 @@ export default function Library({ history }) {
       </Parallax>
       <Container>
         <div className={classes.extraSpace} />
-        <OwnedBooksBlock
-          ownedBookTitles={ownedBookTitles}
-          favoriteBookTitles={favoriteBookTitles}
-          history={history}
-        />
+        {!!isSubscribed ? (
+          <SubscribedLibrary history={history} />
+        ) : (
+          <UnsubscribedLibrary
+            ownedBookTitles={ownedBookTitles}
+            history={history}
+          />
+        )}
       </Container>
 
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
       <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={

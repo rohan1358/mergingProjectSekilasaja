@@ -35,13 +35,19 @@ import { AuthContext } from "../Routing/Auth";
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {
+  // Auth
   const { currentUser } = useContext(AuthContext);
+
+  // Styles
   const classes = useStyles();
   const nav = NavbarStyle();
 
+  // Redux
   const cart = useSelector(selectCart).cart;
 
+  //  useState hooks
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
       window.addEventListener("scroll", headerColorChange);
@@ -52,9 +58,11 @@ export default function Header(props) {
       }
     };
   });
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
   const headerColorChange = () => {
     const { color, changeColorOnScroll } = props;
     const windowsScrollTop = window.pageYOffset;
@@ -74,6 +82,7 @@ export default function Header(props) {
         .classList.remove(classes[changeColorOnScroll.color]);
     }
   };
+
   const {
     color,
     rightLinks,
@@ -83,31 +92,24 @@ export default function Header(props) {
     history,
     rightLinksMobile,
   } = props;
+
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes[color]]: color,
     [classes.absolute]: absolute,
     [classes.fixed]: fixed,
   });
+
   const brandComponent = (
     <a href="/">
       <img className={nav.icon} src={Logo} />
     </a>
   );
+
   return (
     <AppBar style={{ backgroundColor: beigeColor }} className={appBarClasses}>
       <Toolbar className={classes.container}>
-        {/* {leftLinks !== undefined ? brandComponent : null} */}
-        <div className={classes.flex}>
-          {/* {leftLinks !== undefined ? (
-            <Hidden smDown implementation="css">
-              {leftLinks}
-            </Hidden>
-          ) : (
-            brandComponent
-          )} */}
-          {brandComponent}
-        </div>
+        <div className={classes.flex}>{brandComponent}</div>
         <Hidden smDown implementation="css">
           <div style={{ display: "flex" }}>
             <SearchBar history={history} />

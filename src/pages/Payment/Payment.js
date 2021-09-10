@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router";
 
+// Facebook Pixel
 import ReactPixel from "react-facebook-pixel";
 
 // Whatsapp Button
@@ -19,7 +20,6 @@ import PaymentStyle from "../../styles/PaymentStyle";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
-import Loading from "../Loading";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -61,26 +61,23 @@ const useStyles = makeStyles(InfoStyle);
 const firestore = fire.firestore();
 
 export default function Payment({ history }) {
+  // Auth
   const { currentUser } = useContext(AuthContext);
+
+  // Styles
   const classes = MultiUseMobile();
-  const payment_classes = PaymentStyle();
   const styles = useStyles();
+
+  // useState hooks
   const [value, setValue] = useState("female");
-
   const [pending, setPending] = useState(false);
-
-  const handleRadioChange = (event) => {
-    setValue(event.target.value);
-  };
-  // Get user data
-  const userData = useSelector(selectUser);
-
-  // create state variables for each input
+  const [promoAdded, setPromoAdded] = useState(false);
+  const [isSubAdded, setIsSubAdded] = useState(false);
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const [namaDiRekening, setNamaDiRekening] = useState("");
   const [nomorRekening, setNomorRekening] = useState("");
   const [akunTelegram, setAkunTelegram] = useState("");
   const [namaBank, setNamaBank] = useState("");
-
   const [file, setFile] = useState("");
   const [error, setError] = useState("");
   const [fileError, setFileError] = useState("");
@@ -88,20 +85,22 @@ export default function Payment({ history }) {
   const [cartError, setCartError] = useState("");
   const [namaBankError, setNamaBankError] = useState("");
   const [promoCodeData, setPromoCodeData] = useState("");
-
-  // Cart total price
-  const promoCodeRef = useRef("");
   const [promoCode, setPromoCode] = useState("");
+  const [discountAmount, setDiscountAmount] = useState(0);
+
+  // Redux
+  const userData = useSelector(selectUser);
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCart).cart;
-  const [discountAmount, setDiscountAmount] = useState(0);
+
+  // Cart total price
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
   const totalPrice = Intl.NumberFormat().format(
     itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
   );
-  const [promoAdded, setPromoAdded] = useState(false);
-  const [isSubAdded, setIsSubAdded] = useState(false);
-  const [isEmailSent, setIsEmailSent] = useState(false);
+
+  // useRef Hooks
+  const promoCodeRef = useRef("");
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
@@ -131,6 +130,10 @@ export default function Payment({ history }) {
     });
   }, [cartItems]);
 
+  const handleRadioChange = (event) => {
+    setValue(event.target.value);
+  };
+
   const onRemove_ = (product) => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.DeleteToCart(
@@ -149,19 +152,16 @@ export default function Payment({ history }) {
   };
 
   const handleApplyPromo = () => {
-    //console.log(promoCodeRef.current.value);
     if (currentUser !== null) {
       const fetchData = async () => {
-        var promoCodeUsed = '';
+        var promoCodeUsed = "";
         if (promoCode.length > 0) {
           promoCodeUsed = promoCode;
         } else {
           promoCodeUsed = promoCodeRef.current.value;
         }
         console.log(promoCodeUsed);
-        const results = await firebaseGetPromoCode.getPromoCode(
-          promoCodeUsed
-        );
+        const results = await firebaseGetPromoCode.getPromoCode(promoCodeUsed);
         if (results.length != 0) {
           if (results[0].code != "") {
             console.log("HERE!");
@@ -199,8 +199,6 @@ export default function Payment({ history }) {
       setFile(e.target.files[0]);
     }
   };
-
-  console.log(promoCodeData);
 
   // function to handle modal open for login
   const handlePayment = async () => {
@@ -921,6 +919,9 @@ export default function Payment({ history }) {
         </div>
       </Container>
 
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
       <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={

@@ -1,9 +1,13 @@
 import React from "react";
 
+// Whatsapp Button
+import Whatsapp from "../images/Whatsapp.png";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import { Tooltip } from "@material-ui/core";
+
 // Custom components
 import Parallax from "../components/Parallax";
 import Typography from "../components/Typography";
-import NavBar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
 import Header from "../components/NavBar/Header";
 import HeaderLinks from "../components/NavBar/HeaderLinks";
@@ -38,6 +42,42 @@ export default function Contact({ history }) {
           </Typography>
         </Parallax>
       </Container>
+
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
+      <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
+        <Tooltip
+          title={
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                fontSize: "14px",
+                lineHeight: "20px",
+              }}
+            >
+              <WhatsAppIcon fontSize="large" style={{ marginRight: "10px" }} />
+              Klik tombol ini dan langsung hubungi kami di Whatsapp bila ada
+              pertanyaan!
+            </div>
+          }
+          placement="right"
+        >
+          <img
+            src={Whatsapp}
+            style={{
+              position: "fixed",
+              bottom: 15,
+              left: 15,
+              width: "60px",
+              "&:hover": {
+                filter: "brightness(150%)",
+              },
+            }}
+          />
+        </Tooltip>
+      </a>
       <Footer />
     </div>
   );

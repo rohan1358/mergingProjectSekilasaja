@@ -139,8 +139,12 @@ const Controls = forwardRef(
     },
     ref
   ) => {
+    // Styles
     const classes = useStyles();
+
+    // useState hooks
     const [anchorEl, setAnchorEl] = React.useState(null);
+
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };

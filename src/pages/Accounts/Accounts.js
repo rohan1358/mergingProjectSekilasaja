@@ -8,7 +8,6 @@ import { Tooltip } from "@material-ui/core";
 
 // Custom components
 import Typography from "../../components/Typography";
-import NavBar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
@@ -28,28 +27,32 @@ import { Alert } from "@material-ui/lab";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { beigeColor } from "../../styles/Style";
 
-export default function AccountsPage(props) {
+export default function AccountsPage({ history }) {
+  // Auth
   const firestore = fire.firestore();
-  const { history } = props;
-  const classes = MultiUseMobile();
   const { currentUser } = useContext(AuthContext);
+
+  // Styles
+  const classes = MultiUseMobile();
+
+  // useState Hooks
   const [userData, setUserData] = useState(null);
   const [bookNum, setBookNum] = useState([]);
   const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // Update profile
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
-  const phoneNumberRef = useRef();
   const [error, setError] = useState("");
   const [profileError, setProfileError] = useState("");
   const [profileSuccess, setProfileSuccess] = useState("");
   const [success, setSuccess] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+
+  // useRef hooks
+  const passwordRef = useRef();
+  const passwordConfirmRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
+  const phoneNumberRef = useRef();
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
@@ -142,18 +145,6 @@ export default function AccountsPage(props) {
       setSuccess("Proses berhasil!");
       updatePassword(passwordRef.current.value);
     }
-
-    // Promise.all(promises)
-    //   .then(() => {
-    //     setSuccess("Proses berhasil!");
-    //     setError("");
-    //   })
-    //   .catch(() => {
-    //     setError("Proses Gagal!");
-    //   })
-    //   .finally(() => {
-    //     setLoading(false);
-    //   });
   }
 
   return (
@@ -299,6 +290,9 @@ export default function AccountsPage(props) {
         </Container>
       )}
 
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
       <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={

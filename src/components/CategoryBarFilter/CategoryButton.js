@@ -24,9 +24,12 @@ function CategoryButton({
   setIsChosenCategory,
   categoryIcon,
 }) {
+  // styles
   const classes = CategoriesStyle();
 
+  // useState hooks
   const [isSelected, setIsSelected] = useState(false);
+
   useEffect(() => {
     if (chosenCategory === categoryName) {
       setIsSelected(true);

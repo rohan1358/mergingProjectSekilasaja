@@ -19,13 +19,10 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
 import VerifyEmail from "./pages/VerifyEmail";
 import HomeTwo from "./pages/Home/HomeTwo";
-import NewWebLanding from "./pages/NewWebLanding";
 
 // Routing componentns
 import PrivateRoute from "./components/Routing/PrivateRoute";
-import NotVerifiedEmailRoute from "./components/Routing/NotVerifiedEmailRoute";
 import { AuthProvider } from "./components/Routing/Auth";
-import { beigeColor } from "./styles/Style";
 
 function App() {
   return (
@@ -58,7 +55,6 @@ function App() {
             path="/searchResults/:searchValue"
             component={SearchResults}
           />
-          {/* <Route exact path="/contact" component={Contact} /> */}
           <Route exact path="/pricing" component={PricingPage} />
           <Route
             exact
@@ -68,7 +64,6 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={HomeTwo} />
           <Route component={FourOFourPage} />
-          {/* <Route component={NewWebLanding} /> */}
         </Switch>
       </Router>
     </AuthProvider>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Redirect, withRouter } from "react-router";
+import { Redirect } from "react-router";
 
 // Custom components
 import MultiUseMobile from "../styles/MultiUseMobile";
@@ -9,22 +9,23 @@ import Button from "../components/Button";
 // Material-UI components
 import { Container, Paper, makeStyles, Link } from "@material-ui/core";
 import EmailIcon from "@material-ui/icons/Email";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 //For email verification
 import { AuthContext } from "../components/Routing/Auth";
 import { beigeColor } from "../styles/Style";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     padding: "30px",
   },
 }));
 
 export default function VerifyEmail() {
+  // Styles
   const classes = useStyles();
   const multi = MultiUseMobile();
 
+  // Auth
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {

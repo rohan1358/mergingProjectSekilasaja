@@ -1,7 +1,7 @@
 import React from "react";
+
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
-// nodejs library that concatenates classes
 import classNames from "classnames";
 
 // @material-ui/core components
@@ -9,7 +9,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "@material-ui/core/Button";
 
 // core components
-
 import ButtonStyle from "../styles/ButtonStyle";
 
 const makeComponentStyles = makeStyles(() => ({
@@ -32,8 +31,8 @@ const RegularButton = React.forwardRef((props, ref) => {
     ...rest
   } = props;
 
+  // Styles
   const classes = makeComponentStyles();
-
   const btnClasses = classNames({
     [classes.button]: true,
     [classes[size]]: size,
@@ -47,6 +46,7 @@ const RegularButton = React.forwardRef((props, ref) => {
     [classes.justIcon]: justIcon,
     [className]: className,
   });
+
   return (
     <Button {...rest} ref={ref} className={btnClasses}>
       {children}

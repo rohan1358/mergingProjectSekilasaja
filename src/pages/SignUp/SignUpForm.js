@@ -10,12 +10,9 @@ import Button from "../../components/Button";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 
-// firebase components
+// Auth
 import { AuthContext } from "../../components/Routing/Auth";
 import fire from "../../firebase/fire";
-
-const auth = fire.auth();
-const firestore = fire.firestore();
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,12 +40,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//Form for signing up, including all other methods relevant to signing up
 const SignUpForm = ({ history }) => {
+  // Auth
+  const auth = fire.auth();
+  const firestore = fire.firestore();
+
+  // Styles
   const classes = useStyles();
   const multi = MultiUseMobile();
 
-  // create state variables for each input
+  // useState hooks
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -87,6 +88,7 @@ const SignUpForm = ({ history }) => {
               cart: [],
               start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
               end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
+              isVerified: currentUser.emailVerified,
             });
           //Sign up success case
           console.log("Firebase signup suceeded!");

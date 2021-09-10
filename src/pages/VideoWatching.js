@@ -1,13 +1,11 @@
 import React, { useEffect, useContext, useState } from "react";
-import { Redirect, Route } from "react-router";
+import { Redirect } from "react-router";
 
 // Material UI
 import { Container } from "@material-ui/core";
 
 // Custom components
 import NavBarSecond from "../components/NavBar/NavBarSecond";
-import VideoComponent from "../components/VideoPlayer/VidPageComponent";
-import FourOFourPage from "./404page";
 import ReactPlayer from "react-player";
 import Typography from "../components/Typography";
 import { beigeColor } from "../styles/Style";
@@ -17,20 +15,21 @@ import { useSelector } from "react-redux";
 import { selectOwnedBooks } from "../feature/ownedBooksSlice";
 
 //firebase components
-import fire from "../firebase/fire";
 import { AuthContext } from "../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../firebase/firebaseGetBookInfoByTitle";
 
-const db = fire.firestore();
-
 export default function VideoWatchingPage({ match, history }) {
-  const [userData, setUserData] = useState([]);
+  // Auth
   const { currentUser } = useContext(AuthContext);
+
+  // useState hooks
+  const [userData, setUserData] = useState([]);
   const [isBookOwned, setIsBookOwned] = useState(false);
   const [bookContent, setBookContent] = useState([]);
+
+  // Redux
   const ownedBooks = useSelector(selectOwnedBooks);
-  const [pending, setPending] = useState(false);
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
@@ -77,7 +76,6 @@ export default function VideoWatchingPage({ match, history }) {
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
-      {/* {!!isSubscribed || !!isBookOwned ? ( */}
       <div>
         <NavBarSecond />
         <div style={{ marginTop: "70px" }} />
@@ -104,13 +102,8 @@ export default function VideoWatchingPage({ match, history }) {
           <Typography style={{ marginTop: -15 }} size="subheading">
             {bookContent.book_title}
           </Typography>
-
-          {/* <Typography>{bookContent.description} </Typography> */}
         </Container>
       </div>
-      {/* ) : (
-        <FourOFourPage />
-      )} */}
     </div>
   );
 }

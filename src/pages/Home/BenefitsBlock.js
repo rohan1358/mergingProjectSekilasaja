@@ -3,7 +3,6 @@ import React from "react";
 // @material-ui/core components
 import { Grid, Container } from "@material-ui/core";
 import {
-  Audiotrack,
   VideoLibrary,
   MenuBook,
   Group,
@@ -27,6 +26,7 @@ export default function BenefitsBlock({ logo, button }) {
   const desktopClass = classNames({
     [classes.sectionDesktop]: true,
   });
+
   return (
     <div style={{ color: beigeColor, backgroundColor: secondaryColor }}>
       <Container>

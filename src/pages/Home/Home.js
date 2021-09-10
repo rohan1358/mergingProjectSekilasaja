@@ -55,10 +55,15 @@ const mobileStyles = makeStyles((theme) => ({
 }));
 
 export default function Home({ history }) {
-  const { currentUser } = useContext(AuthContext);
+  // Styles
   const mobile = mobileStyles();
   const classes = MultiUseMobile();
   const books = useStyles();
+
+  // Auth
+  const { currentUser } = useContext(AuthContext);
+
+  // useState hooks
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
 
@@ -90,7 +95,6 @@ export default function Home({ history }) {
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
-      {/* <NavBar cartItems={[]} history={history} /> */}
       <Header
         history={history}
         rightLinks={<HeaderLinks history={history} />}
@@ -118,10 +122,6 @@ export default function Home({ history }) {
                       Solusi Buat Kamu Yang{" "}
                       <strong
                         style={{
-                          // textDecoration: "underline",
-                          // textDecorationColor: primaryColor,
-                          // textDecorationThickness: "10px",
-                          // textUnderlinePosition: "under",
                           backgroundColor: primaryColor,
                         }}
                       >
@@ -142,11 +142,6 @@ export default function Home({ history }) {
                     <Button round href="/pricing">
                       Berlanggan Sekarang!
                     </Button>
-                    {/* 
-                    <Typography>
-                      Hanya dengan <strong>Rp. 1.000/hari</strong>, akses semua
-                      buku!
-                    </Typography> */}
 
                     <div style={{ marginTop: "20px" }} />
 
@@ -215,10 +210,6 @@ export default function Home({ history }) {
                     Solusi Buat Kamu Yang{" "}
                     <strong
                       style={{
-                        // textDecoration: "underline",
-                        // textDecorationColor: primaryColor,
-                        // textDecorationThickness: "10px",
-                        // textUnderlinePosition: "under",
                         backgroundColor: primaryColor,
                       }}
                     >
@@ -239,11 +230,6 @@ export default function Home({ history }) {
                   <Button round href="/pricing">
                     Berlanggan Sekarang!
                   </Button>
-                  {/* 
-                    <Typography>
-                      Hanya dengan <strong>Rp. 1.000/hari</strong>, akses semua
-                      buku!
-                    </Typography> */}
 
                   <div style={{ marginTop: "20px" }} />
 
@@ -357,7 +343,6 @@ export default function Home({ history }) {
                         Bisnis, Investasi, dan Pengembangan diri terbaik dunia
                         hanya dalam 15 menit.
                       </strong>{" "}
-                      {/* Belajar dimanapun dan kapanpun. */}
                     </Typography>
 
                     <div style={{ marginTop: "20px" }} />
@@ -442,7 +427,6 @@ export default function Home({ history }) {
                       Bisnis, Investasi, dan Pengembangan diri terbaik dunia
                       hanya dalam 15 menit.
                     </strong>{" "}
-                    {/* Belajar dimanapun dan kapanpun. */}
                   </Typography>
 
                   <div style={{ marginTop: "20px" }} />
@@ -534,6 +518,9 @@ export default function Home({ history }) {
       )}
       <Footer />
 
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
       <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={

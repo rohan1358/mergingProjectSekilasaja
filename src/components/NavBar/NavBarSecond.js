@@ -9,9 +9,7 @@ import {
   Container,
   Grid,
 } from "@material-ui/core";
-import HomeIcon from "@material-ui/icons/Home";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 // Custom components
@@ -21,19 +19,15 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 // nodejs library to set properties for components
 import classNames from "classnames";
 
-export default function NavBarSecond(props) {
-  const { children, buttons } = props;
-
+export default function NavBarSecond({ children, buttons }) {
+  // History
   const backHistory = useHistory();
 
+  // Styles
   const classes = NavbarStyle();
   const multi = MultiUseMobile();
-
   const growClass = classNames({
     [classes.grow]: true,
-  });
-  const toolbarClass = classNames({
-    [classes.toolbar]: true,
   });
   const iconColorClass = classNames({
     [classes.iconColor]: true,

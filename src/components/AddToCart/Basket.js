@@ -24,13 +24,21 @@ import Loading from "../../pages/Loading";
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function Basket({}) {
+  // Styles
   const classes = useStyles();
   const mobile = MultiUseMobile();
+
+  // Redux
   const cartItems = useSelector(selectCart).cart;
   const dispatch = useDispatch();
+
+  // Auth
   const { currentUser } = useContext(AuthContext);
+
+  // useState hooks
   const [isSubAdded, setIsSubAdded] = useState(false);
 
+  // Total cart price
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
   const totalPrice = Intl.NumberFormat().format(itemsPrice);
 
@@ -54,13 +62,6 @@ export default function Basket({}) {
 
   useEffect(() => {
     if (cartItems.length == 0) return setIsSubAdded(true);
-
-    // cartItems.forEach((item) => {
-    //   if(item.coverLink != null){
-    //     setPending(false);
-    //   }
-    // });
-
     cartItems.map((x) => {
       if (
         x.book_title == "Subscription 1 Bulan" ||
@@ -74,14 +75,6 @@ export default function Basket({}) {
       }
     });
   }, [cartItems]);
-
-  // if (pending) {
-  //   return (
-  //     <>
-  //       <Loading />
-  //     </>
-  //   );
-  // }
 
   return (
     <div>

@@ -34,12 +34,12 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SearchBarDrawer(props) {
-  const { logo, direction, history } = props;
+export default function SearchBarDrawer({ logo, direction, history }) {
+  // Styles
   const classes = NavbarStyle();
-
-  // Cart Drawer
   const drawer = useStyles();
+
+  // Cart Drawer useState
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -122,6 +122,7 @@ export default function SearchBarDrawer(props) {
       history.push(`/searchResults/${value}`);
     } else {
       console.log("Book Selected: " + value);
+      // history.push(`/book-details/${value}`);
       history.push(`/searchResults/${value}`);
     }
   };
@@ -152,8 +153,3 @@ export default function SearchBarDrawer(props) {
     </div>
   );
 }
-
-SearchBarDrawer.propTypes = {
-  logo: PropTypes.object.isRequired,
-  direction: PropTypes.string.isRequired,
-};

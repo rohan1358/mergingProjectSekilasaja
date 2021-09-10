@@ -4,23 +4,24 @@ import React, { useEffect, useState } from "react";
 import fire from "../../firebase/fire";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
-// custom components
+// Custom components
 import Loading from "../../pages/Loading";
 
-// //Redux
+// Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectUser, setUser } from "../../feature/userSlice";
 
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
+  // Auth
   const dispatch = useDispatch();
   const userData = useSelector(selectUser);
+  const firestore = fire.firestore();
 
+  // useState Hooks
   const [currentUser, setCurrentUser] = useState(null);
   const [pending, setPending] = useState(true);
-
-  const firestore = fire.firestore();
   const [isEndDateSet, setIsEndDateSet] = useState(false);
 
   useEffect(() => {

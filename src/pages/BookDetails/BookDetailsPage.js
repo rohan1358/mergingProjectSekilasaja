@@ -19,22 +19,13 @@ import Button from "../../components/Button";
 import TextReadingStyle from "../../styles/TextReadingStyle";
 
 // Material-UI components
-import { Container, Divider, Grid, Tabs, makeStyles } from "@material-ui/core";
+import { Container, Divider, Grid, makeStyles } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
-import { selectOwnedBooks } from "../../feature/ownedBooksSlice";
 import { selectCart, setCart } from "../../feature/cartSlice";
-import {
-  selectFavoriteBooks,
-  setFavoriteBooks,
-} from "../../feature/favoriteBooksSlice";
-import {
-  selectOwnedBookTitles,
-  setOwnedBookTitles,
-} from "../../feature/ownedBookTitlesSlice";
 
 // Auth and fire
 import { AuthContext } from "../../components/Routing/Auth";
@@ -43,39 +34,37 @@ import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoB
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
-import * as firebaseGetBookAudioTrialURL from "../../firebase/firebaseGetBookAudioTrialURL";
 import { beigeColor } from "../../styles/Style";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
-    // display: "flex",
     overflowY: "scroll",
     height: 250,
   },
 }));
 
 export default function BookDetailsPage({ match, history }) {
+  // Styles
   const classes = MultiUseMobile();
   const books = TextReadingStyle();
 
+  // Auth
   const { currentUser } = useContext(AuthContext);
-  const dispatch = useDispatch();
-  const ownedBooks = useSelector(selectOwnedBooks);
-  const cartItems = useSelector(selectCart).cart;
-  const favoriteBooks = useSelector(selectFavoriteBooks);
 
+  // Redux
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCart).cart;
+  const tabs = useStyles();
+
+  // useState Hooks
   const [current_product, setCurrent_Product] = useState(null);
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isBookOwned, setIsBookOwned] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [coverLink, setCoverLink] = useState("");
   const [audioLink, setAudioLink] = useState(null);
-
   const [pending, setPending] = useState(true);
-
-  const ownedBookTitles = useSelector(selectOwnedBookTitles);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -103,12 +92,6 @@ export default function BookDetailsPage({ match, history }) {
         match.params.book_title
       );
       setCurrent_Product(book_);
-      // ownedBooks.map((x) => {
-      //   if (x.book_title == match.params.book_title) {
-      //     setIsBookOwned(true);
-      //     setPending(false);
-      //   }
-      // });
     };
     fetchData();
 
@@ -145,22 +128,6 @@ export default function BookDetailsPage({ match, history }) {
     changeBtn();
   }, [cartItems]);
 
-  useEffect(() => {
-    const changeBtn = () => {
-      const exist = favoriteBooks.find(
-        (x) => x.book_title === match.params.book_title
-      );
-      if (exist) {
-        setIsFavorite(true);
-      } else {
-        setIsFavorite(false);
-      }
-    };
-    changeBtn();
-  }, [, favoriteBooks]);
-
-  // console.log(isFavorite);
-
   const handleAddCart = () => {
     const fetchData = async () => {
       const results = await firebaseUpdateCart.AddToCart(
@@ -180,47 +147,6 @@ export default function BookDetailsPage({ match, history }) {
     };
     fetchData();
   };
-
-  const handleAddFavorite = () => {
-    const fetchData = async () => {
-      const results = await firebaseUpdateCart.AddToFavorite(
-        currentUser.uid,
-        current_product
-      );
-
-      const exist = favoriteBooks.find(
-        (x) => x.book_title === match.params.book_title
-      );
-
-      if (exist) {
-        console.log("Already Added");
-      } else {
-        dispatch(setFavoriteBooks([...favoriteBooks, current_product]));
-      }
-    };
-    fetchData();
-  };
-
-  const handleDeleteFavorite = () => {
-    const fetchData = async () => {
-      const results = await firebaseUpdateCart.DeleteFromFavorite(
-        currentUser.uid,
-        current_product
-      );
-      console.log(results);
-      dispatch(
-        setFavoriteBooks([
-          ...favoriteBooks.filter(function (ele) {
-            return ele.book_title != current_product.book_title;
-          }),
-        ])
-      );
-    };
-    fetchData();
-  };
-
-  // Scrolled bar
-  const tabs = useStyles();
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
@@ -274,24 +200,6 @@ export default function BookDetailsPage({ match, history }) {
                                     </Button>
                                   )}
                                 </Grid>
-
-                                {/* <Grid item>
-                                  {isFavorite === false ? (
-                                    <Button
-                                      onClick={handleAddFavorite}
-                                      color="secondary"
-                                    >
-                                      Add To Favorites
-                                    </Button>
-                                  ) : (
-                                    <Button
-                                      onClick={handleDeleteFavorite}
-                                      color="gray"
-                                    >
-                                      Remove From Favorites!
-                                    </Button>
-                                  )}
-                                </Grid> */}
                               </Grid>
                             </div>
 
@@ -321,25 +229,6 @@ export default function BookDetailsPage({ match, history }) {
                                   </Button>
                                 )}
                               </Grid>
-                              {/* <Grid item xs={12}>
-                                {isFavorite === false ? (
-                                  <Button
-                                    onClick={handleAddFavorite}
-                                    color="secondary"
-                                    fullWidth
-                                  >
-                                    Add To Favorites
-                                  </Button>
-                                ) : (
-                                  <Button
-                                    onClick={handleDeleteFavorite}
-                                    color="gray"
-                                    fullWidth
-                                  >
-                                    Remove From Favorites!
-                                  </Button>
-                                )}
-                              </Grid> */}
                             </div>
                           </div>
                         }
@@ -743,6 +632,9 @@ export default function BookDetailsPage({ match, history }) {
         </div>
       )}
 
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
       <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={

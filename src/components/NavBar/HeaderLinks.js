@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 // @material-ui/core components
 import { makeStyles, List, ListItem, Badge } from "@material-ui/core";
@@ -15,37 +15,31 @@ import Basket from "../AddToCart/Basket";
 //Firebase components
 import fire from "../.././firebase/fire";
 import { AuthContext } from "../Routing/Auth";
-import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
-import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
-import * as firebaseGetSubscription from "../../firebase/firebaseGetSubscription";
 
 //Redux
-import { useSelector, useDispatch } from "react-redux";
-import { selectCart, setCart } from "../../feature/cartSlice";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../feature/cartSlice";
 
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks({ history }) {
+  // Styles
   const header = useStyles();
   const classes = NavbarStyle();
 
+  // Auth
   const { currentUser } = useContext(AuthContext);
 
+  // Redux
   const cart = useSelector(selectCart).cart;
-  const dispatch = useDispatch();
-
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isCart, setIsCart] = useState(false);
 
   //Handle event to navigate to accounts page
   const goToAccounts = () => {
-    // console.log(history);
     history.push(`/accounts`);
   };
 
   //Handle event to navigate to pricing page
   const goToPricing = () => {
-    // console.log(history);
     history.push(`/pricing`);
   };
 
@@ -57,49 +51,6 @@ export default function HeaderLinks({ history }) {
     //If user is logged in but not email verified, logout so currentUser becomes null
     if (currentUser && !currentUser.emailVerified) {
       signout();
-    }
-
-    if (currentUser !== null) {
-      const fetchData = async () => {
-        const results = await firebaseGetUserDataById.getUserDataById(
-          currentUser.uid
-        );
-
-        setIsSubscribed(results.is_subscribed);
-
-        const getCartData = async (book_title) => {
-          const products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-            book_title
-          );
-          const subs_ = await firebaseGetSubscription.getSubscription(
-            book_title
-          );
-
-          if (products_ === undefined) {
-            return subs_;
-          } else {
-            return products_;
-          }
-        };
-
-        var a = [
-          ...results.cart.map((book) => {
-            return getCartData(book);
-          }),
-        ];
-
-        Promise.all(a).then((b) => {
-          dispatch(setCart(b));
-        });
-        return results;
-      };
-      fetchData();
-    } else {
-      console.log("Not logged in");
-    }
-
-    if (cart.length > 0) {
-      setIsCart(true);
     }
   }, []);
 

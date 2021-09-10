@@ -20,6 +20,7 @@ import classNames from "classnames";
 import { beigeColor } from "../styles/Style";
 
 function SocialIcons() {
+  // Styles
   const classes = FooterStyle();
   const mobileClass = classNames({
     [classes.sectionMobile]: true,
@@ -112,6 +113,7 @@ function SocialIcons() {
 }
 
 function Copyright() {
+  // Styles
   const classes = FooterStyle();
   const mobileClass = classNames({
     [classes.sectionMobile]: true,
@@ -144,6 +146,7 @@ function Copyright() {
 }
 
 export default function Footer() {
+  // Styles
   const classes = FooterStyle();
   const footerClass = classNames({
     [classes.footer]: true,

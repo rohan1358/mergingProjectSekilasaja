@@ -21,12 +21,15 @@ import Loading from "../Loading";
 import { beigeColor } from "../../styles/Style";
 
 export default function SearchResults({ match, history }) {
+  // Styles
   const classes = MultiUseMobile();
+
+  // useState hooks
   const [pending, setPending] = useState(true);
-
-  const allBooks = useSelector(selectAllBooks);
-
   const [searchResults, setSearchResults] = React.useState([]);
+
+  // Redux
+  const allBooks = useSelector(selectAllBooks);
 
   useEffect(() => {
     //Filter the books according to the search input
@@ -60,6 +63,9 @@ export default function SearchResults({ match, history }) {
       <div className={classes.extraSpace2} />
       <SearchResultsBlock searchResults={searchResults} history={history} />
 
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
       <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={

@@ -1,21 +1,20 @@
 import React from "react";
-import Rdpd from "../../images/rdpd.jpg";
 
 // Material UI component
 import Dialog from "@material-ui/core/Dialog";
 
 // Custom component
-import BookDetailsSimple from "./BookDetailsSimple";
+import BookDetailsModalContent from "./BookDetailsModalContent";
 
-const BookDetailsModal = ({ open, handleClose }) => {
+const BookDetailsModal = ({ open, handleClose, image }) => {
   const handleClose = () => {
     handleClose();
   };
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <BookDetailsSimple
-        cover={Rdpd}
+      <BookDetailsModalContent
+        cover={image}
         handleClose={handleClose}
         title={"Rich Dad Poor Dad"}
         descriptionTitle={"Tentang apa?"}

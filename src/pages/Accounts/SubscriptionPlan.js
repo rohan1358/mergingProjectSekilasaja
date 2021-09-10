@@ -8,19 +8,21 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 // Material UI components
 import { Grid } from "@material-ui/core";
 
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
-
 //firebase components
 import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
-export default function SubscriptionPlan(props) {
+export default function SubscriptionPlan({
+  subscriptionType,
+  number,
+  endDate,
+}) {
+  // useState hooks
   const [userData, setUserData] = useState([]);
+
+  // Auth
   const { currentUser } = useContext(AuthContext);
-  const classes = MultiUseMobile();
-  const { subscriptionType, number, endDate } = props;
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -89,8 +91,3 @@ export default function SubscriptionPlan(props) {
     </div>
   );
 }
-
-SubscriptionPlan.propTypes = {
-  subscriptionType: PropTypes.string.isRequired,
-  number: PropTypes.string.isRequired,
-};

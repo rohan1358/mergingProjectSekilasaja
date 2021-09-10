@@ -9,6 +9,7 @@ import { Container, Grid } from "@material-ui/core";
 import { beigeColor } from "../styles/Style";
 
 export default function Loading() {
+  // Styles
   const multi = MultiUseMobile();
   return (
     <div style={{ backgroundColor: beigeColor }}>

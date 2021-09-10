@@ -13,10 +13,6 @@ import "react-multi-carousel/lib/styles.css";
 // //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
-// //import { selectBook, setBook } from "../../feature/bookSlice";
-
-// //Import firebase function to get books based on filter
-// import * as firebaseGetBooksByCategory from "../.././firebase/firebaseGetBooksByCategory.js";
 
 // Firebase components
 import fire from "../../firebase/fire";
@@ -43,17 +39,16 @@ const responsive = {
   },
 };
 
-export default function CategoryBlock(props) {
+export default function CategoryBlock({ title, history }) {
+  // Styles
   const classes = MultiUseMobile();
 
   //For searching (Using the all books for searching)
   const dispatch = useDispatch();
   const allBooks = useSelector(selectAllBooks);
 
-  const { title, history } = props;
+  // useState hooks
   const [chosenCategory, setChosenCategory] = useState("All");
-
-  // Check if the user has chosen a category or not
   const [isChosenCategory, setIsChosenCategory] = useState(false);
   const [products, SetProducts] = useState([]);
 

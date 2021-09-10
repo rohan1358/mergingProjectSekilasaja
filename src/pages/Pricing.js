@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Redirect } from "react-router";
 
 // Whatsapp Button
 import Whatsapp from "../images/Whatsapp.png";
@@ -9,7 +8,6 @@ import { Tooltip } from "@material-ui/core";
 // Custom components
 import Typography from "../components/Typography";
 import Button from "../components/Button";
-import MultiUseMobile from "../styles/MultiUseMobile";
 import Header from "../components/NavBar/Header";
 import HeaderLinks from "../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../components/NavBar/HeaderLinksMobile";
@@ -26,7 +24,6 @@ import {
   CardHeader,
   Card,
   makeStyles,
-  Divider,
 } from "@material-ui/core";
 
 // Firebase components
@@ -40,8 +37,6 @@ import fire from "../firebase/fire";
 import { selectCart, setCart } from "../feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-const firestore = fire.firestore();
-
 const useStyles = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
   sectionDesktop: {
@@ -53,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
   sectionMobile: {
     display: "block",
-    // marginTop: "40px",
     justifyContent: "center",
     [theme.breakpoints.up("md")]: {
       display: "none",
@@ -67,7 +61,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     textTransform: "uppercase",
     padding: 5,
-    // transform: "rotate(-40deg)",
     top: -1,
     marginLeft: 60,
     fontWeight: "bold",
@@ -80,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     textTransform: "uppercase",
     padding: 5,
-    // transform: "rotate(-40deg)",
     top: -10,
     marginLeft: 0,
     fontWeight: "bold",
@@ -135,20 +127,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PricingPage({ match, history }) {
+  // Styles
   const classes = useStyles();
-  const multi = MultiUseMobile();
 
+  // Auth
   const { currentUser } = useContext(AuthContext);
-  const cartItems = useSelector(selectCart).cart;
+  const firestore = fire.firestore();
 
+  // Redux
+  const cartItems = useSelector(selectCart).cart;
+  const dispatch = useDispatch();
+
+  // useState hooks
   const [userData, setUserData] = useState(null);
   const [subOne, setSubOne] = useState(null);
   const [subThree, setSubThree] = useState(null);
   const [subSix, setSubSix] = useState(null);
   const [subTwelve, setSubTwelve] = useState(null);
   const [pending, setPending] = useState(false);
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -1000,14 +996,6 @@ export default function PricingPage({ match, history }) {
                         </Button>
                       </div>
                     </Grid>
-                    {/* <Grid item xs={1}>
-                      <div
-                        style={{
-                          borderRight: "1px solid #41444b",
-                          height: "170px",
-                        }}
-                      />
-                    </Grid> */}
                   </Grid>
                 </Card>
               </Grid>
@@ -1015,6 +1003,10 @@ export default function PricingPage({ match, history }) {
           </div>
         </Container>
       )}
+
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
       <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={

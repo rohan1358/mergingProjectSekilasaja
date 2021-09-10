@@ -42,10 +42,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 //Form for login, including all other methods relevant to login
-const ForgotPasswordForm = ({ history }) => {
+const ForgotPasswordForm = () => {
+  // Styles
   const classes = useStyles();
   const multi = MultiUseMobile();
+
+  // Ref
   const emailRef = useRef();
+
+  // useState hooks
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);

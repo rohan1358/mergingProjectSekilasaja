@@ -6,7 +6,6 @@ import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { Tooltip } from "@material-ui/core";
 
 // Custom components
-import NavBar from "../../components/NavBar/Navbar";
 import Footer from "../../components/Footer";
 import SignUpForm from "./SignUpForm";
 import MultiUseMobile from "../../styles/MultiUseMobile";
@@ -18,13 +17,14 @@ import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import { Container, Paper, makeStyles } from "@material-ui/core";
 import { beigeColor } from "../../styles/Style";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     padding: "30px",
   },
 }));
 
 export default function SignUpPage({ history }) {
+  // Styles
   const classes = useStyles();
   const multi = MultiUseMobile();
 
@@ -46,6 +46,9 @@ export default function SignUpPage({ history }) {
         <div className={multi.extraSpace} />
       </Container>
 
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
       <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={

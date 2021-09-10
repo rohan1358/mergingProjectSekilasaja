@@ -1,7 +1,6 @@
 import React from "react";
 
 // Custom components
-import NavBar from "../../components/NavBar/Navbar";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
@@ -21,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LoginPage({ history }) {
+  // Styles
   const classes = useStyles();
   const multi = MultiUseMobile();
 

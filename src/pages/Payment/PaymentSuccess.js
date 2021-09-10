@@ -20,11 +20,17 @@ import { selectUser } from "../../feature/userSlice";
 import fire from "../../firebase/fire";
 
 export default function PaymentSuccess() {
+  // Styles
+  const multi = MultiUseMobile();
+
+  // Redux
   const dispatch = useDispatch();
-  const firestore = fire.firestore();
-  const { currentUser } = useContext(AuthContext);
   const userData = useSelector(selectUser);
   const cart = useSelector(selectCart);
+
+  // Auth
+  const firestore = fire.firestore();
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     const emptyCart = async () => {
@@ -49,7 +55,6 @@ export default function PaymentSuccess() {
     emptyCart();
   }, []);
 
-  const multi = MultiUseMobile();
   return (
     <div>
       <div style={{ marginTop: "130px" }} />

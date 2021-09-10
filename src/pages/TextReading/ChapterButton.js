@@ -8,8 +8,10 @@ import { toggleDrawer } from "../../components/Drawer";
 import classNames from "classnames";
 
 function ChapterButton({ chosenChapter, setChosenChapter, chapter }) {
+  // Styles
   const classes = TextReadingStyle();
-  console.log(chapter);
+
+  // useState hooks
   const [isSelected, setIsSelected] = useState(false);
 
   useEffect(() => {

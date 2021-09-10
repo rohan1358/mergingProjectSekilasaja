@@ -8,7 +8,6 @@ import {
   Drawer,
   Divider,
 } from "@material-ui/core";
-import MultiUseMobile from "../styles/MultiUseMobile";
 
 // Custom components
 import NavbarStyle from "../styles/NavbarStyle";
@@ -17,7 +16,6 @@ import { dangerColor, beigeColor } from "../styles/Style";
 
 // nodejs library to set properties for component
 import clsx from "clsx";
-import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   list: {
@@ -35,11 +33,16 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CustomDrawer(props) {
-  const { logo, children, drawerTitle, drawerLogo, direction, childrenCart } =
-    props;
+export default function CustomDrawer({
+  logo,
+  children,
+  drawerTitle,
+  drawerLogo,
+  direction,
+  childrenCart,
+}) {
+  // Styles
   const classes = NavbarStyle();
-  const spaces = MultiUseMobile();
 
   // Cart Drawer
   const drawer = useStyles();
@@ -102,13 +105,3 @@ export default function CustomDrawer(props) {
     </div>
   );
 }
-
-CustomDrawer.propTypes = {
-  logo: PropTypes.object.isRequired,
-  button: PropTypes.object,
-  children: PropTypes.object,
-  drawerTitle: PropTypes.string,
-  drawerLogo: PropTypes.object,
-  direction: PropTypes.string.isRequired,
-  childrenCart: PropTypes.object,
-};

@@ -8,19 +8,19 @@ import { Tooltip } from "@material-ui/core";
 // Custom components
 import FourOFourStyle from "../styles/404Style";
 import Typography from "../components/Typography";
-import NavBar from "../components/NavBar/Navbar";
 import Footer from "../components/Footer";
 import Header from "../components/NavBar/Header";
 import HeaderLinks from "../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../components/NavBar/HeaderLinksMobile";
+import { beigeColor } from "../styles/Style";
 
 // Material-UI components
 import { makeStyles, Container } from "@material-ui/core";
-import { beigeColor } from "../styles/Style";
 
 const useStyles = makeStyles(FourOFourStyle);
 
 export default function FourOFourPage({ history }) {
+  // Styles
   const classes = useStyles();
 
   return (
@@ -43,6 +43,10 @@ export default function FourOFourPage({ history }) {
           diganti, atau memang pada dasarnya tidak pernah dibuat.
         </Typography>
       </Container>
+
+      {/*---------------------------------------------------------------*/}
+      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+      {/*---------------------------------------------------------------*/}
       <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
         <Tooltip
           title={

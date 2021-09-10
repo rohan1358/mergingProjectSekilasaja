@@ -41,25 +41,21 @@ export default function BookCard({
   addedButtonMobile,
   extraSpace,
 }) {
+  // Styles
   const classes = useStyles();
   const hover = useHoverStyles();
 
+  // Auth
   const { currentUser } = useContext(AuthContext);
-
   const db = fire.firestore();
-  const [coverLink, setCoverLink] = useState("");
-  const [products, SetProducts] = useState([]);
-  const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    db.collection("books").onSnapshot((snapshot) => {
-      SetProducts(
-        snapshot.docs.map((doc) => ({
-          ...doc.data(),
-        }))
-      );
-    });
-  }, []);
+  // useState hooks
+  const [coverLink, setCoverLink] = useState("");
+  const [isAdded, setIsAdded] = useState(false);
+
+  // Redux
+  const cartItems = useSelector(selectCart).cart;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -72,11 +68,6 @@ export default function BookCard({
     };
     fetchData();
   }, [, chosenCategory]);
-
-  // Add to cart
-  const cartItems = useSelector(selectCart).cart;
-  const dispatch = useDispatch();
-  const [isAdded, setIsAdded] = useState(false);
 
   const handleAddCart = () => {
     console.log("Adding to cart...");
@@ -127,12 +118,7 @@ export default function BookCard({
         </div>
       )}
 
-      <Link
-        onMouseOver={() => setShow(true)}
-        onMouseOut={() => setShow(false)}
-        underline="none"
-        href={`book-details/${product.book_title}`}
-      >
+      <Link underline="none" href={`book-details/${product.book_title}`}>
         <div className={classes.bookCover}>
           <div>
             <img
