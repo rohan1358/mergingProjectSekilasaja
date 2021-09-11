@@ -87,6 +87,7 @@ export default function Payment({ history }) {
   const [promoCodeData, setPromoCodeData] = useState("");
   const [promoCode, setPromoCode] = useState("");
   const [discountAmount, setDiscountAmount] = useState(0);
+  const [enablePayButton, setEnablePayButton] = useState(false);
 
   // Redux
   const userData = useSelector(selectUser);
@@ -202,6 +203,7 @@ export default function Payment({ history }) {
 
   // function to handle modal open for login
   const handlePayment = async () => {
+    setEnablePayButton(true);
     setError("");
     setFileError("");
     setCartError("");
@@ -210,18 +212,23 @@ export default function Payment({ history }) {
 
     // See if any input values are empty (ALL REQUIRED TO BE FILLED!)
     if (namaDiRekening.length === 0) {
+      setEnablePayButton(false);
       return setError("Nama di rekening belum terisi!");
     } else if (nomorRekening.length === 0) {
+      setEnablePayButton(false);
       return setError("Nomor rekening belum terisi!");
     } else if (namaBank.length === 0) {
+      setEnablePayButton(false);
       return setNamaBankError("Kamu belum memilih jenis pembayaran!");
     } else if (cartItems.length === 0) {
       // console.log("belum beli apa-apa");
+      setEnablePayButton(false);
       return setCartError("Kamu belum membeli apa-apa!");
     }
 
     // See if image has been uploaded or not (REQUIRED!)
     if (!file || file.length === 0) {
+      setEnablePayButton(false);
       return setFileError("Tolong upload image bukti pembayaran!");
     }
 
@@ -596,7 +603,7 @@ export default function Payment({ history }) {
                     <Alert severity="error">{cartError}</Alert>
                   </div>
                 )}
-                <Button fullWidth round onClick={handlePayment} type="submit">
+                <Button id="pay" fullWidth round onClick={handlePayment} type="submit" disabled = {enablePayButton}>
                   <PaymentIcon />
                   Bayar Sekarang
                 </Button>
@@ -910,7 +917,7 @@ export default function Payment({ history }) {
                     <Alert severity="error">{cartError}</Alert>
                   </div>
                 )}
-                <Button fullWidth round onClick={handlePayment} type="submit">
+                <Button id="pay" fullWidth round onClick={handlePayment} type="submit" disabled = {enablePayButton}>
                   <PaymentIcon /> Bayar Sekarang
                 </Button>
               </Paper>
