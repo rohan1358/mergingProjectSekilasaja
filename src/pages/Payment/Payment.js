@@ -603,7 +603,14 @@ export default function Payment({ history }) {
                     <Alert severity="error">{cartError}</Alert>
                   </div>
                 )}
-                <Button id="pay" fullWidth round onClick={handlePayment} type="submit" disabled = {enablePayButton}>
+                <Button
+                  id="pay"
+                  fullWidth
+                  round
+                  onClick={handlePayment}
+                  type="submit"
+                  disabled={enablePayButton}
+                >
                   <PaymentIcon />
                   Bayar Sekarang
                 </Button>
@@ -917,7 +924,14 @@ export default function Payment({ history }) {
                     <Alert severity="error">{cartError}</Alert>
                   </div>
                 )}
-                <Button id="pay" fullWidth round onClick={handlePayment} type="submit" disabled = {enablePayButton}>
+                <Button
+                  id="pay"
+                  fullWidth
+                  round
+                  onClick={handlePayment}
+                  type="submit"
+                  disabled={enablePayButton}
+                >
                   <PaymentIcon /> Bayar Sekarang
                 </Button>
               </Paper>
