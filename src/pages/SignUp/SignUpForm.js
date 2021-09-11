@@ -88,6 +88,10 @@ const SignUpForm = ({ history }) => {
               cart: [],
               start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
               end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
+<<<<<<< HEAD
+=======
+              // isVerified: currentUser.emailVerified,
+>>>>>>> 5850e18d2659d8014cc5a26c92eb8fa7d8eab62a
             });
           //Sign up success case
           console.log("Firebase signup suceeded!");
