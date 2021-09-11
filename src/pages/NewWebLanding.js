@@ -22,14 +22,16 @@ export default function NewWebLanding() {
       <Container>
         <Paper className={classes.paper} elevation={5}>
           <img className={classes.logo} src={Logo} />
-          <Typography size="heading">Sebentar Lagi!</Typography>
+          <Typography size="heading">
+            Maaf! Website Under Maintenance.
+          </Typography>
           <Typography
             className={classes.description}
             type="italic"
             size="subheading"
           >
-            "Sebentar lagi kami akan merilis website ini dan menawarkan berbagai
-            kilas buku terpopuler di dunia dalam bentuk video, audio, dan teks."
+            Mohon menunggu dan terima kasih atas kesabaranmu, bila ada
+            pertanyaan tolong hubungi instagram kami
           </Typography>
           <Button
             href="https://instagram.com/sekilasajacom"

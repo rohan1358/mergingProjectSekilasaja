@@ -19,6 +19,7 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
 import VerifyEmail from "./pages/VerifyEmail";
 import HomeTwo from "./pages/Home/HomeTwo";
+import NewWebLanding from "./pages/NewWebLanding";
 
 // Routing componentns
 import PrivateRoute from "./components/Routing/PrivateRoute";
@@ -64,6 +65,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={HomeTwo} />
           <Route component={FourOFourPage} />
+          {/* <Route exact path="/" component={NewWebLanding} /> */}
         </Switch>
       </Router>
     </AuthProvider>
