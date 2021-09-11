@@ -6,7 +6,6 @@ import { Container, makeStyles } from "@material-ui/core";
 
 // Custom components
 import NavBarSecond from "../components/NavBar/NavBarSecond";
-import ReactPlayer from "react-player";
 import Typography from "../components/Typography";
 import { beigeColor } from "../styles/Style";
 
@@ -95,46 +94,22 @@ export default function VideoWatchingPage({ match, history }) {
     }
   }, []);
 
+  console.log(bookContent);
+
   return (
     <div style={{ backgroundColor: beigeColor }}>
       <div>
         <NavBarSecond />
         <div style={{ marginTop: "70px" }} />
         <Container maxWidth="sm">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <ReactPlayer
-              url={bookContent.video_link}
-              controls={true}
-              config={{
-                file: {
-                  attributes: {
-                    crossorigin: "anonymous",
-                  },
-                },
-              }}
-            />
-          </div>
-
-          {/* <div className={classes.container}>
+          <div className={classes.container}>
             <iframe
               className={classes.iframe}
               src={bookContent.video_link}
               frameborder="0"
-              allowFullScreen
+              allowfullscreen
             />
-            <iframe
-              src="//player.vimeo.com/video/349093088"
-              width="560"
-              height="315"
-              frameborder="0"
-              allowfullscreen=""
-            ></iframe>
-          </div> */}
+          </div>
 
           <Typography size="subheading">{bookContent.book_title}</Typography>
         </Container>
