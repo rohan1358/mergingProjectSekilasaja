@@ -107,7 +107,7 @@ export default function VideoWatchingPage({ match, history }) {
               className={classes.iframe}
               src={bookContent.video_link}
               frameborder="0"
-              allowfullscreen
+              allow="fullscreen"
             />
           </div>
 
