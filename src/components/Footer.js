@@ -226,10 +226,10 @@ export default function Footer() {
               <Link href="/pricing" underline="none">
                 <Typography color="beigeColor">Berlanggan Sekarang</Typography>
               </Link>
-              {/* <Link underline="none">
-                <Typography color="beigeColor">Link</Typography>
+              <Link href="/faq" underline="none">
+                <Typography color="beigeColor">FAQ</Typography>
               </Link>
-              <Link underline="none">
+              {/* <Link underline="none">
                 <Typography color="beigeColor">Link</Typography>
               </Link> */}
             </Grid>
@@ -297,10 +297,10 @@ export default function Footer() {
               <Link href="/pricing" underline="none">
                 <Typography color="beigeColor">Berlanggan Sekarang</Typography>
               </Link>
-              {/* <Link underline="none">
-                <Typography color="beigeColor">Link</Typography>
+              <Link href="/faq" underline="none">
+                <Typography color="beigeColor">FAQ</Typography>
               </Link>
-              <Link underline="none">
+              {/* <Link underline="none">
                 <Typography color="beigeColor">Link</Typography>
               </Link> */}
               <div style={{ marginBottom: "30px" }} />

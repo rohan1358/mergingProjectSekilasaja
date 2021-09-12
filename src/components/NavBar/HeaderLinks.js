@@ -43,6 +43,11 @@ export default function HeaderLinks({ history }) {
     history.push(`/pricing`);
   };
 
+  //Handle event to navigate to pricing page
+  const goToFAQ = () => {
+    history.push(`/faq`);
+  };
+
   useEffect(() => {
     const signout = async () => {
       fire.auth().signOut();
@@ -61,6 +66,12 @@ export default function HeaderLinks({ history }) {
           <ListItem className={header.listItem}>
             <Button onClick={goToPricing} round color="transparent">
               <div style={{ color: secondaryColor }}>Harga</div>
+            </Button>
+          </ListItem>
+
+          <ListItem className={header.listItem}>
+            <Button onClick={goToFAQ} round color="transparent">
+              <div style={{ color: secondaryColor }}>FAQ</div>
             </Button>
           </ListItem>
 
@@ -104,11 +115,19 @@ export default function HeaderLinks({ history }) {
               <div style={{ color: secondaryColor }}>Harga</div>
             </Button>
           </ListItem>
+
+          <ListItem className={header.listItem}>
+            <Button onClick={goToFAQ} round color="transparent">
+              <div style={{ color: secondaryColor }}>FAQ</div>
+            </Button>
+          </ListItem>
+
           <ListItem className={header.listItem}>
             <Button href="/signup" round color="transparent">
               <div style={{ color: secondaryColor }}>Daftar</div>
             </Button>
           </ListItem>
+
           <ListItem className={header.listItem}>
             <Button href="/login" round color="primary">
               <div style={{ color: secondaryColor }}>Login</div>

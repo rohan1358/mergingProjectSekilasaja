@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Custom pages
 import LoginPage from "./pages/Login/Login";
 import SignUpPage from "./pages/SignUp/SignUp";
-import Contact from "./pages/Contact";
 import Home from "./pages/Home/Home";
 import FourOFourPage from "./pages/404page";
 import PricingPage from "./pages/Pricing";
@@ -19,6 +18,11 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
 import VerifyEmail from "./pages/VerifyEmail";
 import HomeTwo from "./pages/Home/HomeTwo";
+import FAQPage from "./pages/FAQ/FAQ";
+
+// Unused
+import Contact from "./pages/Contact";
+import NewWebLanding from "./pages/NewWebLanding";
 
 // Routing componentns
 import PrivateRoute from "./components/Routing/PrivateRoute";
@@ -45,6 +49,7 @@ function App() {
           <PrivateRoute exact path="/payment" component={Payment} />
 
           {/* Public Routes (Everybody can see) */}
+          <Route exact path="/faq" component={FAQPage} />
           <Route exact path="/verify-email" component={VerifyEmail} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
@@ -64,6 +69,9 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={HomeTwo} />
           <Route component={FourOFourPage} />
+
+          {/* <Route exact path="/" component={Contact} />
+          <Route exact path="/" component={NewWebLanding} /> */}
         </Switch>
       </Router>
     </AuthProvider>

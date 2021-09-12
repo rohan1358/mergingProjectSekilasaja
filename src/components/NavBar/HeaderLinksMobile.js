@@ -9,6 +9,7 @@ import PeopleIcon from "@material-ui/icons/People";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import HelpIcon from "@material-ui/icons/Help";
 
 // Custom components
 import Button from "../Button";
@@ -18,10 +19,6 @@ import { secondaryColor } from "../../styles/Style";
 //Firebase components
 import fire from "../.././firebase/fire";
 import { AuthContext } from "../Routing/Auth";
-
-//Redux
-import { useSelector } from "react-redux";
-import { selectCart } from "../../feature/cartSlice";
 
 const useStyles = makeStyles(styles);
 
@@ -44,6 +41,12 @@ export default function HeaderLinksMobile({ history }) {
     history.push(`/pricing`);
   };
 
+  //Handle event to navigate to pricing page
+  const goToFAQ = () => {
+    // console.log(history);
+    history.push(`/faq`);
+  };
+
   useEffect(() => {
     const signout = async () => {
       fire.auth().signOut();
@@ -60,9 +63,10 @@ export default function HeaderLinksMobile({ history }) {
       {!!currentUser ? (
         <List className={header.list}>
           <ListItem className={header.listItem}>
-            <Button fullWidth onClick={goToPricing} round color="transparent">
+            <Button fullWidth href="/library" round color="transparent">
               <div style={{ color: secondaryColor }}>
-                <MonetizationOnIcon /> Harga
+                <LibraryBooksIcon />
+                My Library
               </div>
             </Button>
           </ListItem>
@@ -74,17 +78,15 @@ export default function HeaderLinksMobile({ history }) {
               </div>
             </Button>
           </ListItem>
+
           <ListItem className={header.listItem}>
-            <Button fullWidth href="/library" round color="transparent">
+            <Button fullWidth onClick={goToFAQ} round color="transparent">
               <div style={{ color: secondaryColor }}>
-                <LibraryBooksIcon />
-                My Library
+                <HelpIcon /> FAQ
               </div>
             </Button>
           </ListItem>
-        </List>
-      ) : (
-        <List className={header.list}>
+
           <ListItem className={header.listItem}>
             <Button fullWidth onClick={goToPricing} round color="transparent">
               <div style={{ color: secondaryColor }}>
@@ -92,6 +94,9 @@ export default function HeaderLinksMobile({ history }) {
               </div>
             </Button>
           </ListItem>
+        </List>
+      ) : (
+        <List className={header.list}>
           <ListItem className={header.listItem}>
             <Button fullWidth href="/signup" round color="transparent">
               <div style={{ color: secondaryColor }}>
@@ -103,6 +108,20 @@ export default function HeaderLinksMobile({ history }) {
             <Button fullWidth href="/login" round color="transparent">
               <div style={{ color: secondaryColor }}>
                 <VpnKeyIcon /> Login
+              </div>
+            </Button>
+          </ListItem>
+          <ListItem className={header.listItem}>
+            <Button fullWidth onClick={goToFAQ} round color="transparent">
+              <div style={{ color: secondaryColor }}>
+                <HelpIcon /> FAQ
+              </div>
+            </Button>
+          </ListItem>
+          <ListItem className={header.listItem}>
+            <Button fullWidth onClick={goToPricing} round color="transparent">
+              <div style={{ color: secondaryColor }}>
+                <MonetizationOnIcon /> Harga
               </div>
             </Button>
           </ListItem>
