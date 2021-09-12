@@ -2,11 +2,10 @@ import React, { useEffect, useContext, useState } from "react";
 import { Redirect } from "react-router";
 
 // Material UI
-import { Container } from "@material-ui/core";
+import { Container, makeStyles } from "@material-ui/core";
 
 // Custom components
 import NavBarSecond from "../components/NavBar/NavBarSecond";
-import ReactPlayer from "react-player";
 import Typography from "../components/Typography";
 import { beigeColor } from "../styles/Style";
 
@@ -19,7 +18,28 @@ import { AuthContext } from "../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../firebase/firebaseGetBookInfoByTitle";
 
+const useStyles = makeStyles((theme) => ({
+  container: {
+    position: "relative",
+    overflow: "hidden",
+    width: "100%",
+    paddingTop: "56.25%",
+  },
+  iframe: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    width: "100%",
+    height: "100%",
+  },
+}));
+
 export default function VideoWatchingPage({ match, history }) {
+  // styles
+  const classes = useStyles();
+
   // Auth
   const { currentUser } = useContext(AuthContext);
 
@@ -74,34 +94,24 @@ export default function VideoWatchingPage({ match, history }) {
     }
   }, []);
 
+  console.log(bookContent);
+
   return (
     <div style={{ backgroundColor: beigeColor }}>
       <div>
         <NavBarSecond />
         <div style={{ marginTop: "70px" }} />
         <Container maxWidth="sm">
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <ReactPlayer
-              url={bookContent.video_link}
-              controls={true}
-              config={{
-                file: {
-                  attributes: {
-                    crossorigin: "anonymous",
-                  },
-                },
-              }}
+          <div className={classes.container}>
+            <iframe
+              className={classes.iframe}
+              src={bookContent.video_link}
+              frameborder="0"
+              allowfullscreen
             />
           </div>
 
-          <Typography style={{ marginTop: -15 }} size="subheading">
-            {bookContent.book_title}
-          </Typography>
+          <Typography size="subheading">{bookContent.book_title}</Typography>
         </Container>
       </div>
     </div>
