@@ -4,7 +4,6 @@ import React from "react";
 import Typography from "../../components/Typography";
 import ReviewCard from "../../components/ReviewCard";
 import { secondaryColor } from "../../styles/Style";
-import { Instagram } from "@material-ui/icons";
 
 // Material-UI components
 import { Container, Grid } from "@material-ui/core";
