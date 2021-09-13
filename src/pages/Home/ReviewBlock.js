@@ -32,6 +32,8 @@ const data = [
     Plus, sangat membantu dalam berbagai bentuk self development. Baca buku & dapatin point2
     pentingnya jadi super cepat! Excellent!"
     `,
+    userInstagram: "bynikojulius",
+    userInstagramLink: "https://www.instagram.com/bynikojulius",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fnikojulius.jpg?alt=media&token=f3a855d7-6b93-426e-89f0-7d4fb9a7cc5a",
   },
@@ -43,6 +45,8 @@ const data = [
     Plus, sangat membantu dalam berbagai bentuk self development. Baca buku & dapatin point2
     pentingnya jadi super cepat! Excellent!"
     `,
+    userInstagram: "samuelchrist",
+    userInstagramLink: "https://www.instagram.com/samuelchrist",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fsamuelchrist.jpg?alt=media&token=82857e9d-6cc4-4dfe-a162-dbb10f140579",
   },
@@ -68,6 +72,8 @@ const data = [
     Plus, sangat membantu dalam berbagai bentuk self development. Baca buku & dapatin point2
     pentingnya jadi super cepat! Excellent!"
     `,
+    userInstagram: "samuelchrist",
+    userInstagramLink: "https://www.instagram.com/samuelchrist",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fnikojulius.jpg?alt=media&token=f3a855d7-6b93-426e-89f0-7d4fb9a7cc5a",
   },
@@ -93,6 +99,8 @@ const data = [
     Plus, sangat membantu dalam berbagai bentuk self development. Baca buku & dapatin point2
     pentingnya jadi super cepat! Excellent!"
     `,
+    userInstagram: "samuelchrist",
+    userInstagramLink: "https://www.instagram.com/samuelchrist",
     photoURL:
       "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fnikojulius.jpg?alt=media&token=f3a855d7-6b93-426e-89f0-7d4fb9a7cc5a",
   },
@@ -110,7 +118,13 @@ export default function ReviewBlock({}) {
 
       <Grid container spacing={3}>
         {data.map((x) => (
-          <ReviewCard photoURL={x.photoURL} name={x.name} comment={x.comment} />
+          <ReviewCard
+            photoURL={x.photoURL}
+            name={x.name}
+            comment={x.comment}
+            userInstagram={x.userInstagram}
+            userInstagramLink={x.userInstagramLink}
+          />
         ))}
       </Grid>
     </Container>

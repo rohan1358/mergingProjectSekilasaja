@@ -2,6 +2,7 @@ import React from "react";
 
 // @material-ui/core components
 import { makeStyles, Grid, Paper, Avatar } from "@material-ui/core";
+import { Instagram } from "@material-ui/icons";
 
 // Custom components
 import InfoAreaStyle from "../styles/InfoAreaStyle";
@@ -10,7 +11,13 @@ import { beigeColor, secondaryColor } from "../styles/Style";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function ReviewCard({ name, comment, userInfo, photoURL }) {
+export default function ReviewCard({
+  name,
+  comment,
+  userInstagram,
+  photoURL,
+  userInstagramLink,
+}) {
   // Styles
   const classes = useStyles();
 
@@ -31,6 +38,22 @@ export default function ReviewCard({ name, comment, userInfo, photoURL }) {
               <Typography style={{ marginBottom: 3 }} type="bold">
                 {name}
               </Typography>
+              <a
+                style={{
+                  textDecoration: "none",
+                  color: secondaryColor,
+                }}
+                href={userInstagramLink}
+              >
+                <Typography
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Instagram style={{ marginRight: "3px" }} /> {userInstagram}
+                </Typography>
+              </a>
             </div>
           </Grid>
           <Grid item xs={12}>
