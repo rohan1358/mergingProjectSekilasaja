@@ -10,7 +10,10 @@ import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFil
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-// //Redux
+// Material UI components
+import { Fade } from "@material-ui/core";
+
+// Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
 
@@ -99,12 +102,14 @@ export default function CategoryBlock({ title, history }) {
               (product) => product.category.includes(chosenCategory) == true
             )
             .map((categorisedProduct, index) => (
-              <BookCard
-                chosenCategory={chosenCategory}
-                key={index}
-                product={categorisedProduct}
-                extraSpace={<div style={{ marginTop: "20px" }} />}
-              />
+              <Fade in={true} timeout={1000}>
+                <BookCard
+                  chosenCategory={chosenCategory}
+                  key={index}
+                  product={categorisedProduct}
+                  extraSpace={<div style={{ marginTop: "20px" }} />}
+                />
+              </Fade>
             ))}
         </Carousel>
       ) : (
@@ -118,12 +123,14 @@ export default function CategoryBlock({ title, history }) {
           responsive={responsive}
         >
           {products.map((product) => (
-            <BookCard
-              chosenCategory={chosenCategory}
-              key={product.id}
-              product={product}
-              extraSpace={<div style={{ marginTop: "20px" }} />}
-            />
+            <Fade in={true} timeout={1000}>
+              <BookCard
+                chosenCategory={chosenCategory}
+                key={product.id}
+                product={product}
+                extraSpace={<div style={{ marginTop: "20px" }} />}
+              />
+            </Fade>
           ))}
         </Carousel>
       )}
