@@ -19,7 +19,6 @@ import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import Footer from "../../components/Footer";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import { beigeColor, secondaryColor } from "../../styles/Style";
-import { Instagram } from "@material-ui/icons";
 
 // Material-UI components
 import { Container, Grid, makeStyles, Tooltip } from "@material-ui/core";
