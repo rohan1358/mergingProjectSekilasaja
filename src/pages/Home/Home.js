@@ -18,7 +18,8 @@ import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import Footer from "../../components/Footer";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
-import { beigeColor } from "../../styles/Style";
+import { beigeColor, secondaryColor } from "../../styles/Style";
+import { Instagram } from "@material-ui/icons";
 
 // Material-UI components
 import { Container, Grid, makeStyles, Tooltip } from "@material-ui/core";
@@ -31,6 +32,8 @@ import classNames from "classnames";
 import { AuthContext } from "../../components/Routing/Auth";
 import { primaryColor } from "../../styles/Style";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
+import ReviewCard from "../../components/ReviewCard";
+import ReviewBlock from "./ReviewBlock";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -108,6 +111,10 @@ export default function Home({ history }) {
 
       {!!currentUser ? (
         <div>
+          {/*---------------------------------------------------------------*/}
+          {/*--------------------------- LOGGED IN -------------------------*/}
+          {/*---------------------------------------------------------------*/}
+
           {/* Landing Block */}
           <Parallax
             large
@@ -316,8 +323,11 @@ export default function Home({ history }) {
         </div>
       ) : (
         <div>
-          {/* Landing Block */}
+          {/*---------------------------------------------------------------*/}
+          {/*-------------------------- LOGGED OUT -------------------------*/}
+          {/*---------------------------------------------------------------*/}
 
+          {/* Landing Block */}
           <Parallax
             large
             className={desktopClass}
@@ -504,6 +514,11 @@ export default function Home({ history }) {
               </Button>
             }
           />
+
+          <div style={{ marginTop: "40px" }} />
+
+          {/* Review Block */}
+          <ReviewBlock />
 
           <div style={{ marginTop: "40px" }} />
 
