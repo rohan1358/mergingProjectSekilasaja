@@ -39,8 +39,8 @@ export default function SearchBar({ history }) {
       history.push(`/searchResults/${value}`);
     } else {
       // console.log("Book Selected: " + value);
-      history.push(`/book-details/${value}`);
-      //history.push(`/searchResults/${value}`);
+      //history.push(`/book-details/${value}`);
+      history.push(`/searchResults/${value}`);
     }
   };
 
