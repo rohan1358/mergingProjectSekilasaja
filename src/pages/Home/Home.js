@@ -4,11 +4,8 @@ import { Redirect } from "react-router";
 // Pictures
 import Logo from "../../images/yellow-logo.png";
 import Whatsapp from "../../images/Whatsapp.png";
-import HomeBookPNG from "../../images/home-landing.png";
 
 // Custom components
-import Typography from "../../components/Typography";
-import Parallax from "../../components/Parallax";
 import BenefitsBlock from "./BenefitsBlock";
 import Button from "../../components/Button";
 import MultiUseMobile from "../../styles/MultiUseMobile";
@@ -22,6 +19,7 @@ import { beigeColor } from "../../styles/Style";
 import LandingUserBlock from "./LandingUserBlock";
 import LandingNonUserBlock from "./LandingNonUserBlock";
 import TopBooksBlock from "./TopBooksBlock";
+import TopKilasBlock from "./TopKilasBlocks";
 
 // Material-UI components
 import { Container, Grid, makeStyles, Tooltip } from "@material-ui/core";
@@ -125,7 +123,8 @@ export default function Home({ history }) {
 
           <div style={{ marginTop: "40px" }} />
 
-          <TopBooksBlock />
+          {/* <TopBooksBlock /> */}
+          {/* <TopKilasBlock /> */}
 
           <div style={{ marginTop: "40px" }} />
 
@@ -154,7 +153,8 @@ export default function Home({ history }) {
 
           <div style={{ marginTop: "40px" }} />
 
-          <TopBooksBlock />
+          {/* <TopBooksBlock /> */}
+          {/* <TopKilasBlock /> */}
 
           <div style={{ marginTop: "40px" }} />
 

@@ -13,9 +13,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import NavbarStyle from "../../styles/NavbarStyle";
 import Loading from "../../pages/Loading";
 
-// nodejs library to set properties for component
-import PropTypes from "prop-types";
-
 export default function SearchBar({ history }) {
   // Styles
   const classes = NavbarStyle();
