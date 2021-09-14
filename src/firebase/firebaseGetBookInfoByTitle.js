@@ -50,6 +50,7 @@ export async function getBookInfoByTitle(title) {
       bookInfo.descriptions = bookData.descriptions;
       bookInfo.watch_time = bookData.watch_time;
       bookInfo.read_time = bookData.read_time;
+      bookInfo.short_desc = bookData.short_desc;
 
       const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(title);
       bookInfo.coverLink = await getLink;
