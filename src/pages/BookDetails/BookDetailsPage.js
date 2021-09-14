@@ -17,6 +17,7 @@ import ReactAudioPlayer from "react-audio-player";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import TextReadingStyle from "../../styles/TextReadingStyle";
+import Loading from "../Loading";
 
 // Material-UI components
 import { Container, Divider, Grid, makeStyles } from "@material-ui/core";
@@ -147,6 +148,20 @@ export default function BookDetailsPage({ match, history }) {
     };
     fetchData();
   };
+
+  //Only stop loading (Set pending to false) when all book details have been pulled from database
+  if (current_product && coverLink && audioLink && pending) {
+    setPending(false);
+  }
+
+  //Make page loading till book details have been loaded
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
