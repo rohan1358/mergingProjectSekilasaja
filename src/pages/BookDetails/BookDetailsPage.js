@@ -113,7 +113,7 @@ export default function BookDetailsPage({ match, history }) {
       const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(
         match.params.book_title
       );
-  
+
       const fetchData = async () => {
         const link = await getLink;
         setCoverLink(link);
@@ -173,7 +173,7 @@ export default function BookDetailsPage({ match, history }) {
   };
 
   //Only stop loading (Set pending to false) when all book details have been pulled from database
-  if(current_product && coverLink && audioLink && pending) {
+  if (current_product && coverLink && audioLink && pending) {
     setPending(false);
   }
 

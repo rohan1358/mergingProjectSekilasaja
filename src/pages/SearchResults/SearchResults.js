@@ -43,7 +43,7 @@ export default function SearchResults({ match, history }) {
 
   useEffect(() => {
     //Set pending to false to notify that web finished pulling books based on search results
-    if(searchResults){
+    if (searchResults) {
       setPending(false);
     }
   }, [searchResults]);

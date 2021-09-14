@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 // Custom components
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import { beigeColor } from "../../styles/Style";
 
 // Other components
 import { Container, Divider } from "@material-ui/core";
@@ -26,10 +27,10 @@ export default function SearchResultsBlock(props) {
   }, [searchResults]);
 
   return (
-    <div>
+    <div style={{ backgroundColor: beigeColor }}>
       {isSearchResultsEmpty ? (
         <div className={classes.title}>
-          <div style={{ marginTop: "200px" }} />
+          <div style={{ marginTop: "230px" }} />
           <Typography size="heading">Hasil Pencarian</Typography>
           <Typography
             style={{ fontWeight: "normal" }}
@@ -39,7 +40,7 @@ export default function SearchResultsBlock(props) {
             Kilas tidak ditemukan!
           </Typography>
 
-          <div style={{ marginBottom: "220px" }} />
+          <div style={{ marginBottom: "250px" }} />
         </div>
       ) : (
         <div>
