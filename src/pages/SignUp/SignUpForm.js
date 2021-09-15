@@ -94,14 +94,18 @@ const SignUpForm = ({ history }) => {
               cart: [],
               start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
               end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
-            }).then((resp) => {
+            })
+            .then((resp) => {
               console.log("Added user data to firestore...");
               setPending(false);
-            }).catch((err) => {
+            })
+            .catch((err) => {
               //Sign up fail case
               var errorCode = err.code;
               var errorMessage = err.message;
-              return setError("ERROR (" + errorCode + "):" + "\n\n" + errorMessage);
+              return setError(
+                "ERROR (" + errorCode + "):" + "\n\n" + errorMessage
+              );
             });
           //Sign up success case
           console.log("Firebase signup suceeded!");
