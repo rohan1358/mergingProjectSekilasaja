@@ -54,6 +54,7 @@ const SignUpForm = ({ history }) => {
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
+  const [verifyEmail, setVerifyEmail] = useState("");
   const [password, setPassword] = useState("");
   const [reenterPassword, setReenterPassword] = useState("");
   const [error, setError] = useState("");
@@ -64,7 +65,9 @@ const SignUpForm = ({ history }) => {
 
     //Check if password and reenter password are the same or not.
     if (password != reenterPassword) {
-      return setError("Passwords do not match!");
+      return setError("Password tidak sama!");
+    } else if (email != verifyEmail) {
+      return setError("Email tidak sama!");
     } else {
       //Call function to do signup in firebase
       auth
@@ -149,6 +152,14 @@ const SignUpForm = ({ history }) => {
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+      />
+      <TextField
+        label="Ketik Ulang Email Kamu"
+        variant="filled"
+        type="email"
+        required
+        value={verifyEmail}
+        onChange={(e) => setVerifyEmail(e.target.value)}
       />
       <TextField
         label="Password"
