@@ -1,5 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 
+//Import loading page
+import Loading from "../Loading";
+
 // Whatsapp Button
 import Whatsapp from "../../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
@@ -65,7 +68,9 @@ export default function BookDetailsPage({ match, history }) {
   const [coverLink, setCoverLink] = useState("");
   const [audioLink, setAudioLink] = useState(null);
   const [pending, setPending] = useState(true);
+  const [isFinishPullUserData, setIsFinishPullUserData] = useState(false);
 
+  //First useEffect to grab user data...
   useEffect(() => {
     if (currentUser !== null) {
       const fetchData = async () => {
@@ -78,15 +83,18 @@ export default function BookDetailsPage({ match, history }) {
         results.owned_books.map((x) => {
           if (x == match.params.book_title) {
             setIsBookOwned(true);
-            setPending(false);
           }
         });
       };
       fetchData();
     } else {
       console.log("Not logged in");
+      setIsFinishPullUserData(true);
     }
+  }, [history.location]);
 
+  // Once user data is grabbed, grab book details...
+  useEffect(() => {
     const fetchData = async () => {
       const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
         match.params.book_title
@@ -94,25 +102,41 @@ export default function BookDetailsPage({ match, history }) {
       setCurrent_Product(book_);
     };
     fetchData();
+    if (isFinishPullUserData) {
+      setIsFinishPullUserData(false);
+    }
+  }, [userData, isSubscribed, isFinishPullUserData]);
 
+  // Once book details is grabbed, grab book cover image...
+  useEffect(() => {
     if (match.params.book_title != null) {
       const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(
         match.params.book_title
       );
+
+      const fetchData = async () => {
+        const link = await getLink;
+        setCoverLink(link);
+      };
+      fetchData();
+    }
+  }, [current_product]);
+
+  // Once book cover image is grabbed, grab audio link...
+  useEffect(() => {
+    if (match.params.book_title != null) {
       const getAudioLink = firebaseGetBookAudioURL.getBookAudioURL(
         match.params.book_title,
         1
       );
 
       const fetchData = async () => {
-        const link = await getLink;
         const audioLink = await getAudioLink;
-        setCoverLink(link);
         setAudioLink(audioLink);
       };
       fetchData();
     }
-  }, [history.location]);
+  }, [coverLink]);
 
   useEffect(() => {
     const changeBtn = () => {
@@ -147,6 +171,20 @@ export default function BookDetailsPage({ match, history }) {
     };
     fetchData();
   };
+
+  //Only stop loading (Set pending to false) when all book details have been pulled from database
+  if (current_product && coverLink && audioLink && pending) {
+    setPending(false);
+  }
+
+  //Make page loading till book details have been loaded
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
