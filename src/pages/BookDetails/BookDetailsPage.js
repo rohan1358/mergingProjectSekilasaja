@@ -242,7 +242,7 @@ export default function BookDetailsPage({ match, history }) {
 
                                 <Grid item>
                                   <Button color="secondary" href="/library">
-                                    <LibraryBooksIcon /> Library
+                                    <LibraryBooksIcon /> My Library
                                   </Button>
                                 </Grid>
                               </Grid>
@@ -282,7 +282,7 @@ export default function BookDetailsPage({ match, history }) {
                                   color="secondary"
                                   href="/library"
                                 >
-                                  <LibraryBooksIcon /> Library
+                                  <LibraryBooksIcon /> My Library
                                 </Button>
                               </Grid>
                             </div>
@@ -291,6 +291,11 @@ export default function BookDetailsPage({ match, history }) {
                       />
 
                       <TextDetails
+                        libraryButton={
+                          <Button fullWidth color="secondary" href="/library">
+                            <LibraryBooksIcon /> Go To My Library
+                          </Button>
+                        }
                         video={
                           current_product.video_link ? (
                             <Button
@@ -402,7 +407,7 @@ export default function BookDetailsPage({ match, history }) {
 
                                 <Grid item>
                                   <Button color="secondary" href="/library">
-                                    <LibraryBooksIcon /> Library
+                                    <LibraryBooksIcon /> My Library
                                   </Button>
                                 </Grid>
                               </Grid>
@@ -434,7 +439,7 @@ export default function BookDetailsPage({ match, history }) {
                                   color="secondary"
                                   href="/library"
                                 >
-                                  <LibraryBooksIcon /> Library
+                                  <LibraryBooksIcon /> My Library
                                 </Button>
                               </Grid>
                             </div>
@@ -443,6 +448,11 @@ export default function BookDetailsPage({ match, history }) {
                       />
 
                       <TextDetails
+                        libraryButton={
+                          <Button fullWidth color="secondary" href="/library">
+                            <LibraryBooksIcon /> Go To My Library
+                          </Button>
+                        }
                         video={
                           current_product.video_link ? (
                             <Button href="/pricing" color="secondary" fullWidth>
@@ -464,9 +474,16 @@ export default function BookDetailsPage({ match, history }) {
                           />
                         }
                         totalNum={current_product.kilasan.length}
-                        kilasTitle={current_product.kilasan[0].title}
+                        kilasTitle={
+                          <Typography
+                            style={{ textAlign: "left" }}
+                            size="subheading"
+                          >
+                            {current_product.kilasan[0].title}
+                          </Typography>
+                        }
                         kilasBody={
-                          <div>
+                          <div style={{ textAlign: "left" }}>
                             <Typography className={books.paragraphBookDetails}>
                               {current_product.kilasan[0].details[0]}
                             </Typography>
@@ -517,6 +534,7 @@ export default function BookDetailsPage({ match, history }) {
                                 {index < 2 ? (
                                   <div>
                                     <Typography
+                                      style={{ textAlign: "left" }}
                                       className={books.paragraphBookDetails}
                                     >
                                       {kilas.title === undefined
@@ -531,6 +549,7 @@ export default function BookDetailsPage({ match, history }) {
                                 ) : (
                                   <div className={classes.blur}>
                                     <Typography
+                                      style={{ textAlign: "left" }}
                                       className={books.paragraphBookDetails}
                                     >
                                       {kilas.title === undefined
@@ -596,6 +615,11 @@ export default function BookDetailsPage({ match, history }) {
                   />
 
                   <TextDetails
+                    libraryButton={
+                      <Button fullWidth color="secondary" href="/library">
+                        <LibraryBooksIcon /> Go To My Library
+                      </Button>
+                    }
                     video={
                       current_product.video_link ? (
                         <Button href="/pricing" color="secondary" fullWidth>
@@ -617,9 +641,16 @@ export default function BookDetailsPage({ match, history }) {
                       />
                     }
                     totalNum={current_product.kilasan.length}
-                    kilasTitle={current_product.kilasan[0].title}
+                    kilasTitle={
+                      <Typography
+                        style={{ textAlign: "left" }}
+                        size="subheading"
+                      >
+                        {current_product.kilasan[0].title}
+                      </Typography>
+                    }
                     kilasBody={
-                      <div>
+                      <div style={{ textAlign: "left" }}>
                         <Typography className={books.paragraphBookDetails}>
                           {current_product.kilasan[0].details[0]}
                         </Typography>
@@ -666,6 +697,7 @@ export default function BookDetailsPage({ match, history }) {
                             {index < 2 ? (
                               <div>
                                 <Typography
+                                  style={{ textAlign: "left" }}
                                   className={books.paragraphBookDetails}
                                 >
                                   {kilas.title === undefined
@@ -680,6 +712,7 @@ export default function BookDetailsPage({ match, history }) {
                             ) : (
                               <div className={classes.blur}>
                                 <Typography
+                                  style={{ textAlign: "left" }}
                                   className={books.paragraphBookDetails}
                                 >
                                   {kilas.title === undefined

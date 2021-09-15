@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from "react";
 // @material-ui/core components
 import { makeStyles, List, ListItem, Badge } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 // Custom components
 import Button from "../Button";
@@ -83,7 +84,9 @@ export default function HeaderLinks({ history }) {
 
           <ListItem style={{ display: "flex" }} className={header.listItem}>
             <Button href="/library" round color="primary">
-              <div style={{ color: secondaryColor }}>My Library</div>
+              <div style={{ color: secondaryColor }}>
+                <LibraryBooksIcon /> My Library
+              </div>
             </Button>
 
             <div className={classes.divider} />

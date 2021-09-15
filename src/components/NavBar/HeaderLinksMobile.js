@@ -62,14 +62,14 @@ export default function HeaderLinksMobile({ history }) {
     <div>
       {!!currentUser ? (
         <List className={header.list}>
-          <ListItem className={header.listItem}>
+          {/* <ListItem className={header.listItem}>
             <Button fullWidth href="/library" round color="transparent">
               <div style={{ color: secondaryColor }}>
                 <LibraryBooksIcon />
                 My Library
               </div>
             </Button>
-          </ListItem>
+          </ListItem> */}
 
           <ListItem className={header.listItem}>
             <Button fullWidth onClick={goToAccounts} round color="transparent">
