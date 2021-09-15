@@ -16,7 +16,7 @@ import PaymentSuccess from "./pages/Payment/PaymentSuccess";
 import Library from "./pages/Library/Library";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
-import VerifyEmail from "./pages/VerifyEmail";
+// import VerifyEmail from "./pages/VerifyEmail";
 import HomeTwo from "./pages/Home/HomeTwo";
 import FAQPage from "./pages/FAQ/FAQ";
 
@@ -50,7 +50,7 @@ function App() {
 
           {/* Public Routes (Everybody can see) */}
           <Route exact path="/faq" component={FAQPage} />
-          <Route exact path="/verify-email" component={VerifyEmail} />
+          {/* <Route exact path="/verify-email" component={VerifyEmail} /> */}
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/signup" component={SignUpPage} />
           <Route exact path="/lupa-password" component={ForgotPassword} />
