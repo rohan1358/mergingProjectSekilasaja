@@ -9,11 +9,11 @@ import NavBarSecond from "../components/NavBar/NavBarSecond";
 import Typography from "../components/Typography";
 import { beigeColor } from "../styles/Style";
 
-//Redux
+// Redux
 import { useSelector } from "react-redux";
 import { selectOwnedBooks } from "../feature/ownedBooksSlice";
 
-//firebase components
+// firebase components
 import { AuthContext } from "../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../firebase/firebaseGetBookInfoByTitle";
@@ -101,7 +101,7 @@ export default function VideoWatchingPage({ match, history }) {
       <div>
         <NavBarSecond />
         <div style={{ marginTop: "70px" }} />
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
           <div className={classes.container}>
             <iframe
               className={classes.iframe}

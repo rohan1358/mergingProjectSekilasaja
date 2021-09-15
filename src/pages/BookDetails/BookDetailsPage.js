@@ -25,6 +25,7 @@ import TextReadingStyle from "../../styles/TextReadingStyle";
 import { Container, Divider, Grid, makeStyles } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -238,6 +239,12 @@ export default function BookDetailsPage({ match, history }) {
                                     </Button>
                                   )}
                                 </Grid>
+
+                                <Grid item>
+                                  <Button color="secondary" href="/library">
+                                    <LibraryBooksIcon /> Library
+                                  </Button>
+                                </Grid>
                               </Grid>
                             </div>
 
@@ -253,6 +260,7 @@ export default function BookDetailsPage({ match, history }) {
                                   Read or listen now!
                                 </Button>
                               </Grid>
+
                               <Grid item xs={12}>
                                 {current_product.video_link ? (
                                   <Button
@@ -266,6 +274,16 @@ export default function BookDetailsPage({ match, history }) {
                                     Video coming soon!
                                   </Button>
                                 )}
+                              </Grid>
+
+                              <Grid item>
+                                <Button
+                                  fullWidth
+                                  color="secondary"
+                                  href="/library"
+                                >
+                                  <LibraryBooksIcon /> Library
+                                </Button>
                               </Grid>
                             </div>
                           </div>
@@ -381,6 +399,12 @@ export default function BookDetailsPage({ match, history }) {
                                     </Typography>
                                   )}
                                 </Grid>
+
+                                <Grid item>
+                                  <Button color="secondary" href="/library">
+                                    <LibraryBooksIcon /> Library
+                                  </Button>
+                                </Grid>
                               </Grid>
                             </div>
 
@@ -402,6 +426,16 @@ export default function BookDetailsPage({ match, history }) {
                                 ) : (
                                   <Typography type="bold">✔ Added!</Typography>
                                 )}
+                              </Grid>
+
+                              <Grid item>
+                                <Button
+                                  fullWidth
+                                  color="secondary"
+                                  href="/library"
+                                >
+                                  <LibraryBooksIcon /> Library
+                                </Button>
                               </Grid>
                             </div>
                           </div>
