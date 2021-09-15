@@ -14,6 +14,8 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import { AuthContext } from "../../components/Routing/Auth";
 import fire from "../../firebase/fire";
 
+import Loading from "../Loading";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -55,6 +57,7 @@ const SignUpForm = ({ history }) => {
   const [reenterPassword, setReenterPassword] = useState("");
   const [error, setError] = useState("");
   const { currentUser } = useContext(AuthContext);
+  const [pending, setPending] = useState(true);
 
   const handleSubmit = (e) => {
     // Auth
@@ -72,6 +75,7 @@ const SignUpForm = ({ history }) => {
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((resp) => {
+          console.log("CREATING IN FIRESTORE...");
           //Store the new user information in the database via firestore
           firestore
             .collection("users")
@@ -90,6 +94,14 @@ const SignUpForm = ({ history }) => {
               cart: [],
               start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
               end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
+            }).then((resp) => {
+              console.log("Added user data to firestore...");
+              setPending(false);
+            }).catch((err) => {
+              //Sign up fail case
+              var errorCode = err.code;
+              var errorMessage = err.message;
+              return setError("ERROR (" + errorCode + "):" + "\n\n" + errorMessage);
             });
           //Sign up success case
           console.log("Firebase signup suceeded!");
@@ -114,7 +126,7 @@ const SignUpForm = ({ history }) => {
   //   return <Redirect to="/verify-email" />;
   // }
 
-  if (currentUser) {
+  if (currentUser && !pending) {
     return <Redirect to="/" />;
   }
 
