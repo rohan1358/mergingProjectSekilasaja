@@ -14,6 +14,8 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import { AuthContext } from "../../components/Routing/Auth";
 import fire from "../../firebase/fire";
 
+import Loading from "../Loading";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -41,10 +43,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUpForm = ({ history }) => {
-  // Auth
-  const auth = fire.auth();
-  const firestore = fire.firestore();
-
   // Styles
   const classes = useStyles();
   const multi = MultiUseMobile();
@@ -54,22 +52,30 @@ const SignUpForm = ({ history }) => {
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
+  const [verifyEmail, setVerifyEmail] = useState("");
   const [password, setPassword] = useState("");
   const [reenterPassword, setReenterPassword] = useState("");
   const [error, setError] = useState("");
   const { currentUser } = useContext(AuthContext);
+  const [pending, setPending] = useState(true);
 
   const handleSubmit = (e) => {
+    // Auth
+    const auth = fire.auth();
+    const firestore = fire.firestore();
+
     e.preventDefault();
 
     //Check if password and reenter password are the same or not.
     if (password != reenterPassword) {
-      return setError("Passwords do not match!");
+      return setError("Password tidak sama!");
+    } else if (email != verifyEmail) {
+      return setError("Email tidak sama!");
     } else {
-      //Call function to do signup in firebase
       auth
         .createUserWithEmailAndPassword(email, password)
         .then((resp) => {
+          console.log("CREATING IN FIRESTORE...");
           //Store the new user information in the database via firestore
           firestore
             .collection("users")
@@ -88,7 +94,18 @@ const SignUpForm = ({ history }) => {
               cart: [],
               start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
               end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
-              // isVerified: currentUser.emailVerified,
+            })
+            .then((resp) => {
+              console.log("Added user data to firestore...");
+              setPending(false);
+            })
+            .catch((err) => {
+              //Sign up fail case
+              var errorCode = err.code;
+              var errorMessage = err.message;
+              return setError(
+                "ERROR (" + errorCode + "):" + "\n\n" + errorMessage
+              );
             });
           //Sign up success case
           console.log("Firebase signup suceeded!");
@@ -102,15 +119,19 @@ const SignUpForm = ({ history }) => {
     }
   };
 
-  if (currentUser && currentUser.emailVerified) {
-    console.log("Current user id: " + currentUser.uid);
-    console.log("Redirecting to library page...");
+  // if (currentUser && currentUser.emailVerified) {
+  //   console.log("Current user id: " + currentUser.uid);
+  //   console.log("Redirecting to library page...");
+  //   return <Redirect to="/" />;
+  // } else if (currentUser && !currentUser.emailVerified) {
+  //   console.log(
+  //     "Redirect to email not verified page to ask for email verification..."
+  //   );
+  //   return <Redirect to="/verify-email" />;
+  // }
+
+  if (currentUser && !pending) {
     return <Redirect to="/" />;
-  } else if (currentUser && !currentUser.emailVerified) {
-    console.log(
-      "Redirect to email not verified page to ask for email verification..."
-    );
-    return <Redirect to="/verify-email" />;
   }
 
   return (
@@ -149,6 +170,14 @@ const SignUpForm = ({ history }) => {
         required
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+      />
+      <TextField
+        label="Ketik Ulang Email Kamu"
+        variant="filled"
+        type="email"
+        required
+        value={verifyEmail}
+        onChange={(e) => setVerifyEmail(e.target.value)}
       />
       <TextField
         label="Password"

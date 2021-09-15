@@ -54,10 +54,10 @@ export default function HeaderLinks({ history }) {
       fire.auth().signOut();
     };
 
-    //If user is logged in but not email verified, logout so currentUser becomes null
-    if (currentUser && !currentUser.emailVerified) {
-      signout();
-    }
+    // //If user is logged in but not email verified, logout so currentUser becomes null
+    // if (currentUser && !currentUser.emailVerified) {
+    //   signout();
+    // }
   }, []);
 
   return (
