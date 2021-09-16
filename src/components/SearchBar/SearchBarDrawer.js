@@ -140,7 +140,6 @@ export default function SearchBarDrawer({ logo, direction, history }) {
           <IconButton onClick={toggleDrawer(anchor, true)} color="inherit">
             {logo}
           </IconButton>
-
           <Drawer
             anchor={anchor}
             open={state[anchor]}
