@@ -1,5 +1,7 @@
 import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router";
+import ovoQR from "../../images/ovo-qr.JPG";
+import danaQR from "../../images/dana-qr.JPG";
 
 // Facebook Pixel
 import ReactPixel from "react-facebook-pixel";
@@ -16,10 +18,14 @@ import Button from "../../components/Button";
 import Footer from "../../components/Footer";
 import InfoStyle from "../../styles/InfoAreaStyle";
 import Box from "../../components/Box";
-import PaymentStyle from "../../styles/PaymentStyle";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
+import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
+import BuktiBCA from "./BuktiBCA";
+import BuktiBRI from "./BuktiBRI";
+import BuktiOVO from "./BuktiOVO";
+import BuktiDana from "./BuktiDana";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -52,9 +58,6 @@ import { AuthContext } from "../../components/Routing/Auth";
 
 //Email js components
 import * as emailService from "../../emailService/emailService";
-import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
-import BuktiBCA from "./BuktiBCA";
-import BuktiBRI from "./BuktiBRI";
 
 const useStyles = makeStyles(InfoStyle);
 
@@ -541,6 +544,86 @@ export default function Payment({ history }) {
                       value="BRI Transfer"
                       chosenValue={value}
                     ></Box>
+
+                    <FormControlLabel
+                      value="OVO"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="OVO"
+                      onChange={(e) => setNamaBank(e.target.value)}
+                    />
+                    <Box
+                      text={
+                        <div>
+                          <Typography>
+                            Transfer nominal yang akan dibayarkan ke:{" "}
+                            <div>
+                              <strong>No. HP: 081291176795</strong>
+                            </div>{" "}
+                            <div style={{ marginBottom: "10px" }}>
+                              <strong>Nama: Darren Lucky Buntoro</strong>
+                            </div>
+                            <div>
+                              <img
+                                style={{ width: 225, height: 225 }}
+                                src={ovoQR}
+                              />
+                            </div>
+                            Lampirkan bukti pembayaran dibawah.
+                          </Typography>
+                          <BuktiOVO open={open} handleClose={handleClose} />
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                            fullWidth
+                          >
+                            Contoh Bukti
+                          </Button>
+                        </div>
+                      }
+                      value="OVO"
+                      chosenValue={value}
+                    ></Box>
+                    <FormControlLabel
+                      value="DANA"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="DANA"
+                      onChange={(e) => setNamaBank(e.target.value)}
+                    />
+                    <Box
+                      text={
+                        <div>
+                          <Typography>
+                            Transfer nominal yang akan dibayarkan ke:{" "}
+                            <div>
+                              <strong>No. HP: 081291176795</strong>
+                            </div>{" "}
+                            <div style={{ marginBottom: "10px" }}>
+                              <strong>Nama: Darren Lucky Buntoro</strong>
+                            </div>
+                            <div>
+                              <img
+                                style={{ width: 225, height: 225 }}
+                                src={danaQR}
+                              />
+                            </div>
+                            Lampirkan bukti pembayaran dibawah.
+                          </Typography>
+                          <BuktiDana open={open} handleClose={handleClose} />
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                            fullWidth
+                          >
+                            Contoh Bukti
+                          </Button>
+                        </div>
+                      }
+                      value="DANA"
+                      chosenValue={value}
+                    ></Box>
+
                     <FormControlLabel
                       disabled
                       value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
@@ -862,6 +945,86 @@ export default function Payment({ history }) {
                       value="BRI Transfer"
                       chosenValue={value}
                     ></Box>
+
+                    <FormControlLabel
+                      value="OVO"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="OVO"
+                      onChange={(e) => setNamaBank(e.target.value)}
+                    />
+                    <Box
+                      text={
+                        <div>
+                          <Typography>
+                            Transfer nominal yang akan dibayarkan ke:{" "}
+                            <div>
+                              <strong>No. HP: 081291176795</strong>
+                            </div>{" "}
+                            <div style={{ marginBottom: "10px" }}>
+                              <strong>Nama: Darren Lucky Buntoro</strong>
+                            </div>
+                            <div>
+                              <img
+                                style={{ width: 225, height: 225 }}
+                                src={ovoQR}
+                              />
+                            </div>
+                            Lampirkan bukti pembayaran dibawah.
+                          </Typography>
+                          <BuktiOVO open={open} handleClose={handleClose} />
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                            fullWidth
+                          >
+                            Contoh Bukti
+                          </Button>
+                        </div>
+                      }
+                      value="OVO"
+                      chosenValue={value}
+                    ></Box>
+                    <FormControlLabel
+                      value="DANA"
+                      control={<Radio style={{ color: secondaryColor }} />}
+                      label="DANA"
+                      onChange={(e) => setNamaBank(e.target.value)}
+                    />
+                    <Box
+                      text={
+                        <div>
+                          <Typography>
+                            Transfer nominal yang akan dibayarkan ke:{" "}
+                            <div>
+                              <strong>No. HP: 081291176795</strong>
+                            </div>{" "}
+                            <div style={{ marginBottom: "10px" }}>
+                              <strong>Nama: Darren Lucky Buntoro</strong>
+                            </div>
+                            <div>
+                              <img
+                                style={{ width: 225, height: 225 }}
+                                src={danaQR}
+                              />
+                            </div>
+                            Lampirkan bukti pembayaran dibawah.
+                          </Typography>
+                          <BuktiDana open={open} handleClose={handleClose} />
+                          <Button
+                            color="secondary"
+                            onClick={handleClickOpen}
+                            round
+                            fullWidth
+                          >
+                            Contoh Bukti
+                          </Button>
+                        </div>
+                      }
+                      value="DANA"
+                      chosenValue={value}
+                    ></Box>
+
                     <FormControlLabel
                       disabled
                       value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
