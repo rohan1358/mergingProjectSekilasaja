@@ -15,6 +15,7 @@ import Loading from "../../pages/Loading";
 
 // nodejs library to set properties for component
 import PropTypes from "prop-types";
+import { Redirect } from "react-router";
 
 export default function SearchBar({ history }) {
   // Styles
@@ -39,7 +40,7 @@ export default function SearchBar({ history }) {
       history.push(`/searchResults/${value}`);
     } else {
       // console.log("Book Selected: " + value);
-      //history.push(`/book-details/${value}`);
+      // history.push(`/book-details/${value}`);
       history.push(`/searchResults/${value}`);
     }
   };
@@ -69,7 +70,7 @@ export default function SearchBar({ history }) {
         renderInput={(params) => (
           <form
             style={{ alignItems: "center", display: "flex" }}
-            onSubmit={handleSubmit}
+            // onSubmit={handleSubmit}
           >
             <div className={classes.search}>
               <TextField
