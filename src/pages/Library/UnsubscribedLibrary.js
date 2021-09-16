@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
 // Custom components
 import BookCard from "../../components/BookCard";
@@ -7,10 +7,10 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
 import InfoStyles from "../../styles/InfoAreaStyle";
 import Button from "../../components/Button";
-import Loading from "../Loading";
+import { secondaryColor } from "../../styles/Style";
 
 // Material UI components
-import { Grid, makeStyles, Divider } from "@material-ui/core";
+import { Grid, makeStyles, Divider, CircularProgress } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 // Redux
@@ -122,9 +122,15 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
 
   if (pending) {
     return (
-      <>
-        <Loading />
-      </>
+      <div
+        style={{
+          marginTop: "100px",
+          marginBottom: "100px",
+          textAlign: "center",
+        }}
+      >
+        <CircularProgress style={{ color: secondaryColor }} />
+      </div>
     );
   }
 

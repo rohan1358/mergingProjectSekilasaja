@@ -9,7 +9,7 @@ import {
   Container,
   Grid,
 } from "@material-ui/core";
-import MenuBookIcon from "@material-ui/icons/MenuBook";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
 // Custom components
@@ -52,7 +52,7 @@ export default function NavBarSecond({ children, buttons }) {
                   <ArrowBackIosIcon className={iconColorClass} />
                 </IconButton>
                 <IconButton href="/library" color="inherit">
-                  <MenuBookIcon className={iconColorClass} />
+                  <LibraryBooksIcon className={iconColorClass} />
                 </IconButton>
               </Grid>
 
@@ -71,7 +71,7 @@ export default function NavBarSecond({ children, buttons }) {
               <ArrowBackIosIcon className={iconColorClass} />
             </IconButton>
             <IconButton href="/library" color="inherit">
-              <MenuBookIcon className={iconColorClass} />
+              <LibraryBooksIcon className={iconColorClass} />
             </IconButton>
 
             {children}

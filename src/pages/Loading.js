@@ -5,8 +5,8 @@ import Typography from "../components/Typography";
 import MultiUseMobile from "../styles/MultiUseMobile";
 
 // Material-UI components
-import { Container, Grid } from "@material-ui/core";
-import { beigeColor } from "../styles/Style";
+import { Container, Grid, CircularProgress } from "@material-ui/core";
+import { beigeColor, secondaryColor } from "../styles/Style";
 
 export default function Loading() {
   // Styles
@@ -30,13 +30,12 @@ export default function Loading() {
             <div className={multi.extraSpace} />
           </Grid>
 
-          <Grid item xs={12}>
-            <Typography className={multi.center} type="italic" size="heading">
+          <Grid style={{ textAlign: "center" }} item xs={12}>
+            <CircularProgress style={{ color: secondaryColor }} />
+            <Typography type="italic" size="heading">
               Loading...
             </Typography>
-            <Typography className={multi.center} size="subheading">
-              Mohon Tunggu Sebentar!
-            </Typography>
+            <Typography size="subheading">Mohon Tunggu Sebentar!</Typography>
           </Grid>
         </Grid>
       </Container>

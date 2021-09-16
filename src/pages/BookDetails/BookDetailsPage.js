@@ -1,5 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 
+//Import loading page
+import Loading from "../Loading";
+
 // Whatsapp Button
 import Whatsapp from "../../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
@@ -23,6 +26,7 @@ import Loading from "../Loading";
 import { Container, Divider, Grid, makeStyles } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -66,7 +70,9 @@ export default function BookDetailsPage({ match, history }) {
   const [coverLink, setCoverLink] = useState("");
   const [audioLink, setAudioLink] = useState(null);
   const [pending, setPending] = useState(true);
+  const [isFinishPullUserData, setIsFinishPullUserData] = useState(false);
 
+  //First useEffect to grab user data...
   useEffect(() => {
     if (currentUser !== null) {
       const fetchData = async () => {
@@ -79,15 +85,18 @@ export default function BookDetailsPage({ match, history }) {
         results.owned_books.map((x) => {
           if (x == match.params.book_title) {
             setIsBookOwned(true);
-            setPending(false);
           }
         });
       };
       fetchData();
     } else {
       console.log("Not logged in");
+      setIsFinishPullUserData(true);
     }
+  }, [history.location]);
 
+  // Once user data is grabbed, grab book details...
+  useEffect(() => {
     const fetchData = async () => {
       const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
         match.params.book_title
@@ -95,25 +104,41 @@ export default function BookDetailsPage({ match, history }) {
       setCurrent_Product(book_);
     };
     fetchData();
+    if (isFinishPullUserData) {
+      setIsFinishPullUserData(false);
+    }
+  }, [userData, isSubscribed, isFinishPullUserData]);
 
+  // Once book details is grabbed, grab book cover image...
+  useEffect(() => {
     if (match.params.book_title != null) {
       const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(
         match.params.book_title
       );
+
+      const fetchData = async () => {
+        const link = await getLink;
+        setCoverLink(link);
+      };
+      fetchData();
+    }
+  }, [current_product]);
+
+  // Once book cover image is grabbed, grab audio link...
+  useEffect(() => {
+    if (match.params.book_title != null) {
       const getAudioLink = firebaseGetBookAudioURL.getBookAudioURL(
         match.params.book_title,
         1
       );
 
       const fetchData = async () => {
-        const link = await getLink;
         const audioLink = await getAudioLink;
-        setCoverLink(link);
         setAudioLink(audioLink);
       };
       fetchData();
     }
-  }, [history.location]);
+  }, [coverLink]);
 
   useEffect(() => {
     const changeBtn = () => {
@@ -215,6 +240,12 @@ export default function BookDetailsPage({ match, history }) {
                                     </Button>
                                   )}
                                 </Grid>
+
+                                <Grid item>
+                                  <Button color="secondary" href="/library">
+                                    <LibraryBooksIcon /> My Library
+                                  </Button>
+                                </Grid>
                               </Grid>
                             </div>
 
@@ -230,6 +261,7 @@ export default function BookDetailsPage({ match, history }) {
                                   Read or listen now!
                                 </Button>
                               </Grid>
+
                               <Grid item xs={12}>
                                 {current_product.video_link ? (
                                   <Button
@@ -244,12 +276,27 @@ export default function BookDetailsPage({ match, history }) {
                                   </Button>
                                 )}
                               </Grid>
+
+                              <Grid item>
+                                <Button
+                                  fullWidth
+                                  color="secondary"
+                                  href="/library"
+                                >
+                                  <LibraryBooksIcon /> My Library
+                                </Button>
+                              </Grid>
                             </div>
                           </div>
                         }
                       />
 
                       <TextDetails
+                        libraryButton={
+                          <Button fullWidth color="secondary" href="/library">
+                            <LibraryBooksIcon /> Go To My Library
+                          </Button>
+                        }
                         video={
                           current_product.video_link ? (
                             <Button
@@ -358,6 +405,12 @@ export default function BookDetailsPage({ match, history }) {
                                     </Typography>
                                   )}
                                 </Grid>
+
+                                <Grid item>
+                                  <Button color="secondary" href="/library">
+                                    <LibraryBooksIcon /> My Library
+                                  </Button>
+                                </Grid>
                               </Grid>
                             </div>
 
@@ -380,12 +433,27 @@ export default function BookDetailsPage({ match, history }) {
                                   <Typography type="bold">✔ Added!</Typography>
                                 )}
                               </Grid>
+
+                              <Grid item>
+                                <Button
+                                  fullWidth
+                                  color="secondary"
+                                  href="/library"
+                                >
+                                  <LibraryBooksIcon /> My Library
+                                </Button>
+                              </Grid>
                             </div>
                           </div>
                         }
                       />
 
                       <TextDetails
+                        libraryButton={
+                          <Button fullWidth color="secondary" href="/library">
+                            <LibraryBooksIcon /> Go To My Library
+                          </Button>
+                        }
                         video={
                           current_product.video_link ? (
                             <Button href="/pricing" color="secondary" fullWidth>
@@ -407,9 +475,16 @@ export default function BookDetailsPage({ match, history }) {
                           />
                         }
                         totalNum={current_product.kilasan.length}
-                        kilasTitle={current_product.kilasan[0].title}
+                        kilasTitle={
+                          <Typography
+                            style={{ textAlign: "left" }}
+                            size="subheading"
+                          >
+                            {current_product.kilasan[0].title}
+                          </Typography>
+                        }
                         kilasBody={
-                          <div>
+                          <div style={{ textAlign: "left" }}>
                             <Typography className={books.paragraphBookDetails}>
                               {current_product.kilasan[0].details[0]}
                             </Typography>
@@ -460,6 +535,7 @@ export default function BookDetailsPage({ match, history }) {
                                 {index < 2 ? (
                                   <div>
                                     <Typography
+                                      style={{ textAlign: "left" }}
                                       className={books.paragraphBookDetails}
                                     >
                                       {kilas.title === undefined
@@ -474,6 +550,7 @@ export default function BookDetailsPage({ match, history }) {
                                 ) : (
                                   <div className={classes.blur}>
                                     <Typography
+                                      style={{ textAlign: "left" }}
                                       className={books.paragraphBookDetails}
                                     >
                                       {kilas.title === undefined
@@ -539,6 +616,11 @@ export default function BookDetailsPage({ match, history }) {
                   />
 
                   <TextDetails
+                    libraryButton={
+                      <Button fullWidth color="secondary" href="/library">
+                        <LibraryBooksIcon /> Go To My Library
+                      </Button>
+                    }
                     video={
                       current_product.video_link ? (
                         <Button href="/pricing" color="secondary" fullWidth>
@@ -560,9 +642,16 @@ export default function BookDetailsPage({ match, history }) {
                       />
                     }
                     totalNum={current_product.kilasan.length}
-                    kilasTitle={current_product.kilasan[0].title}
+                    kilasTitle={
+                      <Typography
+                        style={{ textAlign: "left" }}
+                        size="subheading"
+                      >
+                        {current_product.kilasan[0].title}
+                      </Typography>
+                    }
                     kilasBody={
-                      <div>
+                      <div style={{ textAlign: "left" }}>
                         <Typography className={books.paragraphBookDetails}>
                           {current_product.kilasan[0].details[0]}
                         </Typography>
@@ -609,6 +698,7 @@ export default function BookDetailsPage({ match, history }) {
                             {index < 2 ? (
                               <div>
                                 <Typography
+                                  style={{ textAlign: "left" }}
                                   className={books.paragraphBookDetails}
                                 >
                                   {kilas.title === undefined
@@ -623,6 +713,7 @@ export default function BookDetailsPage({ match, history }) {
                             ) : (
                               <div className={classes.blur}>
                                 <Typography
+                                  style={{ textAlign: "left" }}
                                   className={books.paragraphBookDetails}
                                 >
                                   {kilas.title === undefined
