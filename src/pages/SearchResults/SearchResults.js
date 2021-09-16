@@ -39,6 +39,12 @@ export default function SearchResults({ match, history }) {
         .includes(match.params.searchValue.toLowerCase())
     );
     setSearchResults(results);
+
+    //Clean up function for when page changes...
+    return function cleanup() {
+      setPending(true);
+      setSearchResults([]);
+    }
   }, [allBooks, history.location]);
 
   useEffect(() => {

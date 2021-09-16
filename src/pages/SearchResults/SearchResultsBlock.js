@@ -16,13 +16,16 @@ export default function SearchResultsBlock(props) {
 
   const [isSearchResultsEmpty, setIsSearchResultsEmpty] = useState(true);
 
-  console.log(searchResults);
-
   useEffect(() => {
     if (searchResults.length < 1) {
       setIsSearchResultsEmpty(true);
     } else {
       setIsSearchResultsEmpty(false);
+    }
+
+    //Clean up function for when page changes...
+    return function cleanup(){
+      setIsSearchResultsEmpty(true);
     }
   }, [searchResults]);
 
