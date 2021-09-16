@@ -12,7 +12,6 @@ export async function uploadPaymentInfo(
   cartItems,
   image,
   total_cost,
-  akunTelegram,
   namaBank,
   nomorRekening,
   namaDiRekening,

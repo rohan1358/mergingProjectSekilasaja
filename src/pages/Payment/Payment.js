@@ -242,7 +242,6 @@ export default function Payment({ history }) {
       cartItems,
       file,
       totalPrice,
-      // akunTelegram,
       namaBank,
       nomorRekening,
       namaDiRekening,
