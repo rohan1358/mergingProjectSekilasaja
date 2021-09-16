@@ -1,8 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 
-//Import loading page
-import Loading from "../Loading";
-
 // Whatsapp Button
 import Whatsapp from "../../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";

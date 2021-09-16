@@ -124,7 +124,7 @@ export default function Home({ history }) {
           <div style={{ marginTop: "40px" }} />
 
           {/* <TopBooksBlock /> */}
-          {/* <TopKilasBlock /> */}
+          <TopKilasBlock />
 
           <div style={{ marginTop: "40px" }} />
 
@@ -154,7 +154,7 @@ export default function Home({ history }) {
           <div style={{ marginTop: "40px" }} />
 
           {/* <TopBooksBlock /> */}
-          {/* <TopKilasBlock /> */}
+          <TopKilasBlock />
 
           <div style={{ marginTop: "40px" }} />
 
