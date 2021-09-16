@@ -66,16 +66,16 @@ export async function uploadPaymentInfo(
       try {
         var image_url = await imgRef.getDownloadURL();
         //Check if count exists in the string
-        if(referenceName.includes("_" + count)){
-          referenceName = referenceName.replace("_" + count,"");
+        if (referenceName.includes("_" + count)) {
+          referenceName = referenceName.replace("_" + count, "");
         }
         count = count + 1;
 
         //Remove initial file prefix
         if (image.type.toString().includes("png")) {
-          referenceName = referenceName.replace(".png","");
+          referenceName = referenceName.replace(".png", "");
         } else if (image.type.toString().includes("jpeg")) {
-          referenceName = referenceName.replace(".jpg","");
+          referenceName = referenceName.replace(".jpg", "");
         }
 
         //Add new count for new transactions made by same user
@@ -103,6 +103,9 @@ export async function uploadPaymentInfo(
     //Get image uploaded link
     var image_url = await imgRef.getDownloadURL();
     const docRef = await firestore.collection("payments").add({
+      fn: userData.user.firstName,
+      ln: userData.user.lastName,
+      phoneNumber: userData.user.phoneNumber,
       email: userData.user.email,
       date: today,
       image_link: image_url,
@@ -110,7 +113,7 @@ export async function uploadPaymentInfo(
       nama_di_rekening: namaDiRekening,
       nomor_rekening: nomorRekening,
       nama_bank: namaBank,
-      akun_telegram: akunTelegram,
+      // akun_telegram: akunTelegram,
       kode_promo: kodePromo,
       promo_discount_amount: discountAmount,
     });

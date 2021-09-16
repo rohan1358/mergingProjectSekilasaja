@@ -76,7 +76,8 @@ export default function PaymentSuccess() {
 
           <div style={{ padding: 10, backgroundColor: primaryColor }}>
             <Typography type="bold">
-              Untuk join grup Telegram, <div>kamu bisa klik link berikut:</div>
+              Untuk join grup Telegram eksklusif,{" "}
+              <div>kamu bisa klik link berikut:</div>
               <div style={{ marginTop: "20px" }}>
                 <a
                   style={{ textDecoration: "none" }}
