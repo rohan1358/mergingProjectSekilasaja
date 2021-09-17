@@ -1,8 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 
-//Import loading page
-import Loading from "../Loading";
-
 // Whatsapp Button
 import Whatsapp from "../../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
@@ -20,6 +17,7 @@ import ReactAudioPlayer from "react-audio-player";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import TextReadingStyle from "../../styles/TextReadingStyle";
+import Loading from "../Loading";
 
 // Material-UI components
 import { Container, Divider, Grid, makeStyles } from "@material-ui/core";
