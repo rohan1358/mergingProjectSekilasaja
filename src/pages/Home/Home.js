@@ -18,7 +18,6 @@ import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import { beigeColor } from "../../styles/Style";
 import LandingUserBlock from "./LandingUserBlock";
 import LandingNonUserBlock from "./LandingNonUserBlock";
-import TopBooksBlock from "./TopBooksBlock";
 import TopKilasBlock from "./TopKilasBlocks";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
@@ -122,7 +121,6 @@ export default function Home({ history }) {
             }
           />
 
-          {/* <TopBooksBlock /> */}
           <TopKilasBlock
             button={
               <Button round href="/library">
@@ -156,7 +154,6 @@ export default function Home({ history }) {
             }
           />
 
-          {/* <TopBooksBlock /> */}
           <TopKilasBlock
             button={
               <Button round href="/signup">
