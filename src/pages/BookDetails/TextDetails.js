@@ -24,6 +24,7 @@ export default function BookDetails(props) {
     audio,
     tableOfContents,
     isSubscribed,
+    libraryButton,
   } = props;
 
   const mobile = MultiUseMobile();
@@ -87,48 +88,52 @@ export default function BookDetails(props) {
           </div>
 
           <div className={mobileClass}>
-            <Paper className={mobile.paddedContent} elevation={5}>
-              <Grid container>
-                <Grid item xs={12}>
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Audio
-                    </Typography>
-                    {/* <Paper
+            <div style={{ display: "block" }}>
+              <Paper className={mobile.paddedContent} elevation={5}>
+                <Grid container>
+                  <Grid item xs={12}>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Audio
+                      </Typography>
+                      {/* <Paper
                       style={{ backgroundColor: grayColor }}
                       variant="outlined"
                     > */}
-                    {audio}
-                    {/* </Paper> */}
-                  </div>
+                      {audio}
+                      {/* </Paper> */}
+                    </div>
 
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Video
-                    </Typography>
-                    {video}
-                  </div>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Video
+                      </Typography>
+                      {video}
+                    </div>
 
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Daftar Kilas
-                    </Typography>
-                    <Typography>{tableOfContents}</Typography>
-                  </div>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Daftar Kilas
+                      </Typography>
+                      <Typography>{tableOfContents}</Typography>
+                    </div>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <div className={mobile.extraSpace} />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
+
+                    <Typography size="subheading">{kilasTitle}</Typography>
+                    <Typography>{kilasBody}</Typography>
+                  </Grid>
                 </Grid>
+              </Paper>
 
-                <Grid item xs={12}>
-                  <div className={mobile.extraSpace} />
-                </Grid>
-
-                <Grid item xs={12}>
-                  {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
-
-                  <Typography size="subheading">{kilasTitle}</Typography>
-                  <Typography>{kilasBody}</Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+              <div style={{ marginTop: "10px" }}>{libraryButton}</div>
+            </div>
           </div>
         </div>
       ) : (
@@ -178,47 +183,50 @@ export default function BookDetails(props) {
           </div>
 
           <div className={mobileClass}>
-            <Paper className={mobile.paddedContent} elevation={5}>
-              <Grid container>
-                <Grid item xs={12}>
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Audio
-                    </Typography>
-                    {/* <Paper
+            <div style={{ display: "block" }}>
+              <Paper className={mobile.paddedContent} elevation={5}>
+                <Grid container>
+                  <Grid item xs={12}>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Audio
+                      </Typography>
+                      {/* <Paper
                       style={{ backgroundColor: grayColor }}
                       variant="outlined"
                     > */}
-                    {audio}
-                    {/* </Paper> */}
-                  </div>
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Video
-                    </Typography>
-                    {video}
-                  </div>
+                      {audio}
+                      {/* </Paper> */}
+                    </div>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Video
+                      </Typography>
+                      {video}
+                    </div>
 
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Daftar Kilas
-                    </Typography>
-                    <Typography>{tableOfContents}</Typography>
-                  </div>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Daftar Kilas
+                      </Typography>
+                      <Typography>{tableOfContents}</Typography>
+                    </div>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <div className={mobile.extraSpace} />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
+
+                    <Typography size="subheading">{kilasTitle}</Typography>
+                    <Typography>{kilasBody}</Typography>
+                  </Grid>
                 </Grid>
-
-                <Grid item xs={12}>
-                  <div className={mobile.extraSpace} />
-                </Grid>
-
-                <Grid item xs={12}>
-                  {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
-
-                  <Typography size="subheading">{kilasTitle}</Typography>
-                  <Typography>{kilasBody}</Typography>
-                </Grid>
-              </Grid>
-            </Paper>
+              </Paper>
+              <div style={{ marginTop: "10px" }}>{libraryButton}</div>
+            </div>
           </div>
         </div>
       )}

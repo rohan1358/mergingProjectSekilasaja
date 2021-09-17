@@ -10,7 +10,7 @@ import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFil
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-// //Redux
+// Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
 

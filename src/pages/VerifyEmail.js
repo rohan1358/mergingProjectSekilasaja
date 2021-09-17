@@ -70,7 +70,7 @@ export default function VerifyEmail() {
 
   if (currentUser && currentUser.emailVerified) {
     console.log("Redirecting to library...");
-    return <Redirect to="/library" />;
+    return <Redirect to="/" />;
   } else if (!currentUser) {
     console.log("Redirecting to login page as user is not signed in...");
     return <Redirect to="/login" />;

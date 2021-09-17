@@ -48,7 +48,7 @@ export default function BookSearchResultCard({ product, title, history }) {
       };
       fetchData();
     }
-  }, []);
+  }, [product]);
 
   return (
     <Paper elevation={5} className={classes.root}>

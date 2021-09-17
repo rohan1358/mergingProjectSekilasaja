@@ -9,11 +9,11 @@ import NavBarSecond from "../components/NavBar/NavBarSecond";
 import Typography from "../components/Typography";
 import { beigeColor } from "../styles/Style";
 
-//Redux
+// Redux
 import { useSelector } from "react-redux";
 import { selectOwnedBooks } from "../feature/ownedBooksSlice";
 
-//firebase components
+// firebase components
 import { AuthContext } from "../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../firebase/firebaseGetBookInfoByTitle";
@@ -56,12 +56,13 @@ export default function VideoWatchingPage({ match, history }) {
     if (!currentUser) {
       console.log("User is not logged in, redirecting to login page...");
       return <Redirect to="/login" />;
-    } else if (currentUser && !currentUser.emailVerified) {
-      console.log(
-        "Redirect to email not verified page to ask for email verification..."
-      );
-      return <Redirect to="/verify-email" />;
     }
+    // else if (currentUser && !currentUser.emailVerified) {
+    //   console.log(
+    //     "Redirect to email not verified page to ask for email verification..."
+    //   );
+    //   return <Redirect to="/verify-email" />;
+    // }
 
     if (currentUser !== null) {
       const getUser = firebaseGetUserDataById.getUserDataById(currentUser.uid);
@@ -101,7 +102,7 @@ export default function VideoWatchingPage({ match, history }) {
       <div>
         <NavBarSecond />
         <div style={{ marginTop: "70px" }} />
-        <Container maxWidth="sm">
+        <Container maxWidth="md">
           <div className={classes.container}>
             <iframe
               className={classes.iframe}

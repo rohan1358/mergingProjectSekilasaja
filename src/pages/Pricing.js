@@ -506,7 +506,7 @@ export default function PricingPage({ match, history }) {
                         type="subheading"
                         style={{ fontSize: "20px" }}
                       >
-                        Rp. 25.000
+                        Rp. 30.000
                       </Typography>
                       <Typography type="italic">/Kilas</Typography>
                     </div>
@@ -664,7 +664,7 @@ export default function PricingPage({ match, history }) {
                           type="subheading"
                           style={{ fontSize: "20px" }}
                         >
-                          Rp. 25.000
+                          Rp. 30.000
                         </Typography>
                         <Typography type="italic">/Kilas</Typography>
                       </div>
@@ -825,7 +825,7 @@ export default function PricingPage({ match, history }) {
                         type="subheading"
                         style={{ fontSize: "20px" }}
                       >
-                        Rp. 25.000
+                        Rp. 30.000
                       </Typography>
                       <Typography type="italic">/Kilas</Typography>
                     </div>
@@ -986,7 +986,7 @@ export default function PricingPage({ match, history }) {
                           type="subheading"
                           style={{ fontSize: "20px" }}
                         >
-                          Rp. 25.000
+                          Rp. 30.000
                         </Typography>
                         <Typography type="italic">/Kilas</Typography>
                       </div>

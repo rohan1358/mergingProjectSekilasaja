@@ -18,6 +18,7 @@ import { selectUser } from "../../feature/userSlice";
 
 //Firebase
 import fire from "../../firebase/fire";
+import { primaryColor } from "../../styles/Style";
 
 export default function PaymentSuccess() {
   // Styles
@@ -70,6 +71,23 @@ export default function PaymentSuccess() {
             tim kami. Jika belum aktif setelah 1x24 jam, silahkan hubungi
             customer service kami!
           </Typography>
+
+          <div style={{ marginTop: "20px" }} />
+
+          <div style={{ padding: 10, backgroundColor: primaryColor }}>
+            <Typography type="bold">
+              Untuk join grup Telegram eksklusif,{" "}
+              <div>kamu bisa klik link berikut:</div>
+              <div style={{ marginTop: "20px" }}>
+                <a
+                  style={{ textDecoration: "none" }}
+                  href="https://t.me/joinchat/Z4ZtzJ60MHc0YTUx"
+                >
+                  https://t.me/joinchat/Z4ZtzJ60MHc0YTUx
+                </a>
+              </div>
+            </Typography>
+          </div>
 
           <div className={multi.extraSpace} />
 

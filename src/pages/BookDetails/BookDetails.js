@@ -274,9 +274,15 @@ export default function BookDetails({
 
                 <Divider />
 
-                <Typography type="bold">{descriptionTitle}</Typography>
+                <Typography
+                  style={{ marginTop: "20px", textAlign: "left" }}
+                  type="bold"
+                >
+                  {descriptionTitle}
+                </Typography>
                 {description.map((paragraph, index) => (
                   <Typography
+                    style={{ textAlign: "left" }}
                     className={classes.uncopyable}
                     className={classes.paragraph}
                   >

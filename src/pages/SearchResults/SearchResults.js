@@ -39,8 +39,20 @@ export default function SearchResults({ match, history }) {
         .includes(match.params.searchValue.toLowerCase())
     );
     setSearchResults(results);
-    setPending(false);
+
+    //Clean up function for when page changes...
+    return function cleanup() {
+      setPending(true);
+      setSearchResults([]);
+    }
   }, [allBooks, history.location]);
+
+  useEffect(() => {
+    //Set pending to false to notify that web finished pulling books based on search results
+    if (searchResults) {
+      setPending(false);
+    }
+  }, [searchResults]);
 
   if (pending) {
     return (

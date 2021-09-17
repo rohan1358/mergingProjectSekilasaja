@@ -70,15 +70,19 @@ const LoginForm = ({ history }) => {
       });
   };
 
-  if (currentUser && currentUser.emailVerified) {
-    console.log("Current user id: " + currentUser.uid);
-    console.log("Redirecting to library page...");
+  // if (currentUser && currentUser.emailVerified) {
+  //   console.log("Current user id: " + currentUser.uid);
+  //   console.log("Redirecting to library page...");
+  //   return <Redirect to="/" />;
+  // } else if (currentUser && !currentUser.emailVerified) {
+  //   console.log(
+  //     "Redirect to email not verified page to ask for email verification..."
+  //   );
+  //   return <Redirect to="/verify-email" />;
+  // }
+
+  if (currentUser) {
     return <Redirect to="/" />;
-  } else if (currentUser && !currentUser.emailVerified) {
-    console.log(
-      "Redirect to email not verified page to ask for email verification..."
-    );
-    return <Redirect to="/verify-email" />;
   }
 
   return (

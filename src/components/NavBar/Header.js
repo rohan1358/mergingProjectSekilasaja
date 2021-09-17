@@ -16,13 +16,14 @@ import Menu from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import Basket from "../AddToCart/Basket";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 // core components
 import styles from "../../styles/HeaderStyle";
 import NavbarStyle from "../../styles/NavbarStyle";
 import SearchBar from "../SearchBar/SearchBar";
 import SearchBarDrawer from "../SearchBar/SearchBarDrawer";
-import { secondaryColor, beigeColor } from "../../styles/Style";
+import { secondaryColor, beigeColor, primaryColor } from "../../styles/Style";
 import CartDrawer from "../../components/Drawer";
 
 // Redux
@@ -123,17 +124,30 @@ export default function Header(props) {
             logo={<SearchIcon style={{ color: secondaryColor }} />}
           />
           {!!currentUser ? (
-            <CartDrawer
-              direction={"right"}
-              drawerLogo={<ShoppingCartIcon className={nav.hugeIcon} />}
-              drawerTitle={"Your Cart"}
-              logo={
-                <Badge badgeContent={cart.length} color="error">
-                  <ShoppingCartIcon className={nav.iconColor} />
-                </Badge>
-              }
-              childrenCart={<Basket />}
-            />
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <CartDrawer
+                direction={"right"}
+                drawerLogo={<ShoppingCartIcon className={nav.hugeIcon} />}
+                drawerTitle={"Your Cart"}
+                logo={
+                  <Badge badgeContent={cart.length} color="error">
+                    <ShoppingCartIcon className={nav.iconColor} />
+                  </Badge>
+                }
+                childrenCart={<Basket />}
+              />
+              <IconButton
+                style={{
+                  color: secondaryColor,
+                  backgroundColor: primaryColor,
+                  boxShadow: "2px 2px 2px #D9DDDC",
+                }}
+                aria-label="open drawer"
+                href={"/library"}
+              >
+                <LibraryBooksIcon />
+              </IconButton>
+            </div>
           ) : (
             <></>
           )}
