@@ -16,6 +16,7 @@ import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import EuroIcon from "@material-ui/icons/Euro";
 import ForumIcon from "@material-ui/icons/Forum";
+import NewReleasesIcon from "@material-ui/icons/NewReleases";
 
 function CategoryButton({
   chosenCategory,
@@ -59,6 +60,8 @@ function CategoryButton({
     if (categoryName === "Communication") return <ForumIcon />;
 
     if (categoryName === "Money & Investment") return <EuroIcon />;
+
+    if (categoryName === "New Release!") return <NewReleasesIcon />;
   }
 
   return (
