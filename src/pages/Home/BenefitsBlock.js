@@ -149,7 +149,7 @@ export default function BenefitsBlock({ logo, button }) {
               <div style={{ display: "flex", justifyContent: "center" }}>
                 {button}
               </div>
-              <div style={{ marginBottom: "30px" }} />
+              <div style={{ marginBottom: "50px" }} />
             </Grid>
           </Grid>
         </div>
@@ -285,7 +285,7 @@ export default function BenefitsBlock({ logo, button }) {
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   {button}
                 </div>
-                <div style={{ marginBottom: "30px" }} />
+                <div style={{ marginBottom: "50px" }} />
               </Grid>
             </Grid>
           </Grid>

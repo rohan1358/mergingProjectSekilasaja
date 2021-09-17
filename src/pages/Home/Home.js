@@ -20,6 +20,7 @@ import LandingUserBlock from "./LandingUserBlock";
 import LandingNonUserBlock from "./LandingNonUserBlock";
 import TopBooksBlock from "./TopBooksBlock";
 import TopKilasBlock from "./TopKilasBlocks";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 // Material-UI components
 import { Container, Grid, makeStyles, Tooltip } from "@material-ui/core";
@@ -121,10 +122,14 @@ export default function Home({ history }) {
             }
           />
 
-          <div style={{ marginTop: "40px" }} />
-
           {/* <TopBooksBlock /> */}
-          <TopKilasBlock />
+          <TopKilasBlock
+            button={
+              <Button round href="/library">
+                <LibraryBooksIcon /> Akses Library Kamu Sekarang!
+              </Button>
+            }
+          />
 
           <div style={{ marginTop: "40px" }} />
 
@@ -151,10 +156,14 @@ export default function Home({ history }) {
             }
           />
 
-          <div style={{ marginTop: "40px" }} />
-
           {/* <TopBooksBlock /> */}
-          <TopKilasBlock />
+          <TopKilasBlock
+            button={
+              <Button round href="/signup">
+                Daftar Sekarang!
+              </Button>
+            }
+          />
 
           <div style={{ marginTop: "40px" }} />
 

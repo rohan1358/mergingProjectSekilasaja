@@ -1,127 +1,159 @@
 import React, { useEffect, useState } from "react";
 
+// Other components
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
 // Material UI
-import { Container, Paper, Grid, makeStyles } from "@material-ui/core";
+import { Container, Grid, makeStyles } from "@material-ui/core";
 
 // Custom components
 import Typography from "../../components/Typography";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
-import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
-import BookCard from "../../components/BookCard";
-
-// Redux
-import { useSelector, useDispatch } from "react-redux";
-import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
+import Button from "../../components/Button";
 
 // Firebase component
-import fire from "../../firebase/fire";
+import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
+import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 1,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 1,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 768 },
+    items: 1,
+  },
+  mobile: {
+    breakpoint: { max: 768, min: 0 },
+    items: 1,
+  },
+};
 
 const useStyles = makeStyles(InfoAreaStyle);
-const useTopStyles = makeStyles((theme) => ({
-  kilasDesc: {
-    display: "flex",
-    alignItems: "center",
-    marginRight: "10px",
-    color: secondaryColor,
-  },
-  logo: {
-    marginRight: "4px",
-  },
-}));
 
-export default function TopKilasBlock({}) {
-  // Auth
-  const db = fire.firestore();
-
+export default function TopKilasBlock({ button }) {
   // Styles
   const books = useStyles();
-  const classes = useTopStyles();
-
-  //For searching (Using the all books for searching)
-  const dispatch = useDispatch();
-  const allBooks = useSelector(selectAllBooks);
 
   // useState hooks
-  const [products, setProducts] = useState([]);
+  const [bookOne, setBookOne] = useState([]);
+  const [coverOne, setCoverOne] = useState("");
 
   useEffect(() => {
-    db.collection("books").onSnapshot((snapshot) => {
-      setProducts(
-        snapshot.docs.map((doc) => ({
-          ...doc.data(),
-        }))
+    const fetchData = async () => {
+      const book = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        "The Defining Decade"
       );
 
-      //Add dispatch to store all books info for searching
-      if (allBooks.length < 1) {
-        dispatch(
-          setAllBooks(
-            snapshot.docs.map((doc) => ({
-              ...doc.data(),
-            }))
-          )
-        );
-      }
-    });
+      if (book != undefined) setBookOne(book);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(
+        "The Defining Decade"
+      );
+      const link = await getLink;
+
+      if (link !== undefined) setCoverOne(link);
+    };
+    fetchData();
   }, []);
 
   return (
-    <Container>
-      <Grid
-        container
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        spacing={5}
-      >
-        {/* Kilas of the week */}
-        <Grid item md={6} xs={12}>
-          <Typography size="subheading" style={{ textAlign: "center" }}>
-            Kilas Of The Week
-          </Typography>
-          <Paper
-            style={{ backgroundColor: primaryColor, padding: 20 }}
-            elevation={5}
-          >
-            <Grid container spacing={5} justifyContent="space-evenly">
-              {products
-                .filter((product) => product.category.includes("All") == true)
-                .map((categorisedProduct, index) => (
-                  <BookCard
-                    chosenCategory={"All"}
-                    key={index}
-                    product={categorisedProduct}
-                    extraSpace={<div style={{ marginTop: "20px" }} />}
-                  />
-                ))}
+    <Carousel
+      arrows={false}
+      showDots={true}
+      infinite={true}
+      autoPlay={false}
+      autoPlaySpeed={1500}
+      ssr={true}
+      responsive={responsive}
+    >
+      <div style={{ marginBottom: "15px", marginTop: "10px" }}>
+        <Container>
+          <Grid container direction="row" justifyContent="center" spacing={3}>
+            <Grid item xs={12} />
+            <Grid item md={2} xs={12} />
+            <Grid item md={3} xs={12}>
+              <img
+                src={coverOne}
+                className={books.imgRounded + " " + books.imgFluid}
+                style={{ maxWidth: "250px", width: "100%" }}
+              />
             </Grid>
-          </Paper>
-        </Grid>
+            <Grid item md={5} xs={12}>
+              <Typography style={{ marginTop: 0 }} size="subheading">
+                Kilas Baru Minggu Ini
+              </Typography>
+              <Typography type="bold">{bookOne.book_title}</Typography>
+              {/* {bookOne.descriptions.map((x) => (
+                <Typography>{x}</Typography>
+              ))} */}
 
-        {/* New release */}
-        <Grid item md={6} xs={12}>
-          <Typography size="subheading" style={{ textAlign: "center" }}>
-            New Release
-          </Typography>
-          <Paper
-            style={{ backgroundColor: beigeColor, padding: 20 }}
-            elevation={0}
-          >
-            <Grid container spacing={5} justifyContent="space-evenly">
-              {products
-                .filter((product) => product.category.includes("All") == true)
-                .map((categorisedProduct, index) => (
-                  <BookCard
-                    chosenCategory={"All"}
-                    key={index}
-                    product={categorisedProduct}
-                    extraSpace={<div style={{ marginTop: "20px" }} />}
-                  />
-                ))}
+              <Button round href={`/book-details/${bookOne.book_title}`}>
+                Baca Sekarang!
+              </Button>
             </Grid>
-          </Paper>
-        </Grid>
-      </Grid>
-    </Container>
+            <Grid item md={2} xs={12} />
+            <Grid item xs={12} />
+          </Grid>
+        </Container>
+      </div>
+    </Carousel>
+    // <div
+    //   style={{
+    //     backgroundImage: `url(${HomeBG})`,
+    //     backgroundSize: "cover",
+    //   }}
+    // >
+    //   <Container>
+    //     <Grid container direction="row" justifyContent="center" spacing={3}>
+    //       {/* Kilas of the week */}
+    //       <Grid item xs={12} />
+    //       <Grid item xs={12}>
+    //         <Typography
+    //           style={{ marginTop: 0, textAlign: "center" }}
+    //           size="heading"
+    //         >
+    //           <strong style={{ backgroundColor: primaryColor }}>
+    //             Kilas Baru
+    //           </strong>{" "}
+    //           Minggu Ini
+    //         </Typography>
+    // <Grid container spacing={5} justifyContent="space-evenly">
+    // {products
+    //   .filter(
+    //     (product) => product.category.includes("Productivity") == true
+    //   )
+    //   .map((categorisedProduct, index) => (
+    //     <BookCard
+    //       chosenCategory={"Productivity"}
+    //       key={index}
+    //       product={categorisedProduct}
+    //       extraSpace={<div style={{ marginTop: "20px" }} />}
+    //     />
+    //   ))}
+    // </Grid>
+    //       </Grid>
+
+    //       <Grid item xs={12}>
+    //         <div style={{ display: "flex", justifyContent: "center" }}>
+    //           {button}
+    //         </div>
+    //       </Grid>
+    //       <Grid item xs={12} />
+    //     </Grid>
+    //   </Container>
+    // </div>
   );
 }
