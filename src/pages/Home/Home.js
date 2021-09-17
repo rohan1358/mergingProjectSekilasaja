@@ -15,15 +15,11 @@ import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import Footer from "../../components/Footer";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
-<<<<<<< HEAD
-import { beigeColor, secondaryColor } from "../../styles/Style";
-=======
 import { beigeColor } from "../../styles/Style";
 import LandingUserBlock from "./LandingUserBlock";
 import LandingNonUserBlock from "./LandingNonUserBlock";
 import TopKilasBlock from "./TopKilasBlocks";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
->>>>>>> 41b118750aaee96e03507fef4bf406e70d554b10
 
 // Material-UI components
 import { Container, Grid, makeStyles, Tooltip } from "@material-ui/core";
