@@ -1,4 +1,5 @@
 import React from "react";
+import Verified from "../../images/verified.png";
 
 // Custom components
 import Typography from "../../components/Typography";
@@ -17,7 +18,7 @@ const data = [
         <a
           style={{
             textDecoration: "none",
-            fontStyle: "italic",
+            // fontStyle: "italic",
             color: secondaryColor,
           }}
           href="https://nikojulius.com/"
@@ -38,11 +39,11 @@ const data = [
   },
   {
     id: 2,
-    name: <>Samuel Christ | Miliarder Muda</>,
+    name: <>Samuel Christ | Founder SekilasAja!</>,
     comment: `
-    "Aplikasi yang bagus banget, super insightful, membantu untuk terus belajar dan bertumbuh.
-    Plus, sangat membantu dalam berbagai bentuk self development. Baca buku & dapatin point2
-    pentingnya jadi super cepat! Excellent!"
+    "Harapanku SekilasAja! bisa menjadi solusi untuk Indonesia yang malas baca.
+    Tidak ada lagi alasan untuk orang malas membaca. Dalam 15 menit aja,
+    kamu sdh bisa menyelesaikan satu buku! Belajar kapanpun dan dimanapun!"
     `,
     userInstagram: "samuelchrist",
     userInstagramLink: "https://www.instagram.com/samuelchrist",
@@ -51,57 +52,17 @@ const data = [
   },
   {
     id: 3,
-    name: (
-      <>
-        Niko Julius | Founder{" "}
-        <a
-          style={{
-            textDecoration: "none",
-            fontStyle: "italic",
-            color: secondaryColor,
-          }}
-          href="https://nikojulius.com/"
-        >
-          nikojulius.com
-        </a>
-      </>
-    ),
+    name: <>Rinaldi Nur Ibrahim | Founder Youth Ranger Indonesia</>,
     comment: `
-    "Aplikasi yang bagus banget, super insightful, membantu untuk terus belajar dan bertumbuh.
-    Plus, sangat membantu dalam berbagai bentuk self development. Baca buku & dapatin point2
-    pentingnya jadi super cepat! Excellent!"
+    "Banyak banget buku yang mau aku baca tersedia disini. Dipermudah lagi
+    dengan kita bisa mempelajari bukunya melalui Audio dan Visual. Ini inovatif
+    sekali untuk orang yang malas baca buku berlembar-lembar tapi ingin mendapatkan
+    ilmu dari bukunya. Goodjob SekilasAja!"
     `,
-    userInstagram: "samuelchrist",
-    userInstagramLink: "https://www.instagram.com/samuelchrist",
+    userInstagram: "rinaldi_ni",
+    userInstagramLink: "https://www.instagram.com/rinaldi_ni",
     photoURL:
-      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fnikojulius.jpg?alt=media&token=f3a855d7-6b93-426e-89f0-7d4fb9a7cc5a",
-  },
-  {
-    id: 4,
-    name: (
-      <>
-        Niko Julius | Founder{" "}
-        <a
-          style={{
-            textDecoration: "none",
-            fontStyle: "italic",
-            color: secondaryColor,
-          }}
-          href="https://nikojulius.com/"
-        >
-          nikojulius.com
-        </a>
-      </>
-    ),
-    comment: `
-    "Aplikasi yang bagus banget, super insightful, membantu untuk terus belajar dan bertumbuh.
-    Plus, sangat membantu dalam berbagai bentuk self development. Baca buku & dapatin point2
-    pentingnya jadi super cepat! Excellent!"
-    `,
-    userInstagram: "samuelchrist",
-    userInstagramLink: "https://www.instagram.com/samuelchrist",
-    photoURL:
-      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fnikojulius.jpg?alt=media&token=f3a855d7-6b93-426e-89f0-7d4fb9a7cc5a",
+      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Frinaldi.jpg?alt=media&token=3ce705c6-5752-4330-b871-9f96154b06a9",
   },
   ,
 ];
@@ -115,7 +76,7 @@ export default function ReviewBlock({}) {
         Apa Kata Mereka...
       </Typography>
 
-      <Grid container spacing={3}>
+      <Grid container justifyContent="center" spacing={3}>
         {data.map((x) => (
           <ReviewCard
             photoURL={x.photoURL}

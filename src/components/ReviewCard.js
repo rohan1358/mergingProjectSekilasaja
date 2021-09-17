@@ -1,4 +1,5 @@
 import React from "react";
+import Verified from "../images/verified.png";
 
 // @material-ui/core components
 import { makeStyles, Grid, Paper, Avatar } from "@material-ui/core";
@@ -36,7 +37,8 @@ export default function ReviewCard({
             <Avatar style={{ width: 70, height: 70 }} src={photoURL} />
             <div style={{ paddingLeft: "10px" }}>
               <Typography style={{ marginBottom: 3 }} type="bold">
-                {name}
+                {name}{" "}
+                <img style={{ marginBottom: -3, width: 20 }} src={Verified} />
               </Typography>
               <a
                 style={{
