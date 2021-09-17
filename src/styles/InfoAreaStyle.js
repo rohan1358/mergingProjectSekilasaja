@@ -9,11 +9,11 @@ import {
 } from "./Style";
 
 const InfoStyle = {
-  newBadgePos: {
-    position: "absolute",
-    marginTop: -413,
-    marginLeft: -27,
-  },
+  // newBadgePos: {
+  //   position: "absolute",
+  //   marginTop: -413,
+  //   marginLeft: -27,
+  // },
   buttonAddedHoverPos: {
     position: "absolute",
     marginTop: 250,
