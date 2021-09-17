@@ -19,11 +19,12 @@ import { beigeColor } from "../../styles/Style";
 import LandingUserBlock from "./LandingUserBlock";
 import LandingNonUserBlock from "./LandingNonUserBlock";
 import TopKilasBlock from "./TopKilasBlocks";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import ReviewBlock from "./ReviewBlock";
 
 // Material-UI components
-import { Container, Grid, makeStyles, Tooltip } from "@material-ui/core";
+import { Container, makeStyles, Tooltip } from "@material-ui/core";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
@@ -33,7 +34,6 @@ import { AuthContext } from "../../components/Routing/Auth";
 import { primaryColor } from "../../styles/Style";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import ReviewCard from "../../components/ReviewCard";
-import ReviewBlock from "./ReviewBlock";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -127,13 +127,17 @@ export default function Home({ history }) {
             }
           />
 
-          <TopKilasBlock
+          {/* <TopKilasBlock
             button={
               <Button round href="/library">
                 <LibraryBooksIcon /> Akses Library Kamu Sekarang!
               </Button>
             }
-          />
+          /> */}
+
+          <div style={{ marginTop: "40px" }} />
+
+          <ReviewBlock />
 
           <div style={{ marginTop: "40px" }} />
 
@@ -160,13 +164,13 @@ export default function Home({ history }) {
             }
           />
 
-          <TopKilasBlock
+          {/* <TopKilasBlock
             button={
               <Button round href="/signup">
                 Daftar Sekarang!
               </Button>
             }
-          />
+          /> */}
 
           <div style={{ marginTop: "40px" }} />
 
