@@ -26,48 +26,16 @@ import { Container, makeStyles, Tooltip } from "@material-ui/core";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
-// nodejs library to set properties for components
-import classNames from "classnames";
-
 // Firebase components
 import { AuthContext } from "../../components/Routing/Auth";
-import { primaryColor } from "../../styles/Style";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
-import ReviewCard from "../../components/ReviewCard";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-const mobileStyles = makeStyles((theme) => ({
-  // small: 600px; md, medium: 960px; lg, large: 1280px
-  sectionDesktop: {
-    display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
-  },
-  // small: 600px; md, medium: 960px; lg, large: 1280px
-  sectionMobile: {
-    display: "flex",
-    // marginTop: "40px",
-    textAlign: "center",
-    justifyContent: "center",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-  },
-}));
-
 export default function Home({ history }) {
-  // Styles
-  const mobile = mobileStyles();
+  // Styles\
   const classes = MultiUseMobile();
   const books = useStyles();
-  const mobileClass = classNames({
-    [mobile.sectionMobile]: true,
-  });
-  const desktopClass = classNames({
-    [mobile.sectionDesktop]: true,
-  });
 
   // Auth
   const { currentUser } = useContext(AuthContext);
@@ -127,13 +95,13 @@ export default function Home({ history }) {
             }
           />
 
-          {/* <TopKilasBlock
+          <TopKilasBlock
             button={
               <Button round href="/library">
                 <LibraryBooksIcon /> Akses Library Kamu Sekarang!
               </Button>
             }
-          /> */}
+          />
 
           <div style={{ marginTop: "40px" }} />
 
@@ -164,13 +132,13 @@ export default function Home({ history }) {
             }
           />
 
-          {/* <TopKilasBlock
+          <TopKilasBlock
             button={
               <Button round href="/signup">
                 Daftar Sekarang!
               </Button>
             }
-          /> */}
+          />
 
           <div style={{ marginTop: "40px" }} />
 

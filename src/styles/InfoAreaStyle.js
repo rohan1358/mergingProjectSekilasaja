@@ -9,27 +9,20 @@ import {
 } from "./Style";
 
 const InfoStyle = {
+  // newBadgePos: {
+  //   position: "absolute",
+  //   marginTop: -413,
+  //   marginLeft: -27,
+  // },
   buttonAddedHoverPos: {
     position: "absolute",
-    // top: 270,
     marginTop: 250,
     marginLeft: 115,
   },
   buttonHoverPos: {
     position: "absolute",
-    // top: 270,
     marginTop: 250,
     marginLeft: 145,
-  },
-  mobileButtonPos: {
-    // position: "absolute",
-    // top: 270,
-    // marginLeft: 145,
-  },
-  addedMobileButtonPos: {
-    // position: "absolute",
-    // top: 270,
-    // marginLeft: 145,
   },
   cardHover: {
     "&:hover": {
@@ -41,7 +34,6 @@ const InfoStyle = {
   },
   bookCover: {
     maxWidth: "200px",
-    // marginTop: "30px",
   },
   bookDetails: {
     marginTop: "40px",
@@ -87,7 +79,6 @@ const InfoStyle = {
     overflow: "hidden",
   },
   description: {
-    // color: secondaryColor,
     overflow: "hidden",
     marginTop: "0px",
   },
