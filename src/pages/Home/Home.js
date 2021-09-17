@@ -32,6 +32,8 @@ import classNames from "classnames";
 import { AuthContext } from "../../components/Routing/Auth";
 import { primaryColor } from "../../styles/Style";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
+import ReviewCard from "../../components/ReviewCard";
+import ReviewBlock from "./ReviewBlock";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -108,6 +110,10 @@ export default function Home({ history }) {
 
       {!!currentUser ? (
         <div>
+          {/*---------------------------------------------------------------*/}
+          {/*--------------------------- LOGGED IN -------------------------*/}
+          {/*---------------------------------------------------------------*/}
+
           {/* Landing Block */}
           <LandingUserBlock />
 
@@ -161,6 +167,11 @@ export default function Home({ history }) {
               </Button>
             }
           />
+
+          <div style={{ marginTop: "40px" }} />
+
+          {/* Review Block */}
+          <ReviewBlock />
 
           <div style={{ marginTop: "40px" }} />
 
