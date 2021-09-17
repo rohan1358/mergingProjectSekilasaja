@@ -1,5 +1,4 @@
 import React from "react";
-import Verified from "../../images/verified.png";
 
 // Custom components
 import Typography from "../../components/Typography";
