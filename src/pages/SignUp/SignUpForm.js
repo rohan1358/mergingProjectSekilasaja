@@ -94,6 +94,7 @@ const SignUpForm = ({ history }) => {
               cart: [],
               start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
               end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
+              sign_up_date: new Date(),
             })
             .then((resp) => {
               console.log("Added user data to firestore...");
