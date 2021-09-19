@@ -64,6 +64,33 @@ const data = [
       "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Frinaldi.jpg?alt=media&token=3ce705c6-5752-4330-b871-9f96154b06a9",
   },
   ,
+  {
+    id: 4,
+    name: (
+      <>
+        Ogut Mudacumasekali | Founder mudacumasekali &{" "}
+        <a
+          style={{
+            textDecoration: "none",
+            // fontStyle: "italic",
+            color: secondaryColor,
+          }}
+          href="https://contentacademy.id/"
+        >
+          contentacademy.id
+        </a>
+      </>
+    ),
+    comment: `
+    "Aplikasi ini asik banget buat yang lagi nyetir mobil dan olahraga sembari
+    belajar. Walaupun sibuk beraktifitas fisik, tetep bisa banget masukin ilmu
+    ke otak. Recommended banget buat yang mau jadi pinter."
+    `,
+    userInstagram: "mudacumasekali",
+    userInstagramLink: "https://www.instagram.com/mudacumasekali",
+    photoURL:
+      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fogut.jpg?alt=media&token=cfe643ba-adbd-42c9-ab18-b55cda35323d",
+  },
 ];
 
 console.log(data[0].name);
