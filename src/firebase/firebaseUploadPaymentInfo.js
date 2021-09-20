@@ -29,7 +29,8 @@ export async function uploadPaymentInfo(
     });
 
     //Decrease total cost by promo amount (add because discount amount is negative value)
-    total_cost = total_cost + discountAmount;
+    total_cost =
+      total_cost + discountAmount > 0 ? total_cost + discountAmount : 0;
 
     //Get today's date for payment date
     const today = new Date(); //Date of payment

@@ -7,14 +7,17 @@ import reportWebVitals from "./reportWebVitals";
 import { PersistGate } from "redux-persist/integration/react";
 import TagManager from "react-gtm-module";
 
+// Whole website color
 document.body.style = "background: #FFFEF8;";
 
+// Google Tag Manager
 const tagManagerArgs = {
   gtmId: "GTM-5CD4PVH",
 };
 
 TagManager.initialize(tagManagerArgs);
 
+// Disable Inspect
 document.addEventListener("contextmenu", function (e) {
   e.preventDefault();
 });
