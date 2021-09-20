@@ -7,6 +7,8 @@ import reportWebVitals from "./reportWebVitals";
 import { PersistGate } from "redux-persist/integration/react";
 import TagManager from "react-gtm-module";
 
+document.body.style = "background: #FFFEF8;";
+
 const tagManagerArgs = {
   gtmId: "GTM-5CD4PVH",
 };
