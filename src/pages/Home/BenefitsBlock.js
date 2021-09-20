@@ -57,7 +57,7 @@ export default function BenefitsBlock({ logo, button }) {
                 size="heading"
               >
                 {/* <div style={{ display: "flex", alignItems: "center" }}> */}
-                Kenapa harus bergabung di {logo} ?{/* </div> */}
+                Kenapa Harus Bergabung Di {logo} ?{/* </div> */}
               </Typography>
             </Grid>
             <Grid item xs={3}>
@@ -181,7 +181,7 @@ export default function BenefitsBlock({ logo, button }) {
                 }}
                 size="heading"
               >
-                Kenapa harus bergabung di
+                Kenapa Harus Bergabung Di
               </Typography>
               <Typography
                 style={{

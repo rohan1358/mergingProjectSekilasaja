@@ -94,13 +94,13 @@ export default function LandingUserBlock({}) {
                   }}
                   size="subheading"
                 >
-                  Akses kedua bukumu{" "}
+                  Akses Kedua Bukumu{" "}
                   <strong
                     style={{
                       backgroundColor: primaryColor,
                     }}
                   >
-                    sekarang!
+                    Sekarang!
                   </strong>{" "}
                 </Typography>
 
@@ -181,13 +181,13 @@ export default function LandingUserBlock({}) {
                 }}
                 size="subheading"
               >
-                Akses kedua bukumu{" "}
+                Akses Kedua Bukumu{" "}
                 <strong
                   style={{
                     backgroundColor: primaryColor,
                   }}
                 >
-                  sekarang!
+                  Sekarang!
                 </strong>{" "}
               </Typography>
 

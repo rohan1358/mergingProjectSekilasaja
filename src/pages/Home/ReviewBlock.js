@@ -3,7 +3,7 @@ import React from "react";
 // Custom components
 import Typography from "../../components/Typography";
 import ReviewCard from "../../components/ReviewCard";
-import { secondaryColor } from "../../styles/Style";
+import { primaryColor, secondaryColor } from "../../styles/Style";
 
 // Material-UI components
 import { Container, Grid } from "@material-ui/core";
@@ -98,6 +98,27 @@ console.log(data[0].name);
 export default function ReviewBlock({}) {
   return (
     <Container>
+      <Typography
+        style={{
+          textAlign: "center",
+          textTransform: "uppercase",
+          marginTop: "50px",
+          marginBottom: "0",
+          letterSpacing: "3px",
+          fontWeight: 700,
+          fontSize: 20,
+        }}
+      >
+        Yuk, Bergabung dengan{" "}
+        <strong
+          style={{
+            backgroundColor: primaryColor,
+          }}
+        >
+          <strong style={{ fontFamily: "Montserrat" }}>1000+</strong> orang
+          lainnya!
+        </strong>
+      </Typography>
       <Typography style={{ textAlign: "center" }} size="heading">
         Apa Kata Mereka...
       </Typography>
