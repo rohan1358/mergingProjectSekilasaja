@@ -15,6 +15,7 @@ import SubscriptionPlan from "./SubscriptionPlan";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
+import Loading from "../Loading";
 
 // firebase components
 import fire from "../.././firebase/fire";
@@ -46,6 +47,7 @@ export default function AccountsPage({ history }) {
   const [success, setSuccess] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirm, setNewPasswordConfirm] = useState("");
+  const [pending, setPending] = useState(true);
 
   // useRef hooks
   const passwordRef = useRef();
@@ -146,6 +148,18 @@ export default function AccountsPage({ history }) {
       setSuccess("Proses berhasil!");
       updatePassword(passwordRef.current.value);
     }
+  }
+
+  if (userData && bookNum && pending) {
+    setPending(false);
+  }
+
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   return (
