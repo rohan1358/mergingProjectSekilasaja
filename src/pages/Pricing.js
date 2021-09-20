@@ -13,7 +13,6 @@ import HeaderLinks from "../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../components/NavBar/HeaderLinksMobile";
 import Footer from "../components/Footer";
 import { beigeColor, primaryColor, secondaryColor } from "../styles/Style";
-import Loading from "./Loading";
 
 // Material-UI components
 import {
@@ -144,7 +143,6 @@ export default function PricingPage({ match, history }) {
   const [subThree, setSubThree] = useState(null);
   const [subSix, setSubSix] = useState(null);
   const [subTwelve, setSubTwelve] = useState(null);
-  const [pending, setPending] = useState(false);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -182,7 +180,6 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartOne = () => {
     const fetchData = async () => {
-      setPending(true);
       if (cartItems.length != 0) {
         firestore.collection("users").doc(currentUser.uid).update({
           cart: [],
@@ -194,8 +191,6 @@ export default function PricingPage({ match, history }) {
       );
 
       history.push("/payment");
-
-      setPending(false);
 
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 1 Bulan"
@@ -212,7 +207,6 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartThree = () => {
     const fetchData = async () => {
-      setPending(true);
       if (cartItems.length != 0) {
         firestore.collection("users").doc(currentUser.uid).update({
           cart: [],
@@ -224,8 +218,6 @@ export default function PricingPage({ match, history }) {
       );
 
       history.push("/payment");
-
-      setPending(false);
 
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 3 Bulan"
@@ -242,7 +234,6 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartSix = () => {
     const fetchData = async () => {
-      setPending(true);
       if (cartItems.length != 0) {
         firestore.collection("users").doc(currentUser.uid).update({
           cart: [],
@@ -255,8 +246,6 @@ export default function PricingPage({ match, history }) {
       );
 
       history.push("/payment");
-
-      setPending(false);
 
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 6 Bulan"
@@ -273,7 +262,6 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartTwelve = () => {
     const fetchData = async () => {
-      setPending(true);
       if (cartItems.length != 0) {
         firestore.collection("users").doc(currentUser.uid).update({
           cart: [],
@@ -286,8 +274,6 @@ export default function PricingPage({ match, history }) {
       );
 
       history.push("/payment");
-
-      setPending(false);
 
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 12 Bulan"
@@ -344,14 +330,6 @@ export default function PricingPage({ match, history }) {
       route: handleAddCartOne,
     },
   ];
-
-  if (pending) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  }
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
