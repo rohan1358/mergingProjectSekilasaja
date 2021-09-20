@@ -17,7 +17,7 @@ import Button from "../../components/Button";
 // Firebase component
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
-import { beigeColor, primaryColor } from "../../styles/Style";
+import { primaryColor } from "../../styles/Style";
 
 const responsive = {
   superLargeDesktop: {
@@ -266,50 +266,5 @@ export default function TopKilasBlock({ button }) {
         </div>
       </Carousel>
     </div>
-    // <div
-    //   style={{
-    //     backgroundImage: `url(${HomeBG})`,
-    //     backgroundSize: "cover",
-    //   }}
-    // >
-    //   <Container>
-    //     <Grid container direction="row" justifyContent="center" spacing={3}>
-    //       {/* Kilas of the week */}
-    //       <Grid item xs={12} />
-    //       <Grid item xs={12}>
-    //         <Typography
-    //           style={{ marginTop: 0, textAlign: "center" }}
-    //           size="heading"
-    //         >
-    //           <strong style={{ backgroundColor: primaryColor }}>
-    //             Kilas Baru
-    //           </strong>{" "}
-    //           Minggu Ini
-    //         </Typography>
-    // <Grid container spacing={5} justifyContent="space-evenly">
-    // {products
-    //   .filter(
-    //     (product) => product.category.includes("Productivity") == true
-    //   )
-    //   .map((categorisedProduct, index) => (
-    //     <BookCard
-    //       chosenCategory={"Productivity"}
-    //       key={index}
-    //       product={categorisedProduct}
-    //       extraSpace={<div style={{ marginTop: "20px" }} />}
-    //     />
-    //   ))}
-    // </Grid>
-    //       </Grid>
-
-    //       <Grid item xs={12}>
-    //         <div style={{ display: "flex", justifyContent: "center" }}>
-    //           {button}
-    //         </div>
-    //       </Grid>
-    //       <Grid item xs={12} />
-    //     </Grid>
-    //   </Container>
-    // </div>
   );
 }
