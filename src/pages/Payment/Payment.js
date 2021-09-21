@@ -627,7 +627,7 @@ export default function Payment({ history }) {
                       disabled
                       value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!) akan tersedia tanggal 20 September 2021"
+                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!) akan tersedia tanggal 23 September 2021"
                       onChange={(e) => setNamaBank(e.target.value)}
                     />
                     <Box
@@ -1028,7 +1028,7 @@ export default function Payment({ history }) {
                       disabled
                       value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!) akan tersedia tanggal 20 September 2021"
+                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!) akan tersedia tanggal 23 September 2021"
                       onChange={(e) => setNamaBank(e.target.value)}
                     />
                     <Box
