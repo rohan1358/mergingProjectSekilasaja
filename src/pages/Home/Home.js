@@ -31,7 +31,6 @@ import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
-import Loading from "../Loading";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -46,7 +45,6 @@ export default function Home({ history }) {
   // useState hooks
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [pending, setPending] = useState(true);
 
   const [bookOne, setBookOne] = useState([]);
   const [bookTwo, setBookTwo] = useState([]);
@@ -106,17 +104,7 @@ export default function Home({ history }) {
       }
     };
     fetchData();
-  }, [
-    bookOne,
-    bookTwo,
-    bookThree,
-    bookFour,
-    bookFourDesc,
-    bookThreeDesc,
-    bookTwoDesc,
-    bookOneDesc,
-    userData,
-  ]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -143,7 +131,7 @@ export default function Home({ history }) {
       if (link5 !== undefined) setCoverFive(link5);
     };
     fetchData();
-  }, [coverOne, coverTwo, coverThree, coverFour, userData]);
+  }, []);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -162,32 +150,6 @@ export default function Home({ history }) {
 
   if (isSubscribed == true) {
     return <Redirect to={"/library"} />;
-  }
-
-  if (
-    coverOne &&
-    coverTwo &&
-    coverThree &&
-    coverFour &&
-    bookOne &&
-    bookTwo &&
-    bookThree &&
-    bookFour &&
-    bookOneDesc &&
-    bookTwoDesc &&
-    bookThreeDesc &&
-    bookFourDesc &&
-    pending
-  ) {
-    setPending(false);
-  }
-
-  if (pending) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
   }
 
   return (
