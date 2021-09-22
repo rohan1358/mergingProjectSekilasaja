@@ -25,6 +25,7 @@ export default function BookDetails(props) {
     tableOfContents,
     isSubscribed,
     libraryButton,
+    upsellBlock,
   } = props;
 
   const mobile = MultiUseMobile();
@@ -147,6 +148,7 @@ export default function BookDetails(props) {
 
                     <Typography size="subheading">{kilasTitle}</Typography>
                     <Typography>{kilasBody}</Typography>
+                    <div>{upsellBlock}</div>
                   </Grid>
 
                   <Grid item xs={1} />
@@ -211,10 +213,10 @@ export default function BookDetails(props) {
                       </Typography>
                       <Typography>{tableOfContents}</Typography>
                     </div>
-                  </Grid>
 
-                  <Grid item xs={12}>
                     <div className={mobile.extraSpace} />
+
+                    <div>{upsellBlock}</div>
                   </Grid>
 
                   <Grid item xs={12}>
