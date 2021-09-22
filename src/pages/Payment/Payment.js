@@ -106,6 +106,14 @@ export default function Payment({ history }) {
   // useRef Hooks
   const promoCodeRef = useRef("");
 
+  // Facebook Pixel
+  const advancedMatching = { em: "sekilasaja.main@gmail.com" }; // optional, more info: https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching
+  const options = {
+    autoConfig: true, // set pixel's autoConfig. More info: https://developers.facebook.com/docs/facebook-pixel/advanced/
+    debug: false, // enable logs
+  };
+  ReactPixel.init("278438179847480", advancedMatching, options);
+
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
     if (!currentUser) {
@@ -119,6 +127,7 @@ export default function Payment({ history }) {
     }
   }, []);
 
+  // useEffect Hooks
   useEffect(() => {
     cartItems.map((x) => {
       if (
@@ -134,6 +143,7 @@ export default function Payment({ history }) {
     });
   }, [cartItems]);
 
+  // Functions
   const handleRadioChange = (event) => {
     setValue(event.target.value);
   };
@@ -270,6 +280,12 @@ export default function Payment({ history }) {
     //   promoCodeData,
     //   cartItems
     // );
+
+    // Facebook Pixel Conversion Tracking
+    ReactPixel.track("Purchase", {
+      currency: "IDR",
+      value: totalPrice,
+    });
 
     if (image_url) {
       setPending(false);
