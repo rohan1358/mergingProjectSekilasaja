@@ -123,7 +123,7 @@ export default function Home({ history }) {
         "Rich Dad’s Cashflow Quadrant"
       );
       const link5 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "SteveJobs"
+        "Steve Jobs"
       );
 
       if (link1 !== undefined) setCoverOne(link1);
@@ -150,9 +150,9 @@ export default function Home({ history }) {
     }
   }, []);
 
-  // if (isSubscribed == true) {
-  //   return <Redirect to={"/library"} />;
-  // }
+  if (isSubscribed == true) {
+    return <Redirect to={"/library"} />;
+  }
 
   if (
     coverOne &&
