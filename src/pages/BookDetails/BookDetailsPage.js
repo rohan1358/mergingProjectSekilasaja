@@ -517,7 +517,7 @@ export default function BookDetailsPage({ match, history }) {
                         }
                         video={
                           current_product.video_link ? (
-                            <Button href="/pricing" color="secondary" fullWidth>
+                            <Button href="/pricing" color="primary" fullWidth>
                               <PlayCircleFilledIcon /> Akses Videonya Sekarang!
                             </Button>
                           ) : (
@@ -614,6 +614,29 @@ export default function BookDetailsPage({ match, history }) {
                                           kilas.title}
                                     </Typography>
                                     <Divider />
+                                    {index + 2 == 2 ? (
+                                      <></>
+                                    ) : (
+                                      <div>
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            justifyContent: "center",
+                                          }}
+                                        >
+                                          <Button
+                                            round
+                                            href="/pricing"
+                                            style={{
+                                              backgroundImage:
+                                                "linear-gradient(to right, orange, yellow)",
+                                            }}
+                                          >
+                                            Berlanggan Sekarang!
+                                          </Button>
+                                        </div>
+                                      </div>
+                                    )}
                                   </div>
                                 ) : (
                                   <div className={classes.blur}>
@@ -664,7 +687,6 @@ export default function BookDetailsPage({ match, history }) {
                           <Grid container spacing={3}>
                             <Grid item>
                               <Button href={"/login"}>
-                                {" "}
                                 <VpnKeyIcon /> Masuk Sekarang!
                               </Button>
                             </Grid>
@@ -691,7 +713,7 @@ export default function BookDetailsPage({ match, history }) {
                     }
                     video={
                       current_product.video_link ? (
-                        <Button href="/pricing" color="secondary" fullWidth>
+                        <Button href="/pricing" color="primary" fullWidth>
                           <PlayCircleFilledIcon /> Akses Videonya Sekarang!
                         </Button>
                       ) : (
@@ -784,6 +806,29 @@ export default function BookDetailsPage({ match, history }) {
                                       kilas.title}
                                 </Typography>
                                 <Divider />
+                                {index + 2 == 2 ? (
+                                  <></>
+                                ) : (
+                                  <div>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "center",
+                                      }}
+                                    >
+                                      <Button
+                                        round
+                                        href="/pricing"
+                                        style={{
+                                          backgroundImage:
+                                            "linear-gradient(to right, orange, yellow)",
+                                        }}
+                                      >
+                                        Berlanggan Sekarang!
+                                      </Button>
+                                    </div>
+                                  </div>
+                                )}
                               </div>
                             ) : (
                               <div className={classes.blur}>
