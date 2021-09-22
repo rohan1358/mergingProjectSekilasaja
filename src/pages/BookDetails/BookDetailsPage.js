@@ -760,15 +760,8 @@ export default function BookDetailsPage({ match, history }) {
                             justifyContent: "center",
                           }}
                         >
-                          <Button
-                            round
-                            href="/pricing"
-                            style={{
-                              backgroundImage:
-                                "linear-gradient(to right, orange, yellow)",
-                            }}
-                          >
-                            Berlanggan Sekarang!
+                          <Button href={"/login"}>
+                            <VpnKeyIcon /> Masuk Sekarang!
                           </Button>
                         </div>
 
@@ -816,15 +809,8 @@ export default function BookDetailsPage({ match, history }) {
                                         justifyContent: "center",
                                       }}
                                     >
-                                      <Button
-                                        round
-                                        href="/pricing"
-                                        style={{
-                                          backgroundImage:
-                                            "linear-gradient(to right, orange, yellow)",
-                                        }}
-                                      >
-                                        Berlanggan Sekarang!
+                                      <Button href={"/login"}>
+                                        <VpnKeyIcon /> Masuk Sekarang!
                                       </Button>
                                     </div>
                                   </div>

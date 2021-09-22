@@ -283,14 +283,8 @@ export default function Home({ history }) {
               justifyContent: "center",
             }}
           >
-            <Button
-              round
-              href="/pricing"
-              style={{
-                backgroundImage: "linear-gradient(to right, orange, yellow)",
-              }}
-            >
-              Berlanggan Sekarang!
+            <Button round href="/login">
+              Bergabung Sekarang!
             </Button>
           </div>
 
