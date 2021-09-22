@@ -67,57 +67,57 @@ const SignUpForm = ({ history }) => {
     e.preventDefault();
 
     //Check if password and reenter password are the same or not.
-    if (password != reenterPassword) {
-      return setError("Password tidak sama!");
-    } else if (email != verifyEmail) {
-      return setError("Email tidak sama!");
-    } else {
-      auth
-        .createUserWithEmailAndPassword(email, password)
-        .then((resp) => {
-          console.log("CREATING IN FIRESTORE...");
-          //Store the new user information in the database via firestore
-          firestore
-            .collection("users")
-            .doc(resp.user.uid)
-            .set({
-              firstName: firstName,
-              lastName: lastName,
-              phoneNumber: phoneNumber,
-              email: email,
-              owned_books: [
-                "Atomic Habits",
-                "The Little Book of Common Sense Investing",
-              ],
-              favorite_books: [],
-              is_subscribed: false,
-              cart: [],
-              start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
-              end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
-              sign_up_date: new Date(),
-            })
-            .then((resp) => {
-              console.log("Added user data to firestore...");
-              setPending(false);
-            })
-            .catch((err) => {
-              //Sign up fail case
-              var errorCode = err.code;
-              var errorMessage = err.message;
-              return setError(
-                "ERROR (" + errorCode + "):" + "\n\n" + errorMessage
-              );
-            });
-          //Sign up success case
-          console.log("Firebase signup suceeded!");
-        })
-        .catch((err) => {
-          //Sign up fail case
-          var errorCode = err.code;
-          var errorMessage = err.message;
-          return setError("ERROR (" + errorCode + "):" + "\n\n" + errorMessage);
-        });
-    }
+    // if (password != reenterPassword) {
+    //   return setError("Password tidak sama!");
+    // } else if (email != verifyEmail) {
+    //   return setError("Email tidak sama!");
+    // } else {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((resp) => {
+        console.log("CREATING IN FIRESTORE...");
+        //Store the new user information in the database via firestore
+        firestore
+          .collection("users")
+          .doc(resp.user.uid)
+          .set({
+            firstName: firstName,
+            lastName: lastName,
+            phoneNumber: phoneNumber,
+            email: email,
+            owned_books: [
+              "Atomic Habits",
+              "The Little Book of Common Sense Investing",
+            ],
+            favorite_books: [],
+            is_subscribed: false,
+            cart: [],
+            start_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
+            end_date: new Date("9/9/99"), // this date means UNSUBSCRIBED
+            sign_up_date: new Date(),
+          })
+          .then((resp) => {
+            console.log("Added user data to firestore...");
+            setPending(false);
+          })
+          .catch((err) => {
+            //Sign up fail case
+            var errorCode = err.code;
+            var errorMessage = err.message;
+            return setError(
+              "ERROR (" + errorCode + "):" + "\n\n" + errorMessage
+            );
+          });
+        //Sign up success case
+        console.log("Firebase signup suceeded!");
+      })
+      .catch((err) => {
+        //Sign up fail case
+        var errorCode = err.code;
+        var errorMessage = err.message;
+        return setError("ERROR (" + errorCode + "):" + "\n\n" + errorMessage);
+      });
+    // }
   };
 
   // if (currentUser && currentUser.emailVerified) {
@@ -132,7 +132,7 @@ const SignUpForm = ({ history }) => {
   // }
 
   if (currentUser && !pending) {
-    return <Redirect to="/" />;
+    return <Redirect to="/library" />;
   }
 
   return (
@@ -144,21 +144,21 @@ const SignUpForm = ({ history }) => {
         </div>
       )}
       <TextField
-        label="First Name"
+        label="Nama Lengkap"
         variant="filled"
         required
         value={firstName}
         onChange={(e) => setFirstName(e.target.value)}
       />
-      <TextField
+      {/* <TextField
         label="Last Name"
         variant="filled"
         required
         value={lastName}
         onChange={(e) => setLastName(e.target.value)}
-      />
+      /> */}
       <TextField
-        label="Phone Number"
+        label="Nomor HP"
         variant="filled"
         required
         value={phoneNumber}
@@ -172,14 +172,14 @@ const SignUpForm = ({ history }) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <TextField
+      {/* <TextField
         label="Ketik Ulang Email Kamu"
         variant="filled"
         type="email"
         required
         value={verifyEmail}
         onChange={(e) => setVerifyEmail(e.target.value)}
-      />
+      /> */}
       <TextField
         label="Password"
         variant="filled"
@@ -188,14 +188,14 @@ const SignUpForm = ({ history }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <TextField
+      {/* <TextField
         label="Re-enter Password"
         variant="filled"
         type="password"
         required
         value={reenterPassword}
         onChange={(e) => setReenterPassword(e.target.value)}
-      />
+      /> */}
       <Button fullWidth round type="submit" color="primary">
         Sign Up
       </Button>

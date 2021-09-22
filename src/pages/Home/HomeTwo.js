@@ -121,7 +121,7 @@ export default function Home({ history }) {
         "Rich Dad’s Cashflow Quadrant"
       );
       const link5 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "SteveJobs"
+        "Steve Jobs"
       );
 
       if (link1 !== undefined) setCoverOne(link1);
@@ -189,14 +189,17 @@ export default function Home({ history }) {
             bookTwo={bookTwo}
             bookThree={bookThree}
             bookFour={bookFour}
+            bookFive={bookFive}
             bookOneDesc={bookOneDesc}
             bookTwoDesc={bookTwoDesc}
             bookThreeDesc={bookThreeDesc}
             bookFourDesc={bookFourDesc}
+            bookFiveDesc={bookFiveDesc}
             coverOne={coverOne}
             coverTwo={coverTwo}
             coverThree={coverThree}
             coverFour={coverFour}
+            coverFive={coverFive}
           />
 
           <div style={{ marginTop: "40px" }} />
@@ -233,14 +236,17 @@ export default function Home({ history }) {
             bookTwo={bookTwo}
             bookThree={bookThree}
             bookFour={bookFour}
+            bookFive={bookFive}
             bookOneDesc={bookOneDesc}
             bookTwoDesc={bookTwoDesc}
             bookThreeDesc={bookThreeDesc}
             bookFourDesc={bookFourDesc}
+            bookFiveDesc={bookFiveDesc}
             coverOne={coverOne}
             coverTwo={coverTwo}
             coverThree={coverThree}
             coverFour={coverFour}
+            coverFive={coverFive}
           />
 
           <div style={{ marginTop: "40px" }} />

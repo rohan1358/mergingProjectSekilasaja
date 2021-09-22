@@ -42,13 +42,8 @@ export async function uploadPaymentInfo(
         ? "0" + today.getMonth().toString()
         : today.getMonth().toString();
     var year = today.getFullYear().toString();
-    var referenceName =
-      date +
-      month +
-      year +
-      "_" +
-      userData.user.firstName +
-      userData.user.lastName;
+    var referenceName = date + month + year + "_" + userData.user.firstName;
+    // + userData.user.lastName;
 
     //Conditional checking to determine data type
     if (image.type.toString().includes("png")) {
@@ -104,7 +99,7 @@ export async function uploadPaymentInfo(
     var image_url = await imgRef.getDownloadURL();
     const docRef = await firestore.collection("payments").add({
       fn: userData.user.firstName,
-      ln: userData.user.lastName,
+      // ln: userData.user.lastName,
       phoneNumber: userData.user.phoneNumber,
       email: userData.user.email,
       date: today,

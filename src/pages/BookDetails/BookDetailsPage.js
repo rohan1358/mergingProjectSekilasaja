@@ -20,10 +20,11 @@ import TextReadingStyle from "../../styles/TextReadingStyle";
 import Loading from "../Loading";
 
 // Material-UI components
-import { Container, Divider, Grid, makeStyles } from "@material-ui/core";
+import { Container, Divider, Grid, makeStyles, Paper } from "@material-ui/core";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
+import ErrorIcon from "@material-ui/icons/Error";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -37,7 +38,7 @@ import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
 import * as firebaseGetBookAudioTrialURL from "../../firebase/firebaseGetBookAudioTrialURL";
-import { beigeColor } from "../../styles/Style";
+import { beigeColor, secondaryColor } from "../../styles/Style";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -289,6 +290,54 @@ export default function BookDetailsPage({ match, history }) {
                       />
 
                       <TextDetails
+                        upsellBlock={
+                          !!isSubscribed &&
+                          current_product.book_title == "Atomic Habits" ? (
+                            <></>
+                          ) : (
+                            <div>
+                              <Paper
+                                style={{
+                                  textAlign: "center",
+                                  padding: "15px",
+                                }}
+                                elevation={5}
+                              >
+                                <ErrorIcon
+                                  fontSize="large"
+                                  style={{
+                                    marginRight: "10px",
+                                    color: secondaryColor,
+                                  }}
+                                />
+                                <Typography
+                                  style={{
+                                    textAlign: "center",
+                                  }}
+                                  type="italic"
+                                  size="bold"
+                                >
+                                  Ingin memiliki akses untuk semua kilas? Dengan
+                                  hanya Rp. 1.000/hari, Kamu bisa mengakses
+                                  semua kilas!
+                                </Typography>
+                                <Button
+                                  href="/pricing"
+                                  round
+                                  fullWidth
+                                  style={{
+                                    backgroundImage:
+                                      "linear-gradient(to right, orange, yellow)",
+                                  }}
+                                >
+                                  Berlanggan sekarang!
+                                </Button>
+                              </Paper>
+
+                              <div style={{ marginBottom: "20px" }} />
+                            </div>
+                          )
+                        }
                         libraryButton={
                           <Button fullWidth color="secondary" href="/library">
                             <LibraryBooksIcon /> Go To My Library
@@ -383,7 +432,14 @@ export default function BookDetailsPage({ match, history }) {
                             <div className={classes.sectionDesktop}>
                               <Grid container spacing={3}>
                                 <Grid item>
-                                  <Button href={"/pricing"}>
+                                  <Button
+                                    round
+                                    href={"/pricing"}
+                                    style={{
+                                      backgroundImage:
+                                        "linear-gradient(to right, orange, yellow)",
+                                    }}
+                                  >
                                     Berlanggan Sekarang!
                                   </Button>
                                 </Grid>
@@ -413,7 +469,15 @@ export default function BookDetailsPage({ match, history }) {
 
                             <div className={classes.sectionMobileBlock}>
                               <Grid item xs={12}>
-                                <Button fullWidth href={"/pricing"}>
+                                <Button
+                                  fullWidth
+                                  round
+                                  href={"/pricing"}
+                                  style={{
+                                    backgroundImage:
+                                      "linear-gradient(to right, orange, yellow)",
+                                  }}
+                                >
                                   Berlanggan Sekarang!
                                 </Button>
                               </Grid>
@@ -500,7 +564,14 @@ export default function BookDetailsPage({ match, history }) {
                                 justifyContent: "center",
                               }}
                             >
-                              <Button round href="/pricing">
+                              <Button
+                                round
+                                href="/pricing"
+                                style={{
+                                  backgroundImage:
+                                    "linear-gradient(to right, orange, yellow)",
+                                }}
+                              >
                                 Berlanggan Sekarang!
                               </Button>
                             </div>
@@ -667,7 +738,14 @@ export default function BookDetailsPage({ match, history }) {
                             justifyContent: "center",
                           }}
                         >
-                          <Button round href="/pricing">
+                          <Button
+                            round
+                            href="/pricing"
+                            style={{
+                              backgroundImage:
+                                "linear-gradient(to right, orange, yellow)",
+                            }}
+                          >
                             Berlanggan Sekarang!
                           </Button>
                         </div>

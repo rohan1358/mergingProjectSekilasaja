@@ -121,7 +121,7 @@ export default function Home({ history }) {
         "Rich Dad’s Cashflow Quadrant"
       );
       const link5 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "SteveJobs"
+        "Steve Jobs"
       );
 
       if (link1 !== undefined) setCoverOne(link1);
@@ -178,7 +178,13 @@ export default function Home({ history }) {
           <BenefitsBlock
             logo={<img src={Logo} className={books.imgLogoText} />}
             button={
-              <Button round href="/pricing">
+              <Button
+                round
+                href="/pricing"
+                style={{
+                  backgroundImage: "linear-gradient(to right, orange, yellow)",
+                }}
+              >
                 Berlanggan Sekarang!
               </Button>
             }
@@ -189,19 +195,39 @@ export default function Home({ history }) {
             bookTwo={bookTwo}
             bookThree={bookThree}
             bookFour={bookFour}
+            bookFive={bookFive}
             bookOneDesc={bookOneDesc}
             bookTwoDesc={bookTwoDesc}
             bookThreeDesc={bookThreeDesc}
             bookFourDesc={bookFourDesc}
+            bookFiveDesc={bookFiveDesc}
             coverOne={coverOne}
             coverTwo={coverTwo}
             coverThree={coverThree}
             coverFour={coverFour}
+            coverFive={coverFive}
           />
 
           <div style={{ marginTop: "40px" }} />
 
           <ReviewBlock />
+          <div
+            style={{
+              marginTop: 30,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              round
+              href="/pricing"
+              style={{
+                backgroundImage: "linear-gradient(to right, orange, yellow)",
+              }}
+            >
+              Berlanggan Sekarang!
+            </Button>
+          </div>
 
           <div style={{ marginTop: "40px" }} />
 
@@ -233,20 +259,40 @@ export default function Home({ history }) {
             bookTwo={bookTwo}
             bookThree={bookThree}
             bookFour={bookFour}
+            bookFive={bookFive}
             bookOneDesc={bookOneDesc}
             bookTwoDesc={bookTwoDesc}
             bookThreeDesc={bookThreeDesc}
             bookFourDesc={bookFourDesc}
+            bookFiveDesc={bookFiveDesc}
             coverOne={coverOne}
             coverTwo={coverTwo}
             coverThree={coverThree}
             coverFour={coverFour}
+            coverFive={coverFive}
           />
 
           <div style={{ marginTop: "40px" }} />
 
           {/* Review Block */}
           <ReviewBlock />
+          <div
+            style={{
+              marginTop: 30,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              round
+              href="/pricing"
+              style={{
+                backgroundImage: "linear-gradient(to right, orange, yellow)",
+              }}
+            >
+              Berlanggan Sekarang!
+            </Button>
+          </div>
 
           <div style={{ marginTop: "40px" }} />
 

@@ -436,6 +436,10 @@ export default function PricingPage({ match, history }) {
                         round
                         fullWidth
                         color="primary"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(to right, orange, yellow)",
+                        }}
                       >
                         {tier.buttonText}
                       </Button>
@@ -589,6 +593,10 @@ export default function PricingPage({ match, history }) {
                               round
                               fullWidth
                               color="primary"
+                              style={{
+                                backgroundImage:
+                                  "linear-gradient(to right, orange, yellow)",
+                              }}
                             >
                               {tier.buttonText}
                             </Button>
@@ -755,7 +763,16 @@ export default function PricingPage({ match, history }) {
                       </div>
                     </CardContent>
                     <CardActions>
-                      <Button href="/login" round fullWidth color="primary">
+                      <Button
+                        href="/login"
+                        round
+                        fullWidth
+                        color="primary"
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(to right, orange, yellow)",
+                        }}
+                      >
                         {tier.buttonText}
                       </Button>
                     </CardActions>
@@ -911,6 +928,10 @@ export default function PricingPage({ match, history }) {
                               round
                               fullWidth
                               color="primary"
+                              style={{
+                                backgroundImage:
+                                  "linear-gradient(to right, orange, yellow)",
+                              }}
                             >
                               {tier.buttonText}
                             </Button>

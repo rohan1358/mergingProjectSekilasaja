@@ -103,15 +103,15 @@ export default function AccountsPage({ history }) {
       if (currentUser !== null) {
         firestore.collection("users").doc(currentUser.uid).update({
           firstName: firstNameRef.current.value,
-          lastName: lastNameRef.current.value,
+          // lastName: lastNameRef.current.value,
           phoneNumber: phoneNumberRef.current.value,
         });
       }
 
       if (
         userData.firstName === firstNameRef.current.value &&
-        userData.lastName === lastNameRef.current.value &&
         userData.phoneNumber === phoneNumberRef.current.value
+        // && useData.lastName === lastNameRef.current.value
       ) {
         setProfileError("Tidak terjadi perubahan!");
         setProfileSuccess("");
@@ -210,12 +210,12 @@ export default function AccountsPage({ history }) {
                 required
                 defaultValue={userData.firstName}
                 id="filled-basic"
-                label="First Name"
+                label="Nama Lengkap"
                 variant="filled"
                 inputRef={firstNameRef}
                 fullWidth
               />
-              <TextField
+              {/* <TextField
                 required
                 defaultValue={userData.lastName}
                 id="filled-basic"
@@ -223,7 +223,7 @@ export default function AccountsPage({ history }) {
                 variant="filled"
                 inputRef={lastNameRef}
                 fullWidth
-              />
+              /> */}
               <TextField
                 required
                 disabled
@@ -237,7 +237,7 @@ export default function AccountsPage({ history }) {
                 required
                 defaultValue={userData.phoneNumber}
                 id="filled-basic"
-                label="Phone Number"
+                label="Nomor HP"
                 variant="filled"
                 inputRef={phoneNumberRef}
                 fullWidth

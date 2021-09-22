@@ -348,7 +348,15 @@ export default function Payment({ history }) {
                       Dengan hanya Rp. 1.000/hari, Kamu bisa memiliki akses
                       untuk semua buku!
                     </Typography>
-                    <Button href="/pricing" round fullWidth>
+                    <Button
+                      href="/pricing"
+                      round
+                      fullWidth
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to right, orange, yellow)",
+                      }}
+                    >
                       Berlanggan sekarang!
                     </Button>
                   </Paper>
@@ -752,7 +760,15 @@ export default function Payment({ history }) {
                       Dengan hanya Rp. 1.000/hari, Kamu bisa memiliki akses
                       untuk semua buku!
                     </Typography>
-                    <Button href="/pricing" round fullWidth>
+                    <Button
+                      href="/pricing"
+                      round
+                      fullWidth
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(to right, orange, yellow)",
+                      }}
+                    >
                       Berlanggan sekarang!
                     </Button>
                   </Paper>
