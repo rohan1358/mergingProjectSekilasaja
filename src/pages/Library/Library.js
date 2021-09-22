@@ -16,6 +16,9 @@ import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import SubscribedLibrary from "./SubscribedLibrary";
+import Button from "../../components/Button";
+import Loading from "../Loading";
+import { beigeColor, secondaryColor } from "../../styles/Style";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -24,16 +27,14 @@ import {
   setOwnedBookTitles,
 } from "../../feature/ownedBookTitlesSlice";
 
-import Loading from "../Loading";
-
 // Firebase components
 import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 // Material-UI components
-import { Container } from "@material-ui/core";
-import { beigeColor } from "../../styles/Style";
+import { Container, Paper } from "@material-ui/core";
+import ErrorIcon from "@material-ui/icons/Error";
 
 export default function Library({ history }) {
   // Styles
@@ -116,6 +117,27 @@ export default function Library({ history }) {
         <Typography color="beigeColor" size="heading">
           MY LIBRARY
         </Typography>
+        {!!isSubscribed ? (
+          <></>
+        ) : (
+          <div>
+            <Typography color="beigeColor">
+              Dengan hanya Rp. <strong>1.000/hari!</strong>{" "}
+              <div>
+                Kamu bisa memiliki <strong>akses untuk semua buku!</strong>
+              </div>
+            </Typography>
+            <Button
+              href="/pricing"
+              round
+              style={{
+                backgroundImage: "linear-gradient(to right, orange, yellow)",
+              }}
+            >
+              Berlanggan sekarang!
+            </Button>
+          </div>
+        )}
       </Parallax>
       <Container>
         <div className={classes.extraSpace} />
@@ -125,6 +147,48 @@ export default function Library({ history }) {
           <UnsubscribedLibrary
             ownedBookTitles={ownedBookTitles}
             history={history}
+            upsellBlock={
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Paper
+                  style={{
+                    width: "100%",
+                    maxWidth: 500,
+                    marginBottom: 30,
+                    textAlign: "center",
+                    padding: "15px",
+                  }}
+                  elevation={5}
+                >
+                  {/* <ErrorIcon
+                    fontSize="large"
+                    style={{
+                      marginRight: "10px",
+                      color: secondaryColor,
+                    }}
+                  /> */}
+                  <Typography
+                    style={{
+                      textAlign: "center",
+                    }}
+                    type="italic"
+                    size="bold"
+                  >
+                    Ingin memiliki akses untuk semua kilas? Dengan hanya Rp.
+                    1.000/hari, Kamu bisa mengakses semua kilas!
+                  </Typography>
+                  <Button
+                    href="/pricing"
+                    round
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(to right, orange, yellow)",
+                    }}
+                  >
+                    Berlanggan sekarang!
+                  </Button>
+                </Paper>
+              </div>
+            }
           />
         )}
       </Container>

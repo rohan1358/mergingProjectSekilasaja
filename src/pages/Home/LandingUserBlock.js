@@ -79,10 +79,20 @@ export default function LandingUserBlock({}) {
                   </strong>{" "}
                   Belajar dimanapun dan kapanpun.
                 </Typography>
+                <Typography>
+                  Mulai dari <strong>Rp. 1.000/hari!</strong>
+                </Typography>
 
                 <div style={{ marginTop: "20px" }} />
 
-                <Button round href="/pricing">
+                <Button
+                  round
+                  href="/pricing"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(to right, orange, yellow)",
+                  }}
+                >
                   Berlanggan Sekarang!
                 </Button>
 
@@ -166,10 +176,19 @@ export default function LandingUserBlock({}) {
                 </strong>{" "}
                 Belajar dimanapun dan kapanpun.
               </Typography>
+              <Typography>
+                Mulai dari <strong>Rp. 1.000/hari!</strong>
+              </Typography>
 
               <div style={{ marginTop: "20px" }} />
 
-              <Button round href="/pricing">
+              <Button
+                round
+                href="/pricing"
+                style={{
+                  backgroundImage: "linear-gradient(to right, orange, yellow)",
+                }}
+              >
                 Berlanggan Sekarang!
               </Button>
 

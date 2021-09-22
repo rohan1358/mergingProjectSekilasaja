@@ -209,7 +209,13 @@ export default function Home({ history }) {
           <BenefitsBlock
             logo={<img src={Logo} className={books.imgLogoText} />}
             button={
-              <Button round href="/pricing">
+              <Button
+                round
+                href="/pricing"
+                style={{
+                  backgroundImage: "linear-gradient(to right, orange, yellow)",
+                }}
+              >
                 Berlanggan Sekarang!
               </Button>
             }
@@ -236,6 +242,23 @@ export default function Home({ history }) {
           <div style={{ marginTop: "40px" }} />
 
           <ReviewBlock />
+          <div
+            style={{
+              marginTop: 30,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              round
+              href="/pricing"
+              style={{
+                backgroundImage: "linear-gradient(to right, orange, yellow)",
+              }}
+            >
+              Berlanggan Sekarang!
+            </Button>
+          </div>
 
           <div style={{ marginTop: "40px" }} />
 
@@ -284,6 +307,23 @@ export default function Home({ history }) {
 
           {/* Review Block */}
           <ReviewBlock />
+          <div
+            style={{
+              marginTop: 30,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Button
+              round
+              href="/pricing"
+              style={{
+                backgroundImage: "linear-gradient(to right, orange, yellow)",
+              }}
+            >
+              Berlanggan Sekarang!
+            </Button>
+          </div>
 
           <div style={{ marginTop: "40px" }} />
 

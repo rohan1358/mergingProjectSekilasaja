@@ -321,7 +321,15 @@ export default function BookDetailsPage({ match, history }) {
                                   hanya Rp. 1.000/hari, Kamu bisa mengakses
                                   semua kilas!
                                 </Typography>
-                                <Button href="/pricing" round fullWidth>
+                                <Button
+                                  href="/pricing"
+                                  round
+                                  fullWidth
+                                  style={{
+                                    backgroundImage:
+                                      "linear-gradient(to right, orange, yellow)",
+                                  }}
+                                >
                                   Berlanggan sekarang!
                                 </Button>
                               </Paper>
@@ -424,7 +432,14 @@ export default function BookDetailsPage({ match, history }) {
                             <div className={classes.sectionDesktop}>
                               <Grid container spacing={3}>
                                 <Grid item>
-                                  <Button href={"/pricing"}>
+                                  <Button
+                                    round
+                                    href={"/pricing"}
+                                    style={{
+                                      backgroundImage:
+                                        "linear-gradient(to right, orange, yellow)",
+                                    }}
+                                  >
                                     Berlanggan Sekarang!
                                   </Button>
                                 </Grid>
@@ -454,7 +469,15 @@ export default function BookDetailsPage({ match, history }) {
 
                             <div className={classes.sectionMobileBlock}>
                               <Grid item xs={12}>
-                                <Button fullWidth href={"/pricing"}>
+                                <Button
+                                  fullWidth
+                                  round
+                                  href={"/pricing"}
+                                  style={{
+                                    backgroundImage:
+                                      "linear-gradient(to right, orange, yellow)",
+                                  }}
+                                >
                                   Berlanggan Sekarang!
                                 </Button>
                               </Grid>
@@ -541,7 +564,14 @@ export default function BookDetailsPage({ match, history }) {
                                 justifyContent: "center",
                               }}
                             >
-                              <Button round href="/pricing">
+                              <Button
+                                round
+                                href="/pricing"
+                                style={{
+                                  backgroundImage:
+                                    "linear-gradient(to right, orange, yellow)",
+                                }}
+                              >
                                 Berlanggan Sekarang!
                               </Button>
                             </div>
@@ -708,7 +738,14 @@ export default function BookDetailsPage({ match, history }) {
                             justifyContent: "center",
                           }}
                         >
-                          <Button round href="/pricing">
+                          <Button
+                            round
+                            href="/pricing"
+                            style={{
+                              backgroundImage:
+                                "linear-gradient(to right, orange, yellow)",
+                            }}
+                          >
                             Berlanggan Sekarang!
                           </Button>
                         </div>

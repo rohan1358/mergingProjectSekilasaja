@@ -23,7 +23,11 @@ import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoB
 
 const useInfoStyles = makeStyles(InfoStyles);
 
-export default function OwnedBooksBlock({ ownedBookTitles, history }) {
+export default function OwnedBooksBlock({
+  ownedBookTitles,
+  history,
+  upsellBlock,
+}) {
   // Styles
   const classes = MultiUseMobile();
   const cards = useInfoStyles();
@@ -424,6 +428,7 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                   <Typography style={{ textAlign: "center" }} size="heading">
                     Not Owned Books
                   </Typography>
+                  <div>{upsellBlock}</div>
                   <Typography
                     style={{
                       fontSize: "25px",
@@ -449,6 +454,8 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                       >
                         Not Owned Books
                       </Typography>
+
+                      <div>{upsellBlock}</div>
                       <Grid container justifyContent={"center"} spacing={5}>
                         {booksNotOwned
                           .filter(
@@ -500,6 +507,8 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                       >
                         Not Owned Books
                       </Typography>
+
+                      <div>{upsellBlock}</div>
                       <Typography
                         style={{
                           fontSize: "25px",
@@ -524,6 +533,8 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                   <Typography style={{ textAlign: "center" }} size="heading">
                     Not Owned Books
                   </Typography>
+
+                  <div>{upsellBlock}</div>
                   <Typography
                     style={{
                       fontSize: "25px",
@@ -541,6 +552,8 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                   <Typography style={{ textAlign: "center" }} size="heading">
                     Not Owned Books
                   </Typography>
+
+                  <div>{upsellBlock}</div>
                   {booksNotOwned.filter(
                     (product) =>
                       product.category.includes(chosenCategory) == true
@@ -584,6 +597,8 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                       >
                         Not Owned Books
                       </Typography>
+
+                      <div>{upsellBlock}</div>
                       <Typography
                         style={{
                           fontSize: "25px",
@@ -609,6 +624,8 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                   <Typography style={{ textAlign: "center" }} size="heading">
                     Not Owned Books
                   </Typography>
+
+                  <div>{upsellBlock}</div>
                   <Typography
                     style={{
                       fontSize: "25px",
@@ -626,6 +643,8 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                   <Typography style={{ textAlign: "center" }} size="heading">
                     Not Owned Books
                   </Typography>
+
+                  <div>{upsellBlock}</div>
                   <Grid container justifyContent={"center"} spacing={5}>
                     {booksNotOwned.map((product) => (
                       <BookCard
@@ -675,6 +694,8 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                   <Typography style={{ textAlign: "center" }} size="heading">
                     Not Owned Books
                   </Typography>
+
+                  <div>{upsellBlock}</div>
                   <Typography
                     style={{
                       fontSize: "25px",
@@ -692,6 +713,8 @@ export default function OwnedBooksBlock({ ownedBookTitles, history }) {
                   <Typography style={{ textAlign: "center" }} size="heading">
                     Not Owned Books
                   </Typography>
+
+                  <div>{upsellBlock}</div>
                   <Grid container justifyContent="center" spacing={5}>
                     {booksNotOwned.map((product) => (
                       <BookCard

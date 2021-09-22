@@ -81,7 +81,15 @@ export default function SubscriptionPlan({
             </Grid>
 
             <Grid item xs={12}>
-              <Button fullWidth color="primary" href="/pricing">
+              <Button
+                fullWidth
+                round
+                color="primary"
+                href="/pricing"
+                style={{
+                  backgroundImage: "linear-gradient(to right, orange, yellow)",
+                }}
+              >
                 Berlanggan Sekarang!
               </Button>
             </Grid>
