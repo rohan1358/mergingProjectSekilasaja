@@ -56,6 +56,7 @@ export default function Home({ history }) {
   const [coverOne, setCoverOne] = useState("");
   const [coverTwo, setCoverTwo] = useState("");
   const [coverThree, setCoverThree] = useState("");
+  const [isFinishPullUserData, setIsFinishPullUserData] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
