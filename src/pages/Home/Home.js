@@ -47,29 +47,41 @@ export default function Home({ history }) {
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [pending, setPending] = useState(true);
+
   const [bookOne, setBookOne] = useState([]);
   const [bookTwo, setBookTwo] = useState([]);
   const [bookThree, setBookThree] = useState([]);
+  const [bookFour, setBookFour] = useState([]);
+  const [bookFive, setBookFive] = useState([]);
+
   const [bookOneDesc, setBookOneDesc] = useState([]);
   const [bookTwoDesc, setBookTwoDesc] = useState([]);
   const [bookThreeDesc, setBookThreeDesc] = useState([]);
+  const [bookFourDesc, setBookFourDesc] = useState([]);
+  const [bookFiveDesc, setBookFiveDesc] = useState([]);
+
   const [coverOne, setCoverOne] = useState("");
   const [coverTwo, setCoverTwo] = useState("");
   const [coverThree, setCoverThree] = useState("");
-  const [isFinishPullUserData, setIsFinishPullUserData] = useState(false);
+  const [coverFour, setCoverFour] = useState("");
+  const [coverFive, setCoverFive] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       const book1 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
         "The Defining Decade"
       );
-
       const book2 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
         "Kaizen"
       );
-
       const book3 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
         "Rich Dad's Guide To Investing"
+      );
+      const book4 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        "Rich Dad’s Cashflow Quadrant"
+      );
+      const book5 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        "Steve Jobs"
       );
 
       if (book1 != undefined) {
@@ -84,12 +96,22 @@ export default function Home({ history }) {
         setBookThree(book3);
         setBookThreeDesc(book3.descriptions);
       }
+      if (book4 != undefined) {
+        setBookFour(book4);
+        setBookFourDesc(book4.descriptions);
+      }
+      if (book5 != undefined) {
+        setBookFive(book5);
+        setBookFiveDesc(book5.descriptions);
+      }
     };
     fetchData();
   }, [
     bookOne,
     bookTwo,
     bookThree,
+    bookFour,
+    bookFourDesc,
     bookThreeDesc,
     bookTwoDesc,
     bookOneDesc,
@@ -107,13 +129,21 @@ export default function Home({ history }) {
       const link3 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
         "Rich Dad's Guide To Investing"
       );
+      const link4 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
+        "Rich Dad’s Cashflow Quadrant"
+      );
+      const link5 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
+        "SteveJobs"
+      );
 
       if (link1 !== undefined) setCoverOne(link1);
       if (link2 !== undefined) setCoverTwo(link2);
       if (link3 !== undefined) setCoverThree(link3);
+      if (link4 !== undefined) setCoverFour(link4);
+      if (link5 !== undefined) setCoverFive(link5);
     };
     fetchData();
-  }, [coverOne, coverTwo, coverThree, userData]);
+  }, [coverOne, coverTwo, coverThree, coverFour, userData]);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -138,12 +168,15 @@ export default function Home({ history }) {
     coverOne &&
     coverTwo &&
     coverThree &&
+    coverFour &&
     bookOne &&
     bookTwo &&
     bookThree &&
+    bookFour &&
     bookOneDesc &&
     bookTwoDesc &&
     bookThreeDesc &&
+    bookFourDesc &&
     pending
   ) {
     setPending(false);
@@ -193,12 +226,15 @@ export default function Home({ history }) {
             bookOne={bookOne}
             bookTwo={bookTwo}
             bookThree={bookThree}
+            bookFour={bookFour}
             bookOneDesc={bookOneDesc}
             bookTwoDesc={bookTwoDesc}
             bookThreeDesc={bookThreeDesc}
+            bookFourDesc={bookFourDesc}
             coverOne={coverOne}
             coverTwo={coverTwo}
             coverThree={coverThree}
+            coverFour={coverFour}
           />
 
           <div style={{ marginTop: "40px" }} />
@@ -234,12 +270,15 @@ export default function Home({ history }) {
             bookOne={bookOne}
             bookTwo={bookTwo}
             bookThree={bookThree}
+            bookFour={bookFour}
             bookOneDesc={bookOneDesc}
             bookTwoDesc={bookTwoDesc}
             bookThreeDesc={bookThreeDesc}
+            bookFourDesc={bookFourDesc}
             coverOne={coverOne}
             coverTwo={coverTwo}
             coverThree={coverThree}
+            coverFour={coverFour}
           />
 
           <div style={{ marginTop: "40px" }} />

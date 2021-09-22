@@ -42,12 +42,18 @@ export default function TopKilasBlock({
   bookOne,
   bookTwo,
   bookThree,
+  bookFour,
+  bookFive,
   bookOneDesc,
   bookTwoDesc,
   bookThreeDesc,
+  bookFourDesc,
+  bookFiveDesc,
   coverOne,
   coverTwo,
   coverThree,
+  coverFour,
+  coverFive,
 }) {
   // Styles
   const books = useStyles();
@@ -69,6 +75,93 @@ export default function TopKilasBlock({
         ssr={true}
         responsive={responsive}
       >
+        {/* <div
+          style={{
+            // backgroundColor: "#CAEDA8",
+            marginBottom: "5px",
+            marginTop: "10px",
+          }}
+        >
+          <Container>
+            <Grid container direction="row" justifyContent="center" spacing={3}>
+              <Grid item xs={12} />
+              <Grid item md={2} xs={12} />
+              <Grid item md={3} xs={12}>
+                <img
+                  src={coverFive}
+                  className={books.imgRounded + " " + books.imgFluid}
+                  style={{ maxWidth: "250px", width: "100%" }}
+                />
+              </Grid>
+              <Grid item md={5} xs={12}>
+                <Typography style={{ marginTop: 0 }} size="heading">
+                  <strong style={{ backgroundColor: primaryColor }}>
+                    Kilas Baru
+                  </strong>{" "}
+                  Minggu Ini!
+                </Typography>
+                <Typography type="bold" size="subheading">
+                  {bookFive.book_title}
+                </Typography>
+                <Typography>{bookFiveDesc[0]}</Typography>
+
+                <div style={{ marginBottom: 20 }} />
+
+                <Button round href={`/book-details/${bookFive.book_title}`}>
+                  Baca Sekarang!
+                </Button>
+              </Grid>
+              <Grid item md={2} xs={12} />
+              <Grid item xs={12} />
+            </Grid>
+          </Container>
+        </div> */}
+
+        <div
+          style={{
+            // backgroundColor: "#F7D3BB",
+            marginBottom: "5px",
+            marginTop: "10px",
+          }}
+        >
+          <Container>
+            <Grid container direction="row" justifyContent="center" spacing={3}>
+              <Grid item xs={12} />
+              <Grid item md={2} xs={12} />
+              <Grid item md={3} xs={12}>
+                <img
+                  src={coverFour}
+                  className={books.imgRounded + " " + books.imgFluid}
+                  style={{ maxWidth: "250px", width: "100%" }}
+                />
+              </Grid>
+              <Grid item md={5} xs={12}>
+                <Typography style={{ marginTop: 0 }} size="heading">
+                  <strong style={{ backgroundColor: primaryColor }}>
+                    Kilas Baru
+                  </strong>{" "}
+                  Minggu Ini!
+                </Typography>
+                <Typography type="bold" size="subheading">
+                  {bookFour.book_title}
+                </Typography>
+                <Typography>{bookFourDesc[0]}</Typography>
+                {/* {bookOneDesc.map((x) => (
+                  <Typography>{x}</Typography>
+                ))} */}
+
+                <div style={{ marginBottom: 20 }} />
+
+                <Button round href={`/book-details/${bookFour.book_title}`}>
+                  Baca Sekarang!
+                </Button>
+              </Grid>
+              <Grid item md={2} xs={12} />
+              <Grid item xs={12} />
+            </Grid>
+          </Container>
+        </div>
+
         <div
           style={{
             // backgroundColor: "#CAEDA8",

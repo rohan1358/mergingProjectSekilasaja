@@ -67,7 +67,6 @@ export default function BookDetailsPage({ match, history }) {
   const [isAdded, setIsAdded] = useState(false);
   const [coverLink, setCoverLink] = useState("");
   const [audioLink, setAudioLink] = useState(null);
-  const [audioTrialLink, setAudioTrialLink] = useState(null);
   const [pending, setPending] = useState(true);
   const [isFinishPullUserData, setIsFinishPullUserData] = useState(false);
 
@@ -173,7 +172,7 @@ export default function BookDetailsPage({ match, history }) {
   };
 
   //Only stop loading (Set pending to false) when all book details have been pulled from database
-  if (current_product && coverLink && audioLink && pending) {
+  if (current_product && coverLink && pending) {
     setPending(false);
   }
 
