@@ -31,7 +31,6 @@ import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
-import Loading from "../Loading";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -46,7 +45,6 @@ export default function Home({ history }) {
   // useState hooks
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
-  const [pending, setPending] = useState(true);
 
   const [bookOne, setBookOne] = useState([]);
   const [bookTwo, setBookTwo] = useState([]);
@@ -152,35 +150,6 @@ export default function Home({ history }) {
 
   if (isSubscribed == true) {
     return <Redirect to={"/library"} />;
-  }
-
-  if (
-    coverOne &&
-    coverTwo &&
-    coverThree &&
-    coverFour &&
-    coverFive &&
-    bookOne &&
-    bookTwo &&
-    bookThree &&
-    bookFour &&
-    bookFive &&
-    bookOneDesc &&
-    bookTwoDesc &&
-    bookThreeDesc &&
-    bookFourDesc &&
-    bookFiveDesc &&
-    pending
-  ) {
-    setPending(false);
-  }
-
-  if (pending) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
   }
 
   return (

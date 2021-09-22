@@ -70,14 +70,14 @@ export default function TopKilasBlock({
         arrows={false}
         showDots={true}
         infinite={true}
-        autoPlay={false}
+        autoPlay={true}
         autoPlaySpeed={2000}
         ssr={true}
         responsive={responsive}
       >
         <div
           style={{
-            // backgroundColor: "#F7D3BB",
+            // backgroundColor: "#CAEDA8",
             marginBottom: "5px",
             marginTop: "10px",
           }}
@@ -88,7 +88,7 @@ export default function TopKilasBlock({
               <Grid item md={2} xs={12} />
               <Grid item md={3} xs={12}>
                 <img
-                  src={coverFour}
+                  src={coverThree}
                   className={books.imgRounded + " " + books.imgFluid}
                   style={{ maxWidth: "250px", width: "100%" }}
                 />
@@ -101,16 +101,13 @@ export default function TopKilasBlock({
                   Minggu Ini!
                 </Typography>
                 <Typography type="bold" size="subheading">
-                  {bookFour.book_title}
+                  {bookThree.book_title}
                 </Typography>
-                <Typography>{bookFourDesc[0]}</Typography>
-                {/* {bookOneDesc.map((x) => (
-                  <Typography>{x}</Typography>
-                ))} */}
+                <Typography>{bookThreeDesc[0]}</Typography>
 
                 <div style={{ marginBottom: 20 }} />
 
-                <Button round href={`/book-details/${bookFour.book_title}`}>
+                <Button round href={`/book-details/${bookThree.book_title}`}>
                   Baca Sekarang!
                 </Button>
               </Grid>
@@ -164,7 +161,7 @@ export default function TopKilasBlock({
 
         <div
           style={{
-            // backgroundColor: "#CAEDA8",
+            // backgroundColor: "#F7D3BB",
             marginBottom: "5px",
             marginTop: "10px",
           }}
@@ -175,7 +172,7 @@ export default function TopKilasBlock({
               <Grid item md={2} xs={12} />
               <Grid item md={3} xs={12}>
                 <img
-                  src={coverThree}
+                  src={coverFour}
                   className={books.imgRounded + " " + books.imgFluid}
                   style={{ maxWidth: "250px", width: "100%" }}
                 />
@@ -188,13 +185,16 @@ export default function TopKilasBlock({
                   Minggu Ini!
                 </Typography>
                 <Typography type="bold" size="subheading">
-                  {bookThree.book_title}
+                  {bookFour.book_title}
                 </Typography>
-                <Typography>{bookThreeDesc[0]}</Typography>
+                <Typography>{bookFourDesc[0]}</Typography>
+                {/* {bookOneDesc.map((x) => (
+                  <Typography>{x}</Typography>
+                ))} */}
 
                 <div style={{ marginBottom: 20 }} />
 
-                <Button round href={`/book-details/${bookThree.book_title}`}>
+                <Button round href={`/book-details/${bookFour.book_title}`}>
                   Baca Sekarang!
                 </Button>
               </Grid>
