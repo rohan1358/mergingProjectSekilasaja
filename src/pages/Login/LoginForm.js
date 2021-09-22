@@ -82,7 +82,7 @@ const LoginForm = ({ history }) => {
   // }
 
   if (currentUser) {
-    return <Redirect to="/" />;
+    return <Redirect to="/library" />;
   }
 
   return (

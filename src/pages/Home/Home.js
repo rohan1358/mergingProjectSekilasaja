@@ -106,17 +106,7 @@ export default function Home({ history }) {
       }
     };
     fetchData();
-  }, [
-    bookOne,
-    bookTwo,
-    bookThree,
-    bookFour,
-    bookFourDesc,
-    bookThreeDesc,
-    bookTwoDesc,
-    bookOneDesc,
-    userData,
-  ]);
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -133,7 +123,7 @@ export default function Home({ history }) {
         "Rich Dad’s Cashflow Quadrant"
       );
       const link5 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "SteveJobs"
+        "Steve Jobs"
       );
 
       if (link1 !== undefined) setCoverOne(link1);
@@ -143,7 +133,7 @@ export default function Home({ history }) {
       if (link5 !== undefined) setCoverFive(link5);
     };
     fetchData();
-  }, [coverOne, coverTwo, coverThree, coverFour, userData]);
+  }, []);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -169,14 +159,17 @@ export default function Home({ history }) {
     coverTwo &&
     coverThree &&
     coverFour &&
+    coverFive &&
     bookOne &&
     bookTwo &&
     bookThree &&
     bookFour &&
+    bookFive &&
     bookOneDesc &&
     bookTwoDesc &&
     bookThreeDesc &&
     bookFourDesc &&
+    bookFiveDesc &&
     pending
   ) {
     setPending(false);
@@ -227,14 +220,17 @@ export default function Home({ history }) {
             bookTwo={bookTwo}
             bookThree={bookThree}
             bookFour={bookFour}
+            bookFive={bookFive}
             bookOneDesc={bookOneDesc}
             bookTwoDesc={bookTwoDesc}
             bookThreeDesc={bookThreeDesc}
             bookFourDesc={bookFourDesc}
+            bookFiveDesc={bookFiveDesc}
             coverOne={coverOne}
             coverTwo={coverTwo}
             coverThree={coverThree}
             coverFour={coverFour}
+            coverFive={coverFive}
           />
 
           <div style={{ marginTop: "40px" }} />
@@ -271,14 +267,17 @@ export default function Home({ history }) {
             bookTwo={bookTwo}
             bookThree={bookThree}
             bookFour={bookFour}
+            bookFive={bookFive}
             bookOneDesc={bookOneDesc}
             bookTwoDesc={bookTwoDesc}
             bookThreeDesc={bookThreeDesc}
             bookFourDesc={bookFourDesc}
+            bookFiveDesc={bookFiveDesc}
             coverOne={coverOne}
             coverTwo={coverTwo}
             coverThree={coverThree}
             coverFour={coverFour}
+            coverFive={coverFive}
           />
 
           <div style={{ marginTop: "40px" }} />
