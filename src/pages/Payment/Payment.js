@@ -107,12 +107,12 @@ export default function Payment({ history }) {
   const promoCodeRef = useRef("");
 
   // Facebook Pixel
-  const advancedMatching = { em: ".some@emailcom" }; // optional, more info: https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching
+  const advancedMatching = { em: "sekilasaja.main@gmail.com" }; // optional, more info: https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching
   const options = {
     autoConfig: true, // set pixel's autoConfig. More info: https://developers.facebook.com/docs/facebook-pixel/advanced/
     debug: false, // enable logs
   };
-  ReactPixel.init("yourPixelIdGoesHere", advancedMatching, options);
+  ReactPixel.init("278438179847480", advancedMatching, options);
 
   useEffect(() => {
     //Check if user is logged in or not, if not logout to home page.
