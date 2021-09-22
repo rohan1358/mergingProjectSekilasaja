@@ -29,11 +29,14 @@ import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 // Firebase components
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
+import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
+import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
+import Loading from "../Loading";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function Home({ history }) {
-  // Styles\
+  // Styles
   const classes = MultiUseMobile();
   const books = useStyles();
 
@@ -43,6 +46,73 @@ export default function Home({ history }) {
   // useState hooks
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [pending, setPending] = useState(true);
+  const [bookOne, setBookOne] = useState([]);
+  const [bookTwo, setBookTwo] = useState([]);
+  const [bookThree, setBookThree] = useState([]);
+  const [bookOneDesc, setBookOneDesc] = useState([]);
+  const [bookTwoDesc, setBookTwoDesc] = useState([]);
+  const [bookThreeDesc, setBookThreeDesc] = useState([]);
+  const [coverOne, setCoverOne] = useState("");
+  const [coverTwo, setCoverTwo] = useState("");
+  const [coverThree, setCoverThree] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const book1 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        "The Defining Decade"
+      );
+
+      const book2 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        "Kaizen"
+      );
+
+      const book3 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        "Rich Dad's Guide To Investing"
+      );
+
+      if (book1 != undefined) {
+        setBookOne(book1);
+        setBookOneDesc(book1.descriptions);
+      }
+      if (book2 != undefined) {
+        setBookTwo(book2);
+        setBookTwoDesc(book2.descriptions);
+      }
+      if (book3 != undefined) {
+        setBookThree(book3);
+        setBookThreeDesc(book3.descriptions);
+      }
+    };
+    fetchData();
+  }, [
+    bookOne,
+    bookTwo,
+    bookThree,
+    bookThreeDesc,
+    bookTwoDesc,
+    bookOneDesc,
+    userData,
+  ]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const link1 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
+        "The Defining Decade"
+      );
+      const link2 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
+        "Kaizen"
+      );
+      const link3 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
+        "Rich Dad's Guide To Investing"
+      );
+
+      if (link1 !== undefined) setCoverOne(link1);
+      if (link2 !== undefined) setCoverTwo(link2);
+      if (link3 !== undefined) setCoverThree(link3);
+    };
+    fetchData();
+  }, [coverOne, coverTwo, coverThree, userData]);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -61,6 +131,29 @@ export default function Home({ history }) {
 
   if (isSubscribed == true) {
     return <Redirect to={"/library"} />;
+  }
+
+  if (
+    coverOne &&
+    coverTwo &&
+    coverThree &&
+    bookOne &&
+    bookTwo &&
+    bookThree &&
+    bookOneDesc &&
+    bookTwoDesc &&
+    bookThreeDesc &&
+    pending
+  ) {
+    setPending(false);
+  }
+
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   return (
@@ -96,11 +189,15 @@ export default function Home({ history }) {
           />
 
           <TopKilasBlock
-            button={
-              <Button round href="/library">
-                <LibraryBooksIcon /> Akses Library Kamu Sekarang!
-              </Button>
-            }
+            bookOne={bookOne}
+            bookTwo={bookTwo}
+            bookThree={bookThree}
+            bookOneDesc={bookOneDesc}
+            bookTwoDesc={bookTwoDesc}
+            bookThreeDesc={bookThreeDesc}
+            coverOne={coverOne}
+            coverTwo={coverTwo}
+            coverThree={coverThree}
           />
 
           <div style={{ marginTop: "40px" }} />
@@ -133,11 +230,15 @@ export default function Home({ history }) {
           />
 
           <TopKilasBlock
-            button={
-              <Button round href="/signup">
-                Daftar Sekarang!
-              </Button>
-            }
+            bookOne={bookOne}
+            bookTwo={bookTwo}
+            bookThree={bookThree}
+            bookOneDesc={bookOneDesc}
+            bookTwoDesc={bookTwoDesc}
+            bookThreeDesc={bookThreeDesc}
+            coverOne={coverOne}
+            coverTwo={coverTwo}
+            coverThree={coverThree}
           />
 
           <div style={{ marginTop: "40px" }} />

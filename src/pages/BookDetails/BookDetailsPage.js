@@ -36,6 +36,7 @@ import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoB
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
+import * as firebaseGetBookAudioTrialURL from "../../firebase/firebaseGetBookAudioTrialURL";
 import { beigeColor } from "../../styles/Style";
 
 const useStyles = makeStyles(() => ({
@@ -66,6 +67,7 @@ export default function BookDetailsPage({ match, history }) {
   const [isAdded, setIsAdded] = useState(false);
   const [coverLink, setCoverLink] = useState("");
   const [audioLink, setAudioLink] = useState(null);
+  const [audioTrialLink, setAudioTrialLink] = useState(null);
   const [pending, setPending] = useState(true);
   const [isFinishPullUserData, setIsFinishPullUserData] = useState(false);
 
@@ -124,9 +126,8 @@ export default function BookDetailsPage({ match, history }) {
   // Once book cover image is grabbed, grab audio link...
   useEffect(() => {
     if (match.params.book_title != null) {
-      const getAudioLink = firebaseGetBookAudioURL.getBookAudioURL(
-        match.params.book_title,
-        1
+      const getAudioLink = firebaseGetBookAudioTrialURL.getBookAudioTrialURL(
+        match.params.book_title
       );
 
       const fetchData = async () => {

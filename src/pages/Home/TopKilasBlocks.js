@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import homeBG from "../../images/home3.jpg";
-import newBadge from "../../images/new.png";
 
 // Other components
 import Carousel from "react-multi-carousel";
@@ -15,8 +14,6 @@ import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import Button from "../../components/Button";
 
 // Firebase component
-import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
-import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 import { primaryColor } from "../../styles/Style";
 
 const responsive = {
@@ -41,69 +38,19 @@ const responsive = {
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function TopKilasBlock({ button }) {
+export default function TopKilasBlock({
+  bookOne,
+  bookTwo,
+  bookThree,
+  bookOneDesc,
+  bookTwoDesc,
+  bookThreeDesc,
+  coverOne,
+  coverTwo,
+  coverThree,
+}) {
   // Styles
   const books = useStyles();
-
-  // useState hooks
-  const [bookOne, setBookOne] = useState([]);
-  const [bookTwo, setBookTwo] = useState([]);
-  const [bookThree, setBookThree] = useState([]);
-  const [bookOneDesc, setBookOneDesc] = useState([]);
-  const [bookTwoDesc, setBookTwoDesc] = useState([]);
-  const [bookThreeDesc, setBookThreeDesc] = useState([]);
-  const [coverOne, setCoverOne] = useState("");
-  const [coverTwo, setCoverTwo] = useState("");
-  const [coverThree, setCoverThree] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const book1 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        "The Defining Decade"
-      );
-
-      const book2 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        "Kaizen"
-      );
-
-      const book3 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        "Rich Dad’s Cashflow Quadrant"
-      );
-
-      if (book1 != undefined) {
-        setBookOne(book1);
-        setBookOneDesc(book1.descriptions);
-      }
-      if (book2 != undefined) {
-        setBookTwo(book2);
-        setBookTwoDesc(book2.descriptions);
-      }
-      if (book3 != undefined) {
-        setBookThree(book3);
-        setBookThreeDesc(book3.descriptions);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const link1 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "The Defining Decade"
-      );
-      const link2 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "Kaizen"
-      );
-      const link3 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "Rich Dad’s Cashflow Quadrant"
-      );
-
-      if (link1 !== undefined) setCoverOne(link1);
-      if (link2 !== undefined) setCoverTwo(link2);
-      if (link3 !== undefined) setCoverThree(link3);
-    };
-    fetchData();
-  }, []);
 
   return (
     <div
@@ -122,7 +69,7 @@ export default function TopKilasBlock({ button }) {
         ssr={true}
         responsive={responsive}
       >
-        {/* <div
+        <div
           style={{
             // backgroundColor: "#CAEDA8",
             marginBottom: "5px",
@@ -139,7 +86,7 @@ export default function TopKilasBlock({ button }) {
                   className={books.imgRounded + " " + books.imgFluid}
                   style={{ maxWidth: "250px", width: "100%" }}
                 />
-                <div className={books.newBadgePos}>
+                {/* <div className={books.newBadgePos}>
                   <Button
                     color="info"
                     style={{
@@ -152,7 +99,7 @@ export default function TopKilasBlock({ button }) {
                       NEW!
                     </Typography>
                   </Button>
-                </div>
+                </div> */}
               </Grid>
               <Grid item md={5} xs={12}>
                 <Typography style={{ marginTop: 0 }} size="heading">
@@ -176,7 +123,7 @@ export default function TopKilasBlock({ button }) {
               <Grid item xs={12} />
             </Grid>
           </Container>
-        </div> */}
+        </div>
 
         <div
           style={{
