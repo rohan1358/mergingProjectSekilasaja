@@ -20,6 +20,7 @@ import LandingUserBlock from "./LandingUserBlock";
 import LandingNonUserBlock from "./LandingNonUserBlock";
 import TopKilasBlock from "./TopKilasBlocks";
 import ReviewBlock from "./ReviewBlock";
+import Loading from "../Loading";
 
 // Material-UI components
 import { Container, makeStyles, Tooltip } from "@material-ui/core";
@@ -45,6 +46,7 @@ export default function Home({ history }) {
   // useState hooks
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [pending, setPending] = useState(true);
 
   const [bookOne, setBookOne] = useState([]);
   const [bookTwo, setBookTwo] = useState([]);
@@ -150,6 +152,30 @@ export default function Home({ history }) {
 
   if (isSubscribed == true) {
     return <Redirect to={"/library"} />;
+  }
+
+  if (
+    coverOne &&
+    coverTwo &&
+    coverThree &&
+    coverFour &&
+    coverFive &&
+    bookOne &&
+    bookTwo &&
+    bookThree &&
+    bookFour &&
+    bookFive &&
+    pending
+  ) {
+    setPending(false);
+  }
+
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   return (
