@@ -2,6 +2,7 @@ import React, { useState, useContext, useRef, useEffect } from "react";
 import { Redirect } from "react-router";
 import ovoQR from "../../images/ovo-qr.JPG";
 import danaQR from "../../images/dana-qr.JPG";
+import qrisQR from "../../images/qris-qr.jpg";
 
 // Facebook Pixel
 import ReactPixel from "react-facebook-pixel";
@@ -24,6 +25,7 @@ import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
 import BuktiBCA from "./BuktiBCA";
 import BuktiBRI from "./BuktiBRI";
+import BuktiQRIS from "./BuktiQRIS";
 import BuktiOVO from "./BuktiOVO";
 import BuktiDana from "./BuktiDana";
 
@@ -568,7 +570,7 @@ export default function Payment({ history }) {
                       chosenValue={value}
                     ></Box>
 
-                    <FormControlLabel
+                    {/* <FormControlLabel
                       value="OVO"
                       control={<Radio style={{ color: secondaryColor }} />}
                       label="OVO"
@@ -587,7 +589,7 @@ export default function Payment({ history }) {
                             </div>
                             <div>
                               <img
-                                style={{ width: 225, height: 225 }}
+                                style={{ width: 225, height: "auto" }}
                                 src={ovoQR}
                               />
                             </div>
@@ -626,7 +628,7 @@ export default function Payment({ history }) {
                             </div>
                             <div>
                               <img
-                                style={{ width: 225, height: 225 }}
+                                style={{ width: 225, height: "auto" }}
                                 src={danaQR}
                               />
                             </div>
@@ -645,33 +647,39 @@ export default function Payment({ history }) {
                       }
                       value="DANA"
                       chosenValue={value}
-                    ></Box>
+                    ></Box> */}
 
                     <FormControlLabel
-                      disabled
-                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
+                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!) akan tersedia tanggal 23 September 2021"
+                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!, dll.)"
                       onChange={(e) => setNamaBank(e.target.value)}
                     />
                     <Box
                       text={
                         <div>
                           <Typography>
-                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
-                            s sdsda
+                            Scan QR code di bawah:
+                            <div>
+                              <img
+                                style={{ width: 300, height: "auto" }}
+                                src={qrisQR}
+                              />
+                            </div>
+                            Lalu, lampirkan bukti pembayaran dibawah.
                           </Typography>
-                          {/* <BuktiBCA open={open} handleClose={handleClose} /> */}
+                          <BuktiQRIS open={open} handleClose={handleClose} />
                           <Button
                             color="secondary"
                             onClick={handleClickOpen}
                             round
+                            fullWidth
                           >
-                            Contoh
+                            Contoh Bukti
                           </Button>
                         </div>
                       }
-                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
+                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
                       chosenValue={value}
                     ></Box>
                   </RadioGroup>
@@ -977,7 +985,7 @@ export default function Payment({ history }) {
                       chosenValue={value}
                     ></Box>
 
-                    <FormControlLabel
+                    {/* <FormControlLabel
                       value="OVO"
                       control={<Radio style={{ color: secondaryColor }} />}
                       label="OVO"
@@ -996,7 +1004,7 @@ export default function Payment({ history }) {
                             </div>
                             <div>
                               <img
-                                style={{ width: 225, height: 225 }}
+                                style={{ width: 225, height: "auto" }}
                                 src={ovoQR}
                               />
                             </div>
@@ -1035,7 +1043,7 @@ export default function Payment({ history }) {
                             </div>
                             <div>
                               <img
-                                style={{ width: 225, height: 225 }}
+                                style={{ width: 225, height: "auto" }}
                                 src={danaQR}
                               />
                             </div>
@@ -1054,33 +1062,40 @@ export default function Payment({ history }) {
                       }
                       value="DANA"
                       chosenValue={value}
-                    ></Box>
+                    ></Box> */}
 
                     <FormControlLabel
-                      disabled
-                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
+                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
                       control={<Radio style={{ color: secondaryColor }} />}
-                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!) akan tersedia tanggal 23 September 2021"
+                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!, dll.)"
                       onChange={(e) => setNamaBank(e.target.value)}
                     />
                     <Box
                       text={
                         <div>
                           <Typography>
-                            asdasdsasdasdasdasd asdasdasdadas asdaas sadassdasda
-                            s sdsda
+                            Scan QR code di bawah:
+                            <div>
+                              <img
+                                style={{ width: 300, height: "auto" }}
+                                src={qrisQR}
+                              />
+                            </div>
+                            Lalu, lampirkan bukti pembayaran dibawah.
                           </Typography>
-                          {/* <BuktiBCA open={open} handleClose={handleClose} /> */}
+
+                          <BuktiQRIS open={open} handleClose={handleClose} />
                           <Button
                             color="secondary"
                             onClick={handleClickOpen}
                             round
+                            fullWidth
                           >
-                            Contoh
+                            Contoh Bukti
                           </Button>
                         </div>
                       }
-                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!)"
+                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
                       chosenValue={value}
                       onChange={(e) => setNamaBank(e.target.value)}
                     ></Box>

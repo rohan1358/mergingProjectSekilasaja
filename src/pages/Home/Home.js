@@ -249,7 +249,7 @@ export default function Home({ history }) {
             logo={<img src={Logo} className={books.imgLogoText} />}
             button={
               <Button round href="/signup">
-                Bergabung Sekarang!
+                Daftar Sekarang!
               </Button>
             }
           />
@@ -284,7 +284,7 @@ export default function Home({ history }) {
             }}
           >
             <Button round href="/login">
-              Bergabung Sekarang!
+              Daftar Sekarang!
             </Button>
           </div>
 

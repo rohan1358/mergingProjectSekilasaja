@@ -132,7 +132,7 @@ export default function LandingNonUserBlock({}) {
                 <div style={{ marginTop: "20px" }} />
 
                 <Button round href="/signup">
-                  Bergabung Sekarang!
+                  Daftar Sekarang!
                 </Button>
               </div>
             </Grid>
@@ -216,7 +216,7 @@ export default function LandingNonUserBlock({}) {
               <div style={{ marginTop: "20px" }} />
 
               <Button round href="/signup">
-                Bergabung Sekarang!
+                Daftar Sekarang!
               </Button>
             </Container>
           </Grid>
