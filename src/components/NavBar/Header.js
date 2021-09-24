@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { Redirect } from "react-router";
 import Logo from "../../images/dark-logo.png";
 
 // nodejs library that concatenates classes
@@ -32,6 +33,7 @@ import { selectCart, setCart } from "../../feature/cartSlice";
 
 // User
 import { AuthContext } from "../Routing/Auth";
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 const useStyles = makeStyles(styles);
 
@@ -107,10 +109,37 @@ export default function Header(props) {
     </a>
   );
 
+  const brandComponentSubscribed = (
+    <a href="/library">
+      <img className={nav.icon} src={Logo} />
+    </a>
+  );
+
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  useEffect(() => {
+    // Get user info
+    if (currentUser !== null) {
+      const fetchData = async () => {
+        const results = await firebaseGetUserDataById.getUserDataById(
+          currentUser.uid
+        );
+        setIsSubscribed(results.is_subscribed);
+      };
+      fetchData();
+    } else {
+      console.log("Not logged in");
+    }
+  }, []);
+
   return (
     <AppBar style={{ backgroundColor: beigeColor }} className={appBarClasses}>
       <Toolbar className={classes.container}>
-        <div className={classes.flex}>{brandComponent}</div>
+        {!!isSubscribed ? (
+          <div className={classes.flex}>{brandComponentSubscribed}</div>
+        ) : (
+          <div className={classes.flex}>{brandComponent}</div>
+        )}
         <Hidden smDown implementation="css">
           <div style={{ display: "flex" }}>
             <SearchBar history={history} />

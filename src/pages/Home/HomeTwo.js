@@ -47,11 +47,10 @@ export default function Home({ history }) {
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [pending, setPending] = useState(true);
-
-  // useState hooks
   const [products, SetProducts] = useState([]);
 
   useEffect(() => {
+    // Get books info
     db.collection("books").onSnapshot((snapshot) => {
       SetProducts(
         snapshot.docs.map((doc) => ({
@@ -59,9 +58,8 @@ export default function Home({ history }) {
         }))
       );
     });
-  }, []);
 
-  useEffect(() => {
+    // Get user info
     if (currentUser !== null) {
       const fetchData = async () => {
         const results = await firebaseGetUserDataById.getUserDataById(
