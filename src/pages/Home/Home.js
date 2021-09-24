@@ -18,19 +18,20 @@ import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import { beigeColor } from "../../styles/Style";
 import LandingUserBlock from "./LandingUserBlock";
 import LandingNonUserBlock from "./LandingNonUserBlock";
-import TopKilasBlock from "./TopKilasBlocks";
+import NewKilasHomeBlock from "./NewKilasHomeBlock";
 import ReviewBlock from "./ReviewBlock";
+import Loading from "../Loading";
 
 // Material-UI components
 import { Container, makeStyles, Tooltip } from "@material-ui/core";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
-import LibraryBooksIcon from "@material-ui/icons/LibraryBooks";
 
 // Firebase components
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
-import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
-import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
+import fire from "../../firebase/fire";
+
+const db = fire.firestore();
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -45,95 +46,20 @@ export default function Home({ history }) {
   // useState hooks
   const [userData, setUserData] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false);
-
-  const [bookOne, setBookOne] = useState([]);
-  const [bookTwo, setBookTwo] = useState([]);
-  const [bookThree, setBookThree] = useState([]);
-  const [bookFour, setBookFour] = useState([]);
-  const [bookFive, setBookFive] = useState([]);
-
-  const [bookOneDesc, setBookOneDesc] = useState([]);
-  const [bookTwoDesc, setBookTwoDesc] = useState([]);
-  const [bookThreeDesc, setBookThreeDesc] = useState([]);
-  const [bookFourDesc, setBookFourDesc] = useState([]);
-  const [bookFiveDesc, setBookFiveDesc] = useState([]);
-
-  const [coverOne, setCoverOne] = useState("");
-  const [coverTwo, setCoverTwo] = useState("");
-  const [coverThree, setCoverThree] = useState("");
-  const [coverFour, setCoverFour] = useState("");
-  const [coverFive, setCoverFive] = useState("");
+  const [pending, setPending] = useState(true);
+  const [products, SetProducts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const book1 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        "The Defining Decade"
+    // Get books info
+    db.collection("books").onSnapshot((snapshot) => {
+      SetProducts(
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+        }))
       );
-      const book2 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        "Kaizen"
-      );
-      const book3 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        "Rich Dad's Guide To Investing"
-      );
-      const book4 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        "Rich Dad’s Cashflow Quadrant"
-      );
-      const book5 = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        "Steve Jobs"
-      );
+    });
 
-      if (book1 != undefined) {
-        setBookOne(book1);
-        setBookOneDesc(book1.descriptions);
-      }
-      if (book2 != undefined) {
-        setBookTwo(book2);
-        setBookTwoDesc(book2.descriptions);
-      }
-      if (book3 != undefined) {
-        setBookThree(book3);
-        setBookThreeDesc(book3.descriptions);
-      }
-      if (book4 != undefined) {
-        setBookFour(book4);
-        setBookFourDesc(book4.descriptions);
-      }
-      if (book5 != undefined) {
-        setBookFive(book5);
-        setBookFiveDesc(book5.descriptions);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const link1 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "The Defining Decade"
-      );
-      const link2 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "Kaizen"
-      );
-      const link3 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "Rich Dad's Guide To Investing"
-      );
-      const link4 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "Rich Dad’s Cashflow Quadrant"
-      );
-      const link5 = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        "Steve Jobs"
-      );
-
-      if (link1 !== undefined) setCoverOne(link1);
-      if (link2 !== undefined) setCoverTwo(link2);
-      if (link3 !== undefined) setCoverThree(link3);
-      if (link4 !== undefined) setCoverFour(link4);
-      if (link5 !== undefined) setCoverFive(link5);
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
+    // Get user info
     if (currentUser !== null) {
       const fetchData = async () => {
         const results = await firebaseGetUserDataById.getUserDataById(
@@ -150,6 +76,18 @@ export default function Home({ history }) {
 
   if (isSubscribed == true) {
     return <Redirect to={"/library"} />;
+  }
+
+  if (products && pending) {
+    setPending(false);
+  }
+
+  if (pending) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
   }
 
   return (
@@ -190,23 +128,7 @@ export default function Home({ history }) {
             }
           />
 
-          <TopKilasBlock
-            bookOne={bookOne}
-            bookTwo={bookTwo}
-            bookThree={bookThree}
-            bookFour={bookFour}
-            bookFive={bookFive}
-            bookOneDesc={bookOneDesc}
-            bookTwoDesc={bookTwoDesc}
-            bookThreeDesc={bookThreeDesc}
-            bookFourDesc={bookFourDesc}
-            bookFiveDesc={bookFiveDesc}
-            coverOne={coverOne}
-            coverTwo={coverTwo}
-            coverThree={coverThree}
-            coverFour={coverFour}
-            coverFive={coverFive}
-          />
+          <NewKilasHomeBlock products={products} />
 
           <div style={{ marginTop: "40px" }} />
 
@@ -254,23 +176,7 @@ export default function Home({ history }) {
             }
           />
 
-          <TopKilasBlock
-            bookOne={bookOne}
-            bookTwo={bookTwo}
-            bookThree={bookThree}
-            bookFour={bookFour}
-            bookFive={bookFive}
-            bookOneDesc={bookOneDesc}
-            bookTwoDesc={bookTwoDesc}
-            bookThreeDesc={bookThreeDesc}
-            bookFourDesc={bookFourDesc}
-            bookFiveDesc={bookFiveDesc}
-            coverOne={coverOne}
-            coverTwo={coverTwo}
-            coverThree={coverThree}
-            coverFour={coverFour}
-            coverFive={coverFive}
-          />
+          <NewKilasHomeBlock products={products} />
 
           <div style={{ marginTop: "40px" }} />
 
