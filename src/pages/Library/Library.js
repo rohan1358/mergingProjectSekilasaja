@@ -18,7 +18,12 @@ import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import SubscribedLibrary from "./SubscribedLibrary";
 import Button from "../../components/Button";
 import Loading from "../Loading";
-import { beigeColor, secondaryColor } from "../../styles/Style";
+import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
+import NewBooksCardLibrary from "./NewBooksCardLibrary";
+
+// Other components
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -33,8 +38,27 @@ import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 // Material-UI components
-import { Container, Paper } from "@material-ui/core";
-import ErrorIcon from "@material-ui/icons/Error";
+import { Container, Paper, Grid } from "@material-ui/core";
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 5,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 768 },
+    items: 5,
+  },
+  mobile: {
+    breakpoint: { max: 768, min: 0 },
+    items: 5,
+  },
+};
 
 export default function Library({ history }) {
   // Styles
@@ -52,6 +76,7 @@ export default function Library({ history }) {
   const [pending, setPending] = useState(true);
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [products, SetProducts] = useState([]);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -89,6 +114,15 @@ export default function Library({ history }) {
           setPending(false);
         });
       });
+
+    // Get books info
+    db.collection("books").onSnapshot((snapshot) => {
+      SetProducts(
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+        }))
+      );
+    });
   }, []);
 
   if (pending) {
@@ -109,36 +143,97 @@ export default function Library({ history }) {
         fixed
         color="white"
       />
-      <Parallax
-        small
-        filter
-        image={require("../../images/library.jpg").default}
-      >
-        <Typography color="beigeColor" size="heading">
-          MY LIBRARY
-        </Typography>
-        {!!isSubscribed ? (
-          <></>
-        ) : (
-          <div>
-            <Typography color="beigeColor">
-              Dengan hanya Rp. <strong>1.000/hari!</strong>{" "}
-              <div>
-                Kamu bisa memiliki <strong>akses untuk semua buku!</strong>
-              </div>
-            </Typography>
-            <Button
-              href="/pricing"
-              round
-              style={{
-                backgroundImage: "linear-gradient(to right, orange, yellow)",
-              }}
-            >
-              Berlanggan sekarang!
-            </Button>
-          </div>
-        )}
-      </Parallax>
+      {!!isSubscribed ? (
+        <Parallax
+          small
+          filter
+          image={require("../../images/library.jpg").default}
+        >
+          <Grid container>
+            <Grid item md={6} xs={12}>
+              <Typography
+                style={{ marginBottom: 0 }}
+                color="beigeColor"
+                size="heading"
+              >
+                MY LIBRARY
+              </Typography>
+              <Typography
+                style={{ marginTop: 5 }}
+                color="beigeColor"
+                size="subheading"
+              >
+                <strong
+                  style={{
+                    color: secondaryColor,
+                    backgroundColor: primaryColor,
+                  }}
+                >
+                  Kilas Baru
+                </strong>{" "}
+                Minggu Ini!
+              </Typography>
+              {/* <Grid
+                container
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+                spacing={1}
+              > */}
+              <Carousel
+                arrows={false}
+                showDots={false}
+                infinite={true}
+                autoPlay={true}
+                autoPlaySpeed={3000}
+                ssr={true}
+                responsive={responsive}
+              >
+                {products
+                  .filter(
+                    (product) =>
+                      product.category.includes("New Release!") == true
+                  )
+                  .map((categorisedProduct, index) => (
+                    <NewBooksCardLibrary
+                      chosenCategory={"New Release!"}
+                      key={index}
+                      product={categorisedProduct}
+                      extraSpace={<div style={{ marginTop: "20px" }} />}
+                    />
+                  ))}
+              </Carousel>
+              {/* </Grid> */}
+            </Grid>
+          </Grid>
+        </Parallax>
+      ) : (
+        <Parallax
+          small
+          filter
+          image={require("../../images/library.jpg").default}
+        >
+          <Typography color="beigeColor" size="heading">
+            MY LIBRARY
+          </Typography>
+          <Typography color="beigeColor">
+            Dengan hanya Rp. <strong>1.000/hari!</strong>{" "}
+            <div>
+              Kamu bisa memiliki <strong>akses untuk semua buku!</strong>
+            </div>
+          </Typography>
+          <Button
+            href="/pricing"
+            round
+            style={{
+              backgroundImage: "linear-gradient(to right, orange, yellow)",
+            }}
+          >
+            Berlanggan sekarang!
+          </Button>
+        </Parallax>
+      )}
+
       <Container>
         <div className={classes.extraSpace} />
         {!!isSubscribed ? (

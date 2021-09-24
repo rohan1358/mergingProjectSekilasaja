@@ -77,6 +77,15 @@ const ImagesStyle = {
       transform: "scale(1.5)",
     },
   },
+  imgLibraryNewBook: {
+    width: "100%",
+    maxWidth: "100px",
+    padding: 2,
+    // transition: "transform .2s",
+    // "&:hover": {
+    //   transform: "scale(1.5)",
+    // },
+  },
   videoWidth: {
     marginTop: "20px",
     width: "100%",
