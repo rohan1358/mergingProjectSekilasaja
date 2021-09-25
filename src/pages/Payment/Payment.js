@@ -290,10 +290,10 @@ export default function Payment({ history }) {
         promo_codes_used: userPromoCodes,
       });
 
-      // firestore.collection("promo").doc(promoCode[0].code).update({
-      //   code: "",
-      //   amount: 0,
-      // });
+      firestore.collection("promo").doc(promoCode[0].code).update({
+        code: "",
+        amount: 0,
+      });
     }
 
     // //Send email notification
