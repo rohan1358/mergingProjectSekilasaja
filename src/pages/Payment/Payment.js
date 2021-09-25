@@ -26,8 +26,6 @@ import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
 import BuktiBCA from "./BuktiBCA";
 import BuktiBRI from "./BuktiBRI";
 import BuktiQRIS from "./BuktiQRIS";
-import BuktiOVO from "./BuktiOVO";
-import BuktiDana from "./BuktiDana";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -177,22 +175,39 @@ export default function Payment({ history }) {
           promoCodeUsed = promoCodeRef.current.value;
         }
         console.log(promoCodeUsed);
-        const results = await firebaseGetPromoCode.getPromoCode(promoCodeUsed);
-        if (results.length != 0) {
-          if (results[0].code != "") {
-            console.log("HERE!");
-            setPromoError("");
-            setDiscountAmount(-1 * results[0].amount);
-            setPromoAdded(true);
-            setPromoCode(results);
-            setPromoCodeData(results[0].code);
+
+        // Checks if user has used the promo code
+        var userPromoCodes = await firestore
+          .collection("users")
+          .doc(currentUser.uid)
+          .get()
+          .then((doc) => doc.data()["promo_codes_used"]);
+
+        const exist = userPromoCodes.find((x) => x === promoCodeUsed);
+        console.log(exist);
+
+        if (exist) {
+          setPromoError("Kode promo sudah pernah digunakan!");
+        } else {
+          const results = await firebaseGetPromoCode.getPromoCode(
+            promoCodeUsed
+          );
+          if (results.length != 0) {
+            if (results[0].code != "") {
+              console.log("HERE!");
+              setPromoError("");
+              setDiscountAmount(-1 * results[0].amount);
+              setPromoAdded(true);
+              setPromoCode(results);
+              setPromoCodeData(results[0].code);
+            } else {
+              setPromoError("Tidak ditemukan kode promo!");
+              setPromoCodeData("");
+            }
           } else {
             setPromoError("Tidak ditemukan kode promo!");
             setPromoCodeData("");
           }
-        } else {
-          setPromoError("Tidak ditemukan kode promo!");
-          setPromoCodeData("");
         }
       };
       fetchData();
@@ -266,10 +281,19 @@ export default function Payment({ history }) {
     });
 
     if (promoCode.length != 0) {
-      firestore.collection("promo").doc(promoCode[0].code).update({
-        code: "",
-        amount: 0,
+      var docRef = firestore.collection("users").doc(currentUser.uid).get();
+      var userPromoCodes = await docRef.then(
+        (doc) => doc.data()["promo_codes_used"]
+      );
+      userPromoCodes = [...userPromoCodes, promoCode[0].code];
+      firestore.collection("users").doc(currentUser.uid).update({
+        promo_codes_used: userPromoCodes,
       });
+
+      // firestore.collection("promo").doc(promoCode[0].code).update({
+      //   code: "",
+      //   amount: 0,
+      // });
     }
 
     // //Send email notification
