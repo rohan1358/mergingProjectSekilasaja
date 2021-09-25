@@ -1,7 +1,5 @@
-import React, { useState, useContext, useRef, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router";
-import ovoQR from "../../images/ovo-qr.JPG";
-import danaQR from "../../images/dana-qr.JPG";
 import qrisQR from "../../images/qris-qr.jpg";
 
 // Facebook Pixel
@@ -56,8 +54,8 @@ import * as firebaseGetPromoCode from "../../firebase/firebaseGetPromoCode";
 import * as firebaseUploadPaymentInfo from "../../firebase/firebaseUploadPaymentInfo";
 import { AuthContext } from "../../components/Routing/Auth";
 
-//Email js components
-import * as emailService from "../../emailService/emailService";
+// //Email js components
+// import * as emailService from "../../emailService/emailService";
 
 const useStyles = makeStyles(InfoStyle);
 
@@ -102,9 +100,6 @@ export default function Payment({ history }) {
   const totalPrice = Intl.NumberFormat().format(
     itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
   );
-
-  // useRef Hooks
-  const promoCodeRef = useRef("");
 
   // Facebook Pixel
   const advancedMatching = { em: "sekilasaja.main@gmail.com" }; // optional, more info: https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching
@@ -171,20 +166,13 @@ export default function Payment({ history }) {
         var promoCodeUsed = "";
         if (promoCode.length > 0) {
           promoCodeUsed = promoCode;
-        } else {
-          promoCodeUsed = promoCodeRef.current.value;
         }
+
         console.log(promoCodeUsed);
 
-        // Checks if user has used the promo code
-        var userPromoCodes = await firestore
-          .collection("users")
-          .doc(currentUser.uid)
-          .get()
-          .then((doc) => doc.data()["promo_codes_used"]);
-
-        const exist = userPromoCodes.find((x) => x === promoCodeUsed);
-        console.log(exist);
+        const exist = userData.user.promo_codes_used.find(
+          (x) => x === promoCodeUsed
+        );
 
         if (exist) {
           setPromoError("Kode promo sudah pernah digunakan!");
@@ -194,7 +182,6 @@ export default function Payment({ history }) {
           );
           if (results.length != 0) {
             if (results[0].code != "") {
-              console.log("HERE!");
               setPromoError("");
               setDiscountAmount(-1 * results[0].amount);
               setPromoAdded(true);
@@ -281,11 +268,11 @@ export default function Payment({ history }) {
     });
 
     if (promoCode.length != 0) {
-      var docRef = firestore.collection("users").doc(currentUser.uid).get();
-      var userPromoCodes = await docRef.then(
-        (doc) => doc.data()["promo_codes_used"]
-      );
-      userPromoCodes = [...userPromoCodes, promoCode[0].code];
+      var userPromoCodes = [
+        ...userData.user.promo_codes_used,
+        promoCode[0].code,
+      ];
+
       firestore.collection("users").doc(currentUser.uid).update({
         promo_codes_used: userPromoCodes,
       });
@@ -345,7 +332,7 @@ export default function Payment({ history }) {
         color="white"
       />
       <Container maxWidth="md">
-        <div className={classes.sectionDesktop}>
+        <div>
           <Grid container direction="row" justifyContent="center" spacing={3}>
             <Grid item xs={12}>
               <Typography className={classes.center} size="heading">
@@ -353,7 +340,7 @@ export default function Payment({ history }) {
               </Typography>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item md={6} xs={12}>
               {isSubAdded ? (
                 <></>
               ) : (
@@ -453,7 +440,6 @@ export default function Payment({ history }) {
                     variant="filled"
                     fullWidth
                     onChange={(e) => setPromoCode(e.target.value)}
-                    inputRef={promoCodeRef}
                   />
                   {!!promoAdded ? (
                     <Button color="gray">✔ Applied</Button>
@@ -470,7 +456,7 @@ export default function Payment({ history }) {
               </Paper>
             </Grid>
 
-            <Grid item xs={6}>
+            <Grid item md={6} xs={12}>
               <Paper className={classes.paddedContent} elevation={5}>
                 <Typography size="subheading">2. Checkout Form</Typography>
                 <form
@@ -593,85 +579,6 @@ export default function Payment({ history }) {
                       value="BRI Transfer"
                       chosenValue={value}
                     ></Box>
-
-                    {/* <FormControlLabel
-                      value="OVO"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="OVO"
-                      onChange={(e) => setNamaBank(e.target.value)}
-                    />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Transfer nominal yang akan dibayarkan ke:{" "}
-                            <div>
-                              <strong>No. HP: 081291176795</strong>
-                            </div>{" "}
-                            <div style={{ marginBottom: "10px" }}>
-                              <strong>Nama: Darren Lucky Buntoro</strong>
-                            </div>
-                            <div>
-                              <img
-                                style={{ width: 225, height: "auto" }}
-                                src={ovoQR}
-                              />
-                            </div>
-                            Lampirkan bukti pembayaran dibawah.
-                          </Typography>
-                          <BuktiOVO open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="OVO"
-                      chosenValue={value}
-                    ></Box>
-                    <FormControlLabel
-                      value="DANA"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="DANA"
-                      onChange={(e) => setNamaBank(e.target.value)}
-                    />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Transfer nominal yang akan dibayarkan ke:{" "}
-                            <div>
-                              <strong>No. HP: 081291176795</strong>
-                            </div>{" "}
-                            <div style={{ marginBottom: "10px" }}>
-                              <strong>Nama: Darren Lucky Buntoro</strong>
-                            </div>
-                            <div>
-                              <img
-                                style={{ width: 225, height: "auto" }}
-                                src={danaQR}
-                              />
-                            </div>
-                            Lampirkan bukti pembayaran dibawah.
-                          </Typography>
-                          <BuktiDana open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="DANA"
-                      chosenValue={value}
-                    ></Box> */}
 
                     <FormControlLabel
                       value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
@@ -751,421 +658,6 @@ export default function Payment({ history }) {
                 >
                   <PaymentIcon />
                   Bayar Sekarang
-                </Button>
-              </Paper>
-            </Grid>
-          </Grid>
-        </div>
-
-        <div style={{ textAlign: "left" }} className={classes.sectionMobile}>
-          <Grid
-            container
-            direction="row"
-            justifyContent="space-evenly"
-            alignItems="center"
-            spacing={3}
-          >
-            <Grid item xs={12}>
-              <Typography className={classes.center} size="heading">
-                Checkout Page
-              </Typography>
-            </Grid>
-
-            <Grid item xs={12}>
-              {isSubAdded ? (
-                <></>
-              ) : (
-                <div>
-                  <Paper className={classes.paddedContent} elevation={5}>
-                    <Typography
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                      type="italic"
-                      size="bold"
-                    >
-                      <ErrorIcon
-                        fontSize="large"
-                        style={{ marginRight: "10px" }}
-                      />
-                      Dengan hanya Rp. 1.000/hari, Kamu bisa memiliki akses
-                      untuk semua buku!
-                    </Typography>
-                    <Button
-                      href="/pricing"
-                      round
-                      fullWidth
-                      style={{
-                        backgroundImage:
-                          "linear-gradient(to right, orange, yellow)",
-                      }}
-                    >
-                      Berlanggan sekarang!
-                    </Button>
-                  </Paper>
-
-                  <div style={{ marginBottom: "20px" }} />
-                </div>
-              )}
-              <Paper className={classes.paddedContent} elevation={5}>
-                <Typography size="subheading">1. Your Orders</Typography>
-
-                {cartItems.map((item) => (
-                  <div className={classes.spaceBetween}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={2}>
-                        <img
-                          src={item.coverLink}
-                          alt={item.book_title}
-                          className={
-                            styles.imgFluid + " " + styles.imgBookCover
-                          }
-                        />
-                      </Grid>
-                      <Grid item xs={10}>
-                        <Typography type="italic">{item.book_title}</Typography>
-                        <Typography type="italic">
-                          Rp. {Intl.NumberFormat().format(item.price)}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                    <Typography>
-                      <Link
-                        className={classes.link}
-                        underline="none"
-                        onClick={() => onRemove_(item)}
-                      >
-                        Hapus
-                      </Link>
-                    </Typography>
-                  </div>
-                ))}
-                {!!promoAdded ? (
-                  <div>
-                    <Typography type="italic" size="bold" color="dangerColor">
-                      Pemotongan dari kode promo
-                    </Typography>
-                    <Typography type="italic" size="bold" color="dangerColor">
-                      - Rp. {Intl.NumberFormat().format(-1 * discountAmount)}
-                    </Typography>
-                  </div>
-                ) : (
-                  <></>
-                )}
-
-                <div className={classes.extraSpace} />
-                {promoError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{promoError}</Alert>
-                  </div>
-                )}
-
-                <div className={classes.spaceBetween}>
-                  <TextField
-                    style={{ marginRight: "5px" }}
-                    id="filled-basic"
-                    label="Kode Promo"
-                    variant="filled"
-                    fullWidth
-                    inputRef={promoCodeRef}
-                  />
-                  {!!promoAdded ? (
-                    <Button color="gray">✔ Applied</Button>
-                  ) : (
-                    <Button onClick={handleApplyPromo}>Apply</Button>
-                  )}
-                </div>
-                <div className={classes.spaceBetween}>
-                  <Typography size="subheading">TOTAL</Typography>
-                  <Typography size="subheading" type="bold">
-                    Rp. {totalPrice}
-                  </Typography>
-                </div>
-              </Paper>
-            </Grid>
-
-            <Grid item xs={12}>
-              <Paper className={classes.paddedContent} elevation={5}>
-                <Typography size="subheading">2. Checkout Form</Typography>
-                <form
-                  onSubmit={handlePayment}
-                  className={classes.textFieldRoot}
-                >
-                  {error && (
-                    <div className={classes.alertRoot}>
-                      <Alert severity="error">{error}</Alert>
-                    </div>
-                  )}
-                  <TextField
-                    required
-                    id="filled-basic"
-                    label="Nama Lengkap Di Rekening"
-                    variant="filled"
-                    value={namaDiRekening}
-                    onChange={(e) => setNamaDiRekening(e.target.value)}
-                    fullWidth
-                  />
-                  <TextField
-                    required
-                    id="filled-basic"
-                    label="Nomor Rekening atau Nomor HP QRIS"
-                    variant="filled"
-                    value={nomorRekening}
-                    onChange={(e) => setNomorRekening(e.target.value)}
-                    fullWidth
-                  />
-                  {/* <TextField
-                    id="filled-basic"
-                    label="Akun Telegram untuk diinvite ke group eksklusif"
-                    variant="filled"
-                    value={akunTelegram}
-                    onChange={(e) => setAkunTelegram(e.target.value)}
-                    fullWidth
-                  /> */}
-                </form>
-
-                <div style={{ marginTop: "20px" }} />
-
-                <Typography size="subheading">3. Payment</Typography>
-
-                {namaBankError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{namaBankError}</Alert>
-                  </div>
-                )}
-
-                <FormControl component="fieldset">
-                  <RadioGroup
-                    aria-label="gender"
-                    name="gender1"
-                    value={value}
-                    onChange={handleRadioChange}
-                  >
-                    <FormControlLabel
-                      value="BCA Transfer"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="BCA Transfer"
-                      onChange={(e) => setNamaBank(e.target.value)}
-                    />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Transfer nominal yang akan dibayarkan ke:{" "}
-                            <div>
-                              <strong>No. Rekening: 3720266503</strong>
-                            </div>{" "}
-                            <div style={{ marginBottom: "10px" }}>
-                              <strong>Nama: Darren Lucky Buntoro</strong>
-                            </div>
-                            Lampirkan bukti pembayaran dibawah.
-                          </Typography>
-                          <BuktiBCA open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="BCA Transfer"
-                      chosenValue={value}
-                    ></Box>
-                    <FormControlLabel
-                      value="BRI Transfer"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="BRI Transfer"
-                      onChange={(e) => setNamaBank(e.target.value)}
-                    />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Transfer nominal yang akan dibayarkan ke:{" "}
-                            <div>
-                              <strong>No. Rekening: 0541 0100 0710 568</strong>
-                            </div>{" "}
-                            <div style={{ marginBottom: "10px" }}>
-                              <strong>Nama: Darren Lucky Buntoro</strong>
-                            </div>
-                            Lampirkan bukti pembayaran dibawah.
-                          </Typography>
-                          <BuktiBRI open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="BRI Transfer"
-                      chosenValue={value}
-                    ></Box>
-
-                    {/* <FormControlLabel
-                      value="OVO"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="OVO"
-                      onChange={(e) => setNamaBank(e.target.value)}
-                    />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Transfer nominal yang akan dibayarkan ke:{" "}
-                            <div>
-                              <strong>No. HP: 081291176795</strong>
-                            </div>{" "}
-                            <div style={{ marginBottom: "10px" }}>
-                              <strong>Nama: Darren Lucky Buntoro</strong>
-                            </div>
-                            <div>
-                              <img
-                                style={{ width: 225, height: "auto" }}
-                                src={ovoQR}
-                              />
-                            </div>
-                            Lampirkan bukti pembayaran dibawah.
-                          </Typography>
-                          <BuktiOVO open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="OVO"
-                      chosenValue={value}
-                    ></Box>
-                    <FormControlLabel
-                      value="DANA"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="DANA"
-                      onChange={(e) => setNamaBank(e.target.value)}
-                    />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Transfer nominal yang akan dibayarkan ke:{" "}
-                            <div>
-                              <strong>No. HP: 081291176795</strong>
-                            </div>{" "}
-                            <div style={{ marginBottom: "10px" }}>
-                              <strong>Nama: Darren Lucky Buntoro</strong>
-                            </div>
-                            <div>
-                              <img
-                                style={{ width: 225, height: "auto" }}
-                                src={danaQR}
-                              />
-                            </div>
-                            Lampirkan bukti pembayaran dibawah.
-                          </Typography>
-                          <BuktiDana open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="DANA"
-                      chosenValue={value}
-                    ></Box> */}
-
-                    <FormControlLabel
-                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!, dll.)"
-                      onChange={(e) => setNamaBank(e.target.value)}
-                    />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Scan QR code di bawah:
-                            <div>
-                              <img
-                                style={{ width: 300, height: "auto" }}
-                                src={qrisQR}
-                              />
-                            </div>
-                            Lalu, lampirkan bukti pembayaran dibawah.
-                          </Typography>
-
-                          <BuktiQRIS open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
-                      chosenValue={value}
-                      onChange={(e) => setNamaBank(e.target.value)}
-                    ></Box>
-                  </RadioGroup>
-                </FormControl>
-
-                <Typography style={{ marginTop: "20px" }} size="subheading">
-                  4. Lampirkan Bukti Pembayaran
-                </Typography>
-                {fileError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{fileError}</Alert>
-                  </div>
-                )}
-
-                <TextField
-                  required
-                  id="outlined-full-width"
-                  label="Lampirkan Bukti Pembayaran"
-                  name="upload-photo"
-                  type="file"
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  variant="outlined"
-                  onChange={handleChange}
-                />
-
-                <div className={classes.extraSpace} />
-
-                {cartError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{cartError}</Alert>
-                  </div>
-                )}
-                <Button
-                  id="pay"
-                  fullWidth
-                  round
-                  onClick={handlePayment}
-                  type="submit"
-                  disabled={enablePayButton}
-                >
-                  <PaymentIcon /> Bayar Sekarang
                 </Button>
               </Paper>
             </Grid>
