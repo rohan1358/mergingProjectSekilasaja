@@ -24,6 +24,7 @@ import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
 import BuktiBCA from "./BuktiBCA";
 import BuktiBRI from "./BuktiBRI";
 import BuktiQRIS from "./BuktiQRIS";
+import Loading from "../Loading";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -72,6 +73,7 @@ export default function Payment({ history }) {
   // useState hooks
   const [value, setValue] = useState("female");
   const [pending, setPending] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [promoAdded, setPromoAdded] = useState(false);
   const [isSubAdded, setIsSubAdded] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -118,18 +120,20 @@ export default function Payment({ history }) {
 
   // useEffect Hooks
   useEffect(() => {
-    cartItems.map((x) => {
-      if (
-        x.book_title == "Subscription 1 Bulan" ||
-        x.book_title == "Subscription 3 Bulan" ||
-        x.book_title == "Subscription 6 Bulan" ||
-        x.book_title == "Subscription 12 Bulan"
-      ) {
-        setIsSubAdded(true);
-      } else {
-        setIsSubAdded(false);
-      }
-    });
+    if (cartItems != undefined) {
+      cartItems.map((x) => {
+        if (
+          x.book_title == "Subscription 1 Bulan" ||
+          x.book_title == "Subscription 3 Bulan" ||
+          x.book_title == "Subscription 6 Bulan" ||
+          x.book_title == "Subscription 12 Bulan"
+        ) {
+          setIsSubAdded(true);
+        } else {
+          setIsSubAdded(false);
+        }
+      });
+    }
   }, [cartItems]);
 
   // Functions
@@ -244,6 +248,7 @@ export default function Payment({ history }) {
     }
 
     setPending(true);
+
     //Put payment information into firestore storage and database
     var image_url = await firebaseUploadPaymentInfo.uploadPaymentInfo(
       userData,
@@ -314,6 +319,18 @@ export default function Payment({ history }) {
   if (isEmailSent && !pending) {
     history.push("/payment-success");
   }
+
+  // if (cartItems && pending) {
+  //   setLoading(false)
+  // }
+
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <Loading />
+  //     </>
+  //   );
+  // }
 
   return (
     <div style={{ backgroundColor: beigeColor }}>

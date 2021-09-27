@@ -180,11 +180,11 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartOne = () => {
     const fetchData = async () => {
-      if (cartItems.length != 0) {
-        firestore.collection("users").doc(currentUser.uid).update({
-          cart: [],
-        });
-      }
+      // if (cartItems.length != 0) {
+      //   firestore.collection("users").doc(currentUser.uid).update({
+      //     cart: [],
+      //   });
+      // }
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
         subOne
@@ -207,11 +207,11 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartThree = () => {
     const fetchData = async () => {
-      if (cartItems.length != 0) {
-        firestore.collection("users").doc(currentUser.uid).update({
-          cart: [],
-        });
-      }
+      // if (cartItems.length != 0) {
+      //   firestore.collection("users").doc(currentUser.uid).update({
+      //     cart: [],
+      //   });
+      // }
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
         subThree
@@ -234,11 +234,11 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartSix = () => {
     const fetchData = async () => {
-      if (cartItems.length != 0) {
-        firestore.collection("users").doc(currentUser.uid).update({
-          cart: [],
-        });
-      }
+      // if (cartItems.length != 0) {
+      //   firestore.collection("users").doc(currentUser.uid).update({
+      //     cart: [],
+      //   });
+      // }
 
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
@@ -262,11 +262,11 @@ export default function PricingPage({ match, history }) {
 
   const handleAddCartTwelve = () => {
     const fetchData = async () => {
-      if (cartItems.length != 0) {
-        firestore.collection("users").doc(currentUser.uid).update({
-          cart: [],
-        });
-      }
+      // if (cartItems.length != 0) {
+      //   firestore.collection("users").doc(currentUser.uid).update({
+      //     cart: [],
+      //   });
+      // }
 
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
