@@ -77,7 +77,6 @@ export default function Payment({ history }) {
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [namaDiRekening, setNamaDiRekening] = useState("");
   const [nomorRekening, setNomorRekening] = useState("");
-  // const [akunTelegram, setAkunTelegram] = useState("");
   const [namaBank, setNamaBank] = useState("");
   const [file, setFile] = useState("");
   const [error, setError] = useState("");
@@ -114,11 +113,6 @@ export default function Payment({ history }) {
     if (!currentUser) {
       console.log("User is not logged in, redirecting to login page...");
       return <Redirect to="/login" />;
-    } else if (currentUser && !currentUser.emailVerified) {
-      console.log(
-        "Redirect to email not verified page to ask for email verification..."
-      );
-      return <Redirect to="/verify-email" />;
     }
   }, []);
 
