@@ -31,6 +31,10 @@ import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import fire from "../../firebase/fire";
 
+// Redux
+import { useSelector } from "react-redux";
+import { selectUser } from "../../feature/userSlice";
+
 const db = fire.firestore();
 
 const useStyles = makeStyles(InfoAreaStyle);
@@ -42,10 +46,9 @@ export default function Home({ history }) {
 
   // Auth
   const { currentUser } = useContext(AuthContext);
+  const userData = useSelector(selectUser);
 
   // useState hooks
-  const [userData, setUserData] = useState(null);
-  const [isSubscribed, setIsSubscribed] = useState(false);
   const [pending, setPending] = useState(true);
   const [products, SetProducts] = useState([]);
 
@@ -58,23 +61,9 @@ export default function Home({ history }) {
         }))
       );
     });
-
-    // Get user info
-    if (currentUser !== null) {
-      const fetchData = async () => {
-        const results = await firebaseGetUserDataById.getUserDataById(
-          currentUser.uid
-        );
-        setUserData(results);
-        setIsSubscribed(results.is_subscribed);
-      };
-      fetchData();
-    } else {
-      console.log("Not logged in");
-    }
   }, []);
 
-  if (isSubscribed == true) {
+  if (userData.user.is_subscribed == true) {
     return <Redirect to={"/library"} />;
   }
 
