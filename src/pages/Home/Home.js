@@ -63,7 +63,7 @@ export default function Home({ history }) {
     });
   }, []);
 
-  if (userData.user.is_subscribed == true) {
+  if (userData.user.is_subscribed == true && currentUser) {
     return <Redirect to={"/library"} />;
   }
 
