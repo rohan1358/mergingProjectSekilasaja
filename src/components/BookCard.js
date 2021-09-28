@@ -67,18 +67,6 @@ export default function BookCard({
       if (link !== undefined) setCoverLink(link);
     };
     fetchData();
-
-    //Remove any null values
-    var nullExist = false;
-    cartItems.forEach((item) => {
-      if (item === null) {
-        nullExist = true;
-      }
-    });
-    if (nullExist) {
-      dispatch(setCart([cartItems.filter((x) => x !== null)]));
-      console.log(cartItems);
-    }
   }, [, chosenCategory]);
 
   const handleAddCart = () => {
