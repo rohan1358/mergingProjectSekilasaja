@@ -95,7 +95,7 @@ export default function Payment({ history }) {
   const userData = useSelector(selectUser);
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCart).cart;
-
+  console.log(cartItems);
   // Cart total price
   const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
   const totalPrice = Intl.NumberFormat().format(

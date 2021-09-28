@@ -6,6 +6,8 @@ import store, { persistor } from "./app/store";
 import reportWebVitals from "./reportWebVitals";
 import { PersistGate } from "redux-persist/integration/react";
 import TagManager from "react-gtm-module";
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
 
 // Whole website color
 document.body.style = "background: #FFFEF8;";
