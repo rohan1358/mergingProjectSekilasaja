@@ -124,6 +124,9 @@ export default function Payment({ history }) {
   // useEffect Hooks
   useEffect(() => {
     if (cartItems != undefined) {
+      //Remove any null values
+      cartItems.filter(x => x !== null);
+      
       cartItems.map((x) => {
         if (
           x.book_title == "Subscription 1 Bulan" ||
