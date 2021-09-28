@@ -96,6 +96,7 @@ export default function Payment({ history }) {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCart).cart;
   console.log(cartItems);
+
   // Cart total price
   const [itemsPrice, setItemPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
