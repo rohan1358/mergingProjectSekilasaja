@@ -36,6 +36,8 @@ import fire from "../firebase/fire";
 import { selectCart, setCart } from "../feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
+import Loading from "./Loading";
+
 const useStyles = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
   sectionDesktop: {
@@ -143,6 +145,7 @@ export default function PricingPage({ match, history }) {
   const [subThree, setSubThree] = useState(null);
   const [subSix, setSubSix] = useState(null);
   const [subTwelve, setSubTwelve] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (currentUser !== null) {
@@ -161,30 +164,60 @@ export default function PricingPage({ match, history }) {
       const results1 = await firebaseGetSubscription.getSubscription(
         "Subscription 1 Bulan"
       );
+      setSubOne(results1);
+    };
+    fetchSubData();
+
+    return function cleanup() {
+      setLoading(true);
+      setSubOne(null);
+      setSubThree(null);
+      setSubSix(null);
+      setSubTwelve(null);
+    };
+  }, []);
+
+  useEffect(() => {
+    const fetchSubData = async () => {
       const results3 = await firebaseGetSubscription.getSubscription(
         "Subscription 3 Bulan"
       );
+      setSubThree(results3);
+    };
+    fetchSubData();
+  }, [subOne]);
+
+  useEffect(() => {
+    const fetchSubData = async () => {
       const results6 = await firebaseGetSubscription.getSubscription(
         "Subscription 6 Bulan"
       );
+      setSubSix(results6);
+    };
+    fetchSubData();
+  }, [subThree]);
+
+  useEffect(() => {
+    const fetchSubData = async () => {
       const results12 = await firebaseGetSubscription.getSubscription(
         "Subscription 12 Bulan"
       );
-      setSubOne(results1);
-      setSubThree(results3);
-      setSubSix(results6);
       setSubTwelve(results12);
     };
     fetchSubData();
-  }, []);
+  }, [subSix]);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [subTwelve]);
 
   const handleAddCartOne = () => {
     const fetchData = async () => {
-      if (cartItems.length != 0) {
-        firestore.collection("users").doc(currentUser.uid).update({
-          cart: [],
-        });
-      }
+      // if (cartItems.length != 0) {
+      //   firestore.collection("users").doc(currentUser.uid).update({
+      //     cart: [],
+      //   });
+      // }
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
         subOne
@@ -203,15 +236,16 @@ export default function PricingPage({ match, history }) {
       }
     };
     fetchData();
+    console.log(subOne);
   };
 
   const handleAddCartThree = () => {
     const fetchData = async () => {
-      if (cartItems.length != 0) {
-        firestore.collection("users").doc(currentUser.uid).update({
-          cart: [],
-        });
-      }
+      // if (cartItems.length != 0) {
+      //   firestore.collection("users").doc(currentUser.uid).update({
+      //     cart: [],
+      //   });
+      // }
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
         subThree
@@ -230,15 +264,16 @@ export default function PricingPage({ match, history }) {
       }
     };
     fetchData();
+    console.log(subThree);
   };
 
   const handleAddCartSix = () => {
     const fetchData = async () => {
-      if (cartItems.length != 0) {
-        firestore.collection("users").doc(currentUser.uid).update({
-          cart: [],
-        });
-      }
+      // if (cartItems.length != 0) {
+      //   firestore.collection("users").doc(currentUser.uid).update({
+      //     cart: [],
+      //   });
+      // }
 
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
@@ -258,15 +293,16 @@ export default function PricingPage({ match, history }) {
       }
     };
     fetchData();
+    console.log(subSix);
   };
 
   const handleAddCartTwelve = () => {
     const fetchData = async () => {
-      if (cartItems.length != 0) {
-        firestore.collection("users").doc(currentUser.uid).update({
-          cart: [],
-        });
-      }
+      // if (cartItems.length != 0) {
+      //   firestore.collection("users").doc(currentUser.uid).update({
+      //     cart: [],
+      //   });
+      // }
 
       const results = await firebaseUpdateCart.AddToCart(
         currentUser.uid,
@@ -286,6 +322,7 @@ export default function PricingPage({ match, history }) {
       }
     };
     fetchData();
+    console.log(subTwelve);
   };
 
   const tiers = [
@@ -330,6 +367,15 @@ export default function PricingPage({ match, history }) {
       route: handleAddCartOne,
     },
   ];
+
+  if (loading) {
+    console.log("Loading screen...");
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div style={{ backgroundColor: beigeColor }}>

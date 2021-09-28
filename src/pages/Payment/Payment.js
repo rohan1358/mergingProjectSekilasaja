@@ -24,6 +24,7 @@ import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
 import BuktiBCA from "./BuktiBCA";
 import BuktiBRI from "./BuktiBRI";
 import BuktiQRIS from "./BuktiQRIS";
+import Loading from "../Loading";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";
@@ -72,6 +73,7 @@ export default function Payment({ history }) {
   // useState hooks
   const [value, setValue] = useState("female");
   const [pending, setPending] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [promoAdded, setPromoAdded] = useState(false);
   const [isSubAdded, setIsSubAdded] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
@@ -95,10 +97,8 @@ export default function Payment({ history }) {
   const cartItems = useSelector(selectCart).cart;
 
   // Cart total price
-  const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
-  const totalPrice = Intl.NumberFormat().format(
-    itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
-  );
+  const [itemsPrice, setItemPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   // Facebook Pixel
   const advancedMatching = { em: "sekilasaja.main@gmail.com" }; // optional, more info: https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching
@@ -114,23 +114,50 @@ export default function Payment({ history }) {
       console.log("User is not logged in, redirecting to login page...");
       return <Redirect to="/login" />;
     }
+    return function cleanup() {
+      setLoading(true);
+    };
   }, []);
 
   // useEffect Hooks
   useEffect(() => {
-    cartItems.map((x) => {
-      if (
-        x.book_title == "Subscription 1 Bulan" ||
-        x.book_title == "Subscription 3 Bulan" ||
-        x.book_title == "Subscription 6 Bulan" ||
-        x.book_title == "Subscription 12 Bulan"
-      ) {
-        setIsSubAdded(true);
-      } else {
-        setIsSubAdded(false);
+    if (cartItems != undefined) {
+      cartItems.map((x) => {
+        if (
+          x.book_title == "Subscription 1 Bulan" ||
+          x.book_title == "Subscription 3 Bulan" ||
+          x.book_title == "Subscription 6 Bulan" ||
+          x.book_title == "Subscription 12 Bulan"
+        ) {
+          setIsSubAdded(true);
+        } else {
+          setIsSubAdded(false);
+        }
+      });
+      setItemPrice(cartItems.reduce((a, c) => a + c.price, 0));
+    }
+    //Remove any null values
+    var nullExist = false;
+    cartItems.forEach((item) => {
+      if (item === null) {
+        nullExist = true;
       }
     });
+    if (nullExist) {
+      dispatch(setCart([cartItems.filter((x) => x !== null)]));
+      console.log(cartItems);
+    } else {
+      setLoading(false);
+    }
   }, [cartItems]);
+
+  useEffect(() => {
+    setTotalPrice(
+      Intl.NumberFormat().format(
+        itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
+      )
+    );
+  }, [itemsPrice]);
 
   // Functions
   const handleRadioChange = (event) => {
@@ -244,6 +271,7 @@ export default function Payment({ history }) {
     }
 
     setPending(true);
+
     //Put payment information into firestore storage and database
     var image_url = await firebaseUploadPaymentInfo.uploadPaymentInfo(
       userData,
@@ -315,387 +343,403 @@ export default function Payment({ history }) {
     history.push("/payment-success");
   }
 
-  return (
-    <div style={{ backgroundColor: beigeColor }}>
-      <div style={{ marginTop: "120px" }} />
-      <Header
-        history={history}
-        rightLinks={<HeaderLinks history={history} />}
-        rightLinksMobile={<HeaderLinksMobile history={history} />}
-        fixed
-        color="white"
-      />
-      <Container maxWidth="md">
-        <div>
-          <Grid container direction="row" justifyContent="center" spacing={3}>
-            <Grid item xs={12}>
-              <Typography className={classes.center} size="heading">
-                Checkout Page
-              </Typography>
-            </Grid>
+  if (loading) {
+    console.log("Loading screen ...");
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  } else {
+    return (
+      <div style={{ backgroundColor: beigeColor }}>
+        <div style={{ marginTop: "120px" }} />
+        <Header
+          history={history}
+          rightLinks={<HeaderLinks history={history} />}
+          rightLinksMobile={<HeaderLinksMobile history={history} />}
+          fixed
+          color="white"
+        />
+        <Container maxWidth="md">
+          <div>
+            <Grid container direction="row" justifyContent="center" spacing={3}>
+              <Grid item xs={12}>
+                <Typography className={classes.center} size="heading">
+                  Checkout Page
+                </Typography>
+              </Grid>
 
-            <Grid item md={6} xs={12}>
-              {isSubAdded ? (
-                <></>
-              ) : (
-                <div>
-                  <Paper className={classes.paddedContent} elevation={5}>
-                    <Typography
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                      type="italic"
-                      size="bold"
-                    >
-                      <ErrorIcon
-                        fontSize="large"
-                        style={{ marginRight: "10px" }}
-                      />
-                      Dengan hanya Rp. 1.000/hari, Kamu bisa memiliki akses
-                      untuk semua buku!
-                    </Typography>
-                    <Button
-                      href="/pricing"
-                      round
-                      fullWidth
-                      style={{
-                        backgroundImage:
-                          "linear-gradient(to right, orange, yellow)",
-                      }}
-                    >
-                      Berlanggan sekarang!
-                    </Button>
-                  </Paper>
-
-                  <div style={{ marginBottom: "20px" }} />
-                </div>
-              )}
-
-              <Paper className={classes.paddedContent} elevation={5}>
-                <Typography size="subheading">1. Your Orders</Typography>
-
-                {cartItems.map((item) => (
-                  <div className={classes.spaceBetween}>
-                    <Grid container spacing={2}>
-                      <Grid item xs={2}>
-                        <img
-                          src={item.coverLink}
-                          alt={item.book_title}
-                          className={
-                            styles.imgFluid + " " + styles.imgBookCover
-                          }
-                        />
-                      </Grid>
-                      <Grid item xs={10}>
-                        <Typography type="italic">{item.book_title}</Typography>
-                        <Typography type="italic">
-                          Rp. {Intl.NumberFormat().format(item.price)}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-
-                    <Typography>
-                      <Link
-                        className={classes.link}
-                        underline="none"
-                        onClick={() => onRemove_(item)}
-                      >
-                        Hapus
-                      </Link>
-                    </Typography>
-                  </div>
-                ))}
-
-                {!!promoAdded ? (
-                  <div>
-                    <Typography type="italic" size="bold" color="dangerColor">
-                      Pemotongan dari kode promo
-                    </Typography>
-                    <Typography type="italic" size="bold" color="dangerColor">
-                      - Rp. {Intl.NumberFormat().format(-1 * discountAmount)}
-                    </Typography>
-                  </div>
-                ) : (
+              <Grid item md={6} xs={12}>
+                {isSubAdded ? (
                   <></>
-                )}
+                ) : (
+                  <div>
+                    <Paper className={classes.paddedContent} elevation={5}>
+                      <Typography
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                        type="italic"
+                        size="bold"
+                      >
+                        <ErrorIcon
+                          fontSize="large"
+                          style={{ marginRight: "10px" }}
+                        />
+                        Dengan hanya Rp. 1.000/hari, Kamu bisa memiliki akses
+                        untuk semua buku!
+                      </Typography>
+                      <Button
+                        href="/pricing"
+                        round
+                        fullWidth
+                        style={{
+                          backgroundImage:
+                            "linear-gradient(to right, orange, yellow)",
+                        }}
+                      >
+                        Berlanggan sekarang!
+                      </Button>
+                    </Paper>
 
-                <div className={classes.extraSpace} />
-                {promoError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{promoError}</Alert>
+                    <div style={{ marginBottom: "20px" }} />
                   </div>
                 )}
-                <div className={classes.spaceBetween}>
-                  <TextField
-                    style={{ marginRight: "5px" }}
-                    id="filled-basic"
-                    label="Kode Promo"
-                    variant="filled"
-                    fullWidth
-                    onChange={(e) => setPromoCode(e.target.value)}
-                  />
-                  {!!promoAdded ? (
-                    <Button color="gray">✔ Applied</Button>
-                  ) : (
-                    <Button onClick={handleApplyPromo}>Apply</Button>
-                  )}
-                </div>
-                <div className={classes.spaceBetween}>
-                  <Typography size="subheading">TOTAL</Typography>
-                  <Typography size="subheading" type="bold">
-                    Rp. {totalPrice}
-                  </Typography>
-                </div>
-              </Paper>
-            </Grid>
 
-            <Grid item md={6} xs={12}>
-              <Paper className={classes.paddedContent} elevation={5}>
-                <Typography size="subheading">2. Checkout Form</Typography>
-                <form
-                  onSubmit={handlePayment}
-                  className={classes.textFieldRoot}
-                >
-                  {error && (
+                <Paper className={classes.paddedContent} elevation={5}>
+                  <Typography size="subheading">1. Your Orders</Typography>
+
+                  {cartItems.map((item) => (
+                    <div className={classes.spaceBetween}>
+                      <Grid container spacing={2}>
+                        <Grid item xs={2}>
+                          <img
+                            src={item.coverLink}
+                            alt={item.book_title}
+                            className={
+                              styles.imgFluid + " " + styles.imgBookCover
+                            }
+                          />
+                        </Grid>
+                        <Grid item xs={10}>
+                          <Typography type="italic">
+                            {item.book_title}
+                          </Typography>
+                          <Typography type="italic">
+                            Rp. {Intl.NumberFormat().format(item.price)}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+
+                      <Typography>
+                        <Link
+                          className={classes.link}
+                          underline="none"
+                          onClick={() => onRemove_(item)}
+                        >
+                          Hapus
+                        </Link>
+                      </Typography>
+                    </div>
+                  ))}
+
+                  {!!promoAdded ? (
+                    <div>
+                      <Typography type="italic" size="bold" color="dangerColor">
+                        Pemotongan dari kode promo
+                      </Typography>
+                      <Typography type="italic" size="bold" color="dangerColor">
+                        - Rp. {Intl.NumberFormat().format(-1 * discountAmount)}
+                      </Typography>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+
+                  <div className={classes.extraSpace} />
+                  {promoError && (
                     <div className={classes.alertRoot}>
-                      <Alert severity="error">{error}</Alert>
+                      <Alert severity="error">{promoError}</Alert>
                     </div>
                   )}
-                  <TextField
-                    required
-                    id="filled-basic"
-                    label="Nama Lengkap Di Rekening"
-                    variant="filled"
-                    value={namaDiRekening}
-                    onChange={(e) => setNamaDiRekening(e.target.value)}
-                    fullWidth
-                  />
-                  <TextField
-                    required
-                    id="filled-basic"
-                    label="Nomor Rekening atau Nomor HP QRIS"
-                    variant="filled"
-                    value={nomorRekening}
-                    onChange={(e) => setNomorRekening(e.target.value)}
-                    fullWidth
-                  />
-                  {/* <TextField
-                    id="filled-basic"
-                    label="Akun Telegram untuk diinvite ke group eksklusif"
-                    variant="filled"
-                    value={akunTelegram}
-                    onChange={(e) => setAkunTelegram(e.target.value)}
-                    fullWidth
-                  /> */}
-                </form>
-
-                <div style={{ marginTop: "20px" }} />
-
-                <Typography size="subheading">3. Payment</Typography>
-
-                {namaBankError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{namaBankError}</Alert>
+                  <div className={classes.spaceBetween}>
+                    <TextField
+                      style={{ marginRight: "5px" }}
+                      id="filled-basic"
+                      label="Kode Promo"
+                      variant="filled"
+                      fullWidth
+                      onChange={(e) => setPromoCode(e.target.value)}
+                    />
+                    {!!promoAdded ? (
+                      <Button color="gray">✔ Applied</Button>
+                    ) : (
+                      <Button onClick={handleApplyPromo}>Apply</Button>
+                    )}
                   </div>
-                )}
-                <FormControl component="fieldset">
-                  <RadioGroup
-                    aria-label="gender"
-                    name="gender1"
-                    value={value}
-                    onChange={handleRadioChange}
-                    required
+                  <div className={classes.spaceBetween}>
+                    <Typography size="subheading">TOTAL</Typography>
+                    <Typography size="subheading" type="bold">
+                      Rp. {totalPrice}
+                    </Typography>
+                  </div>
+                </Paper>
+              </Grid>
+
+              <Grid item md={6} xs={12}>
+                <Paper className={classes.paddedContent} elevation={5}>
+                  <Typography size="subheading">2. Checkout Form</Typography>
+                  <form
+                    onSubmit={handlePayment}
+                    className={classes.textFieldRoot}
                   >
-                    <FormControlLabel
-                      value="BCA Transfer"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="BCA Transfer"
-                      onChange={(e) => setNamaBank(e.target.value)}
+                    {error && (
+                      <div className={classes.alertRoot}>
+                        <Alert severity="error">{error}</Alert>
+                      </div>
+                    )}
+                    <TextField
+                      required
+                      id="filled-basic"
+                      label="Nama Lengkap Di Rekening"
+                      variant="filled"
+                      value={namaDiRekening}
+                      onChange={(e) => setNamaDiRekening(e.target.value)}
+                      fullWidth
                     />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Transfer nominal yang akan dibayarkan ke:{" "}
-                            <div>
-                              <strong>No. Rekening: 3720266503</strong>
-                            </div>{" "}
-                            <div style={{ marginBottom: "10px" }}>
-                              <strong>Nama: Darren Lucky Buntoro</strong>
-                            </div>
-                            Lampirkan bukti pembayaran dibawah.
-                          </Typography>
-                          <BuktiBCA open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="BCA Transfer"
-                      chosenValue={value}
-                    ></Box>
-                    <FormControlLabel
-                      value="BRI Transfer"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="BRI Transfer"
-                      onChange={(e) => setNamaBank(e.target.value)}
+                    <TextField
+                      required
+                      id="filled-basic"
+                      label="Nomor Rekening atau Nomor HP QRIS"
+                      variant="filled"
+                      value={nomorRekening}
+                      onChange={(e) => setNomorRekening(e.target.value)}
+                      fullWidth
                     />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Transfer nominal yang akan dibayarkan ke:{" "}
-                            <div>
-                              <strong>No. Rekening: 0541 0100 0710 568</strong>
-                            </div>{" "}
-                            <div style={{ marginBottom: "10px" }}>
-                              <strong>Nama: Darren Lucky Buntoro</strong>
-                            </div>
-                            Lampirkan bukti pembayaran dibawah.
-                          </Typography>
-                          <BuktiBRI open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="BRI Transfer"
-                      chosenValue={value}
-                    ></Box>
+                    {/* <TextField
+                      id="filled-basic"
+                      label="Akun Telegram untuk diinvite ke group eksklusif"
+                      variant="filled"
+                      value={akunTelegram}
+                      onChange={(e) => setAkunTelegram(e.target.value)}
+                      fullWidth
+                    /> */}
+                  </form>
 
-                    <FormControlLabel
-                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
-                      control={<Radio style={{ color: secondaryColor }} />}
-                      label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!, dll.)"
-                      onChange={(e) => setNamaBank(e.target.value)}
-                    />
-                    <Box
-                      text={
-                        <div>
-                          <Typography>
-                            Scan QR code di bawah:
-                            <div>
-                              <img
-                                style={{ width: 300, height: "auto" }}
-                                src={qrisQR}
-                              />
-                            </div>
-                            Lalu, lampirkan bukti pembayaran dibawah.
-                          </Typography>
-                          <BuktiQRIS open={open} handleClose={handleClose} />
-                          <Button
-                            color="secondary"
-                            onClick={handleClickOpen}
-                            round
-                            fullWidth
-                          >
-                            Contoh Bukti
-                          </Button>
-                        </div>
-                      }
-                      value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
-                      chosenValue={value}
-                    ></Box>
-                  </RadioGroup>
-                </FormControl>
+                  <div style={{ marginTop: "20px" }} />
 
-                <Typography style={{ marginTop: "20px" }} size="subheading">
-                  4. Lampirkan Bukti Pembayaran
-                </Typography>
+                  <Typography size="subheading">3. Payment</Typography>
 
-                {fileError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{fileError}</Alert>
-                  </div>
-                )}
+                  {namaBankError && (
+                    <div className={classes.alertRoot}>
+                      <Alert severity="error">{namaBankError}</Alert>
+                    </div>
+                  )}
+                  <FormControl component="fieldset">
+                    <RadioGroup
+                      aria-label="gender"
+                      name="gender1"
+                      value={value}
+                      onChange={handleRadioChange}
+                      required
+                    >
+                      <FormControlLabel
+                        value="BCA Transfer"
+                        control={<Radio style={{ color: secondaryColor }} />}
+                        label="BCA Transfer"
+                        onChange={(e) => setNamaBank(e.target.value)}
+                      />
+                      <Box
+                        text={
+                          <div>
+                            <Typography>
+                              Transfer nominal yang akan dibayarkan ke:{" "}
+                              <div>
+                                <strong>No. Rekening: 3720266503</strong>
+                              </div>{" "}
+                              <div style={{ marginBottom: "10px" }}>
+                                <strong>Nama: Darren Lucky Buntoro</strong>
+                              </div>
+                              Lampirkan bukti pembayaran dibawah.
+                            </Typography>
+                            <BuktiBCA open={open} handleClose={handleClose} />
+                            <Button
+                              color="secondary"
+                              onClick={handleClickOpen}
+                              round
+                              fullWidth
+                            >
+                              Contoh Bukti
+                            </Button>
+                          </div>
+                        }
+                        value="BCA Transfer"
+                        chosenValue={value}
+                      ></Box>
+                      <FormControlLabel
+                        value="BRI Transfer"
+                        control={<Radio style={{ color: secondaryColor }} />}
+                        label="BRI Transfer"
+                        onChange={(e) => setNamaBank(e.target.value)}
+                      />
+                      <Box
+                        text={
+                          <div>
+                            <Typography>
+                              Transfer nominal yang akan dibayarkan ke:{" "}
+                              <div>
+                                <strong>
+                                  No. Rekening: 0541 0100 0710 568
+                                </strong>
+                              </div>{" "}
+                              <div style={{ marginBottom: "10px" }}>
+                                <strong>Nama: Darren Lucky Buntoro</strong>
+                              </div>
+                              Lampirkan bukti pembayaran dibawah.
+                            </Typography>
+                            <BuktiBRI open={open} handleClose={handleClose} />
+                            <Button
+                              color="secondary"
+                              onClick={handleClickOpen}
+                              round
+                              fullWidth
+                            >
+                              Contoh Bukti
+                            </Button>
+                          </div>
+                        }
+                        value="BRI Transfer"
+                        chosenValue={value}
+                      ></Box>
 
-                <TextField
-                  required
-                  id="outlined-full-width"
-                  label="Lampirkan Bukti Pembayaran"
-                  name="upload-photo"
-                  type="file"
-                  fullWidth
-                  margin="normal"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  variant="outlined"
-                  onChange={handleChange}
-                />
+                      <FormControlLabel
+                        value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
+                        control={<Radio style={{ color: secondaryColor }} />}
+                        label="QRIS (DANA, GoPay, OVO, ShopeePay, LinkAja!, dll.)"
+                        onChange={(e) => setNamaBank(e.target.value)}
+                      />
+                      <Box
+                        text={
+                          <div>
+                            <Typography>
+                              Scan QR code di bawah:
+                              <div>
+                                <img
+                                  style={{ width: 300, height: "auto" }}
+                                  src={qrisQR}
+                                />
+                              </div>
+                              Lalu, lampirkan bukti pembayaran dibawah.
+                            </Typography>
+                            <BuktiQRIS open={open} handleClose={handleClose} />
+                            <Button
+                              color="secondary"
+                              onClick={handleClickOpen}
+                              round
+                              fullWidth
+                            >
+                              Contoh Bukti
+                            </Button>
+                          </div>
+                        }
+                        value="QRIS (DANA, GoPay, ShopeePay, OVO, LinkAja!, dll.)"
+                        chosenValue={value}
+                      ></Box>
+                    </RadioGroup>
+                  </FormControl>
 
-                <div className={classes.extraSpace} />
+                  <Typography style={{ marginTop: "20px" }} size="subheading">
+                    4. Lampirkan Bukti Pembayaran
+                  </Typography>
 
-                {cartError && (
-                  <div className={classes.alertRoot}>
-                    <Alert severity="error">{cartError}</Alert>
-                  </div>
-                )}
-                <Button
-                  id="pay"
-                  fullWidth
-                  round
-                  onClick={handlePayment}
-                  type="submit"
-                  disabled={enablePayButton}
-                >
-                  <PaymentIcon />
-                  Bayar Sekarang
-                </Button>
-              </Paper>
+                  {fileError && (
+                    <div className={classes.alertRoot}>
+                      <Alert severity="error">{fileError}</Alert>
+                    </div>
+                  )}
+
+                  <TextField
+                    required
+                    id="outlined-full-width"
+                    label="Lampirkan Bukti Pembayaran"
+                    name="upload-photo"
+                    type="file"
+                    fullWidth
+                    margin="normal"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    variant="outlined"
+                    onChange={handleChange}
+                  />
+
+                  <div className={classes.extraSpace} />
+
+                  {cartError && (
+                    <div className={classes.alertRoot}>
+                      <Alert severity="error">{cartError}</Alert>
+                    </div>
+                  )}
+                  <Button
+                    id="pay"
+                    fullWidth
+                    round
+                    onClick={handlePayment}
+                    type="submit"
+                    disabled={enablePayButton}
+                  >
+                    <PaymentIcon />
+                    Bayar Sekarang
+                  </Button>
+                </Paper>
+              </Grid>
             </Grid>
-          </Grid>
-        </div>
-      </Container>
+          </div>
+        </Container>
 
-      {/*---------------------------------------------------------------*/}
-      {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
-      {/*---------------------------------------------------------------*/}
-      <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
-        <Tooltip
-          title={
-            <div
+        {/*---------------------------------------------------------------*/}
+        {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
+        {/*---------------------------------------------------------------*/}
+        <a href="https://wa.me/message/JC5E4YLJBCKTE1" target="_blank">
+          <Tooltip
+            title={
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontSize: "14px",
+                  lineHeight: "20px",
+                }}
+              >
+                <WhatsAppIcon
+                  fontSize="large"
+                  style={{ marginRight: "10px" }}
+                />
+                Klik tombol ini dan langsung hubungi kami di Whatsapp bila ada
+                pertanyaan!
+              </div>
+            }
+            placement="right"
+          >
+            <img
+              src={Whatsapp}
               style={{
-                display: "flex",
-                alignItems: "center",
-                fontSize: "14px",
-                lineHeight: "20px",
+                position: "fixed",
+                bottom: 15,
+                left: 15,
+                width: "60px",
+                "&:hover": {
+                  filter: "brightness(150%)",
+                },
               }}
-            >
-              <WhatsAppIcon fontSize="large" style={{ marginRight: "10px" }} />
-              Klik tombol ini dan langsung hubungi kami di Whatsapp bila ada
-              pertanyaan!
-            </div>
-          }
-          placement="right"
-        >
-          <img
-            src={Whatsapp}
-            style={{
-              position: "fixed",
-              bottom: 15,
-              left: 15,
-              width: "60px",
-              "&:hover": {
-                filter: "brightness(150%)",
-              },
-            }}
-          />
-        </Tooltip>
-      </a>
+            />
+          </Tooltip>
+        </a>
 
-      <Footer />
-    </div>
-  );
+        <Footer />
+      </div>
+    );
+  }
 }

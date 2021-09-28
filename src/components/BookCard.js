@@ -93,6 +93,8 @@ export default function BookCard({
 
   useEffect(() => {
     const changeBtn = () => {
+      console.log(cartItems);
+      console.log(product);
       const exist = cartItems.find((x) => x.book_title === product.book_title);
       if (exist) {
         setIsAdded(true);
