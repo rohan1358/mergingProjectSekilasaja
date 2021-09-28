@@ -137,7 +137,17 @@ export default function Payment({ history }) {
       setItemPrice(cartItems.reduce((a, c) => a + c.price, 0));
     }
     //Remove any null values
-    dispatch(setCart(cartItems.filter((x) => x !== null)));
+    var nullExist = false;
+    cartItems.forEach((item) => {
+      if (item === null) {
+        nullExist = true;
+      }
+    });
+    if (nullExist) {
+      dispatch(setCart(cartItems.filter((x) => x !== null)));
+    }
+    console.log(cartItems);
+
     setLoading(false);
   }, [cartItems]);
 
@@ -334,6 +344,7 @@ export default function Payment({ history }) {
   }
 
   if (loading) {
+    console.log("Loading screen ...");
     return (
       <>
         <Loading />
@@ -414,6 +425,7 @@ export default function Payment({ history }) {
                         />
                       </Grid>
                       <Grid item xs={10}>
+                        f
                         <Typography type="italic">{item.book_title}</Typography>
                         <Typography type="italic">
                           Rp. {Intl.NumberFormat().format(item.price)}
