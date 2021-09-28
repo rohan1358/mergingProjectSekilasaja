@@ -137,7 +137,17 @@ export default function Payment({ history }) {
       setItemPrice(cartItems.reduce((a, c) => a + c.price, 0));
     }
     //Remove any null values
-    dispatch(setCartItems(cartItems.filter(x => x !== null)));
+    var nullExist = false;
+    cartItems.forEach((item) => {
+      if(item === null){
+        nullExist = true;
+      }
+    });
+    if (nullExist) {
+      dispatch(setCart(cartItems.filter(x => x !== null)));
+    }
+    console.log(cartItems);
+    
     setLoading(false);
   }, [cartItems]);
 
