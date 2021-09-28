@@ -125,8 +125,8 @@ export default function Payment({ history }) {
   useEffect(() => {
     if (cartItems != undefined) {
       //Remove any null values
-      cartItems.filter(x => x !== null);
-      
+      cartItems.filter((x) => x !== null);
+
       cartItems.map((x) => {
         if (
           x.book_title == "Subscription 1 Bulan" ||
@@ -140,6 +140,8 @@ export default function Payment({ history }) {
         }
       });
       setItemPrice(cartItems.reduce((a, c) => a + c.price, 0));
+
+      console.log(cartItems);
     }
     setLoading(false);
   }, [cartItems]);
