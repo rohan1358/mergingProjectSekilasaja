@@ -133,6 +133,7 @@ export default function Payment({ history }) {
       });
       setItemPrice(cartItems.reduce((a, c) => a + c.price, 0));
     }
+    setLoading(false);
   }, [cartItems]);
 
   useEffect(() => {
@@ -325,17 +326,13 @@ export default function Payment({ history }) {
     history.push("/payment-success");
   }
 
-  // if (cartItems && pending) {
-  //   setLoading(false)
-  // }
-
-  // if (loading) {
-  //   return (
-  //     <>
-  //       <Loading />
-  //     </>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
