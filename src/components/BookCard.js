@@ -71,14 +71,14 @@ export default function BookCard({
     //Remove any null values
     var nullExist = false;
     cartItems.forEach((item) => {
-      if(item === null){
+      if (item === null) {
         nullExist = true;
       }
     });
     if (nullExist) {
-      dispatch(setCart([cartItems.filter(x => x !== null)]));
+      dispatch(setCart([cartItems.filter((x) => x !== null)]));
       console.log(cartItems);
-    } 
+    }
   }, [, chosenCategory]);
 
   const handleAddCart = () => {
