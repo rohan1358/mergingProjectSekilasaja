@@ -136,9 +136,11 @@ export default function Payment({ history }) {
   }, [cartItems]);
 
   useEffect(() => {
-    setTotalPrice(Intl.NumberFormat().format(
-      itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
-    ));
+    setTotalPrice(
+      Intl.NumberFormat().format(
+        itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
+      )
+    );
   }, [itemsPrice]);
 
   // Functions
