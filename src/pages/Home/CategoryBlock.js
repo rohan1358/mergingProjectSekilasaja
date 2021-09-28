@@ -76,6 +76,7 @@ export default function CategoryBlock({ title, history }) {
     });
 
     return function cleanup(){
+      SetProducts([]);
       setLoading(true);
     }
   }, []);
