@@ -97,10 +97,8 @@ export default function Payment({ history }) {
   const cartItems = useSelector(selectCart).cart;
   console.log(cartItems);
   // Cart total price
-  const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
-  const totalPrice = Intl.NumberFormat().format(
-    itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
-  );
+  const [itemsPrice, setItemPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   // Facebook Pixel
   const advancedMatching = { em: "sekilasaja.main@gmail.com" }; // optional, more info: https://developers.facebook.com/docs/facebook-pixel/advanced/advanced-matching
@@ -133,8 +131,15 @@ export default function Payment({ history }) {
           setIsSubAdded(false);
         }
       });
+      setItemPrice(cartItems.reduce((a, c) => a + c.price, 0));
     }
   }, [cartItems]);
+
+  useEffect(() => {
+    setTotalPrice(Intl.NumberFormat().format(
+      itemsPrice + discountAmount > 0 ? itemsPrice + discountAmount : 0
+    ));
+  }, [itemsPrice]);
 
   // Functions
   const handleRadioChange = (event) => {
