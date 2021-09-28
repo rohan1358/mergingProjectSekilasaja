@@ -95,7 +95,7 @@ export default function Payment({ history }) {
   const userData = useSelector(selectUser);
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCart).cart;
-  console.log(cartItems);
+
   // Cart total price
   const [itemsPrice, setItemPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -113,6 +113,9 @@ export default function Payment({ history }) {
     if (!currentUser) {
       console.log("User is not logged in, redirecting to login page...");
       return <Redirect to="/login" />;
+    }
+    return function cleanup(){
+      setLoading(true);
     }
   }, []);
 
