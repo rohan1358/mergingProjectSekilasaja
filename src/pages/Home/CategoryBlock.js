@@ -17,6 +17,8 @@ import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
 // Firebase components
 import fire from "../../firebase/fire";
 
+import Loading from "../Loading";
+
 const db = fire.firestore();
 
 const responsive = {
@@ -51,6 +53,7 @@ export default function CategoryBlock({ title, history }) {
   const [chosenCategory, setChosenCategory] = useState("All");
   const [isChosenCategory, setIsChosenCategory] = useState(false);
   const [products, SetProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     db.collection("books").onSnapshot((snapshot) => {
@@ -71,7 +74,23 @@ export default function CategoryBlock({ title, history }) {
         );
       }
     });
+
+    return function cleanup(){
+      setLoading(true);
+    }
   }, []);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [products]);
+
+  if (loading) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div>
