@@ -96,8 +96,6 @@ export default function Payment({ history }) {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCart).cart;
 
-  console.log(cartItems);
-
   // Cart total price
   const [itemsPrice, setItemPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -137,11 +135,9 @@ export default function Payment({ history }) {
         }
       });
       setItemPrice(cartItems.reduce((a, c) => a + c.price, 0));
-
-      console.log(cartItems);
     }
     //Remove any null values
-    cartItems.filter((x) => x !== null);
+    dispatch(setCart(cartItems.filter((x) => x !== null)));
     setLoading(false);
   }, [cartItems]);
 
