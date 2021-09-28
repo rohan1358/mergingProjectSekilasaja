@@ -168,13 +168,13 @@ export default function PricingPage({ match, history }) {
     };
     fetchSubData();
 
-    return function cleanup(){
+    return function cleanup() {
       setLoading(true);
       setSubOne(null);
       setSubThree(null);
       setSubSix(null);
       setSubTwelve(null);
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -236,6 +236,7 @@ export default function PricingPage({ match, history }) {
       }
     };
     fetchData();
+    console.log(subOne);
   };
 
   const handleAddCartThree = () => {
@@ -263,6 +264,7 @@ export default function PricingPage({ match, history }) {
       }
     };
     fetchData();
+    console.log(subThree);
   };
 
   const handleAddCartSix = () => {
@@ -291,6 +293,7 @@ export default function PricingPage({ match, history }) {
       }
     };
     fetchData();
+    console.log(subSix);
   };
 
   const handleAddCartTwelve = () => {
@@ -319,6 +322,7 @@ export default function PricingPage({ match, history }) {
       }
     };
     fetchData();
+    console.log(subTwelve);
   };
 
   const tiers = [
