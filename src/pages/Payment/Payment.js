@@ -137,7 +137,7 @@ export default function Payment({ history }) {
       setItemPrice(cartItems.reduce((a, c) => a + c.price, 0));
     }
     //Remove any null values
-    cartItems.filter(x => x !== null);
+    dispatch(setCartItems(cartItems.filter(x => x !== null)));
     setLoading(false);
   }, [cartItems]);
 
