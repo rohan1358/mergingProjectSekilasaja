@@ -145,10 +145,10 @@ export default function Payment({ history }) {
     });
     if (nullExist) {
       dispatch(setCart([cartItems.filter(x => x !== null)]));
+      console.log(cartItems);
+    } else {
+      setLoading(false);
     }
-    console.log(cartItems);
-
-    setLoading(false);
   }, [cartItems]);
 
   useEffect(() => {
