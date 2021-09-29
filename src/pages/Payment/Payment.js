@@ -347,6 +347,8 @@ export default function Payment({ history }) {
     setLoading(false);
   }
 
+  console.log(totalPrice);
+
   if (loading) {
     console.log("Loading screen ...");
     return (

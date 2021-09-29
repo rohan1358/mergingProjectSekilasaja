@@ -291,8 +291,7 @@ export default function BookDetailsPage({ match, history }) {
 
                       <TextDetails
                         upsellBlock={
-                          !!isSubscribed &&
-                          current_product.book_title == "Atomic Habits" ? (
+                          !!isSubscribed ? (
                             <></>
                           ) : (
                             <div>
