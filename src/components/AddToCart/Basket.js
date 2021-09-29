@@ -5,6 +5,7 @@ import Typography from "../Typography";
 import Button from "../Button";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import Loading from "../../pages/Loading";
 
 // Firebase components
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
@@ -38,9 +39,11 @@ export default function Basket({}) {
   // useState hooks
   const [isSubAdded, setIsSubAdded] = useState(false);
 
-  // Total cart price
-  const itemsPrice = cartItems.reduce((a, c) => a + c.price, 0);
-  const totalPrice = Intl.NumberFormat().format(itemsPrice);
+  // Cart total price
+  const [itemsPrice, setItemPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const [loading, setLoading] = useState(true);
 
   const onRemove_ = (product) => {
     const fetchData = async () => {
@@ -58,11 +61,14 @@ export default function Basket({}) {
       );
     };
     fetchData();
+    return function cleanup() {
+      setLoading(true);
+    };
   };
 
   useEffect(() => {
-    if (cartItems != null || cartItems != undefined) {
-      if (cartItems.length == 0) return setIsSubAdded(true);
+    if (cartItems.length == 0) return setIsSubAdded(true);
+    if (cartItems != undefined) {
       cartItems.map((x) => {
         if (
           x.book_title == "Subscription 1 Bulan" ||
@@ -75,8 +81,37 @@ export default function Basket({}) {
           setIsSubAdded(false);
         }
       });
+      setItemPrice(cartItems.reduce((a, c) => a + c.price, 0));
+    }
+
+    //Remove any null values
+    var nullExist = false;
+    cartItems.forEach((item) => {
+      if (item === null) {
+        nullExist = true;
+      }
+    });
+    if (nullExist) {
+      dispatch(setCart([cartItems.filter((x) => x !== null)]));
+      console.log(cartItems);
+    } else {
+      setLoading(false);
     }
   }, [cartItems]);
+
+  useEffect(() => {
+    setTotalPrice(Intl.NumberFormat().format(itemsPrice));
+    setLoading(false);
+  }, [itemsPrice]);
+
+  if (loading) {
+    console.log("Loading screen ...");
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
 
   return (
     <div>
