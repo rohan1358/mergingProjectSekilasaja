@@ -79,22 +79,15 @@ export default function BookCard({
         currentUser.uid,
         product
       );
-
-      const exist = cartItems.find((x) => x.book_title === product.book_title);
-
-      if (exist) {
-        console.log("Already Added");
-      } else {
-        dispatch(setCart([...cartItems, product]));
-      }
+      dispatch(setCart([...cartItems, product]));
     };
     fetchData();
   };
 
   useEffect(() => {
     const changeBtn = () => {
-      console.log(cartItems);
-      console.log(product);
+      // console.log(cartItems);
+      // console.log(product);
       const exist = cartItems.find((x) => x.book_title === product.book_title);
       if (exist) {
         setIsAdded(true);

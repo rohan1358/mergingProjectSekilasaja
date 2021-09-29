@@ -13,13 +13,12 @@ import { AuthContext } from "../Routing/Auth";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
+import { selectUser } from "../../feature/userSlice";
 
 // Material-UI components
 import { makeStyles, Grid, Paper } from "@material-ui/core";
 import ErrorIcon from "@material-ui/icons/Error";
 import { secondaryColor } from "../../styles/Style";
-
-import Loading from "../../pages/Loading";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -30,6 +29,7 @@ export default function Basket({}) {
 
   // Redux
   const cartItems = useSelector(selectCart).cart;
+  const userCartTitles = useSelector(selectUser).user.cart;
   const dispatch = useDispatch();
 
   // Auth
@@ -61,19 +61,21 @@ export default function Basket({}) {
   };
 
   useEffect(() => {
-    if (cartItems.length == 0) return setIsSubAdded(true);
-    cartItems.map((x) => {
-      if (
-        x.book_title == "Subscription 1 Bulan" ||
-        x.book_title == "Subscription 3 Bulan" ||
-        x.book_title == "Subscription 6 Bulan" ||
-        x.book_title == "Subscription 12 Bulan"
-      ) {
-        setIsSubAdded(true);
-      } else {
-        setIsSubAdded(false);
-      }
-    });
+    if (cartItems != null || cartItems != undefined) {
+      if (cartItems.length == 0) return setIsSubAdded(true);
+      cartItems.map((x) => {
+        if (
+          x.book_title == "Subscription 1 Bulan" ||
+          x.book_title == "Subscription 3 Bulan" ||
+          x.book_title == "Subscription 6 Bulan" ||
+          x.book_title == "Subscription 12 Bulan"
+        ) {
+          setIsSubAdded(true);
+        } else {
+          setIsSubAdded(false);
+        }
+      });
+    }
   }, [cartItems]);
 
   return (
