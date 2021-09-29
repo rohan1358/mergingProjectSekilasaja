@@ -5,6 +5,7 @@ import Typography from "../Typography";
 import Button from "../Button";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
 import MultiUseMobile from "../../styles/MultiUseMobile";
+import Loading from "../../pages/Loading";
 
 // Firebase components
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
@@ -13,13 +14,12 @@ import { AuthContext } from "../Routing/Auth";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
+import { selectUser } from "../../feature/userSlice";
 
 // Material-UI components
 import { makeStyles, Grid, Paper } from "@material-ui/core";
 import ErrorIcon from "@material-ui/icons/Error";
 import { secondaryColor } from "../../styles/Style";
-
-import Loading from "../../pages/Loading";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -30,6 +30,7 @@ export default function Basket({}) {
 
   // Redux
   const cartItems = useSelector(selectCart).cart;
+  const userCartTitles = useSelector(selectUser).user.cart;
   const dispatch = useDispatch();
 
   // Auth

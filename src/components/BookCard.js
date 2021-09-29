@@ -8,6 +8,8 @@ import InfoAreaStyle from "../styles/InfoAreaStyle";
 import Typography from "./Typography";
 
 // Firebase components
+import * as firebaseGetSubscription from "../firebase/firebaseGetSubscription";
+import * as firebaseGetBookInfoByTitle from "../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseGetBookCoverImageURL from "../firebase/firebaseGetBookCoverImageURL";
 import * as firebaseUpdateCart from "../firebase/firebaseUpdateCart";
 import { AuthContext } from "./Routing/Auth";
@@ -15,6 +17,7 @@ import { AuthContext } from "./Routing/Auth";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../feature/cartSlice";
+import { selectUser, setUser } from "../feature/userSlice";
 
 import fire from "../firebase/fire";
 
@@ -55,6 +58,7 @@ export default function BookCard({
 
   // Redux
   const cartItems = useSelector(selectCart).cart;
+  const userCartTitles = useSelector(selectUser).user.cart;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -79,22 +83,15 @@ export default function BookCard({
         currentUser.uid,
         product
       );
-
-      const exist = cartItems.find((x) => x.book_title === product.book_title);
-
-      if (exist) {
-        console.log("Already Added");
-      } else {
-        dispatch(setCart([...cartItems, product]));
-      }
+      dispatch(setCart([...cartItems, product]));
     };
     fetchData();
   };
 
   useEffect(() => {
     const changeBtn = () => {
-      console.log(cartItems);
-      console.log(product);
+      // console.log(cartItems);
+      // console.log(product);
       const exist = cartItems.find((x) => x.book_title === product.book_title);
       if (exist) {
         setIsAdded(true);

@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 
 // Whatsapp Button
 import Whatsapp from "../images/Whatsapp.png";
@@ -223,7 +224,9 @@ export default function PricingPage({ match, history }) {
         subOne
       );
 
-      history.push("/payment");
+      if (results) {
+        history.push("/payment");
+      }
 
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 1 Bulan"
@@ -251,7 +254,9 @@ export default function PricingPage({ match, history }) {
         subThree
       );
 
-      history.push("/payment");
+      if (results) {
+        history.push("/payment");
+      }
 
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 3 Bulan"
@@ -280,7 +285,9 @@ export default function PricingPage({ match, history }) {
         subSix
       );
 
-      history.push("/payment");
+      if (results) {
+        history.push("/payment");
+      }
 
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 6 Bulan"
@@ -309,7 +316,9 @@ export default function PricingPage({ match, history }) {
         subTwelve
       );
 
-      history.push("/payment");
+      if (results) {
+        history.push("/payment");
+      }
 
       const exist = cartItems.find(
         (x) => x.book_title === "Subscription 12 Bulan"
