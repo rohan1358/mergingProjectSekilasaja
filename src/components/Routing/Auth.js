@@ -19,7 +19,6 @@ export const AuthContext = React.createContext();
 export const AuthProvider = ({ children }) => {
   // Auth
   const dispatch = useDispatch();
-  const userData = useSelector(selectUser);
   const firestore = fire.firestore();
   const userCartTitles = useSelector(selectUser).user.cart;
 
@@ -29,40 +28,6 @@ export const AuthProvider = ({ children }) => {
   const [isEndDateSet, setIsEndDateSet] = useState(false);
 
   useEffect(() => {
-    // if (userCartTitles != undefined) {
-    //   const fetchData = () => {
-    //     const getBookData = async (book_title) => {
-    //       var products_ = null;
-    //       if (
-    //         book_title == "Subscription 1 Bulan" ||
-    //         book_title == "Subscription 3 Bulan" ||
-    //         book_title == "Subscription 6 Bulan" ||
-    //         book_title == "Subscription 12 Bulan"
-    //       ) {
-    //         products_ = await firebaseGetSubscription.getSubscription(
-    //           book_title
-    //         );
-    //       } else {
-    //         products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-    //           book_title
-    //         );
-    //       }
-    //       return products_;
-    //     };
-
-    //     var book_ = [
-    //       ...userCartTitles.map((book) => {
-    //         return getBookData(book);
-    //       }),
-    //     ];
-
-    //     var a = Promise.all(book_).then(function (book) {
-    //       dispatch(setCart(book));
-    //     });
-    //   };
-    //   fetchData();
-    // }
-
     fire.auth().onAuthStateChanged((user) => {
       setCurrentUser(user);
       setPending(false);
@@ -99,8 +64,45 @@ export const AuthProvider = ({ children }) => {
           }
         };
         fetchData();
+
+        // if (userCartTitles.length > 0) {
+        //   const fetchData = () => {
+        //     const getBookData = async (book_title) => {
+        //       var products_ = null;
+        //       if (
+        //         book_title == "Subscription 1 Bulan" ||
+        //         book_title == "Subscription 3 Bulan" ||
+        //         book_title == "Subscription 6 Bulan" ||
+        //         book_title == "Subscription 12 Bulan"
+        //       ) {
+        //         products_ = await firebaseGetSubscription.getSubscription(
+        //           book_title
+        //         );
+        //       } else {
+        //         products_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+        //           book_title
+        //         );
+        //       }
+        //       return products_;
+        //     };
+
+        //     var book_ = [
+        //       ...userCartTitles.map((book) => {
+        //         return getBookData(book);
+        //       }),
+        //     ];
+
+        //     var a = Promise.all(book_).then(function (book) {
+        //       dispatch(setCart(book));
+        //     });
+
+        //     setPending(false);
+        //   };
+        //   fetchData();
+        // }
       } else {
         console.log("Not logged in");
+        setPending(false);
       }
     });
   }, []);

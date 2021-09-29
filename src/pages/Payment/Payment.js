@@ -343,6 +343,10 @@ export default function Payment({ history }) {
     history.push("/payment-success");
   }
 
+  if (loading && cartItems) {
+    setLoading(false);
+  }
+
   if (loading) {
     console.log("Loading screen ...");
     return (
