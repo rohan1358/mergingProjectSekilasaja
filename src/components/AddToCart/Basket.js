@@ -67,7 +67,7 @@ export default function Basket({}) {
 
   useEffect(() => {
     if (cartItems.length == 0) return setIsSubAdded(true);
-    if (cartItems != undefined){
+    if (cartItems != undefined) {
       cartItems.map((x) => {
         if (
           x.book_title == "Subscription 1 Bulan" ||
