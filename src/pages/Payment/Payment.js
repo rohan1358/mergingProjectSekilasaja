@@ -55,16 +55,13 @@ import * as firebaseGetPromoCode from "../../firebase/firebaseGetPromoCode";
 import * as firebaseUploadPaymentInfo from "../../firebase/firebaseUploadPaymentInfo";
 import { AuthContext } from "../../components/Routing/Auth";
 
-// //Email js components
-// import * as emailService from "../../emailService/emailService";
-
+// Styles
 const useStyles = makeStyles(InfoStyle);
-
-const firestore = fire.firestore();
 
 export default function Payment({ history }) {
   // Auth
   const { currentUser } = useContext(AuthContext);
+  const firestore = fire.firestore();
 
   // Styles
   const classes = MultiUseMobile();
@@ -224,6 +221,10 @@ export default function Payment({ history }) {
     }
   };
 
+  console.log(totalPrice);
+  console.log(cartItems.length);
+  console.log(cartItems.map((x) => x.book_title).toString());
+
   const handleChange = (e) => {
     //Check if file size exceeds 2mb or not
     setFileError("");
@@ -272,6 +273,15 @@ export default function Payment({ history }) {
 
     setPending(true);
 
+    // Facebook Pixel Conversion Tracking
+    ReactPixel.track("Purchase", {
+      currency: "IDR",
+      value: totalPrice,
+      num_items: cartItems.length,
+      content_name: cartItems.map((x) => x.book_title).toString(),
+      content_type: "product",
+    });
+
     //Put payment information into firestore storage and database
     var image_url = await firebaseUploadPaymentInfo.uploadPaymentInfo(
       userData,
@@ -305,23 +315,6 @@ export default function Payment({ history }) {
       });
     }
 
-    // //Send email notification
-    // await emailService.sendPaymentNotification(
-    //   userData,
-    //   image_url,
-    //   namaBank,
-    //   namaDiRekening,
-    //   nomorRekening,
-    //   promoCodeData,
-    //   cartItems
-    // );
-
-    // Facebook Pixel Conversion Tracking
-    ReactPixel.track("Purchase", {
-      currency: "IDR",
-      value: totalPrice,
-    });
-
     if (image_url) {
       setPending(false);
       setIsEmailSent(true);
@@ -347,10 +340,7 @@ export default function Payment({ history }) {
     setLoading(false);
   }
 
-  console.log(totalPrice);
-
   if (loading) {
-    console.log("Loading screen ...");
     return (
       <>
         <Loading />

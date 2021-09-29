@@ -104,7 +104,7 @@ export default function BookCard({
 
   return (
     <Grid
-      style={{ padding: 5 }}
+      style={{ padding: 3 }}
       className={classes.cardHover + " " + notOwned + " " + hover.root}
       item
     >
