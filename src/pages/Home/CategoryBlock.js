@@ -113,23 +113,31 @@ export default function CategoryBlock({ title, history }) {
         setIsChosenCategory={setIsChosenCategory}
       ></CategoryBarFilter>
       <div style={{ marginTop: "20px" }} />
-      {chosenCategory === "Coming Soon!" ? (
+      {chosenCategory === "New Release!" ? (
         <div>
-          <Typography style={{ textAlign: "center" }} size="heading">
-            Coming Soon!
-          </Typography>
-          {allBooks
-            .filter(
-              (product) => product.category.includes("Coming Soon!") == true
-            )
-            .map((categorisedProduct, index) => (
-              <ComingSoonCard
-                notOwned={cards.notOwned}
-                chosenCategory={"Coming Soon!"}
-                key={index}
-                product={categorisedProduct}
-              />
-            ))}
+          <Carousel
+            arrows={false}
+            showDots={true}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={1500}
+            ssr={true}
+            responsive={responsive}
+          >
+            {products
+              .filter(
+                (product) => product.category.includes("New Release!") == true
+              )
+              .map((categorisedProduct, index) => (
+                <ComingSoonCard
+                  notOwned={cards.notOwned}
+                  chosenCategory={"New Release!"}
+                  key={index}
+                  product={categorisedProduct}
+                  extraSpace={<div style={{ marginTop: "20px" }} />}
+                />
+              ))}
+          </Carousel>
         </div>
       ) : (
         <div>

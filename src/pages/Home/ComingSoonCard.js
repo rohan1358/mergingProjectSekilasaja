@@ -12,7 +12,12 @@ import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCov
 
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function ComingSoonCard({ product, chosenCategory, notOwned }) {
+export default function ComingSoonCard({
+  product,
+  chosenCategory,
+  notOwned,
+  extraSpace,
+}) {
   // Styles
   const classes = useStyles();
 
@@ -58,6 +63,7 @@ export default function ComingSoonCard({ product, chosenCategory, notOwned }) {
           <div style={{ marginBottom: "0px" }} />
         </div>
       </div>
+      {extraSpace}
     </Grid>
   );
 }
