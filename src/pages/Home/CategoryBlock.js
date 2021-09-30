@@ -113,7 +113,7 @@ export default function CategoryBlock({ title, history }) {
         setIsChosenCategory={setIsChosenCategory}
       ></CategoryBarFilter>
       <div style={{ marginTop: "20px" }} />
-      {chosenCategory === "New Release!" ? (
+      {chosenCategory === "Coming Soon!" ? (
         <div>
           <Carousel
             arrows={false}
@@ -126,64 +126,43 @@ export default function CategoryBlock({ title, history }) {
           >
             {products
               .filter(
-                (product) => product.category.includes("New Release!") == true
+                (product) => product.category.includes("Coming Soon!") == true
               )
               .map((categorisedProduct, index) => (
                 <ComingSoonCard
                   notOwned={cards.notOwned}
-                  chosenCategory={"New Release!"}
+                  chosenCategory={"Coming Soon!"}
                   key={index}
                   product={categorisedProduct}
-                  extraSpace={<div style={{ marginTop: "20px" }} />}
+                  extraSpace={<div style={{ marginTop: "40px" }} />}
                 />
               ))}
           </Carousel>
         </div>
       ) : (
         <div>
-          {isChosenCategory === true ? (
-            <Carousel
-              arrows={false}
-              showDots={true}
-              infinite={true}
-              autoPlay={true}
-              autoPlaySpeed={1500}
-              ssr={true}
-              responsive={responsive}
-            >
-              {products
-                .filter(
-                  (product) => product.category.includes(chosenCategory) == true
-                )
-                .map((categorisedProduct, index) => (
-                  <BookCard
-                    chosenCategory={chosenCategory}
-                    key={index}
-                    product={categorisedProduct}
-                    extraSpace={<div style={{ marginTop: "20px" }} />}
-                  />
-                ))}
-            </Carousel>
-          ) : (
-            <Carousel
-              arrows={false}
-              showDots={true}
-              infinite={true}
-              autoPlay={true}
-              autoPlaySpeed={3000}
-              ssr={true}
-              responsive={responsive}
-            >
-              {products.map((product) => (
+          <Carousel
+            arrows={false}
+            showDots={true}
+            infinite={true}
+            autoPlay={true}
+            autoPlaySpeed={1500}
+            ssr={true}
+            responsive={responsive}
+          >
+            {products
+              .filter(
+                (product) => product.category.includes(chosenCategory) == true
+              )
+              .map((categorisedProduct, index) => (
                 <BookCard
                   chosenCategory={chosenCategory}
-                  key={product.id}
-                  product={product}
+                  key={index}
+                  product={categorisedProduct}
                   extraSpace={<div style={{ marginTop: "20px" }} />}
                 />
               ))}
-            </Carousel>
-          )}
+          </Carousel>
         </div>
       )}
     </div>

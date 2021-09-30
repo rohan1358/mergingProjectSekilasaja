@@ -50,77 +50,59 @@ export default function SubscribedLibrary({ history }) {
 
       <div style={{ marginTop: "20px" }} />
 
-      {isChosenCategory === true ? (
-        <div>
-          {chosenCategory === "Coming Soon!" ? (
-            <div>
-              <Typography style={{ textAlign: "center" }} size="heading">
-                Coming Soon!
-              </Typography>
-              {products
-                .filter(
-                  (product) => product.category.includes("Coming Soon!") == true
-                )
-                .map((categorisedProduct, index) => (
-                  <ComingSoonCard
-                    notOwned={cards.notOwned}
-                    chosenCategory={"Coming Soon!"}
-                    key={index}
-                    product={categorisedProduct}
-                  />
-                ))}
-            </div>
-          ) : (
-            <div>
-              <Typography style={{ textAlign: "center" }} size="heading">
-                Owned Books
-              </Typography>
-              {products.filter(
-                (product) => product.category.includes(chosenCategory) == true
-              ).length !== 0 ? (
-                <Grid container justifyContent={"center"} spacing={5}>
-                  {products
-                    .filter(
-                      (product) =>
-                        product.category.includes(chosenCategory) == true
-                    )
-                    .map((categorisedProduct, index) => (
-                      <BookCard
-                        chosenCategory={chosenCategory}
-                        coverTitle={categorisedProduct.book_title}
-                        key={index}
-                        product={categorisedProduct}
-                      />
-                    ))}
-                </Grid>
-              ) : (
-                <div>
-                  <Typography size="heading">Owned Books</Typography>
-                  <Typography type="italic">
-                    Tidak ditemukan kilas di kategori ini!
-                  </Typography>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      ) : (
-        <div>
-          <Typography style={{ textAlign: "center" }} size="heading">
-            Owned Books
-          </Typography>
-          <Grid container justifyContent={"center"} spacing={5}>
-            {products.map((product) => (
-              <BookCard
-                chosenCategory={chosenCategory}
-                coverTitle={product.book_title}
-                key={product.id}
-                product={product}
-              />
-            ))}
-          </Grid>
-        </div>
-      )}
+      <div>
+        {chosenCategory === "Coming Soon!" ? (
+          <div>
+            <Typography style={{ textAlign: "center" }} size="heading">
+              Coming Soon!
+            </Typography>
+            {products
+              .filter(
+                (product) => product.category.includes("Coming Soon!") == true
+              )
+              .map((categorisedProduct, index) => (
+                <ComingSoonCard
+                  notOwned={cards.notOwned}
+                  chosenCategory={"Coming Soon!"}
+                  key={index}
+                  product={categorisedProduct}
+                />
+              ))}
+          </div>
+        ) : (
+          <div>
+            <Typography style={{ textAlign: "center" }} size="heading">
+              Owned Books
+            </Typography>
+            {products.filter(
+              (product) => product.category.includes(chosenCategory) == true
+            ).length !== 0 ? (
+              <Grid container justifyContent={"center"} spacing={5}>
+                {products
+                  .filter(
+                    (product) =>
+                      product.category.includes(chosenCategory) == true
+                  )
+                  .map((categorisedProduct, index) => (
+                    <BookCard
+                      chosenCategory={chosenCategory}
+                      coverTitle={categorisedProduct.book_title}
+                      key={index}
+                      product={categorisedProduct}
+                    />
+                  ))}
+              </Grid>
+            ) : (
+              <div>
+                <Typography size="heading">Owned Books</Typography>
+                <Typography type="italic">
+                  Tidak ditemukan kilas di kategori ini!
+                </Typography>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </Container>
   );
 }
