@@ -18,24 +18,51 @@ import { beigeColor } from "../../styles/Style";
 import { useSelector } from "react-redux";
 import { selectAllBooks } from "../../feature/allBooksSlice";
 
+// Firebase components
+import fire from "../../firebase/fire";
+
 // Images
 const Whatsapp =
   "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
 
 export default function SearchResults({ match, history }) {
+  // Auth
+  const db = fire.firestore();
+
   // Styles
   const classes = MultiUseMobile();
 
   // useState hooks
   const [pending, setPending] = useState(true);
   const [searchResults, setSearchResults] = React.useState([]);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   // Redux
   const allBooks = useSelector(selectAllBooks);
 
   useEffect(() => {
+    db.collection("books").onSnapshot((snapshot) => {
+      setProducts(
+        snapshot.docs.map((categorisedProduct) => ({
+          ...categorisedProduct.data(),
+        }))
+      );
+
+      setFilteredProducts(
+        products
+          .filter((product) => product.category.includes("All") == true)
+          .map((categorisedProduct) => categorisedProduct)
+      );
+    });
+  }, []);
+
+  console.log(products);
+  console.log(filteredProducts);
+
+  useEffect(() => {
     //Filter the books according to the search input
-    const results = allBooks.filter((book) =>
+    const results = filteredProducts.filter((book) =>
       book.book_title
         .toLowerCase()
         .includes(match.params.searchValue.toLowerCase())
