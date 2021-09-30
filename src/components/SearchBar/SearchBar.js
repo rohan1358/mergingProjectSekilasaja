@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -13,11 +13,13 @@ import SearchIcon from "@material-ui/icons/Search";
 import NavbarStyle from "../../styles/NavbarStyle";
 import Loading from "../../pages/Loading";
 
-// nodejs library to set properties for component
-import PropTypes from "prop-types";
-import { Redirect } from "react-router";
+// Firebase components
+import fire from "../../firebase/fire";
 
 export default function SearchBar({ history }) {
+  // Auth
+  const db = fire.firestore();
+
   // Styles
   const classes = NavbarStyle();
 
@@ -26,6 +28,17 @@ export default function SearchBar({ history }) {
 
   // useState hooks
   const [pending, setPending] = useState(false);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    db.collection("books").onSnapshot((snapshot) => {
+      setProducts(
+        snapshot.docs.map((doc) => ({
+          ...doc.data(),
+        }))
+      );
+    });
+  }, []);
 
   //Handle search input value change
   const inputValueRef = useRef("");
@@ -66,7 +79,9 @@ export default function SearchBar({ history }) {
         id="free-solo-2-demo"
         disableClearable
         onChange={(event, value) => goToBookDetails(event, value)}
-        options={allBooks.map((option) => option.book_title)}
+        options={products
+          .filter((product) => product.category.includes("All") == true)
+          .map((categorisedProduct) => categorisedProduct.book_title)}
         renderInput={(params) => (
           <form
             style={{ alignItems: "center", display: "flex" }}

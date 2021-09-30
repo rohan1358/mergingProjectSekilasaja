@@ -61,12 +61,12 @@ export default function CategoryBlock({ title, history }) {
   // useState hooks
   const [chosenCategory, setChosenCategory] = useState("All");
   const [isChosenCategory, setIsChosenCategory] = useState(false);
-  const [products, SetProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     db.collection("books").onSnapshot((snapshot) => {
-      SetProducts(
+      setProducts(
         snapshot.docs.map((doc) => ({
           ...doc.data(),
         }))
@@ -85,7 +85,7 @@ export default function CategoryBlock({ title, history }) {
     });
 
     return function cleanup() {
-      SetProducts([]);
+      setProducts([]);
       setLoading(true);
     };
   }, []);
