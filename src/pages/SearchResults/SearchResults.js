@@ -36,7 +36,6 @@ export default function SearchResults({ match, history }) {
   const [pending, setPending] = useState(true);
   const [searchResults, setSearchResults] = React.useState([]);
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
 
   // Redux
   const allBooks = useSelector(selectAllBooks);
@@ -44,25 +43,19 @@ export default function SearchResults({ match, history }) {
   useEffect(() => {
     db.collection("books").onSnapshot((snapshot) => {
       setProducts(
-        snapshot.docs.map((categorisedProduct) => ({
-          ...categorisedProduct.data(),
-        }))
-      );
-
-      setFilteredProducts(
-        products
+        snapshot.docs
+          .map((categorisedProduct) => ({
+            ...categorisedProduct.data(),
+          }))
           .filter((product) => product.category.includes("All") == true)
           .map((categorisedProduct) => categorisedProduct)
       );
     });
   }, []);
 
-  console.log(products);
-  console.log(filteredProducts);
-
   useEffect(() => {
     //Filter the books according to the search input
-    const results = filteredProducts.filter((book) =>
+    const results = products.filter((book) =>
       book.book_title
         .toLowerCase()
         .includes(match.params.searchValue.toLowerCase())
@@ -74,7 +67,7 @@ export default function SearchResults({ match, history }) {
       setPending(true);
       setSearchResults([]);
     };
-  }, [allBooks, history.location]);
+  }, [products, history.location]);
 
   useEffect(() => {
     //Set pending to false to notify that web finished pulling books based on search results
