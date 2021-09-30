@@ -5,16 +5,22 @@ import BookCard from "../../components/BookCard";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
+import InfoStyle from "../../styles/InfoAreaStyle";
+import ComingSoonCard from "../../pages/Home/ComingSoonCard";
 
 // Material UI components
-import { Grid, Container } from "@material-ui/core";
+import { Grid, Container, makeStyles } from "@material-ui/core";
 
 // Firebase components
 import fire from "../../firebase/fire";
 
+// Styles
+const useInfoStyles = makeStyles(InfoStyle);
+
 export default function SubscribedLibrary({ history }) {
   // Styles
   const classes = MultiUseMobile();
+  const cards = useInfoStyles();
 
   // Auth
   const db = fire.firestore();
@@ -46,11 +52,29 @@ export default function SubscribedLibrary({ history }) {
 
       {isChosenCategory === true ? (
         <div>
-          <div className={classes.sectionDesktopBlock}>
-            <Typography style={{ textAlign: "center" }} size="heading">
-              Owned Books
-            </Typography>
+          {chosenCategory === "Coming Soon!" ? (
             <div>
+              <Typography style={{ textAlign: "center" }} size="heading">
+                Coming Soon!
+              </Typography>
+              {products
+                .filter(
+                  (product) => product.category.includes("Coming Soon!") == true
+                )
+                .map((categorisedProduct, index) => (
+                  <ComingSoonCard
+                    notOwned={cards.notOwned}
+                    chosenCategory={"Coming Soon!"}
+                    key={index}
+                    product={categorisedProduct}
+                  />
+                ))}
+            </div>
+          ) : (
+            <div>
+              <Typography style={{ textAlign: "center" }} size="heading">
+                Owned Books
+              </Typography>
               {products.filter(
                 (product) => product.category.includes(chosenCategory) == true
               ).length !== 0 ? (
@@ -78,71 +102,23 @@ export default function SubscribedLibrary({ history }) {
                 </div>
               )}
             </div>
-          </div>
-
-          <div className={classes.sectionMobileBlock}>
-            <Typography size="heading">Owned Books</Typography>
-            <div>
-              {products.filter(
-                (product) => product.category.includes(chosenCategory) == true
-              ).length !== 0 ? (
-                <Grid container justifyContent="center" spacing={5}>
-                  {products
-                    .filter(
-                      (product) =>
-                        product.category.includes(chosenCategory) == true
-                    )
-                    .map((categorisedProduct, index) => (
-                      <BookCard
-                        chosenCategory={chosenCategory}
-                        coverTitle={categorisedProduct.book_title}
-                        key={index}
-                        product={categorisedProduct}
-                      />
-                    ))}
-                </Grid>
-              ) : (
-                <div>
-                  <Typography size="heading">Owned Books</Typography>
-                  <Typography type="italic">
-                    Tidak ditemukan kilas di kategori ini!
-                  </Typography>
-                </div>
-              )}
-            </div>
-          </div>
+          )}
         </div>
       ) : (
         <div>
-          <div className={classes.sectionDesktopBlock}>
-            <Typography style={{ textAlign: "center" }} size="heading">
-              Owned Books
-            </Typography>
-            <Grid container justifyContent={"center"} spacing={5}>
-              {products.map((product) => (
-                <BookCard
-                  chosenCategory={chosenCategory}
-                  coverTitle={product.book_title}
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-            </Grid>
-          </div>
-
-          <div className={classes.sectionMobileBlock}>
-            <Typography size="heading">Owned Books</Typography>
-            <Grid container justifyContent="center" spacing={5}>
-              {products.map((product) => (
-                <BookCard
-                  chosenCategory={chosenCategory}
-                  coverTitle={product.book_title}
-                  key={product.id}
-                  product={product}
-                />
-              ))}
-            </Grid>
-          </div>
+          <Typography style={{ textAlign: "center" }} size="heading">
+            Owned Books
+          </Typography>
+          <Grid container justifyContent={"center"} spacing={5}>
+            {products.map((product) => (
+              <BookCard
+                chosenCategory={chosenCategory}
+                coverTitle={product.book_title}
+                key={product.id}
+                product={product}
+              />
+            ))}
+          </Grid>
         </div>
       )}
     </Container>

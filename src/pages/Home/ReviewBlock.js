@@ -99,8 +99,6 @@ const data = [
   },
 ];
 
-console.log(data[0].name);
-
 export default function ReviewBlock({}) {
   return (
     <Container>
