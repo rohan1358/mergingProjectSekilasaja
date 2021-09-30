@@ -5,7 +5,7 @@ var storage = firebase.storage();
 
 //Method to get book cover image from firebase storage
 export async function getBookAudioTrialURL(referenceName) {
-  var refName = "Book_Audio_Trial/" + referenceName + "/" + "TRIAL.mp3";
+  var refName = "Book_Audio/" + referenceName + "/" + "TRIAL.mp3";
   var audioRef = storage.ref().child(refName);
 
   try {
