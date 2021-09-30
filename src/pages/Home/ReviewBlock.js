@@ -8,6 +8,16 @@ import { primaryColor, secondaryColor } from "../../styles/Style";
 // Material-UI components
 import { Container, Grid } from "@material-ui/core";
 
+// Images
+const nikojulius =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FReview_Profile_Picture%2Fnikojulius.jpg?alt=media&token=9d4a5806-73de-4cde-b599-1deb4238d276";
+const samuelchrist =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FReview_Profile_Picture%2Fsamuelchrist.jpg?alt=media&token=ce5ddd2f-13e5-4d1d-a4d3-fd6b0d200685";
+const rinaldi =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FReview_Profile_Picture%2Frinaldi.jpg?alt=media&token=ec60d904-c48e-41c4-b6b7-803eed4acea2";
+const ogut =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FReview_Profile_Picture%2Fogut.jpg?alt=media&token=127e7980-61d0-4df7-a538-7e23b7c75ec5";
+
 const data = [
   {
     id: 1,
@@ -33,8 +43,7 @@ const data = [
     `,
     userInstagram: "bynikojulius",
     userInstagramLink: "https://www.instagram.com/bynikojulius",
-    photoURL:
-      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fnikojulius.jpg?alt=media&token=f3a855d7-6b93-426e-89f0-7d4fb9a7cc5a",
+    photoURL: nikojulius,
   },
   {
     id: 2,
@@ -46,8 +55,7 @@ const data = [
     `,
     userInstagram: "samuelchrist",
     userInstagramLink: "https://www.instagram.com/samuelchrist",
-    photoURL:
-      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fsamuelchrist.jpg?alt=media&token=82857e9d-6cc4-4dfe-a162-dbb10f140579",
+    photoURL: samuelchrist,
   },
   {
     id: 3,
@@ -60,8 +68,7 @@ const data = [
     `,
     userInstagram: "rinaldi_ni",
     userInstagramLink: "https://www.instagram.com/rinaldi_ni",
-    photoURL:
-      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Frinaldi.jpg?alt=media&token=3ce705c6-5752-4330-b871-9f96154b06a9",
+    photoURL: rinaldi,
   },
   ,
   {
@@ -88,8 +95,7 @@ const data = [
     `,
     userInstagram: "mudacumasekali",
     userInstagramLink: "https://www.instagram.com/mudacumasekali",
-    photoURL:
-      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Review_Profile%2Fogut.jpg?alt=media&token=cfe643ba-adbd-42c9-ab18-b55cda35323d",
+    photoURL: ogut,
   },
 ];
 

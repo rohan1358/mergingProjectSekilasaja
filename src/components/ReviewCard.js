@@ -1,5 +1,4 @@
 import React from "react";
-import Verified from "../images/verified.png";
 
 // @material-ui/core components
 import { makeStyles, Grid, Paper, Avatar } from "@material-ui/core";
@@ -10,6 +9,11 @@ import InfoAreaStyle from "../styles/InfoAreaStyle";
 import Typography from "./Typography";
 import { beigeColor, secondaryColor } from "../styles/Style";
 
+// Images
+const Verified =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fverified.png?alt=media&token=598f728a-c9bf-4732-b88e-0b8176ee7ea6";
+
+// Styles
 const useStyles = makeStyles(InfoAreaStyle);
 
 export default function ReviewCard({

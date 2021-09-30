@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router";
 
 // Whatsapp Button
-import Whatsapp from "../../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { Tooltip } from "@material-ui/core";
 
@@ -39,6 +38,12 @@ import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById
 
 // Material-UI components
 import { Container, Paper, Grid } from "@material-ui/core";
+
+// Images
+const Whatsapp =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
+const LibraryBackground =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Flibrary.jpg?alt=media&token=694df049-4675-4ea9-97bc-7562b045e445";
 
 const responsive = {
   superLargeDesktop: {
@@ -144,11 +149,7 @@ export default function Library({ history }) {
         color="white"
       />
       {!!isSubscribed ? (
-        <Parallax
-          small
-          filter
-          image={require("../../images/library.jpg").default}
-        >
+        <Parallax small filter image={LibraryBackground}>
           <Grid container>
             <Grid item md={6} xs={12}>
               <Typography
@@ -208,11 +209,7 @@ export default function Library({ history }) {
           </Grid>
         </Parallax>
       ) : (
-        <Parallax
-          small
-          filter
-          image={require("../../images/library.jpg").default}
-        >
+        <Parallax small filter image={LibraryBackground}>
           <Typography color="beigeColor" size="heading">
             MY LIBRARY
           </Typography>

@@ -1,6 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Redirect } from "react-router";
-import Logo from "../../images/dark-logo.png";
 
 // nodejs library that concatenates classes
 import classNames from "classnames";
@@ -28,13 +26,18 @@ import { secondaryColor, beigeColor, primaryColor } from "../../styles/Style";
 import CartDrawer from "../../components/Drawer";
 
 // Redux
-import { useSelector, useDispatch } from "react-redux";
-import { selectCart, setCart } from "../../feature/cartSlice";
+import { useSelector } from "react-redux";
+import { selectCart } from "../../feature/cartSlice";
 
 // User
 import { AuthContext } from "../Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
+// Images
+const Logo =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fdark-logo.png?alt=media&token=cfd7dc4d-1687-473e-a272-4d7c66b97467";
+
+// Styles
 const useStyles = makeStyles(styles);
 
 export default function Header(props) {

@@ -3,13 +3,11 @@ import React, { useState, useEffect, useContext } from "react";
 // Custom components
 import Typography from "../../components/Typography";
 import Button from "../../components/Button";
-import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // Material UI components
 import { Grid } from "@material-ui/core";
 
 //firebase components
-import fire from "../../firebase/fire";
 import { AuthContext } from "../../components/Routing/Auth";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 

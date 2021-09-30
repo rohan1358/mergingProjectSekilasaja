@@ -1,12 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router";
-import qrisQR from "../../images/qris-qr.jpg";
 
 // Facebook Pixel
 import ReactPixel from "react-facebook-pixel";
 
 // Whatsapp Button
-import Whatsapp from "../../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { Tooltip } from "@material-ui/core";
 
@@ -20,7 +18,7 @@ import Box from "../../components/Box";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
-import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
+import { beigeColor, secondaryColor } from "../../styles/Style";
 import BuktiBCA from "./BuktiBCA";
 import BuktiBRI from "./BuktiBRI";
 import BuktiQRIS from "./BuktiQRIS";
@@ -54,6 +52,12 @@ import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetPromoCode from "../../firebase/firebaseGetPromoCode";
 import * as firebaseUploadPaymentInfo from "../../firebase/firebaseUploadPaymentInfo";
 import { AuthContext } from "../../components/Routing/Auth";
+
+// Images
+const Whatsapp =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
+const qrisQR =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fqris-qr.jpg?alt=media&token=b3aed020-3219-4075-87f9-6fc9d664aa88";
 
 // Styles
 const useStyles = makeStyles(InfoStyle);

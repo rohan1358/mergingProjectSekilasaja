@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../images/yellow-logo.png";
 
 // Material-UI components
 import {
@@ -18,6 +17,10 @@ import FooterStyle from "../styles/FooterStyle";
 // nodejs library to set properties for components
 import classNames from "classnames";
 import { beigeColor } from "../styles/Style";
+
+// Images
+const Logo =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fyellow-logo.png?alt=media&token=7483e708-574b-455d-9128-b03fe6b0e4e2";
 
 function SocialIcons() {
   // Styles
@@ -179,12 +182,11 @@ export default function Footer() {
               <a href="/">
                 <img className={iconClass} src={Logo} />
               </a>
-              <SocialIcons />
 
               {/* <Typography color="beigeColor">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Bantuin Kamu Ngerti Isi Buku <div>HANYA Dalam 15 Menit!</div>
               </Typography> */}
+              <SocialIcons />
             </Grid>
 
             <Grid item xs={3}>
@@ -248,8 +250,7 @@ export default function Footer() {
               <SocialIcons />
 
               {/* <Typography color="beigeColor">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Bantuin Kamu Ngerti Isi Buku HANYA Dalam 15 Menit!
               </Typography> */}
             </Grid>
 

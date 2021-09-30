@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 
 // Whatsapp Button
-import Whatsapp from "../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { Tooltip } from "@material-ui/core";
 
@@ -14,6 +12,7 @@ import HeaderLinks from "../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../components/NavBar/HeaderLinksMobile";
 import Footer from "../components/Footer";
 import { beigeColor, primaryColor, secondaryColor } from "../styles/Style";
+import Loading from "./Loading";
 
 // Material-UI components
 import {
@@ -37,7 +36,9 @@ import fire from "../firebase/fire";
 import { selectCart, setCart } from "../feature/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-import Loading from "./Loading";
+// Images
+const Whatsapp =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
 
 const useStyles = makeStyles((theme) => ({
   // small: 600px; md, medium: 960px; lg, large: 1280px
