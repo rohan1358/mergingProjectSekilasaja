@@ -1,7 +1,6 @@
 import React from "react";
 
 // Whatsapp Button
-import Whatsapp from "../../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { Tooltip } from "@material-ui/core";
 
@@ -18,6 +17,13 @@ import FAQBar from "./FAQBar";
 // Material-UI components
 import { Container } from "@material-ui/core";
 
+// Images
+const Whatsapp =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
+
+const FAQBackground =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Ffaq.jpg?alt=media&token=bc550e8f-4cab-4842-a1f8-ba86850c25f8";
+
 export default function FAQ({ history }) {
   return (
     <div style={{ backgroundColor: beigeColor }}>
@@ -29,7 +35,7 @@ export default function FAQ({ history }) {
         fixed
         color="white"
       />
-      <Parallax small filter image={require("../../images/faq.jpg").default}>
+      <Parallax small filter image={FAQBackground}>
         <Typography color="beigeColor" size="heading">
           FAQ (Frequently Asked Questions)
         </Typography>

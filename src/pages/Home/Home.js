@@ -1,10 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router";
 
-// Pictures
-import Logo from "../../images/yellow-logo.png";
-import Whatsapp from "../../images/Whatsapp.png";
-
 // Custom components
 import BenefitsBlock from "./BenefitsBlock";
 import Button from "../../components/Button";
@@ -28,14 +24,17 @@ import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 
 // Firebase components
 import { AuthContext } from "../../components/Routing/Auth";
-import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import fire from "../../firebase/fire";
 
 // Redux
 import { useSelector } from "react-redux";
 import { selectUser } from "../../feature/userSlice";
 
-const db = fire.firestore();
+// Images
+const Logo =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fyellow-logo.png?alt=media&token=7483e708-574b-455d-9128-b03fe6b0e4e2";
+const Whatsapp =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -47,6 +46,7 @@ export default function Home({ history }) {
   // Auth
   const { currentUser } = useContext(AuthContext);
   const userData = useSelector(selectUser);
+  const db = fire.firestore();
 
   // useState hooks
   const [pending, setPending] = useState(true);

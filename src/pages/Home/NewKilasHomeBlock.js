@@ -1,5 +1,4 @@
 import React from "react";
-import homeBG from "../../images/home3.jpg";
 
 // Custom components
 import NewKilasCard from "./NewKilasCard";
@@ -8,10 +7,9 @@ import NewKilasCard from "./NewKilasCard";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-// Firebase components
-import fire from "../../firebase/fire";
-
-const db = fire.firestore();
+// Images
+const homeBG =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fhome3.jpg?alt=media&token=166b3a98-5b07-4380-949c-b8196181c446";
 
 const responsive = {
   superLargeDesktop: {

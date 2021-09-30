@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../images/dark-logo.png";
 
 // Custom components
 import Styles from "../styles/NewWebStyle";
@@ -10,6 +9,10 @@ import Button from "../components/Button";
 import { Container, IconButton, Paper, makeStyles } from "@material-ui/core";
 import { Instagram } from "@material-ui/icons";
 import { beigeColor } from "../styles/Style";
+
+// Images
+const Logo =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fdark-logo.png?alt=media&token=cfd7dc4d-1687-473e-a272-4d7c66b97467";
 
 const useStyles = makeStyles(Styles);
 

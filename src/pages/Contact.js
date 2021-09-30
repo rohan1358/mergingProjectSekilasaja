@@ -1,7 +1,6 @@
 import React from "react";
 
 // Whatsapp Button
-import Whatsapp from "../images/Whatsapp.png";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { Tooltip } from "@material-ui/core";
 
@@ -17,6 +16,12 @@ import HeaderLinksMobile from "../components/NavBar/HeaderLinksMobile";
 import { Container } from "@material-ui/core";
 import { beigeColor } from "../styles/Style";
 
+// Images
+const Whatsapp =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
+const ContactBackground =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fcontact.jpg?alt=media&token=3ab740bd-1640-4479-b9d3-651bc9235d91";
+
 export default function Contact({ history }) {
   return (
     <div style={{ backgroundColor: beigeColor }}>
@@ -29,11 +34,7 @@ export default function Contact({ history }) {
         color="white"
       />
       <Container>
-        <Parallax
-          border
-          filter
-          image={require("../images/contact.jpg").default}
-        >
+        <Parallax border filter image={ContactBackground}>
           <Typography color="beigeColor" size="heading">
             Kamu Bisa Hubungi Kami Lewat
           </Typography>

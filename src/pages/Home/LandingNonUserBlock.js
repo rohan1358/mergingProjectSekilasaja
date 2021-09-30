@@ -1,5 +1,4 @@
 import React from "react";
-import HomeBookPNG from "../../images/home-landing.png";
 
 // Material UI
 import { Container, Grid, makeStyles } from "@material-ui/core";
@@ -14,6 +13,16 @@ import Button from "../../components/Button";
 
 // nodejs library to set properties for components
 import classNames from "classnames";
+
+// Images
+const HomeBookPNG =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fhome-landing.png?alt=media&token=edcd982a-108d-470f-a0a7-946827cc3d41";
+const HomeBookJPG =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fhome-landing.jpg?alt=media&token=aa12eeb4-f07c-4536-8e4c-64a12c6e2b17";
+const AtomicHabits =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FAtomic%20Habits.png?alt=media&token=bf6b087c-ce51-4b90-b329-3b91bfe6a1e3";
+const TheLittleBook =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FThe%20Little%20Book%20of%20Common%20Sense%20Investing.png?alt=media&token=fd281a56-a2e0-4986-a1bd-b20bafe4b069";
 
 const useStyles = makeStyles(InfoAreaStyle);
 
@@ -40,7 +49,6 @@ const mobileStyles = makeStyles((theme) => ({
 export default function LandingNonUserBlock({}) {
   // Styles
   const mobile = mobileStyles();
-  const classes = MultiUseMobile();
   const books = useStyles();
 
   const mobileClass = classNames({
@@ -52,11 +60,7 @@ export default function LandingNonUserBlock({}) {
 
   return (
     <div>
-      <Parallax
-        large
-        className={desktopClass}
-        image={require("../../images/home-landing.jpg").default}
-      >
+      <Parallax large className={desktopClass} image={HomeBookJPG}>
         <Container>
           <Grid container>
             <Grid item xs={12} md={5}>
@@ -83,9 +87,7 @@ export default function LandingNonUserBlock({}) {
 
                 <a href={`/book-details/Atomic%20Habits`}>
                   <img
-                    src={
-                      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FAtomic%20Habits.png?alt=media&token=bf6b087c-ce51-4b90-b329-3b91bfe6a1e3"
-                    }
+                    src={AtomicHabits}
                     className={
                       books.imgRounded +
                       " " +
@@ -99,9 +101,7 @@ export default function LandingNonUserBlock({}) {
                   href={`/book-details/The%20Little%20Book%20of%20Common%20Sense%20Investing`}
                 >
                   <img
-                    src={
-                      "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FThe%20Little%20Book%20of%20Common%20Sense%20Investing.png?alt=media&token=fd281a56-a2e0-4986-a1bd-b20bafe4b069"
-                    }
+                    src={TheLittleBook}
                     className={
                       books.imgRounded +
                       " " +
@@ -167,9 +167,7 @@ export default function LandingNonUserBlock({}) {
 
               <a href={`/book-details/Atomic%20Habits`}>
                 <img
-                  src={
-                    "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FAtomic%20Habits.png?alt=media&token=bf6b087c-ce51-4b90-b329-3b91bfe6a1e3"
-                  }
+                  src={AtomicHabits}
                   className={
                     books.imgRounded +
                     " " +
@@ -183,9 +181,7 @@ export default function LandingNonUserBlock({}) {
                 href={`/book-details/The%20Little%20Book%20of%20Common%20Sense%20Investing`}
               >
                 <img
-                  src={
-                    "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Book_Dashboard_Images%2FThe%20Little%20Book%20of%20Common%20Sense%20Investing.png?alt=media&token=fd281a56-a2e0-4986-a1bd-b20bafe4b069"
-                  }
+                  src={TheLittleBook}
                   className={
                     books.imgRounded +
                     " " +
