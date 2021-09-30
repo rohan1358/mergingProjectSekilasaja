@@ -17,6 +17,7 @@ import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import EuroIcon from "@material-ui/icons/Euro";
 import ForumIcon from "@material-ui/icons/Forum";
 import NewReleasesIcon from "@material-ui/icons/NewReleases";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 
 function CategoryButton({
   chosenCategory,
@@ -62,6 +63,8 @@ function CategoryButton({
     if (categoryName === "Money & Investment") return <EuroIcon />;
 
     if (categoryName === "New Release!") return <NewReleasesIcon />;
+
+    if (categoryName === "Coming Soon!") return <ArrowForwardIcon />;
   }
 
   return (

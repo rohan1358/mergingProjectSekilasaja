@@ -5,6 +5,9 @@ import BookCard from "../../components/BookCard";
 import Typography from "../../components/Typography";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
+import ComingSoonCard from "./ComingSoonCard";
+import InfoStyles from "../../styles/InfoAreaStyle";
+import Loading from "../Loading";
 
 // Other components
 import Carousel from "react-multi-carousel";
@@ -17,9 +20,11 @@ import { selectAllBooks, setAllBooks } from "../../feature/allBooksSlice";
 // Firebase components
 import fire from "../../firebase/fire";
 
-import Loading from "../Loading";
+// Material UI components
+import { makeStyles } from "@material-ui/core";
 
-const db = fire.firestore();
+// Styles
+const useInfoStyles = makeStyles(InfoStyles);
 
 const responsive = {
   superLargeDesktop: {
@@ -42,8 +47,12 @@ const responsive = {
 };
 
 export default function CategoryBlock({ title, history }) {
+  // Auth
+  const db = fire.firestore();
+
   // Styles
   const classes = MultiUseMobile();
+  const cards = useInfoStyles();
 
   //For searching (Using the all books for searching)
   const dispatch = useDispatch();
@@ -75,10 +84,10 @@ export default function CategoryBlock({ title, history }) {
       }
     });
 
-    return function cleanup(){
+    return function cleanup() {
       SetProducts([]);
       setLoading(true);
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -104,48 +113,70 @@ export default function CategoryBlock({ title, history }) {
         setIsChosenCategory={setIsChosenCategory}
       ></CategoryBarFilter>
       <div style={{ marginTop: "20px" }} />
-      {isChosenCategory === true ? (
-        <Carousel
-          arrows={false}
-          showDots={true}
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={1500}
-          ssr={true}
-          responsive={responsive}
-        >
-          {products
+      {chosenCategory === "Coming Soon!" ? (
+        <div>
+          <Typography style={{ textAlign: "center" }} size="heading">
+            Coming Soon!
+          </Typography>
+          {allBooks
             .filter(
-              (product) => product.category.includes(chosenCategory) == true
+              (product) => product.category.includes("Coming Soon!") == true
             )
             .map((categorisedProduct, index) => (
-              <BookCard
-                chosenCategory={chosenCategory}
+              <ComingSoonCard
+                notOwned={cards.notOwned}
+                chosenCategory={"Coming Soon!"}
                 key={index}
                 product={categorisedProduct}
-                extraSpace={<div style={{ marginTop: "20px" }} />}
               />
             ))}
-        </Carousel>
+        </div>
       ) : (
-        <Carousel
-          arrows={false}
-          showDots={true}
-          infinite={true}
-          autoPlay={true}
-          autoPlaySpeed={3000}
-          ssr={true}
-          responsive={responsive}
-        >
-          {products.map((product) => (
-            <BookCard
-              chosenCategory={chosenCategory}
-              key={product.id}
-              product={product}
-              extraSpace={<div style={{ marginTop: "20px" }} />}
-            />
-          ))}
-        </Carousel>
+        <div>
+          {isChosenCategory === true ? (
+            <Carousel
+              arrows={false}
+              showDots={true}
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={1500}
+              ssr={true}
+              responsive={responsive}
+            >
+              {products
+                .filter(
+                  (product) => product.category.includes(chosenCategory) == true
+                )
+                .map((categorisedProduct, index) => (
+                  <BookCard
+                    chosenCategory={chosenCategory}
+                    key={index}
+                    product={categorisedProduct}
+                    extraSpace={<div style={{ marginTop: "20px" }} />}
+                  />
+                ))}
+            </Carousel>
+          ) : (
+            <Carousel
+              arrows={false}
+              showDots={true}
+              infinite={true}
+              autoPlay={true}
+              autoPlaySpeed={3000}
+              ssr={true}
+              responsive={responsive}
+            >
+              {products.map((product) => (
+                <BookCard
+                  chosenCategory={chosenCategory}
+                  key={product.id}
+                  product={product}
+                  extraSpace={<div style={{ marginTop: "20px" }} />}
+                />
+              ))}
+            </Carousel>
+          )}
+        </div>
       )}
     </div>
   );

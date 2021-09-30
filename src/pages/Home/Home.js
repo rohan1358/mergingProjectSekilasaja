@@ -16,6 +16,7 @@ import LandingUserBlock from "./LandingUserBlock";
 import LandingNonUserBlock from "./LandingNonUserBlock";
 import NewKilasHomeBlock from "./NewKilasHomeBlock";
 import ReviewBlock from "./ReviewBlock";
+import ComingSoonBlock from "./ComingSoonBlock";
 import Loading from "../Loading";
 
 // Material-UI components
@@ -119,6 +120,8 @@ export default function Home({ history }) {
 
           <NewKilasHomeBlock products={products} />
 
+          <ComingSoonBlock />
+
           <div style={{ marginTop: "40px" }} />
 
           <ReviewBlock />
@@ -152,6 +155,9 @@ export default function Home({ history }) {
         </div>
       ) : (
         <div>
+          {/*---------------------------------------------------------------*/}
+          {/*--------------------------- LOGGED OUT ------------------------*/}
+          {/*---------------------------------------------------------------*/}
           {/* Landing Block */}
           <LandingNonUserBlock />
 
@@ -166,6 +172,8 @@ export default function Home({ history }) {
           />
 
           <NewKilasHomeBlock products={products} />
+
+          <ComingSoonBlock />
 
           <div style={{ marginTop: "40px" }} />
 

@@ -8,6 +8,7 @@ import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFil
 import InfoStyles from "../../styles/InfoAreaStyle";
 import Button from "../../components/Button";
 import { secondaryColor } from "../../styles/Style";
+import ComingSoonCard from "../../pages/Home/ComingSoonCard";
 
 // Material UI components
 import { Grid, makeStyles, Divider, CircularProgress } from "@material-ui/core";
@@ -150,127 +151,63 @@ export default function OwnedBooksBlock({
         {/*---------------------------------------------------------------*/}
         {/*--------------------- OWNED BOOKS SECTION ---------------------*/}
         {/*---------------------------------------------------------------*/}
-        {isChosenCategory === true ? (
-          <div>
-            <div className={classes.sectionDesktopBlock}>
-              {/* OWNED BOOKS DESKTOP */}
-              {ownedBooks.length === 0 ? (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Owned Books
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontSize: "25px",
-                      display: "flex",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    type="italic"
-                  >
-                    Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang
-                    untuk akses semua buku!
-                  </Typography>
-                </div>
-              ) : (
-                <div>
-                  <div>
-                    {ownedBooks.filter(
-                      (product) =>
-                        product.category.includes(chosenCategory) == true
-                    ).length !== 0 ? (
-                      <div>
-                        <Typography
-                          style={{ textAlign: "center" }}
-                          size="heading"
-                        >
-                          Owned Books
-                        </Typography>
-                        <Grid container justifyContent={"center"} spacing={5}>
-                          {ownedBooks
-                            .filter(
-                              (product) =>
-                                product.category.includes(chosenCategory) ==
-                                true
-                            )
-                            .map((categorisedProduct, index) => (
-                              <BookCard
-                                chosenCategory={chosenCategory}
-                                coverTitle={categorisedProduct.book_title}
-                                key={index}
-                                product={categorisedProduct}
-                              />
-                            ))}
-                        </Grid>
-                      </div>
-                    ) : (
-                      <div>
-                        <Typography
-                          style={{ textAlign: "center" }}
-                          size="heading"
-                        >
-                          Owned Books
-                        </Typography>
-                        <Typography
-                          style={{
-                            fontSize: "25px",
-                            display: "flex",
-                            justifyContent: "center",
-                            textAlign: "center",
-                          }}
-                          type="italic"
-                        >
-                          Tidak ditemukan kilas di kategori ini!
-                        </Typography>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
 
-            <div className={classes.sectionMobileBlock}>
-              {/* OWNED BOOKS MOBILE */}
-              {ownedBooks.length === 0 ? (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Owned Books
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontSize: "25px",
-                      display: "flex",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    type="italic"
-                  >
-                    Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang
-                    untuk akses semua buku!
-                  </Typography>
-                </div>
-              ) : (
-                <div>
-                  <Grid container justifyContent="center" spacing={5}>
+        {chosenCategory === "Coming Soon!" ? (
+          <div>
+            <Typography style={{ textAlign: "center" }} size="heading">
+              Coming Soon!
+            </Typography>
+            {allBooks
+              .filter(
+                (product) => product.category.includes("Coming Soon!") == true
+              )
+              .map((categorisedProduct, index) => (
+                <ComingSoonCard
+                  notOwned={cards.notOwned}
+                  chosenCategory={"Coming Soon!"}
+                  key={index}
+                  product={categorisedProduct}
+                />
+              ))}
+          </div>
+        ) : (
+          <div>
+            {isChosenCategory === true ? (
+              <div>
+                {/* OWNED BOOKS DESKTOP */}
+                {ownedBooks.length === 0 ? (
+                  <div>
                     <Typography style={{ textAlign: "center" }} size="heading">
                       Owned Books
                     </Typography>
-                    {ownedBooks.filter(
-                      (product) =>
-                        product.category.includes(chosenCategory) == true
-                    ).length !== 0 ? (
-                      <div>
-                        <Typography
-                          style={{ textAlign: "center" }}
-                          size="heading"
-                        >
-                          Owned Books
-                        </Typography>
-                        {ownedBooks.filter(
-                          (product) =>
-                            product.category.includes(chosenCategory) == true
-                        ).length !== 0 ? (
-                          <Grid container justifyContent="center" spacing={5}>
+                    <Typography
+                      style={{
+                        fontSize: "25px",
+                        display: "flex",
+                        justifyContent: "center",
+                        textAlign: "center",
+                      }}
+                      type="italic"
+                    >
+                      Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang
+                      untuk akses semua buku!
+                    </Typography>
+                  </div>
+                ) : (
+                  <div>
+                    <div>
+                      {ownedBooks.filter(
+                        (product) =>
+                          product.category.includes(chosenCategory) == true
+                      ).length !== 0 ? (
+                        <div>
+                          <Typography
+                            style={{ textAlign: "center" }}
+                            size="heading"
+                          >
+                            Owned Books
+                          </Typography>
+                          <Grid container justifyContent={"center"} spacing={5}>
                             {ownedBooks
                               .filter(
                                 (product) =>
@@ -286,27 +223,156 @@ export default function OwnedBooksBlock({
                                 />
                               ))}
                           </Grid>
-                        ) : (
-                          <div>
-                            <Typography
-                              style={{ textAlign: "center" }}
-                              size="heading"
-                            >
-                              Owned Books
-                            </Typography>
-                            <Typography
-                              style={{
-                                fontSize: "25px",
-                                display: "flex",
-                                justifyContent: "center",
-                                textAlign: "center",
-                              }}
-                              type="italic"
-                            >
-                              Kamu tidak memiliki kilas di dalam kategori ini!
-                            </Typography>
-                          </div>
-                        )}
+                        </div>
+                      ) : (
+                        <div>
+                          <Typography
+                            style={{ textAlign: "center" }}
+                            size="heading"
+                          >
+                            Owned Books
+                          </Typography>
+                          <Typography
+                            style={{
+                              fontSize: "25px",
+                              display: "flex",
+                              justifyContent: "center",
+                              textAlign: "center",
+                            }}
+                            type="italic"
+                          >
+                            Tidak ditemukan kilas di kategori ini!
+                          </Typography>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                {ownedBooks.length !== 0 ? (
+                  <div>
+                    <Typography style={{ textAlign: "center" }} size="heading">
+                      Owned Books
+                    </Typography>
+                    <Grid container justifyContent={"center"} spacing={5}>
+                      {ownedBooks.map((product) => (
+                        <BookCard
+                          chosenCategory={chosenCategory}
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
+                      ))}
+                    </Grid>
+                  </div>
+                ) : (
+                  <div>
+                    <Typography style={{ textAlign: "center" }} size="heading">
+                      Owned Books
+                    </Typography>
+                    <Typography
+                      style={{
+                        fontSize: "25px",
+                        display: "flex",
+                        justifyContent: "center",
+                        textAlign: "center",
+                      }}
+                      type="italic"
+                    >
+                      Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang
+                      untuk akses semua buku!
+                    </Typography>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <Divider style={{ marginTop: "20px" }} />
+
+            {/*---------------------------------------------------------------*/}
+            {/*---------------------- NOT OWNED SECTION ----------------------*/}
+            {/*---------------------------------------------------------------*/}
+            {isChosenCategory === true ? (
+              <div>
+                {/* NOT OWNED BOOKS DESKTOP */}
+                {isNotOwnedBooksEmpty ? (
+                  <div>
+                    <Typography style={{ textAlign: "center" }} size="heading">
+                      Not Owned Books
+                    </Typography>
+                    <div>{upsellBlock}</div>
+                    <Typography
+                      style={{
+                        fontSize: "25px",
+                        display: "flex",
+                        justifyContent: "center",
+                        textAlign: "center",
+                      }}
+                      type="italic"
+                    >
+                      Kamu telah memiliki semua kilas!
+                    </Typography>
+                  </div>
+                ) : (
+                  <div>
+                    {booksNotOwned.filter(
+                      (product) =>
+                        product.category.includes(chosenCategory) == true
+                    ).length !== 0 ? (
+                      <div>
+                        <Typography
+                          style={{ textAlign: "center" }}
+                          size="heading"
+                        >
+                          Not Owned Books
+                        </Typography>
+
+                        <div>{upsellBlock}</div>
+                        <Grid container justifyContent={"center"} spacing={5}>
+                          {booksNotOwned
+                            .filter(
+                              (product) =>
+                                product.category.includes(chosenCategory) ==
+                                true
+                            )
+                            .map((categorisedProduct, index) => (
+                              <BookCard
+                                notOwned={cards.notOwned}
+                                chosenCategory={chosenCategory}
+                                coverTitle={categorisedProduct.book_title}
+                                key={index}
+                                product={categorisedProduct}
+                                addedButton={
+                                  <Button
+                                    color="gray"
+                                    style={{
+                                      borderRadius: "100%",
+                                      paddingRight: "12px",
+                                      paddingLeft: "12px",
+                                    }}
+                                  >
+                                    ✔ Added
+                                  </Button>
+                                }
+                                button={
+                                  <Button
+                                    style={{
+                                      borderRadius: "100%",
+                                      paddingRight: "12px",
+                                      paddingLeft: "12px",
+                                    }}
+                                  >
+                                    <ShoppingCartIcon
+                                      style={{ marginRight: "-0.5px" }}
+                                      fontSize="small"
+                                    />
+                                  </Button>
+                                }
+                              />
+                            ))}
+                        </Grid>
                       </div>
                     ) : (
                       <div>
@@ -314,8 +380,10 @@ export default function OwnedBooksBlock({
                           style={{ textAlign: "center" }}
                           size="heading"
                         >
-                          Owned Books
+                          Not Owned Books
                         </Typography>
+
+                        <div>{upsellBlock}</div>
                         <Typography
                           style={{
                             fontSize: "25px",
@@ -325,422 +393,83 @@ export default function OwnedBooksBlock({
                           }}
                           type="italic"
                         >
-                          Tidak ditemukan kilas di kategori ini!
+                          Kamu memiliki semua kilas di kategori ini!
                         </Typography>
                       </div>
                     )}
-                  </Grid>
-                </div>
-              )}
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div className={classes.sectionDesktopBlock}>
-              {ownedBooks.length !== 0 ? (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Owned Books
-                  </Typography>
-                  <Grid container justifyContent={"center"} spacing={5}>
-                    {ownedBooks.map((product) => (
-                      <BookCard
-                        chosenCategory={chosenCategory}
-                        coverTitle={product.book_title}
-                        key={product.id}
-                        product={product}
-                      />
-                    ))}
-                  </Grid>
-                </div>
-              ) : (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Owned Books
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontSize: "25px",
-                      display: "flex",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    type="italic"
-                  >
-                    Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang
-                    untuk akses semua buku!
-                  </Typography>
-                </div>
-              )}
-            </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div>
+                {isNotOwnedBooksEmpty ? (
+                  <div>
+                    <Typography style={{ textAlign: "center" }} size="heading">
+                      Not Owned Books
+                    </Typography>
 
-            <div className={classes.sectionMobileBlock}>
-              {ownedBooks.length !== 0 ? (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Owned Books
-                  </Typography>
-                  <Grid container justifyContent="center" spacing={5}>
-                    {ownedBooks.map((product) => (
-                      <BookCard
-                        chosenCategory={chosenCategory}
-                        coverTitle={product.book_title}
-                        key={product.id}
-                        product={product}
-                      />
-                    ))}
-                  </Grid>
-                </div>
-              ) : (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Owned Books
-                  </Typography>
-                  <Typography
-                    style={{
-                      fontSize: "25px",
-                      display: "flex",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    type="italic"
-                  >
-                    Kamu tidak memiliki kilas sama sekali. Berlanggan sekarang
-                    untuk akses semua buku!
-                  </Typography>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+                    <div>{upsellBlock}</div>
+                    <Typography
+                      style={{
+                        fontSize: "25px",
+                        display: "flex",
+                        justifyContent: "center",
+                        textAlign: "center",
+                      }}
+                      type="italic"
+                    >
+                      Kamu telah memiliki semua kilas!
+                    </Typography>
+                  </div>
+                ) : (
+                  <div>
+                    <Typography style={{ textAlign: "center" }} size="heading">
+                      Not Owned Books
+                    </Typography>
 
-        <Divider style={{ marginTop: "20px" }} />
-
-        {/*---------------------------------------------------------------*/}
-        {/*---------------------- NOT OWNED SECTION ----------------------*/}
-        {/*---------------------------------------------------------------*/}
-        {isChosenCategory === true ? (
-          <div>
-            <div className={classes.sectionDesktopBlock}>
-              {/* NOT OWNED BOOKS DESKTOP */}
-              {isNotOwnedBooksEmpty ? (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Not Owned Books
-                  </Typography>
-                  <div>{upsellBlock}</div>
-                  <Typography
-                    style={{
-                      fontSize: "25px",
-                      display: "flex",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    type="italic"
-                  >
-                    Kamu telah memiliki semua kilas!
-                  </Typography>
-                </div>
-              ) : (
-                <div>
-                  {booksNotOwned.filter(
-                    (product) =>
-                      product.category.includes(chosenCategory) == true
-                  ).length !== 0 ? (
-                    <div>
-                      <Typography
-                        style={{ textAlign: "center" }}
-                        size="heading"
-                      >
-                        Not Owned Books
-                      </Typography>
-
-                      <div>{upsellBlock}</div>
-                      <Grid container justifyContent={"center"} spacing={5}>
-                        {booksNotOwned
-                          .filter(
-                            (product) =>
-                              product.category.includes(chosenCategory) == true
-                          )
-                          .map((categorisedProduct, index) => (
-                            <BookCard
-                              notOwned={cards.notOwned}
-                              chosenCategory={chosenCategory}
-                              coverTitle={categorisedProduct.book_title}
-                              key={index}
-                              product={categorisedProduct}
-                              addedButton={
-                                <Button
-                                  color="gray"
-                                  style={{
-                                    borderRadius: "100%",
-                                    paddingRight: "12px",
-                                    paddingLeft: "12px",
-                                  }}
-                                >
-                                  ✔ Added
-                                </Button>
-                              }
-                              button={
-                                <Button
-                                  style={{
-                                    borderRadius: "100%",
-                                    paddingRight: "12px",
-                                    paddingLeft: "12px",
-                                  }}
-                                >
-                                  <ShoppingCartIcon
-                                    style={{ marginRight: "-0.5px" }}
-                                    fontSize="small"
-                                  />
-                                </Button>
-                              }
-                            />
-                          ))}
-                      </Grid>
-                    </div>
-                  ) : (
-                    <div>
-                      <Typography
-                        style={{ textAlign: "center" }}
-                        size="heading"
-                      >
-                        Not Owned Books
-                      </Typography>
-
-                      <div>{upsellBlock}</div>
-                      <Typography
-                        style={{
-                          fontSize: "25px",
-                          display: "flex",
-                          justifyContent: "center",
-                          textAlign: "center",
-                        }}
-                        type="italic"
-                      >
-                        Kamu memiliki semua kilas di kategori ini!
-                      </Typography>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            <div className={classes.sectionMobileBlock}>
-              {/* NOT OWNED BOOKS MOBILE */}
-              {isNotOwnedBooksEmpty ? (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Not Owned Books
-                  </Typography>
-
-                  <div>{upsellBlock}</div>
-                  <Typography
-                    style={{
-                      fontSize: "25px",
-                      display: "flex",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    type="italic"
-                  >
-                    Kamu telah memiliki semua kilas!
-                  </Typography>
-                </div>
-              ) : (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Not Owned Books
-                  </Typography>
-
-                  <div>{upsellBlock}</div>
-                  {booksNotOwned.filter(
-                    (product) =>
-                      product.category.includes(chosenCategory) == true
-                  ).length !== 0 ? (
-                    <div>
-                      <Grid container justifyContent="center" spacing={5}>
-                        {booksNotOwned
-                          .filter(
-                            (product) =>
-                              product.category.includes(chosenCategory) == true
-                          )
-                          .map((categorisedProduct, index) => (
-                            <BookCard
-                              notOwned={cards.notOwned}
-                              chosenCategory={chosenCategory}
-                              coverTitle={categorisedProduct.book_title}
-                              key={index}
-                              product={categorisedProduct}
-                              buttonMobile={
-                                <Button fullWidth round>
-                                  <ShoppingCartIcon
-                                    style={{ marginRight: "-0.5px" }}
-                                    fontSize="small"
-                                  />
-                                </Button>
-                              }
-                              addedButtonMobile={
-                                <Button round color="gray" fullWidth>
-                                  ✔ Added
-                                </Button>
-                              }
-                            />
-                          ))}
-                      </Grid>
-                    </div>
-                  ) : (
-                    <div>
-                      <Typography
-                        style={{ textAlign: "center" }}
-                        size="heading"
-                      >
-                        Not Owned Books
-                      </Typography>
-
-                      <div>{upsellBlock}</div>
-                      <Typography
-                        style={{
-                          fontSize: "25px",
-                          display: "flex",
-                          justifyContent: "center",
-                          textAlign: "center",
-                        }}
-                        type="italic"
-                      >
-                        Kamu memiliki semua kilas di kategori ini!
-                      </Typography>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        ) : (
-          <div>
-            <div className={classes.sectionDesktopBlock}>
-              {isNotOwnedBooksEmpty ? (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Not Owned Books
-                  </Typography>
-
-                  <div>{upsellBlock}</div>
-                  <Typography
-                    style={{
-                      fontSize: "25px",
-                      display: "flex",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    type="italic"
-                  >
-                    Kamu telah memiliki semua kilas!
-                  </Typography>
-                </div>
-              ) : (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Not Owned Books
-                  </Typography>
-
-                  <div>{upsellBlock}</div>
-                  <Grid container justifyContent={"center"} spacing={5}>
-                    {booksNotOwned.map((product) => (
-                      <BookCard
-                        addedButton={
-                          <Button
-                            color="gray"
-                            style={{
-                              borderRadius: "100%",
-                              paddingRight: "12px",
-                              paddingLeft: "12px",
-                            }}
-                          >
-                            ✔ Added
-                          </Button>
-                        }
-                        button={
-                          <Button
-                            style={{
-                              borderRadius: "100%",
-                              paddingRight: "12px",
-                              paddingLeft: "12px",
-                            }}
-                          >
-                            <ShoppingCartIcon
-                              style={{ marginRight: "-0.5px" }}
-                              fontSize="small"
-                            />
-                          </Button>
-                        }
-                        notOwned={cards.notOwned}
-                        chosenCategory={chosenCategory}
-                        coverTitle={product.book_title}
-                        key={product.id}
-                        product={product}
-                      />
-                    ))}
-                  </Grid>
-                </div>
-              )}
-
-              <div className={classes.extraSpace} />
-            </div>
-
-            <div className={classes.sectionMobileBlock}>
-              {isNotOwnedBooksEmpty ? (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Not Owned Books
-                  </Typography>
-
-                  <div>{upsellBlock}</div>
-                  <Typography
-                    style={{
-                      fontSize: "25px",
-                      display: "flex",
-                      justifyContent: "center",
-                      textAlign: "center",
-                    }}
-                    type="italic"
-                  >
-                    Kamu telah memiliki semua kilas!
-                  </Typography>
-                </div>
-              ) : (
-                <div>
-                  <Typography style={{ textAlign: "center" }} size="heading">
-                    Not Owned Books
-                  </Typography>
-
-                  <div>{upsellBlock}</div>
-                  <Grid container justifyContent="center" spacing={5}>
-                    {booksNotOwned.map((product) => (
-                      <BookCard
-                        chosenCategory={chosenCategory}
-                        coverTitle={product.book_title}
-                        key={product.id}
-                        product={product}
-                        buttonMobile={
-                          <Button fullWidth round>
-                            <ShoppingCartIcon
-                              style={{ marginRight: "-0.5px" }}
-                              fontSize="small"
-                            />
-                          </Button>
-                        }
-                        addedButtonMobile={
-                          <Button round color="gray" fullWidth>
-                            ✔ Added
-                          </Button>
-                        }
-                      />
-                    ))}
-                  </Grid>
-                </div>
-              )}
-            </div>
+                    <div>{upsellBlock}</div>
+                    <Grid container justifyContent={"center"} spacing={5}>
+                      {booksNotOwned.map((product) => (
+                        <BookCard
+                          addedButton={
+                            <Button
+                              color="gray"
+                              style={{
+                                borderRadius: "100%",
+                                paddingRight: "12px",
+                                paddingLeft: "12px",
+                              }}
+                            >
+                              ✔ Added
+                            </Button>
+                          }
+                          button={
+                            <Button
+                              style={{
+                                borderRadius: "100%",
+                                paddingRight: "12px",
+                                paddingLeft: "12px",
+                              }}
+                            >
+                              <ShoppingCartIcon
+                                style={{ marginRight: "-0.5px" }}
+                                fontSize="small"
+                              />
+                            </Button>
+                          }
+                          notOwned={cards.notOwned}
+                          chosenCategory={chosenCategory}
+                          coverTitle={product.book_title}
+                          key={product.id}
+                          product={product}
+                        />
+                      ))}
+                    </Grid>
+                  </div>
+                )}
+                <div className={classes.extraSpace} />
+              </div>
+            )}
           </div>
         )}
       </div>
