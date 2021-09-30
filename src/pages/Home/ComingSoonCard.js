@@ -31,7 +31,11 @@ export default function ComingSoonCard({ product, chosenCategory, notOwned }) {
   }, [, chosenCategory]);
 
   return (
-    <Grid style={{ padding: 5 }} className={notOwned} item>
+    <Grid
+      style={{ padding: 5 }}
+      // className={notOwned}
+      item
+    >
       <div className={classes.bookCover}>
         <div>
           <img

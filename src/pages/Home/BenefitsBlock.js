@@ -134,7 +134,7 @@ export default function BenefitsBlock({ logo, button }) {
                         color: primaryColor,
                       }}
                     >
-                      15+ Kilas buku
+                      30++ Kilas buku
                     </strong>{" "}
                     best-seller dunia setiap bulannya!
                   </div>
@@ -270,7 +270,7 @@ export default function BenefitsBlock({ logo, button }) {
                         color: primaryColor,
                       }}
                     >
-                      15+ Kilas buku
+                      30++ Kilas buku
                     </strong>{" "}
                     best-seller dunia setiap bulannya!
                   </div>

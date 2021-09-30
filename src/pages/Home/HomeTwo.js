@@ -120,6 +120,8 @@ export default function Home({ history }) {
 
           <NewKilasHomeBlock products={products} />
 
+          <ComingSoonBlock />
+
           <div style={{ marginTop: "40px" }} />
 
           <ReviewBlock />
