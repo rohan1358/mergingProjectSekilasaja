@@ -157,18 +157,21 @@ export default function OwnedBooksBlock({
             <Typography style={{ textAlign: "center" }} size="heading">
               Coming Soon!
             </Typography>
-            {allBooks
-              .filter(
-                (product) => product.category.includes("Coming Soon!") == true
-              )
-              .map((categorisedProduct, index) => (
-                <ComingSoonCard
-                  notOwned={cards.notOwned}
-                  chosenCategory={"Coming Soon!"}
-                  key={index}
-                  product={categorisedProduct}
-                />
-              ))}
+
+            <Grid container justifyContent={"center"} spacing={5}>
+              {allBooks
+                .filter(
+                  (product) => product.category.includes("Coming Soon!") == true
+                )
+                .map((categorisedProduct, index) => (
+                  <ComingSoonCard
+                    notOwned={cards.notOwned}
+                    chosenCategory={"Coming Soon!"}
+                    key={index}
+                    product={categorisedProduct}
+                  />
+                ))}
+            </Grid>
           </div>
         ) : (
           <div>
@@ -302,33 +305,53 @@ export default function OwnedBooksBlock({
                               coverTitle={categorisedProduct.book_title}
                               key={index}
                               product={categorisedProduct}
-                              addedButton={
-                                <Button
-                                  color="gray"
-                                  style={{
-                                    borderRadius: "100%",
-                                    paddingRight: "12px",
-                                    paddingLeft: "12px",
-                                  }}
-                                >
-                                  ✔ Added
-                                </Button>
-                              }
-                              button={
-                                <Button
-                                  style={{
-                                    borderRadius: "100%",
-                                    paddingRight: "12px",
-                                    paddingLeft: "12px",
-                                  }}
-                                >
+                              buttonMobile={
+                                <Button fullWidth round>
                                   <ShoppingCartIcon
                                     style={{ marginRight: "-0.5px" }}
                                     fontSize="small"
                                   />
                                 </Button>
                               }
+                              addedButtonMobile={
+                                <Button round color="gray" fullWidth>
+                                  ✔ Added
+                                </Button>
+                              }
                             />
+                            // <BookCard
+                            //   notOwned={cards.notOwned}
+                            //   chosenCategory={chosenCategory}
+                            //   coverTitle={categorisedProduct.book_title}
+                            //   key={index}
+                            //   product={categorisedProduct}
+                            //   addedButton={
+                            //     <Button
+                            //       color="gray"
+                            //       style={{
+                            //         borderRadius: "100%",
+                            //         paddingRight: "12px",
+                            //         paddingLeft: "12px",
+                            //       }}
+                            //     >
+                            //       ✔ Added
+                            //     </Button>
+                            //   }
+                            //   button={
+                            //     <Button
+                            //       style={{
+                            //         borderRadius: "100%",
+                            //         paddingRight: "12px",
+                            //         paddingLeft: "12px",
+                            //       }}
+                            //     >
+                            //       <ShoppingCartIcon
+                            //         style={{ marginRight: "-0.5px" }}
+                            //         fontSize="small"
+                            //       />
+                            //     </Button>
+                            //   }
+                            // />
                           ))}
                       </Grid>
                     </div>

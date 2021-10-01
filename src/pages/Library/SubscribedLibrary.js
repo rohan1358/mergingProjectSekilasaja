@@ -56,18 +56,21 @@ export default function SubscribedLibrary({ history }) {
             <Typography style={{ textAlign: "center" }} size="heading">
               Coming Soon!
             </Typography>
-            {products
-              .filter(
-                (product) => product.category.includes("Coming Soon!") == true
-              )
-              .map((categorisedProduct, index) => (
-                <ComingSoonCard
-                  notOwned={cards.notOwned}
-                  chosenCategory={"Coming Soon!"}
-                  key={index}
-                  product={categorisedProduct}
-                />
-              ))}
+
+            <Grid container justifyContent={"center"} spacing={5}>
+              {products
+                .filter(
+                  (product) => product.category.includes("Coming Soon!") == true
+                )
+                .map((categorisedProduct, index) => (
+                  <ComingSoonCard
+                    notOwned={cards.notOwned}
+                    chosenCategory={"Coming Soon!"}
+                    key={index}
+                    product={categorisedProduct}
+                  />
+                ))}
+            </Grid>
           </div>
         ) : (
           <div>

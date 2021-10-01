@@ -105,7 +105,7 @@ export default function BookCard({
   return (
     <Grid
       style={{ padding: 5 }}
-      className={classes.cardHover + " " + notOwned + " " + hover.root}
+      className={classes.cardHover + " " + hover.root}
       item
     >
       {isAdded ? (
@@ -125,6 +125,8 @@ export default function BookCard({
               src={coverLink}
               alt={product.book_title}
               className={
+                notOwned +
+                " " +
                 classes.imgRounded +
                 " " +
                 classes.imgFluid +
@@ -142,6 +144,7 @@ export default function BookCard({
           </div>
         </div>
       </Link>
+
       {isAdded ? (
         <div onClick={handleAddCart}>
           <div className={classes.addedMobileButtonPos}>
