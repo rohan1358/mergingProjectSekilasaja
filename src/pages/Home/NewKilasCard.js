@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // @material-ui/core components
-import { makeStyles, Grid, Container } from "@material-ui/core";
+import { makeStyles, Grid, Container, Hidden } from "@material-ui/core";
 
 // Custom components
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
@@ -46,6 +46,14 @@ export default function NewKilasCard({ product, chosenCategory }) {
           <Grid item xs={12} />
           <Grid item md={2} xs={12} />
           <Grid item md={3} xs={12}>
+            <Hidden mdUp>
+              <Typography style={{ marginTop: 0 }} size="heading">
+                <strong style={{ backgroundColor: primaryColor }}>
+                  Kilas Baru
+                </strong>{" "}
+                Minggu Ini!
+              </Typography>
+            </Hidden>
             <img
               src={coverLink}
               className={books.imgRounded + " " + books.imgFluid}
@@ -53,12 +61,14 @@ export default function NewKilasCard({ product, chosenCategory }) {
             />
           </Grid>
           <Grid item md={5} xs={12}>
-            <Typography style={{ marginTop: 0 }} size="heading">
-              <strong style={{ backgroundColor: primaryColor }}>
-                Kilas Baru
-              </strong>{" "}
-              Minggu Ini!
-            </Typography>
+            <Hidden smDown implementation="css">
+              <Typography style={{ marginTop: 0 }} size="heading">
+                <strong style={{ backgroundColor: primaryColor }}>
+                  Kilas Baru
+                </strong>{" "}
+                Minggu Ini!
+              </Typography>
+            </Hidden>
             <Typography type="bold" size="subheading">
               {product.book_title}
             </Typography>

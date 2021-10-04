@@ -118,6 +118,18 @@ export default function Home({ history }) {
             }
           />
 
+          <div style={{ marginTop: "40px" }} />
+
+          {/* Third Block */}
+          <Container>
+            <CategoryBlock
+              history={history}
+              title={"Temukan Kategori Kesukaan Kamu!"}
+            />
+          </Container>
+
+          <div style={{ marginTop: "40px" }} />
+
           <NewKilasHomeBlock products={products} />
 
           <ComingSoonBlock />
@@ -142,16 +154,6 @@ export default function Home({ history }) {
               Berlanggan Sekarang!
             </Button>
           </div>
-
-          <div style={{ marginTop: "40px" }} />
-
-          {/* Third Block */}
-          <Container>
-            <CategoryBlock
-              history={history}
-              title={"Temukan Kategori Kesukaan Kamu!"}
-            />
-          </Container>
         </div>
       ) : (
         <div>
@@ -170,6 +172,18 @@ export default function Home({ history }) {
               </Button>
             }
           />
+
+          <div style={{ marginTop: "40px" }} />
+
+          {/* Third Block */}
+          <Container>
+            <CategoryBlock
+              history={history}
+              title={"Temukan Kategori Kesukaan Kamu!"}
+            />
+          </Container>
+
+          <div style={{ marginTop: "40px" }} />
 
           <NewKilasHomeBlock products={products} />
 
@@ -190,16 +204,6 @@ export default function Home({ history }) {
               Daftar Sekarang!
             </Button>
           </div>
-
-          <div style={{ marginTop: "40px" }} />
-
-          {/* Third Block */}
-          <Container>
-            <CategoryBlock
-              history={history}
-              title={"Temukan Kategori Kesukaan Kamu!"}
-            />
-          </Container>
         </div>
       )}
       <Footer />
