@@ -86,6 +86,11 @@ const ImagesStyle = {
     //   transform: "scale(1.5)",
     // },
   },
+  imgBookComingSoon: {
+    marginTop: "10px",
+    width: "100%",
+    maxWidth: "120px",
+  },
   videoWidth: {
     marginTop: "20px",
     width: "100%",

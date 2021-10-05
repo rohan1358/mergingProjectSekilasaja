@@ -680,8 +680,8 @@ export default function BookDetailsPage({ match, history }) {
                     author={current_product.author}
                     descriptionTitle={"Tentang Apa?"}
                     description={current_product.descriptions}
-                    watchTime={"15"}
-                    readTime={"15"}
+                    watchTime={current_product.watch_time}
+                    readTime={current_product.read_time}
                     num={current_product.kilasan.length}
                     buttons={
                       <div>

@@ -51,7 +51,7 @@ export default function ComingSoonCard({
               " " +
               classes.imgFluid +
               " " +
-              classes.imgBookCover
+              classes.imgBookComingSoon
             }
           />
           {/* <div className={classes.descriptionWrapper}>

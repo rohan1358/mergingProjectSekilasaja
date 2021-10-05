@@ -8,7 +8,7 @@ import Loading from "../Loading";
 import { beigeColor, primaryColor } from "../../styles/Style";
 
 // Material-UI components
-import { Container, makeStyles } from "@material-ui/core";
+import { Container, makeStyles, Grid } from "@material-ui/core";
 
 // Other components
 import Carousel from "react-multi-carousel";
@@ -121,7 +121,7 @@ export default function ComingSoonBlock({}) {
         </Typography>
 
         <div style={{ marginTop: "20px" }} />
-        <Carousel
+        {/* <Carousel
           arrows={false}
           showDots={false}
           infinite={true}
@@ -129,7 +129,8 @@ export default function ComingSoonBlock({}) {
           autoPlaySpeed={1500}
           ssr={true}
           responsive={responsive}
-        >
+        > */}
+        <Grid container justifyContent="center">
           {products
             .filter(
               (product) => product.category.includes("Coming Soon!") == true
@@ -142,7 +143,8 @@ export default function ComingSoonBlock({}) {
                 product={categorisedProduct}
               />
             ))}
-        </Carousel>
+        </Grid>
+        {/* </Carousel> */}
       </Container>
     </div>
   );
