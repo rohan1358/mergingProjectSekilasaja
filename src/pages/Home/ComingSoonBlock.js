@@ -137,7 +137,7 @@ export default function ComingSoonBlock({}) {
             )
             .map((categorisedProduct, index) => (
               <ComingSoonCard
-                notOwned={cards.notOwned}
+                imgSize={cards.imgBookComingSoon}
                 chosenCategory={"Coming Soon!"}
                 key={index}
                 product={categorisedProduct}

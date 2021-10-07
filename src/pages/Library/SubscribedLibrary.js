@@ -64,7 +64,6 @@ export default function SubscribedLibrary({ history }) {
                 )
                 .map((categorisedProduct, index) => (
                   <ComingSoonCard
-                    notOwned={cards.notOwned}
                     chosenCategory={"Coming Soon!"}
                     key={index}
                     product={categorisedProduct}

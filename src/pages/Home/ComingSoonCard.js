@@ -5,7 +5,6 @@ import { makeStyles, Link, Grid } from "@material-ui/core";
 
 // Custom components
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
-import Typography from "../../components/Typography";
 
 // Firebase components
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
@@ -15,8 +14,8 @@ const useStyles = makeStyles(InfoAreaStyle);
 export default function ComingSoonCard({
   product,
   chosenCategory,
-  notOwned,
   extraSpace,
+  imgSize,
 }) {
   // Styles
   const classes = useStyles();
@@ -47,11 +46,7 @@ export default function ComingSoonCard({
             src={coverLink}
             alt={product.book_title}
             className={
-              classes.imgRounded +
-              " " +
-              classes.imgFluid +
-              " " +
-              classes.imgBookComingSoon
+              classes.imgRounded + " " + classes.imgFluid + " " + imgSize
             }
           />
           {/* <div className={classes.descriptionWrapper}>

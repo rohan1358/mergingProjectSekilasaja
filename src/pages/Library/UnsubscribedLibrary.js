@@ -165,7 +165,6 @@ export default function OwnedBooksBlock({
                 )
                 .map((categorisedProduct, index) => (
                   <ComingSoonCard
-                    notOwned={cards.notOwned}
                     chosenCategory={"Coming Soon!"}
                     key={index}
                     product={categorisedProduct}

@@ -26,7 +26,7 @@ const InfoStyle = {
   },
   cardHover: {
     "&:hover": {
-      filter: "brightness(100%)",
+      filter: "brightness(120%)",
     },
   },
   notOwned: {

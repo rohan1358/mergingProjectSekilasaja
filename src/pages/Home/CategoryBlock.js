@@ -130,7 +130,6 @@ export default function CategoryBlock({ title, history }) {
               )
               .map((categorisedProduct, index) => (
                 <ComingSoonCard
-                  notOwned={cards.notOwned}
                   chosenCategory={"Coming Soon!"}
                   key={index}
                   product={categorisedProduct}
