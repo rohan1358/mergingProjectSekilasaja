@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-// History
-import { createBrowserHistory } from "history";
-
 // Custom pages
 import LoginPage from "./pages/Login/Login";
 import SignUpPage from "./pages/SignUp/SignUp";
@@ -31,17 +28,6 @@ import NewWebLanding from "./pages/NewWebLanding";
 // Routing componentns
 import PrivateRoute from "./components/Routing/PrivateRoute";
 import { AuthProvider } from "./components/Routing/Auth";
-
-// Google Analytics
-import ReactGA from "react-ga";
-
-// const history = createBrowserHistory();
-
-// // Initialize google analytics page view tracking
-// history.listen((location) => {
-//   ReactGA.set({ page: location.pathname }); // Update the user's current page
-//   ReactGA.pageview(location.pathname); // Record a pageview for the given page
-// });
 
 function App() {
   return (
