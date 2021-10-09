@@ -209,10 +209,10 @@ export default function Footer() {
                       textDecoration: "none",
                       fontStyle: "italic",
                     }}
-                    href="mailto:sekilasaja.contact@gmail.com"
+                    href="mailto:hi@sekilasaja.com"
                     className={classes.linkHover}
                   >
-                    sekilasaja.contact@gmail.com
+                    hi@sekilasaja.com
                   </a>
                 </Typography>
               </Link>
@@ -273,10 +273,10 @@ export default function Footer() {
                       textDecoration: "none",
                       fontStyle: "italic",
                     }}
-                    href="mailto:sekilasaja.contact@gmail.com"
+                    href="mailto:hi@sekilasaja.com"
                     className={classes.linkHover}
                   >
-                    sekilasaja.contact@gmail.com
+                    hi@sekilasaja.com
                   </a>
                 </Typography>
               </Link>

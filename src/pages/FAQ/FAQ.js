@@ -264,7 +264,7 @@ export default function FAQ({ history }) {
               </Typography>
               <Typography>
                 Emailnya berjudul "Kode Promo SekilasAja! - Terima Kasih" dari
-                Email sekilasaja.contact@gmail.com
+                Email hi@sekilasaja.com
               </Typography>
               <Typography>
                 Untuk masa berlakunya, hanya sampai tanggal 9 Oktober 2021.
