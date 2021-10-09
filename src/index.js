@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom";
+import reportWebVitals from "./reportWebVitals";
+
+// Webapp
 import App from "./App";
+
+// Redux
 import { Provider } from "react-redux";
 import store, { persistor } from "./app/store";
-import reportWebVitals from "./reportWebVitals";
 import { PersistGate } from "redux-persist/integration/react";
+
+// Google
 import TagManager from "react-gtm-module";
+import ReactGA from "react-ga";
+
+// Internet Browsers
 import "react-app-polyfill/ie11";
 import "react-app-polyfill/stable";
 
@@ -16,8 +25,12 @@ document.body.style = "background: #FFFEF8;";
 const tagManagerArgs = {
   gtmId: "GTM-5CD4PVH",
 };
-
 TagManager.initialize(tagManagerArgs);
+
+// Google Analytics
+const trackingId = "UA-207035025-1"; // Replace with your Google Analytics tracking ID
+ReactGA.initialize(trackingId);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 // Disable Inspect
 document.addEventListener("contextmenu", function (e) {
