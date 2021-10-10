@@ -8,6 +8,7 @@ import { Container, makeStyles } from "@material-ui/core";
 import NavBarSecond from "../components/NavBar/NavBarSecond";
 import Typography from "../components/Typography";
 import { beigeColor } from "../styles/Style";
+import FourOFourPage from "./404page";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -88,33 +89,37 @@ export default function VideoWatchingPage({ match, history }) {
     };
     fetchData();
 
-    if (!userData.is_subscribed) {
-      if (!isBookOwned) {
-        <Redirect to="/404page" />;
-      }
-    }
+    // if (!userData.is_subscribed) {
+    //   if (!isBookOwned) {
+    //     <Redirect to="/404page" />;
+    //   }
+    // }
   }, []);
-
-  console.log(bookContent);
 
   return (
     <div style={{ backgroundColor: beigeColor }}>
-      <div>
-        <NavBarSecond />
-        <div style={{ marginTop: "70px" }} />
-        <Container maxWidth="md">
-          <div className={classes.container}>
-            <iframe
-              className={classes.iframe}
-              src={bookContent.video_link}
-              frameborder="0"
-              allow="fullscreen"
-            />
-          </div>
+      {!!userData.is_subscribed || !!isBookOwned ? (
+        <div>
+          <NavBarSecond />
+          <div style={{ marginTop: "70px" }} />
+          <Container maxWidth="md">
+            <div className={classes.container}>
+              <iframe
+                className={classes.iframe}
+                src={bookContent.video_link}
+                frameborder="0"
+                allow="fullscreen"
+              />
+            </div>
 
-          <Typography size="subheading">{bookContent.book_title}</Typography>
-        </Container>
-      </div>
+            <Typography size="subheading">{bookContent.book_title}</Typography>
+          </Container>
+        </div>
+      ) : (
+        <div>
+          <FourOFourPage history={history} />
+        </div>
+      )}
     </div>
   );
 }
