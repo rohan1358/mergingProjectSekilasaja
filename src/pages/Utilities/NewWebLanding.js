@@ -1,14 +1,14 @@
 import React from "react";
 
 // Custom components
-import Styles from "../styles/NewWebStyle";
-import Typography from "../components/Typography";
-import Button from "../components/Button";
+import Styles from "../../styles/NewWebStyle";
+import Typography from "../../components/Typography";
+import Button from "../../components/Button";
 
 // Material-UI components
 import { Container, IconButton, Paper, makeStyles } from "@material-ui/core";
 import { Instagram } from "@material-ui/icons";
-import { beigeColor } from "../styles/Style";
+import { beigeColor } from "../../styles/Style";
 
 // Images
 const Logo =

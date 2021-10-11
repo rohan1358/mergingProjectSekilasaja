@@ -1,12 +1,12 @@
 import React from "react";
 
 // Custom components
-import Typography from "../components/Typography";
-import MultiUseMobile from "../styles/MultiUseMobile";
+import Typography from "../../components/Typography";
+import MultiUseMobile from "../../styles/MultiUseMobile";
 
 // Material-UI components
 import { Container, Grid, CircularProgress } from "@material-ui/core";
-import { beigeColor, secondaryColor } from "../styles/Style";
+import { beigeColor, secondaryColor } from "../../styles/Style";
 
 export default function Loading() {
   // Styles

@@ -8,7 +8,7 @@ import TextReadingStyle from "../../styles/TextReadingStyle";
 import NavbarStyle from "../../styles/NavbarStyle";
 import TableOfContent from "./TableOfContent";
 import Typography from "../../components/Typography";
-import FourOFourPage from "../404page";
+import FourOFourPage from "../Utilities/404page";
 import ReactAudioPlayer from "react-audio-player";
 
 // Material UI components

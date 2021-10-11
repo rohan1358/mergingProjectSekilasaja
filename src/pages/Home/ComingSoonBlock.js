@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import ComingSoonCard from "./ComingSoonCard";
 import Typography from "../../components/Typography";
 import InfoStyle from "../../styles/InfoAreaStyle";
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 import { beigeColor, primaryColor } from "../../styles/Style";
 
 // Material-UI components

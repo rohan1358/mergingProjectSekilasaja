@@ -16,7 +16,7 @@ import ReactAudioPlayer from "react-audio-player";
 import MultiUseMobile from "../../styles/MultiUseMobile";
 import Button from "../../components/Button";
 import TextReadingStyle from "../../styles/TextReadingStyle";
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 
 // Material-UI components
 import { Container, Divider, Grid, makeStyles, Paper } from "@material-ui/core";

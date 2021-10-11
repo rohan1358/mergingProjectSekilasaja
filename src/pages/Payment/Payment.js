@@ -22,7 +22,7 @@ import { beigeColor, secondaryColor } from "../../styles/Style";
 import BuktiBCA from "./BuktiBCA";
 import BuktiBRI from "./BuktiBRI";
 import BuktiQRIS from "./BuktiQRIS";
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";

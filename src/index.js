@@ -33,9 +33,9 @@ ReactGA.initialize(trackingId);
 ReactGA.pageview(window.location.pathname + window.location.search);
 
 // Disable Inspect
-document.addEventListener("contextmenu", function (e) {
-  e.preventDefault();
-});
+// document.addEventListener("contextmenu", function (e) {
+//   e.preventDefault();
+// });
 
 document.onkeydown = function (e) {
   if (e.keyCode == 123) {

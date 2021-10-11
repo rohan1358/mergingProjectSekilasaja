@@ -5,19 +5,19 @@ import { Redirect } from "react-router";
 import { Container, makeStyles } from "@material-ui/core";
 
 // Custom components
-import NavBarSecond from "../components/NavBar/NavBarSecond";
-import Typography from "../components/Typography";
-import { beigeColor } from "../styles/Style";
-import FourOFourPage from "./404page";
+import NavBarSecond from "../../components/NavBar/NavBarSecond";
+import Typography from "../../components/Typography";
+import { beigeColor } from "../../styles/Style";
+import FourOFourPage from "../Utilities/404page";
 
 // Redux
 import { useSelector } from "react-redux";
-import { selectOwnedBooks } from "../feature/ownedBooksSlice";
+import { selectOwnedBooks } from "../../feature/ownedBooksSlice";
 
 // firebase components
-import { AuthContext } from "../components/Routing/Auth";
-import * as firebaseGetUserDataById from "../firebase/firebaseGetUserDataById";
-import * as firebaseGetBookInfoByTitle from "../firebase/firebaseGetBookInfoByTitle";
+import { AuthContext } from "../../components/Routing/Auth";
+import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
+import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 
 const useStyles = makeStyles((theme) => ({
   container: {

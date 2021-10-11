@@ -17,7 +17,7 @@ import LandingNonUserBlock from "./LandingNonUserBlock";
 import NewKilasHomeBlock from "./NewKilasHomeBlock";
 import ReviewBlock from "./ReviewBlock";
 import ComingSoonBlock from "./ComingSoonBlock";
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 
 // Material-UI components
 import { Container, makeStyles, Tooltip } from "@material-ui/core";

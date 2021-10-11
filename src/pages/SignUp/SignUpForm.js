@@ -14,7 +14,7 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import { AuthContext } from "../../components/Routing/Auth";
 import fire from "../../firebase/fire";
 
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 
 const useStyles = makeStyles((theme) => ({
   root: {

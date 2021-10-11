@@ -5,7 +5,7 @@ import fire from "../../firebase/fire";
 import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 
 // Custom components
-import Loading from "../../pages/Loading";
+import Loading from "../../pages/Utilities/Loading";
 
 // Redux
 import { useDispatch } from "react-redux";

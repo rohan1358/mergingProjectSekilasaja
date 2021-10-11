@@ -2,17 +2,16 @@ import React, { useContext, useEffect } from "react";
 import { Redirect } from "react-router";
 
 // Custom components
-import MultiUseMobile from "../styles/MultiUseMobile";
-import Typography from "../components/Typography";
-import Button from "../components/Button";
+import MultiUseMobile from "../../styles/MultiUseMobile";
+import Typography from "../../components/Typography";
 
 // Material-UI components
 import { Container, Paper, makeStyles, Link } from "@material-ui/core";
 import EmailIcon from "@material-ui/icons/Email";
 
 //For email verification
-import { AuthContext } from "../components/Routing/Auth";
-import { beigeColor } from "../styles/Style";
+import { AuthContext } from "../../components/Routing/Auth";
+import { beigeColor } from "../../styles/Style";
 
 const useStyles = makeStyles(() => ({
   root: {

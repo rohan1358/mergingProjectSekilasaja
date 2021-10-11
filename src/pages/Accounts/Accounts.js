@@ -14,7 +14,7 @@ import SubscriptionPlan from "./SubscriptionPlan";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 
 // firebase components
 import fire from "../.././firebase/fire";

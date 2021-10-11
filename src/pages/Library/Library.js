@@ -16,7 +16,7 @@ import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import SubscribedLibrary from "./SubscribedLibrary";
 import Button from "../../components/Button";
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 import { beigeColor, primaryColor, secondaryColor } from "../../styles/Style";
 import NewBooksCardLibrary from "./NewBooksCardLibrary";
 
