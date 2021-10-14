@@ -32,10 +32,10 @@ const trackingId = "UA-207035025-1"; // Replace with your Google Analytics track
 ReactGA.initialize(trackingId);
 ReactGA.pageview(window.location.pathname + window.location.search);
 
-// Disable Inspect
-document.addEventListener("contextmenu", function (e) {
-  e.preventDefault();
-});
+// // Disable Inspect
+// document.addEventListener("contextmenu", function (e) {
+//   e.preventDefault();
+// });
 
 document.onkeydown = function (e) {
   if (e.keyCode == 123) {
