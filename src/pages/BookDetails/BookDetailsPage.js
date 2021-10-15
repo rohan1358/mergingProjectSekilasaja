@@ -28,14 +28,13 @@ import ErrorIcon from "@material-ui/icons/Error";
 //Redux
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, setCart } from "../../feature/cartSlice";
+import { selectUser } from "../../feature/userSlice";
 
 // Auth and fire
 import { AuthContext } from "../../components/Routing/Auth";
-import * as firebaseGetUserDataById from "../../firebase/firebaseGetUserDataById";
 import * as firebaseGetBookInfoByTitle from "../../firebase/firebaseGetBookInfoByTitle";
 import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
-import * as firebaseGetBookAudioURL from "../../firebase/firebaseGetBookAudioURL";
 import * as firebaseGetBookAudioTrialURL from "../../firebase/firebaseGetBookAudioTrialURL";
 import { beigeColor, secondaryColor } from "../../styles/Style";
 
@@ -62,84 +61,49 @@ export default function BookDetailsPage({ match, history }) {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCart).cart;
   const tabs = useStyles();
+  const userData = useSelector(selectUser);
 
   // useState Hooks
   const [current_product, setCurrent_Product] = useState(null);
-  const [userData, setUserData] = useState(null);
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [isBookOwned, setIsBookOwned] = useState(false);
-  const [isAdded, setIsAdded] = useState(false);
   const [coverLink, setCoverLink] = useState("");
   const [audioLink, setAudioLink] = useState(null);
+
+  const [isBookOwned, setIsBookOwned] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
   const [pending, setPending] = useState(true);
-  const [isFinishPullUserData, setIsFinishPullUserData] = useState(false);
 
   //First useEffect to grab user data...
   useEffect(() => {
     if (currentUser !== null) {
-      const fetchData = async () => {
-        const results = await firebaseGetUserDataById.getUserDataById(
-          currentUser.uid
-        );
-        setUserData(results);
-        setIsSubscribed(results.is_subscribed);
+      if (userData.user.owned_books.includes(match.params.book_title)) {
+        setIsBookOwned(true);
+      }
+    }
 
-        results.owned_books.map((x) => {
-          if (x == match.params.book_title) {
-            setIsBookOwned(true);
-          }
-        });
+    if (match.params.book_title != null) {
+      const fetchData = async () => {
+        const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
+          match.params.book_title
+        );
+
+        const link = await firebaseGetBookCoverImageURL.getBookCoverImageURL(
+          match.params.book_title
+        );
+
+        const audioLink =
+          await firebaseGetBookAudioTrialURL.getBookAudioTrialURL(
+            match.params.book_title
+          );
+
+        setCurrent_Product(book_);
+        setCoverLink(link);
+        setAudioLink(audioLink);
+
+        setPending(false);
       };
       fetchData();
-    } else {
-      console.log("Not logged in");
-      setIsFinishPullUserData(true);
     }
   }, [history.location]);
-
-  // Once user data is grabbed, grab book details...
-  useEffect(() => {
-    const fetchData = async () => {
-      const book_ = await firebaseGetBookInfoByTitle.getBookInfoByTitle(
-        match.params.book_title
-      );
-      setCurrent_Product(book_);
-    };
-    fetchData();
-    if (isFinishPullUserData) {
-      setIsFinishPullUserData(false);
-    }
-  }, [userData, isSubscribed, isFinishPullUserData]);
-
-  // Once book details is grabbed, grab book cover image...
-  useEffect(() => {
-    if (match.params.book_title != null) {
-      const getLink = firebaseGetBookCoverImageURL.getBookCoverImageURL(
-        match.params.book_title
-      );
-
-      const fetchData = async () => {
-        const link = await getLink;
-        setCoverLink(link);
-      };
-      fetchData();
-    }
-  }, [current_product]);
-
-  // Once book cover image is grabbed, grab audio link...
-  useEffect(() => {
-    if (match.params.book_title != null) {
-      const getAudioLink = firebaseGetBookAudioTrialURL.getBookAudioTrialURL(
-        match.params.book_title
-      );
-
-      const fetchData = async () => {
-        const audioLink = await getAudioLink;
-        setAudioLink(audioLink);
-      };
-      fetchData();
-    }
-  }, [coverLink]);
 
   useEffect(() => {
     const changeBtn = () => {
@@ -175,11 +139,6 @@ export default function BookDetailsPage({ match, history }) {
     fetchData();
   };
 
-  //Only stop loading (Set pending to false) when all book details have been pulled from database
-  if (current_product && coverLink && pending) {
-    setPending(false);
-  }
-
   //Make page loading till book details have been loaded
   if (pending) {
     return (
@@ -201,7 +160,7 @@ export default function BookDetailsPage({ match, history }) {
       />
       {!!currentUser ? (
         <div>
-          {!!isSubscribed || !!isBookOwned ? (
+          {!!userData.user.is_subscribed || !!isBookOwned ? (
             <div>
               {(current_product !== null) === true && (
                 <div>
@@ -294,7 +253,7 @@ export default function BookDetailsPage({ match, history }) {
 
                       <TextDetails
                         upsellBlock={
-                          !!isSubscribed ? (
+                          !!userData.user.is_subscribed ? (
                             <></>
                           ) : (
                             <div>

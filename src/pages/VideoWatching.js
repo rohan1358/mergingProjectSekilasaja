@@ -11,7 +11,6 @@ import { beigeColor } from "../styles/Style";
 
 // Redux
 import { useSelector } from "react-redux";
-import { selectOwnedBooks } from "../feature/ownedBooksSlice";
 import { selectUser } from "../feature/userSlice";
 
 // firebase components

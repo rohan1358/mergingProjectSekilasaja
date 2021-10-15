@@ -8,7 +8,6 @@ import TextReadingStyle from "../../styles/TextReadingStyle";
 import NavbarStyle from "../../styles/NavbarStyle";
 import TableOfContent from "./TableOfContent";
 import Typography from "../../components/Typography";
-import FourOFourPage from "../404page";
 import ReactAudioPlayer from "react-audio-player";
 import Loading from "../Loading";
 
@@ -48,7 +47,6 @@ export default function TextReading({ match, history }) {
   const [pending, setPending] = useState(true);
 
   // Redux
-  const ownedBooks = useSelector(selectOwnedBooks);
   const userData = useSelector(selectUser);
 
   const handleNext = () => {
@@ -84,6 +82,8 @@ export default function TextReading({ match, history }) {
           }))
         );
       });
+
+    console.log(chapterContent);
 
     if (userData.user.owned_books.includes(match.params.book_title)) {
       setIsBookOwned(true);
