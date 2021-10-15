@@ -85,11 +85,9 @@ export default function TextReading({ match, history }) {
         );
       });
 
-    ownedBooks.map((x) => {
-      if (x.book_title == match.params.book_title) {
-        setIsBookOwned(true);
-      }
-    });
+    if (userData.user.owned_books.includes(match.params.book_title)) {
+      setIsBookOwned(true);
+    }
 
     const fetchData = async () => {
       const getlink = firebaseGetBookAudioURL.getBookAudioURL(

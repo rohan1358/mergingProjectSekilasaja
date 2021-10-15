@@ -46,7 +46,6 @@ export default function VideoWatchingPage({ match, history }) {
   const [pending, setPending] = useState(true);
 
   // Redux
-  const ownedBooks = useSelector(selectOwnedBooks);
   const userData = useSelector(selectUser);
 
   useEffect(() => {
@@ -55,11 +54,10 @@ export default function VideoWatchingPage({ match, history }) {
         match.params.book_title
       );
       setBookContent(book_);
-      ownedBooks.map((x) => {
-        if (x.book_title == book_.book_title) {
-          setIsBookOwned(true);
-        }
-      });
+
+      if (userData.user.owned_books.includes(match.params.book_title)) {
+        setIsBookOwned(true);
+      }
       setPending(false);
     };
     fetchData();
