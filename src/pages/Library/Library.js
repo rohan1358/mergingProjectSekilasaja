@@ -30,6 +30,7 @@ import {
   selectOwnedBookTitles,
   setOwnedBookTitles,
 } from "../../feature/ownedBookTitlesSlice";
+import { selectUser } from "../../feature/userSlice";
 
 // Firebase components
 import fire from "../../firebase/fire";
@@ -76,40 +77,13 @@ export default function Library({ history }) {
   // Redux
   const dispatch = useDispatch();
   const ownedBookTitles = useSelector(selectOwnedBookTitles);
+  const userData = useSelector(selectUser);
 
   // useState Hooks
   const [pending, setPending] = useState(true);
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [userData, setUserData] = useState(null);
   const [products, SetProducts] = useState([]);
 
   useEffect(() => {
-    if (currentUser !== null) {
-      const fetchData = async () => {
-        const results = await firebaseGetUserDataById.getUserDataById(
-          currentUser.uid
-        );
-        setUserData(results);
-        setIsSubscribed(results.is_subscribed);
-      };
-      fetchData();
-    } else {
-      console.log("Not logged in");
-    }
-
-    //Check if user is logged in or not, if not logout to home page.
-    // if (currentUser && !currentUser.emailVerified) {
-    //   console.log(
-    //     "Redirect to email not verified page to ask for email verification..."
-    //   );
-    //   return <Redirect to="/verify-email" />;
-    // } else
-
-    if (!currentUser) {
-      console.log("User is not logged in, redirecting to login page...");
-      return <Redirect to="/login" />;
-    }
-
     //Get owned book titles from user data
     db.collection("users")
       .where("email", "==", currentUser.email)
@@ -148,7 +122,7 @@ export default function Library({ history }) {
         fixed
         color="white"
       />
-      {!!isSubscribed ? (
+      {!!userData.user.is_subscribed ? (
         <Parallax small filter image={LibraryBackground}>
           <Grid container>
             <Grid item md={6} xs={12}>
@@ -233,7 +207,7 @@ export default function Library({ history }) {
 
       <Container>
         <div className={classes.extraSpace} />
-        {!!isSubscribed ? (
+        {!!userData.user.is_subscribed ? (
           <SubscribedLibrary history={history} />
         ) : (
           <UnsubscribedLibrary

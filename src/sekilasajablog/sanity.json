@@ -1,11 +1,11 @@
 {
   "root": true,
-  "project": {
-    "name": "sekilasaja-blog"
-  },
   "api": {
     "projectId": "0rvnwfzg",
     "dataset": "production"
+  },
+  "project": {
+    "name": "sekilasaja-blog"
   },
   "plugins": [
     "@sanity/base",

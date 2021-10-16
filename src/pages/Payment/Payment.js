@@ -22,6 +22,8 @@ import { beigeColor, secondaryColor } from "../../styles/Style";
 import BuktiBCA from "./BuktiBCA";
 import BuktiBRI from "./BuktiBRI";
 import BuktiQRIS from "./BuktiQRIS";
+import BuktiDANA from "./BuktiDANA";
+import BuktiOVO from "./BuktiOVO";
 import Loading from "../Utilities/Loading";
 
 //Redux
@@ -58,6 +60,10 @@ const Whatsapp =
   "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
 const qrisQR =
   "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fqris-qr.jpg?alt=media&token=b3aed020-3219-4075-87f9-6fc9d664aa88";
+const danaQR =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fdana-qr.JPG?alt=media&token=2b142a63-a153-4eda-95f5-921cb9aa003e";
+const ovoQR =
+  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fovo-qr.JPG?alt=media&token=1b3096ed-3c48-4d33-9f96-5385a7854c1f";
 
 // Styles
 const useStyles = makeStyles(InfoStyle);
@@ -225,22 +231,22 @@ export default function Payment({ history }) {
     }
   };
 
-  console.log(totalPrice);
-  console.log(cartItems.length);
-  console.log(cartItems.map((x) => x.book_title).toString());
-
   const handleChange = (e) => {
     //Check if file size exceeds 2mb or not
     setFileError("");
-    var fsize = e.target.files[0].size;
-    var convertedFileSize = Math.round(fsize / 1024);
-    if (convertedFileSize >= 2048) {
-      e.target.value = "";
-      return setFileError(
-        "File yang diupload melebihi 2mb, tolong upload ulang!"
-      );
-    } else {
-      setFile(e.target.files[0]);
+    if (e.target.files[0] != undefined) {
+      var fsize = e.target.files[0].size;
+      var convertedFileSize = Math.round(fsize / 1024);
+      console.log(e.target.files[0]);
+
+      if (convertedFileSize >= 2048) {
+        e.target.value = "";
+        return setFileError(
+          "File yang diupload melebihi 2mb, tolong upload ulang!"
+        );
+      } else {
+        setFile(e.target.files[0]);
+      }
     }
   };
 
@@ -611,6 +617,82 @@ export default function Payment({ history }) {
                           </div>
                         }
                         value="BRI Transfer"
+                        chosenValue={value}
+                      ></Box>
+
+                      <FormControlLabel
+                        value="DANA"
+                        control={<Radio style={{ color: secondaryColor }} />}
+                        label="DANA"
+                        onChange={(e) => setNamaBank(e.target.value)}
+                      />
+                      <Box
+                        text={
+                          <div>
+                            <Typography>
+                              <div>
+                                Bayar dengan nomor telfon:{" "}
+                                <strong>081291176795</strong>
+                              </div>
+                              Atau, scan QR code di bawah:
+                              <div>
+                                <img
+                                  style={{ width: 300, height: "auto" }}
+                                  src={danaQR}
+                                />
+                              </div>
+                              Lalu, lampirkan bukti pembayaran dibawah.
+                            </Typography>
+                            <BuktiDANA open={open} handleClose={handleClose} />
+                            <Button
+                              color="secondary"
+                              onClick={handleClickOpen}
+                              round
+                              fullWidth
+                            >
+                              Contoh Bukti
+                            </Button>
+                          </div>
+                        }
+                        value="DANA"
+                        chosenValue={value}
+                      ></Box>
+
+                      <FormControlLabel
+                        value="OVO"
+                        control={<Radio style={{ color: secondaryColor }} />}
+                        label="OVO"
+                        onChange={(e) => setNamaBank(e.target.value)}
+                      />
+                      <Box
+                        text={
+                          <div>
+                            <Typography>
+                              <div>
+                                Bayar dengan nomor telfon:{" "}
+                                <strong>081291176795</strong>
+                              </div>
+                              Atau, scan QR code di bawah:
+                              <div>
+                                <img
+                                  style={{ width: 300, height: "auto" }}
+                                  src={ovoQR}
+                                />
+                              </div>
+                              Lalu, lampirkan bukti pembayaran dibawah.
+                            </Typography>
+                            <BuktiOVO open={open} handleClose={handleClose} />
+                            <Button
+                              color="secondary"
+                              onClick={handleClickOpen}
+                              round
+                              fullWidth
+                            >
+                              Contoh Bukti
+                            </Button>
+                          </div>
+                        }
+                        value="OVO"
                         chosenValue={value}
                       ></Box>
 

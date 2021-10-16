@@ -43,7 +43,7 @@ export default function Post({ history }) {
           alt
         },
         "authorName": author -> name,
-        "publishedDate": ""
+        "publishedDate": releaseDate
       }`
       )
       .then((data) => setSinglePost(data[0]));
@@ -51,6 +51,7 @@ export default function Post({ history }) {
   }, [slug]);
 
   console.log(singlePost);
+
   return (
     <>
       {isLoading ? (
@@ -83,7 +84,9 @@ export default function Post({ history }) {
               />
             )}
 
-            <Typography>{singlePost.name}</Typography>
+            <Typography>
+              {singlePost.authorName} | {singlePost.publishedDate}
+            </Typography>
             <Typography>
               <BlockContent
                 blocks={singlePost.body}
