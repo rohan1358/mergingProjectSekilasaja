@@ -5,10 +5,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./pages/Login/Login";
 import SignUpPage from "./pages/SignUp/SignUp";
 import Home from "./pages/Home/Home";
-import FourOFourPage from "./pages/404page";
-import PricingPage from "./pages/Pricing";
+import FourOFourPage from "./pages/Utilities/404page";
+import PricingPage from "./pages/Pricing/Pricing";
 import BookDetailsPage from "./pages/BookDetails/BookDetailsPage";
-import VideoWatchingPage from "./pages/VideoWatching";
+import VideoWatchingPage from "./pages/VideoWatching/VideoWatching";
 import TextReadingPage from "./pages/TextReading/TextReading";
 import AccountsPage from "./pages/Accounts/Accounts";
 import Payment from "./pages/Payment/Payment";
@@ -16,14 +16,16 @@ import PaymentSuccess from "./pages/Payment/PaymentSuccess";
 import Library from "./pages/Library/Library";
 import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
+import Blog from "./pages/Blog/Blog";
+import Post from "./pages/Blog/Post";
 
 // import VerifyEmail from "./pages/VerifyEmail";
 import HomeTwo from "./pages/Home/HomeTwo";
 import FAQPage from "./pages/FAQ/FAQ";
 
 // Unused
-import Contact from "./pages/Contact";
-import NewWebLanding from "./pages/NewWebLanding";
+import Contact from "./pages/Contact/Contact";
+import NewWebLanding from "./pages/Utilities/NewWebLanding";
 
 // Routing componentns
 import PrivateRoute from "./components/Routing/PrivateRoute";
@@ -48,7 +50,6 @@ function App() {
           />
           <PrivateRoute exact path="/library" component={Library} />
           <PrivateRoute exact path="/payment" component={Payment} />
-
           {/* Public Routes (Everybody can see) */}
           <Route exact path="/faq" component={FAQPage} />
           {/* <Route exact path="/verify-email" component={VerifyEmail} /> */}
@@ -67,10 +68,11 @@ function App() {
             path="/book-details/:book_title"
             component={BookDetailsPage}
           />
+          <Route exact path="/blog" component={Blog} />
+          <Route path="/blog/:slug" children={<Post />} />
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={HomeTwo} />
           <Route component={FourOFourPage} />
-
           {/* <Route exact path="/" component={Contact} />
           <Route exact path="/" component={NewWebLanding} /> */}
         </Switch>

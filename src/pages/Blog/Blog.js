@@ -5,87 +5,48 @@ import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { Tooltip } from "@material-ui/core";
 
 // Custom components
+import Parallax from "../../components/Parallax";
+import Typography from "../../components/Typography";
 import Footer from "../../components/Footer";
-import MultiUseMobile from "../../styles/MultiUseMobile";
-import SearchResultsBlock from "./SearchResultsBlock";
 import Header from "../../components/NavBar/Header";
 import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
-import Loading from "../Utilities/Loading";
-import { beigeColor } from "../../styles/Style";
 
-//Redux
-import { useSelector } from "react-redux";
-import { selectAllBooks } from "../../feature/allBooksSlice";
+// Material-UI components
+import { Container, Grid } from "@material-ui/core";
 
-// Firebase components
-import fire from "../../firebase/fire";
+// Sanity
+import client from "../../sekilasajablog/client";
 
 // Images
 const Whatsapp =
   "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
 
-export default function SearchResults({ match, history }) {
-  // Auth
-  const db = fire.firestore();
-
-  // Styles
-  const classes = MultiUseMobile();
-
-  // useState hooks
-  const [pending, setPending] = useState(true);
-  const [searchResults, setSearchResults] = React.useState([]);
-  const [products, setProducts] = useState([]);
-
-  // Redux
-  const allBooks = useSelector(selectAllBooks);
+export default function BlogPage({ history }) {
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    db.collection("books").onSnapshot((snapshot) => {
-      setProducts(
-        snapshot.docs
-          .map((categorisedProduct) => ({
-            ...categorisedProduct.data(),
-          }))
-          .filter((product) => product.category.includes("All") == true)
-          .map((categorisedProduct) => categorisedProduct)
-      );
-    });
+    client
+      .fetch(
+        `*[_type == "post"] {
+          title,
+          slug,
+          body,
+          mainImage {
+              asset -> {
+                  _id,
+                  url
+              },
+              alt
+          }
+      }`
+      )
+      .then((data) => setPosts(data))
+      .catch(console.error);
   }, []);
 
-  useEffect(() => {
-    //Filter the books according to the search input
-    const results = products.filter((book) =>
-      book.book_title
-        .toLowerCase()
-        .includes(match.params.searchValue.toLowerCase())
-    );
-    setSearchResults(results);
-
-    //Clean up function for when page changes...
-    return function cleanup() {
-      setPending(true);
-      setSearchResults([]);
-    };
-  }, [products, history.location]);
-
-  useEffect(() => {
-    //Set pending to false to notify that web finished pulling books based on search results
-    if (searchResults) {
-      setPending(false);
-    }
-  }, [searchResults]);
-
-  if (pending) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  }
-
   return (
-    <div style={{ backgroundColor: beigeColor }}>
+    <div>
       <div style={{ marginTop: "100px" }} />
       <Header
         history={history}
@@ -94,8 +55,42 @@ export default function SearchResults({ match, history }) {
         fixed
         color="white"
       />
-      <div className={classes.extraSpace2} />
-      <SearchResultsBlock searchResults={searchResults} history={history} />
+
+      <Container maxWidth="md">
+        <Typography style={{ textAlign: "center" }} size="heading">
+          SekilasAja! Blog
+        </Typography>
+        {/* <Typography>Total artikel: {posts.length}</Typography> */}
+        <Grid container direction="row" justifyContent="flex-start" spacing={3}>
+          {posts.map((post) => (
+            <Grid item key={post.slug.current}>
+              {/* <article key={post.slug.current}> */}
+              <a href={`/blog/${post.slug.current}`}>
+                <div>
+                  <img
+                    style={{
+                      width: "100%",
+                      maxWidth: 300,
+                      height: 150,
+                      objectFit: "cover",
+                    }}
+                    src={post.mainImage.asset.url}
+                    alt={post.title}
+                  />
+                </div>
+              </a>
+
+              <a
+                style={{ textDecoration: "none" }}
+                href={`/blog/${post.slug.current}`}
+              >
+                <Typography size="subheading">{post.title}</Typography>
+              </a>
+              {/* </article> */}
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
 
       {/*---------------------------------------------------------------*/}
       {/*---------------------- WHATSAPP FIXED NAV ---------------------*/}
@@ -132,7 +127,6 @@ export default function SearchResults({ match, history }) {
           />
         </Tooltip>
       </a>
-
       <Footer />
     </div>
   );

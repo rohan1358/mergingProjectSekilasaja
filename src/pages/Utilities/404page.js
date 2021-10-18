@@ -5,24 +5,27 @@ import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { Tooltip } from "@material-ui/core";
 
 // Custom components
-import Parallax from "../components/Parallax";
-import Typography from "../components/Typography";
-import Footer from "../components/Footer";
-import Header from "../components/NavBar/Header";
-import HeaderLinks from "../components/NavBar/HeaderLinks";
-import HeaderLinksMobile from "../components/NavBar/HeaderLinksMobile";
+import FourOFourStyle from "../../styles/404Style";
+import Typography from "../../components/Typography";
+import Footer from "../../components/Footer";
+import Header from "../../components/NavBar/Header";
+import HeaderLinks from "../../components/NavBar/HeaderLinks";
+import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
+import { beigeColor } from "../../styles/Style";
 
 // Material-UI components
-import { Container } from "@material-ui/core";
-import { beigeColor } from "../styles/Style";
+import { makeStyles, Container } from "@material-ui/core";
 
 // Images
 const Whatsapp =
   "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2FWhatsapp.png?alt=media&token=88483bb9-b9d3-4aa8-9f14-9b7f91682861";
-const ContactBackground =
-  "https://firebasestorage.googleapis.com/v0/b/sekilasaja-999fd.appspot.com/o/Website_Images%2FWeb_Picture_Components%2Fcontact.jpg?alt=media&token=3ab740bd-1640-4479-b9d3-651bc9235d91";
 
-export default function Contact({ history }) {
+const useStyles = makeStyles(FourOFourStyle);
+
+export default function FourOFourPage({ history }) {
+  // Styles
+  const classes = useStyles();
+
   return (
     <div style={{ backgroundColor: beigeColor }}>
       <div style={{ marginTop: "100px" }} />
@@ -33,15 +36,15 @@ export default function Contact({ history }) {
         fixed
         color="white"
       />
-      <Container>
-        <Parallax border filter image={ContactBackground}>
-          <Typography color="beigeColor" size="heading">
-            Kamu Bisa Hubungi Kami Lewat
-          </Typography>
-          <Typography color="beigeColor" size="subheading" type="italic">
-            hi@sekilasaja.com
-          </Typography>
-        </Parallax>
+      <Container className={classes.position}>
+        <Typography className={classes.title} size="heading">
+          404
+        </Typography>
+        <Typography size="heading">Halaman Tidak Ditemukan!</Typography>
+        <Typography className={classes.description} size="subheading">
+          Halaman yang kamu cari tidak ditemukan. Mungkin halaman sudah dihapus,
+          diganti, atau memang pada dasarnya tidak pernah dibuat.
+        </Typography>
       </Container>
 
       {/*---------------------------------------------------------------*/}

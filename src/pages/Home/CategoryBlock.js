@@ -7,7 +7,7 @@ import MultiUseMobile from "../../styles/MultiUseMobile";
 import CategoryBarFilter from "../../components/CategoryBarFilter/CategoryBarFilter";
 import ComingSoonCard from "./ComingSoonCard";
 import InfoStyles from "../../styles/InfoAreaStyle";
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 
 // Other components
 import Carousel from "react-multi-carousel";

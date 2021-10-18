@@ -24,7 +24,7 @@ import BuktiBRI from "./BuktiBRI";
 import BuktiQRIS from "./BuktiQRIS";
 import BuktiDANA from "./BuktiDANA";
 import BuktiOVO from "./BuktiOVO";
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 
 //Redux
 import { useSelector, useDispatch } from "react-redux";

@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 
 // Custom components
 import NavbarStyle from "../../styles/NavbarStyle";
-import Loading from "../../pages/Loading";
+import Loading from "../../pages/Utilities/Loading";
 
 // Firebase components
 import fire from "../../firebase/fire";

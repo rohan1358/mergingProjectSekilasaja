@@ -9,7 +9,7 @@ import NavbarStyle from "../../styles/NavbarStyle";
 import TableOfContent from "./TableOfContent";
 import Typography from "../../components/Typography";
 import ReactAudioPlayer from "react-audio-player";
-import Loading from "../Loading";
+import Loading from "../Utilities/Loading";
 
 // Material UI components
 import DvrIcon from "@material-ui/icons/Dvr";
