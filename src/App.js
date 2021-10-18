@@ -68,13 +68,13 @@ function App() {
             path="/book-details/:book_title"
             component={BookDetailsPage}
           />
-          <Route exact path="/blog" component={Blog} />
-          <Route path="/blog/:slug" children={<Post />} />
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={HomeTwo} />
-          <Route component={FourOFourPage} />
+          {/* <Route exact path="/blog" component={Blog} />
+          <Route path="/blog/:slug" children={<Post />} /> */}
           {/* <Route exact path="/" component={Contact} />
           <Route exact path="/" component={NewWebLanding} /> */}
+          <Route component={FourOFourPage} />
         </Switch>
       </Router>
     </AuthProvider>
