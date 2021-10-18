@@ -51,30 +51,6 @@ export default function ComingSoonBlock({ products }) {
           style={{ maxWidth: 400, height: 400, width: "100%" }}
           src={comingSoonHuman}
         />
-        <div>
-          <Carousel
-            arrows={false}
-            showDots={true}
-            infinite={true}
-            autoPlay={true}
-            autoPlaySpeed={1500}
-            ssr={true}
-            responsive={responsive}
-          >
-            {products
-              .filter(
-                (product) => product.category.includes("Coming Soon!") == true
-              )
-              .map((categorisedProduct, index) => (
-                <ComingSoonCard
-                  chosenCategory={"Coming Soon!"}
-                  key={index}
-                  product={categorisedProduct}
-                  extraSpace={<div style={{ marginTop: "40px" }} />}
-                />
-              ))}
-          </Carousel>
-        </div>
       </div>
     </Container>
   );
