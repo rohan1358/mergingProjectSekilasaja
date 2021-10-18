@@ -87,20 +87,15 @@ export default function FAQ({ history }) {
             <div>
               <Typography>1. Klik tombol “Bergabung sekarang!”</Typography>
               <Typography>
-                2. Isi form data diri Kamu seperti nama depan, nama belakang, no
-                telp, email, password, dan konfirmasi password.
+                2. Isi form data diri Kamu seperti nama lengkap, no telp, email,
+                dan password.
               </Typography>
               <Typography>
                 3. Cek Email Kamu dan lihat Email verifikasi yang sudah
                 terkirim.
               </Typography>
               <Typography>
-                4. Buka Email yang Kamu baru saja terima dan klik link untuk
-                mengverifikasi akun Kamu.
-              </Typography>
-              <Typography>
-                5. Jika sudah terverifikasi, silahkan kembali ke halaman website
-                sekilasaja.com, dan refresh halaman!
+                3. Selamat kamu sudah terdaftar sebagai member kami.
               </Typography>
             </div>
           }
