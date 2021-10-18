@@ -11,7 +11,6 @@ import HeaderLinks from "../../components/NavBar/HeaderLinks";
 import HeaderLinksMobile from "../../components/NavBar/HeaderLinksMobile";
 import Footer from "../../components/Footer";
 import InfoAreaStyle from "../../styles/InfoAreaStyle";
-import { beigeColor } from "../../styles/Style";
 import LandingUserBlock from "./LandingUserBlock";
 import LandingNonUserBlock from "./LandingNonUserBlock";
 import NewKilasHomeBlock from "./NewKilasHomeBlock";
@@ -81,7 +80,7 @@ export default function Home({ history }) {
   }
 
   return (
-    <div style={{ backgroundColor: beigeColor }}>
+    <div>
       <Header
         history={history}
         rightLinks={<HeaderLinks history={history} />}

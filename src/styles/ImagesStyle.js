@@ -77,6 +77,14 @@ const ImagesStyle = {
       transform: "scale(1.5)",
     },
   },
+  imgNewHomeBook: {
+    width: "100%",
+    maxWidth: "250px",
+    padding: "5px",
+    "&:hover": {
+      filter: "brightness(150%)",
+    },
+  },
   imgLibraryNewBook: {
     width: "100%",
     maxWidth: "100px",

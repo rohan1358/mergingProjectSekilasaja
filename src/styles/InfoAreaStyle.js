@@ -9,11 +9,6 @@ import {
 } from "./Style";
 
 const InfoStyle = {
-  // newBadgePos: {
-  //   position: "absolute",
-  //   marginTop: -413,
-  //   marginLeft: -27,
-  // },
   buttonAddedHoverPos: {
     position: "absolute",
     marginTop: 250,
@@ -73,6 +68,15 @@ const InfoStyle = {
     color: secondaryColor,
     width: "36px",
     height: "36px",
+  },
+  iconCircle: {
+    color: primaryColor,
+    width: "70px",
+    height: "70px",
+    display: "inline-block",
+    borderRadius: 60,
+    backgroundColor: "#FFF9DF",
+    padding: "0.5em 0.5em",
   },
   descriptionWrapper: {
     color: secondaryColor,

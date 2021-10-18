@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginPage from "./pages/Login/Login";
 import SignUpPage from "./pages/SignUp/SignUp";
 import Home from "./pages/Home/Home";
+import HomeTwo from "./pages/Home/HomeTwo";
+import HomeNew from "./pages/HomeNew/Home";
 import FourOFourPage from "./pages/Utilities/404page";
 import PricingPage from "./pages/Pricing/Pricing";
 import BookDetailsPage from "./pages/BookDetails/BookDetailsPage";
@@ -18,9 +20,6 @@ import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
 import SearchResults from "./pages/SearchResults/SearchResults";
 import Blog from "./pages/Blog/Blog";
 import Post from "./pages/Blog/Post";
-
-// import VerifyEmail from "./pages/VerifyEmail";
-import HomeTwo from "./pages/Home/HomeTwo";
 import FAQPage from "./pages/FAQ/FAQ";
 
 // Unused
@@ -70,6 +69,7 @@ function App() {
           />
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={HomeTwo} />
+          <Route exact path="/home-new" component={HomeNew} />
           {/* <Route exact path="/blog" component={Blog} />
           <Route path="/blog/:slug" children={<Post />} /> */}
           {/* <Route exact path="/" component={Contact} />

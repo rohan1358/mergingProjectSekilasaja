@@ -149,6 +149,11 @@ const MultiUseMobile = makeStyles((theme) => ({
     bottom: 15,
     left: 15,
   },
+  underline: {
+    borderBottom: "9px solid #FFE05D",
+    display: "inline-block",
+    lineHeight: 0.45,
+  },
 }));
 
 export default MultiUseMobile;

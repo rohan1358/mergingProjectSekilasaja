@@ -5,9 +5,9 @@ import { makeStyles, Grid, Paper, Avatar } from "@material-ui/core";
 import { Instagram } from "@material-ui/icons";
 
 // Custom components
-import InfoAreaStyle from "../styles/InfoAreaStyle";
-import Typography from "./Typography";
-import { beigeColor, secondaryColor } from "../styles/Style";
+import InfoAreaStyle from "../../../styles/InfoAreaStyle";
+import Typography from "../../../components/Typography";
+import { beigeColor, secondaryColor } from "../../../styles/Style";
 
 // Images
 const Verified =
@@ -16,7 +16,7 @@ const Verified =
 // Styles
 const useStyles = makeStyles(InfoAreaStyle);
 
-export default function ReviewCard({
+export default function TestimonialCard({
   name,
   comment,
   userInstagram,
@@ -27,22 +27,26 @@ export default function ReviewCard({
   const classes = useStyles();
 
   return (
-    <Grid item md={6} xs={12}>
+    <div style={{ padding: 30 }}>
       <Paper
         style={{
           padding: "20px",
           borderColor: secondaryColor,
           backgroundColor: beigeColor,
           borderRadius: 30,
-          height: 350,
         }}
         variant="outlined"
       >
         <Grid container>
+          <Grid item xs={12}>
+            <div style={{ marginTop: "20px" }} />
+            <Typography>{comment}</Typography>
+          </Grid>
+
           <Grid style={{ display: "flex", alignItems: "center" }} item xs={12}>
-            <Avatar style={{ width: 70, height: 70 }} src={photoURL} />
+            <Avatar style={{ width: 50, height: 50 }} src={photoURL} />
             <div style={{ paddingLeft: "10px" }}>
-              <Typography style={{ marginBottom: 3 }} type="bold">
+              <Typography style={{ marginBottom: 0 }} type="bold">
                 {name}{" "}
                 <img style={{ marginBottom: -3, width: 20 }} src={Verified} />
               </Typography>
@@ -54,22 +58,22 @@ export default function ReviewCard({
                 href={userInstagramLink}
               >
                 <Typography
+                  type="italic"
                   style={{
                     display: "flex",
                     alignItems: "center",
+                    fontSize: 14,
+                    marginTop: 3,
                   }}
                 >
-                  <Instagram style={{ marginRight: "3px" }} /> {userInstagram}
+                  @{userInstagram}
                 </Typography>
               </a>
             </div>
           </Grid>
-          <Grid item xs={12}>
-            <div style={{ marginTop: "20px" }} />
-            <Typography>{comment}</Typography>
-          </Grid>
         </Grid>
       </Paper>
-    </Grid>
+      <div style={{ marginTop: 20 }} />
+    </div>
   );
 }
