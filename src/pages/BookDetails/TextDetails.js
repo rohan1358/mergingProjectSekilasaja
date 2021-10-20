@@ -67,12 +67,7 @@ export default function BookDetails(props) {
                       Audio
                     </Typography>
 
-                    <Paper
-                      style={{ backgroundColor: grayColor }}
-                      variant="outlined"
-                    >
-                      {audio}
-                    </Paper>
+                    {audio}
                   </div>
 
                   <div>
@@ -154,8 +149,6 @@ export default function BookDetails(props) {
                 elevation={5}
               >
                 <Grid item>
-                  {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
-
                   <Typography size="subheading">{kilasTitle}</Typography>
                   <Typography>{kilasBody}</Typography>
                 </Grid>
@@ -167,12 +160,7 @@ export default function BookDetails(props) {
                     <Typography size="subheading" type="bold">
                       Audio
                     </Typography>
-                    {/* <Paper
-                        style={{ backgroundColor: grayColor }}
-                        variant="outlined"
-                      > */}
                     {audio}
-                    {/* </Paper> */}
                   </div>
                   <div>
                     <Typography size="subheading" type="bold">
@@ -202,12 +190,7 @@ export default function BookDetails(props) {
                       <Typography size="subheading" type="bold">
                         Audio
                       </Typography>
-                      {/* <Paper
-                      style={{ backgroundColor: grayColor }}
-                      variant="outlined"
-                    > */}
                       {audio}
-                      {/* </Paper> */}
                     </div>
                     <div>
                       <Typography size="subheading" type="bold">
