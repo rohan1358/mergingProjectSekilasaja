@@ -141,7 +141,12 @@ const MultiUseMobile = makeStyles((theme) => ({
     },
   },
   audioControl: {
-    width: "100%",
+    // before
+    // width: "100%",
+    // maxWidth: "800px",
+
+    // editted
+    width: "50%",
     maxWidth: "800px",
   },
   fixedLogo: {

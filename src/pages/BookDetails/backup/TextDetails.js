@@ -42,54 +42,49 @@ export default function BookDetails(props) {
     <div>
       {!!isSubscribed ? (
         <div>
-          {/*  className={classes.bookDetailsWidth} */}
-          <div>
+          <div className={classes.bookDetailsWidth}>
             <div className={desktopClass}>
-              <Grid
-                container
-                className={mobile.paddedContent}
-                style={{ padding: "10px" }}
-                elevation={5}
-                elevation={5}
-              >
-                <Grid item xs={7}>
-                  {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
+              <Paper className={mobile.paddedContent} elevation={5}>
+                <Grid container>
+                  <Grid item xs={7}>
+                    {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
 
-                  <Typography size="subheading">{kilasTitle}</Typography>
-                  <Typography>{kilasBody}</Typography>
+                    <Typography size="subheading">{kilasTitle}</Typography>
+                    <Typography>{kilasBody}</Typography>
+                  </Grid>
+
+                  <Grid item xs={1} />
+
+                  <Grid item xs={4}>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Audio
+                      </Typography>
+
+                      <Paper
+                        style={{ backgroundColor: grayColor }}
+                        variant="outlined"
+                      >
+                        {audio}
+                      </Paper>
+                    </div>
+
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Video
+                      </Typography>
+                      {video}
+                    </div>
+
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Daftar Kilas
+                      </Typography>
+                      <Typography>{tableOfContents}</Typography>
+                    </div>
+                  </Grid>
                 </Grid>
-
-                <Grid item xs={1} />
-
-                <Grid item xs={4}>
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Audio
-                    </Typography>
-
-                    <Paper
-                      style={{ backgroundColor: grayColor }}
-                      variant="outlined"
-                    >
-                      {audio}
-                    </Paper>
-                  </div>
-
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Video
-                    </Typography>
-                    {video}
-                  </div>
-
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Daftar Kilas
-                    </Typography>
-                    <Typography>{tableOfContents}</Typography>
-                  </div>
-                </Grid>
-              </Grid>
+              </Paper>
             </div>
           </div>
 
@@ -144,52 +139,48 @@ export default function BookDetails(props) {
         </div>
       ) : (
         <div>
-          {/* className={classes.bookDetailsWidth} */}
-          <div>
+          <div className={classes.bookDetailsWidth}>
             <div className={desktopClass}>
-              <Grid
-                container
-                className={mobile.paddedContent}
-                style={{ padding: "10px" }}
-                elevation={5}
-              >
-                <Grid item>
-                  {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
+              <Paper className={mobile.paddedContent} elevation={5}>
+                <Grid container>
+                  <Grid item xs={7}>
+                    {/* <Typography type="bold">Kilas 1 dari {totalNum}</Typography> */}
 
-                  <Typography size="subheading">{kilasTitle}</Typography>
-                  <Typography>{kilasBody}</Typography>
-                </Grid>
+                    <Typography size="subheading">{kilasTitle}</Typography>
+                    <Typography>{kilasBody}</Typography>
+                    <div>{upsellBlock}</div>
+                  </Grid>
 
-                <Grid item />
+                  <Grid item xs={1} />
 
-                <Grid item>
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Audio
-                    </Typography>
-                    {/* <Paper
+                  <Grid item xs={4}>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Audio
+                      </Typography>
+                      {/* <Paper
                         style={{ backgroundColor: grayColor }}
                         variant="outlined"
                       > */}
-                    {audio}
-                    {/* </Paper> */}
-                  </div>
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Video
-                    </Typography>
-                    {video}
-                  </div>
+                      {audio}
+                      {/* </Paper> */}
+                    </div>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Video
+                      </Typography>
+                      {video}
+                    </div>
 
-                  <div>
-                    <Typography size="subheading" type="bold">
-                      Daftar Kilas
-                    </Typography>
-                    <Typography>{tableOfContents}</Typography>
-                  </div>
+                    <div>
+                      <Typography size="subheading" type="bold">
+                        Daftar Kilas
+                      </Typography>
+                      <Typography>{tableOfContents}</Typography>
+                    </div>
+                  </Grid>
                 </Grid>
-                <div>{upsellBlock}</div>
-              </Grid>
+              </Paper>
             </div>
           </div>
 

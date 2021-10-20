@@ -80,6 +80,7 @@ const BookDetailsSimple = ({
                 }
               />
             </Grid>
+
             <Grid item xs={12}>
               <div className={classes.bookDetailsDesc}>
                 <Typography size="subheading" type="bold">

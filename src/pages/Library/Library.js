@@ -89,6 +89,7 @@ export default function Library({ history }) {
       .where("email", "==", currentUser.email)
       .onSnapshot((snapshot) => {
         snapshot.forEach((doc) => {
+          console.log("doc", doc.data());
           dispatch(setOwnedBookTitles(doc.data()["owned_books"]));
           setPending(false);
         });

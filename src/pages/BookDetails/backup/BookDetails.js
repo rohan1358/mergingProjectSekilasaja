@@ -24,7 +24,6 @@ export default function BookDetails({
   watchTime,
   num,
   buttons,
-  textDetail,
 }) {
   // Styles
   const mobile = MultiUseMobile();
@@ -147,9 +146,8 @@ export default function BookDetails({
                   ))}
 
                   <div style={{ marginTop: "40px" }} />
-                  {/* {buttons} */}
+                  {buttons}
                 </div>
-                {textDetail && textDetail}
               </Grid>
 
               <Grid item xs={3}>
@@ -163,7 +161,10 @@ export default function BookDetails({
                     classes.imgBookDetailsCover
                   }
                 />
-                {buttons}
+              </Grid>
+
+              <Grid item xs={12}>
+                <div style={{ marginTop: "7px" }} />
               </Grid>
             </Grid>
           </div>
@@ -291,7 +292,6 @@ export default function BookDetails({
 
                 {buttons}
                 <div style={{ marginTop: "20px" }} />
-                {textDetail && textDetail}
               </div>
             </Grid>
 

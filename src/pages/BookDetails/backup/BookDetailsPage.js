@@ -37,7 +37,6 @@ import * as firebaseUpdateCart from "../../firebase/firebaseUpdateCart";
 import * as firebaseGetBookCoverImageURL from "../../firebase/firebaseGetBookCoverImageURL";
 import * as firebaseGetBookAudioTrialURL from "../../firebase/firebaseGetBookAudioTrialURL";
 import { beigeColor, secondaryColor } from "../../styles/Style";
-import ButtonStyle from "../../styles/ButtonStyle";
 
 // Images
 const Whatsapp =
@@ -179,40 +178,31 @@ export default function BookDetailsPage({ match, history }) {
                         buttons={
                           <div>
                             <div className={classes.sectionDesktop}>
-                              <Grid container>
-                                <Grid item style={ButtonStyle.fullWidth}>
+                              <Grid container spacing={3}>
+                                <Grid item>
                                   <Button
-                                    round
-                                    fullWidth
                                     href={`/text-page/${current_product.book_title}`}
                                   >
                                     Read or listen now!
                                   </Button>
                                 </Grid>
 
-                                <Grid item style={ButtonStyle.fullWidth}>
+                                <Grid item>
                                   {current_product.video_link ? (
                                     <Button
-                                      fullWidth
-                                      round
                                       href={`/video/${current_product.book_title}`}
                                     >
                                       Watch now!
                                     </Button>
                                   ) : (
-                                    <Button round fullWidth disabled="true">
+                                    <Button disabled="true">
                                       Video coming soon!
                                     </Button>
                                   )}
                                 </Grid>
 
-                                <Grid item style={ButtonStyle.fullWidth}>
-                                  <Button
-                                    fullWidth
-                                    round
-                                    color="secondary"
-                                    href="/library"
-                                  >
+                                <Grid item>
+                                  <Button color="secondary" href="/library">
                                     <LibraryBooksIcon /> My Library
                                   </Button>
                                 </Grid>
@@ -259,133 +249,123 @@ export default function BookDetailsPage({ match, history }) {
                             </div>
                           </div>
                         }
-                        textDetail={
-                          <TextDetails
-                            upsellBlock={
-                              !!userData.user.is_subscribed ? (
-                                <></>
-                              ) : (
-                                <div>
-                                  <Paper
-                                    style={{
-                                      textAlign: "center",
-                                      padding: "15px",
-                                    }}
-                                    elevation={5}
-                                  >
-                                    <ErrorIcon
-                                      fontSize="large"
-                                      style={{
-                                        marginRight: "10px",
-                                        color: secondaryColor,
-                                      }}
-                                    />
-                                    <Typography
-                                      style={{
-                                        textAlign: "center",
-                                      }}
-                                      type="italic"
-                                      size="bold"
-                                    >
-                                      Ingin memiliki akses untuk semua kilas?
-                                      Dengan hanya Rp. 1.000/hari, Kamu bisa
-                                      mengakses semua kilas!
-                                    </Typography>
-                                    <Button
-                                      href="/pricing"
-                                      round
-                                      fullWidth
-                                      style={{
-                                        backgroundImage:
-                                          "linear-gradient(to right, orange, yellow)",
-                                      }}
-                                    >
-                                      Berlanggan sekarang!
-                                    </Button>
-                                  </Paper>
+                      />
 
-                                  <div style={{ marginBottom: "20px" }} />
-                                </div>
-                              )
-                            }
-                            libraryButton={
-                              <Button
-                                fullWidth
-                                color="secondary"
-                                href="/library"
+                      <TextDetails
+                        upsellBlock={
+                          !!userData.user.is_subscribed ? (
+                            <></>
+                          ) : (
+                            <div>
+                              <Paper
+                                style={{
+                                  textAlign: "center",
+                                  padding: "15px",
+                                }}
+                                elevation={5}
                               >
-                                <LibraryBooksIcon /> Go To My Library
-                              </Button>
-                            }
-                            video={
-                              current_product.video_link ? (
-                                <Button
-                                  href={`/video/${current_product.book_title}`}
-                                  color="primary"
-                                  fullWidth
-                                >
-                                  <PlayCircleFilledIcon /> Akses Videonya
-                                  Sekarang!
-                                </Button>
-                              ) : (
-                                <Button
-                                  disabled="true"
-                                  color="primary"
-                                  fullWidth
-                                >
-                                  <PlayCircleFilledIcon />
-                                  Video coming soon!
-                                </Button>
-                              )
-                            }
-                            audio={
-                              <ReactAudioPlayer
-                                className={classes.audioControl}
-                                controlsList="nodownload"
-                                src={audioLink}
-                                controls
-                              />
-                            }
-                            totalNum={current_product.kilasan.length}
-                            kilasTitle={
-                              <Typography
-                                style={{ textAlign: "left" }}
-                                size="subheading"
-                              >
-                                {current_product.kilasan[0].title}
-                              </Typography>
-                            }
-                            kilasBody={current_product.kilasan[0].details.map(
-                              (paragraph) => (
+                                <ErrorIcon
+                                  fontSize="large"
+                                  style={{
+                                    marginRight: "10px",
+                                    color: secondaryColor,
+                                  }}
+                                />
                                 <Typography
-                                  style={{ textAlign: "left" }}
-                                  className={books.paragraphBookDetails}
+                                  style={{
+                                    textAlign: "center",
+                                  }}
+                                  type="italic"
+                                  size="bold"
                                 >
-                                  {paragraph}
+                                  Ingin memiliki akses untuk semua kilas? Dengan
+                                  hanya Rp. 1.000/hari, Kamu bisa mengakses
+                                  semua kilas!
                                 </Typography>
-                              )
-                            )}
-                            tableOfContents={
-                              <div className={tabs.root}>
-                                {current_product.kilasan.map((kilas, index) => (
-                                  <Typography style={{ textAlign: "left" }}>
-                                    {kilas.title === undefined
-                                      ? "Ringkasan Akhir"
-                                      : "Kilas #" +
-                                        (index + 1) +
-                                        " : " +
-                                        kilas.title}
-                                    <Divider
-                                      style={{
-                                        marginTop: "12px",
-                                        marginBottom: "12px",
-                                      }}
-                                    />
-                                  </Typography>
-                                ))}
-                              </div>
-                            }
+                                <Button
+                                  href="/pricing"
+                                  round
+                                  fullWidth
+                                  style={{
+                                    backgroundImage:
+                                      "linear-gradient(to right, orange, yellow)",
+                                  }}
+                                >
+                                  Berlanggan sekarang!
+                                </Button>
+                              </Paper>
+
+                              <div style={{ marginBottom: "20px" }} />
+                            </div>
+                          )
+                        }
+                        libraryButton={
+                          <Button fullWidth color="secondary" href="/library">
+                            <LibraryBooksIcon /> Go To My Library
+                          </Button>
+                        }
+                        video={
+                          current_product.video_link ? (
+                            <Button
+                              href={`/video/${current_product.book_title}`}
+                              color="primary"
+                              fullWidth
+                            >
+                              <PlayCircleFilledIcon /> Akses Videonya Sekarang!
+                            </Button>
+                          ) : (
+                            <Button disabled="true" color="primary" fullWidth>
+                              <PlayCircleFilledIcon />
+                              Video coming soon!
+                            </Button>
+                          )
+                        }
+                        audio={
+                          <ReactAudioPlayer
+                            className={classes.audioControl}
+                            controlsList="nodownload"
+                            src={audioLink}
+                            controls
                           />
+                        }
+                        totalNum={current_product.kilasan.length}
+                        kilasTitle={
+                          <Typography
+                            style={{ textAlign: "left" }}
+                            size="subheading"
+                          >
+                            {current_product.kilasan[0].title}
+                          </Typography>
+                        }
+                        kilasBody={current_product.kilasan[0].details.map(
+                          (paragraph) => (
+                            <Typography
+                              style={{ textAlign: "left" }}
+                              className={books.paragraphBookDetails}
+                            >
+                              {paragraph}
+                            </Typography>
+                          )
+                        )}
+                        tableOfContents={
+                          <div className={tabs.root}>
+                            {current_product.kilasan.map((kilas, index) => (
+                              <Typography style={{ textAlign: "left" }}>
+                                {kilas.title === undefined
+                                  ? "Ringkasan Akhir"
+                                  : "Kilas #" +
+                                    (index + 1) +
+                                    " : " +
+                                    kilas.title}
+                                <Divider
+                                  style={{
+                                    marginTop: "12px",
+                                    marginBottom: "12px",
+                                  }}
+                                />
+                              </Typography>
+                            ))}
+                          </div>
                         }
                       />
                     </Container>
